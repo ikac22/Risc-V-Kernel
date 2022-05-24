@@ -1,0 +1,7 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory '/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project'
+ 
+riscv64-linux-gnu-ld -z max-page-size=4096 --script kernel.ld -o kernel build/src/asm/interrupt_asm.o build/src/asm/tcb_asm.o  build/src/cpp/interrupt_cpp.o build/src/cpp/main.o build/src/cpp/memory_allocator.o build/src/cpp/scheduler.o build/src/cpp/tcb.o build/src/cpp/testing.o build/src/cpp/syscall_c.o --library-path . --library=:lib/hw.lib --library=:lib/console.lib --library-path . --library=:lib/hw.lib --library=:lib/console.lib
+riscv64-linux-gnu-objdump --source kernel > kernel.asm
+make: Leaving directory '/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project'
+ 

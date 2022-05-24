@@ -1,5 +1,5 @@
-#include"../h/MemoryAllocator.h"
-#include"../h/Testing.h"
+#include"../../h/memory_allocator.hpp"
+#include"../../h/testing.hpp"
 
 /*MemoryAllocator::MemoryAllocator(){
     print("aaaa");
@@ -45,8 +45,8 @@ void* MemoryAllocator::mem_alloc(size_t size){
         if(best_prev) best_prev->next = curr;
         else fmem_head = curr;
     }
-    print((ull)best);
-    print((ull)best->size);
+    //print((uint64)best);
+    //print((uint64)best->size);
     best->next = nullptr;
     return (char*)best+sizeof(FreeSegment);
 }
@@ -76,7 +76,7 @@ int MemoryAllocator::mem_free(void* adr){
         fmem_head = (FreeSegment*)((char*)adr - sizeof(FreeSegment));
     else{
         FreeSegment* newsgm = (FreeSegment*)((char*)adr - sizeof(FreeSegment)), *prev,* cur;
-        print((ull)newsgm);
+        //print((uint64)newsgm);
         for(prev = nullptr, cur = fmem_head; cur; prev = cur, cur = cur->next)
             if((!prev || (size_t)adr > (size_t)prev) && (size_t)adr < (size_t)cur)
                 break;
@@ -95,13 +95,16 @@ int MemoryAllocator::mem_free(void* adr){
 }
 
 void MemoryAllocator::print_list(){
+    //print("MEM_BLOCK_SIZE: ", ' ');
+    //print(MEM_BLOCK_SIZE, '\n', 0);
     print("------Free Segment Lista------");
     if(!fmem_head)
         print("LISTA JE PRAZNA!");
     for(FreeSegment* curr = fmem_head; curr; curr = curr->next){
-        print((ull)curr);
-        print((ull)curr->size);
+        print((uint64)curr, '\n', 0);
+        print((uint64)curr->size, '\n', 0);
         __putc('\n');
     }
     print("------------------------------");
 }
+

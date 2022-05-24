@@ -3,7 +3,7 @@
 #include"../lib/hw.h"
 
 struct FreeSegment{
-    FreeSegment* next;
+    struct FreeSegment* next;
     size_t size;
 };
 

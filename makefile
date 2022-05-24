@@ -9,7 +9,6 @@ KERNEL_ASM = kernel.asm
 
 LIBS = \
   ${DIR_LIBS}/hw.lib \
-  ${DIR_LIBS}/mem.lib \
   ${DIR_LIBS}/console.lib
 
 # riscv64-unknown-elf- or riscv64-linux-gnu-
@@ -17,6 +16,7 @@ LIBS = \
 #TOOLPREFIX =
 
 # Try to infer the correct TOOLPREFIX if not set
+#
 ifndef TOOLPREFIX
 TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' >/dev/null 2>&1; \
 	then echo 'riscv64-unknown-elf-'; \
@@ -122,6 +122,7 @@ QEMUGDB = $(shell if ${QEMU} -help | grep -q '^-gdb'; \
 CPU_CORE_COUNT = 1
 QEMUOPTS = -machine virt -bios none -kernel ${KERNEL_IMG} -m 128M -smp ${CPU_CORE_COUNT} -nographic
 
+.PRECIOUS: %.s
 qemu: ${KERNEL_IMG}
 	${QEMU} ${QEMUOPTS}
 
