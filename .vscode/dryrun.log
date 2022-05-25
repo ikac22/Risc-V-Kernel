@@ -1,7 +1,38 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project'
  
-riscv64-linux-gnu-ld -z max-page-size=4096 --script kernel.ld -o kernel build/src/asm/interrupt_asm.o build/src/asm/tcb_asm.o  build/src/cpp/interrupt_cpp.o build/src/cpp/main.o build/src/cpp/memory_allocator.o build/src/cpp/scheduler.o build/src/cpp/tcb.o build/src/cpp/testing.o build/src/cpp/syscall_c.o --library-path . --library=:lib/hw.lib --library=:lib/console.lib --library-path . --library=:lib/hw.lib --library=:lib/console.lib
-riscv64-linux-gnu-objdump --source kernel > kernel.asm
+mkdir build
+riscv64-unknown-elf-gcc -E  src/asm/interrupt_asm.S > src/asm/interrupt_asm.s
+mkdir -p build/src/asm/
+riscv64-unknown-elf-as -c -ggdb -march=rv64ima -mabi=lp64 -o build/src/asm/interrupt_asm.o src/asm/interrupt_asm.s
+ 
+riscv64-unknown-elf-gcc -E  src/asm/tcb_asm.S > src/asm/tcb_asm.s
+mkdir -p build/src/asm/
+riscv64-unknown-elf-as -c -ggdb -march=rv64ima -mabi=lp64 -o build/src/asm/tcb_asm.o src/asm/tcb_asm.s
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/interrupt_cpp.d" -Wa,-a,-ad,-alms=build/src/cpp/interrupt_cpp.lst -o build/src/cpp/interrupt_cpp.o src/cpp/interrupt_cpp.cpp
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/main.d" -Wa,-a,-ad,-alms=build/src/cpp/main.lst -o build/src/cpp/main.o src/cpp/main.cpp
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/memory_allocator.d" -Wa,-a,-ad,-alms=build/src/cpp/memory_allocator.lst -o build/src/cpp/memory_allocator.o src/cpp/memory_allocator.cpp
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/scheduler.d" -Wa,-a,-ad,-alms=build/src/cpp/scheduler.lst -o build/src/cpp/scheduler.o src/cpp/scheduler.cpp
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/tcb.d" -Wa,-a,-ad,-alms=build/src/cpp/tcb.lst -o build/src/cpp/tcb.o src/cpp/tcb.cpp
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/testing.d" -Wa,-a,-ad,-alms=build/src/cpp/testing.lst -o build/src/cpp/testing.o src/cpp/testing.cpp
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/syscall_c.d" -Wa,-a,-ad,-alms=build/src/cpp/syscall_c.lst -o build/src/cpp/syscall_c.o src/cpp/syscall_c.cpp
+ 
+mkdir -p build/src/cpp/
+riscv64-unknown-elf-g++ -c -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-stack-protector -D DEBUG_PRINT=0 -MMD -MP -MF"build/src/cpp/ksemaphore.d" -Wa,-a,-ad,-alms=build/src/cpp/ksemaphore.lst -o build/src/cpp/ksemaphore.o src/cpp/ksemaphore.cpp
+ 
+riscv64-unknown-elf-ld -z max-page-size=4096 --script kernel.ld -o kernel build/src/asm/interrupt_asm.o build/src/asm/tcb_asm.o  build/src/cpp/interrupt_cpp.o build/src/cpp/main.o build/src/cpp/memory_allocator.o build/src/cpp/scheduler.o build/src/cpp/tcb.o build/src/cpp/testing.o build/src/cpp/syscall_c.o build/src/cpp/ksemaphore.o --library-path . --library=:lib/hw.lib --library=:lib/console.lib --library-path . --library=:lib/hw.lib --library=:lib/console.lib
+riscv64-unknown-elf-objdump --source kernel > kernel.asm
 make: Leaving directory '/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project'
  

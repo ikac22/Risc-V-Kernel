@@ -2,6 +2,7 @@
 #include"../../h/riscv.hpp"
 #include"../../h/syscall_c.h"
 #include"../../h/tcb.hpp"
+
 void timer_handler(){
     
 
@@ -12,12 +13,12 @@ void timer_handler(){
     
     if(TCB::timeSliceCounter >= TCB::running->getTimeSlice()){
         //uint64 sip = Riscv::r_sip();
-        volatile uint64 sstatus = Riscv::r_sstatus(),
+        /*volatile*/ uint64 sstatus = Riscv::r_sstatus(),
         sepc = Riscv::r_sepc()/*, ra, sp*/;
         
         TCB::timeSliceCounter = 0;
         
-        TCB::dispatch();
+        TCB::yield();
 
         Riscv::w_sstatus(sstatus);
         Riscv::w_sepc(sepc);
@@ -33,7 +34,7 @@ uint64 usrEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4){
 }
 
 uint64 sysEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4){    
-    volatile uint64 sepc = Riscv::r_sepc()+4, sstatus = Riscv::r_sstatus(), ret = a0;
+    /*volatile*/ uint64 sepc = Riscv::r_sepc()+4, sstatus = Riscv::r_sstatus(), ret = a0;
     if(a0 == 0x1){
         //mem_alloc
         ret = (uint64)MemoryAllocator::getInstance().mem_alloc(a1);
@@ -46,28 +47,28 @@ uint64 sysEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4){
         //thread_create
         uint64* t = (uint64*)a1;
         *t = (uint64)TCB::createThread((TCB::Body)a2, (void*)a3, (uint64*)a4); 
-        if(*t) ret = 0;
-        else ret = -1;
+        if(!(*t)) ret = -4;
+        else ret = 0;
     }else if(a0 == 0x12){
         //thread_exit
-        TCB::running->setFinished();
+        TCB::running->finish();
         TCB::dispatch();
         Riscv::w_sstatus(sstatus);
     }
     else if(a0 == 0x13){
         //thread_dispatch
         TCB::timeSliceCounter = 0; 
-        TCB::dispatch();
+        TCB::yield();
         Riscv::w_sstatus(sstatus);
     }else if(a0 == 0x69){
-        //delete ha ndle
+        //delete handle
         TCB::deleteThread((TCB*)a1);
     }
     Riscv::w_sepc(sepc);
     return ret;
 }
 
-extern "C" void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4){
+extern "C" volatile void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4){
     /*uint64 a0_s = a0, a1_s = a1, 
         a2_s = a2, a3_s = a3, 
         a4_s = a4;*/  
@@ -75,7 +76,6 @@ extern "C" void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
     static int t = 0;
     if(scause == 9){
         //ecall iz sistemskog rezima
-        
         a0 = sysEcall(a0, a1, a2, a3, a4);
         asm volatile("sd %0, 10 * 8(s0)" :: "r" (a0));
     
@@ -108,4 +108,5 @@ extern "C" void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
             t++;
         }
     }
+    //print(a4);
 }

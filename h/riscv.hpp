@@ -50,6 +50,9 @@ public:
     static uint64 r_a3();
     static uint64 r_a4();
 
+    static void popRegisters();
+    static void pushRegisters();
+
     static void popSppSpie();
 };
 

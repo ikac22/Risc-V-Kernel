@@ -18,7 +18,6 @@ class PtrQueue{
         while(!isEmpty())
             remove();
     }
-
 public:
     #include"../h/kernel_operators.hpp"
     //PtrQueue():head(nullptr), tail(nullptr){}
@@ -40,6 +39,13 @@ public:
         return nullptr;
     }
 
+    T* top(){
+        if(head == nullptr)
+            return 0;
+        else
+            return head->info;
+    }
+
     bool isEmpty() {return !head;}
 
     void printQueue(){
@@ -52,6 +58,21 @@ public:
         print("");
     }
     
+    void insertSorted(T* info, int(*cmp)(T*, T*)){
+        Node* prev = nullptr, cur = head;
+        while(cur && cmp(info, cur->info) >= 0){
+            prev = cur;
+            cur = cur->next;
+        }
+        if(!prev){
+            Node* tmp = new Node(info, head);
+            head = tmp;
+        }else{
+            Node* tmp = new Node(info, cur);
+            prev->next = tmp;
+        }
+    }
+
     ~PtrQueue(){
         brisi();
     }

@@ -23,6 +23,7 @@ void workerBodyA(void*) {
 void workerBodyB(void*) {
     for (uint64 i = 0; i < 16; i++) {
         print("B: i=", i, 0);
+        if(i == 7) thread_exit();
         for (uint64 j = 0; j < 10000; j++) {
             for (uint64 k = 0; k < 30000; k++) { /* busy wait */ }
             // TCB::yield();
@@ -60,63 +61,87 @@ void workerBodyC(void*) {
 //    TCB::yield();
 }
 
+void workerBodyD(void*) {
+    uint8 i = 10;
+    for (; i < 13; i++) {
+        print("D: i=", i, 0);
+    }
+
+    print("D: yield");
+    __asm__ ("li t1, 5");
+    TCB::yield();
+
+    uint64 result = fibonacci(16);
+    print("D: fibonaci=", result, 0);
+
+    for (; i < 16; i++) {
+        print("D: i=", i, 0);
+    }
+//    TCB::yield();
+}
+
 void mainWrapper(void*){
     userMain();
 }
 
 int main(){
-    //init
-    MemoryAllocator& allocator = MemoryAllocator::getInstance();
     size_t dssb = (DEFAULT_STACK_SIZE-1)/MEM_BLOCK_SIZE + 1;
 
     print("sizeof(PtrQueue): ", sizeof(PtrQueue<TCB>), 0);
     print("sizeof(TCB): ", sizeof(TCB), 0);
     print("DEFAULT_STACK_SIZE_BLOCKS: ", dssb, 0);
     print("DEFAULT_TIME_SLICE: ", DEFAULT_TIME_SLICE, 0);
-
-    //allocator.print_list();
+    print("-------------------------------\n\n");
+    
+    print("kernelInit\n-------------------------------");
     Scheduler::initalize();
-    TCB *threads[5];
-    //allocator.print_list();
-
-   
-    //mainThread
-    threads[0] = TCB::createThread(nullptr);
-    TCB::running = threads[0];
-    //allocator.print_list();
-    print("Thread0 adr:", (uint64)threads[0], 0);
-    
-    //firstThread
-    threads[1] = TCB::createThread(workerBodyA, nullptr, (uint64*)allocator.mem_alloc(dssb));
-    //allocator.print_list();
-    print("Thread1 adr:", (uint64)threads[1], 0);
-    //if(threads[1] != nullptr) print("ThreadA created\n");
-    
-    //secondThread
-    threads[2] = TCB::createThread(workerBodyB, nullptr, (uint64*)allocator.mem_alloc(dssb));
-    //allocator.print_list();
-    print("Thread2 adr:", (uint64)threads[2], 0);
-    //if(threads[2] != nullptr) print("ThreadB created\n");
-    
-    //thirdThread
-    threads[3] = TCB::createThread(workerBodyC, nullptr, (uint64*)allocator.mem_alloc(dssb));
-    //allocator.print_list();
-    print("Thread3 adr:", (uint64)threads[3], 0);
-    //if(threads[3] != nullptr) print("ThreadC created\n");
-
-    //threads[4] = TCB::createThread(workerBodyD);
-    //printString("ThreadD created\n");
-
+    print("Scheduler initalized");
+    MemoryAllocator& allocator = MemoryAllocator::getInstance();
+    if(allocator.initalized()) print("Allocator initalized");
+    else { 
+        print("ERROR: allocator not initalized");
+        return 0;
+    }
     Riscv::w_stvec((uint64)interruptvec);
+    print("stvec initalized");
+
+    TCB* kernelThread;
+    thread_t threads[5];
+    for(int i = 0; i < 5; i++)
+        threads[i] = nullptr;
+
+    print("Thread making...");
+    //mainThread
+    kernelThread = TCB::createThread(nullptr);
+    TCB::running = kernelThread;
+    if(kernelThread) print("KernelThread created");
+
+    
+    int val = thread_create(&threads[1], workerBodyA, nullptr);
+    if(!val && threads[1]) print("Thread A created");
+    
+    val = thread_create(&threads[2], workerBodyB, nullptr);
+    if(!val && threads[2]) print("Thread B created");
+
+    val = thread_create(&threads[3], workerBodyC, nullptr);
+    if(!val && threads[3]) print("Thread C created");
+
+    val = thread_create(&threads[4], workerBodyD, nullptr);
+    if(!val && threads[4]) print("Thread D created");
+
+    print("Scheduler queue", ' ');
+    Scheduler::print_queue();
+    print("-------------------------------\n\n");
+    
+    
     Riscv::ms_sstatus(Riscv::SSTATUS_SIE);
-    while (!(threads[1]->isFinished() && threads[2]->isFinished() /*&&
-             threads[3]->isFinished()*/)) {
-        //print("vrtim se");
-        print("deo kernela");
+    while (!(((TCB*)threads[1])->isFinished() && ((TCB*)threads[2])->isFinished() 
+             && ((TCB*)threads[3])->isFinished() && ((TCB*)threads[4])->isFinished())) {
+        //print("Kernel idle thread");
         thread_dispatch();
     }
 
-    for(auto &thread: threads){MemoryAllocator::getInstance().mem_free(thread);}
+    for(auto &thread: threads){ delete thread;}
     print("Kernel kraj");
     return 0;
 }   
