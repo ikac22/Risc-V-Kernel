@@ -2,7 +2,7 @@
 #include"../../h/riscv.hpp"
 #include"../../h/testing.hpp"
 #include "../../h/ksemaphore.hpp"
-
+#include"../../h/syscall_c.h"
 TCB* TCB::running = nullptr;
 uint64 TCB::timeSliceCounter = 0;
 

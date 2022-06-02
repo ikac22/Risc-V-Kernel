@@ -1,6 +1,6 @@
 #include"../../h/memory_allocator.hpp"
 #include"../../h/testing.hpp"
-
+#include"../../lib/console.h"
 /*MemoryAllocator::MemoryAllocator(){
     print("aaaa");
     fmem_head = (FreeSegment*)HEAP_START_ADDR;

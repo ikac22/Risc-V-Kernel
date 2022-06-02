@@ -1,10 +1,10 @@
 #include"../../h/stdio.hpp"
 #include"../../h/scheduler.hpp"
 #include"../../h/testing.hpp"
+#include"../../h/riscv.hpp"
+
 #define KLOCK() Riscv::mc_sstatus(Riscv::SSTATUS_SIE)
 #define KUNLOCK() Riscv::ms_sstatus(Riscv::SSTATUS_SIE)
-
-
 
 SharedBuffer<char>* StdIO::ibuffer = nullptr;
 SharedBuffer<char>* StdIO::obuffer = nullptr;

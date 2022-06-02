@@ -1,5 +1,11 @@
 #include"../../h/testing.hpp"
+#include"../../lib/console.h"
 #include"../../h/tcb.hpp"
+#include"../../h/riscv.hpp"
+#include"../../h/syscall_c.h"
+#include"../../h/syscall_cpp.hpp"
+#include"../../test/printing.hpp"
+
 void print(uint64 unum, char end, bool hex){
     uint64 sstatus = Riscv::r_sstatus();
     Riscv::mc_sstatus(Riscv::SSTATUS_SIE);
@@ -115,4 +121,25 @@ void print_sup_registers(){
 void* kmalloc(size_t size){
     size = (size-1)/MEM_BLOCK_SIZE + 1;
     return MemoryAllocator::getInstance().mem_alloc(size);
+}
+
+class PeriodicWorker:public PeriodicThread{
+    int val;
+public:
+    PeriodicWorker(time_t period, int val):
+    PeriodicThread(period){
+        this->val = val;
+    }
+protected:
+    void periodicActivation() override{
+        printInt(val++);
+        printString("\n");
+    }
+};
+
+void testPeriodicWorker(){
+    PeriodicWorker worker(10, 5);
+    Semaphore sem(0);
+    worker.start();
+    sem.wait();
 }
