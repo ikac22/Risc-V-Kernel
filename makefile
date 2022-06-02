@@ -9,6 +9,7 @@ KERNEL_ASM = kernel.asm
 
 LIBS = \
   ${DIR_LIBS}/hw.lib \
+  ${DIR_LIBS}/mem.lib \
   ${DIR_LIBS}/console.lib
 
 # riscv64-unknown-elf- or riscv64-linux-gnu-
@@ -16,7 +17,6 @@ LIBS = \
 #TOOLPREFIX =
 
 # Try to infer the correct TOOLPREFIX if not set
-#
 ifndef TOOLPREFIX
 TOOLPREFIX := $(shell if riscv64-unknown-elf-objdump -i 2>&1 | grep 'elf64-big' >/dev/null 2>&1; \
 	then echo 'riscv64-unknown-elf-'; \
@@ -62,6 +62,7 @@ CXXFLAGS  = -Wall -Werror -Og -ggdb
 CXXFLAGS += -nostdlib -std=c++11
 CXXFLAGS += -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax
 CXXFLAGS += -fno-omit-frame-pointer -ffreestanding -fno-common
+CXXFLAGS += -fno-rtti -fno-threadsafe-statics
 #CXXFLAGS += -I./${DIR_LIBS} -I./${DIR_INC}
 CXXFLAGS += $(shell ${CXX} -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
 CXXFLAGS += ${DEBUG_FLAG}
@@ -85,6 +86,7 @@ SOURCES_CPP = $(shell find . -name "*.cpp" -printf "%P ")
 OBJECTS += $(addprefix ${DIR_BUILD}/,${SOURCES_CPP:.cpp=.o})
 vpath %.cpp $(sort $(dir ${SOURCES_CPP}))
 
+.PRECIOUS: %.S
 all: ${KERNEL_IMG}
 
 ${KERNEL_IMG}: ${LIBS} ${OBJECTS} ${LDSCRIPT} | ${DIR_BUILD}
@@ -122,7 +124,7 @@ QEMUGDB = $(shell if ${QEMU} -help | grep -q '^-gdb'; \
 CPU_CORE_COUNT = 1
 QEMUOPTS = -machine virt -bios none -kernel ${KERNEL_IMG} -m 128M -smp ${CPU_CORE_COUNT} -nographic
 
-.PRECIOUS: %.s
+.PRECIOUS: %.S
 qemu: ${KERNEL_IMG}
 	${QEMU} ${QEMUOPTS}
 
@@ -136,6 +138,6 @@ qemu-gdb: ${KERNEL_IMG} .gdbinit
 # Prevent deletion of intermediate files, e.g. cat.o, after first build, so
 # that disk image changes after first build are persistent until clean.
 # http://www.gnu.org/software/make/manual/html_node/Chained-Rules.html
-.PRECIOUS: %.o
+.PRECIOUS: %.o %.s %.S
 
 -include $(wildcard ${DIR_BUILD}/*.d)

@@ -1,39 +1,48 @@
+#include"../../h/ptr_queue.hpp"
+#include"../../h/tcb.hpp"
 #include"../../h/scheduler.hpp"
 
-PtrQueue<TCB>* Scheduler::queue = nullptr;
-PtrQueue<Scheduler::slpTCB>* Scheduler::sleeping = nullptr;
-void Scheduler::initalize(){
-    if(!queue){
-        queue = new PtrQueue<TCB>();}
-    if(!sleeping){
-        sleeping = new PtrQueue<slpTCB>();}
-}
+TcbQueue Scheduler::queue;
+TcbQueue Scheduler::sleeping;
 
-TCB* Scheduler::get(){
-    return queue->remove();
-}
 
-void Scheduler::put(TCB* ptr){
-    queue->insert(ptr);
-}
+TCB* Scheduler::get() { return queue.remove(); }
 
-void Scheduler::finalize(){
-    if(queue) delete queue;
-}
+void Scheduler::put(TCB* ptr) { queue.insert(ptr); }
 
-void Scheduler::print_queue(){
-    queue->printQueue();
-}
+void Scheduler::initalize(){}
 
-int Scheduler::cmp(slpTCB* x1, slpTCB* x2){
-    time_t diff = x1->time-x2->time;
+void Scheduler::finalize(){}
+
+void Scheduler::print_queue() { queue.printQueue(); }
+
+int Scheduler::cmp(TCB* x1, TCB* x2)
+{
+    int diff = (int)x1->sleep_time-(int)x2->sleep_time;
     if(diff>=0)
-        x1->time = diff;
+        x1->sleep_time = diff;
+    else
+        x2->sleep_time = -diff;
     return diff;
 }
 
-void Scheduler::put_sleeper(TCB* t, time_t time){
+void Scheduler::put_sleeper(TCB* t, time_t time)
+{
+    t->sleep_time = time;
+    sleeping.insertSorted(t, cmp);  
+}
 
-    sleeping->insertSorted(new slpTCB(time, t), cmp);
-     
+void Scheduler::update_sleep()
+{
+    TCB* t = sleeping.top();
+    if(t == nullptr) return;
+    t->sleep_time--;
+    while(t && t->sleep_time == 0){
+        sleeping.remove();
+        
+        t->setState(TCB::READY);
+        put(t);
+        
+        t = sleeping.top();
+    }
 }

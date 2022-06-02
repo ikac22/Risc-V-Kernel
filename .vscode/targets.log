@@ -1,4 +1,6 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+make: *** No rule to make target 'build/testing/lock.o', needed by 'kernel'.  Stop.
+
 # GNU Make 4.3
 # Built for x86_64-pc-linux-gnu
 # Copyright (C) 1988-2020 Free Software Foundation, Inc.
@@ -6,12 +8,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Wed May 25 17:07:39 2022
- 
+# Make data base, printed on Sat May 28 12:24:16 2022
 
 # Variables
 
-# makefile (from 'Makefile', line 84)
+# makefile (from 'Makefile', line 85)
 SOURCES_CPP = $(shell find . -name "*.cpp" -printf "%P ")
 # environment
 GDK_BACKEND = x11
@@ -19,18 +20,18 @@ GDK_BACKEND = x11
 AS = ${TOOLPREFIX}as
 # environment
 LC_ALL = C
-# makefile (from 'Makefile', line 118)
+# makefile (from 'Makefile', line 119)
 QEMUGDB = $(shell if ${QEMU} -help | grep -q '^-gdb'; then echo "-gdb tcp::${GDBPORT}"; else echo "-s -p ${GDBPORT}"; fi)
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-57fd4ace-9f5a-4f67-9c58-5835b5c22174.sock
-# makefile (from 'Makefile', line 116)
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-e6b6b0ac-7fd0-4e89-adf1-cf42a5c84160.sock
+# makefile (from 'Makefile', line 117)
 GDBPORT = $(shell expr `id -u` % 5000 + 25000)
 # environment
 VSCODE_CWD = /home/ikac
 # makefile (from 'Makefile', line 5)
 DEBUG_FLAG = -D DEBUG_PRINT=0
 # makefile (from 'Makefile', line 10)
-LIBS = ${DIR_LIBS}/hw.lib ${DIR_LIBS}/console.lib
+LIBS = ${DIR_LIBS}/hw.lib ${DIR_LIBS}/mem.lib ${DIR_LIBS}/console.lib
 # environment
 LESS_TERMCAP_me = [0m
 # environment
@@ -50,7 +51,7 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # default
 .VARIABLES := 
 # environment
-PWD = /home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project
+PWD = /home/ikac/mnt/fax/drugagodina/os1/projekat/zadatak/project
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # environment
@@ -79,17 +80,17 @@ LESS_TERMCAP_md = [1;36m
 .INCLUDE_DIRS = /usr/local/include /usr/include /usr/include
 # makefile
 MAKEFLAGS = pqrR
-# makefile (from 'Makefile', line 122)
+# makefile (from 'Makefile', line 123)
 CPU_CORE_COUNT = 1
 # environment
 LESS_TERMCAP_so = [01;33m
 # makefile
-CURDIR := /home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project
+CURDIR := /home/ikac/mnt/fax/drugagodina/os1/projekat/zadatak/project
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
-# makefile (from 'Makefile', line 70)
+# makefile (from 'Makefile', line 71)
 LDSCRIPT = kernel.ld
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
@@ -98,7 +99,7 @@ LESS_TERMCAP_ue = [0m
 # environment
 MFLAGS = -pqrR
 # environment
-SSH_AUTH_SOCK = /tmp/ssh-XXXXXXm1ty3g/agent.1103
+SSH_AUTH_SOCK = /tmp/ssh-XXXXXXwFps2z/agent.1073
 # default
 .SHELLFLAGS := -c
 # automatic
@@ -118,7 +119,7 @@ PT8HOME = /opt/pt
 # environment
 VSCODE_VERBOSE_LOGGING = true
 # environment
-VSCODE_PID = 174383
+VSCODE_PID = 5060
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -167,7 +168,7 @@ LANGUAGE = en_US:en
 ^F = $(notdir $^)
 # environment
 COMMAND_NOT_FOUND_INSTALL_PROMPT = 1
-# makefile (from 'Makefile', line 72)
+# makefile (from 'Makefile', line 73)
 LDLIBS = --library-path . $(patsubst %,--library=:%,${LIBS})
 # environment
 LESS_TERMCAP_mb = [1;31m
@@ -195,7 +196,7 @@ XDG_SEAT_PATH = /org/freedesktop/DisplayManager/Seat0
 DESKTOP_SESSION = awesome
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# makefile (from 'Makefile', line 85)
+# makefile (from 'Makefile', line 86)
 OBJECTS = $(addprefix ${DIR_BUILD}/,${SOURCES_ASM:.S=.o}) $(addprefix ${DIR_BUILD}/,${SOURCES:.c=.o}) $(addprefix ${DIR_BUILD}/,${SOURCES_CPP:.cpp=.o})
 # 'override' directive
 GNUMAKEFLAGS := 
@@ -219,10 +220,10 @@ GTK_MODULES = gail:atk-bridge
 MAKE_VERSION := 4.3
 # 'override' directive
 .SHELLSTATUS := 0
-# makefile (from 'Makefile', line 71)
+# makefile (from 'Makefile', line 72)
 LDFLAGS = -z max-page-size=4096 --script ${LDSCRIPT}
 # environment
-SSH_AGENT_PID = 1163
+SSH_AGENT_PID = 1133
 # environment
 VSCODE_NODE_CACHED_DATA_DIR = 
 # environment
@@ -254,7 +255,7 @@ VSCODE_IPC_HOOK = /run/user/1000/vscode-5d3dd306-1.56.1-main.sock
 # makefile (from 'Makefile', line 2)
 DIR_LIBS = lib
 # environment
-XDG_SESSION_ID = 2
+XDG_SESSION_ID = 3
 # environment
 DOTNET_CLI_TELEMETRY_OPTOUT = 1
 # default
@@ -267,13 +268,13 @@ SUFFIXES :=
 LD = ${TOOLPREFIX}ld
 # environment
 QT_AUTO_SCREEN_SCALE_FACTOR = 0
-# makefile (from 'Makefile', line 68)
-CXXFLAGS = -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common $(shell ${CXX} -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector) ${DEBUG_FLAG} -MMD -MP -MF"${@:%.o=%.d}"
+# makefile (from 'Makefile', line 69)
+CXXFLAGS = -Wall -Werror -Og -ggdb -nostdlib -std=c++11 -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax -fno-omit-frame-pointer -ffreestanding -fno-common -fno-rtti -fno-threadsafe-statics $(shell ${CXX} -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector) ${DEBUG_FLAG} -MMD -MP -MF"${@:%.o=%.d}"
 # environment
 XDG_GREETER_DATA_DIR = /var/lib/lightdm/data/ikac
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell nocomment grouped-target extra-prereqs archives jobserver output-sync check-symlink load
-# makefile (from 'Makefile', line 123)
+# makefile (from 'Makefile', line 124)
 QEMUOPTS = -machine virt -bios none -kernel ${KERNEL_IMG} -m 128M -smp ${CPU_CORE_COUNT} -nographic
 # makefile (from 'Makefile', line 37)
 CXX = ${TOOLPREFIX}g++
@@ -281,15 +282,15 @@ CXX = ${TOOLPREFIX}g++
 CC = ${TOOLPREFIX}gcc
 # makefile (from 'Makefile', line 39)
 OBJCOPY = ${TOOLPREFIX}objcopy
-# makefile (from 'Makefile', line 80)
+# makefile (from 'Makefile', line 81)
 SOURCES = $(shell find . -name "*.c" -printf "%P ")
-# makefile (from 'Makefile', line 76)
+# makefile (from 'Makefile', line 77)
 SOURCES_ASM = $(shell find . -name "*.S" -printf "%P ")
 # environment
 GDMSESSION = awesome
 # variable set hash-table stats:
  
-# Load=138/1024=13%, Rehash=0, Collisions=16/280=6%
+# Load=138/1024=13%, Rehash=0, Collisions=16/270=6%
 
 # Pattern-specific Variable Values
 
@@ -297,28 +298,32 @@ GDMSESSION = awesome
 
 # Directories
 
-# src/asm (device 2049, inode 262): 6 files, 6 impossibilities.
+# src/asm (device 2049, inode 618): 7 files, 9 impossibilities.
 # src/cpp/src/asm: could not be stat'd.
-# src/cpp (device 2049, inode 150): 4 files, no impossibilities so far.
-# build (device 2049, inode 38325): 3 files, no impossibilities.
-# . (device 2049, inode 119): 15 files, no impossibilities.
+# testing/src/asm: could not be stat'd.
+# testing (device 2049, inode 442): 17 files, 3 impossibilities.
+# testing/testing: could not be stat'd.
+# src/cpp (device 2049, inode 622): No files, no impossibilities so far.
+# build (device 2049, inode 235): 3 files, no impossibilities.
+# . (device 2049, inode 186): 17 files, no impossibilities.
+# src/cpp/testing: could not be stat'd.
 
-# 28 files, 6 impossibilities in 5 directories.
+# 44 files, 12 impossibilities in 9 directories.
 
 # Implicit Rules
 
 build/%.o: %.cpp Makefile | build
-#  recipe to execute (from 'Makefile', line 95):
+#  recipe to execute (from 'Makefile', line 96):
 	@mkdir -p $(dir ${@})
 	${CXX} -c ${CXXFLAGS} -Wa,-a,-ad,-alms=${DIR_BUILD}/${<:.cpp=.lst} -o ${@} ${<}
 
 build/%.o: %.c Makefile | build
-#  recipe to execute (from 'Makefile', line 99):
+#  recipe to execute (from 'Makefile', line 100):
 	@mkdir -p $(dir ${@})
 	${CC} -c ${CFLAGS} -Wa,-a,-ad,-alms=${DIR_BUILD}/${<:.c=.lst} -o ${@} ${<}
 
 build/%.o: %.s Makefile | build
-#  recipe to execute (from 'Makefile', line 103):
+#  recipe to execute (from 'Makefile', line 104):
 	@mkdir -p $(dir ${@})
 	${AS} -c ${ASFLAGS} -o ${@} ${<}
 
@@ -328,7 +333,7 @@ build/%.o: %.s Makefile | build
 # Not a target:
 build/src/asm/interrupt_asm.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-25 17:00:35.46
+#  Last modified 2022-05-25 18:36:31.3
 #  File has been updated.
 #  Successfully updated.
 
@@ -339,17 +344,15 @@ build/src/cpp/syscall_c.o:
 #  File has not been updated.
 
 # Not a target:
-src/cpp/main.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-25 17:07:25.27
-#  File has been updated.
-#  Successfully updated.
+build/testing/printing.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .gdbinit.tmpl-riscv:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
- 
 #  File has not been updated.
 
 # Not a target:
@@ -359,13 +362,12 @@ build/src/cpp/ksemaphore.o:
 #  File has not been updated.
 
 # Not a target:
-%.s:
-#  Precious file (prerequisite of .PRECIOUS).
+build/testing/buffer.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-.PRECIOUS: %.s %.o
+.PRECIOUS: %.o
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -373,21 +375,28 @@ build/src/cpp/ksemaphore.o:
 # Not a target:
 build/src/cpp/tcb.o:
 #  Implicit rule search has not been done.
+ 
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-24 16:05:01.02
+#  Last modified 2022-05-18 14:15:14
 #  File has been updated.
 #  Successfully updated.
+
+# Not a target:
+build/testing/buffer_CPP_API.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 clean:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  recipe to execute (from 'Makefile', line 110):
+#  recipe to execute (from 'Makefile', line 111):
 	rm -f *.tex *.dvi *.idx *.aux *.log *.ind *.ilg
 	rm -f ${KERNEL_IMG} ${KERNEL_ASM}
 	rm -fr ${DIR_BUILD}
@@ -399,16 +408,11 @@ build/src/cpp/testing.o:
 #  Modification time never checked.
 #  File has not been updated.
 
- 
-build/src/cpp/interrupt_cpp.o: src/cpp/interrupt_cpp.cpp Makefile | build
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'src/cpp/interrupt_cpp'
-#  Last modified 2022-05-25 17:00:35.52
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 95):
-	@mkdir -p $(dir ${@})
-	${CXX} -c ${CXXFLAGS} -Wa,-a,-ad,-alms=${DIR_BUILD}/${<:.cpp=.lst} -o ${@} ${<}
+# Not a target:
+build/src/cpp/interrupt_cpp.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 build/src/cpp/scheduler.o:
@@ -416,14 +420,11 @@ build/src/cpp/scheduler.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-kernel: lib/hw.lib lib/console.lib build/src/asm/interrupt_asm.o build/src/asm/tcb_asm.o build/src/cpp/interrupt_cpp.o build/src/cpp/main.o build/src/cpp/memory_allocator.o build/src/cpp/scheduler.o build/src/cpp/tcb.o build/src/cpp/testing.o build/src/cpp/syscall_c.o build/src/cpp/ksemaphore.o kernel.ld | build
+kernel: lib/hw.lib lib/mem.lib lib/console.lib build/src/asm/interrupt_asm.o build/src/asm/tcb_asm.o build/src/asm/riscv_asm.o build/testing/lock.o build/src/cpp/interrupt_cpp.o build/src/cpp/main.o build/src/cpp/memory_allocator.o build/src/cpp/scheduler.o build/src/cpp/tcb.o build/src/cpp/testing.o build/src/cpp/syscall_c.o build/src/cpp/ksemaphore.o build/testing/buffer.o build/testing/buffer_CPP_API.o build/testing/printing.o build/testing/userMain.o kernel.ld | build
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-25 17:00:35.87
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/13=0%
-#  recipe to execute (from 'Makefile', line 91):
+#  Last modified 2022-05-25 18:36:31.7
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 92):
 	${LD} ${LDFLAGS} -o ${@} ${OBJECTS} ${LDLIBS} ${LDLIBS}
 	${OBJDUMP} --source ${KERNEL_IMG} > ${KERNEL_ASM}
 
@@ -435,6 +436,7 @@ kernel: lib/hw.lib lib/console.lib build/src/asm/interrupt_asm.o build/src/asm/t
 
 # Not a target:
 kernel.ld:
+ 
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -443,56 +445,40 @@ all: kernel
 #  Command line target.
 #  Implicit rule search has been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
- 
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/13=0%
-
-# Not a target:
-src/cpp/interrupt_cpp.cpp:
-#  Implicit rule search has been done.
-#  Last modified 2022-05-25 14:40:08.95
-#  File has been updated.
-#  Successfully updated.
+#  File has not been updated.
 
 build:
 #  Implicit rule search has not been done.
-#  Last modified 2022-05-25 17:00:35.46
-#  File has been updated.
-#  Successfully updated.
-#  recipe to execute (from 'Makefile', line 107):
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 108):
 	mkdir ${@}
 
-# 'override' directive
-build/src/cpp/main.o: .SHELLSTATUS := 0
-build/src/cpp/main.o: src/cpp/main.cpp Makefile | build
+# Not a target:
+lib/mem.lib:
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: 'src/cpp/main'
-#  Last modified 2022-05-25 17:00:35.61
+#  Last modified 2022-03-07 13:47:02
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := build/src/cpp/main.o
-# automatic
-# * := src/cpp/main
-# automatic
-# < := src/cpp/main.cpp
-# automatic
-# + := src/cpp/main.cpp Makefile
-# automatic
-# % := 
-# automatic
-# ^ := src/cpp/main.cpp Makefile
-# automatic
-# ? := src/cpp/main.cpp
-# automatic
-# | := build
-# variable set hash-table stats:
-# Load=9/32=28%, Rehash=0, Collisions=2/27=7%
-#  recipe to execute (from 'Makefile', line 95):
-	@mkdir -p $(dir ${@})
-	${CXX} -c ${CXXFLAGS} -Wa,-a,-ad,-alms=${DIR_BUILD}/${<:.cpp=.lst} -o ${@} ${<}
+#  Successfully updated.
+
+# Not a target:
+build/src/cpp/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+build/testing/userMain.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+build/src/asm/riscv_asm.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-05-25 18:36:31.31
+#  File has been updated.
+#  Successfully updated.
 
 qemu: kernel
 #  Implicit rule search has not been done.
@@ -500,6 +486,13 @@ qemu: kernel
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 127):
 	${QEMU} ${QEMUOPTS}
+
+# Not a target:
+build/testing/lock.o:
+#  Implicit rule search has been done.
+#  File does not exist.
+#  File has not been updated.
+ 
 
 # Not a target:
 lib/hw.lib:
@@ -524,7 +517,7 @@ build/src/cpp/memory_allocator.o:
 # Not a target:
 build/src/asm/tcb_asm.o:
 #  Implicit rule search has been done.
-#  Last modified 2022-05-25 17:00:35.47
+#  Last modified 2022-05-25 18:36:31.31
 #  File has been updated.
 #  Successfully updated.
 
@@ -548,25 +541,26 @@ lib/console.lib:
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'Makefile', line 130):
+ 
 	sed "s/:1234/:${GDBPORT}/" < ${^} > ${@}
 
 # files hash-table stats:
-# Load=29/1024=3%, Rehash=0, Collisions=0/98=0%
+# Load=33/1024=3%, Rehash=0, Collisions=4/121=3%
 # VPATH Search Paths
 
-vpath %.S src/asm
-vpath %.cpp src/cpp
+vpath %.S src/asm:testing
+vpath %.cpp src/cpp:testing
 
 # 2 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 68 / storage = 916 B / avg = 13 B
-# current buf: size = 8162 B / used = 916 B / count = 68 / avg = 13 B
+# strcache buffers: 1 (0) / strings = 102 / storage = 1521 B / avg = 14 B
+# current buf: size = 8162 B / used = 1521 B / count = 102 / avg = 14 B
 
-# strcache performance: lookups = 128 / hit rate = 46%
+# strcache performance: lookups = 158 / hit rate = 35%
 # hash-table stats:
-# Load=68/8192=1%, Rehash=0, Collisions=0/128=0%
-# Finished Make data base on Wed May 25 17:07:39 2022
+# Load=102/8192=1%, Rehash=0, Collisions=2/158=1%
+# Finished Make data base on Sat May 28 12:24:16 2022
 
  

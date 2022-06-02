@@ -1,5 +1,5 @@
 #include"../../h/testing.hpp"
-
+#include"../../h/tcb.hpp"
 void print(uint64 unum, char end, bool hex){
     uint64 sstatus = Riscv::r_sstatus();
     Riscv::mc_sstatus(Riscv::SSTATUS_SIE);
@@ -19,10 +19,11 @@ void print(uint64 unum, char end, bool hex){
     __putc('0');
     __putc('x');
     
+    const char* numbers = "0123456789ABCDEF";
     unum1 = unum;
     i = 0;
     do{
-        buffer[i++] = '0' + unum1%16;
+        buffer[i++] = numbers[unum1%16];
         unum1/=16;
     } while(unum1 > 0);
     for(int j = i-1; j >= 0; j--)
@@ -109,4 +110,9 @@ void print_sup_registers(){
 
     print("scause:",' ');
     print(Riscv::r_scause(), '\n', 1);
+}
+
+void* kmalloc(size_t size){
+    size = (size-1)/MEM_BLOCK_SIZE + 1;
+    return MemoryAllocator::getInstance().mem_alloc(size);
 }

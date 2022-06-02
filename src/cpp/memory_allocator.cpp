@@ -22,7 +22,10 @@ MemoryAllocator& MemoryAllocator::getInstance(){
 
 void* MemoryAllocator::mem_alloc(size_t size){
     FreeSegment* best = nullptr,*best_prev = nullptr,* curr = fmem_head, *prev = nullptr;
+    //print("Alocirano blokova: ", size, 0);
     size = size*MEM_BLOCK_SIZE;
+
+
     while(curr){
         if(curr->size >= size)
             if (!best || (curr->size < best->size)){
@@ -45,9 +48,12 @@ void* MemoryAllocator::mem_alloc(size_t size){
         if(best_prev) best_prev->next = curr;
         else fmem_head = curr;
     }
+
     //print((uint64)best);
     //print((uint64)best->size);
     best->next = nullptr;
+    //print("Na adresi: ", (uint64)best+sizeof(FreeSegment), 0);
+    //print_list();
     return (char*)best+sizeof(FreeSegment);
 }
 

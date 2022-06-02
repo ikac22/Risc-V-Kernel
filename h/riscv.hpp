@@ -54,6 +54,9 @@ public:
     static void pushRegisters();
 
     static void popSppSpie();
+
+    static void mc_cstatus(uint64 mask);
+    static bool cstatus_ready(uint64 mask);
 };
 
 inline uint64 Riscv::r_a0(){
@@ -176,6 +179,21 @@ inline void Riscv::ni_sepc(){ //next instruction sepc
     asm volatile("csrw sepc, s1");
 
     asm volatile("mv s1, %0" : : "r" (s1));
+}
+
+inline void Riscv::mc_cstatus(uint64 mask){
+    uint64 iostatus;
+    asm volatile("lb %[reg], (%[adr])" : [reg] "=r" (iostatus) : [adr] "r" (CONSOLE_STATUS) );
+    if(iostatus & mask)
+        iostatus ^= mask;
+    asm volatile("wb %[reg], (%[adr])" :  : [reg] "r" (iostatus), [adr] "r" (CONSOLE_STATUS) );
+}
+
+inline bool Riscv::cstatus_ready(uint64 mask)
+{
+    uint64 iostatus;
+    asm volatile("lb %[reg], (%[adr])" : [reg] "=r" (iostatus) : [adr] "r" (CONSOLE_STATUS) );
+    return iostatus & mask;
 }
 
 

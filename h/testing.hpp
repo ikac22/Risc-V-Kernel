@@ -14,4 +14,8 @@ void memTest();
 void print_a0();
 void print_sup_registers();
 void print(const char* str, uint64 t, bool hex = 1);
+void* kmalloc(size_t size);
+
+
+
 #endif
