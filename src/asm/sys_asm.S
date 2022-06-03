@@ -3,10 +3,4 @@
 .global thread_dispatch
 .global thread_create
 .global thread_exit
-.global sem_open
-.global sem_close
-.global sem_wait
-.global sem_signal
-.global time_sleep
-.global getc
-.global putc
+
