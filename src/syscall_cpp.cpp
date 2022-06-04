@@ -1,5 +1,5 @@
 #include"../h/syscall_cpp.hpp"
-#include"../test/printing.hpp"
+//#include"../test/printing.hpp"
 
 void* operator new(size_t sz){return mem_alloc(sz);}
 void operator delete(void* ptr){mem_free(ptr);}
