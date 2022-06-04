@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PTH="/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project/src/asm/"
+PTH="/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project/src/"
 FILE="asmcode.asm"
 
 rm $(find $PTH*.S)

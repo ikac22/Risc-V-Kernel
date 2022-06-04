@@ -1,13 +1,17 @@
 #ifndef _queue_h
 #define _queue_h
 
-#include"../h/tcb.hpp"
+//#include"../h/tcb.hpp"
 //#include"../h/testing.hpp"
+#include"../lib/hw.h"
+#include"../h/memory_allocator.hpp"
+
+class TCB;
 
 class TcbQueue{
        
-   TCB *head, *tail;
-
+    TCB *head, *tail;
+    int tmpNum;
     void brisi(){
         while(!isEmpty())
             remove();
@@ -15,7 +19,7 @@ class TcbQueue{
 
 public:
     #include"../h/kernel_operators.hpp"
-    TcbQueue():head(nullptr), tail(nullptr){}
+    TcbQueue():head(nullptr), tail(nullptr), tmpNum(0){}
     
     bool exists(TCB* info) const;
 
@@ -33,6 +37,7 @@ public:
 
     void insertFront(TCB* info);
 
+    int length(){ return tmpNum; }
     /*~TcbQueue(){
         brisi();
     }*/

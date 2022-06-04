@@ -21,8 +21,7 @@ public:
     
     ~TCB(){ 
         MemoryAllocator& allocator = MemoryAllocator::getInstance(); 
-        if(!allocator.invalidFreeAddress(this))
-            allocator.mem_free(stack);
+        allocator.mem_free(this->stack);
     }
     
     //nestaticki metodi
@@ -34,6 +33,7 @@ public:
     bool isSuspended(){return state == BLOCKED || state == SLEEPING;}
     void setKernelMode() { userMode = false; }
     void setKernelLocked() { locked = true; }
+    bool isKernelThread() { return !userMode; } 
 
     //staticki metodi
     static TCB* createThread(Body, void* args = nullptr, uint64* stack = nullptr);
@@ -41,6 +41,10 @@ public:
     static void dispatch(); //potencijalna promena running niti
     static void deleteThread(TCB*);
     static void sleep(time_t);
+    static TCB* createMainKernelThread();
+    static int endKernel();
+    static void setPanicContext(uint64, uint64);
+    static void panicDispatch();
     
     //struktura
     struct Context{
@@ -49,13 +53,15 @@ public:
     
     static uint64 timeSliceCounter;
     static TCB* running;
+    
 
     TCB* next;
     time_t sleep_time;
-    KSemaphore* out_sem;
 
 private:
-    
+    static Context panicContext;
+    static TCB* kernelThread;
+    static int threadsUp;
     Body body;  
     void* args;
     uint64* stack, timeSlice;

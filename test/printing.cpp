@@ -51,27 +51,16 @@ int stringToInt(const char *s) {
 
 char digits[] = "0123456789ABCDEF";
 
-void printInt(int xx, int base, int sgn)
+void printInt(uint64 xx, int base)
 {
     LOCK();
     char buf[16];
-    int i, neg;
-    uint x;
-
-    neg = 0;
-    if(sgn && xx < 0){
-        neg = 1;
-        x = -xx;
-    } else {
-        x = xx;
-    }
+    int i;
 
     i = 0;
     do{
-        buf[i++] = digits[x % base];
-    }while((x /= base) != 0);
-    if(neg)
-        buf[i++] = '-';
+        buf[i++] = digits[xx % base];
+    }while((xx /= base) != 0);
 
     while(--i >= 0)
         putc(buf[i]);

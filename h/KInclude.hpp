@@ -2,7 +2,6 @@
 #define ___KINCLUDE___
 
 #include"../h/ptr_queue.hpp"
-#include"../h/testing.hpp"
 #include"../h/riscv.hpp"
 #include"../h/syscall_c.h"
 #include"../h/tcb.hpp"

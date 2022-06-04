@@ -15,6 +15,8 @@ public:
     static void update_sleep();
     static void put_front(TCB* t) { queue.insertFront(t); }
     static void print_queue();
+    static bool tcbQueueEmpty(){ return queue.isEmpty(); }
+    static int getQueueSize() { return queue.length(); }
 private:
     static int cmp(TCB*, TCB*);
     static TcbQueue queue;

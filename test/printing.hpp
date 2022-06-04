@@ -13,7 +13,7 @@ char* getString(char *buf, int max);
 
 int stringToInt(const char *s);
 
-void printInt(int xx, int base=10, int sgn=0);
+void printInt(uint64 xx, int base=10);
 
 #endif // _PRINTING_HPP_
 

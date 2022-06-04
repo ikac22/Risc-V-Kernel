@@ -4,22 +4,20 @@
 
 void* operator new (size_t);
 void operator delete (void*);
-struct Wrap;
 
 class Thread {
 public:
     Thread (void (*body)(void*), void* arg);
-    virtual ~Thread (){ delete myHandle; }
+    virtual ~Thread ();
     void start ();
     static void dispatch () { thread_dispatch(); }
     static void sleep (time_t time){ time_sleep(time); }
 protected:
-    Thread (){ myHandle = nullptr; this->w = nullptr;}
+    Thread (){ myHandle = nullptr;}
     virtual void run () {}
 private:
     static void runWrapper(void*);
     thread_t myHandle;
-    Wrap* w;
 };
 
 class Semaphore {
