@@ -73,8 +73,6 @@ int kernelInit()
 
     uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
-    idleThread->setKernelMode();
-    idleThread->setKernelLocked();
     if(userMainStack && idleThreadStack && idleThread && userMainThread)
         kprintString("Threads successfully initalized!\n");
     else
