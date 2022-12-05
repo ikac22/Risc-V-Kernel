@@ -11,4 +11,9 @@
 #include"../h/memory_allocator.hpp"
 #include"../h/kernel_funs.h"
 
+extern "C" uint64 KERNEL_TEXT_START;
+extern "C" uint64 KERNEL_TEXT_END;
+extern "C" uint64 USER_TEXT_START;
+extern "C" uint64 USER_TEXT_END;
+
 #endif 

@@ -1,0 +1,1975 @@
+GAS LISTING /tmp/cceLesXB.s 			page 1
+
+
+   1              		.file	"kernel_lib.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_Z15userMainWrapperPv
+  12              	_Z15userMainWrapperPv:
+  13              	.LFB91:
+  14              		.file 1 "src/kernel/kernel_lib.cpp"
+   1:src/kernel/kernel_lib.cpp **** #include"../../h/kernel_lib.h"
+   2:src/kernel/kernel_lib.cpp **** 
+   3:src/kernel/kernel_lib.cpp **** extern "C" uint64 KERNEL_TEXT_START;
+   4:src/kernel/kernel_lib.cpp **** extern "C" uint64 KERNEL_TEXT_END;
+   5:src/kernel/kernel_lib.cpp **** extern "C" uint64 USER_TEXT_START;
+   6:src/kernel/kernel_lib.cpp **** extern "C" uint64 USER_TEXT_END;
+   7:src/kernel/kernel_lib.cpp **** 
+   8:src/kernel/kernel_lib.cpp **** void userMainWrapper(void*)
+   9:src/kernel/kernel_lib.cpp **** {
+  15              		.loc 1 9 1
+  16              		.cfi_startproc
+  17 0000 130101FF 		addi	sp,sp,-16
+  18              		.cfi_def_cfa_offset 16
+  19 0004 23341100 		sd	ra,8(sp)
+  20 0008 23308100 		sd	s0,0(sp)
+  21              		.cfi_offset 1, -8
+  22              		.cfi_offset 8, -16
+  23 000c 13040101 		addi	s0,sp,16
+  24              		.cfi_def_cfa 8, 0
+  10:src/kernel/kernel_lib.cpp ****     userMain();
+  25              		.loc 1 10 5
+  26              		.loc 1 10 13 is_stmt 0
+  27 0010 97000000 		call	_Z8userMainv
+  27      E7800000 
+  28              	.LVL0:
+  11:src/kernel/kernel_lib.cpp **** }
+  29              		.loc 1 11 1
+  30 0018 83308100 		ld	ra,8(sp)
+  31              		.cfi_restore 1
+  32 001c 03340100 		ld	s0,0(sp)
+  33              		.cfi_restore 8
+  34              		.cfi_def_cfa 2, 16
+  35 0020 13010101 		addi	sp,sp,16
+  36              		.cfi_def_cfa_offset 0
+  37 0024 67800000 		jr	ra
+  38              		.cfi_endproc
+  39              	.LFE91:
+  41              		.align	2
+  42              		.globl	_Z12idleFunctionPv
+  44              	_Z12idleFunctionPv:
+  45              	.LFB92:
+  12:src/kernel/kernel_lib.cpp **** 
+  13:src/kernel/kernel_lib.cpp **** void idleFunction(void*)
+  14:src/kernel/kernel_lib.cpp **** {
+GAS LISTING /tmp/cceLesXB.s 			page 2
+
+
+  46              		.loc 1 14 1 is_stmt 1
+  47              		.cfi_startproc
+  48 0028 130101FF 		addi	sp,sp,-16
+  49              		.cfi_def_cfa_offset 16
+  50 002c 23341100 		sd	ra,8(sp)
+  51 0030 23308100 		sd	s0,0(sp)
+  52              		.cfi_offset 1, -8
+  53              		.cfi_offset 8, -16
+  54 0034 13040101 		addi	s0,sp,16
+  55              		.cfi_def_cfa 8, 0
+  56              	.L4:
+  15:src/kernel/kernel_lib.cpp ****     while(1){
+  57              		.loc 1 15 5 discriminator 1
+  16:src/kernel/kernel_lib.cpp ****         TCB::yield();
+  58              		.loc 1 16 9 discriminator 1
+  59              		.loc 1 16 19 is_stmt 0 discriminator 1
+  60 0038 97000000 		call	_ZN3TCB5yieldEv
+  60      E7800000 
+  61              	.LVL1:
+  62 0040 6FF09FFF 		j	.L4
+  63              		.cfi_endproc
+  64              	.LFE92:
+  66              		.align	2
+  67              		.globl	_Z7kmallocm
+  69              	_Z7kmallocm:
+  70              	.LFB93:
+  17:src/kernel/kernel_lib.cpp ****         //thread_dispatch();
+  18:src/kernel/kernel_lib.cpp ****     }
+  19:src/kernel/kernel_lib.cpp **** }
+  20:src/kernel/kernel_lib.cpp **** 
+  21:src/kernel/kernel_lib.cpp **** void* kmalloc(size_t size)
+  22:src/kernel/kernel_lib.cpp **** {
+  71              		.loc 1 22 1 is_stmt 1
+  72              		.cfi_startproc
+  73              	.LVL2:
+  74 0044 130101FE 		addi	sp,sp,-32
+  75              		.cfi_def_cfa_offset 32
+  76 0048 233C1100 		sd	ra,24(sp)
+  77 004c 23388100 		sd	s0,16(sp)
+  78 0050 23349100 		sd	s1,8(sp)
+  79              		.cfi_offset 1, -8
+  80              		.cfi_offset 8, -16
+  81              		.cfi_offset 9, -24
+  82 0054 13040102 		addi	s0,sp,32
+  83              		.cfi_def_cfa 8, 0
+  23:src/kernel/kernel_lib.cpp ****     size = (size-1)/MEM_BLOCK_SIZE + 1;
+  84              		.loc 1 23 5
+  85              		.loc 1 23 17 is_stmt 0
+  86 0058 9304F5FF 		addi	s1,a0,-1
+  87              		.loc 1 23 20
+  88 005c 93D46400 		srli	s1,s1,6
+  89              		.loc 1 23 10
+  90 0060 93841400 		addi	s1,s1,1
+  91              	.LVL3:
+  24:src/kernel/kernel_lib.cpp ****     return MemoryAllocator::getInstance().mem_alloc(size);
+  92              		.loc 1 24 5 is_stmt 1
+  93              		.loc 1 24 41 is_stmt 0
+GAS LISTING /tmp/cceLesXB.s 			page 3
+
+
+  94 0064 97000000 		call	_ZN15MemoryAllocator11getInstanceEv
+  94      E7800000 
+  95              	.LVL4:
+  96              		.loc 1 24 52
+  97 006c 93850400 		mv	a1,s1
+  98 0070 97000000 		call	_ZN15MemoryAllocator9mem_allocEm
+  98      E7800000 
+  99              	.LVL5:
+  25:src/kernel/kernel_lib.cpp **** }
+ 100              		.loc 1 25 1
+ 101 0078 83308101 		ld	ra,24(sp)
+ 102              		.cfi_restore 1
+ 103 007c 03340101 		ld	s0,16(sp)
+ 104              		.cfi_restore 8
+ 105              		.cfi_def_cfa 2, 32
+ 106 0080 83348100 		ld	s1,8(sp)
+ 107              		.cfi_restore 9
+ 108              	.LVL6:
+ 109 0084 13010102 		addi	sp,sp,32
+ 110              		.cfi_def_cfa_offset 0
+ 111 0088 67800000 		jr	ra
+ 112              		.cfi_endproc
+ 113              	.LFE93:
+ 115              		.align	2
+ 116              		.globl	_Z5kputcc
+ 118              	_Z5kputcc:
+ 119              	.LFB94:
+  26:src/kernel/kernel_lib.cpp **** 
+  27:src/kernel/kernel_lib.cpp **** void kputc(char c){
+ 120              		.loc 1 27 19 is_stmt 1
+ 121              		.cfi_startproc
+ 122              	.LVL7:
+ 123 008c 130101FF 		addi	sp,sp,-16
+ 124              		.cfi_def_cfa_offset 16
+ 125 0090 23348100 		sd	s0,8(sp)
+ 126              		.cfi_offset 8, -8
+ 127 0094 13040101 		addi	s0,sp,16
+ 128              		.cfi_def_cfa 8, 0
+  28:src/kernel/kernel_lib.cpp ****     char* odata = (char*)CONSOLE_TX_DATA, 
+ 129              		.loc 1 28 5
+ 130              		.loc 1 28 11 is_stmt 0
+ 131 0098 97070000 		lla	a5,CONSOLE_TX_DATA
+ 131      93870700 
+ 132 00a0 83B60700 		ld	a3,0(a5)
+ 133              	.LVL8:
+  29:src/kernel/kernel_lib.cpp ****     *iostatus = (char*)CONSOLE_STATUS;
+ 134              		.loc 1 29 6
+ 135 00a4 97070000 		lla	a5,CONSOLE_STATUS
+ 135      93870700 
+ 136 00ac 03B70700 		ld	a4,0(a5)
+ 137              	.LVL9:
+ 138              	.L9:
+  30:src/kernel/kernel_lib.cpp ****     while(!(*iostatus & CONSOLE_TX_STATUS_BIT));
+ 139              		.loc 1 30 5 is_stmt 1
+ 140              		.loc 1 30 13 is_stmt 0
+ 141 00b0 83470700 		lbu	a5,0(a4)
+ 142              		.loc 1 30 11
+GAS LISTING /tmp/cceLesXB.s 			page 4
+
+
+ 143 00b4 93F70702 		andi	a5,a5,32
+ 144 00b8 E38C07FE 		beq	a5,zero,.L9
+  31:src/kernel/kernel_lib.cpp ****     *odata = c;
+ 145              		.loc 1 31 5 is_stmt 1
+ 146              		.loc 1 31 12 is_stmt 0
+ 147 00bc 2380A600 		sb	a0,0(a3)
+  32:src/kernel/kernel_lib.cpp **** }
+ 148              		.loc 1 32 1
+ 149 00c0 03348100 		ld	s0,8(sp)
+ 150              		.cfi_restore 8
+ 151              		.cfi_def_cfa 2, 16
+ 152 00c4 13010101 		addi	sp,sp,16
+ 153              		.cfi_def_cfa_offset 0
+ 154 00c8 67800000 		jr	ra
+ 155              		.cfi_endproc
+ 156              	.LFE94:
+ 158              		.align	2
+ 159              		.globl	_Z12kprintStringPKc
+ 161              	_Z12kprintStringPKc:
+ 162              	.LFB95:
+  33:src/kernel/kernel_lib.cpp **** 
+  34:src/kernel/kernel_lib.cpp **** void kprintString(const char* string)
+  35:src/kernel/kernel_lib.cpp **** {
+ 163              		.loc 1 35 1 is_stmt 1
+ 164              		.cfi_startproc
+ 165              	.LVL10:
+ 166 00cc 130101FE 		addi	sp,sp,-32
+ 167              		.cfi_def_cfa_offset 32
+ 168 00d0 233C1100 		sd	ra,24(sp)
+ 169 00d4 23388100 		sd	s0,16(sp)
+ 170 00d8 23349100 		sd	s1,8(sp)
+ 171              		.cfi_offset 1, -8
+ 172              		.cfi_offset 8, -16
+ 173              		.cfi_offset 9, -24
+ 174 00dc 13040102 		addi	s0,sp,32
+ 175              		.cfi_def_cfa 8, 0
+ 176 00e0 93040500 		mv	s1,a0
+  36:src/kernel/kernel_lib.cpp ****     if(!string) return;
+ 177              		.loc 1 36 5
+ 178 00e4 630E0500 		beq	a0,zero,.L11
+ 179              	.LVL11:
+ 180              	.L13:
+  37:src/kernel/kernel_lib.cpp ****     while(*string)
+ 181              		.loc 1 37 5
+ 182              		.loc 1 37 11 is_stmt 0
+ 183 00e8 03C50400 		lbu	a0,0(s1)
+ 184              		.loc 1 37 12
+ 185 00ec 630A0500 		beq	a0,zero,.L11
+  38:src/kernel/kernel_lib.cpp ****     {
+  39:src/kernel/kernel_lib.cpp ****         kputc(*string);
+ 186              		.loc 1 39 9 is_stmt 1
+ 187              		.loc 1 39 14 is_stmt 0
+ 188 00f0 97000000 		call	_Z5kputcc
+ 188      E7800000 
+ 189              	.LVL12:
+  40:src/kernel/kernel_lib.cpp ****         string++;
+ 190              		.loc 1 40 9 is_stmt 1
+GAS LISTING /tmp/cceLesXB.s 			page 5
+
+
+ 191              		.loc 1 40 15 is_stmt 0
+ 192 00f8 93841400 		addi	s1,s1,1
+ 193              	.LVL13:
+  37:src/kernel/kernel_lib.cpp ****     while(*string)
+ 194              		.loc 1 37 5
+ 195 00fc 6FF0DFFE 		j	.L13
+ 196              	.L11:
+  41:src/kernel/kernel_lib.cpp ****     }
+  42:src/kernel/kernel_lib.cpp **** }
+ 197              		.loc 1 42 1
+ 198 0100 83308101 		ld	ra,24(sp)
+ 199              		.cfi_restore 1
+ 200 0104 03340101 		ld	s0,16(sp)
+ 201              		.cfi_restore 8
+ 202              		.cfi_def_cfa 2, 32
+ 203 0108 83348100 		ld	s1,8(sp)
+ 204              		.cfi_restore 9
+ 205              	.LVL14:
+ 206 010c 13010102 		addi	sp,sp,32
+ 207              		.cfi_def_cfa_offset 0
+ 208 0110 67800000 		jr	ra
+ 209              		.cfi_endproc
+ 210              	.LFE95:
+ 212              		.align	2
+ 213              		.globl	_Z9kprintIntmi
+ 215              	_Z9kprintIntmi:
+ 216              	.LFB97:
+  43:src/kernel/kernel_lib.cpp **** 
+  44:src/kernel/kernel_lib.cpp **** int kernelInit()
+  45:src/kernel/kernel_lib.cpp **** {
+  46:src/kernel/kernel_lib.cpp ****     kprintString("--------------KERNEL INIT--------------\n");
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+  53:src/kernel/kernel_lib.cpp **** 
+  54:src/kernel/kernel_lib.cpp ****     Riscv::w_stvec((uint64)interruptvec);
+  55:src/kernel/kernel_lib.cpp ****     kprintString("stvec initalized!\n");
+  56:src/kernel/kernel_lib.cpp ****     MemoryAllocator::getInstance();
+  57:src/kernel/kernel_lib.cpp ****     kprintString("MemoryAllocator initalized!\n");
+  58:src/kernel/kernel_lib.cpp ****     Scheduler::initalize();
+  59:src/kernel/kernel_lib.cpp ****     kprintString("Scheduler initalized!\n");
+  60:src/kernel/kernel_lib.cpp ****     StdIO::initalize();
+  61:src/kernel/kernel_lib.cpp ****     kprintString("StdIO initalized!\n");
+  62:src/kernel/kernel_lib.cpp ****     TCB::createMainKernelThread();
+  63:src/kernel/kernel_lib.cpp ****     kprintString("Main kenrel thread initalized!\n");
+  64:src/kernel/kernel_lib.cpp **** 
+  65:src/kernel/kernel_lib.cpp ****     kprintString("Initalizing user thread and idle thread...\n");
+  66:src/kernel/kernel_lib.cpp ****     uint64* userMainStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+  67:src/kernel/kernel_lib.cpp ****     TCB* userMainThread = TCB::createThread(userMainWrapper, nullptr, userMainStack);
+  68:src/kernel/kernel_lib.cpp **** 
+  69:src/kernel/kernel_lib.cpp ****     uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+  70:src/kernel/kernel_lib.cpp ****     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
+  71:src/kernel/kernel_lib.cpp ****     idleThread->setKernelMode();
+  72:src/kernel/kernel_lib.cpp ****     idleThread->setKernelLocked();
+GAS LISTING /tmp/cceLesXB.s 			page 6
+
+
+  73:src/kernel/kernel_lib.cpp ****     if(userMainStack && idleThreadStack && idleThread && userMainThread)
+  74:src/kernel/kernel_lib.cpp ****         kprintString("Threads successfully initalized!\n");
+  75:src/kernel/kernel_lib.cpp ****     else
+  76:src/kernel/kernel_lib.cpp ****         return -1;
+  77:src/kernel/kernel_lib.cpp ****     kprintString("-----------KERNEL INITALIZED-----------\n\n");
+  78:src/kernel/kernel_lib.cpp **** 
+  79:src/kernel/kernel_lib.cpp ****     return 0;
+  80:src/kernel/kernel_lib.cpp **** }
+  81:src/kernel/kernel_lib.cpp **** 
+  82:src/kernel/kernel_lib.cpp **** char kdigits[] = "0123456789ABCDEF";
+  83:src/kernel/kernel_lib.cpp **** void kprintInt(uint64 xx, int base){
+ 217              		.loc 1 83 36 is_stmt 1
+ 218              		.cfi_startproc
+ 219              	.LVL15:
+ 220 0114 130101FD 		addi	sp,sp,-48
+ 221              		.cfi_def_cfa_offset 48
+ 222 0118 23341102 		sd	ra,40(sp)
+ 223 011c 23308102 		sd	s0,32(sp)
+ 224 0120 233C9100 		sd	s1,24(sp)
+ 225              		.cfi_offset 1, -8
+ 226              		.cfi_offset 8, -16
+ 227              		.cfi_offset 9, -24
+ 228 0124 13040103 		addi	s0,sp,48
+ 229              		.cfi_def_cfa 8, 0
+  84:src/kernel/kernel_lib.cpp ****     switch(base){
+ 230              		.loc 1 84 5
+  85:src/kernel/kernel_lib.cpp **** 
+  86:src/kernel/kernel_lib.cpp ****     }
+  87:src/kernel/kernel_lib.cpp ****     char buf[16];
+ 231              		.loc 1 87 5
+  88:src/kernel/kernel_lib.cpp ****     int i;
+ 232              		.loc 1 88 5
+  89:src/kernel/kernel_lib.cpp **** 
+  90:src/kernel/kernel_lib.cpp ****     i = 0;
+ 233              		.loc 1 90 5
+ 234              	.LVL16:
+ 235              		.loc 1 90 7 is_stmt 0
+ 236 0128 93070000 		li	a5,0
+ 237 012c 6F008000 		j	.L16
+ 238              	.LVL17:
+ 239              	.L19:
+  91:src/kernel/kernel_lib.cpp ****     do{
+  92:src/kernel/kernel_lib.cpp ****         buf[i++] = kdigits[xx % base];
+  93:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 240              		.loc 1 93 16
+ 241 0130 13050700 		mv	a0,a4
+ 242              	.LVL18:
+ 243              	.L16:
+  91:src/kernel/kernel_lib.cpp ****     do{
+ 244              		.loc 1 91 5 is_stmt 1
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 245              		.loc 1 92 9
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 246              		.loc 1 92 31 is_stmt 0
+ 247 0134 B376B502 		remu	a3,a0,a1
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 248              		.loc 1 92 14
+GAS LISTING /tmp/cceLesXB.s 			page 7
+
+
+ 249 0138 9B841700 		addiw	s1,a5,1
+ 250              	.LVL19:
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 251              		.loc 1 92 37
+ 252 013c 17070000 		lla	a4,.LANCHOR0
+ 252      13070700 
+ 253 0144 3307D700 		add	a4,a4,a3
+ 254 0148 03470700 		lbu	a4,0(a4)
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 255              		.loc 1 92 18
+ 256 014c 930604FE 		addi	a3,s0,-32
+ 257 0150 B387F600 		add	a5,a3,a5
+ 258              	.LVL20:
+ 259 0154 2388E7FE 		sb	a4,-16(a5)
+ 260              		.loc 1 93 16
+ 261 0158 3357B502 		divu	a4,a0,a1
+ 262              	.LVL21:
+  92:src/kernel/kernel_lib.cpp ****     }while((xx /= base) != 0);
+ 263              		.loc 1 92 14
+ 264 015c 93870400 		mv	a5,s1
+ 265              		.loc 1 93 25
+ 266 0160 E378B5FC 		bleu	a1,a0,.L19
+ 267              	.LVL22:
+ 268              	.L18:
+  94:src/kernel/kernel_lib.cpp ****     
+  95:src/kernel/kernel_lib.cpp ****     while(--i >= 0)
+ 269              		.loc 1 95 5 is_stmt 1
+ 270              		.loc 1 95 15 is_stmt 0
+ 271 0164 9B84F4FF 		addiw	s1,s1,-1
+ 272              	.LVL23:
+ 273 0168 63CE0400 		blt	s1,zero,.L15
+  96:src/kernel/kernel_lib.cpp ****         kputc(buf[i]);
+ 274              		.loc 1 96 9 is_stmt 1
+ 275              		.loc 1 96 14 is_stmt 0
+ 276 016c 930704FE 		addi	a5,s0,-32
+ 277 0170 B3879700 		add	a5,a5,s1
+ 278 0174 03C507FF 		lbu	a0,-16(a5)
+ 279 0178 97000000 		call	_Z5kputcc
+ 279      E7800000 
+ 280              	.LVL24:
+  95:src/kernel/kernel_lib.cpp ****         kputc(buf[i]);
+ 281              		.loc 1 95 5
+ 282 0180 6FF05FFE 		j	.L18
+ 283              	.L15:
+  97:src/kernel/kernel_lib.cpp **** }...
+ 284              		.loc 1 97 1
+ 285 0184 83308102 		ld	ra,40(sp)
+ 286              		.cfi_restore 1
+ 287 0188 03340102 		ld	s0,32(sp)
+ 288              		.cfi_restore 8
+ 289              		.cfi_def_cfa 2, 48
+ 290 018c 83348101 		ld	s1,24(sp)
+ 291              		.cfi_restore 9
+ 292 0190 13010103 		addi	sp,sp,48
+ 293              		.cfi_def_cfa_offset 0
+ 294 0194 67800000 		jr	ra
+ 295              		.cfi_endproc
+GAS LISTING /tmp/cceLesXB.s 			page 8
+
+
+ 296              	.LFE97:
+ 298              		.align	2
+ 299              		.globl	_Z10kernelInitv
+ 301              	_Z10kernelInitv:
+ 302              	.LFB96:
+  45:src/kernel/kernel_lib.cpp **** {
+ 303              		.loc 1 45 1 is_stmt 1
+ 304              		.cfi_startproc
+ 305 0198 130101FD 		addi	sp,sp,-48
+ 306              		.cfi_def_cfa_offset 48
+ 307 019c 23341102 		sd	ra,40(sp)
+ 308 01a0 23308102 		sd	s0,32(sp)
+ 309 01a4 233C9100 		sd	s1,24(sp)
+ 310 01a8 23382101 		sd	s2,16(sp)
+ 311 01ac 23343101 		sd	s3,8(sp)
+ 312              		.cfi_offset 1, -8
+ 313              		.cfi_offset 8, -16
+ 314              		.cfi_offset 9, -24
+ 315              		.cfi_offset 18, -32
+ 316              		.cfi_offset 19, -40
+ 317 01b0 13040103 		addi	s0,sp,48
+ 318              		.cfi_def_cfa 8, 0
+  46:src/kernel/kernel_lib.cpp ****     kprintString("--------------KERNEL INIT--------------\n");
+ 319              		.loc 1 46 5
+  46:src/kernel/kernel_lib.cpp ****     kprintString("--------------KERNEL INIT--------------\n");
+ 320              		.loc 1 46 17 is_stmt 0
+ 321 01b4 17050000 		lla	a0,.LC0
+ 321      13050500 
+ 322 01bc 97000000 		call	_Z12kprintStringPKc
+ 322      E7800000 
+ 323              	.LVL25:
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 324              		.loc 1 47 5 is_stmt 1
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 325              		.loc 1 47 17 is_stmt 0
+ 326 01c4 17050000 		lla	a0,.LC1
+ 326      13050500 
+ 327 01cc 97000000 		call	_Z12kprintStringPKc
+ 327      E7800000 
+ 328              	.LVL26:
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 329              		.loc 1 47 40 is_stmt 1
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 330              		.loc 1 47 49 is_stmt 0
+ 331 01d4 93050001 		li	a1,16
+ 332 01d8 97070000 		lla	a5,HEAP_START_ADDR
+ 332      93870700 
+ 333 01e0 03B50700 		ld	a0,0(a5)
+ 334 01e4 97000000 		call	_Z9kprintIntmi
+ 334      E7800000 
+ 335              	.LVL27:
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 336              		.loc 1 47 79 is_stmt 1
+  47:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
+ 337              		.loc 1 47 91 is_stmt 0
+ 338 01ec 17050000 		lla	a0,.LC2
+ 338      13050500 
+GAS LISTING /tmp/cceLesXB.s 			page 9
+
+
+ 339 01f4 97000000 		call	_Z12kprintStringPKc
+ 339      E7800000 
+ 340              	.LVL28:
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 341              		.loc 1 48 5 is_stmt 1
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 342              		.loc 1 48 17 is_stmt 0
+ 343 01fc 17050000 		lla	a0,.LC3
+ 343      13050500 
+ 344 0204 97000000 		call	_Z12kprintStringPKc
+ 344      E7800000 
+ 345              	.LVL29:
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 346              		.loc 1 48 38 is_stmt 1
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 347              		.loc 1 48 47 is_stmt 0
+ 348 020c 93050001 		li	a1,16
+ 349 0210 97070000 		lla	a5,HEAP_END_ADDR
+ 349      93870700 
+ 350 0218 03B50700 		ld	a0,0(a5)
+ 351 021c 97000000 		call	_Z9kprintIntmi
+ 351      E7800000 
+ 352              	.LVL30:
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 353              		.loc 1 48 75 is_stmt 1
+  48:src/kernel/kernel_lib.cpp ****     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
+ 354              		.loc 1 48 87 is_stmt 0
+ 355 0224 17050000 		lla	a0,.LC2
+ 355      13050500 
+ 356 022c 97000000 		call	_Z12kprintStringPKc
+ 356      E7800000 
+ 357              	.LVL31:
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 358              		.loc 1 49 5 is_stmt 1
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 359              		.loc 1 49 17 is_stmt 0
+ 360 0234 17050000 		lla	a0,.LC4
+ 360      13050500 
+ 361 023c 97000000 		call	_Z12kprintStringPKc
+ 361      E7800000 
+ 362              	.LVL32:
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 363              		.loc 1 49 42 is_stmt 1
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 364              		.loc 1 49 51 is_stmt 0
+ 365 0244 93050001 		li	a1,16
+ 366 0248 97070000 		lla	a5,KERNEL_TEXT_START
+ 366      93870700 
+ 367 0250 03B50700 		ld	a0,0(a5)
+ 368 0254 97000000 		call	_Z9kprintIntmi
+ 368      E7800000 
+ 369              	.LVL33:
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 370              		.loc 1 49 75 is_stmt 1
+  49:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+ 371              		.loc 1 49 87 is_stmt 0
+ 372 025c 17050000 		lla	a0,.LC2
+GAS LISTING /tmp/cceLesXB.s 			page 10
+
+
+ 372      13050500 
+ 373 0264 97000000 		call	_Z12kprintStringPKc
+ 373      E7800000 
+ 374              	.LVL34:
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 375              		.loc 1 50 5 is_stmt 1
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 376              		.loc 1 50 17 is_stmt 0
+ 377 026c 17050000 		lla	a0,.LC5
+ 377      13050500 
+ 378 0274 97000000 		call	_Z12kprintStringPKc
+ 378      E7800000 
+ 379              	.LVL35:
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 380              		.loc 1 50 40 is_stmt 1
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 381              		.loc 1 50 49 is_stmt 0
+ 382 027c 93050001 		li	a1,16
+ 383 0280 97070000 		lla	a5,KERNEL_TEXT_END
+ 383      93870700 
+ 384 0288 03B50700 		ld	a0,0(a5)
+ 385 028c 97000000 		call	_Z9kprintIntmi
+ 385      E7800000 
+ 386              	.LVL36:
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 387              		.loc 1 50 71 is_stmt 1
+  50:src/kernel/kernel_lib.cpp ****     kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+ 388              		.loc 1 50 83 is_stmt 0
+ 389 0294 17050000 		lla	a0,.LC2
+ 389      13050500 
+ 390 029c 97000000 		call	_Z12kprintStringPKc
+ 390      E7800000 
+ 391              	.LVL37:
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 392              		.loc 1 51 5 is_stmt 1
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 393              		.loc 1 51 17 is_stmt 0
+ 394 02a4 17050000 		lla	a0,.LC6
+ 394      13050500 
+ 395 02ac 97000000 		call	_Z12kprintStringPKc
+ 395      E7800000 
+ 396              	.LVL38:
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 397              		.loc 1 51 40 is_stmt 1
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 398              		.loc 1 51 49 is_stmt 0
+ 399 02b4 93050001 		li	a1,16
+ 400 02b8 97070000 		lla	a5,USER_TEXT_START
+ 400      93870700 
+ 401 02c0 03B50700 		ld	a0,0(a5)
+ 402 02c4 97000000 		call	_Z9kprintIntmi
+ 402      E7800000 
+ 403              	.LVL39:
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 404              		.loc 1 51 71 is_stmt 1
+  51:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+ 405              		.loc 1 51 83 is_stmt 0
+GAS LISTING /tmp/cceLesXB.s 			page 11
+
+
+ 406 02cc 17050000 		lla	a0,.LC2
+ 406      13050500 
+ 407 02d4 97000000 		call	_Z12kprintStringPKc
+ 407      E7800000 
+ 408              	.LVL40:
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 409              		.loc 1 52 5 is_stmt 1
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 410              		.loc 1 52 17 is_stmt 0
+ 411 02dc 17050000 		lla	a0,.LC7
+ 411      13050500 
+ 412 02e4 97000000 		call	_Z12kprintStringPKc
+ 412      E7800000 
+ 413              	.LVL41:
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 414              		.loc 1 52 38 is_stmt 1
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 415              		.loc 1 52 47 is_stmt 0
+ 416 02ec 93050001 		li	a1,16
+ 417 02f0 97070000 		lla	a5,USER_TEXT_END
+ 417      93870700 
+ 418 02f8 03B50700 		ld	a0,0(a5)
+ 419 02fc 97000000 		call	_Z9kprintIntmi
+ 419      E7800000 
+ 420              	.LVL42:
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 421              		.loc 1 52 67 is_stmt 1
+  52:src/kernel/kernel_lib.cpp ****     kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+ 422              		.loc 1 52 79 is_stmt 0
+ 423 0304 17050000 		lla	a0,.LC2
+ 423      13050500 
+ 424 030c 97000000 		call	_Z12kprintStringPKc
+ 424      E7800000 
+ 425              	.LVL43:
+  54:src/kernel/kernel_lib.cpp ****     Riscv::w_stvec((uint64)interruptvec);
+ 426              		.loc 1 54 5 is_stmt 1
+  54:src/kernel/kernel_lib.cpp ****     Riscv::w_stvec((uint64)interruptvec);
+ 427              		.loc 1 54 19 is_stmt 0
+ 428 0314 97070000 		lla	a5,interruptvec
+ 428      93870700 
+ 429              	.LVL44:
+ 430              	.LBB8:
+ 431              	.LBB9:
+ 432              		.file 2 "src/kernel/../../h/../h/riscv.hpp"
+   1:src/kernel/../../h/../h/riscv.hpp **** #ifndef __riscv__
+   2:src/kernel/../../h/../h/riscv.hpp **** #define __riscv__
+   3:src/kernel/../../h/../h/riscv.hpp **** 
+   4:src/kernel/../../h/../h/riscv.hpp **** #include"../lib/hw.h"
+   5:src/kernel/../../h/../h/riscv.hpp **** 
+   6:src/kernel/../../h/../h/riscv.hpp **** class Riscv{
+   7:src/kernel/../../h/../h/riscv.hpp **** public:
+   8:src/kernel/../../h/../h/riscv.hpp ****     
+   9:src/kernel/../../h/../h/riscv.hpp ****     static void w_scause(uint64);
+  10:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_scause(); 
+  11:src/kernel/../../h/../h/riscv.hpp **** 
+  12:src/kernel/../../h/../h/riscv.hpp ****     static void w_sepc(uint64);
+  13:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_sepc();
+GAS LISTING /tmp/cceLesXB.s 			page 12
+
+
+  14:src/kernel/../../h/../h/riscv.hpp ****     static void ni_sepc();
+  15:src/kernel/../../h/../h/riscv.hpp **** 
+  16:src/kernel/../../h/../h/riscv.hpp ****     static void w_stvec(uint64);
+  17:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_stvec();
+  18:src/kernel/../../h/../h/riscv.hpp ****      
+  19:src/kernel/../../h/../h/riscv.hpp ****     static void w_stval(uint64);
+  20:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_stval();
+  21:src/kernel/../../h/../h/riscv.hpp ****     
+  22:src/kernel/../../h/../h/riscv.hpp ****     enum BitMaskSip{
+  23:src/kernel/../../h/../h/riscv.hpp ****         SIP_SSIE = (1<<1),
+  24:src/kernel/../../h/../h/riscv.hpp ****         SIP_STIE = (1<<5),
+  25:src/kernel/../../h/../h/riscv.hpp ****         SIP_SEIE = (1<<9),
+  26:src/kernel/../../h/../h/riscv.hpp ****     };
+  27:src/kernel/../../h/../h/riscv.hpp **** 
+  28:src/kernel/../../h/../h/riscv.hpp ****     static void ms_sip(uint64);
+  29:src/kernel/../../h/../h/riscv.hpp ****     static void mc_sip(uint64);
+  30:src/kernel/../../h/../h/riscv.hpp **** 
+  31:src/kernel/../../h/../h/riscv.hpp ****     static void w_sip(uint64);
+  32:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_sip();
+  33:src/kernel/../../h/../h/riscv.hpp **** 
+  34:src/kernel/../../h/../h/riscv.hpp ****     enum BitMaskSstatus{
+  35:src/kernel/../../h/../h/riscv.hpp ****         SSTATUS_SIE = (1<<1),
+  36:src/kernel/../../h/../h/riscv.hpp ****         SSTATUS_SPIE = (1<<5),
+  37:src/kernel/../../h/../h/riscv.hpp ****         SSTATUS_SPP = (1<<8),
+  38:src/kernel/../../h/../h/riscv.hpp ****     };
+  39:src/kernel/../../h/../h/riscv.hpp **** 
+  40:src/kernel/../../h/../h/riscv.hpp ****     static void ms_sstatus(uint64);
+  41:src/kernel/../../h/../h/riscv.hpp ****     static void mc_sstatus(uint64);
+  42:src/kernel/../../h/../h/riscv.hpp **** 
+  43:src/kernel/../../h/../h/riscv.hpp ****     static void w_sstatus(uint64);
+  44:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_sstatus();
+  45:src/kernel/../../h/../h/riscv.hpp **** 
+  46:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_a0();
+  47:src/kernel/../../h/../h/riscv.hpp ****     static uint64 s_a0(uint64 a0);
+  48:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_a1();
+  49:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_a2();
+  50:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_a3();
+  51:src/kernel/../../h/../h/riscv.hpp ****     static uint64 r_a4();
+  52:src/kernel/../../h/../h/riscv.hpp **** 
+  53:src/kernel/../../h/../h/riscv.hpp ****     static void popRegisters();
+  54:src/kernel/../../h/../h/riscv.hpp ****     static void pushRegisters();
+  55:src/kernel/../../h/../h/riscv.hpp **** 
+  56:src/kernel/../../h/../h/riscv.hpp ****     static void popSppSpie();
+  57:src/kernel/../../h/../h/riscv.hpp **** 
+  58:src/kernel/../../h/../h/riscv.hpp ****     static void mc_cstatus(uint64 mask);
+  59:src/kernel/../../h/../h/riscv.hpp ****     static bool cstatus_ready(uint64 mask);
+  60:src/kernel/../../h/../h/riscv.hpp **** };
+  61:src/kernel/../../h/../h/riscv.hpp **** 
+  62:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_a0(){
+  63:src/kernel/../../h/../h/riscv.hpp ****     uint64 a0;
+  64:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("mv %0, a0" : "=r" (a0));
+  65:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  66:src/kernel/../../h/../h/riscv.hpp **** }
+  67:src/kernel/../../h/../h/riscv.hpp **** 
+  68:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_a1(){
+  69:src/kernel/../../h/../h/riscv.hpp ****     uint64 a0;
+  70:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("mv %0, a1" : "=r" (a0));
+GAS LISTING /tmp/cceLesXB.s 			page 13
+
+
+  71:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  72:src/kernel/../../h/../h/riscv.hpp **** }
+  73:src/kernel/../../h/../h/riscv.hpp **** 
+  74:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_a2(){
+  75:src/kernel/../../h/../h/riscv.hpp ****     uint64 a0;
+  76:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("mv %0, a2" : "=r" (a0));
+  77:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  78:src/kernel/../../h/../h/riscv.hpp **** }
+  79:src/kernel/../../h/../h/riscv.hpp **** 
+  80:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_a3(){
+  81:src/kernel/../../h/../h/riscv.hpp ****     uint64 a0;
+  82:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("mv %0, a3" : "=r" (a0));
+  83:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  84:src/kernel/../../h/../h/riscv.hpp **** }
+  85:src/kernel/../../h/../h/riscv.hpp **** 
+  86:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_a4(){
+  87:src/kernel/../../h/../h/riscv.hpp ****     uint64 a0;
+  88:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("mv %0, a4" : "=r" (a0));
+  89:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  90:src/kernel/../../h/../h/riscv.hpp **** }
+  91:src/kernel/../../h/../h/riscv.hpp **** 
+  92:src/kernel/../../h/../h/riscv.hpp **** 
+  93:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::s_a0(uint64 a0){
+  94:src/kernel/../../h/../h/riscv.hpp ****     return a0;
+  95:src/kernel/../../h/../h/riscv.hpp **** }
+  96:src/kernel/../../h/../h/riscv.hpp **** 
+  97:src/kernel/../../h/../h/riscv.hpp **** inline void Riscv::w_scause(uint64 scause){
+  98:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("csrw scause, %0" : : "r" (scause));
+  99:src/kernel/../../h/../h/riscv.hpp **** }
+ 100:src/kernel/../../h/../h/riscv.hpp **** 
+ 101:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_scause(){
+ 102:src/kernel/../../h/../h/riscv.hpp ****     uint64 volatile scause;
+ 103:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("csrr %0, scause" : "=r" (scause));
+ 104:src/kernel/../../h/../h/riscv.hpp ****     return scause;
+ 105:src/kernel/../../h/../h/riscv.hpp **** } 
+ 106:src/kernel/../../h/../h/riscv.hpp **** 
+ 107:src/kernel/../../h/../h/riscv.hpp **** inline void Riscv::w_sepc(uint64 sepc){
+ 108:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("csrw sepc, %0" : : "r" (sepc));
+ 109:src/kernel/../../h/../h/riscv.hpp **** }
+ 110:src/kernel/../../h/../h/riscv.hpp **** 
+ 111:src/kernel/../../h/../h/riscv.hpp **** inline uint64 Riscv::r_sepc(){
+ 112:src/kernel/../../h/../h/riscv.hpp ****     uint64 volatile sepc;
+ 113:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("csrr %0, sepc" : "=r" (sepc));
+ 114:src/kernel/../../h/../h/riscv.hpp ****     return sepc;
+ 115:src/kernel/../../h/../h/riscv.hpp **** } 
+ 116:src/kernel/../../h/../h/riscv.hpp **** 
+ 117:src/kernel/../../h/../h/riscv.hpp **** inline void Riscv::w_stvec(uint64 stvec){
+ 118:src/kernel/../../h/../h/riscv.hpp ****     asm volatile("csrw stvec, %0" : : "r" (stvec));
+ 433              		.loc 2 118 5 is_stmt 1
+ 434              		.loc 2 118 51 is_stmt 0
+ 435              	 #APP
+ 436              	# 118 "src/kernel/../../h/../h/riscv.hpp" 1
+ 119              	}
+ 437              		csrw stvec, a5
+ 438              	# 0 "" 2
+ 439              	.LVL45:
+ 440              	 #NO_APP
+GAS LISTING /tmp/cceLesXB.s 			page 14
+
+
+ 441              	.LBE9:
+ 442              	.LBE8:
+  55:src/kernel/kernel_lib.cpp ****     kprintString("stvec initalized!\n");
+ 443              		.loc 1 55 5 is_stmt 1
+  55:src/kernel/kernel_lib.cpp ****     kprintString("stvec initalized!\n");
+ 444              		.loc 1 55 17 is_stmt 0
+ 445 0320 17050000 		lla	a0,.LC8
+ 445      13050500 
+ 446 0328 97000000 		call	_Z12kprintStringPKc
+ 446      E7800000 
+ 447              	.LVL46:
+  56:src/kernel/kernel_lib.cpp ****     MemoryAllocator::getInstance();
+ 448              		.loc 1 56 5 is_stmt 1
+  56:src/kernel/kernel_lib.cpp ****     MemoryAllocator::getInstance();
+ 449              		.loc 1 56 34 is_stmt 0
+ 450 0330 97000000 		call	_ZN15MemoryAllocator11getInstanceEv
+ 450      E7800000 
+ 451              	.LVL47:
+  57:src/kernel/kernel_lib.cpp ****     kprintString("MemoryAllocator initalized!\n");
+ 452              		.loc 1 57 5 is_stmt 1
+  57:src/kernel/kernel_lib.cpp ****     kprintString("MemoryAllocator initalized!\n");
+ 453              		.loc 1 57 17 is_stmt 0
+ 454 0338 17050000 		lla	a0,.LC9
+ 454      13050500 
+ 455 0340 97000000 		call	_Z12kprintStringPKc
+ 455      E7800000 
+ 456              	.LVL48:
+  58:src/kernel/kernel_lib.cpp ****     Scheduler::initalize();
+ 457              		.loc 1 58 5 is_stmt 1
+  58:src/kernel/kernel_lib.cpp ****     Scheduler::initalize();
+ 458              		.loc 1 58 25 is_stmt 0
+ 459 0348 97000000 		call	_ZN9Scheduler9initalizeEv
+ 459      E7800000 
+ 460              	.LVL49:
+  59:src/kernel/kernel_lib.cpp ****     kprintString("Scheduler initalized!\n");
+ 461              		.loc 1 59 5 is_stmt 1
+  59:src/kernel/kernel_lib.cpp ****     kprintString("Scheduler initalized!\n");
+ 462              		.loc 1 59 17 is_stmt 0
+ 463 0350 17050000 		lla	a0,.LC10
+ 463      13050500 
+ 464 0358 97000000 		call	_Z12kprintStringPKc
+ 464      E7800000 
+ 465              	.LVL50:
+  60:src/kernel/kernel_lib.cpp ****     StdIO::initalize();
+ 466              		.loc 1 60 5 is_stmt 1
+  60:src/kernel/kernel_lib.cpp ****     StdIO::initalize();
+ 467              		.loc 1 60 21 is_stmt 0
+ 468 0360 97000000 		call	_ZN5StdIO9initalizeEv
+ 468      E7800000 
+ 469              	.LVL51:
+  61:src/kernel/kernel_lib.cpp ****     kprintString("StdIO initalized!\n");
+ 470              		.loc 1 61 5 is_stmt 1
+  61:src/kernel/kernel_lib.cpp ****     kprintString("StdIO initalized!\n");
+ 471              		.loc 1 61 17 is_stmt 0
+ 472 0368 17050000 		lla	a0,.LC11
+ 472      13050500 
+ 473 0370 97000000 		call	_Z12kprintStringPKc
+GAS LISTING /tmp/cceLesXB.s 			page 15
+
+
+ 473      E7800000 
+ 474              	.LVL52:
+  62:src/kernel/kernel_lib.cpp ****     TCB::createMainKernelThread();
+ 475              		.loc 1 62 5 is_stmt 1
+  62:src/kernel/kernel_lib.cpp ****     TCB::createMainKernelThread();
+ 476              		.loc 1 62 32 is_stmt 0
+ 477 0378 97000000 		call	_ZN3TCB22createMainKernelThreadEv
+ 477      E7800000 
+ 478              	.LVL53:
+  63:src/kernel/kernel_lib.cpp ****     kprintString("Main kenrel thread initalized!\n");
+ 479              		.loc 1 63 5 is_stmt 1
+  63:src/kernel/kernel_lib.cpp ****     kprintString("Main kenrel thread initalized!\n");
+ 480              		.loc 1 63 17 is_stmt 0
+ 481 0380 17050000 		lla	a0,.LC12
+ 481      13050500 
+ 482 0388 97000000 		call	_Z12kprintStringPKc
+ 482      E7800000 
+ 483              	.LVL54:
+  65:src/kernel/kernel_lib.cpp ****     kprintString("Initalizing user thread and idle thread...\n");
+ 484              		.loc 1 65 5 is_stmt 1
+  65:src/kernel/kernel_lib.cpp ****     kprintString("Initalizing user thread and idle thread...\n");
+ 485              		.loc 1 65 17 is_stmt 0
+ 486 0390 17050000 		lla	a0,.LC13
+ 486      13050500 
+ 487 0398 97000000 		call	_Z12kprintStringPKc
+ 487      E7800000 
+ 488              	.LVL55:
+  66:src/kernel/kernel_lib.cpp ****     uint64* userMainStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+ 489              		.loc 1 66 5 is_stmt 1
+  66:src/kernel/kernel_lib.cpp ****     uint64* userMainStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+ 490              		.loc 1 66 45 is_stmt 0
+ 491 03a0 37150000 		li	a0,4096
+ 492 03a4 97000000 		call	_Z7kmallocm
+ 492      E7800000 
+ 493              	.LVL56:
+ 494 03ac 93040500 		mv	s1,a0
+ 495              	.LVL57:
+  67:src/kernel/kernel_lib.cpp ****     TCB* userMainThread = TCB::createThread(userMainWrapper, nullptr, userMainStack);
+ 496              		.loc 1 67 5 is_stmt 1
+  67:src/kernel/kernel_lib.cpp ****     TCB* userMainThread = TCB::createThread(userMainWrapper, nullptr, userMainStack);
+ 497              		.loc 1 67 44 is_stmt 0
+ 498 03b0 13060500 		mv	a2,a0
+ 499 03b4 93050000 		li	a1,0
+ 500 03b8 17050000 		lla	a0,_Z15userMainWrapperPv
+ 500      13050500 
+ 501 03c0 97000000 		call	_ZN3TCB12createThreadEPFvPvES0_Pm
+ 501      E7800000 
+ 502              	.LVL58:
+ 503 03c8 93090500 		mv	s3,a0
+ 504              	.LVL59:
+  69:src/kernel/kernel_lib.cpp ****     uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+ 505              		.loc 1 69 5 is_stmt 1
+  69:src/kernel/kernel_lib.cpp ****     uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+ 506              		.loc 1 69 47 is_stmt 0
+ 507 03cc 37150000 		li	a0,4096
+ 508              	.LVL60:
+ 509 03d0 97000000 		call	_Z7kmallocm
+GAS LISTING /tmp/cceLesXB.s 			page 16
+
+
+ 509      E7800000 
+ 510              	.LVL61:
+ 511 03d8 13090500 		mv	s2,a0
+ 512              	.LVL62:
+  70:src/kernel/kernel_lib.cpp ****     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
+ 513              		.loc 1 70 5 is_stmt 1
+  70:src/kernel/kernel_lib.cpp ****     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
+ 514              		.loc 1 70 40 is_stmt 0
+ 515 03dc 13060500 		mv	a2,a0
+ 516 03e0 93050000 		li	a1,0
+ 517 03e4 17050000 		lla	a0,_Z12idleFunctionPv
+ 517      13050500 
+ 518              	.LVL63:
+ 519 03ec 97000000 		call	_ZN3TCB12createThreadEPFvPvES0_Pm
+ 519      E7800000 
+ 520              	.LVL64:
+  71:src/kernel/kernel_lib.cpp ****     idleThread->setKernelMode();
+ 521              		.loc 1 71 5 is_stmt 1
+ 522              	.LBB10:
+ 523              	.LBB11:
+ 524              		.file 3 "src/kernel/../../h/../h/tcb.hpp"
+   1:src/kernel/../../h/../h/tcb.hpp **** #ifndef __tcb__h
+   2:src/kernel/../../h/../h/tcb.hpp **** #define __tcb__h
+   3:src/kernel/../../h/../h/tcb.hpp **** 
+   4:src/kernel/../../h/../h/tcb.hpp **** #include"../h/memory_allocator.hpp"
+   5:src/kernel/../../h/../h/tcb.hpp **** 
+   6:src/kernel/../../h/../h/tcb.hpp **** class KSemaphore;
+   7:src/kernel/../../h/../h/tcb.hpp **** 
+   8:src/kernel/../../h/../h/tcb.hpp **** class TCB{
+   9:src/kernel/../../h/../h/tcb.hpp ****     
+  10:src/kernel/../../h/../h/tcb.hpp **** public:
+  11:src/kernel/../../h/../h/tcb.hpp ****     //alokacija
+  12:src/kernel/../../h/../h/tcb.hpp ****     #include"../h/kernel_operators.hpp"
+  13:src/kernel/../../h/../h/tcb.hpp ****     
+  14:src/kernel/../../h/../h/tcb.hpp ****     using Body = void (*)(void*);
+  15:src/kernel/../../h/../h/tcb.hpp ****     enum TCBState{
+  16:src/kernel/../../h/../h/tcb.hpp ****         BLOCKED,
+  17:src/kernel/../../h/../h/tcb.hpp ****         READY,
+  18:src/kernel/../../h/../h/tcb.hpp ****         FINISHED,
+  19:src/kernel/../../h/../h/tcb.hpp ****         SLEEPING
+  20:src/kernel/../../h/../h/tcb.hpp ****     };
+  21:src/kernel/../../h/../h/tcb.hpp ****     
+  22:src/kernel/../../h/../h/tcb.hpp ****     ~TCB(){ 
+  23:src/kernel/../../h/../h/tcb.hpp ****         MemoryAllocator& allocator = MemoryAllocator::getInstance(); 
+  24:src/kernel/../../h/../h/tcb.hpp ****         allocator.mem_free(this->stack);
+  25:src/kernel/../../h/../h/tcb.hpp ****     }
+  26:src/kernel/../../h/../h/tcb.hpp ****     
+  27:src/kernel/../../h/../h/tcb.hpp ****     //nestaticki metodi
+  28:src/kernel/../../h/../h/tcb.hpp ****     void setState(TCBState s) {state = s;}
+  29:src/kernel/../../h/../h/tcb.hpp ****     TCBState getState() const{ return state; }
+  30:src/kernel/../../h/../h/tcb.hpp ****     void finish() { state = FINISHED; }
+  31:src/kernel/../../h/../h/tcb.hpp ****     bool isFinished(){ return state == FINISHED; }
+  32:src/kernel/../../h/../h/tcb.hpp ****     uint64 getTimeSlice() const { return timeSlice; }
+  33:src/kernel/../../h/../h/tcb.hpp ****     bool isSuspended(){return state == BLOCKED || state == SLEEPING;}
+  34:src/kernel/../../h/../h/tcb.hpp ****     void setKernelMode() { userMode = false; }
+ 525              		.loc 3 34 28
+ 526              		.loc 3 34 37 is_stmt 0
+GAS LISTING /tmp/cceLesXB.s 			page 17
+
+
+ 527 03f4 A30A0502 		sb	zero,53(a0)
+ 528              	.LVL65:
+ 529              	.LBE11:
+ 530              	.LBE10:
+  72:src/kernel/kernel_lib.cpp ****     idleThread->setKernelLocked();
+ 531              		.loc 1 72 5 is_stmt 1
+ 532              	.LBB12:
+ 533              	.LBB13:
+  35:src/kernel/../../h/../h/tcb.hpp ****     void setKernelLocked() { locked = true; }
+ 534              		.loc 3 35 30
+ 535              		.loc 3 35 37 is_stmt 0
+ 536 03f8 93071000 		li	a5,1
+ 537 03fc 230BF502 		sb	a5,54(a0)
+ 538              	.LVL66:
+ 539              	.LBE13:
+ 540              	.LBE12:
+  73:src/kernel/kernel_lib.cpp ****     if(userMainStack && idleThreadStack && idleThread && userMainThread)
+ 541              		.loc 1 73 5 is_stmt 1
+ 542 0400 63880404 		beq	s1,zero,.L23
+  73:src/kernel/kernel_lib.cpp ****     if(userMainStack && idleThreadStack && idleThread && userMainThread)
+ 543              		.loc 1 73 22 is_stmt 0 discriminator 1
+ 544 0404 630A0904 		beq	s2,zero,.L24
+  73:src/kernel/kernel_lib.cpp ****     if(userMainStack && idleThreadStack && idleThread && userMainThread)
+ 545              		.loc 1 73 41 discriminator 2
+ 546 0408 630C0504 		beq	a0,zero,.L25
+  73:src/kernel/kernel_lib.cpp ****     if(userMainStack && idleThreadStack && idleThread && userMainThread)
+ 547              		.loc 1 73 55 discriminator 3
+ 548 040c 638E0904 		beq	s3,zero,.L26
+  74:src/kernel/kernel_lib.cpp ****         kprintString("Threads successfully initalized!\n");
+ 549              		.loc 1 74 9 is_stmt 1
+  74:src/kernel/kernel_lib.cpp ****         kprintString("Threads successfully initalized!\n");
+ 550              		.loc 1 74 21 is_stmt 0
+ 551 0410 17050000 		lla	a0,.LC14
+ 551      13050500 
+ 552              	.LVL67:
+ 553 0418 97000000 		call	_Z12kprintStringPKc
+ 553      E7800000 
+ 554              	.LVL68:
+  77:src/kernel/kernel_lib.cpp ****     kprintString("-----------KERNEL INITALIZED-----------\n\n");
+ 555              		.loc 1 77 5 is_stmt 1
+  77:src/kernel/kernel_lib.cpp ****     kprintString("-----------KERNEL INITALIZED-----------\n\n");
+ 556              		.loc 1 77 17 is_stmt 0
+ 557 0420 17050000 		lla	a0,.LC15
+ 557      13050500 
+ 558 0428 97000000 		call	_Z12kprintStringPKc
+ 558      E7800000 
+ 559              	.LVL69:
+  79:src/kernel/kernel_lib.cpp ****     return 0;
+ 560              		.loc 1 79 5 is_stmt 1
+  79:src/kernel/kernel_lib.cpp ****     return 0;
+ 561              		.loc 1 79 12 is_stmt 0
+ 562 0430 13050000 		li	a0,0
+ 563              	.L22:
+  80:src/kernel/kernel_lib.cpp **** }
+ 564              		.loc 1 80 1
+ 565 0434 83308102 		ld	ra,40(sp)
+ 566              		.cfi_remember_state
+GAS LISTING /tmp/cceLesXB.s 			page 18
+
+
+ 567              		.cfi_restore 1
+ 568 0438 03340102 		ld	s0,32(sp)
+ 569              		.cfi_restore 8
+ 570              		.cfi_def_cfa 2, 48
+ 571 043c 83348101 		ld	s1,24(sp)
+ 572              		.cfi_restore 9
+ 573              	.LVL70:
+ 574 0440 03390101 		ld	s2,16(sp)
+ 575              		.cfi_restore 18
+ 576              	.LVL71:
+ 577 0444 83398100 		ld	s3,8(sp)
+ 578              		.cfi_restore 19
+ 579              	.LVL72:
+ 580 0448 13010103 		addi	sp,sp,48
+ 581              		.cfi_def_cfa_offset 0
+ 582 044c 67800000 		jr	ra
+ 583              	.LVL73:
+ 584              	.L23:
+ 585              		.cfi_restore_state
+  76:src/kernel/kernel_lib.cpp ****         return -1;
+ 586              		.loc 1 76 17
+ 587 0450 1305F0FF 		li	a0,-1
+ 588              	.LVL74:
+ 589 0454 6FF01FFE 		j	.L22
+ 590              	.LVL75:
+ 591              	.L24:
+ 592 0458 1305F0FF 		li	a0,-1
+ 593              	.LVL76:
+ 594 045c 6FF09FFD 		j	.L22
+ 595              	.LVL77:
+ 596              	.L25:
+ 597 0460 1305F0FF 		li	a0,-1
+ 598              	.LVL78:
+ 599 0464 6FF01FFD 		j	.L22
+ 600              	.LVL79:
+ 601              	.L26:
+ 602 0468 1305F0FF 		li	a0,-1
+ 603              	.LVL80:
+ 604 046c 6FF09FFC 		j	.L22
+ 605              		.cfi_endproc
+ 606              	.LFE96:
+ 608              		.globl	kdigits
+ 609              		.data
+ 610              		.align	3
+ 611              		.set	.LANCHOR0,. + 0
+ 614              	kdigits:
+ 615 0000 30313233 		.string	"0123456789ABCDEF"
+ 615      34353637 
+ 615      38394142 
+ 615      43444546 
+ 615      00
+ 616              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 617              		.align	3
+ 618              	.LC0:
+ 619 0000 2D2D2D2D 		.string	"--------------KERNEL INIT--------------\n"
+ 619      2D2D2D2D 
+ 619      2D2D2D2D 
+GAS LISTING /tmp/cceLesXB.s 			page 19
+
+
+ 619      2D2D4B45 
+ 619      524E454C 
+ 620 0029 00000000 		.zero	7
+ 620      000000
+ 621              	.LC1:
+ 622 0030 48454150 		.string	"HEAP_START_ADDR: "
+ 622      5F535441 
+ 622      52545F41 
+ 622      4444523A 
+ 622      2000
+ 623 0042 00000000 		.zero	6
+ 623      0000
+ 624              	.LC2:
+ 625 0048 0A00     		.string	"\n"
+ 626 004a 00000000 		.zero	6
+ 626      0000
+ 627              	.LC3:
+ 628 0050 48454150 		.string	"HEAP_END_ADDR: "
+ 628      5F454E44 
+ 628      5F414444 
+ 628      523A2000 
+ 629              	.LC4:
+ 630 0060 4B45524E 		.string	"KERNEL_TEXT_START: "
+ 630      454C5F54 
+ 630      4558545F 
+ 630      53544152 
+ 630      543A2000 
+ 631 0074 00000000 		.zero	4
+ 632              	.LC5:
+ 633 0078 4B45524E 		.string	"KERNEL_TEXT_END: "
+ 633      454C5F54 
+ 633      4558545F 
+ 633      454E443A 
+ 633      2000
+ 634 008a 00000000 		.zero	6
+ 634      0000
+ 635              	.LC6:
+ 636 0090 55534552 		.string	"USER_TEXT_START: "
+ 636      5F544558 
+ 636      545F5354 
+ 636      4152543A 
+ 636      2000
+ 637 00a2 00000000 		.zero	6
+ 637      0000
+ 638              	.LC7:
+ 639 00a8 55534552 		.string	"USER_TEXT_END: "
+ 639      5F544558 
+ 639      545F454E 
+ 639      443A2000 
+ 640              	.LC8:
+ 641 00b8 73747665 		.string	"stvec initalized!\n"
+ 641      6320696E 
+ 641      6974616C 
+ 641      697A6564 
+ 641      210A00
+ 642 00cb 00000000 		.zero	5
+ 642      00
+GAS LISTING /tmp/cceLesXB.s 			page 20
+
+
+ 643              	.LC9:
+ 644 00d0 4D656D6F 		.string	"MemoryAllocator initalized!\n"
+ 644      7279416C 
+ 644      6C6F6361 
+ 644      746F7220 
+ 644      696E6974 
+ 645 00ed 000000   		.zero	3
+ 646              	.LC10:
+ 647 00f0 53636865 		.string	"Scheduler initalized!\n"
+ 647      64756C65 
+ 647      7220696E 
+ 647      6974616C 
+ 647      697A6564 
+ 648 0107 00       		.zero	1
+ 649              	.LC11:
+ 650 0108 53746449 		.string	"StdIO initalized!\n"
+ 650      4F20696E 
+ 650      6974616C 
+ 650      697A6564 
+ 650      210A00
+ 651 011b 00000000 		.zero	5
+ 651      00
+ 652              	.LC12:
+ 653 0120 4D61696E 		.string	"Main kenrel thread initalized!\n"
+ 653      206B656E 
+ 653      72656C20 
+ 653      74687265 
+ 653      61642069 
+ 654              	.LC13:
+ 655 0140 496E6974 		.string	"Initalizing user thread and idle thread...\n"
+ 655      616C697A 
+ 655      696E6720 
+ 655      75736572 
+ 655      20746872 
+ 656 016c 00000000 		.zero	4
+ 657              	.LC14:
+ 658 0170 54687265 		.string	"Threads successfully initalized!\n"
+ 658      61647320 
+ 658      73756363 
+ 658      65737366 
+ 658      756C6C79 
+ 659 0192 00000000 		.zero	6
+ 659      0000
+ 660              	.LC15:
+ 661 0198 2D2D2D2D 		.string	"-----------KERNEL INITALIZED-----------\n\n"
+ 661      2D2D2D2D 
+ 661      2D2D2D4B 
+ 661      45524E45 
+ 661      4C20494E 
+ 662              		.text
+ 663              	.Letext0:
+ 664              		.file 4 "src/kernel/../../h/../h/../lib/hw.h"
+ 665              		.file 5 "src/kernel/../../h/../h/../h/memory_allocator.hpp"
+ 666              		.file 6 "src/kernel/../../h/../h/ptr_queue.hpp"
+ 667              		.file 7 "src/kernel/../../h/../h/../h/kernel_operators.hpp"
+ 668              		.file 8 "src/kernel/../../h/../h/ksemaphore.hpp"
+ 669              		.file 9 "src/kernel/../../h/../h/stdio.hpp"
+GAS LISTING /tmp/cceLesXB.s 			page 21
+
+
+ 670              		.file 10 "src/kernel/../../h/../h/scheduler.hpp"
+ 671              		.file 11 "src/kernel/../../h/../h/kernel_funs.h"
+GAS LISTING /tmp/cceLesXB.s 			page 22
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 kernel_lib.cpp
+     /tmp/cceLesXB.s:12     .text:0000000000000000 _Z15userMainWrapperPv
+     /tmp/cceLesXB.s:16     .text:0000000000000000 .L0 
+     /tmp/cceLesXB.s:17     .text:0000000000000000 .L0 
+     /tmp/cceLesXB.s:18     .text:0000000000000004 .L0 
+     /tmp/cceLesXB.s:21     .text:000000000000000c .L0 
+     /tmp/cceLesXB.s:22     .text:000000000000000c .L0 
+     /tmp/cceLesXB.s:24     .text:0000000000000010 .L0 
+     /tmp/cceLesXB.s:26     .text:0000000000000010 .L0 
+     /tmp/cceLesXB.s:27     .text:0000000000000010 .L0 
+     /tmp/cceLesXB.s:30     .text:0000000000000018 .L0 
+     /tmp/cceLesXB.s:31     .text:000000000000001c .L0 
+     /tmp/cceLesXB.s:33     .text:0000000000000020 .L0 
+     /tmp/cceLesXB.s:34     .text:0000000000000020 .L0 
+     /tmp/cceLesXB.s:36     .text:0000000000000024 .L0 
+     /tmp/cceLesXB.s:38     .text:0000000000000028 .L0 
+     /tmp/cceLesXB.s:44     .text:0000000000000028 _Z12idleFunctionPv
+     /tmp/cceLesXB.s:47     .text:0000000000000028 .L0 
+     /tmp/cceLesXB.s:48     .text:0000000000000028 .L0 
+     /tmp/cceLesXB.s:49     .text:000000000000002c .L0 
+     /tmp/cceLesXB.s:52     .text:0000000000000034 .L0 
+     /tmp/cceLesXB.s:53     .text:0000000000000034 .L0 
+     /tmp/cceLesXB.s:55     .text:0000000000000038 .L0 
+     /tmp/cceLesXB.s:58     .text:0000000000000038 .L0 
+     /tmp/cceLesXB.s:59     .text:0000000000000038 .L0 
+     /tmp/cceLesXB.s:60     .text:0000000000000038 .L0 
+     /tmp/cceLesXB.s:63     .text:0000000000000044 .L0 
+     /tmp/cceLesXB.s:69     .text:0000000000000044 _Z7kmallocm
+     /tmp/cceLesXB.s:72     .text:0000000000000044 .L0 
+     /tmp/cceLesXB.s:74     .text:0000000000000044 .L0 
+     /tmp/cceLesXB.s:75     .text:0000000000000048 .L0 
+     /tmp/cceLesXB.s:79     .text:0000000000000054 .L0 
+     /tmp/cceLesXB.s:80     .text:0000000000000054 .L0 
+     /tmp/cceLesXB.s:81     .text:0000000000000054 .L0 
+     /tmp/cceLesXB.s:83     .text:0000000000000058 .L0 
+     /tmp/cceLesXB.s:85     .text:0000000000000058 .L0 
+     /tmp/cceLesXB.s:86     .text:0000000000000058 .L0 
+     /tmp/cceLesXB.s:88     .text:000000000000005c .L0 
+     /tmp/cceLesXB.s:90     .text:0000000000000060 .L0 
+     /tmp/cceLesXB.s:93     .text:0000000000000064 .L0 
+     /tmp/cceLesXB.s:94     .text:0000000000000064 .L0 
+     /tmp/cceLesXB.s:97     .text:000000000000006c .L0 
+     /tmp/cceLesXB.s:101    .text:0000000000000078 .L0 
+     /tmp/cceLesXB.s:102    .text:000000000000007c .L0 
+     /tmp/cceLesXB.s:104    .text:0000000000000080 .L0 
+     /tmp/cceLesXB.s:105    .text:0000000000000080 .L0 
+     /tmp/cceLesXB.s:107    .text:0000000000000084 .L0 
+     /tmp/cceLesXB.s:110    .text:0000000000000088 .L0 
+     /tmp/cceLesXB.s:112    .text:000000000000008c .L0 
+     /tmp/cceLesXB.s:118    .text:000000000000008c _Z5kputcc
+     /tmp/cceLesXB.s:121    .text:000000000000008c .L0 
+     /tmp/cceLesXB.s:123    .text:000000000000008c .L0 
+     /tmp/cceLesXB.s:124    .text:0000000000000090 .L0 
+     /tmp/cceLesXB.s:126    .text:0000000000000094 .L0 
+     /tmp/cceLesXB.s:128    .text:0000000000000098 .L0 
+     /tmp/cceLesXB.s:130    .text:0000000000000098 .L0 
+GAS LISTING /tmp/cceLesXB.s 			page 23
+
+
+     /tmp/cceLesXB.s:131    .text:0000000000000098 .L0 
+     /tmp/cceLesXB.s:135    .text:00000000000000a4 .L0 
+     /tmp/cceLesXB.s:140    .text:00000000000000b0 .L0 
+     /tmp/cceLesXB.s:141    .text:00000000000000b0 .L0 
+     /tmp/cceLesXB.s:143    .text:00000000000000b4 .L0 
+     /tmp/cceLesXB.s:146    .text:00000000000000bc .L0 
+     /tmp/cceLesXB.s:147    .text:00000000000000bc .L0 
+     /tmp/cceLesXB.s:149    .text:00000000000000c0 .L0 
+     /tmp/cceLesXB.s:150    .text:00000000000000c4 .L0 
+     /tmp/cceLesXB.s:151    .text:00000000000000c4 .L0 
+     /tmp/cceLesXB.s:153    .text:00000000000000c8 .L0 
+     /tmp/cceLesXB.s:155    .text:00000000000000cc .L0 
+     /tmp/cceLesXB.s:161    .text:00000000000000cc _Z12kprintStringPKc
+     /tmp/cceLesXB.s:164    .text:00000000000000cc .L0 
+     /tmp/cceLesXB.s:166    .text:00000000000000cc .L0 
+     /tmp/cceLesXB.s:167    .text:00000000000000d0 .L0 
+     /tmp/cceLesXB.s:171    .text:00000000000000dc .L0 
+     /tmp/cceLesXB.s:172    .text:00000000000000dc .L0 
+     /tmp/cceLesXB.s:173    .text:00000000000000dc .L0 
+     /tmp/cceLesXB.s:175    .text:00000000000000e0 .L0 
+     /tmp/cceLesXB.s:178    .text:00000000000000e4 .L0 
+     /tmp/cceLesXB.s:182    .text:00000000000000e8 .L0 
+     /tmp/cceLesXB.s:183    .text:00000000000000e8 .L0 
+     /tmp/cceLesXB.s:185    .text:00000000000000ec .L0 
+     /tmp/cceLesXB.s:187    .text:00000000000000f0 .L0 
+     /tmp/cceLesXB.s:188    .text:00000000000000f0 .L0 
+     /tmp/cceLesXB.s:191    .text:00000000000000f8 .L0 
+     /tmp/cceLesXB.s:192    .text:00000000000000f8 .L0 
+     /tmp/cceLesXB.s:195    .text:00000000000000fc .L0 
+     /tmp/cceLesXB.s:198    .text:0000000000000100 .L0 
+     /tmp/cceLesXB.s:199    .text:0000000000000104 .L0 
+     /tmp/cceLesXB.s:201    .text:0000000000000108 .L0 
+     /tmp/cceLesXB.s:202    .text:0000000000000108 .L0 
+     /tmp/cceLesXB.s:204    .text:000000000000010c .L0 
+     /tmp/cceLesXB.s:207    .text:0000000000000110 .L0 
+     /tmp/cceLesXB.s:209    .text:0000000000000114 .L0 
+     /tmp/cceLesXB.s:215    .text:0000000000000114 _Z9kprintIntmi
+     /tmp/cceLesXB.s:218    .text:0000000000000114 .L0 
+     /tmp/cceLesXB.s:220    .text:0000000000000114 .L0 
+     /tmp/cceLesXB.s:221    .text:0000000000000118 .L0 
+     /tmp/cceLesXB.s:225    .text:0000000000000124 .L0 
+     /tmp/cceLesXB.s:226    .text:0000000000000124 .L0 
+     /tmp/cceLesXB.s:227    .text:0000000000000124 .L0 
+     /tmp/cceLesXB.s:229    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:231    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:232    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:233    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:235    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:236    .text:0000000000000128 .L0 
+     /tmp/cceLesXB.s:241    .text:0000000000000130 .L0 
+     /tmp/cceLesXB.s:245    .text:0000000000000134 .L0 
+     /tmp/cceLesXB.s:246    .text:0000000000000134 .L0 
+     /tmp/cceLesXB.s:247    .text:0000000000000134 .L0 
+     /tmp/cceLesXB.s:249    .text:0000000000000138 .L0 
+     /tmp/cceLesXB.s:252    .text:000000000000013c .L0 
+     /tmp/cceLesXB.s:256    .text:000000000000014c .L0 
+     /tmp/cceLesXB.s:261    .text:0000000000000158 .L0 
+GAS LISTING /tmp/cceLesXB.s 			page 24
+
+
+     /tmp/cceLesXB.s:264    .text:000000000000015c .L0 
+     /tmp/cceLesXB.s:266    .text:0000000000000160 .L0 
+     /tmp/cceLesXB.s:270    .text:0000000000000164 .L0 
+     /tmp/cceLesXB.s:271    .text:0000000000000164 .L0 
+     /tmp/cceLesXB.s:275    .text:000000000000016c .L0 
+     /tmp/cceLesXB.s:276    .text:000000000000016c .L0 
+     /tmp/cceLesXB.s:282    .text:0000000000000180 .L0 
+     /tmp/cceLesXB.s:285    .text:0000000000000184 .L0 
+     /tmp/cceLesXB.s:286    .text:0000000000000188 .L0 
+     /tmp/cceLesXB.s:288    .text:000000000000018c .L0 
+     /tmp/cceLesXB.s:289    .text:000000000000018c .L0 
+     /tmp/cceLesXB.s:291    .text:0000000000000190 .L0 
+     /tmp/cceLesXB.s:293    .text:0000000000000194 .L0 
+     /tmp/cceLesXB.s:295    .text:0000000000000198 .L0 
+     /tmp/cceLesXB.s:301    .text:0000000000000198 _Z10kernelInitv
+     /tmp/cceLesXB.s:304    .text:0000000000000198 .L0 
+     /tmp/cceLesXB.s:305    .text:0000000000000198 .L0 
+     /tmp/cceLesXB.s:306    .text:000000000000019c .L0 
+     /tmp/cceLesXB.s:312    .text:00000000000001b0 .L0 
+     /tmp/cceLesXB.s:313    .text:00000000000001b0 .L0 
+     /tmp/cceLesXB.s:314    .text:00000000000001b0 .L0 
+     /tmp/cceLesXB.s:315    .text:00000000000001b0 .L0 
+     /tmp/cceLesXB.s:316    .text:00000000000001b0 .L0 
+     /tmp/cceLesXB.s:318    .text:00000000000001b4 .L0 
+     /tmp/cceLesXB.s:320    .text:00000000000001b4 .L0 
+     /tmp/cceLesXB.s:321    .text:00000000000001b4 .L0 
+     /tmp/cceLesXB.s:325    .text:00000000000001c4 .L0 
+     /tmp/cceLesXB.s:326    .text:00000000000001c4 .L0 
+     /tmp/cceLesXB.s:330    .text:00000000000001d4 .L0 
+     /tmp/cceLesXB.s:331    .text:00000000000001d4 .L0 
+     /tmp/cceLesXB.s:337    .text:00000000000001ec .L0 
+     /tmp/cceLesXB.s:338    .text:00000000000001ec .L0 
+     /tmp/cceLesXB.s:342    .text:00000000000001fc .L0 
+     /tmp/cceLesXB.s:343    .text:00000000000001fc .L0 
+     /tmp/cceLesXB.s:347    .text:000000000000020c .L0 
+     /tmp/cceLesXB.s:348    .text:000000000000020c .L0 
+     /tmp/cceLesXB.s:354    .text:0000000000000224 .L0 
+     /tmp/cceLesXB.s:355    .text:0000000000000224 .L0 
+     /tmp/cceLesXB.s:359    .text:0000000000000234 .L0 
+     /tmp/cceLesXB.s:360    .text:0000000000000234 .L0 
+     /tmp/cceLesXB.s:364    .text:0000000000000244 .L0 
+     /tmp/cceLesXB.s:365    .text:0000000000000244 .L0 
+     /tmp/cceLesXB.s:371    .text:000000000000025c .L0 
+     /tmp/cceLesXB.s:372    .text:000000000000025c .L0 
+     /tmp/cceLesXB.s:376    .text:000000000000026c .L0 
+     /tmp/cceLesXB.s:377    .text:000000000000026c .L0 
+     /tmp/cceLesXB.s:381    .text:000000000000027c .L0 
+     /tmp/cceLesXB.s:382    .text:000000000000027c .L0 
+     /tmp/cceLesXB.s:388    .text:0000000000000294 .L0 
+     /tmp/cceLesXB.s:389    .text:0000000000000294 .L0 
+     /tmp/cceLesXB.s:393    .text:00000000000002a4 .L0 
+     /tmp/cceLesXB.s:394    .text:00000000000002a4 .L0 
+     /tmp/cceLesXB.s:398    .text:00000000000002b4 .L0 
+     /tmp/cceLesXB.s:399    .text:00000000000002b4 .L0 
+     /tmp/cceLesXB.s:405    .text:00000000000002cc .L0 
+     /tmp/cceLesXB.s:406    .text:00000000000002cc .L0 
+     /tmp/cceLesXB.s:410    .text:00000000000002dc .L0 
+GAS LISTING /tmp/cceLesXB.s 			page 25
+
+
+     /tmp/cceLesXB.s:411    .text:00000000000002dc .L0 
+     /tmp/cceLesXB.s:415    .text:00000000000002ec .L0 
+     /tmp/cceLesXB.s:416    .text:00000000000002ec .L0 
+     /tmp/cceLesXB.s:422    .text:0000000000000304 .L0 
+     /tmp/cceLesXB.s:423    .text:0000000000000304 .L0 
+     /tmp/cceLesXB.s:427    .text:0000000000000314 .L0 
+     /tmp/cceLesXB.s:428    .text:0000000000000314 .L0 
+     /tmp/cceLesXB.s:434    .text:000000000000031c .L0 
+src/kernel/../../h/../h/riscv.hpp:118    .text:000000000000031c .L0 
+     /tmp/cceLesXB.s:444    .text:0000000000000320 .L0 
+     /tmp/cceLesXB.s:445    .text:0000000000000320 .L0 
+     /tmp/cceLesXB.s:449    .text:0000000000000330 .L0 
+     /tmp/cceLesXB.s:450    .text:0000000000000330 .L0 
+     /tmp/cceLesXB.s:453    .text:0000000000000338 .L0 
+     /tmp/cceLesXB.s:454    .text:0000000000000338 .L0 
+     /tmp/cceLesXB.s:458    .text:0000000000000348 .L0 
+     /tmp/cceLesXB.s:459    .text:0000000000000348 .L0 
+     /tmp/cceLesXB.s:462    .text:0000000000000350 .L0 
+     /tmp/cceLesXB.s:463    .text:0000000000000350 .L0 
+     /tmp/cceLesXB.s:467    .text:0000000000000360 .L0 
+     /tmp/cceLesXB.s:468    .text:0000000000000360 .L0 
+     /tmp/cceLesXB.s:471    .text:0000000000000368 .L0 
+     /tmp/cceLesXB.s:472    .text:0000000000000368 .L0 
+     /tmp/cceLesXB.s:476    .text:0000000000000378 .L0 
+     /tmp/cceLesXB.s:477    .text:0000000000000378 .L0 
+     /tmp/cceLesXB.s:480    .text:0000000000000380 .L0 
+     /tmp/cceLesXB.s:481    .text:0000000000000380 .L0 
+     /tmp/cceLesXB.s:485    .text:0000000000000390 .L0 
+     /tmp/cceLesXB.s:486    .text:0000000000000390 .L0 
+     /tmp/cceLesXB.s:490    .text:00000000000003a0 .L0 
+     /tmp/cceLesXB.s:491    .text:00000000000003a0 .L0 
+     /tmp/cceLesXB.s:497    .text:00000000000003b0 .L0 
+     /tmp/cceLesXB.s:498    .text:00000000000003b0 .L0 
+     /tmp/cceLesXB.s:506    .text:00000000000003cc .L0 
+     /tmp/cceLesXB.s:507    .text:00000000000003cc .L0 
+     /tmp/cceLesXB.s:514    .text:00000000000003dc .L0 
+     /tmp/cceLesXB.s:515    .text:00000000000003dc .L0 
+     /tmp/cceLesXB.s:525    .text:00000000000003f4 .L0 
+     /tmp/cceLesXB.s:526    .text:00000000000003f4 .L0 
+     /tmp/cceLesXB.s:527    .text:00000000000003f4 .L0 
+     /tmp/cceLesXB.s:534    .text:00000000000003f8 .L0 
+     /tmp/cceLesXB.s:535    .text:00000000000003f8 .L0 
+     /tmp/cceLesXB.s:536    .text:00000000000003f8 .L0 
+     /tmp/cceLesXB.s:542    .text:0000000000000400 .L0 
+     /tmp/cceLesXB.s:544    .text:0000000000000404 .L0 
+     /tmp/cceLesXB.s:546    .text:0000000000000408 .L0 
+     /tmp/cceLesXB.s:548    .text:000000000000040c .L0 
+     /tmp/cceLesXB.s:550    .text:0000000000000410 .L0 
+     /tmp/cceLesXB.s:551    .text:0000000000000410 .L0 
+     /tmp/cceLesXB.s:556    .text:0000000000000420 .L0 
+     /tmp/cceLesXB.s:557    .text:0000000000000420 .L0 
+     /tmp/cceLesXB.s:561    .text:0000000000000430 .L0 
+     /tmp/cceLesXB.s:562    .text:0000000000000430 .L0 
+     /tmp/cceLesXB.s:565    .text:0000000000000434 .L0 
+     /tmp/cceLesXB.s:566    .text:0000000000000438 .L0 
+     /tmp/cceLesXB.s:567    .text:0000000000000438 .L0 
+     /tmp/cceLesXB.s:569    .text:000000000000043c .L0 
+GAS LISTING /tmp/cceLesXB.s 			page 26
+
+
+     /tmp/cceLesXB.s:570    .text:000000000000043c .L0 
+     /tmp/cceLesXB.s:572    .text:0000000000000440 .L0 
+     /tmp/cceLesXB.s:575    .text:0000000000000444 .L0 
+     /tmp/cceLesXB.s:578    .text:0000000000000448 .L0 
+     /tmp/cceLesXB.s:581    .text:000000000000044c .L0 
+     /tmp/cceLesXB.s:585    .text:0000000000000450 .L0 
+     /tmp/cceLesXB.s:587    .text:0000000000000450 .L0 
+     /tmp/cceLesXB.s:605    .text:0000000000000470 .L0 
+     /tmp/cceLesXB.s:614    .data:0000000000000000 kdigits
+     /tmp/cceLesXB.s:611    .data:0000000000000000 .LANCHOR0
+     /tmp/cceLesXB.s:672    .text:0000000000000470 .L0 
+     /tmp/cceLesXB.s:131    .text:0000000000000098 .L0 
+     /tmp/cceLesXB.s:135    .text:00000000000000a4 .L0 
+     /tmp/cceLesXB.s:252    .text:000000000000013c .L0 
+     /tmp/cceLesXB.s:618    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cceLesXB.s:321    .text:00000000000001b4 .L0 
+     /tmp/cceLesXB.s:621    .rodata.str1.8:0000000000000030 .LC1
+     /tmp/cceLesXB.s:326    .text:00000000000001c4 .L0 
+     /tmp/cceLesXB.s:332    .text:00000000000001d8 .L0 
+     /tmp/cceLesXB.s:624    .rodata.str1.8:0000000000000048 .LC2
+     /tmp/cceLesXB.s:338    .text:00000000000001ec .L0 
+     /tmp/cceLesXB.s:627    .rodata.str1.8:0000000000000050 .LC3
+     /tmp/cceLesXB.s:343    .text:00000000000001fc .L0 
+     /tmp/cceLesXB.s:349    .text:0000000000000210 .L0 
+     /tmp/cceLesXB.s:355    .text:0000000000000224 .L0 
+     /tmp/cceLesXB.s:629    .rodata.str1.8:0000000000000060 .LC4
+     /tmp/cceLesXB.s:360    .text:0000000000000234 .L0 
+     /tmp/cceLesXB.s:366    .text:0000000000000248 .L0 
+     /tmp/cceLesXB.s:372    .text:000000000000025c .L0 
+     /tmp/cceLesXB.s:632    .rodata.str1.8:0000000000000078 .LC5
+     /tmp/cceLesXB.s:377    .text:000000000000026c .L0 
+     /tmp/cceLesXB.s:383    .text:0000000000000280 .L0 
+     /tmp/cceLesXB.s:389    .text:0000000000000294 .L0 
+     /tmp/cceLesXB.s:635    .rodata.str1.8:0000000000000090 .LC6
+     /tmp/cceLesXB.s:394    .text:00000000000002a4 .L0 
+     /tmp/cceLesXB.s:400    .text:00000000000002b8 .L0 
+     /tmp/cceLesXB.s:406    .text:00000000000002cc .L0 
+     /tmp/cceLesXB.s:638    .rodata.str1.8:00000000000000a8 .LC7
+     /tmp/cceLesXB.s:411    .text:00000000000002dc .L0 
+     /tmp/cceLesXB.s:417    .text:00000000000002f0 .L0 
+     /tmp/cceLesXB.s:423    .text:0000000000000304 .L0 
+     /tmp/cceLesXB.s:428    .text:0000000000000314 .L0 
+     /tmp/cceLesXB.s:640    .rodata.str1.8:00000000000000b8 .LC8
+     /tmp/cceLesXB.s:445    .text:0000000000000320 .L0 
+     /tmp/cceLesXB.s:643    .rodata.str1.8:00000000000000d0 .LC9
+     /tmp/cceLesXB.s:454    .text:0000000000000338 .L0 
+     /tmp/cceLesXB.s:646    .rodata.str1.8:00000000000000f0 .LC10
+     /tmp/cceLesXB.s:463    .text:0000000000000350 .L0 
+     /tmp/cceLesXB.s:649    .rodata.str1.8:0000000000000108 .LC11
+     /tmp/cceLesXB.s:472    .text:0000000000000368 .L0 
+     /tmp/cceLesXB.s:652    .rodata.str1.8:0000000000000120 .LC12
+     /tmp/cceLesXB.s:481    .text:0000000000000380 .L0 
+     /tmp/cceLesXB.s:654    .rodata.str1.8:0000000000000140 .LC13
+     /tmp/cceLesXB.s:486    .text:0000000000000390 .L0 
+     /tmp/cceLesXB.s:500    .text:00000000000003b8 .L0 
+     /tmp/cceLesXB.s:517    .text:00000000000003e4 .L0 
+     /tmp/cceLesXB.s:657    .rodata.str1.8:0000000000000170 .LC14
+GAS LISTING /tmp/cceLesXB.s 			page 27
+
+
+     /tmp/cceLesXB.s:551    .text:0000000000000410 .L0 
+     /tmp/cceLesXB.s:660    .rodata.str1.8:0000000000000198 .LC15
+     /tmp/cceLesXB.s:557    .text:0000000000000420 .L0 
+     /tmp/cceLesXB.s:56     .text:0000000000000038 .L4
+     /tmp/cceLesXB.s:138    .text:00000000000000b0 .L9
+     /tmp/cceLesXB.s:196    .text:0000000000000100 .L11
+     /tmp/cceLesXB.s:180    .text:00000000000000e8 .L13
+     /tmp/cceLesXB.s:243    .text:0000000000000134 .L16
+     /tmp/cceLesXB.s:239    .text:0000000000000130 .L19
+     /tmp/cceLesXB.s:283    .text:0000000000000184 .L15
+     /tmp/cceLesXB.s:268    .text:0000000000000164 .L18
+     /tmp/cceLesXB.s:584    .text:0000000000000450 .L23
+     /tmp/cceLesXB.s:591    .text:0000000000000458 .L24
+     /tmp/cceLesXB.s:596    .text:0000000000000460 .L25
+     /tmp/cceLesXB.s:601    .text:0000000000000468 .L26
+     /tmp/cceLesXB.s:563    .text:0000000000000434 .L22
+     /tmp/cceLesXB.s:3174   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cceLesXB.s:4868   .debug_str:0000000000000714 .LASF285
+     /tmp/cceLesXB.s:4804   .debug_str:0000000000000521 .LASF286
+     /tmp/cceLesXB.s:5024   .debug_str:0000000000000ca0 .LASF287
+     /tmp/cceLesXB.s:8      .text:0000000000000000 .Ltext0
+     /tmp/cceLesXB.s:663    .text:0000000000000470 .Letext0
+     /tmp/cceLesXB.s:4632   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cceLesXB.s:4838   .debug_str:0000000000000645 .LASF0
+     /tmp/cceLesXB.s:4880   .debug_str:0000000000000813 .LASF1
+     /tmp/cceLesXB.s:5034   .debug_str:0000000000000d05 .LASF2
+     /tmp/cceLesXB.s:5048   .debug_str:0000000000000d75 .LASF4
+     /tmp/cceLesXB.s:4856   .debug_str:00000000000006bc .LASF3
+     /tmp/cceLesXB.s:4654   .debug_str:00000000000000b0 .LASF5
+     /tmp/cceLesXB.s:4998   .debug_str:0000000000000bdf .LASF6
+     /tmp/cceLesXB.s:4986   .debug_str:0000000000000b91 .LASF7
+     /tmp/cceLesXB.s:4870   .debug_str:00000000000007d8 .LASF8
+     /tmp/cceLesXB.s:4792   .debug_str:00000000000004cf .LASF9
+     /tmp/cceLesXB.s:4810   .debug_str:0000000000000557 .LASF10
+     /tmp/cceLesXB.s:4708   .debug_str:0000000000000249 .LASF11
+     /tmp/cceLesXB.s:4776   .debug_str:000000000000047f .LASF12
+     /tmp/cceLesXB.s:4724   .debug_str:0000000000000298 .LASF13
+     /tmp/cceLesXB.s:4706   .debug_str:0000000000000239 .LASF14
+     /tmp/cceLesXB.s:5096   .debug_str:0000000000000eda .LASF15
+     /tmp/cceLesXB.s:4756   .debug_str:00000000000003b5 .LASF16
+     /tmp/cceLesXB.s:5080   .debug_str:0000000000000e5d .LASF17
+     /tmp/cceLesXB.s:4790   .debug_str:00000000000004c3 .LASF288
+     /tmp/cceLesXB.s:4710   .debug_str:0000000000000258 .LASF18
+     /tmp/cceLesXB.s:4878   .debug_str:000000000000080e .LASF19
+     /tmp/cceLesXB.s:4978   .debug_str:0000000000000b5a .LASF23
+     /tmp/cceLesXB.s:4680   .debug_str:0000000000000178 .LASF20
+     /tmp/cceLesXB.s:5076   .debug_str:0000000000000e40 .LASF21
+     /tmp/cceLesXB.s:4960   .debug_str:0000000000000ad9 .LASF22
+     /tmp/cceLesXB.s:5160   .debug_str:00000000000010dc .LASF126
+     /tmp/cceLesXB.s:4672   .debug_str:0000000000000129 .LASF25
+     /tmp/cceLesXB.s:4982   .debug_str:0000000000000b71 .LASF24
+     /tmp/cceLesXB.s:4886   .debug_str:000000000000085f .LASF26
+     /tmp/cceLesXB.s:4852   .debug_str:000000000000069a .LASF27
+     /tmp/cceLesXB.s:5120   .debug_str:0000000000000f90 .LASF28
+     /tmp/cceLesXB.s:4862   .debug_str:00000000000006e5 .LASF34
+     /tmp/cceLesXB.s:5180   .debug_str:000000000000117c .LASF29
+     /tmp/cceLesXB.s:5208   .debug_str:0000000000001249 .LASF31
+GAS LISTING /tmp/cceLesXB.s 			page 28
+
+
+     /tmp/cceLesXB.s:5038   .debug_str:0000000000000d1a .LASF30
+     /tmp/cceLesXB.s:5164   .debug_str:00000000000010f0 .LASF32
+     /tmp/cceLesXB.s:4766   .debug_str:000000000000041e .LASF33
+     /tmp/cceLesXB.s:4826   .debug_str:00000000000005d3 .LASF35
+     /tmp/cceLesXB.s:5198   .debug_str:00000000000011f3 .LASF114
+     /tmp/cceLesXB.s:4934   .debug_str:00000000000009f5 .LASF116
+     /tmp/cceLesXB.s:4932   .debug_str:00000000000009eb .LASF36
+     /tmp/cceLesXB.s:4658   .debug_str:00000000000000c2 .LASF37
+     /tmp/cceLesXB.s:5106   .debug_str:0000000000000f37 .LASF38
+     /tmp/cceLesXB.s:4772   .debug_str:000000000000044d .LASF39
+     /tmp/cceLesXB.s:5186   .debug_str:000000000000119d .LASF40
+     /tmp/cceLesXB.s:4738   .debug_str:0000000000000327 .LASF41
+     /tmp/cceLesXB.s:4730   .debug_str:00000000000002e5 .LASF47
+     /tmp/cceLesXB.s:4686   .debug_str:000000000000019c .LASF49
+     /tmp/cceLesXB.s:4910   .debug_str:000000000000094b .LASF42
+     /tmp/cceLesXB.s:5150   .debug_str:00000000000010a0 .LASF43
+     /tmp/cceLesXB.s:5086   .debug_str:0000000000000e92 .LASF44
+     /tmp/cceLesXB.s:4952   .debug_str:0000000000000aa2 .LASF45
+     /tmp/cceLesXB.s:5140   .debug_str:0000000000001051 .LASF46
+     /tmp/cceLesXB.s:5156   .debug_str:00000000000010bf .LASF48
+     /tmp/cceLesXB.s:4894   .debug_str:00000000000008bc .LASF50
+     /tmp/cceLesXB.s:5222   .debug_str:00000000000012bd .LASF51
+     /tmp/cceLesXB.s:4930   .debug_str:00000000000009da .LASF52
+     /tmp/cceLesXB.s:4694   .debug_str:00000000000001e1 .LASF53
+     /tmp/cceLesXB.s:4912   .debug_str:0000000000000950 .LASF54
+     /tmp/cceLesXB.s:4644   .debug_str:000000000000004e .LASF55
+     /tmp/cceLesXB.s:4928   .debug_str:00000000000009c8 .LASF56
+     /tmp/cceLesXB.s:5078   .debug_str:0000000000000e4a .LASF57
+     /tmp/cceLesXB.s:4988   .debug_str:0000000000000ba4 .LASF58
+     /tmp/cceLesXB.s:4834   .debug_str:0000000000000627 .LASF59
+     /tmp/cceLesXB.s:5036   .debug_str:0000000000000d13 .LASF60
+     /tmp/cceLesXB.s:5088   .debug_str:0000000000000e97 .LASF61
+     /tmp/cceLesXB.s:4832   .debug_str:0000000000000620 .LASF62
+     /tmp/cceLesXB.s:4884   .debug_str:0000000000000845 .LASF63
+     /tmp/cceLesXB.s:4642   .debug_str:0000000000000047 .LASF64
+     /tmp/cceLesXB.s:5016   .debug_str:0000000000000c52 .LASF65
+     /tmp/cceLesXB.s:5046   .debug_str:0000000000000d62 .LASF289
+     /tmp/cceLesXB.s:4850   .debug_str:0000000000000692 .LASF66
+     /tmp/cceLesXB.s:5202   .debug_str:000000000000120b .LASF67
+     /tmp/cceLesXB.s:4752   .debug_str:0000000000000394 .LASF68
+     /tmp/cceLesXB.s:4824   .debug_str:00000000000005b8 .LASF69
+     /tmp/cceLesXB.s:4818   .debug_str:0000000000000593 .LASF70
+     /tmp/cceLesXB.s:5104   .debug_str:0000000000000f0c .LASF71
+     /tmp/cceLesXB.s:4720   .debug_str:0000000000000287 .LASF72
+     /tmp/cceLesXB.s:4636   .debug_str:000000000000001a .LASF73
+     /tmp/cceLesXB.s:5112   .debug_str:0000000000000f60 .LASF74
+     /tmp/cceLesXB.s:4754   .debug_str:000000000000039f .LASF75
+     /tmp/cceLesXB.s:5128   .debug_str:0000000000000ff5 .LASF290
+     /tmp/cceLesXB.s:4638   .debug_str:000000000000003a .LASF76
+     /tmp/cceLesXB.s:4702   .debug_str:0000000000000216 .LASF77
+     /tmp/cceLesXB.s:4690   .debug_str:00000000000001ca .LASF78
+     /tmp/cceLesXB.s:4714   .debug_str:0000000000000263 .LASF79
+     /tmp/cceLesXB.s:4716   .debug_str:000000000000026c .LASF291
+     /tmp/cceLesXB.s:5146   .debug_str:000000000000107f .LASF80
+     /tmp/cceLesXB.s:4786   .debug_str:00000000000004b1 .LASF81
+     /tmp/cceLesXB.s:4964   .debug_str:0000000000000ae8 .LASF82
+     /tmp/cceLesXB.s:4820   .debug_str:00000000000005a0 .LASF83
+GAS LISTING /tmp/cceLesXB.s 			page 29
+
+
+     /tmp/cceLesXB.s:5050   .debug_str:0000000000000d7c .LASF84
+     /tmp/cceLesXB.s:4650   .debug_str:0000000000000097 .LASF85
+     /tmp/cceLesXB.s:5044   .debug_str:0000000000000d59 .LASF86
+     /tmp/cceLesXB.s:4728   .debug_str:00000000000002c6 .LASF87
+     /tmp/cceLesXB.s:5066   .debug_str:0000000000000df2 .LASF88
+     /tmp/cceLesXB.s:5020   .debug_str:0000000000000c80 .LASF89
+     /tmp/cceLesXB.s:4916   .debug_str:0000000000000971 .LASF90
+     /tmp/cceLesXB.s:4774   .debug_str:000000000000046e .LASF91
+     /tmp/cceLesXB.s:5108   .debug_str:0000000000000f40 .LASF92
+     /tmp/cceLesXB.s:5102   .debug_str:0000000000000ef6 .LASF93
+     /tmp/cceLesXB.s:4888   .debug_str:000000000000088a .LASF94
+     /tmp/cceLesXB.s:5130   .debug_str:0000000000000ffe .LASF95
+     /tmp/cceLesXB.s:4796   .debug_str:00000000000004e5 .LASF96
+     /tmp/cceLesXB.s:5158   .debug_str:00000000000010c5 .LASF97
+     /tmp/cceLesXB.s:4984   .debug_str:0000000000000b83 .LASF98
+     /tmp/cceLesXB.s:5228   .debug_str:00000000000012e5 .LASF99
+     /tmp/cceLesXB.s:5132   .debug_str:0000000000001017 .LASF100
+     /tmp/cceLesXB.s:5166   .debug_str:000000000000110c .LASF101
+     /tmp/cceLesXB.s:4816   .debug_str:0000000000000584 .LASF102
+     /tmp/cceLesXB.s:4634   .debug_str:0000000000000000 .LASF103
+     /tmp/cceLesXB.s:5094   .debug_str:0000000000000ecd .LASF104
+     /tmp/cceLesXB.s:5190   .debug_str:00000000000011ad .LASF105
+     /tmp/cceLesXB.s:4972   .debug_str:0000000000000b29 .LASF292
+     /tmp/cceLesXB.s:4696   .debug_str:00000000000001f1 .LASF106
+     /tmp/cceLesXB.s:5026   .debug_str:0000000000000cc3 .LASF108
+     /tmp/cceLesXB.s:4742   .debug_str:000000000000034f .LASF107
+     /tmp/cceLesXB.s:4718   .debug_str:0000000000000274 .LASF109
+     /tmp/cceLesXB.s:5172   .debug_str:0000000000001155 .LASF110
+     /tmp/cceLesXB.s:4920   .debug_str:0000000000000984 .LASF111
+     /tmp/cceLesXB.s:4670   .debug_str:0000000000000123 .LASF112
+     /tmp/cceLesXB.s:5122   .debug_str:0000000000000fc3 .LASF113
+     /tmp/cceLesXB.s:5196   .debug_str:00000000000011dc .LASF115
+     /tmp/cceLesXB.s:4948   .debug_str:0000000000000a78 .LASF117
+     /tmp/cceLesXB.s:5162   .debug_str:00000000000010e6 .LASF118
+     /tmp/cceLesXB.s:4700   .debug_str:0000000000000202 .LASF119
+     /tmp/cceLesXB.s:5030   .debug_str:0000000000000cdc .LASF120
+     /tmp/cceLesXB.s:5118   .debug_str:0000000000000f74 .LASF121
+     /tmp/cceLesXB.s:5056   .debug_str:0000000000000d9a .LASF122
+     /tmp/cceLesXB.s:5032   .debug_str:0000000000000cec .LASF123
+     /tmp/cceLesXB.s:5062   .debug_str:0000000000000dd1 .LASF124
+     /tmp/cceLesXB.s:5124   .debug_str:0000000000000fd3 .LASF125
+     /tmp/cceLesXB.s:4970   .debug_str:0000000000000b1e .LASF127
+     /tmp/cceLesXB.s:4906   .debug_str:0000000000000925 .LASF128
+     /tmp/cceLesXB.s:4840   .debug_str:0000000000000652 .LASF129
+     /tmp/cceLesXB.s:4678   .debug_str:000000000000016e .LASF130
+     /tmp/cceLesXB.s:4740   .debug_str:000000000000034a .LASF131
+     /tmp/cceLesXB.s:5216   .debug_str:0000000000001297 .LASF132
+     /tmp/cceLesXB.s:5074   .debug_str:0000000000000e3a .LASF133
+     /tmp/cceLesXB.s:5136   .debug_str:000000000000102c .LASF134
+     /tmp/cceLesXB.s:4748   .debug_str:0000000000000378 .LASF135
+     /tmp/cceLesXB.s:4918   .debug_str:0000000000000978 .LASF136
+     /tmp/cceLesXB.s:4864   .debug_str:0000000000000701 .LASF137
+     /tmp/cceLesXB.s:4980   .debug_str:0000000000000b6a .LASF138
+     /tmp/cceLesXB.s:4876   .debug_str:0000000000000806 .LASF139
+     /tmp/cceLesXB.s:5084   .debug_str:0000000000000e7b .LASF240
+     /tmp/cceLesXB.s:4692   .debug_str:00000000000001d3 .LASF140
+     /tmp/cceLesXB.s:4890   .debug_str:0000000000000897 .LASF142
+GAS LISTING /tmp/cceLesXB.s 			page 30
+
+
+     /tmp/cceLesXB.s:4732   .debug_str:00000000000002f4 .LASF293
+     /tmp/cceLesXB.s:4648   .debug_str:000000000000006f .LASF294
+     /tmp/cceLesXB.s:4674   .debug_str:0000000000000142 .LASF141
+     /tmp/cceLesXB.s:4938   .debug_str:0000000000000a25 .LASF143
+     /tmp/cceLesXB.s:5176   .debug_str:000000000000116c .LASF144
+     /tmp/cceLesXB.s:5028   .debug_str:0000000000000cd3 .LASF145
+     /tmp/cceLesXB.s:4968   .debug_str:0000000000000b09 .LASF146
+     /tmp/cceLesXB.s:5154   .debug_str:00000000000010b6 .LASF147
+     /tmp/cceLesXB.s:5148   .debug_str:000000000000108b .LASF148
+     /tmp/cceLesXB.s:4954   .debug_str:0000000000000aa7 .LASF149
+     /tmp/cceLesXB.s:4874   .debug_str:00000000000007f3 .LASF150
+     /tmp/cceLesXB.s:5004   .debug_str:0000000000000bfc .LASF151
+     /tmp/cceLesXB.s:5010   .debug_str:0000000000000c17 .LASF152
+     /tmp/cceLesXB.s:4666   .debug_str:0000000000000110 .LASF153
+     /tmp/cceLesXB.s:5168   .debug_str:0000000000001127 .LASF154
+     /tmp/cceLesXB.s:4950   .debug_str:0000000000000a9a .LASF155
+     /tmp/cceLesXB.s:4966   .debug_str:0000000000000af5 .LASF156
+     /tmp/cceLesXB.s:5194   .debug_str:00000000000011d4 .LASF157
+     /tmp/cceLesXB.s:5092   .debug_str:0000000000000eb9 .LASF158
+     /tmp/cceLesXB.s:5082   .debug_str:0000000000000e73 .LASF159
+     /tmp/cceLesXB.s:4848   .debug_str:000000000000067e .LASF160
+     /tmp/cceLesXB.s:4896   .debug_str:00000000000008d1 .LASF161
+     /tmp/cceLesXB.s:5012   .debug_str:0000000000000c2a .LASF162
+     /tmp/cceLesXB.s:5090   .debug_str:0000000000000eb2 .LASF163
+     /tmp/cceLesXB.s:5054   .debug_str:0000000000000d87 .LASF164
+     /tmp/cceLesXB.s:4744   .debug_str:0000000000000358 .LASF165
+     /tmp/cceLesXB.s:4802   .debug_str:000000000000050e .LASF166
+     /tmp/cceLesXB.s:4846   .debug_str:0000000000000678 .LASF167
+     /tmp/cceLesXB.s:4736   .debug_str:0000000000000315 .LASF168
+     /tmp/cceLesXB.s:5052   .debug_str:0000000000000d81 .LASF169
+     /tmp/cceLesXB.s:4830   .debug_str:000000000000060e .LASF170
+     /tmp/cceLesXB.s:4656   .debug_str:00000000000000b7 .LASF171
+     /tmp/cceLesXB.s:5040   .debug_str:0000000000000d24 .LASF172
+     /tmp/cceLesXB.s:4778   .debug_str:000000000000048e .LASF173
+     /tmp/cceLesXB.s:5220   .debug_str:00000000000012a5 .LASF174
+     /tmp/cceLesXB.s:5174   .debug_str:0000000000001162 .LASF175
+     /tmp/cceLesXB.s:4662   .debug_str:00000000000000ec .LASF176
+     /tmp/cceLesXB.s:5178   .debug_str:0000000000001172 .LASF177
+     /tmp/cceLesXB.s:5204   .debug_str:0000000000001222 .LASF178
+     /tmp/cceLesXB.s:5184   .debug_str:0000000000001198 .LASF179
+     /tmp/cceLesXB.s:4974   .debug_str:0000000000000b2e .LASF180
+     /tmp/cceLesXB.s:5134   .debug_str:0000000000001027 .LASF181
+     /tmp/cceLesXB.s:5206   .debug_str:0000000000001238 .LASF182
+     /tmp/cceLesXB.s:4962   .debug_str:0000000000000ae3 .LASF183
+     /tmp/cceLesXB.s:4860   .debug_str:00000000000006d4 .LASF184
+     /tmp/cceLesXB.s:5188   .debug_str:00000000000011a8 .LASF185
+     /tmp/cceLesXB.s:4646   .debug_str:000000000000005e .LASF186
+     /tmp/cceLesXB.s:4722   .debug_str:0000000000000293 .LASF187
+     /tmp/cceLesXB.s:5230   .debug_str:00000000000012fe .LASF188
+     /tmp/cceLesXB.s:5192   .debug_str:00000000000011cf .LASF189
+     /tmp/cceLesXB.s:5144   .debug_str:000000000000106e .LASF190
+     /tmp/cceLesXB.s:4844   .debug_str:000000000000066b .LASF191
+     /tmp/cceLesXB.s:5170   .debug_str:000000000000113b .LASF192
+     /tmp/cceLesXB.s:5060   .debug_str:0000000000000dc3 .LASF193
+     /tmp/cceLesXB.s:4762   .debug_str:00000000000003f6 .LASF194
+     /tmp/cceLesXB.s:4822   .debug_str:00000000000005ad .LASF195
+     /tmp/cceLesXB.s:4956   .debug_str:0000000000000aae .LASF196
+GAS LISTING /tmp/cceLesXB.s 			page 31
+
+
+     /tmp/cceLesXB.s:4698   .debug_str:00000000000001f7 .LASF197
+     /tmp/cceLesXB.s:5018   .debug_str:0000000000000c68 .LASF198
+     /tmp/cceLesXB.s:4664   .debug_str:0000000000000102 .LASF199
+     /tmp/cceLesXB.s:5138   .debug_str:0000000000001036 .LASF200
+     /tmp/cceLesXB.s:5114   .debug_str:0000000000000f67 .LASF201
+     /tmp/cceLesXB.s:4784   .debug_str:00000000000004a6 .LASF202
+     /tmp/cceLesXB.s:4854   .debug_str:00000000000006a8 .LASF203
+     /tmp/cceLesXB.s:4902   .debug_str:00000000000008f3 .LASF204
+     /tmp/cceLesXB.s:5226   .debug_str:00000000000012d0 .LASF205
+     /tmp/cceLesXB.s:5110   .debug_str:0000000000000f4b .LASF206
+     /tmp/cceLesXB.s:4808   .debug_str:0000000000000543 .LASF207
+     /tmp/cceLesXB.s:4640   .debug_str:0000000000000042 .LASF208
+     /tmp/cceLesXB.s:5072   .debug_str:0000000000000e23 .LASF209
+     /tmp/cceLesXB.s:5100   .debug_str:0000000000000eef .LASF210
+     /tmp/cceLesXB.s:4758   .debug_str:00000000000003cb .LASF211
+     /tmp/cceLesXB.s:4794   .debug_str:00000000000004df .LASF212
+     /tmp/cceLesXB.s:4940   .debug_str:0000000000000a39 .LASF213
+     /tmp/cceLesXB.s:5070   .debug_str:0000000000000e08 .LASF214
+     /tmp/cceLesXB.s:4936   .debug_str:0000000000000a19 .LASF215
+     /tmp/cceLesXB.s:5014   .debug_str:0000000000000c3e .LASF216
+     /tmp/cceLesXB.s:5182   .debug_str:0000000000001187 .LASF217
+     /tmp/cceLesXB.s:5000   .debug_str:0000000000000be6 .LASF218
+     /tmp/cceLesXB.s:5008   .debug_str:0000000000000c11 .LASF219
+     /tmp/cceLesXB.s:5218   .debug_str:000000000000129c .LASF220
+     /tmp/cceLesXB.s:4858   .debug_str:00000000000006ce .LASF221
+     /tmp/cceLesXB.s:4712   .debug_str:000000000000025d .LASF222
+     /tmp/cceLesXB.s:5098   .debug_str:0000000000000ee6 .LASF223
+     /tmp/cceLesXB.s:4750   .debug_str:000000000000037e .LASF224
+     /tmp/cceLesXB.s:4652   .debug_str:00000000000000a3 .LASF225
+     /tmp/cceLesXB.s:4976   .debug_str:0000000000000b3f .LASF226
+     /tmp/cceLesXB.s:5022   .debug_str:0000000000000c94 .LASF227
+     /tmp/cceLesXB.s:5232   .debug_str:000000000000130f .LASF228
+     /tmp/cceLesXB.s:4800   .debug_str:00000000000004fe .LASF229
+     /tmp/cceLesXB.s:4704   .debug_str:000000000000021c .LASF230
+     /tmp/cceLesXB.s:4842   .debug_str:000000000000065f .LASF231
+     /tmp/cceLesXB.s:4746   .debug_str:000000000000035f .LASF232
+     /tmp/cceLesXB.s:4798   .debug_str:00000000000004f1 .LASF233
+     /tmp/cceLesXB.s:5126   .debug_str:0000000000000fdb .LASF234
+     /tmp/cceLesXB.s:4668   .debug_str:0000000000000118 .LASF235
+     /tmp/cceLesXB.s:4872   .debug_str:00000000000007eb .LASF236
+     /tmp/cceLesXB.s:5116   .debug_str:0000000000000f6c .LASF237
+     /tmp/cceLesXB.s:4958   .debug_str:0000000000000ac6 .LASF295
+     /tmp/cceLesXB.s:4866   .debug_str:000000000000070a .LASF238
+     /tmp/cceLesXB.s:5212   .debug_str:000000000000126f .LASF239
+     /tmp/cceLesXB.s:4684   .debug_str:0000000000000188 .LASF296
+     /tmp/cceLesXB.s:4828   .debug_str:00000000000005f6 .LASF241
+     /tmp/cceLesXB.s:4660   .debug_str:00000000000000e3 .LASF242
+     /tmp/cceLesXB.s:4908   .debug_str:0000000000000932 .LASF243
+     /tmp/cceLesXB.s:4944   .debug_str:0000000000000a58 .LASF244
+     /tmp/cceLesXB.s:4676   .debug_str:000000000000014c .LASF245
+     /tmp/cceLesXB.s:4992   .debug_str:0000000000000bbf .LASF246
+     /tmp/cceLesXB.s:4726   .debug_str:00000000000002a8 .LASF247
+     /tmp/cceLesXB.s:5210   .debug_str:0000000000001265 .LASF248
+     /tmp/cceLesXB.s:4768   .debug_str:0000000000000429 .LASF249
+     /tmp/cceLesXB.s:5200   .debug_str:00000000000011ff .LASF250
+     /tmp/cceLesXB.s:5042   .debug_str:0000000000000d3c .LASF251
+     /tmp/cceLesXB.s:5214   .debug_str:0000000000001289 .LASF252
+GAS LISTING /tmp/cceLesXB.s 			page 32
+
+
+     /tmp/cceLesXB.s:4882   .debug_str:0000000000000826 .LASF253
+     /tmp/cceLesXB.s:4764   .debug_str:0000000000000411 .LASF254
+     /tmp/cceLesXB.s:4904   .debug_str:0000000000000907 .LASF255
+     /tmp/cceLesXB.s:5058   .debug_str:0000000000000da8 .LASF256
+     /tmp/cceLesXB.s:4770   .debug_str:0000000000000447 .LASF257
+     /tmp/cceLesXB.s:4996   .debug_str:0000000000000bd6 .LASF258
+     /tmp/cceLesXB.s:4760   .debug_str:00000000000003e4 .LASF259
+     /tmp/cceLesXB.s:4914   .debug_str:0000000000000961 .LASF260
+     /tmp/cceLesXB.s:5064   .debug_str:0000000000000de2 .LASF261
+     /tmp/cceLesXB.s:5006   .debug_str:0000000000000c03 .LASF262
+     /tmp/cceLesXB.s:4806   .debug_str:000000000000053b .LASF263
+     /tmp/cceLesXB.s:4994   .debug_str:0000000000000bcc .LASF264
+     /tmp/cceLesXB.s:4898   .debug_str:00000000000008d9 .LASF265
+     /tmp/cceLesXB.s:216    .text:0000000000000114 .LFB97
+     /tmp/cceLesXB.s:296    .text:0000000000000198 .LFE97
+     /tmp/cceLesXB.s:4447   .debug_loc:0000000000000000 .LLST2
+     /tmp/cceLesXB.s:4942   .debug_str:0000000000000a53 .LASF266
+     /tmp/cceLesXB.s:4466   .debug_loc:000000000000005c .LLST3
+     /tmp/cceLesXB.s:4480   .debug_loc:0000000000000095 .LLST4
+     /tmp/cceLesXB.s:280    .text:0000000000000180 .LVL24
+     /tmp/cceLesXB.s:4900   .debug_str:00000000000008e8 .LASF267
+     /tmp/cceLesXB.s:4812   .debug_str:0000000000000565 .LASF268
+     /tmp/cceLesXB.s:302    .text:0000000000000198 .LFB96
+     /tmp/cceLesXB.s:606    .text:0000000000000470 .LFE96
+     /tmp/cceLesXB.s:5002   .debug_str:0000000000000bee .LASF269
+     /tmp/cceLesXB.s:4502   .debug_loc:00000000000000f4 .LLST5
+     /tmp/cceLesXB.s:4814   .debug_str:0000000000000575 .LASF270
+     /tmp/cceLesXB.s:4513   .debug_loc:000000000000012a .LLST6
+     /tmp/cceLesXB.s:4922   .debug_str:000000000000099e .LASF271
+     /tmp/cceLesXB.s:4528   .debug_loc:0000000000000173 .LLST7
+     /tmp/cceLesXB.s:4682   .debug_str:000000000000017d .LASF272
+     /tmp/cceLesXB.s:4547   .debug_loc:00000000000001cf .LLST8
+     /tmp/cceLesXB.s:430    .text:000000000000031c .LBB8
+     /tmp/cceLesXB.s:442    .text:0000000000000320 .LBE8
+     /tmp/cceLesXB.s:522    .text:00000000000003f4 .LBB10
+     /tmp/cceLesXB.s:530    .text:00000000000003f8 .LBE10
+     /tmp/cceLesXB.s:4570   .debug_loc:000000000000023e .LLST9
+     /tmp/cceLesXB.s:532    .text:00000000000003f8 .LBB12
+     /tmp/cceLesXB.s:540    .text:0000000000000400 .LBE12
+     /tmp/cceLesXB.s:4577   .debug_loc:0000000000000261 .LLST10
+     /tmp/cceLesXB.s:323    .text:00000000000001c4 .LVL25
+     /tmp/cceLesXB.s:328    .text:00000000000001d4 .LVL26
+     /tmp/cceLesXB.s:335    .text:00000000000001ec .LVL27
+     /tmp/cceLesXB.s:340    .text:00000000000001fc .LVL28
+     /tmp/cceLesXB.s:345    .text:000000000000020c .LVL29
+     /tmp/cceLesXB.s:352    .text:0000000000000224 .LVL30
+     /tmp/cceLesXB.s:357    .text:0000000000000234 .LVL31
+     /tmp/cceLesXB.s:362    .text:0000000000000244 .LVL32
+     /tmp/cceLesXB.s:369    .text:000000000000025c .LVL33
+     /tmp/cceLesXB.s:374    .text:000000000000026c .LVL34
+     /tmp/cceLesXB.s:379    .text:000000000000027c .LVL35
+     /tmp/cceLesXB.s:386    .text:0000000000000294 .LVL36
+     /tmp/cceLesXB.s:391    .text:00000000000002a4 .LVL37
+     /tmp/cceLesXB.s:396    .text:00000000000002b4 .LVL38
+     /tmp/cceLesXB.s:403    .text:00000000000002cc .LVL39
+     /tmp/cceLesXB.s:408    .text:00000000000002dc .LVL40
+     /tmp/cceLesXB.s:413    .text:00000000000002ec .LVL41
+GAS LISTING /tmp/cceLesXB.s 			page 33
+
+
+     /tmp/cceLesXB.s:420    .text:0000000000000304 .LVL42
+     /tmp/cceLesXB.s:425    .text:0000000000000314 .LVL43
+     /tmp/cceLesXB.s:447    .text:0000000000000330 .LVL46
+     /tmp/cceLesXB.s:451    .text:0000000000000338 .LVL47
+     /tmp/cceLesXB.s:456    .text:0000000000000348 .LVL48
+     /tmp/cceLesXB.s:460    .text:0000000000000350 .LVL49
+     /tmp/cceLesXB.s:465    .text:0000000000000360 .LVL50
+     /tmp/cceLesXB.s:469    .text:0000000000000368 .LVL51
+     /tmp/cceLesXB.s:474    .text:0000000000000378 .LVL52
+     /tmp/cceLesXB.s:478    .text:0000000000000380 .LVL53
+     /tmp/cceLesXB.s:483    .text:0000000000000390 .LVL54
+     /tmp/cceLesXB.s:488    .text:00000000000003a0 .LVL55
+     /tmp/cceLesXB.s:493    .text:00000000000003ac .LVL56
+     /tmp/cceLesXB.s:502    .text:00000000000003c8 .LVL58
+     /tmp/cceLesXB.s:510    .text:00000000000003d8 .LVL61
+     /tmp/cceLesXB.s:520    .text:00000000000003f4 .LVL64
+     /tmp/cceLesXB.s:554    .text:0000000000000420 .LVL68
+     /tmp/cceLesXB.s:559    .text:0000000000000430 .LVL69
+     /tmp/cceLesXB.s:5152   .debug_str:00000000000010a9 .LASF273
+     /tmp/cceLesXB.s:4946   .debug_str:0000000000000a64 .LASF274
+     /tmp/cceLesXB.s:162    .text:00000000000000cc .LFB95
+     /tmp/cceLesXB.s:210    .text:0000000000000114 .LFE95
+     /tmp/cceLesXB.s:4688   .debug_str:00000000000001c3 .LASF275
+     /tmp/cceLesXB.s:4584   .debug_loc:0000000000000284 .LLST1
+     /tmp/cceLesXB.s:189    .text:00000000000000f8 .LVL12
+     /tmp/cceLesXB.s:5224   .debug_str:00000000000012ca .LASF276
+     /tmp/cceLesXB.s:4924   .debug_str:00000000000009ae .LASF277
+     /tmp/cceLesXB.s:119    .text:000000000000008c .LFB94
+     /tmp/cceLesXB.s:156    .text:00000000000000cc .LFE94
+     /tmp/cceLesXB.s:4780   .debug_str:0000000000000499 .LASF278
+     /tmp/cceLesXB.s:4892   .debug_str:00000000000008b0 .LASF279
+     /tmp/cceLesXB.s:70     .text:0000000000000044 .LFB93
+     /tmp/cceLesXB.s:113    .text:000000000000008c .LFE93
+     /tmp/cceLesXB.s:4595   .debug_loc:00000000000002ba .LLST0
+     /tmp/cceLesXB.s:95     .text:000000000000006c .LVL4
+     /tmp/cceLesXB.s:99     .text:0000000000000078 .LVL5
+     /tmp/cceLesXB.s:5068   .debug_str:0000000000000dfb .LASF280
+     /tmp/cceLesXB.s:4734   .debug_str:0000000000000302 .LASF281
+     /tmp/cceLesXB.s:45     .text:0000000000000028 .LFB92
+     /tmp/cceLesXB.s:64     .text:0000000000000044 .LFE92
+     /tmp/cceLesXB.s:61     .text:0000000000000040 .LVL1
+     /tmp/cceLesXB.s:4926   .debug_str:00000000000009b8 .LASF282
+     /tmp/cceLesXB.s:5142   .debug_str:0000000000001058 .LASF283
+     /tmp/cceLesXB.s:13     .text:0000000000000000 .LFB91
+     /tmp/cceLesXB.s:39     .text:0000000000000028 .LFE91
+     /tmp/cceLesXB.s:28     .text:0000000000000018 .LVL0
+     /tmp/cceLesXB.s:4782   .debug_str:00000000000004a1 .LASF284
+     /tmp/cceLesXB.s:4788   .debug_str:00000000000004bd .LASF297
+     /tmp/cceLesXB.s:4836   .debug_str:0000000000000638 .LASF298
+     /tmp/cceLesXB.s:4990   .debug_str:0000000000000bb6 .LASF299
+     /tmp/cceLesXB.s:219    .text:0000000000000114 .LVL15
+     /tmp/cceLesXB.s:238    .text:0000000000000130 .LVL17
+     /tmp/cceLesXB.s:242    .text:0000000000000134 .LVL18
+     /tmp/cceLesXB.s:262    .text:000000000000015c .LVL21
+     /tmp/cceLesXB.s:267    .text:0000000000000164 .LVL22
+     /tmp/cceLesXB.s:234    .text:0000000000000128 .LVL16
+     /tmp/cceLesXB.s:250    .text:000000000000013c .LVL19
+GAS LISTING /tmp/cceLesXB.s 			page 34
+
+
+     /tmp/cceLesXB.s:258    .text:0000000000000154 .LVL20
+     /tmp/cceLesXB.s:272    .text:0000000000000168 .LVL23
+     /tmp/cceLesXB.s:495    .text:00000000000003b0 .LVL57
+     /tmp/cceLesXB.s:573    .text:0000000000000440 .LVL70
+     /tmp/cceLesXB.s:583    .text:0000000000000450 .LVL73
+     /tmp/cceLesXB.s:504    .text:00000000000003cc .LVL59
+     /tmp/cceLesXB.s:508    .text:00000000000003d0 .LVL60
+     /tmp/cceLesXB.s:579    .text:0000000000000448 .LVL72
+     /tmp/cceLesXB.s:512    .text:00000000000003dc .LVL62
+     /tmp/cceLesXB.s:518    .text:00000000000003ec .LVL63
+     /tmp/cceLesXB.s:576    .text:0000000000000444 .LVL71
+     /tmp/cceLesXB.s:552    .text:0000000000000418 .LVL67
+     /tmp/cceLesXB.s:588    .text:0000000000000454 .LVL74
+     /tmp/cceLesXB.s:590    .text:0000000000000458 .LVL75
+     /tmp/cceLesXB.s:593    .text:000000000000045c .LVL76
+     /tmp/cceLesXB.s:595    .text:0000000000000460 .LVL77
+     /tmp/cceLesXB.s:598    .text:0000000000000464 .LVL78
+     /tmp/cceLesXB.s:600    .text:0000000000000468 .LVL79
+     /tmp/cceLesXB.s:603    .text:000000000000046c .LVL80
+     /tmp/cceLesXB.s:528    .text:00000000000003f8 .LVL65
+     /tmp/cceLesXB.s:538    .text:0000000000000400 .LVL66
+     /tmp/cceLesXB.s:165    .text:00000000000000cc .LVL10
+     /tmp/cceLesXB.s:179    .text:00000000000000e8 .LVL11
+     /tmp/cceLesXB.s:205    .text:000000000000010c .LVL14
+     /tmp/cceLesXB.s:73     .text:0000000000000044 .LVL2
+     /tmp/cceLesXB.s:91     .text:0000000000000064 .LVL3
+     /tmp/cceLesXB.s:108    .text:0000000000000084 .LVL6
+     /tmp/cceLesXB.s:673    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_Z8userMainv
+_ZN3TCB5yieldEv
+_ZN15MemoryAllocator11getInstanceEv
+_ZN15MemoryAllocator9mem_allocEm
+CONSOLE_TX_DATA
+CONSOLE_STATUS
+HEAP_START_ADDR
+HEAP_END_ADDR
+KERNEL_TEXT_START
+KERNEL_TEXT_END
+USER_TEXT_START
+USER_TEXT_END
+interruptvec
+_ZN9Scheduler9initalizeEv
+_ZN5StdIO9initalizeEv
+_ZN3TCB22createMainKernelThreadEv
+_ZN3TCB12createThreadEPFvPvES0_Pm

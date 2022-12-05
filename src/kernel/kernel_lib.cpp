@@ -1,10 +1,5 @@
 #include"../../h/kernel_lib.h"
 
-extern "C" uint64 KERNEL_TEXT_START;
-extern "C" uint64 KERNEL_TEXT_END;
-extern "C" uint64 USER_TEXT_START;
-extern "C" uint64 USER_TEXT_END;
-
 void userMainWrapper(void*)
 {
     userMain();
@@ -12,7 +7,18 @@ void userMainWrapper(void*)
 
 void idleFunction(void*)
 {
-    while(1){
+    while(1){ 
+        /* 
+        *   Cannot swap thread_dispatch() sys_call for TCB::yield() because
+        *   yeild must be atomic so we must call it in kernel locked mode
+        *   but if we make this thread kernel locked and it becomes alone in scheduler 
+        *   cpu will never get to the other threads because there will be no interruption. 
+        *
+        *   We could make preemptive kernel thread but that is a little bit harder.
+        *   We must make INTERRUPTION LOCK FUNCTION (function that disables interrupts)  
+        *   that will lock the thread when executing critical section code! TODO or NOT
+        *    
+        */
         thread_dispatch();
     }
 }
@@ -67,6 +73,8 @@ int kernelInit()
 
     uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
+    idleThread->setKernelMode();
+    idleThread->setKernelLocked();
     if(userMainStack && idleThreadStack && idleThread && userMainThread)
         kprintString("Threads successfully initalized!\n");
     else
@@ -78,6 +86,9 @@ int kernelInit()
 
 char kdigits[] = "0123456789ABCDEF";
 void kprintInt(uint64 xx, int base){
+    switch(base){
+
+    }
     char buf[16];
     int i;
 
@@ -85,8 +96,7 @@ void kprintInt(uint64 xx, int base){
     do{
         buf[i++] = kdigits[xx % base];
     }while((xx /= base) != 0);
-
-
+    
     while(--i >= 0)
         kputc(buf[i]);
 }
