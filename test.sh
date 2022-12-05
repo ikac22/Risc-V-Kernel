@@ -1,6 +1,6 @@
 #!/bin/bash
 
-PTH="/home/ikac/mnt/Fax/DrugaGodina/os1/projekat/zadatak/project/"
+PTH="/home/ikac/shared/projects/riscvOS/"
 PTHTEST="${PTH}test/"
 allFiles="$(ls -1 ${PTH}test/)"
 
