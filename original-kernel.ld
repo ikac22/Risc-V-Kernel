@@ -10,21 +10,8 @@ SECTIONS
   . = 0x80000000;
 
   .text : {
-    *(.entry_os) 
-    
-    . = ALIGN(0x1000);
-    EXCLUDE_FILE (build/src/*) *(.text .text.*)
-
-    . = ALIGN(0x1000);
-    PROVIDE(_kernel_text_start = .);
-    build/src/kernel/*(.text .text.*)
-    PROVIDE(_kernel_text_end = .);
-
-    . = ALIGN(0x1000);
-    PROVIDE(_user_text_start = .);
-    EXCLUDE_FILE (build/src/kernel/*) build/src/user/*(.text .text*)
-    PROVIDE(_user_text_end = .);
-    
+    *(.entry_os) . = ALIGN(0x1000);
+    *(.text .text.*)
     . = ALIGN(0x1000);
     PROVIDE(etext = .);
   }

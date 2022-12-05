@@ -1,5 +1,10 @@
 #include"../../h/kernel_lib.h"
 
+extern "C" uint64 KERNEL_TEXT_START;
+extern "C" uint64 KERNEL_TEXT_END;
+extern "C" uint64 USER_TEXT_START;
+extern "C" uint64 USER_TEXT_END;
+
 void userMainWrapper(void*)
 {
     userMain();
@@ -40,7 +45,11 @@ int kernelInit()
     kprintString("--------------KERNEL INIT--------------\n");
     kprintString("HEAP_START_ADDR: "); kprintInt((uint64)HEAP_START_ADDR,16); kprintString("\n");
     kprintString("HEAP_END_ADDR: "); kprintInt((uint64)HEAP_END_ADDR,16); kprintString("\n");
-    
+    kprintString("KERNEL_TEXT_START: "); kprintInt(KERNEL_TEXT_START,16); kprintString("\n");
+    kprintString("KERNEL_TEXT_END: "); kprintInt(KERNEL_TEXT_END,16); kprintString("\n");
+    kprintString("USER_TEXT_START: "); kprintInt(USER_TEXT_START,16); kprintString("\n");
+    kprintString("USER_TEXT_END: "); kprintInt(USER_TEXT_END,16); kprintString("\n");
+
     Riscv::w_stvec((uint64)interruptvec);
     kprintString("stvec initalized!\n");
     MemoryAllocator::getInstance();
