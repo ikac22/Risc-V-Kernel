@@ -2,22 +2,35 @@
 #define _memory_h
 #include"../lib/hw.h"
 
+/* NEED TO BE CHANGED */
+
+/* structure that acts as a free memory segment header */ 
 struct FreeSegment{
     struct FreeSegment* next;
     size_t size;
 };
 
+
+/* kernel class responsible for alocating memory */
 class MemoryAllocator{
 private:
+
+    /* structure that keeps metadata about memory segment */
+    struct MemorySegmentMeta{
+        struct MemorySegmentMeta* next;
+        size_t size;
+        void* address;
+    };
+
     bool init;
-    FreeSegment* fmem_head;
-    FreeSegment* fall_head;
+    FreeSegment* fmem_head; /* free memory sectors list head */
+    FreeSegment* fall_head; /* allocated memory sectors list head */
     static MemoryAllocator allocator;
 
     MemoryAllocator() = default;
     
-    bool wantToFreeAddress(void* adr);
-    FreeSegment* mergeWithNext(FreeSegment*);
+    bool wantToFreeAddress(void* adr); /* is given address valid to deallocate */
+    FreeSegment* mergeWithNext(FreeSegment*); /* merge two free segments to new free segment */
 public:
     
     MemoryAllocator(const MemoryAllocator&) = delete;

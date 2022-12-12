@@ -3,6 +3,10 @@
 
 #include"../lib/hw.h"
 
+/* 
+*   class that abstracts Kernel semaphore object
+*   (the address returned is the address of kernel object)  
+*/
 
 class _semaphore;
 

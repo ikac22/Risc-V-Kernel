@@ -1,0 +1,1038 @@
+GAS LISTING /tmp/cccBsPIK.s 			page 1
+
+
+   1              		.file	"ptr_queue.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_ZNK8TcbQueue6existsEP3TCB
+  12              	_ZNK8TcbQueue6existsEP3TCB:
+  13              	.LFB98:
+  14              		.file 1 "src/kernel/ptr_queue.cpp"
+   1:src/kernel/ptr_queue.cpp **** #include"../../h/kernel_lib.h"
+   2:src/kernel/ptr_queue.cpp **** bool TcbQueue::exists(TCB* info) const 
+   3:src/kernel/ptr_queue.cpp **** {
+  15              		.loc 1 3 1
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101FF 		addi	sp,sp,-16
+  19              		.cfi_def_cfa_offset 16
+  20 0004 23348100 		sd	s0,8(sp)
+  21              		.cfi_offset 8, -8
+  22 0008 13040101 		addi	s0,sp,16
+  23              		.cfi_def_cfa 8, 0
+   4:src/kernel/ptr_queue.cpp ****     for(TCB* node = head; node; node = node->next)
+  24              		.loc 1 4 5
+  25              	.LBB2:
+  26              		.loc 1 4 14 is_stmt 0
+  27 000c 83370500 		ld	a5,0(a0)
+  28              	.LVL1:
+  29              	.L3:
+  30              		.loc 1 4 27 discriminator 1
+  31 0010 63880700 		beq	a5,zero,.L4
+   5:src/kernel/ptr_queue.cpp ****     {
+   6:src/kernel/ptr_queue.cpp ****         if(node == info)
+  32              		.loc 1 6 9 is_stmt 1
+  33 0014 638EB700 		beq	a5,a1,.L5
+   4:src/kernel/ptr_queue.cpp ****     for(TCB* node = head; node; node = node->next)
+  34              		.loc 1 4 38 is_stmt 0 discriminator 2
+  35 0018 83B70700 		ld	a5,0(a5)
+  36              	.LVL2:
+   4:src/kernel/ptr_queue.cpp ****     for(TCB* node = head; node; node = node->next)
+  37              		.loc 1 4 5 discriminator 2
+  38 001c 6FF05FFF 		j	.L3
+  39              	.L4:
+  40              	.LBE2:
+   7:src/kernel/ptr_queue.cpp ****             return true;
+   8:src/kernel/ptr_queue.cpp ****     }
+   9:src/kernel/ptr_queue.cpp ****     return false;
+  41              		.loc 1 9 12
+  42 0020 13050000 		li	a0,0
+  43              	.LVL3:
+  44              	.L2:
+  10:src/kernel/ptr_queue.cpp **** }
+  45              		.loc 1 10 1
+  46 0024 03348100 		ld	s0,8(sp)
+GAS LISTING /tmp/cccBsPIK.s 			page 2
+
+
+  47              		.cfi_remember_state
+  48              		.cfi_restore 8
+  49              		.cfi_def_cfa 2, 16
+  50 0028 13010101 		addi	sp,sp,16
+  51              		.cfi_def_cfa_offset 0
+  52 002c 67800000 		jr	ra
+  53              	.LVL4:
+  54              	.L5:
+  55              		.cfi_restore_state
+  56              	.LBB3:
+   7:src/kernel/ptr_queue.cpp ****             return true;
+  57              		.loc 1 7 20
+  58 0030 13051000 		li	a0,1
+  59              	.LVL5:
+  60 0034 6FF01FFF 		j	.L2
+  61              	.LBE3:
+  62              		.cfi_endproc
+  63              	.LFE98:
+  65              		.align	2
+  66              		.globl	_ZN8TcbQueue6insertEP3TCB
+  68              	_ZN8TcbQueue6insertEP3TCB:
+  69              	.LFB99:
+  11:src/kernel/ptr_queue.cpp **** 
+  12:src/kernel/ptr_queue.cpp **** TcbQueue& TcbQueue::insert(TCB* info)
+  13:src/kernel/ptr_queue.cpp **** {
+  70              		.loc 1 13 1 is_stmt 1
+  71              		.cfi_startproc
+  72              	.LVL6:
+  73 0038 130101FF 		addi	sp,sp,-16
+  74              		.cfi_def_cfa_offset 16
+  75 003c 23348100 		sd	s0,8(sp)
+  76              		.cfi_offset 8, -8
+  77 0040 13040101 		addi	s0,sp,16
+  78              		.cfi_def_cfa 8, 0
+  14:src/kernel/ptr_queue.cpp ****     info->next = nullptr;
+  79              		.loc 1 14 5
+  80              		.loc 1 14 16 is_stmt 0
+  81 0044 23B00500 		sd	zero,0(a1)
+  15:src/kernel/ptr_queue.cpp ****     tail = tail==nullptr?(head = info):(tail->next = info);
+  82              		.loc 1 15 5 is_stmt 1
+  83              		.loc 1 15 12 is_stmt 0
+  84 0048 83378500 		ld	a5,8(a0)
+  85              		.loc 1 15 25
+  86 004c 63820702 		beq	a5,zero,.L11
+  87              		.loc 1 15 52 discriminator 2
+  88 0050 23B0B700 		sd	a1,0(a5)
+  89              	.L9:
+  90              		.loc 1 15 10 discriminator 4
+  91 0054 2334B500 		sd	a1,8(a0)
+  16:src/kernel/ptr_queue.cpp ****     tmpNum++;
+  92              		.loc 1 16 5 is_stmt 1 discriminator 4
+  93 0058 83270501 		lw	a5,16(a0)
+  94              		.loc 1 16 11 is_stmt 0 discriminator 4
+  95 005c 9B871700 		addiw	a5,a5,1
+  96 0060 2328F500 		sw	a5,16(a0)
+  17:src/kernel/ptr_queue.cpp ****     return *this;
+  97              		.loc 1 17 5 is_stmt 1 discriminator 4
+GAS LISTING /tmp/cccBsPIK.s 			page 3
+
+
+  18:src/kernel/ptr_queue.cpp **** }
+  98              		.loc 1 18 1 is_stmt 0 discriminator 4
+  99 0064 03348100 		ld	s0,8(sp)
+ 100              		.cfi_remember_state
+ 101              		.cfi_restore 8
+ 102              		.cfi_def_cfa 2, 16
+ 103 0068 13010101 		addi	sp,sp,16
+ 104              		.cfi_def_cfa_offset 0
+ 105 006c 67800000 		jr	ra
+ 106              	.L11:
+ 107              		.cfi_restore_state
+  15:src/kernel/ptr_queue.cpp ****     tmpNum++;
+ 108              		.loc 1 15 32 discriminator 1
+ 109 0070 2330B500 		sd	a1,0(a0)
+ 110 0074 6FF01FFE 		j	.L9
+ 111              		.cfi_endproc
+ 112              	.LFE99:
+ 114              		.align	2
+ 115              		.globl	_ZN8TcbQueue6removeEv
+ 117              	_ZN8TcbQueue6removeEv:
+ 118              	.LFB100:
+  19:src/kernel/ptr_queue.cpp ****    
+  20:src/kernel/ptr_queue.cpp **** TCB* TcbQueue::remove(){
+ 119              		.loc 1 20 24 is_stmt 1
+ 120              		.cfi_startproc
+ 121              	.LVL7:
+ 122 0078 130101FF 		addi	sp,sp,-16
+ 123              		.cfi_def_cfa_offset 16
+ 124 007c 23348100 		sd	s0,8(sp)
+ 125              		.cfi_offset 8, -8
+ 126 0080 13040101 		addi	s0,sp,16
+ 127              		.cfi_def_cfa 8, 0
+ 128 0084 93070500 		mv	a5,a0
+  21:src/kernel/ptr_queue.cpp ****     if(head!=nullptr){
+ 129              		.loc 1 21 5
+ 130              	.LBB4:
+ 131              		.loc 1 21 8 is_stmt 0
+ 132 0088 03350500 		ld	a0,0(a0)
+ 133              	.LVL8:
+ 134              		.loc 1 21 5
+ 135 008c 63020502 		beq	a0,zero,.L12
+ 136              	.LBB5:
+  22:src/kernel/ptr_queue.cpp ****         TCB* ret = head;
+ 137              		.loc 1 22 9 is_stmt 1
+ 138              	.LVL9:
+  23:src/kernel/ptr_queue.cpp ****         head = head==tail?(tail = nullptr):head->next;
+ 139              		.loc 1 23 9
+ 140              		.loc 1 23 22 is_stmt 0
+ 141 0090 03B78700 		ld	a4,8(a5)
+ 142              		.loc 1 23 26
+ 143 0094 6304E502 		beq	a0,a4,.L17
+ 144              		.loc 1 23 26 discriminator 2
+ 145 0098 03370500 		ld	a4,0(a0)
+ 146              	.L15:
+ 147              		.loc 1 23 14 discriminator 4
+ 148 009c 23B0E700 		sd	a4,0(a5)
+  24:src/kernel/ptr_queue.cpp ****         ret->next = nullptr;
+GAS LISTING /tmp/cccBsPIK.s 			page 4
+
+
+ 149              		.loc 1 24 9 is_stmt 1 discriminator 4
+ 150              		.loc 1 24 19 is_stmt 0 discriminator 4
+ 151 00a0 23300500 		sd	zero,0(a0)
+  25:src/kernel/ptr_queue.cpp ****         tmpNum--;
+ 152              		.loc 1 25 9 is_stmt 1 discriminator 4
+ 153 00a4 03A70701 		lw	a4,16(a5)
+ 154              		.loc 1 25 15 is_stmt 0 discriminator 4
+ 155 00a8 1B07F7FF 		addiw	a4,a4,-1
+ 156 00ac 23A8E700 		sw	a4,16(a5)
+  26:src/kernel/ptr_queue.cpp ****         return ret;            
+ 157              		.loc 1 26 9 is_stmt 1 discriminator 4
+ 158              	.LVL10:
+ 159              	.L12:
+ 160              	.LBE5:
+ 161              	.LBE4:
+  27:src/kernel/ptr_queue.cpp ****     }
+  28:src/kernel/ptr_queue.cpp ****     return nullptr;
+  29:src/kernel/ptr_queue.cpp **** }
+ 162              		.loc 1 29 1 is_stmt 0
+ 163 00b0 03348100 		ld	s0,8(sp)
+ 164              		.cfi_remember_state
+ 165              		.cfi_restore 8
+ 166              		.cfi_def_cfa 2, 16
+ 167 00b4 13010101 		addi	sp,sp,16
+ 168              		.cfi_def_cfa_offset 0
+ 169 00b8 67800000 		jr	ra
+ 170              	.LVL11:
+ 171              	.L17:
+ 172              		.cfi_restore_state
+ 173              	.LBB7:
+ 174              	.LBB6:
+  23:src/kernel/ptr_queue.cpp ****         ret->next = nullptr;
+ 175              		.loc 1 23 33 discriminator 1
+ 176 00bc 23B40700 		sd	zero,8(a5)
+  23:src/kernel/ptr_queue.cpp ****         ret->next = nullptr;
+ 177              		.loc 1 23 26 discriminator 1
+ 178 00c0 13070000 		li	a4,0
+ 179 00c4 6FF09FFD 		j	.L15
+ 180              	.LBE6:
+ 181              	.LBE7:
+ 182              		.cfi_endproc
+ 183              	.LFE100:
+ 185              		.align	2
+ 186              		.globl	_ZN8TcbQueue3topEv
+ 188              	_ZN8TcbQueue3topEv:
+ 189              	.LFB101:
+  30:src/kernel/ptr_queue.cpp **** 
+  31:src/kernel/ptr_queue.cpp **** TCB* TcbQueue::top(){
+ 190              		.loc 1 31 21 is_stmt 1
+ 191              		.cfi_startproc
+ 192              	.LVL12:
+ 193 00c8 130101FF 		addi	sp,sp,-16
+ 194              		.cfi_def_cfa_offset 16
+ 195 00cc 23348100 		sd	s0,8(sp)
+ 196              		.cfi_offset 8, -8
+ 197 00d0 13040101 		addi	s0,sp,16
+ 198              		.cfi_def_cfa 8, 0
+GAS LISTING /tmp/cccBsPIK.s 			page 5
+
+
+  32:src/kernel/ptr_queue.cpp ****     return head;
+ 199              		.loc 1 32 5
+  33:src/kernel/ptr_queue.cpp **** }
+ 200              		.loc 1 33 1 is_stmt 0
+ 201 00d4 03350500 		ld	a0,0(a0)
+ 202              	.LVL13:
+ 203 00d8 03348100 		ld	s0,8(sp)
+ 204              		.cfi_restore 8
+ 205              		.cfi_def_cfa 2, 16
+ 206 00dc 13010101 		addi	sp,sp,16
+ 207              		.cfi_def_cfa_offset 0
+ 208 00e0 67800000 		jr	ra
+ 209              		.cfi_endproc
+ 210              	.LFE101:
+ 212              		.align	2
+ 213              		.globl	_ZN8TcbQueue10printQueueEv
+ 215              	_ZN8TcbQueue10printQueueEv:
+ 216              	.LFB102:
+  34:src/kernel/ptr_queue.cpp **** 
+  35:src/kernel/ptr_queue.cpp **** void TcbQueue::printQueue(){
+ 217              		.loc 1 35 28 is_stmt 1
+ 218              		.cfi_startproc
+ 219              	.LVL14:
+ 220 00e4 130101FE 		addi	sp,sp,-32
+ 221              		.cfi_def_cfa_offset 32
+ 222 00e8 233C1100 		sd	ra,24(sp)
+ 223 00ec 23388100 		sd	s0,16(sp)
+ 224 00f0 23349100 		sd	s1,8(sp)
+ 225              		.cfi_offset 1, -8
+ 226              		.cfi_offset 8, -16
+ 227              		.cfi_offset 9, -24
+ 228 00f4 13040102 		addi	s0,sp,32
+ 229              		.cfi_def_cfa 8, 0
+  36:src/kernel/ptr_queue.cpp ****     TCB* t = head;
+ 230              		.loc 1 36 5
+ 231              		.loc 1 36 10 is_stmt 0
+ 232 00f8 83340500 		ld	s1,0(a0)
+ 233              	.LVL15:
+ 234              	.L22:
+  37:src/kernel/ptr_queue.cpp ****     while(t){
+ 235              		.loc 1 37 5 is_stmt 1
+ 236              		.loc 1 37 11 is_stmt 0
+ 237 00fc 63800404 		beq	s1,zero,.L21
+  38:src/kernel/ptr_queue.cpp ****         kprintString("-> ");
+ 238              		.loc 1 38 9 is_stmt 1
+ 239              		.loc 1 38 21 is_stmt 0
+ 240 0100 17050000 		lla	a0,.LC0
+ 240      13050500 
+ 241 0108 97000000 		call	_Z12kprintStringPKc
+ 241      E7800000 
+ 242              	.LVL16:
+  39:src/kernel/ptr_queue.cpp ****         kprintInt((uint64)t);
+ 243              		.loc 1 39 9 is_stmt 1
+ 244              		.loc 1 39 18 is_stmt 0
+ 245 0110 13060000 		li	a2,0
+ 246 0114 9305A000 		li	a1,10
+ 247 0118 13850400 		mv	a0,s1
+GAS LISTING /tmp/cccBsPIK.s 			page 6
+
+
+ 248 011c 97000000 		call	_Z9kprintIntmib
+ 248      E7800000 
+ 249              	.LVL17:
+  40:src/kernel/ptr_queue.cpp ****         kprintString("\n");
+ 250              		.loc 1 40 9 is_stmt 1
+ 251              		.loc 1 40 21 is_stmt 0
+ 252 0124 17050000 		lla	a0,.LC1
+ 252      13050500 
+ 253 012c 97000000 		call	_Z12kprintStringPKc
+ 253      E7800000 
+ 254              	.LVL18:
+  41:src/kernel/ptr_queue.cpp ****         t = t->next;            
+ 255              		.loc 1 41 9 is_stmt 1
+ 256              		.loc 1 41 11 is_stmt 0
+ 257 0134 83B40400 		ld	s1,0(s1)
+ 258              	.LVL19:
+  37:src/kernel/ptr_queue.cpp ****         kprintString("-> ");
+ 259              		.loc 1 37 5
+ 260 0138 6FF05FFC 		j	.L22
+ 261              	.L21:
+  42:src/kernel/ptr_queue.cpp ****     }
+  43:src/kernel/ptr_queue.cpp ****     kprintString("\n");
+ 262              		.loc 1 43 5 is_stmt 1
+ 263              		.loc 1 43 17 is_stmt 0
+ 264 013c 17050000 		lla	a0,.LC1
+ 264      13050500 
+ 265 0144 97000000 		call	_Z12kprintStringPKc
+ 265      E7800000 
+ 266              	.LVL20:
+  44:src/kernel/ptr_queue.cpp **** }
+ 267              		.loc 1 44 1
+ 268 014c 83308101 		ld	ra,24(sp)
+ 269              		.cfi_restore 1
+ 270 0150 03340101 		ld	s0,16(sp)
+ 271              		.cfi_restore 8
+ 272              		.cfi_def_cfa 2, 32
+ 273 0154 83348100 		ld	s1,8(sp)
+ 274              		.cfi_restore 9
+ 275              	.LVL21:
+ 276 0158 13010102 		addi	sp,sp,32
+ 277              		.cfi_def_cfa_offset 0
+ 278 015c 67800000 		jr	ra
+ 279              		.cfi_endproc
+ 280              	.LFE102:
+ 282              		.align	2
+ 283              		.globl	_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E
+ 285              	_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E:
+ 286              	.LFB103:
+  45:src/kernel/ptr_queue.cpp ****     
+  46:src/kernel/ptr_queue.cpp **** void TcbQueue::insertSorted(TCB* info, int(*cmp)(TCB*, TCB*)){
+ 287              		.loc 1 46 62 is_stmt 1
+ 288              		.cfi_startproc
+ 289              	.LVL22:
+ 290 0160 130101FC 		addi	sp,sp,-64
+ 291              		.cfi_def_cfa_offset 64
+ 292 0164 233C1102 		sd	ra,56(sp)
+ 293 0168 23388102 		sd	s0,48(sp)
+GAS LISTING /tmp/cccBsPIK.s 			page 7
+
+
+ 294 016c 23349102 		sd	s1,40(sp)
+ 295 0170 23302103 		sd	s2,32(sp)
+ 296 0174 233C3101 		sd	s3,24(sp)
+ 297 0178 23384101 		sd	s4,16(sp)
+ 298 017c 23345101 		sd	s5,8(sp)
+ 299              		.cfi_offset 1, -8
+ 300              		.cfi_offset 8, -16
+ 301              		.cfi_offset 9, -24
+ 302              		.cfi_offset 18, -32
+ 303              		.cfi_offset 19, -40
+ 304              		.cfi_offset 20, -48
+ 305              		.cfi_offset 21, -56
+ 306 0180 13040104 		addi	s0,sp,64
+ 307              		.cfi_def_cfa 8, 0
+ 308 0184 930A0500 		mv	s5,a0
+ 309 0188 13890500 		mv	s2,a1
+ 310 018c 130A0600 		mv	s4,a2
+  47:src/kernel/ptr_queue.cpp ****     TCB* prev = nullptr,* cur = head;
+ 311              		.loc 1 47 5
+ 312              	.LVL23:
+ 313              		.loc 1 47 27 is_stmt 0
+ 314 0190 83340500 		ld	s1,0(a0)
+ 315              	.LVL24:
+ 316              		.loc 1 47 10
+ 317 0194 93090000 		li	s3,0
+ 318              	.LVL25:
+ 319              	.L26:
+  48:src/kernel/ptr_queue.cpp ****     while(cur && cmp(info, cur) >= 0){
+ 320              		.loc 1 48 5 is_stmt 1
+ 321              		.loc 1 48 15 is_stmt 0
+ 322 0198 63800402 		beq	s1,zero,.L25
+ 323              		.loc 1 48 21 discriminator 1
+ 324 019c 93850400 		mv	a1,s1
+ 325 01a0 13050900 		mv	a0,s2
+ 326 01a4 E7000A00 		jalr	s4
+ 327              	.LVL26:
+ 328              		.loc 1 48 15 discriminator 1
+ 329 01a8 63480500 		blt	a0,zero,.L25
+  49:src/kernel/ptr_queue.cpp ****         prev = cur;
+ 330              		.loc 1 49 9 is_stmt 1
+ 331              	.LVL27:
+  50:src/kernel/ptr_queue.cpp ****         cur = cur->next;
+ 332              		.loc 1 50 9
+  49:src/kernel/ptr_queue.cpp ****         prev = cur;
+ 333              		.loc 1 49 14 is_stmt 0
+ 334 01ac 93890400 		mv	s3,s1
+ 335              		.loc 1 50 13
+ 336 01b0 83B40400 		ld	s1,0(s1)
+ 337              	.LVL28:
+  48:src/kernel/ptr_queue.cpp ****     while(cur && cmp(info, cur) >= 0){
+ 338              		.loc 1 48 5
+ 339 01b4 6FF05FFE 		j	.L26
+ 340              	.L25:
+  51:src/kernel/ptr_queue.cpp ****     }
+  52:src/kernel/ptr_queue.cpp ****     if(!prev){
+ 341              		.loc 1 52 5 is_stmt 1 discriminator 4
+ 342 01b8 63800904 		beq	s3,zero,.L32
+GAS LISTING /tmp/cccBsPIK.s 			page 8
+
+
+  53:src/kernel/ptr_queue.cpp ****         info->next = head;
+  54:src/kernel/ptr_queue.cpp ****         head = head==nullptr?(tail = info):info; 
+  55:src/kernel/ptr_queue.cpp ****     }else{
+  56:src/kernel/ptr_queue.cpp ****         info->next = cur;
+ 343              		.loc 1 56 9
+ 344              		.loc 1 56 20 is_stmt 0
+ 345 01bc 23309900 		sd	s1,0(s2)
+  57:src/kernel/ptr_queue.cpp ****         prev->next = cur==nullptr?(tail=info):info;
+ 346              		.loc 1 57 9 is_stmt 1
+ 347              		.loc 1 57 34 is_stmt 0
+ 348 01c0 638A0404 		beq	s1,zero,.L33
+ 349              	.L30:
+ 350              		.loc 1 57 20 discriminator 4
+ 351 01c4 23B02901 		sd	s2,0(s3)
+ 352              	.L29:
+  58:src/kernel/ptr_queue.cpp ****     }
+  59:src/kernel/ptr_queue.cpp ****     tmpNum++;
+ 353              		.loc 1 59 5 is_stmt 1
+ 354 01c8 83A70A01 		lw	a5,16(s5)
+ 355              		.loc 1 59 11 is_stmt 0
+ 356 01cc 9B871700 		addiw	a5,a5,1
+ 357 01d0 23A8FA00 		sw	a5,16(s5)
+  60:src/kernel/ptr_queue.cpp **** }
+ 358              		.loc 1 60 1
+ 359 01d4 83308103 		ld	ra,56(sp)
+ 360              		.cfi_remember_state
+ 361              		.cfi_restore 1
+ 362 01d8 03340103 		ld	s0,48(sp)
+ 363              		.cfi_restore 8
+ 364              		.cfi_def_cfa 2, 64
+ 365 01dc 83348102 		ld	s1,40(sp)
+ 366              		.cfi_restore 9
+ 367              	.LVL29:
+ 368 01e0 03390102 		ld	s2,32(sp)
+ 369              		.cfi_restore 18
+ 370              	.LVL30:
+ 371 01e4 83398101 		ld	s3,24(sp)
+ 372              		.cfi_restore 19
+ 373              	.LVL31:
+ 374 01e8 033A0101 		ld	s4,16(sp)
+ 375              		.cfi_restore 20
+ 376              	.LVL32:
+ 377 01ec 833A8100 		ld	s5,8(sp)
+ 378              		.cfi_restore 21
+ 379              	.LVL33:
+ 380 01f0 13010104 		addi	sp,sp,64
+ 381              		.cfi_def_cfa_offset 0
+ 382 01f4 67800000 		jr	ra
+ 383              	.LVL34:
+ 384              	.L32:
+ 385              		.cfi_restore_state
+  53:src/kernel/ptr_queue.cpp ****         head = head==nullptr?(tail = info):info; 
+ 386              		.loc 1 53 9 is_stmt 1
+  53:src/kernel/ptr_queue.cpp ****         head = head==nullptr?(tail = info):info; 
+ 387              		.loc 1 53 22 is_stmt 0
+ 388 01f8 83B70A00 		ld	a5,0(s5)
+  53:src/kernel/ptr_queue.cpp ****         head = head==nullptr?(tail = info):info; 
+GAS LISTING /tmp/cccBsPIK.s 			page 9
+
+
+ 389              		.loc 1 53 20
+ 390 01fc 2330F900 		sd	a5,0(s2)
+  54:src/kernel/ptr_queue.cpp ****     }else{
+ 391              		.loc 1 54 9 is_stmt 1
+  54:src/kernel/ptr_queue.cpp ****     }else{
+ 392              		.loc 1 54 29 is_stmt 0
+ 393 0200 63860700 		beq	a5,zero,.L34
+ 394              	.L28:
+  54:src/kernel/ptr_queue.cpp ****     }else{
+ 395              		.loc 1 54 14 discriminator 4
+ 396 0204 23B02A01 		sd	s2,0(s5)
+ 397 0208 6FF01FFC 		j	.L29
+ 398              	.L34:
+  54:src/kernel/ptr_queue.cpp ****     }else{
+ 399              		.loc 1 54 36 discriminator 1
+ 400 020c 23B42A01 		sd	s2,8(s5)
+ 401 0210 6FF05FFF 		j	.L28
+ 402              	.L33:
+  57:src/kernel/ptr_queue.cpp ****     }
+ 403              		.loc 1 57 40 discriminator 1
+ 404 0214 23B42A01 		sd	s2,8(s5)
+ 405 0218 6FF0DFFA 		j	.L30
+ 406              		.cfi_endproc
+ 407              	.LFE103:
+ 409              		.align	2
+ 410              		.globl	_ZN8TcbQueue11insertFrontEP3TCB
+ 412              	_ZN8TcbQueue11insertFrontEP3TCB:
+ 413              	.LFB104:
+  61:src/kernel/ptr_queue.cpp **** 
+  62:src/kernel/ptr_queue.cpp **** void TcbQueue::insertFront(TCB* info){
+ 414              		.loc 1 62 38 is_stmt 1
+ 415              		.cfi_startproc
+ 416              	.LVL35:
+ 417 021c 130101FF 		addi	sp,sp,-16
+ 418              		.cfi_def_cfa_offset 16
+ 419 0220 23348100 		sd	s0,8(sp)
+ 420              		.cfi_offset 8, -8
+ 421 0224 13040101 		addi	s0,sp,16
+ 422              		.cfi_def_cfa 8, 0
+  63:src/kernel/ptr_queue.cpp ****     info->next = head;
+ 423              		.loc 1 63 5
+ 424              		.loc 1 63 18 is_stmt 0
+ 425 0228 83370500 		ld	a5,0(a0)
+ 426              		.loc 1 63 16
+ 427 022c 23B0F500 		sd	a5,0(a1)
+  64:src/kernel/ptr_queue.cpp ****     head = head==nullptr?(tail = info):info;
+ 428              		.loc 1 64 5 is_stmt 1
+ 429              		.loc 1 64 25 is_stmt 0
+ 430 0230 63800702 		beq	a5,zero,.L38
+ 431              	.L36:
+ 432              		.loc 1 64 10 discriminator 4
+ 433 0234 2330B500 		sd	a1,0(a0)
+  65:src/kernel/ptr_queue.cpp ****     tmpNum++;
+ 434              		.loc 1 65 5 is_stmt 1 discriminator 4
+ 435 0238 83270501 		lw	a5,16(a0)
+ 436              		.loc 1 65 11 is_stmt 0 discriminator 4
+ 437 023c 9B871700 		addiw	a5,a5,1
+GAS LISTING /tmp/cccBsPIK.s 			page 10
+
+
+ 438 0240 2328F500 		sw	a5,16(a0)
+  66:src/kernel/ptr_queue.cpp **** }...
+ 439              		.loc 1 66 1 discriminator 4
+ 440 0244 03348100 		ld	s0,8(sp)
+ 441              		.cfi_remember_state
+ 442              		.cfi_restore 8
+ 443              		.cfi_def_cfa 2, 16
+ 444 0248 13010101 		addi	sp,sp,16
+ 445              		.cfi_def_cfa_offset 0
+ 446 024c 67800000 		jr	ra
+ 447              	.L38:
+ 448              		.cfi_restore_state
+  64:src/kernel/ptr_queue.cpp ****     head = head==nullptr?(tail = info):info;
+ 449              		.loc 1 64 32 discriminator 1
+ 450 0250 2334B500 		sd	a1,8(a0)
+ 451 0254 6FF01FFE 		j	.L36
+ 452              		.cfi_endproc
+ 453              	.LFE104:
+ 455              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 456              		.align	3
+ 457              	.LC0:
+ 458 0000 2D3E2000 		.string	"-> "
+ 459 0004 00000000 		.zero	4
+ 460              	.LC1:
+ 461 0008 0A00     		.string	"\n"
+ 462              		.text
+ 463              	.Letext0:
+ 464              		.file 2 "src/kernel/../../h/../h/../lib/hw.h"
+ 465              		.file 3 "src/kernel/../../h/../h/ptr_queue.hpp"
+ 466              		.file 4 "src/kernel/../../h/../h/../h/kernel_operators.hpp"
+ 467              		.file 5 "src/kernel/../../h/../h/tcb.hpp"
+ 468              		.file 6 "src/kernel/../../h/../h/pmt.h"
+ 469              		.file 7 "src/kernel/../../h/kernel_lib.h"
+ 470              		.file 8 "src/kernel/../../h/../h/kernel_funs.h"
+GAS LISTING /tmp/cccBsPIK.s 			page 11
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ptr_queue.cpp
+     /tmp/cccBsPIK.s:12     .text:0000000000000000 _ZNK8TcbQueue6existsEP3TCB
+     /tmp/cccBsPIK.s:16     .text:0000000000000000 .L0 
+     /tmp/cccBsPIK.s:18     .text:0000000000000000 .L0 
+     /tmp/cccBsPIK.s:19     .text:0000000000000004 .L0 
+     /tmp/cccBsPIK.s:21     .text:0000000000000008 .L0 
+     /tmp/cccBsPIK.s:23     .text:000000000000000c .L0 
+     /tmp/cccBsPIK.s:26     .text:000000000000000c .L0 
+     /tmp/cccBsPIK.s:27     .text:000000000000000c .L0 
+     /tmp/cccBsPIK.s:31     .text:0000000000000010 .L0 
+     /tmp/cccBsPIK.s:33     .text:0000000000000014 .L0 
+     /tmp/cccBsPIK.s:35     .text:0000000000000018 .L0 
+     /tmp/cccBsPIK.s:38     .text:000000000000001c .L0 
+     /tmp/cccBsPIK.s:42     .text:0000000000000020 .L0 
+     /tmp/cccBsPIK.s:46     .text:0000000000000024 .L0 
+     /tmp/cccBsPIK.s:47     .text:0000000000000028 .L0 
+     /tmp/cccBsPIK.s:48     .text:0000000000000028 .L0 
+     /tmp/cccBsPIK.s:49     .text:0000000000000028 .L0 
+     /tmp/cccBsPIK.s:51     .text:000000000000002c .L0 
+     /tmp/cccBsPIK.s:55     .text:0000000000000030 .L0 
+     /tmp/cccBsPIK.s:58     .text:0000000000000030 .L0 
+     /tmp/cccBsPIK.s:62     .text:0000000000000038 .L0 
+     /tmp/cccBsPIK.s:68     .text:0000000000000038 _ZN8TcbQueue6insertEP3TCB
+     /tmp/cccBsPIK.s:71     .text:0000000000000038 .L0 
+     /tmp/cccBsPIK.s:73     .text:0000000000000038 .L0 
+     /tmp/cccBsPIK.s:74     .text:000000000000003c .L0 
+     /tmp/cccBsPIK.s:76     .text:0000000000000040 .L0 
+     /tmp/cccBsPIK.s:78     .text:0000000000000044 .L0 
+     /tmp/cccBsPIK.s:80     .text:0000000000000044 .L0 
+     /tmp/cccBsPIK.s:81     .text:0000000000000044 .L0 
+     /tmp/cccBsPIK.s:83     .text:0000000000000048 .L0 
+     /tmp/cccBsPIK.s:84     .text:0000000000000048 .L0 
+     /tmp/cccBsPIK.s:86     .text:000000000000004c .L0 
+     /tmp/cccBsPIK.s:88     .text:0000000000000050 .L0 
+     /tmp/cccBsPIK.s:91     .text:0000000000000054 .L0 
+     /tmp/cccBsPIK.s:93     .text:0000000000000058 .L0 
+     /tmp/cccBsPIK.s:95     .text:000000000000005c .L0 
+     /tmp/cccBsPIK.s:98     .text:0000000000000064 .L0 
+     /tmp/cccBsPIK.s:99     .text:0000000000000064 .L0 
+     /tmp/cccBsPIK.s:100    .text:0000000000000068 .L0 
+     /tmp/cccBsPIK.s:101    .text:0000000000000068 .L0 
+     /tmp/cccBsPIK.s:102    .text:0000000000000068 .L0 
+     /tmp/cccBsPIK.s:104    .text:000000000000006c .L0 
+     /tmp/cccBsPIK.s:107    .text:0000000000000070 .L0 
+     /tmp/cccBsPIK.s:109    .text:0000000000000070 .L0 
+     /tmp/cccBsPIK.s:111    .text:0000000000000078 .L0 
+     /tmp/cccBsPIK.s:117    .text:0000000000000078 _ZN8TcbQueue6removeEv
+     /tmp/cccBsPIK.s:120    .text:0000000000000078 .L0 
+     /tmp/cccBsPIK.s:122    .text:0000000000000078 .L0 
+     /tmp/cccBsPIK.s:123    .text:000000000000007c .L0 
+     /tmp/cccBsPIK.s:125    .text:0000000000000080 .L0 
+     /tmp/cccBsPIK.s:127    .text:0000000000000084 .L0 
+     /tmp/cccBsPIK.s:131    .text:0000000000000088 .L0 
+     /tmp/cccBsPIK.s:132    .text:0000000000000088 .L0 
+     /tmp/cccBsPIK.s:135    .text:000000000000008c .L0 
+     /tmp/cccBsPIK.s:139    .text:0000000000000090 .L0 
+GAS LISTING /tmp/cccBsPIK.s 			page 12
+
+
+     /tmp/cccBsPIK.s:140    .text:0000000000000090 .L0 
+     /tmp/cccBsPIK.s:141    .text:0000000000000090 .L0 
+     /tmp/cccBsPIK.s:143    .text:0000000000000094 .L0 
+     /tmp/cccBsPIK.s:145    .text:0000000000000098 .L0 
+     /tmp/cccBsPIK.s:148    .text:000000000000009c .L0 
+     /tmp/cccBsPIK.s:150    .text:00000000000000a0 .L0 
+     /tmp/cccBsPIK.s:151    .text:00000000000000a0 .L0 
+     /tmp/cccBsPIK.s:153    .text:00000000000000a4 .L0 
+     /tmp/cccBsPIK.s:155    .text:00000000000000a8 .L0 
+     /tmp/cccBsPIK.s:162    .text:00000000000000b0 .L0 
+     /tmp/cccBsPIK.s:163    .text:00000000000000b0 .L0 
+     /tmp/cccBsPIK.s:164    .text:00000000000000b4 .L0 
+     /tmp/cccBsPIK.s:165    .text:00000000000000b4 .L0 
+     /tmp/cccBsPIK.s:166    .text:00000000000000b4 .L0 
+     /tmp/cccBsPIK.s:168    .text:00000000000000b8 .L0 
+     /tmp/cccBsPIK.s:172    .text:00000000000000bc .L0 
+     /tmp/cccBsPIK.s:176    .text:00000000000000bc .L0 
+     /tmp/cccBsPIK.s:178    .text:00000000000000c0 .L0 
+     /tmp/cccBsPIK.s:182    .text:00000000000000c8 .L0 
+     /tmp/cccBsPIK.s:188    .text:00000000000000c8 _ZN8TcbQueue3topEv
+     /tmp/cccBsPIK.s:191    .text:00000000000000c8 .L0 
+     /tmp/cccBsPIK.s:193    .text:00000000000000c8 .L0 
+     /tmp/cccBsPIK.s:194    .text:00000000000000cc .L0 
+     /tmp/cccBsPIK.s:196    .text:00000000000000d0 .L0 
+     /tmp/cccBsPIK.s:198    .text:00000000000000d4 .L0 
+     /tmp/cccBsPIK.s:200    .text:00000000000000d4 .L0 
+     /tmp/cccBsPIK.s:201    .text:00000000000000d4 .L0 
+     /tmp/cccBsPIK.s:204    .text:00000000000000dc .L0 
+     /tmp/cccBsPIK.s:205    .text:00000000000000dc .L0 
+     /tmp/cccBsPIK.s:207    .text:00000000000000e0 .L0 
+     /tmp/cccBsPIK.s:209    .text:00000000000000e4 .L0 
+     /tmp/cccBsPIK.s:215    .text:00000000000000e4 _ZN8TcbQueue10printQueueEv
+     /tmp/cccBsPIK.s:218    .text:00000000000000e4 .L0 
+     /tmp/cccBsPIK.s:220    .text:00000000000000e4 .L0 
+     /tmp/cccBsPIK.s:221    .text:00000000000000e8 .L0 
+     /tmp/cccBsPIK.s:225    .text:00000000000000f4 .L0 
+     /tmp/cccBsPIK.s:226    .text:00000000000000f4 .L0 
+     /tmp/cccBsPIK.s:227    .text:00000000000000f4 .L0 
+     /tmp/cccBsPIK.s:229    .text:00000000000000f8 .L0 
+     /tmp/cccBsPIK.s:231    .text:00000000000000f8 .L0 
+     /tmp/cccBsPIK.s:232    .text:00000000000000f8 .L0 
+     /tmp/cccBsPIK.s:236    .text:00000000000000fc .L0 
+     /tmp/cccBsPIK.s:237    .text:00000000000000fc .L0 
+     /tmp/cccBsPIK.s:239    .text:0000000000000100 .L0 
+     /tmp/cccBsPIK.s:240    .text:0000000000000100 .L0 
+     /tmp/cccBsPIK.s:244    .text:0000000000000110 .L0 
+     /tmp/cccBsPIK.s:245    .text:0000000000000110 .L0 
+     /tmp/cccBsPIK.s:251    .text:0000000000000124 .L0 
+     /tmp/cccBsPIK.s:252    .text:0000000000000124 .L0 
+     /tmp/cccBsPIK.s:256    .text:0000000000000134 .L0 
+     /tmp/cccBsPIK.s:257    .text:0000000000000134 .L0 
+     /tmp/cccBsPIK.s:260    .text:0000000000000138 .L0 
+     /tmp/cccBsPIK.s:263    .text:000000000000013c .L0 
+     /tmp/cccBsPIK.s:264    .text:000000000000013c .L0 
+     /tmp/cccBsPIK.s:268    .text:000000000000014c .L0 
+     /tmp/cccBsPIK.s:269    .text:0000000000000150 .L0 
+     /tmp/cccBsPIK.s:271    .text:0000000000000154 .L0 
+GAS LISTING /tmp/cccBsPIK.s 			page 13
+
+
+     /tmp/cccBsPIK.s:272    .text:0000000000000154 .L0 
+     /tmp/cccBsPIK.s:274    .text:0000000000000158 .L0 
+     /tmp/cccBsPIK.s:277    .text:000000000000015c .L0 
+     /tmp/cccBsPIK.s:279    .text:0000000000000160 .L0 
+     /tmp/cccBsPIK.s:285    .text:0000000000000160 _ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E
+     /tmp/cccBsPIK.s:288    .text:0000000000000160 .L0 
+     /tmp/cccBsPIK.s:290    .text:0000000000000160 .L0 
+     /tmp/cccBsPIK.s:291    .text:0000000000000164 .L0 
+     /tmp/cccBsPIK.s:299    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:300    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:301    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:302    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:303    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:304    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:305    .text:0000000000000180 .L0 
+     /tmp/cccBsPIK.s:307    .text:0000000000000184 .L0 
+     /tmp/cccBsPIK.s:313    .text:0000000000000190 .L0 
+     /tmp/cccBsPIK.s:314    .text:0000000000000190 .L0 
+     /tmp/cccBsPIK.s:317    .text:0000000000000194 .L0 
+     /tmp/cccBsPIK.s:321    .text:0000000000000198 .L0 
+     /tmp/cccBsPIK.s:322    .text:0000000000000198 .L0 
+     /tmp/cccBsPIK.s:324    .text:000000000000019c .L0 
+     /tmp/cccBsPIK.s:329    .text:00000000000001a8 .L0 
+     /tmp/cccBsPIK.s:332    .text:00000000000001ac .L0 
+     /tmp/cccBsPIK.s:333    .text:00000000000001ac .L0 
+     /tmp/cccBsPIK.s:334    .text:00000000000001ac .L0 
+     /tmp/cccBsPIK.s:336    .text:00000000000001b0 .L0 
+     /tmp/cccBsPIK.s:339    .text:00000000000001b4 .L0 
+     /tmp/cccBsPIK.s:342    .text:00000000000001b8 .L0 
+     /tmp/cccBsPIK.s:344    .text:00000000000001bc .L0 
+     /tmp/cccBsPIK.s:345    .text:00000000000001bc .L0 
+     /tmp/cccBsPIK.s:347    .text:00000000000001c0 .L0 
+     /tmp/cccBsPIK.s:348    .text:00000000000001c0 .L0 
+     /tmp/cccBsPIK.s:351    .text:00000000000001c4 .L0 
+     /tmp/cccBsPIK.s:354    .text:00000000000001c8 .L0 
+     /tmp/cccBsPIK.s:356    .text:00000000000001cc .L0 
+     /tmp/cccBsPIK.s:359    .text:00000000000001d4 .L0 
+     /tmp/cccBsPIK.s:360    .text:00000000000001d8 .L0 
+     /tmp/cccBsPIK.s:361    .text:00000000000001d8 .L0 
+     /tmp/cccBsPIK.s:363    .text:00000000000001dc .L0 
+     /tmp/cccBsPIK.s:364    .text:00000000000001dc .L0 
+     /tmp/cccBsPIK.s:366    .text:00000000000001e0 .L0 
+     /tmp/cccBsPIK.s:369    .text:00000000000001e4 .L0 
+     /tmp/cccBsPIK.s:372    .text:00000000000001e8 .L0 
+     /tmp/cccBsPIK.s:375    .text:00000000000001ec .L0 
+     /tmp/cccBsPIK.s:378    .text:00000000000001f0 .L0 
+     /tmp/cccBsPIK.s:381    .text:00000000000001f4 .L0 
+     /tmp/cccBsPIK.s:385    .text:00000000000001f8 .L0 
+     /tmp/cccBsPIK.s:387    .text:00000000000001f8 .L0 
+     /tmp/cccBsPIK.s:388    .text:00000000000001f8 .L0 
+     /tmp/cccBsPIK.s:390    .text:00000000000001fc .L0 
+     /tmp/cccBsPIK.s:392    .text:0000000000000200 .L0 
+     /tmp/cccBsPIK.s:393    .text:0000000000000200 .L0 
+     /tmp/cccBsPIK.s:396    .text:0000000000000204 .L0 
+     /tmp/cccBsPIK.s:400    .text:000000000000020c .L0 
+     /tmp/cccBsPIK.s:404    .text:0000000000000214 .L0 
+     /tmp/cccBsPIK.s:406    .text:000000000000021c .L0 
+GAS LISTING /tmp/cccBsPIK.s 			page 14
+
+
+     /tmp/cccBsPIK.s:412    .text:000000000000021c _ZN8TcbQueue11insertFrontEP3TCB
+     /tmp/cccBsPIK.s:415    .text:000000000000021c .L0 
+     /tmp/cccBsPIK.s:417    .text:000000000000021c .L0 
+     /tmp/cccBsPIK.s:418    .text:0000000000000220 .L0 
+     /tmp/cccBsPIK.s:420    .text:0000000000000224 .L0 
+     /tmp/cccBsPIK.s:422    .text:0000000000000228 .L0 
+     /tmp/cccBsPIK.s:424    .text:0000000000000228 .L0 
+     /tmp/cccBsPIK.s:425    .text:0000000000000228 .L0 
+     /tmp/cccBsPIK.s:427    .text:000000000000022c .L0 
+     /tmp/cccBsPIK.s:429    .text:0000000000000230 .L0 
+     /tmp/cccBsPIK.s:430    .text:0000000000000230 .L0 
+     /tmp/cccBsPIK.s:433    .text:0000000000000234 .L0 
+     /tmp/cccBsPIK.s:435    .text:0000000000000238 .L0 
+     /tmp/cccBsPIK.s:437    .text:000000000000023c .L0 
+     /tmp/cccBsPIK.s:440    .text:0000000000000244 .L0 
+     /tmp/cccBsPIK.s:441    .text:0000000000000248 .L0 
+     /tmp/cccBsPIK.s:442    .text:0000000000000248 .L0 
+     /tmp/cccBsPIK.s:443    .text:0000000000000248 .L0 
+     /tmp/cccBsPIK.s:445    .text:000000000000024c .L0 
+     /tmp/cccBsPIK.s:448    .text:0000000000000250 .L0 
+     /tmp/cccBsPIK.s:450    .text:0000000000000250 .L0 
+     /tmp/cccBsPIK.s:452    .text:0000000000000258 .L0 
+     /tmp/cccBsPIK.s:471    .text:0000000000000258 .L0 
+     /tmp/cccBsPIK.s:457    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cccBsPIK.s:240    .text:0000000000000100 .L0 
+     /tmp/cccBsPIK.s:460    .rodata.str1.8:0000000000000008 .LC1
+     /tmp/cccBsPIK.s:252    .text:0000000000000124 .L0 
+     /tmp/cccBsPIK.s:264    .text:000000000000013c .L0 
+     /tmp/cccBsPIK.s:39     .text:0000000000000020 .L4
+     /tmp/cccBsPIK.s:54     .text:0000000000000030 .L5
+     /tmp/cccBsPIK.s:29     .text:0000000000000010 .L3
+     /tmp/cccBsPIK.s:44     .text:0000000000000024 .L2
+     /tmp/cccBsPIK.s:106    .text:0000000000000070 .L11
+     /tmp/cccBsPIK.s:89     .text:0000000000000054 .L9
+     /tmp/cccBsPIK.s:159    .text:00000000000000b0 .L12
+     /tmp/cccBsPIK.s:171    .text:00000000000000bc .L17
+     /tmp/cccBsPIK.s:146    .text:000000000000009c .L15
+     /tmp/cccBsPIK.s:261    .text:000000000000013c .L21
+     /tmp/cccBsPIK.s:234    .text:00000000000000fc .L22
+     /tmp/cccBsPIK.s:340    .text:00000000000001b8 .L25
+     /tmp/cccBsPIK.s:319    .text:0000000000000198 .L26
+     /tmp/cccBsPIK.s:384    .text:00000000000001f8 .L32
+     /tmp/cccBsPIK.s:402    .text:0000000000000214 .L33
+     /tmp/cccBsPIK.s:398    .text:000000000000020c .L34
+     /tmp/cccBsPIK.s:352    .text:00000000000001c8 .L29
+     /tmp/cccBsPIK.s:394    .text:0000000000000204 .L28
+     /tmp/cccBsPIK.s:349    .text:00000000000001c4 .L30
+     /tmp/cccBsPIK.s:447    .text:0000000000000250 .L38
+     /tmp/cccBsPIK.s:431    .text:0000000000000234 .L36
+     /tmp/cccBsPIK.s:1685   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/cccBsPIK.s:2889   .debug_str:00000000000002ee .LASF133
+     /tmp/cccBsPIK.s:2907   .debug_str:0000000000000429 .LASF134
+     /tmp/cccBsPIK.s:3011   .debug_str:00000000000006ef .LASF135
+     /tmp/cccBsPIK.s:8      .text:0000000000000000 .Ltext0
+     /tmp/cccBsPIK.s:463    .text:0000000000000258 .Letext0
+     /tmp/cccBsPIK.s:2795   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/cccBsPIK.s:2815   .debug_str:0000000000000098 .LASF0
+GAS LISTING /tmp/cccBsPIK.s 			page 15
+
+
+     /tmp/cccBsPIK.s:3061   .debug_str:000000000000085e .LASF1
+     /tmp/cccBsPIK.s:3029   .debug_str:0000000000000777 .LASF2
+     /tmp/cccBsPIK.s:3017   .debug_str:0000000000000720 .LASF4
+     /tmp/cccBsPIK.s:3023   .debug_str:0000000000000745 .LASF3
+     /tmp/cccBsPIK.s:2869   .debug_str:0000000000000266 .LASF5
+     /tmp/cccBsPIK.s:2919   .debug_str:00000000000004af .LASF6
+     /tmp/cccBsPIK.s:2909   .debug_str:0000000000000442 .LASF7
+     /tmp/cccBsPIK.s:2983   .debug_str:000000000000063b .LASF8
+     /tmp/cccBsPIK.s:2835   .debug_str:0000000000000111 .LASF9
+     /tmp/cccBsPIK.s:3051   .debug_str:000000000000080a .LASF10
+     /tmp/cccBsPIK.s:2873   .debug_str:000000000000027d .LASF11
+     /tmp/cccBsPIK.s:2845   .debug_str:0000000000000162 .LASF12
+     /tmp/cccBsPIK.s:2921   .debug_str:00000000000004b6 .LASF13
+     /tmp/cccBsPIK.s:2877   .debug_str:0000000000000299 .LASF14
+     /tmp/cccBsPIK.s:3009   .debug_str:00000000000006e3 .LASF15
+     /tmp/cccBsPIK.s:2879   .debug_str:00000000000002a9 .LASF16
+     /tmp/cccBsPIK.s:2857   .debug_str:00000000000001ee .LASF17
+     /tmp/cccBsPIK.s:2937   .debug_str:000000000000051c .LASF18
+     /tmp/cccBsPIK.s:2977   .debug_str:0000000000000620 .LASF32
+     /tmp/cccBsPIK.s:2825   .debug_str:00000000000000cf .LASF19
+     /tmp/cccBsPIK.s:3035   .debug_str:00000000000007af .LASF20
+     /tmp/cccBsPIK.s:2831   .debug_str:00000000000000f3 .LASF21
+     /tmp/cccBsPIK.s:3039   .debug_str:00000000000007ca .LASF26
+     /tmp/cccBsPIK.s:2841   .debug_str:0000000000000133 .LASF28
+     /tmp/cccBsPIK.s:2963   .debug_str:00000000000005c5 .LASF22
+     /tmp/cccBsPIK.s:2819   .debug_str:00000000000000aa .LASF24
+     /tmp/cccBsPIK.s:2799   .debug_str:0000000000000011 .LASF23
+     /tmp/cccBsPIK.s:2883   .debug_str:00000000000002ca .LASF25
+     /tmp/cccBsPIK.s:2957   .debug_str:00000000000005a3 .LASF27
+     /tmp/cccBsPIK.s:2915   .debug_str:0000000000000483 .LASF29
+     /tmp/cccBsPIK.s:2855   .debug_str:00000000000001db .LASF30
+     /tmp/cccBsPIK.s:2829   .debug_str:00000000000000e1 .LASF31
+     /tmp/cccBsPIK.s:2991   .debug_str:000000000000066f .LASF33
+     /tmp/cccBsPIK.s:2989   .debug_str:0000000000000668 .LASF34
+     /tmp/cccBsPIK.s:2849   .debug_str:0000000000000188 .LASF36
+     /tmp/cccBsPIK.s:2995   .debug_str:0000000000000688 .LASF35
+     /tmp/cccBsPIK.s:2917   .debug_str:0000000000000495 .LASF37
+     /tmp/cccBsPIK.s:2805   .debug_str:0000000000000065 .LASF38
+     /tmp/cccBsPIK.s:2973   .debug_str:00000000000005fe .LASF39
+     /tmp/cccBsPIK.s:2985   .debug_str:000000000000064e .LASF136
+     /tmp/cccBsPIK.s:2993   .debug_str:0000000000000680 .LASF40
+     /tmp/cccBsPIK.s:2833   .debug_str:00000000000000fa .LASF41
+     /tmp/cccBsPIK.s:2881   .debug_str:00000000000002bf .LASF42
+     /tmp/cccBsPIK.s:3025   .debug_str:0000000000000757 .LASF43
+     /tmp/cccBsPIK.s:2875   .debug_str:000000000000028c .LASF44
+     /tmp/cccBsPIK.s:2803   .debug_str:000000000000003a .LASF45
+     /tmp/cccBsPIK.s:3055   .debug_str:0000000000000825 .LASF46
+     /tmp/cccBsPIK.s:2863   .debug_str:000000000000022c .LASF47
+     /tmp/cccBsPIK.s:2987   .debug_str:0000000000000661 .LASF48
+     /tmp/cccBsPIK.s:3037   .debug_str:00000000000007b4 .LASF49
+     /tmp/cccBsPIK.s:2933   .debug_str:000000000000050d .LASF137
+     /tmp/cccBsPIK.s:3013   .debug_str:0000000000000712 .LASF50
+     /tmp/cccBsPIK.s:2935   .debug_str:0000000000000516 .LASF51
+     /tmp/cccBsPIK.s:2899   .debug_str:00000000000003da .LASF52
+     /tmp/cccBsPIK.s:3079   .debug_str:00000000000008e4 .LASF53
+     /tmp/cccBsPIK.s:2981   .debug_str:0000000000000633 .LASF138
+     /tmp/cccBsPIK.s:2891   .debug_str:00000000000003b2 .LASF54
+GAS LISTING /tmp/cccBsPIK.s 			page 16
+
+
+     /tmp/cccBsPIK.s:2975   .debug_str:0000000000000614 .LASF55
+     /tmp/cccBsPIK.s:2827   .debug_str:00000000000000d4 .LASF56
+     /tmp/cccBsPIK.s:3007   .debug_str:00000000000006d6 .LASF57
+     /tmp/cccBsPIK.s:3067   .debug_str:000000000000088e .LASF58
+     /tmp/cccBsPIK.s:2943   .debug_str:0000000000000548 .LASF59
+     /tmp/cccBsPIK.s:3063   .debug_str:0000000000000871 .LASF60
+     /tmp/cccBsPIK.s:2903   .debug_str:00000000000003e8 .LASF61
+     /tmp/cccBsPIK.s:2967   .debug_str:00000000000005e0 .LASF62
+     /tmp/cccBsPIK.s:3065   .debug_str:000000000000087a .LASF63
+     /tmp/cccBsPIK.s:2897   .debug_str:00000000000003d3 .LASF64
+     /tmp/cccBsPIK.s:2797   .debug_str:0000000000000000 .LASF65
+     /tmp/cccBsPIK.s:2895   .debug_str:00000000000003c8 .LASF66
+     /tmp/cccBsPIK.s:2809   .debug_str:0000000000000076 .LASF67
+     /tmp/cccBsPIK.s:2839   .debug_str:0000000000000126 .LASF68
+     /tmp/cccBsPIK.s:2925   .debug_str:00000000000004cf .LASF69
+     /tmp/cccBsPIK.s:3021   .debug_str:0000000000000739 .LASF70
+     /tmp/cccBsPIK.s:2913   .debug_str:000000000000046c .LASF71
+     /tmp/cccBsPIK.s:2965   .debug_str:00000000000005d2 .LASF72
+     /tmp/cccBsPIK.s:3057   .debug_str:0000000000000831 .LASF73
+     /tmp/cccBsPIK.s:2971   .debug_str:00000000000005ee .LASF74
+     /tmp/cccBsPIK.s:2861   .debug_str:0000000000000211 .LASF75
+     /tmp/cccBsPIK.s:2929   .debug_str:00000000000004f8 .LASF76
+     /tmp/cccBsPIK.s:2843   .debug_str:0000000000000148 .LASF77
+     /tmp/cccBsPIK.s:2859   .debug_str:0000000000000204 .LASF78
+     /tmp/cccBsPIK.s:2939   .debug_str:0000000000000521 .LASF79
+     /tmp/cccBsPIK.s:2885   .debug_str:00000000000002db .LASF139
+     /tmp/cccBsPIK.s:2931   .debug_str:0000000000000507 .LASF80
+     /tmp/cccBsPIK.s:2851   .debug_str:00000000000001a3 .LASF82
+     /tmp/cccBsPIK.s:2923   .debug_str:00000000000004c6 .LASF81
+     /tmp/cccBsPIK.s:2947   .debug_str:0000000000000566 .LASF83
+     /tmp/cccBsPIK.s:2999   .debug_str:0000000000000697 .LASF84
+     /tmp/cccBsPIK.s:3069   .debug_str:0000000000000893 .LASF85
+     /tmp/cccBsPIK.s:3041   .debug_str:00000000000007d0 .LASF86
+     /tmp/cccBsPIK.s:2927   .debug_str:00000000000004e8 .LASF87
+     /tmp/cccBsPIK.s:2911   .debug_str:0000000000000455 .LASF88
+     /tmp/cccBsPIK.s:2905   .debug_str:0000000000000407 .LASF90
+     /tmp/cccBsPIK.s:2823   .debug_str:00000000000000c5 .LASF89
+     /tmp/cccBsPIK.s:3059   .debug_str:000000000000084a .LASF91
+     /tmp/cccBsPIK.s:2871   .debug_str:000000000000026d .LASF92
+     /tmp/cccBsPIK.s:3081   .debug_str:00000000000008ed .LASF93
+     /tmp/cccBsPIK.s:2887   .debug_str:00000000000002e0 .LASF94
+     /tmp/cccBsPIK.s:2801   .debug_str:0000000000000021 .LASF95
+     /tmp/cccBsPIK.s:3033   .debug_str:000000000000079e .LASF96
+     /tmp/cccBsPIK.s:2997   .debug_str:000000000000068f .LASF97
+     /tmp/cccBsPIK.s:2817   .debug_str:00000000000000a5 .LASF98
+     /tmp/cccBsPIK.s:3077   .debug_str:00000000000008d9 .LASF99
+     /tmp/cccBsPIK.s:3053   .debug_str:0000000000000818 .LASF100
+     /tmp/cccBsPIK.s:2959   .debug_str:00000000000005b3 .LASF101
+     /tmp/cccBsPIK.s:3071   .debug_str:00000000000008ad .LASF102
+     /tmp/cccBsPIK.s:3027   .debug_str:0000000000000772 .LASF103
+     /tmp/cccBsPIK.s:2961   .debug_str:00000000000005c0 .LASF104
+     /tmp/cccBsPIK.s:3015   .debug_str:000000000000071a .LASF105
+     /tmp/cccBsPIK.s:2807   .debug_str:000000000000006c .LASF106
+     /tmp/cccBsPIK.s:3043   .debug_str:00000000000007d6 .LASF107
+     /tmp/cccBsPIK.s:2953   .debug_str:000000000000058e .LASF108
+     /tmp/cccBsPIK.s:2955   .debug_str:000000000000059a .LASF109
+     /tmp/cccBsPIK.s:2813   .debug_str:0000000000000091 .LASF110
+GAS LISTING /tmp/cccBsPIK.s 			page 17
+
+
+     /tmp/cccBsPIK.s:2949   .debug_str:0000000000000579 .LASF111
+     /tmp/cccBsPIK.s:2847   .debug_str:0000000000000171 .LASF140
+     /tmp/cccBsPIK.s:3075   .debug_str:00000000000008cb .LASF112
+     /tmp/cccBsPIK.s:3031   .debug_str:0000000000000785 .LASF114
+     /tmp/cccBsPIK.s:3049   .debug_str:00000000000007fc .LASF141
+     /tmp/cccBsPIK.s:2853   .debug_str:00000000000001b3 .LASF142
+     /tmp/cccBsPIK.s:2821   .debug_str:00000000000000bb .LASF113
+     /tmp/cccBsPIK.s:3003   .debug_str:00000000000006b2 .LASF115
+     /tmp/cccBsPIK.s:2901   .debug_str:00000000000003e3 .LASF116
+     /tmp/cccBsPIK.s:2865   .debug_str:000000000000024c .LASF117
+     /tmp/cccBsPIK.s:2979   .debug_str:0000000000000629 .LASF118
+     /tmp/cccBsPIK.s:3019   .debug_str:0000000000000727 .LASF119
+     /tmp/cccBsPIK.s:2867   .debug_str:000000000000025b .LASF120
+     /tmp/cccBsPIK.s:2945   .debug_str:0000000000000554 .LASF121
+     /tmp/cccBsPIK.s:3045   .debug_str:00000000000007dc .LASF122
+     /tmp/cccBsPIK.s:3005   .debug_str:00000000000006c6 .LASF123
+     /tmp/cccBsPIK.s:3001   .debug_str:00000000000006a4 .LASF124
+     /tmp/cccBsPIK.s:413    .text:000000000000021c .LFB104
+     /tmp/cccBsPIK.s:453    .text:0000000000000258 .LFE104
+     /tmp/cccBsPIK.s:2969   .debug_str:00000000000005e9 .LASF125
+     /tmp/cccBsPIK.s:2941   .debug_str:0000000000000543 .LASF126
+     /tmp/cccBsPIK.s:286    .text:0000000000000160 .LFB103
+     /tmp/cccBsPIK.s:407    .text:000000000000021c .LFE103
+     /tmp/cccBsPIK.s:2576   .debug_loc:0000000000000000 .LLST6
+     /tmp/cccBsPIK.s:2598   .debug_loc:000000000000005f .LLST7
+     /tmp/cccBsPIK.s:2620   .debug_loc:00000000000000be .LLST8
+     /tmp/cccBsPIK.s:2837   .debug_str:0000000000000121 .LASF127
+     /tmp/cccBsPIK.s:2642   .debug_loc:000000000000011d .LLST9
+     /tmp/cccBsPIK.s:2666   .debug_loc:000000000000018d .LLST10
+     /tmp/cccBsPIK.s:327    .text:00000000000001a8 .LVL26
+     /tmp/cccBsPIK.s:216    .text:00000000000000e4 .LFB102
+     /tmp/cccBsPIK.s:280    .text:0000000000000160 .LFE102
+     /tmp/cccBsPIK.s:2686   .debug_loc:00000000000001ea .LLST4
+     /tmp/cccBsPIK.s:2700   .debug_loc:0000000000000223 .LLST5
+     /tmp/cccBsPIK.s:242    .text:0000000000000110 .LVL16
+     /tmp/cccBsPIK.s:249    .text:0000000000000124 .LVL17
+     /tmp/cccBsPIK.s:254    .text:0000000000000134 .LVL18
+     /tmp/cccBsPIK.s:266    .text:000000000000014c .LVL20
+     /tmp/cccBsPIK.s:189    .text:00000000000000c8 .LFB101
+     /tmp/cccBsPIK.s:210    .text:00000000000000e4 .LFE101
+     /tmp/cccBsPIK.s:2707   .debug_loc:0000000000000246 .LLST3
+     /tmp/cccBsPIK.s:118    .text:0000000000000078 .LFB100
+     /tmp/cccBsPIK.s:183    .text:00000000000000c8 .LFE100
+     /tmp/cccBsPIK.s:2721   .debug_loc:000000000000027f .LLST1
+     /tmp/cccBsPIK.s:2781   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/cccBsPIK.s:2732   .debug_loc:00000000000002b5 .LLST2
+     /tmp/cccBsPIK.s:69     .text:0000000000000038 .LFB99
+     /tmp/cccBsPIK.s:112    .text:0000000000000078 .LFE99
+     /tmp/cccBsPIK.s:13     .text:0000000000000000 .LFB98
+     /tmp/cccBsPIK.s:63     .text:0000000000000038 .LFE98
+     /tmp/cccBsPIK.s:2743   .debug_loc:00000000000002eb .LLST0
+     /tmp/cccBsPIK.s:2811   .debug_str:000000000000008c .LASF128
+     /tmp/cccBsPIK.s:3073   .debug_str:00000000000008b7 .LASF129
+     /tmp/cccBsPIK.s:2951   .debug_str:0000000000000581 .LASF131
+     /tmp/cccBsPIK.s:3047   .debug_str:00000000000007ec .LASF130
+     /tmp/cccBsPIK.s:2893   .debug_str:00000000000003be .LASF132
+     /tmp/cccBsPIK.s:289    .text:0000000000000160 .LVL22
+GAS LISTING /tmp/cccBsPIK.s 			page 18
+
+
+     /tmp/cccBsPIK.s:318    .text:0000000000000198 .LVL25
+     /tmp/cccBsPIK.s:379    .text:00000000000001f0 .LVL33
+     /tmp/cccBsPIK.s:383    .text:00000000000001f8 .LVL34
+     /tmp/cccBsPIK.s:370    .text:00000000000001e4 .LVL30
+     /tmp/cccBsPIK.s:376    .text:00000000000001ec .LVL32
+     /tmp/cccBsPIK.s:312    .text:0000000000000190 .LVL23
+     /tmp/cccBsPIK.s:331    .text:00000000000001ac .LVL27
+     /tmp/cccBsPIK.s:337    .text:00000000000001b4 .LVL28
+     /tmp/cccBsPIK.s:373    .text:00000000000001e8 .LVL31
+     /tmp/cccBsPIK.s:315    .text:0000000000000194 .LVL24
+     /tmp/cccBsPIK.s:367    .text:00000000000001e0 .LVL29
+     /tmp/cccBsPIK.s:219    .text:00000000000000e4 .LVL14
+     /tmp/cccBsPIK.s:233    .text:00000000000000fc .LVL15
+     /tmp/cccBsPIK.s:275    .text:0000000000000158 .LVL21
+     /tmp/cccBsPIK.s:192    .text:00000000000000c8 .LVL12
+     /tmp/cccBsPIK.s:202    .text:00000000000000d8 .LVL13
+     /tmp/cccBsPIK.s:121    .text:0000000000000078 .LVL7
+     /tmp/cccBsPIK.s:133    .text:000000000000008c .LVL8
+     /tmp/cccBsPIK.s:138    .text:0000000000000090 .LVL9
+     /tmp/cccBsPIK.s:158    .text:00000000000000b0 .LVL10
+     /tmp/cccBsPIK.s:170    .text:00000000000000bc .LVL11
+     /tmp/cccBsPIK.s:17     .text:0000000000000000 .LVL0
+     /tmp/cccBsPIK.s:43     .text:0000000000000024 .LVL3
+     /tmp/cccBsPIK.s:53     .text:0000000000000030 .LVL4
+     /tmp/cccBsPIK.s:59     .text:0000000000000034 .LVL5
+     /tmp/cccBsPIK.s:472    .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/cccBsPIK.s:25     .text:000000000000000c .LBB2
+     /tmp/cccBsPIK.s:40     .text:0000000000000020 .LBE2
+     /tmp/cccBsPIK.s:56     .text:0000000000000030 .LBB3
+     /tmp/cccBsPIK.s:61     .text:0000000000000038 .LBE3
+     /tmp/cccBsPIK.s:136    .text:0000000000000090 .LBB5
+     /tmp/cccBsPIK.s:160    .text:00000000000000b0 .LBE5
+     /tmp/cccBsPIK.s:174    .text:00000000000000bc .LBB6
+     /tmp/cccBsPIK.s:180    .text:00000000000000c8 .LBE6
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_Z9kprintIntmib

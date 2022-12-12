@@ -1,5 +1,5 @@
-#include"../../h/memory_allocator.hpp"
-#include"../../h/kernel_funs.h"
+#include"../../h/kernel_lib.h"
+
 MemoryAllocator MemoryAllocator::allocator;
 
 MemoryAllocator& MemoryAllocator::getInstance(){

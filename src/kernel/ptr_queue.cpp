@@ -1,6 +1,4 @@
-#include"../../h/ptr_queue.hpp"
-#include"../../h/kernel_funs.h"
-#include"../../h/tcb.hpp"
+#include"../../h/kernel_lib.h"
 bool TcbQueue::exists(TCB* info) const 
 {
     for(TCB* node = head; node; node = node->next)

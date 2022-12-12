@@ -1,4 +1,4 @@
-#include"../../h/KInclude.hpp"
+#include"../../h/kernel_lib.h"
 
 KSemaphore* KSemaphore::activeSemaphores = nullptr;
 

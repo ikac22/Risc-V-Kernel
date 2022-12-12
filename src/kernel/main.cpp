@@ -1,6 +1,7 @@
 #include"../../h/kernel_lib.h"
+#include"../../h/kernel_test.h"
 
-int main(){
+int oldKernelMain(){
     uint64 ra, sp;
     asm volatile("mv %0, ra" : "=r" (ra));
     asm volatile("mv %0, sp" : "=r" (sp));
@@ -19,4 +20,14 @@ int main(){
 
     kprintString("\n\nKERNEL ENDED SUCCESSFULLY!\n\n");
     return 0;
+}
+
+int newKernelMain(){
+    newKernelInit();
+    buddy_test();
+    return 0;
+}
+
+int main(){
+    return newKernelMain();
 }   

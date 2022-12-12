@@ -5,7 +5,8 @@
 
 class KSemaphore;
 
-class TCB{
+/* THREAD CONTROL BLOCK */
+class TCB{ 
     
 public:
     //alokacija
@@ -59,16 +60,18 @@ public:
     time_t sleep_time;
 
 private:
+
     static Context panicContext;
     static TCB* kernelThread;
     static int threadsUp;
+
     Body body;  
     void* args;
     uint64* stack, timeSlice;
     TCBState state;
     bool deleteOnEnd, userMode, locked;
     Context context;
-    
+
     TCB(Body , void* , uint64* ,  uint64 ts = DEFAULT_TIME_SLICE);
     static void threadWrapper();
     static void contextSwitch(Context* oldContext, Context* newContext);

@@ -1,0 +1,1079 @@
+GAS LISTING /tmp/ccIFPgNv.s 			page 1
+
+
+   1              		.file	"kernel_test.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_Z19buddy_allocate_testmb
+  12              	_Z19buddy_allocate_testmb:
+  13              	.LFB98:
+  14              		.file 1 "src/kernel/kernel_test.cpp"
+   1:src/kernel/kernel_test.cpp **** #include"../../h/kernel_lib.h"
+   2:src/kernel/kernel_test.cpp **** #include"../../h/kernel_test.h"
+   3:src/kernel/kernel_test.cpp **** 
+   4:src/kernel/kernel_test.cpp **** void* buddy_allocate_test(size_t s, bool a = false){
+  15              		.loc 1 4 52
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101FE 		addi	sp,sp,-32
+  19              		.cfi_def_cfa_offset 32
+  20 0004 233C1100 		sd	ra,24(sp)
+  21 0008 23388100 		sd	s0,16(sp)
+  22 000c 23349100 		sd	s1,8(sp)
+  23 0010 23302101 		sd	s2,0(sp)
+  24              		.cfi_offset 1, -8
+  25              		.cfi_offset 8, -16
+  26              		.cfi_offset 9, -24
+  27              		.cfi_offset 18, -32
+  28 0014 13040102 		addi	s0,sp,32
+  29              		.cfi_def_cfa 8, 0
+  30 0018 93040500 		mv	s1,a0
+  31 001c 13890500 		mv	s2,a1
+   5:src/kernel/kernel_test.cpp ****     kprintString("Buddy allocate: ");
+  32              		.loc 1 5 5
+  33              		.loc 1 5 17 is_stmt 0
+  34 0020 17050000 		lla	a0,.LC0
+  34      13050500 
+  35              	.LVL1:
+  36 0028 97000000 		call	_Z12kprintStringPKc
+  36      E7800000 
+  37              	.LVL2:
+   6:src/kernel/kernel_test.cpp ****     kprintInt(s);
+  38              		.loc 1 6 5 is_stmt 1
+  39              		.loc 1 6 14 is_stmt 0
+  40 0030 13060000 		li	a2,0
+  41 0034 9305A000 		li	a1,10
+  42 0038 13850400 		mv	a0,s1
+  43 003c 97000000 		call	_Z9kprintIntmib
+  43      E7800000 
+  44              	.LVL3:
+   7:src/kernel/kernel_test.cpp ****     kprintString(" blocks\n");
+  45              		.loc 1 7 5 is_stmt 1
+  46              		.loc 1 7 17 is_stmt 0
+  47 0044 17050000 		lla	a0,.LC1
+  47      13050500 
+GAS LISTING /tmp/ccIFPgNv.s 			page 2
+
+
+  48 004c 97000000 		call	_Z12kprintStringPKc
+  48      E7800000 
+  49              	.LVL4:
+   8:src/kernel/kernel_test.cpp ****     void* ret = Buddy::getInstance().mem_alloc(s);
+  50              		.loc 1 8 5 is_stmt 1
+  51              		.loc 1 8 36 is_stmt 0
+  52 0054 97000000 		call	_ZN5Buddy11getInstanceEv
+  52      E7800000 
+  53              	.LVL5:
+  54              		.loc 1 8 47
+  55 005c 93850400 		mv	a1,s1
+  56 0060 97000000 		call	_ZN5Buddy9mem_allocEm
+  56      E7800000 
+  57              	.LVL6:
+  58 0068 93040500 		mv	s1,a0
+  59              	.LVL7:
+   9:src/kernel/kernel_test.cpp ****     KVALCHECKPRINT(Returned address, ret);
+  60              		.loc 1 9 5 is_stmt 1
+  61 006c 17050000 		lla	a0,.LC2
+  61      13050500 
+  62 0074 97000000 		call	_Z12kprintStringPKc
+  62      E7800000 
+  63              	.LVL8:
+  64              		.loc 1 9 5
+  65 007c 13060000 		li	a2,0
+  66 0080 93050001 		li	a1,16
+  67 0084 13850400 		mv	a0,s1
+  68 0088 97000000 		call	_Z9kprintIntmib
+  68      E7800000 
+  69              	.LVL9:
+  70              		.loc 1 9 5
+  71 0090 17050000 		lla	a0,.LC3
+  71      13050500 
+  72 0098 97000000 		call	_Z12kprintStringPKc
+  72      E7800000 
+  73              	.LVL10:
+  10:src/kernel/kernel_test.cpp ****     kprintString("\n");
+  74              		.loc 1 10 5
+  75              		.loc 1 10 17 is_stmt 0
+  76 00a0 17050000 		lla	a0,.LC3
+  76      13050500 
+  77 00a8 97000000 		call	_Z12kprintStringPKc
+  77      E7800000 
+  78              	.LVL11:
+  11:src/kernel/kernel_test.cpp ****     if(!ret)
+  79              		.loc 1 11 5 is_stmt 1
+  80 00b0 63820404 		beq	s1,zero,.L5
+  81              	.L2:
+  12:src/kernel/kernel_test.cpp ****         kprintString("BUDDY ALLOCATE ERROR\n");
+  13:src/kernel/kernel_test.cpp ****     kprintString("\n");
+  82              		.loc 1 13 5
+  83              		.loc 1 13 17 is_stmt 0
+  84 00b4 17050000 		lla	a0,.LC3
+  84      13050500 
+  85 00bc 97000000 		call	_Z12kprintStringPKc
+  85      E7800000 
+  86              	.LVL12:
+GAS LISTING /tmp/ccIFPgNv.s 			page 3
+
+
+  14:src/kernel/kernel_test.cpp ****     
+  15:src/kernel/kernel_test.cpp ****     if(a) Buddy::getInstance().status_print();
+  87              		.loc 1 15 5 is_stmt 1
+  88 00c4 63120904 		bne	s2,zero,.L6
+  89              	.L3:
+  16:src/kernel/kernel_test.cpp ****     kprintString("\n");
+  90              		.loc 1 16 5
+  91              		.loc 1 16 17 is_stmt 0
+  92 00c8 17050000 		lla	a0,.LC3
+  92      13050500 
+  93 00d0 97000000 		call	_Z12kprintStringPKc
+  93      E7800000 
+  94              	.LVL13:
+  17:src/kernel/kernel_test.cpp ****     return ret;
+  95              		.loc 1 17 5 is_stmt 1
+  18:src/kernel/kernel_test.cpp **** }
+  96              		.loc 1 18 1 is_stmt 0
+  97 00d8 13850400 		mv	a0,s1
+  98 00dc 83308101 		ld	ra,24(sp)
+  99              		.cfi_remember_state
+ 100              		.cfi_restore 1
+ 101 00e0 03340101 		ld	s0,16(sp)
+ 102              		.cfi_restore 8
+ 103              		.cfi_def_cfa 2, 32
+ 104 00e4 83348100 		ld	s1,8(sp)
+ 105              		.cfi_restore 9
+ 106              	.LVL14:
+ 107 00e8 03390100 		ld	s2,0(sp)
+ 108              		.cfi_restore 18
+ 109 00ec 13010102 		addi	sp,sp,32
+ 110              		.cfi_def_cfa_offset 0
+ 111 00f0 67800000 		jr	ra
+ 112              	.LVL15:
+ 113              	.L5:
+ 114              		.cfi_restore_state
+  12:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 115              		.loc 1 12 9 is_stmt 1
+  12:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 116              		.loc 1 12 21 is_stmt 0
+ 117 00f4 17050000 		lla	a0,.LC4
+ 117      13050500 
+ 118 00fc 97000000 		call	_Z12kprintStringPKc
+ 118      E7800000 
+ 119              	.LVL16:
+ 120 0104 6FF01FFB 		j	.L2
+ 121              	.L6:
+  15:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 122              		.loc 1 15 11 is_stmt 1 discriminator 1
+  15:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 123              		.loc 1 15 30 is_stmt 0 discriminator 1
+ 124 0108 97000000 		call	_ZN5Buddy11getInstanceEv
+ 124      E7800000 
+ 125              	.LVL17:
+  15:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 126              		.loc 1 15 44 discriminator 1
+ 127 0110 93051000 		li	a1,1
+ 128 0114 97000000 		call	_ZN5Buddy12status_printEb
+GAS LISTING /tmp/ccIFPgNv.s 			page 4
+
+
+ 128      E7800000 
+ 129              	.LVL18:
+ 130 011c 6FF0DFFA 		j	.L3
+ 131              		.cfi_endproc
+ 132              	.LFE98:
+ 134              		.align	2
+ 135              		.globl	_Z21buddy_deallocate_testPvb
+ 137              	_Z21buddy_deallocate_testPvb:
+ 138              	.LFB99:
+  19:src/kernel/kernel_test.cpp **** 
+  20:src/kernel/kernel_test.cpp **** int buddy_deallocate_test(void* s, bool a = false){
+ 139              		.loc 1 20 51 is_stmt 1
+ 140              		.cfi_startproc
+ 141              	.LVL19:
+ 142 0120 130101FE 		addi	sp,sp,-32
+ 143              		.cfi_def_cfa_offset 32
+ 144 0124 233C1100 		sd	ra,24(sp)
+ 145 0128 23388100 		sd	s0,16(sp)
+ 146 012c 23349100 		sd	s1,8(sp)
+ 147 0130 23302101 		sd	s2,0(sp)
+ 148              		.cfi_offset 1, -8
+ 149              		.cfi_offset 8, -16
+ 150              		.cfi_offset 9, -24
+ 151              		.cfi_offset 18, -32
+ 152 0134 13040102 		addi	s0,sp,32
+ 153              		.cfi_def_cfa 8, 0
+ 154 0138 93040500 		mv	s1,a0
+ 155 013c 13890500 		mv	s2,a1
+  21:src/kernel/kernel_test.cpp ****     kprintString("Buddy deallocate block on address: ");
+ 156              		.loc 1 21 5
+ 157              		.loc 1 21 17 is_stmt 0
+ 158 0140 17050000 		lla	a0,.LC5
+ 158      13050500 
+ 159              	.LVL20:
+ 160 0148 97000000 		call	_Z12kprintStringPKc
+ 160      E7800000 
+ 161              	.LVL21:
+  22:src/kernel/kernel_test.cpp ****     kprintInt((uint64)s, 16);
+ 162              		.loc 1 22 5 is_stmt 1
+ 163              		.loc 1 22 14 is_stmt 0
+ 164 0150 13060000 		li	a2,0
+ 165 0154 93050001 		li	a1,16
+ 166 0158 13850400 		mv	a0,s1
+ 167 015c 97000000 		call	_Z9kprintIntmib
+ 167      E7800000 
+ 168              	.LVL22:
+  23:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 169              		.loc 1 23 5 is_stmt 1
+ 170              		.loc 1 23 17 is_stmt 0
+ 171 0164 17050000 		lla	a0,.LC3
+ 171      13050500 
+ 172 016c 97000000 		call	_Z12kprintStringPKc
+ 172      E7800000 
+ 173              	.LVL23:
+  24:src/kernel/kernel_test.cpp ****     int ret = Buddy::getInstance().mem_free(s);
+ 174              		.loc 1 24 5 is_stmt 1
+ 175              		.loc 1 24 34 is_stmt 0
+GAS LISTING /tmp/ccIFPgNv.s 			page 5
+
+
+ 176 0174 97000000 		call	_ZN5Buddy11getInstanceEv
+ 176      E7800000 
+ 177              	.LVL24:
+ 178              		.loc 1 24 44
+ 179 017c 93850400 		mv	a1,s1
+ 180 0180 97000000 		call	_ZN5Buddy8mem_freeEPv
+ 180      E7800000 
+ 181              	.LVL25:
+ 182 0188 93040500 		mv	s1,a0
+ 183              	.LVL26:
+  25:src/kernel/kernel_test.cpp ****     if(ret < 0){
+ 184              		.loc 1 25 5 is_stmt 1
+ 185 018c 63420504 		blt	a0,zero,.L11
+ 186              	.LVL27:
+ 187              	.L8:
+  26:src/kernel/kernel_test.cpp ****         kprintString("BUDDY DEALLOCATE ERROR:");
+  27:src/kernel/kernel_test.cpp ****         kprintInt((uint64)ret, 10, true);
+  28:src/kernel/kernel_test.cpp ****         kprintString("\n");
+  29:src/kernel/kernel_test.cpp ****     }
+  30:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 188              		.loc 1 30 5
+ 189              		.loc 1 30 17 is_stmt 0
+ 190 0190 17050000 		lla	a0,.LC3
+ 190      13050500 
+ 191 0198 97000000 		call	_Z12kprintStringPKc
+ 191      E7800000 
+ 192              	.LVL28:
+  31:src/kernel/kernel_test.cpp ****     if(a) Buddy::getInstance().status_print();
+ 193              		.loc 1 31 5 is_stmt 1
+ 194 01a0 63140906 		bne	s2,zero,.L12
+ 195              	.L9:
+  32:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 196              		.loc 1 32 5
+ 197              		.loc 1 32 17 is_stmt 0
+ 198 01a4 17050000 		lla	a0,.LC3
+ 198      13050500 
+ 199 01ac 97000000 		call	_Z12kprintStringPKc
+ 199      E7800000 
+ 200              	.LVL29:
+  33:src/kernel/kernel_test.cpp ****     return ret;
+ 201              		.loc 1 33 5 is_stmt 1
+  34:src/kernel/kernel_test.cpp **** }
+ 202              		.loc 1 34 1 is_stmt 0
+ 203 01b4 13850400 		mv	a0,s1
+ 204 01b8 83308101 		ld	ra,24(sp)
+ 205              		.cfi_remember_state
+ 206              		.cfi_restore 1
+ 207 01bc 03340101 		ld	s0,16(sp)
+ 208              		.cfi_restore 8
+ 209              		.cfi_def_cfa 2, 32
+ 210 01c0 83348100 		ld	s1,8(sp)
+ 211              		.cfi_restore 9
+ 212 01c4 03390100 		ld	s2,0(sp)
+ 213              		.cfi_restore 18
+ 214 01c8 13010102 		addi	sp,sp,32
+ 215              		.cfi_def_cfa_offset 0
+ 216 01cc 67800000 		jr	ra
+GAS LISTING /tmp/ccIFPgNv.s 			page 6
+
+
+ 217              	.LVL30:
+ 218              	.L11:
+ 219              		.cfi_restore_state
+  26:src/kernel/kernel_test.cpp ****         kprintInt((uint64)ret, 10, true);
+ 220              		.loc 1 26 9 is_stmt 1
+  26:src/kernel/kernel_test.cpp ****         kprintInt((uint64)ret, 10, true);
+ 221              		.loc 1 26 21 is_stmt 0
+ 222 01d0 17050000 		lla	a0,.LC6
+ 222      13050500 
+ 223              	.LVL31:
+ 224 01d8 97000000 		call	_Z12kprintStringPKc
+ 224      E7800000 
+ 225              	.LVL32:
+  27:src/kernel/kernel_test.cpp ****         kprintString("\n");
+ 226              		.loc 1 27 9 is_stmt 1
+  27:src/kernel/kernel_test.cpp ****         kprintString("\n");
+ 227              		.loc 1 27 18 is_stmt 0
+ 228 01e0 13061000 		li	a2,1
+ 229 01e4 9305A000 		li	a1,10
+ 230 01e8 13850400 		mv	a0,s1
+ 231 01ec 97000000 		call	_Z9kprintIntmib
+ 231      E7800000 
+ 232              	.LVL33:
+  28:src/kernel/kernel_test.cpp ****     }
+ 233              		.loc 1 28 9 is_stmt 1
+  28:src/kernel/kernel_test.cpp ****     }
+ 234              		.loc 1 28 21 is_stmt 0
+ 235 01f4 17050000 		lla	a0,.LC3
+ 235      13050500 
+ 236 01fc 97000000 		call	_Z12kprintStringPKc
+ 236      E7800000 
+ 237              	.LVL34:
+ 238 0204 6FF0DFF8 		j	.L8
+ 239              	.L12:
+  31:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 240              		.loc 1 31 11 is_stmt 1 discriminator 1
+  31:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 241              		.loc 1 31 30 is_stmt 0 discriminator 1
+ 242 0208 97000000 		call	_ZN5Buddy11getInstanceEv
+ 242      E7800000 
+ 243              	.LVL35:
+  31:src/kernel/kernel_test.cpp ****     kprintString("\n");
+ 244              		.loc 1 31 44 discriminator 1
+ 245 0210 93051000 		li	a1,1
+ 246 0214 97000000 		call	_ZN5Buddy12status_printEb
+ 246      E7800000 
+ 247              	.LVL36:
+ 248 021c 6FF09FF8 		j	.L9
+ 249              		.cfi_endproc
+ 250              	.LFE99:
+ 252              		.align	2
+ 253              		.globl	_Z10buddy_testv
+ 255              	_Z10buddy_testv:
+ 256              	.LFB100:
+  35:src/kernel/kernel_test.cpp **** 
+  36:src/kernel/kernel_test.cpp **** void buddy_test(){
+ 257              		.loc 1 36 18 is_stmt 1
+GAS LISTING /tmp/ccIFPgNv.s 			page 7
+
+
+ 258              		.cfi_startproc
+ 259 0220 130101FC 		addi	sp,sp,-64
+ 260              		.cfi_def_cfa_offset 64
+ 261 0224 233C1102 		sd	ra,56(sp)
+ 262 0228 23388102 		sd	s0,48(sp)
+ 263 022c 23349102 		sd	s1,40(sp)
+ 264 0230 23302103 		sd	s2,32(sp)
+ 265 0234 233C3101 		sd	s3,24(sp)
+ 266 0238 23384101 		sd	s4,16(sp)
+ 267 023c 23345101 		sd	s5,8(sp)
+ 268 0240 23306101 		sd	s6,0(sp)
+ 269              		.cfi_offset 1, -8
+ 270              		.cfi_offset 8, -16
+ 271              		.cfi_offset 9, -24
+ 272              		.cfi_offset 18, -32
+ 273              		.cfi_offset 19, -40
+ 274              		.cfi_offset 20, -48
+ 275              		.cfi_offset 21, -56
+ 276              		.cfi_offset 22, -64
+ 277 0244 13040104 		addi	s0,sp,64
+ 278              		.cfi_def_cfa 8, 0
+  37:src/kernel/kernel_test.cpp ****     void* t = buddy_allocate_test(128);
+ 279              		.loc 1 37 5
+ 280              		.loc 1 37 34 is_stmt 0
+ 281 0248 93050000 		li	a1,0
+ 282 024c 13050008 		li	a0,128
+ 283 0250 97000000 		call	_Z19buddy_allocate_testmb
+ 283      E7800000 
+ 284              	.LVL37:
+ 285 0258 130B0500 		mv	s6,a0
+ 286              	.LVL38:
+  38:src/kernel/kernel_test.cpp ****     buddy_allocate_test(25);
+ 287              		.loc 1 38 5 is_stmt 1
+ 288              		.loc 1 38 24 is_stmt 0
+ 289 025c 93050000 		li	a1,0
+ 290 0260 13059001 		li	a0,25
+ 291              	.LVL39:
+ 292 0264 97000000 		call	_Z19buddy_allocate_testmb
+ 292      E7800000 
+ 293              	.LVL40:
+  39:src/kernel/kernel_test.cpp ****     void* t1 = buddy_allocate_test(64);
+ 294              		.loc 1 39 5 is_stmt 1
+ 295              		.loc 1 39 35 is_stmt 0
+ 296 026c 93050000 		li	a1,0
+ 297 0270 13050004 		li	a0,64
+ 298 0274 97000000 		call	_Z19buddy_allocate_testmb
+ 298      E7800000 
+ 299              	.LVL41:
+ 300 027c 13090500 		mv	s2,a0
+ 301              	.LVL42:
+  40:src/kernel/kernel_test.cpp ****     void* t2 = buddy_allocate_test(1);
+ 302              		.loc 1 40 5 is_stmt 1
+ 303              		.loc 1 40 35 is_stmt 0
+ 304 0280 93050000 		li	a1,0
+ 305 0284 13051000 		li	a0,1
+ 306              	.LVL43:
+ 307 0288 97000000 		call	_Z19buddy_allocate_testmb
+GAS LISTING /tmp/ccIFPgNv.s 			page 8
+
+
+ 307      E7800000 
+ 308              	.LVL44:
+ 309 0290 930A0500 		mv	s5,a0
+ 310              	.LVL45:
+  41:src/kernel/kernel_test.cpp ****     void* t2_bud = buddy_allocate_test(1);
+ 311              		.loc 1 41 5 is_stmt 1
+ 312              		.loc 1 41 39 is_stmt 0
+ 313 0294 93050000 		li	a1,0
+ 314 0298 13051000 		li	a0,1
+ 315              	.LVL46:
+ 316 029c 97000000 		call	_Z19buddy_allocate_testmb
+ 316      E7800000 
+ 317              	.LVL47:
+ 318 02a4 93040500 		mv	s1,a0
+ 319              	.LVL48:
+  42:src/kernel/kernel_test.cpp ****     void* t3 = buddy_allocate_test(1);
+ 320              		.loc 1 42 5 is_stmt 1
+ 321              		.loc 1 42 35 is_stmt 0
+ 322 02a8 93050000 		li	a1,0
+ 323 02ac 13051000 		li	a0,1
+ 324 02b0 97000000 		call	_Z19buddy_allocate_testmb
+ 324      E7800000 
+ 325              	.LVL49:
+ 326 02b8 130A0500 		mv	s4,a0
+ 327              	.LVL50:
+  43:src/kernel/kernel_test.cpp ****     void* t3_bud = buddy_allocate_test(1, true);
+ 328              		.loc 1 43 5 is_stmt 1
+ 329              		.loc 1 43 39 is_stmt 0
+ 330 02bc 93051000 		li	a1,1
+ 331 02c0 13051000 		li	a0,1
+ 332              	.LVL51:
+ 333 02c4 97000000 		call	_Z19buddy_allocate_testmb
+ 333      E7800000 
+ 334              	.LVL52:
+ 335 02cc 93090500 		mv	s3,a0
+ 336              	.LVL53:
+  44:src/kernel/kernel_test.cpp ****     /* deallocate dont have buddy */
+  45:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t);
+ 337              		.loc 1 45 5 is_stmt 1
+ 338              		.loc 1 45 26 is_stmt 0
+ 339 02d0 93050000 		li	a1,0
+ 340 02d4 13050B00 		mv	a0,s6
+ 341              	.LVL54:
+ 342 02d8 97000000 		call	_Z21buddy_deallocate_testPvb
+ 342      E7800000 
+ 343              	.LVL55:
+  46:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(nullptr);
+ 344              		.loc 1 46 5 is_stmt 1
+ 345              		.loc 1 46 26 is_stmt 0
+ 346 02e0 93050000 		li	a1,0
+ 347 02e4 13050000 		li	a0,0
+ 348 02e8 97000000 		call	_Z21buddy_deallocate_testPvb
+ 348      E7800000 
+ 349              	.LVL56:
+  47:src/kernel/kernel_test.cpp ****     /* merge not-all */
+  48:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t2,true);
+ 350              		.loc 1 48 5 is_stmt 1
+GAS LISTING /tmp/ccIFPgNv.s 			page 9
+
+
+ 351              		.loc 1 48 26 is_stmt 0
+ 352 02f0 93051000 		li	a1,1
+ 353 02f4 13850A00 		mv	a0,s5
+ 354 02f8 97000000 		call	_Z21buddy_deallocate_testPvb
+ 354      E7800000 
+ 355              	.LVL57:
+  49:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t3,true);
+ 356              		.loc 1 49 5 is_stmt 1
+ 357              		.loc 1 49 26 is_stmt 0
+ 358 0300 93051000 		li	a1,1
+ 359 0304 13050A00 		mv	a0,s4
+ 360 0308 97000000 		call	_Z21buddy_deallocate_testPvb
+ 360      E7800000 
+ 361              	.LVL58:
+  50:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t3_bud,true);
+ 362              		.loc 1 50 5 is_stmt 1
+ 363              		.loc 1 50 26 is_stmt 0
+ 364 0310 93051000 		li	a1,1
+ 365 0314 13850900 		mv	a0,s3
+ 366 0318 97000000 		call	_Z21buddy_deallocate_testPvb
+ 366      E7800000 
+ 367              	.LVL59:
+  51:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t2_bud,true);
+ 368              		.loc 1 51 5 is_stmt 1
+ 369              		.loc 1 51 26 is_stmt 0
+ 370 0320 93051000 		li	a1,1
+ 371 0324 13850400 		mv	a0,s1
+ 372 0328 97000000 		call	_Z21buddy_deallocate_testPvb
+ 372      E7800000 
+ 373              	.LVL60:
+  52:src/kernel/kernel_test.cpp ****     /* merge all (deallocate has buddy) */
+  53:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t1, true);
+ 374              		.loc 1 53 5 is_stmt 1
+ 375              		.loc 1 53 26 is_stmt 0
+ 376 0330 93051000 		li	a1,1
+ 377 0334 13050900 		mv	a0,s2
+ 378 0338 97000000 		call	_Z21buddy_deallocate_testPvb
+ 378      E7800000 
+ 379              	.LVL61:
+  54:src/kernel/kernel_test.cpp ****     /* allocate all memory */
+  55:src/kernel/kernel_test.cpp ****     t = buddy_allocate_test(4096);
+ 380              		.loc 1 55 5 is_stmt 1
+ 381              		.loc 1 55 28 is_stmt 0
+ 382 0340 93050000 		li	a1,0
+ 383 0344 37150000 		li	a0,4096
+ 384 0348 97000000 		call	_Z19buddy_allocate_testmb
+ 384      E7800000 
+ 385              	.LVL62:
+ 386 0350 93040500 		mv	s1,a0
+ 387              	.LVL63:
+  56:src/kernel/kernel_test.cpp ****     /* deallocate sub-block */
+  57:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t1);
+ 388              		.loc 1 57 5 is_stmt 1
+ 389              		.loc 1 57 26 is_stmt 0
+ 390 0354 93050000 		li	a1,0
+ 391 0358 13050900 		mv	a0,s2
+ 392 035c 97000000 		call	_Z21buddy_deallocate_testPvb
+GAS LISTING /tmp/ccIFPgNv.s 			page 10
+
+
+ 392      E7800000 
+ 393              	.LVL64:
+  58:src/kernel/kernel_test.cpp ****     /* try allocation if all memory is allocated */
+  59:src/kernel/kernel_test.cpp ****     buddy_allocate_test(128);
+ 394              		.loc 1 59 5 is_stmt 1
+ 395              		.loc 1 59 24 is_stmt 0
+ 396 0364 93050000 		li	a1,0
+ 397 0368 13050008 		li	a0,128
+ 398 036c 97000000 		call	_Z19buddy_allocate_testmb
+ 398      E7800000 
+ 399              	.LVL65:
+  60:src/kernel/kernel_test.cpp ****     /* deallocate all memory */
+  61:src/kernel/kernel_test.cpp ****     buddy_deallocate_test(t);
+ 400              		.loc 1 61 5 is_stmt 1
+ 401              		.loc 1 61 26 is_stmt 0
+ 402 0374 93050000 		li	a1,0
+ 403 0378 13850400 		mv	a0,s1
+ 404 037c 97000000 		call	_Z21buddy_deallocate_testPvb
+ 404      E7800000 
+ 405              	.LVL66:
+  62:src/kernel/kernel_test.cpp ****     /* deallocate memory not in range */
+  63:src/kernel/kernel_test.cpp ****     buddy_deallocate_test((void*)((uint64)t + (Buddy::BLOCK_SIZE<<13)));
+ 406              		.loc 1 63 5 is_stmt 1
+ 407              		.loc 1 63 26 is_stmt 0
+ 408 0384 93050000 		li	a1,0
+ 409 0388 37050002 		li	a0,33554432
+ 410 038c 3385A400 		add	a0,s1,a0
+ 411 0390 97000000 		call	_Z21buddy_deallocate_testPvb
+ 411      E7800000 
+ 412              	.LVL67:
+  64:src/kernel/kernel_test.cpp ****     /* allocate memory not in range */
+  65:src/kernel/kernel_test.cpp ****     buddy_allocate_test(8192, true);
+ 413              		.loc 1 65 5 is_stmt 1
+ 414              		.loc 1 65 24 is_stmt 0
+ 415 0398 93051000 		li	a1,1
+ 416 039c 37250000 		li	a0,8192
+ 417 03a0 97000000 		call	_Z19buddy_allocate_testmb
+ 417      E7800000 
+ 418              	.LVL68:
+  66:src/kernel/kernel_test.cpp **** 
+  67:src/kernel/kernel_test.cpp **** 
+  68:src/kernel/kernel_test.cpp **** }...
+ 419              		.loc 1 68 1
+ 420 03a8 83308103 		ld	ra,56(sp)
+ 421              		.cfi_restore 1
+ 422 03ac 03340103 		ld	s0,48(sp)
+ 423              		.cfi_restore 8
+ 424              		.cfi_def_cfa 2, 64
+ 425 03b0 83348102 		ld	s1,40(sp)
+ 426              		.cfi_restore 9
+ 427              	.LVL69:
+ 428 03b4 03390102 		ld	s2,32(sp)
+ 429              		.cfi_restore 18
+ 430              	.LVL70:
+ 431 03b8 83398101 		ld	s3,24(sp)
+ 432              		.cfi_restore 19
+ 433              	.LVL71:
+GAS LISTING /tmp/ccIFPgNv.s 			page 11
+
+
+ 434 03bc 033A0101 		ld	s4,16(sp)
+ 435              		.cfi_restore 20
+ 436              	.LVL72:
+ 437 03c0 833A8100 		ld	s5,8(sp)
+ 438              		.cfi_restore 21
+ 439              	.LVL73:
+ 440 03c4 033B0100 		ld	s6,0(sp)
+ 441              		.cfi_restore 22
+ 442 03c8 13010104 		addi	sp,sp,64
+ 443              		.cfi_def_cfa_offset 0
+ 444 03cc 67800000 		jr	ra
+ 445              		.cfi_endproc
+ 446              	.LFE100:
+ 448              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 449              		.align	3
+ 450              	.LC0:
+ 451 0000 42756464 		.string	"Buddy allocate: "
+ 451      7920616C 
+ 451      6C6F6361 
+ 451      74653A20 
+ 451      00
+ 452 0011 00000000 		.zero	7
+ 452      000000
+ 453              	.LC1:
+ 454 0018 20626C6F 		.string	" blocks\n"
+ 454      636B730A 
+ 454      00
+ 455 0021 00000000 		.zero	7
+ 455      000000
+ 456              	.LC2:
+ 457 0028 52657475 		.string	"Returned address: "
+ 457      726E6564 
+ 457      20616464 
+ 457      72657373 
+ 457      3A2000
+ 458 003b 00000000 		.zero	5
+ 458      00
+ 459              	.LC3:
+ 460 0040 0A00     		.string	"\n"
+ 461 0042 00000000 		.zero	6
+ 461      0000
+ 462              	.LC4:
+ 463 0048 42554444 		.string	"BUDDY ALLOCATE ERROR\n"
+ 463      5920414C 
+ 463      4C4F4341 
+ 463      54452045 
+ 463      52524F52 
+ 464 005e 0000     		.zero	2
+ 465              	.LC5:
+ 466 0060 42756464 		.string	"Buddy deallocate block on address: "
+ 466      79206465 
+ 466      616C6C6F 
+ 466      63617465 
+ 466      20626C6F 
+ 467 0084 00000000 		.zero	4
+ 468              	.LC6:
+ 469 0088 42554444 		.string	"BUDDY DEALLOCATE ERROR:"
+GAS LISTING /tmp/ccIFPgNv.s 			page 12
+
+
+ 469      59204445 
+ 469      414C4C4F 
+ 469      43415445 
+ 469      20455252 
+ 470              		.text
+ 471              	.Letext0:
+ 472              		.file 2 "src/kernel/../../h/../h/../lib/hw.h"
+ 473              		.file 3 "src/kernel/../../h/../h/pmt.h"
+ 474              		.file 4 "src/kernel/../../h/../h/buddy.h"
+ 475              		.file 5 "src/kernel/../../h/kernel_lib.h"
+ 476              		.file 6 "src/kernel/../../h/../h/kernel_funs.h"
+GAS LISTING /tmp/ccIFPgNv.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 kernel_test.cpp
+     /tmp/ccIFPgNv.s:12     .text:0000000000000000 _Z19buddy_allocate_testmb
+     /tmp/ccIFPgNv.s:16     .text:0000000000000000 .L0 
+     /tmp/ccIFPgNv.s:18     .text:0000000000000000 .L0 
+     /tmp/ccIFPgNv.s:19     .text:0000000000000004 .L0 
+     /tmp/ccIFPgNv.s:24     .text:0000000000000014 .L0 
+     /tmp/ccIFPgNv.s:25     .text:0000000000000014 .L0 
+     /tmp/ccIFPgNv.s:26     .text:0000000000000014 .L0 
+     /tmp/ccIFPgNv.s:27     .text:0000000000000014 .L0 
+     /tmp/ccIFPgNv.s:29     .text:0000000000000018 .L0 
+     /tmp/ccIFPgNv.s:33     .text:0000000000000020 .L0 
+     /tmp/ccIFPgNv.s:34     .text:0000000000000020 .L0 
+     /tmp/ccIFPgNv.s:39     .text:0000000000000030 .L0 
+     /tmp/ccIFPgNv.s:40     .text:0000000000000030 .L0 
+     /tmp/ccIFPgNv.s:46     .text:0000000000000044 .L0 
+     /tmp/ccIFPgNv.s:47     .text:0000000000000044 .L0 
+     /tmp/ccIFPgNv.s:51     .text:0000000000000054 .L0 
+     /tmp/ccIFPgNv.s:52     .text:0000000000000054 .L0 
+     /tmp/ccIFPgNv.s:55     .text:000000000000005c .L0 
+     /tmp/ccIFPgNv.s:61     .text:000000000000006c .L0 
+     /tmp/ccIFPgNv.s:65     .text:000000000000007c .L0 
+     /tmp/ccIFPgNv.s:71     .text:0000000000000090 .L0 
+     /tmp/ccIFPgNv.s:75     .text:00000000000000a0 .L0 
+     /tmp/ccIFPgNv.s:76     .text:00000000000000a0 .L0 
+     /tmp/ccIFPgNv.s:80     .text:00000000000000b0 .L0 
+     /tmp/ccIFPgNv.s:83     .text:00000000000000b4 .L0 
+     /tmp/ccIFPgNv.s:84     .text:00000000000000b4 .L0 
+     /tmp/ccIFPgNv.s:88     .text:00000000000000c4 .L0 
+     /tmp/ccIFPgNv.s:91     .text:00000000000000c8 .L0 
+     /tmp/ccIFPgNv.s:92     .text:00000000000000c8 .L0 
+     /tmp/ccIFPgNv.s:96     .text:00000000000000d8 .L0 
+     /tmp/ccIFPgNv.s:97     .text:00000000000000d8 .L0 
+     /tmp/ccIFPgNv.s:99     .text:00000000000000e0 .L0 
+     /tmp/ccIFPgNv.s:100    .text:00000000000000e0 .L0 
+     /tmp/ccIFPgNv.s:102    .text:00000000000000e4 .L0 
+     /tmp/ccIFPgNv.s:103    .text:00000000000000e4 .L0 
+     /tmp/ccIFPgNv.s:105    .text:00000000000000e8 .L0 
+     /tmp/ccIFPgNv.s:108    .text:00000000000000ec .L0 
+     /tmp/ccIFPgNv.s:110    .text:00000000000000f0 .L0 
+     /tmp/ccIFPgNv.s:114    .text:00000000000000f4 .L0 
+     /tmp/ccIFPgNv.s:116    .text:00000000000000f4 .L0 
+     /tmp/ccIFPgNv.s:117    .text:00000000000000f4 .L0 
+     /tmp/ccIFPgNv.s:123    .text:0000000000000108 .L0 
+     /tmp/ccIFPgNv.s:124    .text:0000000000000108 .L0 
+     /tmp/ccIFPgNv.s:127    .text:0000000000000110 .L0 
+     /tmp/ccIFPgNv.s:131    .text:0000000000000120 .L0 
+     /tmp/ccIFPgNv.s:137    .text:0000000000000120 _Z21buddy_deallocate_testPvb
+     /tmp/ccIFPgNv.s:140    .text:0000000000000120 .L0 
+     /tmp/ccIFPgNv.s:142    .text:0000000000000120 .L0 
+     /tmp/ccIFPgNv.s:143    .text:0000000000000124 .L0 
+     /tmp/ccIFPgNv.s:148    .text:0000000000000134 .L0 
+     /tmp/ccIFPgNv.s:149    .text:0000000000000134 .L0 
+     /tmp/ccIFPgNv.s:150    .text:0000000000000134 .L0 
+     /tmp/ccIFPgNv.s:151    .text:0000000000000134 .L0 
+     /tmp/ccIFPgNv.s:153    .text:0000000000000138 .L0 
+     /tmp/ccIFPgNv.s:157    .text:0000000000000140 .L0 
+GAS LISTING /tmp/ccIFPgNv.s 			page 14
+
+
+     /tmp/ccIFPgNv.s:158    .text:0000000000000140 .L0 
+     /tmp/ccIFPgNv.s:163    .text:0000000000000150 .L0 
+     /tmp/ccIFPgNv.s:164    .text:0000000000000150 .L0 
+     /tmp/ccIFPgNv.s:170    .text:0000000000000164 .L0 
+     /tmp/ccIFPgNv.s:171    .text:0000000000000164 .L0 
+     /tmp/ccIFPgNv.s:175    .text:0000000000000174 .L0 
+     /tmp/ccIFPgNv.s:176    .text:0000000000000174 .L0 
+     /tmp/ccIFPgNv.s:179    .text:000000000000017c .L0 
+     /tmp/ccIFPgNv.s:185    .text:000000000000018c .L0 
+     /tmp/ccIFPgNv.s:189    .text:0000000000000190 .L0 
+     /tmp/ccIFPgNv.s:190    .text:0000000000000190 .L0 
+     /tmp/ccIFPgNv.s:194    .text:00000000000001a0 .L0 
+     /tmp/ccIFPgNv.s:197    .text:00000000000001a4 .L0 
+     /tmp/ccIFPgNv.s:198    .text:00000000000001a4 .L0 
+     /tmp/ccIFPgNv.s:202    .text:00000000000001b4 .L0 
+     /tmp/ccIFPgNv.s:203    .text:00000000000001b4 .L0 
+     /tmp/ccIFPgNv.s:205    .text:00000000000001bc .L0 
+     /tmp/ccIFPgNv.s:206    .text:00000000000001bc .L0 
+     /tmp/ccIFPgNv.s:208    .text:00000000000001c0 .L0 
+     /tmp/ccIFPgNv.s:209    .text:00000000000001c0 .L0 
+     /tmp/ccIFPgNv.s:211    .text:00000000000001c4 .L0 
+     /tmp/ccIFPgNv.s:213    .text:00000000000001c8 .L0 
+     /tmp/ccIFPgNv.s:215    .text:00000000000001cc .L0 
+     /tmp/ccIFPgNv.s:219    .text:00000000000001d0 .L0 
+     /tmp/ccIFPgNv.s:221    .text:00000000000001d0 .L0 
+     /tmp/ccIFPgNv.s:222    .text:00000000000001d0 .L0 
+     /tmp/ccIFPgNv.s:227    .text:00000000000001e0 .L0 
+     /tmp/ccIFPgNv.s:228    .text:00000000000001e0 .L0 
+     /tmp/ccIFPgNv.s:234    .text:00000000000001f4 .L0 
+     /tmp/ccIFPgNv.s:235    .text:00000000000001f4 .L0 
+     /tmp/ccIFPgNv.s:241    .text:0000000000000208 .L0 
+     /tmp/ccIFPgNv.s:242    .text:0000000000000208 .L0 
+     /tmp/ccIFPgNv.s:245    .text:0000000000000210 .L0 
+     /tmp/ccIFPgNv.s:249    .text:0000000000000220 .L0 
+     /tmp/ccIFPgNv.s:255    .text:0000000000000220 _Z10buddy_testv
+     /tmp/ccIFPgNv.s:258    .text:0000000000000220 .L0 
+     /tmp/ccIFPgNv.s:259    .text:0000000000000220 .L0 
+     /tmp/ccIFPgNv.s:260    .text:0000000000000224 .L0 
+     /tmp/ccIFPgNv.s:269    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:270    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:271    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:272    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:273    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:274    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:275    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:276    .text:0000000000000244 .L0 
+     /tmp/ccIFPgNv.s:278    .text:0000000000000248 .L0 
+     /tmp/ccIFPgNv.s:280    .text:0000000000000248 .L0 
+     /tmp/ccIFPgNv.s:281    .text:0000000000000248 .L0 
+     /tmp/ccIFPgNv.s:288    .text:000000000000025c .L0 
+     /tmp/ccIFPgNv.s:289    .text:000000000000025c .L0 
+     /tmp/ccIFPgNv.s:295    .text:000000000000026c .L0 
+     /tmp/ccIFPgNv.s:296    .text:000000000000026c .L0 
+     /tmp/ccIFPgNv.s:303    .text:0000000000000280 .L0 
+     /tmp/ccIFPgNv.s:304    .text:0000000000000280 .L0 
+     /tmp/ccIFPgNv.s:312    .text:0000000000000294 .L0 
+     /tmp/ccIFPgNv.s:313    .text:0000000000000294 .L0 
+GAS LISTING /tmp/ccIFPgNv.s 			page 15
+
+
+     /tmp/ccIFPgNv.s:321    .text:00000000000002a8 .L0 
+     /tmp/ccIFPgNv.s:322    .text:00000000000002a8 .L0 
+     /tmp/ccIFPgNv.s:329    .text:00000000000002bc .L0 
+     /tmp/ccIFPgNv.s:330    .text:00000000000002bc .L0 
+     /tmp/ccIFPgNv.s:338    .text:00000000000002d0 .L0 
+     /tmp/ccIFPgNv.s:339    .text:00000000000002d0 .L0 
+     /tmp/ccIFPgNv.s:345    .text:00000000000002e0 .L0 
+     /tmp/ccIFPgNv.s:346    .text:00000000000002e0 .L0 
+     /tmp/ccIFPgNv.s:351    .text:00000000000002f0 .L0 
+     /tmp/ccIFPgNv.s:352    .text:00000000000002f0 .L0 
+     /tmp/ccIFPgNv.s:357    .text:0000000000000300 .L0 
+     /tmp/ccIFPgNv.s:358    .text:0000000000000300 .L0 
+     /tmp/ccIFPgNv.s:363    .text:0000000000000310 .L0 
+     /tmp/ccIFPgNv.s:364    .text:0000000000000310 .L0 
+     /tmp/ccIFPgNv.s:369    .text:0000000000000320 .L0 
+     /tmp/ccIFPgNv.s:370    .text:0000000000000320 .L0 
+     /tmp/ccIFPgNv.s:375    .text:0000000000000330 .L0 
+     /tmp/ccIFPgNv.s:376    .text:0000000000000330 .L0 
+     /tmp/ccIFPgNv.s:381    .text:0000000000000340 .L0 
+     /tmp/ccIFPgNv.s:382    .text:0000000000000340 .L0 
+     /tmp/ccIFPgNv.s:389    .text:0000000000000354 .L0 
+     /tmp/ccIFPgNv.s:390    .text:0000000000000354 .L0 
+     /tmp/ccIFPgNv.s:395    .text:0000000000000364 .L0 
+     /tmp/ccIFPgNv.s:396    .text:0000000000000364 .L0 
+     /tmp/ccIFPgNv.s:401    .text:0000000000000374 .L0 
+     /tmp/ccIFPgNv.s:402    .text:0000000000000374 .L0 
+     /tmp/ccIFPgNv.s:407    .text:0000000000000384 .L0 
+     /tmp/ccIFPgNv.s:408    .text:0000000000000384 .L0 
+     /tmp/ccIFPgNv.s:414    .text:0000000000000398 .L0 
+     /tmp/ccIFPgNv.s:415    .text:0000000000000398 .L0 
+     /tmp/ccIFPgNv.s:420    .text:00000000000003a8 .L0 
+     /tmp/ccIFPgNv.s:421    .text:00000000000003ac .L0 
+     /tmp/ccIFPgNv.s:423    .text:00000000000003b0 .L0 
+     /tmp/ccIFPgNv.s:424    .text:00000000000003b0 .L0 
+     /tmp/ccIFPgNv.s:426    .text:00000000000003b4 .L0 
+     /tmp/ccIFPgNv.s:429    .text:00000000000003b8 .L0 
+     /tmp/ccIFPgNv.s:432    .text:00000000000003bc .L0 
+     /tmp/ccIFPgNv.s:435    .text:00000000000003c0 .L0 
+     /tmp/ccIFPgNv.s:438    .text:00000000000003c4 .L0 
+     /tmp/ccIFPgNv.s:441    .text:00000000000003c8 .L0 
+     /tmp/ccIFPgNv.s:443    .text:00000000000003cc .L0 
+     /tmp/ccIFPgNv.s:445    .text:00000000000003d0 .L0 
+     /tmp/ccIFPgNv.s:477    .text:00000000000003d0 .L0 
+     /tmp/ccIFPgNv.s:450    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccIFPgNv.s:34     .text:0000000000000020 .L0 
+     /tmp/ccIFPgNv.s:453    .rodata.str1.8:0000000000000018 .LC1
+     /tmp/ccIFPgNv.s:47     .text:0000000000000044 .L0 
+     /tmp/ccIFPgNv.s:456    .rodata.str1.8:0000000000000028 .LC2
+     /tmp/ccIFPgNv.s:61     .text:000000000000006c .L0 
+     /tmp/ccIFPgNv.s:459    .rodata.str1.8:0000000000000040 .LC3
+     /tmp/ccIFPgNv.s:71     .text:0000000000000090 .L0 
+     /tmp/ccIFPgNv.s:76     .text:00000000000000a0 .L0 
+     /tmp/ccIFPgNv.s:84     .text:00000000000000b4 .L0 
+     /tmp/ccIFPgNv.s:92     .text:00000000000000c8 .L0 
+     /tmp/ccIFPgNv.s:462    .rodata.str1.8:0000000000000048 .LC4
+     /tmp/ccIFPgNv.s:117    .text:00000000000000f4 .L0 
+     /tmp/ccIFPgNv.s:465    .rodata.str1.8:0000000000000060 .LC5
+GAS LISTING /tmp/ccIFPgNv.s 			page 16
+
+
+     /tmp/ccIFPgNv.s:158    .text:0000000000000140 .L0 
+     /tmp/ccIFPgNv.s:171    .text:0000000000000164 .L0 
+     /tmp/ccIFPgNv.s:190    .text:0000000000000190 .L0 
+     /tmp/ccIFPgNv.s:198    .text:00000000000001a4 .L0 
+     /tmp/ccIFPgNv.s:468    .rodata.str1.8:0000000000000088 .LC6
+     /tmp/ccIFPgNv.s:222    .text:00000000000001d0 .L0 
+     /tmp/ccIFPgNv.s:235    .text:00000000000001f4 .L0 
+     /tmp/ccIFPgNv.s:113    .text:00000000000000f4 .L5
+     /tmp/ccIFPgNv.s:121    .text:0000000000000108 .L6
+     /tmp/ccIFPgNv.s:81     .text:00000000000000b4 .L2
+     /tmp/ccIFPgNv.s:89     .text:00000000000000c8 .L3
+     /tmp/ccIFPgNv.s:218    .text:00000000000001d0 .L11
+     /tmp/ccIFPgNv.s:239    .text:0000000000000208 .L12
+     /tmp/ccIFPgNv.s:187    .text:0000000000000190 .L8
+     /tmp/ccIFPgNv.s:195    .text:00000000000001a4 .L9
+     /tmp/ccIFPgNv.s:1785   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccIFPgNv.s:2702   .debug_str:000000000000024a .LASF85
+     /tmp/ccIFPgNv.s:2676   .debug_str:00000000000001a6 .LASF86
+     /tmp/ccIFPgNv.s:2780   .debug_str:0000000000000588 .LASF87
+     /tmp/ccIFPgNv.s:8      .text:0000000000000000 .Ltext0
+     /tmp/ccIFPgNv.s:471    .text:00000000000003d0 .Letext0
+     /tmp/ccIFPgNv.s:2614   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccIFPgNv.s:2708   .debug_str:0000000000000323 .LASF0
+     /tmp/ccIFPgNv.s:2794   .debug_str:000000000000061a .LASF1
+     /tmp/ccIFPgNv.s:2688   .debug_str:0000000000000205 .LASF3
+     /tmp/ccIFPgNv.s:2698   .debug_str:0000000000000233 .LASF2
+     /tmp/ccIFPgNv.s:2656   .debug_str:0000000000000104 .LASF4
+     /tmp/ccIFPgNv.s:2744   .debug_str:000000000000046a .LASF5
+     /tmp/ccIFPgNv.s:2634   .debug_str:000000000000007e .LASF6
+     /tmp/ccIFPgNv.s:2724   .debug_str:00000000000003b3 .LASF7
+     /tmp/ccIFPgNv.s:2624   .debug_str:000000000000002d .LASF8
+     /tmp/ccIFPgNv.s:2776   .debug_str:0000000000000572 .LASF9
+     /tmp/ccIFPgNv.s:2672   .debug_str:0000000000000192 .LASF10
+     /tmp/ccIFPgNv.s:2638   .debug_str:000000000000008e .LASF11
+     /tmp/ccIFPgNv.s:2764   .debug_str:0000000000000513 .LASF12
+     /tmp/ccIFPgNv.s:2692   .debug_str:0000000000000214 .LASF13
+     /tmp/ccIFPgNv.s:2620   .debug_str:000000000000000f .LASF14
+     /tmp/ccIFPgNv.s:2644   .debug_str:00000000000000b3 .LASF15
+     /tmp/ccIFPgNv.s:2742   .debug_str:0000000000000454 .LASF16
+     /tmp/ccIFPgNv.s:2652   .debug_str:00000000000000e8 .LASF17
+     /tmp/ccIFPgNv.s:2664   .debug_str:000000000000014f .LASF18
+     /tmp/ccIFPgNv.s:2726   .debug_str:00000000000003c6 .LASF19
+     /tmp/ccIFPgNv.s:2766   .debug_str:0000000000000522 .LASF20
+     /tmp/ccIFPgNv.s:2696   .debug_str:000000000000022b .LASF88
+     /tmp/ccIFPgNv.s:2798   .debug_str:0000000000000643 .LASF21
+     /tmp/ccIFPgNv.s:2786   .debug_str:00000000000005ca .LASF22
+     /tmp/ccIFPgNv.s:2762   .debug_str:000000000000050d .LASF23
+     /tmp/ccIFPgNv.s:2654   .debug_str:00000000000000fe .LASF40
+     /tmp/ccIFPgNv.s:2678   .debug_str:00000000000001c1 .LASF89
+     /tmp/ccIFPgNv.s:2616   .debug_str:0000000000000000 .LASF24
+     /tmp/ccIFPgNv.s:2618   .debug_str:0000000000000005 .LASF25
+     /tmp/ccIFPgNv.s:2770   .debug_str:000000000000053d .LASF26
+     /tmp/ccIFPgNv.s:2674   .debug_str:00000000000001a0 .LASF27
+     /tmp/ccIFPgNv.s:2704   .debug_str:000000000000030e .LASF28
+     /tmp/ccIFPgNv.s:2740   .debug_str:000000000000044f .LASF29
+     /tmp/ccIFPgNv.s:2684   .debug_str:00000000000001e8 .LASF30
+     /tmp/ccIFPgNv.s:2706   .debug_str:000000000000031c .LASF31
+GAS LISTING /tmp/ccIFPgNv.s 			page 17
+
+
+     /tmp/ccIFPgNv.s:2784   .debug_str:00000000000005bd .LASF32
+     /tmp/ccIFPgNv.s:2792   .debug_str:000000000000060c .LASF34
+     /tmp/ccIFPgNv.s:2670   .debug_str:0000000000000182 .LASF33
+     /tmp/ccIFPgNv.s:2622   .debug_str:000000000000001f .LASF35
+     /tmp/ccIFPgNv.s:2750   .debug_str:000000000000049e .LASF36
+     /tmp/ccIFPgNv.s:2658   .debug_str:000000000000010b .LASF38
+     /tmp/ccIFPgNv.s:2752   .debug_str:00000000000004ae .LASF37
+     /tmp/ccIFPgNv.s:2682   .debug_str:00000000000001d9 .LASF39
+     /tmp/ccIFPgNv.s:2718   .debug_str:0000000000000388 .LASF41
+     /tmp/ccIFPgNv.s:2734   .debug_str:0000000000000415 .LASF42
+     /tmp/ccIFPgNv.s:2758   .debug_str:00000000000004e9 .LASF43
+     /tmp/ccIFPgNv.s:2768   .debug_str:0000000000000531 .LASF44
+     /tmp/ccIFPgNv.s:2736   .debug_str:0000000000000420 .LASF46
+     /tmp/ccIFPgNv.s:2646   .debug_str:00000000000000bf .LASF45
+     /tmp/ccIFPgNv.s:2788   .debug_str:00000000000005cf .LASF47
+     /tmp/ccIFPgNv.s:2754   .debug_str:00000000000004c1 .LASF48
+     /tmp/ccIFPgNv.s:2732   .debug_str:00000000000003f2 .LASF49
+     /tmp/ccIFPgNv.s:2648   .debug_str:00000000000000d0 .LASF50
+     /tmp/ccIFPgNv.s:2660   .debug_str:000000000000011a .LASF51
+     /tmp/ccIFPgNv.s:2778   .debug_str:0000000000000582 .LASF52
+     /tmp/ccIFPgNv.s:2668   .debug_str:0000000000000168 .LASF53
+     /tmp/ccIFPgNv.s:2700   .debug_str:0000000000000241 .LASF54
+     /tmp/ccIFPgNv.s:2716   .debug_str:0000000000000373 .LASF55
+     /tmp/ccIFPgNv.s:2690   .debug_str:000000000000020b .LASF56
+     /tmp/ccIFPgNv.s:2710   .debug_str:0000000000000330 .LASF57
+     /tmp/ccIFPgNv.s:2642   .debug_str:00000000000000a8 .LASF90
+     /tmp/ccIFPgNv.s:2650   .debug_str:00000000000000de .LASF58
+     /tmp/ccIFPgNv.s:2748   .debug_str:0000000000000486 .LASF59
+     /tmp/ccIFPgNv.s:2760   .debug_str:0000000000000501 .LASF91
+     /tmp/ccIFPgNv.s:2728   .debug_str:00000000000003cb .LASF92
+     /tmp/ccIFPgNv.s:2626   .debug_str:0000000000000040 .LASF60
+     /tmp/ccIFPgNv.s:2756   .debug_str:00000000000004cf .LASF61
+     /tmp/ccIFPgNv.s:2746   .debug_str:000000000000047c .LASF62
+     /tmp/ccIFPgNv.s:2790   .debug_str:00000000000005f6 .LASF63
+     /tmp/ccIFPgNv.s:2636   .debug_str:0000000000000085 .LASF64
+     /tmp/ccIFPgNv.s:2796   .debug_str:000000000000062d .LASF65
+     /tmp/ccIFPgNv.s:2632   .debug_str:0000000000000074 .LASF66
+     /tmp/ccIFPgNv.s:2782   .debug_str:00000000000005ab .LASF67
+     /tmp/ccIFPgNv.s:2720   .debug_str:0000000000000398 .LASF68
+     /tmp/ccIFPgNv.s:2774   .debug_str:0000000000000560 .LASF69
+     /tmp/ccIFPgNv.s:2712   .debug_str:000000000000034d .LASF70
+     /tmp/ccIFPgNv.s:2680   .debug_str:00000000000001c9 .LASF71
+     /tmp/ccIFPgNv.s:2730   .debug_str:00000000000003e4 .LASF72
+     /tmp/ccIFPgNv.s:2640   .debug_str:000000000000009d .LASF73
+     /tmp/ccIFPgNv.s:2722   .debug_str:00000000000003a3 .LASF74
+     /tmp/ccIFPgNv.s:256    .text:0000000000000220 .LFB100
+     /tmp/ccIFPgNv.s:446    .text:00000000000003d0 .LFE100
+     /tmp/ccIFPgNv.s:2445   .debug_loc:0000000000000000 .LLST6
+     /tmp/ccIFPgNv.s:2460   .debug_loc:0000000000000049 .LLST7
+     /tmp/ccIFPgNv.s:2471   .debug_loc:000000000000007f .LLST8
+     /tmp/ccIFPgNv.s:2694   .debug_str:0000000000000224 .LASF75
+     /tmp/ccIFPgNv.s:2482   .debug_loc:00000000000000b5 .LLST9
+     /tmp/ccIFPgNv.s:2489   .debug_loc:00000000000000d8 .LLST10
+     /tmp/ccIFPgNv.s:2800   .debug_str:0000000000000648 .LASF76
+     /tmp/ccIFPgNv.s:2500   .debug_loc:000000000000010e .LLST11
+     /tmp/ccIFPgNv.s:284    .text:0000000000000258 .LVL37
+     /tmp/ccIFPgNv.s:293    .text:000000000000026c .LVL40
+GAS LISTING /tmp/ccIFPgNv.s 			page 18
+
+
+     /tmp/ccIFPgNv.s:299    .text:000000000000027c .LVL41
+     /tmp/ccIFPgNv.s:308    .text:0000000000000290 .LVL44
+     /tmp/ccIFPgNv.s:317    .text:00000000000002a4 .LVL47
+     /tmp/ccIFPgNv.s:325    .text:00000000000002b8 .LVL49
+     /tmp/ccIFPgNv.s:334    .text:00000000000002cc .LVL52
+     /tmp/ccIFPgNv.s:343    .text:00000000000002e0 .LVL55
+     /tmp/ccIFPgNv.s:349    .text:00000000000002f0 .LVL56
+     /tmp/ccIFPgNv.s:355    .text:0000000000000300 .LVL57
+     /tmp/ccIFPgNv.s:361    .text:0000000000000310 .LVL58
+     /tmp/ccIFPgNv.s:367    .text:0000000000000320 .LVL59
+     /tmp/ccIFPgNv.s:373    .text:0000000000000330 .LVL60
+     /tmp/ccIFPgNv.s:379    .text:0000000000000340 .LVL61
+     /tmp/ccIFPgNv.s:385    .text:0000000000000350 .LVL62
+     /tmp/ccIFPgNv.s:393    .text:0000000000000364 .LVL64
+     /tmp/ccIFPgNv.s:399    .text:0000000000000374 .LVL65
+     /tmp/ccIFPgNv.s:405    .text:0000000000000384 .LVL66
+     /tmp/ccIFPgNv.s:412    .text:0000000000000398 .LVL67
+     /tmp/ccIFPgNv.s:418    .text:00000000000003a8 .LVL68
+     /tmp/ccIFPgNv.s:2714   .debug_str:000000000000035d .LASF77
+     /tmp/ccIFPgNv.s:2628   .debug_str:000000000000004d .LASF79
+     /tmp/ccIFPgNv.s:138    .text:0000000000000120 .LFB99
+     /tmp/ccIFPgNv.s:250    .text:0000000000000220 .LFE99
+     /tmp/ccIFPgNv.s:2511   .debug_loc:0000000000000144 .LLST3
+     /tmp/ccIFPgNv.s:2529   .debug_loc:0000000000000190 .LLST4
+     /tmp/ccIFPgNv.s:2543   .debug_loc:00000000000001c9 .LLST5
+     /tmp/ccIFPgNv.s:161    .text:0000000000000150 .LVL21
+     /tmp/ccIFPgNv.s:168    .text:0000000000000164 .LVL22
+     /tmp/ccIFPgNv.s:173    .text:0000000000000174 .LVL23
+     /tmp/ccIFPgNv.s:177    .text:000000000000017c .LVL24
+     /tmp/ccIFPgNv.s:181    .text:0000000000000188 .LVL25
+     /tmp/ccIFPgNv.s:192    .text:00000000000001a0 .LVL28
+     /tmp/ccIFPgNv.s:200    .text:00000000000001b4 .LVL29
+     /tmp/ccIFPgNv.s:225    .text:00000000000001e0 .LVL32
+     /tmp/ccIFPgNv.s:232    .text:00000000000001f4 .LVL33
+     /tmp/ccIFPgNv.s:237    .text:0000000000000204 .LVL34
+     /tmp/ccIFPgNv.s:243    .text:0000000000000210 .LVL35
+     /tmp/ccIFPgNv.s:247    .text:000000000000021c .LVL36
+     /tmp/ccIFPgNv.s:2686   .debug_str:00000000000001f1 .LASF78
+     /tmp/ccIFPgNv.s:2662   .debug_str:0000000000000135 .LASF80
+     /tmp/ccIFPgNv.s:13     .text:0000000000000000 .LFB98
+     /tmp/ccIFPgNv.s:132    .text:0000000000000120 .LFE98
+     /tmp/ccIFPgNv.s:2554   .debug_loc:00000000000001ff .LLST0
+     /tmp/ccIFPgNv.s:2572   .debug_loc:000000000000024b .LLST1
+     /tmp/ccIFPgNv.s:2586   .debug_loc:0000000000000284 .LLST2
+     /tmp/ccIFPgNv.s:37     .text:0000000000000030 .LVL2
+     /tmp/ccIFPgNv.s:44     .text:0000000000000044 .LVL3
+     /tmp/ccIFPgNv.s:49     .text:0000000000000054 .LVL4
+     /tmp/ccIFPgNv.s:53     .text:000000000000005c .LVL5
+     /tmp/ccIFPgNv.s:57     .text:0000000000000068 .LVL6
+     /tmp/ccIFPgNv.s:63     .text:000000000000007c .LVL8
+     /tmp/ccIFPgNv.s:69     .text:0000000000000090 .LVL9
+     /tmp/ccIFPgNv.s:73     .text:00000000000000a0 .LVL10
+     /tmp/ccIFPgNv.s:78     .text:00000000000000b0 .LVL11
+     /tmp/ccIFPgNv.s:86     .text:00000000000000c4 .LVL12
+     /tmp/ccIFPgNv.s:94     .text:00000000000000d8 .LVL13
+     /tmp/ccIFPgNv.s:119    .text:0000000000000104 .LVL16
+     /tmp/ccIFPgNv.s:125    .text:0000000000000110 .LVL17
+GAS LISTING /tmp/ccIFPgNv.s 			page 19
+
+
+     /tmp/ccIFPgNv.s:129    .text:000000000000011c .LVL18
+     /tmp/ccIFPgNv.s:2666   .debug_str:0000000000000154 .LASF81
+     /tmp/ccIFPgNv.s:2738   .debug_str:0000000000000442 .LASF83
+     /tmp/ccIFPgNv.s:2772   .debug_str:0000000000000550 .LASF82
+     /tmp/ccIFPgNv.s:2630   .debug_str:000000000000006a .LASF84
+     /tmp/ccIFPgNv.s:286    .text:000000000000025c .LVL38
+     /tmp/ccIFPgNv.s:291    .text:0000000000000264 .LVL39
+     /tmp/ccIFPgNv.s:387    .text:0000000000000354 .LVL63
+     /tmp/ccIFPgNv.s:427    .text:00000000000003b4 .LVL69
+     /tmp/ccIFPgNv.s:301    .text:0000000000000280 .LVL42
+     /tmp/ccIFPgNv.s:306    .text:0000000000000288 .LVL43
+     /tmp/ccIFPgNv.s:430    .text:00000000000003b8 .LVL70
+     /tmp/ccIFPgNv.s:310    .text:0000000000000294 .LVL45
+     /tmp/ccIFPgNv.s:315    .text:000000000000029c .LVL46
+     /tmp/ccIFPgNv.s:439    .text:00000000000003c4 .LVL73
+     /tmp/ccIFPgNv.s:319    .text:00000000000002a8 .LVL48
+     /tmp/ccIFPgNv.s:327    .text:00000000000002bc .LVL50
+     /tmp/ccIFPgNv.s:332    .text:00000000000002c4 .LVL51
+     /tmp/ccIFPgNv.s:436    .text:00000000000003c0 .LVL72
+     /tmp/ccIFPgNv.s:336    .text:00000000000002d0 .LVL53
+     /tmp/ccIFPgNv.s:341    .text:00000000000002d8 .LVL54
+     /tmp/ccIFPgNv.s:433    .text:00000000000003bc .LVL71
+     /tmp/ccIFPgNv.s:141    .text:0000000000000120 .LVL19
+     /tmp/ccIFPgNv.s:159    .text:0000000000000148 .LVL20
+     /tmp/ccIFPgNv.s:183    .text:000000000000018c .LVL26
+     /tmp/ccIFPgNv.s:186    .text:0000000000000190 .LVL27
+     /tmp/ccIFPgNv.s:217    .text:00000000000001d0 .LVL30
+     /tmp/ccIFPgNv.s:223    .text:00000000000001d8 .LVL31
+     /tmp/ccIFPgNv.s:17     .text:0000000000000000 .LVL0
+     /tmp/ccIFPgNv.s:35     .text:0000000000000028 .LVL1
+     /tmp/ccIFPgNv.s:59     .text:000000000000006c .LVL7
+     /tmp/ccIFPgNv.s:106    .text:00000000000000e8 .LVL14
+     /tmp/ccIFPgNv.s:112    .text:00000000000000f4 .LVL15
+     /tmp/ccIFPgNv.s:478    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN5Buddy11getInstanceEv
+_ZN5Buddy9mem_allocEm
+_ZN5Buddy12status_printEb
+_ZN5Buddy8mem_freeEPv

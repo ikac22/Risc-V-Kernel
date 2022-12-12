@@ -5,7 +5,9 @@
 
 class Riscv{
 public:
-    
+/* 
+--------------------SUPERVISOR REGISTERS--------------------    
+*/
     static void w_scause(uint64);
     static uint64 r_scause(); 
 
@@ -43,21 +45,31 @@ public:
     static void w_sstatus(uint64);
     static uint64 r_sstatus();
 
-    static uint64 r_a0();
+/* 
+--------------------CLASSIC REGISTERS--------------------    
+*/
+    static uint64 r_a0(); /* parameter registers */
     static uint64 s_a0(uint64 a0);
     static uint64 r_a1();
     static uint64 r_a2();
     static uint64 r_a3();
     static uint64 r_a4();
 
-    static void popRegisters();
-    static void pushRegisters();
+    static void popRegisters(); /* pop all context registers */
+    static void pushRegisters(); /* push all context registers */
+ 
+    static void popSppSpie(); /* jump from kernel to start of thread */
 
-    static void popSppSpie();
-
-    static void mc_cstatus(uint64 mask);
+/* 
+--------------------CONSOLE REGISTERS--------------------    
+*/
+    static void mc_cstatus(uint64 mask); 
     static bool cstatus_ready(uint64 mask);
 };
+
+/* 
+--------------------CLASSIC REGISTERS--------------------    
+*/
 
 inline uint64 Riscv::r_a0(){
     uint64 a0;
@@ -93,6 +105,10 @@ inline uint64 Riscv::r_a4(){
 inline uint64 Riscv::s_a0(uint64 a0){
     return a0;
 }
+
+/* 
+--------------------SUPERVISOR REGISTERS--------------------    
+*/
 
 inline void Riscv::w_scause(uint64 scause){
     asm volatile("csrw scause, %0" : : "r" (scause));
@@ -181,7 +197,11 @@ inline void Riscv::ni_sepc(){ //next instruction sepc
     asm volatile("mv s1, %0" : : "r" (s1));
 }
 
-inline void Riscv::mc_cstatus(uint64 mask){
+/* 
+--------------------CONSOLE REGISTERS--------------------    
+*/
+
+inline void Riscv::mc_cstatus(uint64 mask){ 
     uint64 iostatus;
     asm volatile("lb %[reg], (%[adr])" : [reg] "=r" (iostatus) : [adr] "r" (CONSOLE_STATUS) );
     if(iostatus & mask)
