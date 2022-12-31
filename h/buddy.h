@@ -2,6 +2,8 @@
 #define buddy_h
 
 #include"../h/noalloc_allocator.hpp"
+#define BUDDY_LEVEL(num) \
+(log2( (( (uint64) num - 1 ) >> log2(Buddy::BLOCK_SIZE)) + 1))
 
 struct mmeta_t{
     mmeta_t* next,*prev;
@@ -9,76 +11,62 @@ struct mmeta_t{
 };
 
 class Buddy{
-protected:
-    /* block status */
-    enum bstatus: short{
-        FREE = -1,
-        SUB_ALLOC = -2
-    };
-    /* bit len of block sizee */
+private:
     static uchar BLOCK_SIZE_BIT_LEN;
     /* singleton */
     static Buddy* buddy; 
-    /* starting address memory buddy allocator operates */
+    /* level is order of two */
     void* start_address; 
-    /* size of memory in blocks*/
-    size_t size; 
-    /* array of list head pointers to 2^n chunk */
+    size_t max_level; 
     mmeta_t** lhp;
-    uchar lhp_size;
-    /* is_free[i] <=> is chunk starting with block i free */
-    bstatus* blocks;
+    uchar* fmap; 
 
     __NOALLOC_OPERATORS__
+    
+    Buddy(void* saddr, uchar level);
+    
+    /* remove copy operator and constructor */
+    Buddy(const Buddy&) = delete;
+    void operator=(const Buddy&) = delete;
 
-    /* buddy allocator constructor */
-    Buddy(void* saddr, size_t sz);
+    /* working with lists */
+    mmeta_t* get_from_list(uchar level);
+    int add_to_list(uchar level, mmeta_t* chunk);
+    int remove_from_list(uchar level, mmeta_t*);
+    
+    /* working with blocks */
+    mmeta_t* split(mmeta_t*);
+    mmeta_t* merge_ip(mmeta_t*);
+ 
+    /* working with free map */
+    bool get_bit_val(size_t index);
+    void set_bit(size_t index);
+    void clr_bit(size_t index);
 
-    /* align input to size of blocks */
+    /* utility */
+    void* get_buddy_addr(uchar level, void*);
     static uint64 blockAlign(uint64 input){
         return (input + BLOCK_SIZE - 1) & ( (~0ULL) << BLOCK_SIZE_BIT_LEN);
     }
-    /* add chunk to list of given level */
-    int add_to_list(uchar level, mmeta_t* chunk);
-    /* remove chunk from list of given level */
-    int remove_from_list(uchar level, mmeta_t*);
-    /* get block number */
-    size_t get_block_num(mmeta_t*);
-    /* get front elem of list */
-    mmeta_t* get_from_list(uchar level);
-    /* get second half address of given chunk */
-    mmeta_t* split(mmeta_t*);
-    /* print blocks entry */
-    void print_be(size_t entry);
-    /* 
-    *   merge if possible if not return nullptr;
-    *   assuming that the given chunk is not in list;
-    */
-    mmeta_t* merge_ip(mmeta_t*);
+
+    /* testing */
+    void print_be(size_t);
+    
 public:
-    /* block is minimal allocation unit - must be pow 2*/
+    
+    /* init and geting singleton instance */
     static const size_t BLOCK_SIZE = 4096;
-    /* 
-    *   Initalization of Buddy Allocator: 
-    *   Address and Size will be aligned to 4096
-    */
-    static int initalize(void*, size_t);
+    static int initalize(void*, uchar);
     static Buddy& getInstance();
 
-    /* print status */
+    /* testing */
     void status_print(bool f = true);
 
-    /* sz must be 2^n it represents the number of blocks */
-    void* mem_alloc(size_t sz);
-    int mem_free(void*);
+    /* interface */
+    void* mem_alloc(uchar level);
+    int mem_free(void*, uchar level);
 };
-
-/*
-*   kmi - kernel memory initalize
-* 
-*   Initalize buddy allocator  
-*   for the 12,5% of heap memory
-*/
+/* kernel memory init */
 int kmi();
 
 #endif

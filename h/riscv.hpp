@@ -20,6 +20,9 @@ public:
      
     static void w_stval(uint64);
     static uint64 r_stval();
+
+    static void w_satp(uint64);
+    static uint64 r_satp();
     
     enum BitMaskSip{
         SIP_SSIE = (1<<1),
@@ -33,10 +36,17 @@ public:
     static void w_sip(uint64);
     static uint64 r_sip();
 
+    static void ms_sie(uint64);
+    static void mc_sie(uint64);
+
+    static void w_sie(uint64);
+    static uint64 r_sie();
+
     enum BitMaskSstatus{
         SSTATUS_SIE = (1<<1),
         SSTATUS_SPIE = (1<<5),
         SSTATUS_SPP = (1<<8),
+        SSTATUS_SUM = (1<<18),
     };
 
     static void ms_sstatus(uint64);
@@ -48,6 +58,7 @@ public:
 /* 
 --------------------CLASSIC REGISTERS--------------------    
 */
+    static uint64 r_sp();
     static uint64 r_a0(); /* parameter registers */
     static uint64 s_a0(uint64 a0);
     static uint64 r_a1();
@@ -70,6 +81,12 @@ public:
 /* 
 --------------------CLASSIC REGISTERS--------------------    
 */
+
+inline uint64 Riscv::r_sp(){
+    uint64 a0;
+    asm volatile("mv %0, sp" : "=r" (a0));
+    return a0;
+}
 
 inline uint64 Riscv::r_a0(){
     uint64 a0;
@@ -168,6 +185,24 @@ inline uint64 Riscv::r_sip(){
     return sip;
 } 
 
+inline void Riscv::ms_sie(uint64 mask){
+    asm volatile ("csrs sie, %0" : : "r" (mask));
+}
+
+inline void Riscv::mc_sie(uint64 mask){
+    asm volatile ("csrc sie, %0" : : "r" (mask));
+}
+
+inline void Riscv::w_sie(uint64 sie){
+    asm volatile("csrw sie, %0" : : "r" (sie));
+}
+
+inline uint64 Riscv::r_sie(){
+    uint64 volatile sie;
+    asm volatile("csrr %0, sie" : "=r" (sie));
+    return sie;
+} 
+
 inline void Riscv::ms_sstatus(uint64 mask){
     asm volatile ("csrs sstatus, %0" : : "r" (mask));
 }
@@ -195,6 +230,15 @@ inline void Riscv::ni_sepc(){ //next instruction sepc
     asm volatile("csrw sepc, s1");
 
     asm volatile("mv s1, %0" : : "r" (s1));
+}
+
+inline void Riscv::w_satp(uint64 satp){
+    asm volatile("csrw satp, %0" : : "r" (satp));
+}
+inline uint64 r_satp(){
+    uint64 volatile satp;
+    asm volatile("csrr %0, satp" : "=r" (satp));
+    return satp;
 }
 
 /* 

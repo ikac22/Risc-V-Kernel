@@ -24,7 +24,9 @@ public:
     int wait(); /* classic wait method */
     
     int signal(); /* classic signal method */
-    
+
+    unsigned get_val() { return val; } 
+
     static int close(KSemaphore* sem); 
     
     static bool exists(KSemaphore* sem); /* test if semaphore exists in list of active */

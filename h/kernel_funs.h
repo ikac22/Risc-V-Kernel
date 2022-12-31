@@ -49,4 +49,11 @@ void swap(T& a, T& b){
     a = b;
     b = x;
 }
+
+/* init */
+template<typename T>
+void def_ctor(void* ptr){
+    T r;
+    *(T*)ptr = r;
+}
 #endif

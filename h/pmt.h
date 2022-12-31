@@ -12,7 +12,7 @@
 */
 
 
-enum PMTEntryBits{
+enum PMTEntryBits: uint64{
     clear = 0,
     valid = 1 << 0,
     read = 1 << 1,
@@ -33,11 +33,13 @@ enum PMTEntryBits{
 class PMTEntry{
     uint64 val;
 public:
+    void clear();
     bool chk_flags(PMTEntryBits); 
     void set_flags(PMTEntryBits);
     void clear_flags(PMTEntryBits); 
     void* get_pa(); /* get phisical address */
     int set_pa(void*); /* set phisical address */
+    void print();
 };
 
 class PMT{
@@ -45,6 +47,11 @@ public:
     static const size_t PMT_LEVEL_SIZE = 1 << 9,
     PAGE_SIZE = 1 << 12, VADDR_MASK[3], INVALID_MASK = -(1LL<<39);
     PMTEntry* get_entry(uchar level, void* vaddr);
+    PMTEntry* get_entry(uint64 index);
+    void clear();
+    void print();
+    static PMT* allocate_pmt();
+    
 private:
     PMTEntry entry [PMT_LEVEL_SIZE]; /* one level table of entries */
 };

@@ -10,13 +10,13 @@ SECTIONS
   . = 0x80000000;
 
   .text : {
+    PROVIDE(_kernel_text_start = .);
     *(.entry_os) 
     
     . = ALIGN(0x1000);
     EXCLUDE_FILE (build/src/*) *(.text .text.*)
 
     . = ALIGN(0x1000);
-    PROVIDE(_kernel_text_start = .);
     build/src/kernel/*(.text .text.*)
     PROVIDE(_kernel_text_end = .);
 
