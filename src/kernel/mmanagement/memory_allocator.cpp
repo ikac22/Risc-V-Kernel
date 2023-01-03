@@ -5,9 +5,9 @@ MemoryAllocator MemoryAllocator::allocator;
 MemoryAllocator& MemoryAllocator::getInstance(){
     if(!allocator.init){
         allocator.fall_head = nullptr;
-        allocator.fmem_head = (FreeSegment*)HEAP_START_ADDR;
+        allocator.fmem_head = (FreeSegment*)NoAlloc::getEndAddress();
         allocator.fmem_head->next = nullptr;
-        allocator.fmem_head->size = ((size_t)HEAP_END_ADDR - (size_t)HEAP_START_ADDR - sizeof(FreeSegment));
+        allocator.fmem_head->size = ((size_t)HEAP_END_ADDR - (size_t)NoAlloc::getEndAddress() - sizeof(FreeSegment));
         allocator.init = true;
     }
     return allocator;

@@ -221,7 +221,7 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
 {
     uint64 scause = Riscv::r_scause();
     //static bool panic = 0;
-    KCHECKPRINT(scause);
+    //KCHECKPRINT(scause);
     if(scause == IS)
     {
         //ecall iz sistemskog rezima

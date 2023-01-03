@@ -1,7 +1,7 @@
 #include"../../../h/kernel_lib.h"
 
 KSemaphore* KSemaphore::activeSemaphores = nullptr;
-
+ObjectCache* KSemaphore::cache = nullptr;
 int KSemaphore::wait(){
     if(val > 0)
     {

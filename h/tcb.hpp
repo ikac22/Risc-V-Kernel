@@ -2,6 +2,8 @@
 #define __tcb__h
 
 #include"../h/memory_allocator.hpp"
+#include"../h/slab_allocator.h"
+#include "object_cache.h"
 
 class KSemaphore;
 
@@ -10,14 +12,20 @@ class TCB{
     
 public:
     //alokacija
-    #include"../h/kernel_operators.hpp"
+    //#include"../h/kernel_operators.hpp"
     
+    void* operator new(size_t sz); 
+    void* operator new[](size_t sz);
+    void operator delete(void* ptr);
+    void operator delete[](void* ptr);
+
     using Body = void (*)(void*);
     enum TCBState{
         BLOCKED,
         READY,
         FINISHED,
-        SLEEPING
+        SLEEPING,
+        PREPARING
     };
     
     ~TCB(){ 
@@ -60,7 +68,7 @@ public:
     time_t sleep_time;
 
 private:
-
+    static ObjectCache* cache;
     static Context panicContext;
     static TCB* kernelThread;
     static int threadsUp;

@@ -14,11 +14,13 @@ int oldKernelMain(){
     }
    
     uint64 sstatus = Riscv::r_sstatus();
+    kprintString("Starting User Process");
     TCB::yield();
     Riscv::w_sstatus(sstatus);
     
 
-    kprintString("\n\nKERNEL ENDED SUCCESSFULLY!\n\n");
+    kprintString("SRECNA NOVA GODINAAAA!!!!!");
+    //kprintString("\n\nKERNEL ENDED SUCCESSFULLY!\n\n");
     return 0;
 }
 
@@ -42,5 +44,5 @@ int newKernelMain(){
 }
 
 int main(){
-    return newKernelMain();
+    return oldKernelMain();
 }   

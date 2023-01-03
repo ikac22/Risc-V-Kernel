@@ -4,12 +4,13 @@
 #include"../../../h/syscall_c.h"
 #include"../../../h/stdio.hpp"
 
+
 TCB* TCB::running = nullptr;
 uint64 TCB::timeSliceCounter = 0;
 TCB* TCB::kernelThread = nullptr;
 int TCB::threadsUp = 0;
 TCB::Context TCB::panicContext;
-
+ObjectCache* TCB::cache = nullptr;
 void Riscv::popSppSpie() 
 {
     __asm__ volatile ("csrw sepc, ra");
@@ -138,4 +139,20 @@ void TCB::setPanicContext(uint64 ra, uint64 sp)
 void TCB::panicDispatch()
 {
     contextSwitch(&running->context, &panicContext);
+}
+
+void* TCB::operator new(size_t sz){ 
+    if(!cache){
+        cache = new ObjectCache("tcb_cache", sz, nullptr, nullptr); 
+    }
+    return cache->alloc_obj();
+} 
+void* TCB::operator new[](size_t sz){ 
+    return SlabAllocator::getInstance().kmalloc(sz);
+} 
+void TCB::operator delete(void* ptr){ 
+    cache->free_obj(ptr);
+} 
+void TCB::operator delete[](void* ptr){
+    SlabAllocator::getInstance().kfree(ptr);
 }

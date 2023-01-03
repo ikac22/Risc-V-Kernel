@@ -2,14 +2,18 @@
 #define __semaphore__
 
 #include"../h/ptr_queue.hpp"
+#include "slab_allocator.h"
 
 /* Class used to describe semaphore in kernel code */
 
 class KSemaphore
 {
+    static ObjectCache* cache; 
 public:
-    #include"../h/kernel_operators.hpp" /* allocation and deallocation */
+    //#include"../h/kernel_operators.hpp" /* allocation and deallocation */
     
+    __SLAB_ALLOCATION__(KSemaphore, nullptr, nullptr)
+
     KSemaphore(unsigned val):val(val)
     {
         /* 

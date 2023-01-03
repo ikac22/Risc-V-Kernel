@@ -66,6 +66,13 @@ int kernelInit()
     kprintString("NoAlloc initalized: ");
     KVALCHECKPRINT(NOALLOC_END_ADDR, NoAlloc::getEndAddress());
 
+    kprintString("Initalizing kmem!!!\n");
+    if(kmi()){
+        kprintString("KMEM NOT SUCCESSFULLY INITALIZED!!!\n");
+        return 1;
+    }
+    kprintString("kmem initalized!!!\n");
+
     Riscv::w_stvec((uint64)interruptvec); 
     kprintString("stvec initalized!\n");
     
@@ -131,11 +138,7 @@ int newKernelInit(){
     kprintString("NoAlloc initalized: ");
     KVALCHECKPRINT(NOALLOC_END_ADDR, NoAlloc::getEndAddress());
     
-    /* 
-    *   -Kernel Allocator Init 
-    *       -Init Buddy Allocator
-    *       -Init Slab Slab Allocator
-    */
+
     kprintString("Initalizing kmem!!!\n");
     if(kmi()){
         kprintString("KMEM NOT SUCCESSFULLY INITALIZED!!!\n");

@@ -1,4 +1,7 @@
 #include"../../../h/kernel_lib.h"
+
+ObjectCache* TcbQueue::cache = nullptr;
+
 bool TcbQueue::exists(TCB* info) const 
 {
     for(TCB* node = head; node; node = node->next)

@@ -5,6 +5,24 @@
 #include "list.h"
 #include "noalloc_allocator.hpp"
 
+#define __SLAB_ALLOCATION__(typename, ctor, dtor) \
+    void* operator new(size_t sz){ \
+        if(!cache){ \
+            cache = new ObjectCache( #typename "_cache", sz, ctor, dtor); \
+        } \
+        return cache->alloc_obj(); \
+    } \
+    void* operator new[](size_t sz){ \
+        return SlabAllocator::getInstance().kmalloc(sz);\
+    }  \
+    void operator delete(void* ptr){ \
+        cache->free_obj(ptr); \
+    }  \
+    void operator delete[](void* ptr){ \
+        SlabAllocator::getInstance().kfree(ptr); \
+    }\
+
+
 typedef class SlabAllocator{
     typedef ObjectCache::SlabMetaType SMT;
     friend ObjectCache;
