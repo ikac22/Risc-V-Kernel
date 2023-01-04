@@ -9,6 +9,9 @@
 //#include"test/testing.hpp"
 //#include"../../h/syscall_c.h"
 //#include"test/printing.hpp"
+
+
+
 void userMain() {
     //RADI: Threads_C_API_test(); // zadatak 2., niti C API i sinhrona promena konteksta
     //RADI: Threads_CPP_API_test(); // zadatak 2., niti CPP API i sinhrona promena konteksta
@@ -23,4 +26,9 @@ void userMain() {
     //mem_alloc(64);
     //asm volatile("csrw sstatus, 0");
     
+}
+
+void userMainWrapper(void*)
+{
+    userMain();
 }

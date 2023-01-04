@@ -44,7 +44,10 @@ void Thread::runWrapper(void* thread)
 Thread::~Thread()
 {
     _Wrap* w = (_Wrap*)myHandle;
-    delete w->handle;
+    if(w->handle){
+        delete w->handle;
+    }
+    
     delete w;
 }
 

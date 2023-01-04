@@ -212,6 +212,8 @@ Slab* ObjectCache::find_slab(void* addr, list_t* head){
 
 
 int ObjectCache::free_obj(void* ptr){
+    // kprintString(name); kprintString(": ");
+    // KCHECKPRINT(ptr);
     Slab* slab_meta = *(Slab**)((uint64)ptr & (-Buddy::BLOCK_SIZE));
     
     if(type == BUFF_SLAB){

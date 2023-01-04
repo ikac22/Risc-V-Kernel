@@ -2,6 +2,25 @@
 #include"../../h/_thread.h"
 #include"../../h/_semaphore.h"
 
+
+extern "C" int thread_delete(void* addr)
+{
+    int ret = 0;
+
+    asm volatile("mv a1, %0" : : "r" (addr));
+    asm volatile("mv a0, %0" : : "r" (0x69));
+    asm volatile("ecall");
+
+    return ret;
+}
+
+
+void _thread::operator delete(void* ptr){
+    thread_delete(ptr);
+}
+
+
+
 extern "C" void* mem_alloc(size_t size)
 {
     size_t szblcks = (size-1)/MEM_BLOCK_SIZE + 1;
@@ -67,6 +86,8 @@ extern "C" int thread_exit()
 
     return ret;
 }
+
+
 
 extern "C" int sem_open(sem_t* handle, unsigned val)
 {

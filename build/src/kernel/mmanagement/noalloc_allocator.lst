@@ -1,0 +1,330 @@
+GAS LISTING /tmp/ccfbzopY.s 			page 1
+
+
+   1              		.file	"noalloc_allocator.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_ZN7NoAlloc9mem_allocEm
+  12              	_ZN7NoAlloc9mem_allocEm:
+  13              	.LFB113:
+  14              		.file 1 "src/kernel/mmanagement/noalloc_allocator.cpp"
+   1:src/kernel/mmanagement/noalloc_allocator.cpp **** #include"../../../h/kernel_lib.h"
+   2:src/kernel/mmanagement/noalloc_allocator.cpp **** 
+   3:src/kernel/mmanagement/noalloc_allocator.cpp **** void* NoAlloc::NOALLOC_END_ADDR;
+   4:src/kernel/mmanagement/noalloc_allocator.cpp **** bool NoAlloc::working = false;
+   5:src/kernel/mmanagement/noalloc_allocator.cpp **** 
+   6:src/kernel/mmanagement/noalloc_allocator.cpp **** void* NoAlloc::mem_alloc(size_t size){
+  15              		.loc 1 6 38
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101FF 		addi	sp,sp,-16
+  19              		.cfi_def_cfa_offset 16
+  20 0004 23348100 		sd	s0,8(sp)
+  21              		.cfi_offset 8, -8
+  22 0008 13040101 		addi	s0,sp,16
+  23              		.cfi_def_cfa 8, 0
+   7:src/kernel/mmanagement/noalloc_allocator.cpp ****     /* not initalized */
+   8:src/kernel/mmanagement/noalloc_allocator.cpp ****     if(!working) return nullptr;
+  24              		.loc 1 8 5
+  25              		.loc 1 8 8 is_stmt 0
+  26 000c 17070000 		lbu	a4,_ZN7NoAlloc7workingE
+  26      03470700 
+  27              		.loc 1 8 5
+  28 0014 63000704 		beq	a4,zero,.L3
+  29 0018 93070500 		mv	a5,a0
+   9:src/kernel/mmanagement/noalloc_allocator.cpp ****     if(!NOALLOC_END_ADDR) return nullptr;
+  30              		.loc 1 9 5 is_stmt 1
+  31              		.loc 1 9 8 is_stmt 0
+  32 001c 17070000 		lla	a4,_ZN7NoAlloc16NOALLOC_END_ADDRE
+  32      13070700 
+  33 0024 03350700 		ld	a0,0(a4)
+  34              	.LVL1:
+  35              		.loc 1 9 5
+  36 0028 63000502 		beq	a0,zero,.L1
+  10:src/kernel/mmanagement/noalloc_allocator.cpp **** 
+  11:src/kernel/mmanagement/noalloc_allocator.cpp ****     /* not enough memory */
+  12:src/kernel/mmanagement/noalloc_allocator.cpp ****     if((size_t) NOALLOC_END_ADDR + size >= (uint64)HEAP_END_ADDR)
+  37              		.loc 1 12 5 is_stmt 1
+  38              		.loc 1 12 34 is_stmt 0
+  39 002c B307F500 		add	a5,a0,a5
+  40              	.LVL2:
+  41              		.loc 1 12 41
+  42 0030 17070000 		lla	a4,HEAP_END_ADDR
+  42      13070700 
+  43 0038 03370700 		ld	a4,0(a4)
+GAS LISTING /tmp/ccfbzopY.s 			page 2
+
+
+  44              		.loc 1 12 5
+  45 003c 63F0E702 		bgeu	a5,a4,.L4
+  13:src/kernel/mmanagement/noalloc_allocator.cpp ****         return nullptr;
+  14:src/kernel/mmanagement/noalloc_allocator.cpp ****     
+  15:src/kernel/mmanagement/noalloc_allocator.cpp ****     void* ret = NOALLOC_END_ADDR;
+  46              		.loc 1 15 5 is_stmt 1
+  47              	.LVL3:
+  16:src/kernel/mmanagement/noalloc_allocator.cpp ****     NOALLOC_END_ADDR = (void*) ((size_t)NOALLOC_END_ADDR + size); /* increase end addr by size of o
+  48              		.loc 1 16 5
+  49              		.loc 1 16 22 is_stmt 0
+  50 0040 17070000 		sd	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE,a4
+  50      2330F700 
+  17:src/kernel/mmanagement/noalloc_allocator.cpp ****     
+  18:src/kernel/mmanagement/noalloc_allocator.cpp ****     return ret; 
+  51              		.loc 1 18 5 is_stmt 1
+  52              	.LVL4:
+  53              	.L1:
+  19:src/kernel/mmanagement/noalloc_allocator.cpp **** }
+  54              		.loc 1 19 1 is_stmt 0
+  55 0048 03348100 		ld	s0,8(sp)
+  56              		.cfi_remember_state
+  57              		.cfi_restore 8
+  58              		.cfi_def_cfa 2, 16
+  59 004c 13010101 		addi	sp,sp,16
+  60              		.cfi_def_cfa_offset 0
+  61 0050 67800000 		jr	ra
+  62              	.LVL5:
+  63              	.L3:
+  64              		.cfi_restore_state
+   8:src/kernel/mmanagement/noalloc_allocator.cpp ****     if(!NOALLOC_END_ADDR) return nullptr;
+  65              		.loc 1 8 25
+  66 0054 13050000 		li	a0,0
+  67              	.LVL6:
+  68 0058 6FF01FFF 		j	.L1
+  69              	.L4:
+  13:src/kernel/mmanagement/noalloc_allocator.cpp ****     
+  70              		.loc 1 13 16
+  71 005c 13050000 		li	a0,0
+  72 0060 6FF09FFE 		j	.L1
+  73              		.cfi_endproc
+  74              	.LFE113:
+  76              		.align	2
+  77              		.globl	_ZN7NoAlloc4initEv
+  79              	_ZN7NoAlloc4initEv:
+  80              	.LFB114:
+  20:src/kernel/mmanagement/noalloc_allocator.cpp **** 
+  21:src/kernel/mmanagement/noalloc_allocator.cpp **** void NoAlloc::init(){
+  81              		.loc 1 21 21 is_stmt 1
+  82              		.cfi_startproc
+  83 0064 130101FF 		addi	sp,sp,-16
+  84              		.cfi_def_cfa_offset 16
+  85 0068 23348100 		sd	s0,8(sp)
+  86              		.cfi_offset 8, -8
+  87 006c 13040101 		addi	s0,sp,16
+  88              		.cfi_def_cfa 8, 0
+  22:src/kernel/mmanagement/noalloc_allocator.cpp ****     if(!NOALLOC_END_ADDR){
+  89              		.loc 1 22 5
+GAS LISTING /tmp/ccfbzopY.s 			page 3
+
+
+  90              		.loc 1 22 8 is_stmt 0
+  91 0070 97070000 		lla	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE
+  91      93870700 
+  92 0078 83B70700 		ld	a5,0(a5)
+  93              		.loc 1 22 5
+  94 007c 63880700 		beq	a5,zero,.L9
+  95              	.L6:
+  23:src/kernel/mmanagement/noalloc_allocator.cpp ****         NOALLOC_END_ADDR = (void*)HEAP_START_ADDR;
+  24:src/kernel/mmanagement/noalloc_allocator.cpp ****         working = true;
+  25:src/kernel/mmanagement/noalloc_allocator.cpp ****     }
+  26:src/kernel/mmanagement/noalloc_allocator.cpp **** }...
+  96              		.loc 1 26 1
+  97 0080 03348100 		ld	s0,8(sp)
+  98              		.cfi_remember_state
+  99              		.cfi_restore 8
+ 100              		.cfi_def_cfa 2, 16
+ 101 0084 13010101 		addi	sp,sp,16
+ 102              		.cfi_def_cfa_offset 0
+ 103 0088 67800000 		jr	ra
+ 104              	.L9:
+ 105              		.cfi_restore_state
+  23:src/kernel/mmanagement/noalloc_allocator.cpp ****         NOALLOC_END_ADDR = (void*)HEAP_START_ADDR;
+ 106              		.loc 1 23 9 is_stmt 1
+  23:src/kernel/mmanagement/noalloc_allocator.cpp ****         NOALLOC_END_ADDR = (void*)HEAP_START_ADDR;
+ 107              		.loc 1 23 26 is_stmt 0
+ 108 008c 97070000 		lla	a5,HEAP_START_ADDR
+ 108      93870700 
+ 109 0094 83B70700 		ld	a5,0(a5)
+ 110 0098 17070000 		sd	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE,a4
+ 110      2330F700 
+  24:src/kernel/mmanagement/noalloc_allocator.cpp ****         working = true;
+ 111              		.loc 1 24 9 is_stmt 1
+  24:src/kernel/mmanagement/noalloc_allocator.cpp ****         working = true;
+ 112              		.loc 1 24 17 is_stmt 0
+ 113 00a0 93071000 		li	a5,1
+ 114 00a4 17070000 		sb	a5,_ZN7NoAlloc7workingE,a4
+ 114      2300F700 
+ 115              		.loc 1 26 1
+ 116 00ac 6FF05FFD 		j	.L6
+ 117              		.cfi_endproc
+ 118              	.LFE114:
+ 120              		.globl	_ZN7NoAlloc7workingE
+ 121              		.globl	_ZN7NoAlloc16NOALLOC_END_ADDRE
+ 122              		.section	.sbss,"aw",@nobits
+ 123              		.align	3
+ 126              	_ZN7NoAlloc7workingE:
+ 127 0000 00       		.zero	1
+ 128 0001 00000000 		.zero	7
+ 128      000000
+ 131              	_ZN7NoAlloc16NOALLOC_END_ADDRE:
+ 132 0008 00000000 		.zero	8
+ 132      00000000 
+ 133              		.text
+ 134              	.Letext0:
+ 135              		.file 2 "src/kernel/mmanagement/../../../h/../h/../lib/hw.h"
+ 136              		.file 3 "src/kernel/mmanagement/../../../h/../h/noalloc_allocator.hpp"
+ 137              		.file 4 "src/kernel/mmanagement/../../../h/kernel_lib.h"
+GAS LISTING /tmp/ccfbzopY.s 			page 4
+
+
+GAS LISTING /tmp/ccfbzopY.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 noalloc_allocator.cpp
+     /tmp/ccfbzopY.s:12     .text:0000000000000000 _ZN7NoAlloc9mem_allocEm
+     /tmp/ccfbzopY.s:16     .text:0000000000000000 .L0 
+     /tmp/ccfbzopY.s:18     .text:0000000000000000 .L0 
+     /tmp/ccfbzopY.s:19     .text:0000000000000004 .L0 
+     /tmp/ccfbzopY.s:21     .text:0000000000000008 .L0 
+     /tmp/ccfbzopY.s:23     .text:000000000000000c .L0 
+     /tmp/ccfbzopY.s:25     .text:000000000000000c .L0 
+     /tmp/ccfbzopY.s:126    .sbss:0000000000000000 _ZN7NoAlloc7workingE
+     /tmp/ccfbzopY.s:26     .text:000000000000000c .L0 
+     /tmp/ccfbzopY.s:28     .text:0000000000000014 .L0 
+     /tmp/ccfbzopY.s:31     .text:000000000000001c .L0 
+     /tmp/ccfbzopY.s:131    .sbss:0000000000000008 _ZN7NoAlloc16NOALLOC_END_ADDRE
+     /tmp/ccfbzopY.s:32     .text:000000000000001c .L0 
+     /tmp/ccfbzopY.s:36     .text:0000000000000028 .L0 
+     /tmp/ccfbzopY.s:38     .text:000000000000002c .L0 
+     /tmp/ccfbzopY.s:39     .text:000000000000002c .L0 
+     /tmp/ccfbzopY.s:42     .text:0000000000000030 .L0 
+     /tmp/ccfbzopY.s:45     .text:000000000000003c .L0 
+     /tmp/ccfbzopY.s:48     .text:0000000000000040 .L0 
+     /tmp/ccfbzopY.s:49     .text:0000000000000040 .L0 
+     /tmp/ccfbzopY.s:50     .text:0000000000000040 .L0 
+     /tmp/ccfbzopY.s:54     .text:0000000000000048 .L0 
+     /tmp/ccfbzopY.s:55     .text:0000000000000048 .L0 
+     /tmp/ccfbzopY.s:56     .text:000000000000004c .L0 
+     /tmp/ccfbzopY.s:57     .text:000000000000004c .L0 
+     /tmp/ccfbzopY.s:58     .text:000000000000004c .L0 
+     /tmp/ccfbzopY.s:60     .text:0000000000000050 .L0 
+     /tmp/ccfbzopY.s:64     .text:0000000000000054 .L0 
+     /tmp/ccfbzopY.s:66     .text:0000000000000054 .L0 
+     /tmp/ccfbzopY.s:71     .text:000000000000005c .L0 
+     /tmp/ccfbzopY.s:73     .text:0000000000000064 .L0 
+     /tmp/ccfbzopY.s:79     .text:0000000000000064 _ZN7NoAlloc4initEv
+     /tmp/ccfbzopY.s:82     .text:0000000000000064 .L0 
+     /tmp/ccfbzopY.s:83     .text:0000000000000064 .L0 
+     /tmp/ccfbzopY.s:84     .text:0000000000000068 .L0 
+     /tmp/ccfbzopY.s:86     .text:000000000000006c .L0 
+     /tmp/ccfbzopY.s:88     .text:0000000000000070 .L0 
+     /tmp/ccfbzopY.s:90     .text:0000000000000070 .L0 
+     /tmp/ccfbzopY.s:91     .text:0000000000000070 .L0 
+     /tmp/ccfbzopY.s:94     .text:000000000000007c .L0 
+     /tmp/ccfbzopY.s:97     .text:0000000000000080 .L0 
+     /tmp/ccfbzopY.s:98     .text:0000000000000084 .L0 
+     /tmp/ccfbzopY.s:99     .text:0000000000000084 .L0 
+     /tmp/ccfbzopY.s:100    .text:0000000000000084 .L0 
+     /tmp/ccfbzopY.s:102    .text:0000000000000088 .L0 
+     /tmp/ccfbzopY.s:105    .text:000000000000008c .L0 
+     /tmp/ccfbzopY.s:107    .text:000000000000008c .L0 
+     /tmp/ccfbzopY.s:108    .text:000000000000008c .L0 
+     /tmp/ccfbzopY.s:112    .text:00000000000000a0 .L0 
+     /tmp/ccfbzopY.s:113    .text:00000000000000a0 .L0 
+     /tmp/ccfbzopY.s:116    .text:00000000000000ac .L0 
+     /tmp/ccfbzopY.s:117    .text:00000000000000b0 .L0 
+     /tmp/ccfbzopY.s:138    .text:00000000000000b0 .L0 
+     /tmp/ccfbzopY.s:26     .text:000000000000000c .L0 
+     /tmp/ccfbzopY.s:32     .text:000000000000001c .L0 
+GAS LISTING /tmp/ccfbzopY.s 			page 6
+
+
+     /tmp/ccfbzopY.s:42     .text:0000000000000030 .L0 
+     /tmp/ccfbzopY.s:50     .text:0000000000000040 .L0 
+     /tmp/ccfbzopY.s:91     .text:0000000000000070 .L0 
+     /tmp/ccfbzopY.s:108    .text:000000000000008c .L0 
+     /tmp/ccfbzopY.s:110    .text:0000000000000098 .L0 
+     /tmp/ccfbzopY.s:114    .text:00000000000000a4 .L0 
+     /tmp/ccfbzopY.s:63     .text:0000000000000054 .L3
+     /tmp/ccfbzopY.s:53     .text:0000000000000048 .L1
+     /tmp/ccfbzopY.s:69     .text:000000000000005c .L4
+     /tmp/ccfbzopY.s:104    .text:000000000000008c .L9
+     /tmp/ccfbzopY.s:95     .text:0000000000000080 .L6
+     /tmp/ccfbzopY.s:455    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccfbzopY.s:883    .debug_str:000000000000005d .LASF39
+     /tmp/ccfbzopY.s:941    .debug_str:00000000000002d0 .LASF40
+     /tmp/ccfbzopY.s:955    .debug_str:0000000000000355 .LASF41
+     /tmp/ccfbzopY.s:8      .text:0000000000000000 .Ltext0
+     /tmp/ccfbzopY.s:134    .text:00000000000000b0 .Letext0
+     /tmp/ccfbzopY.s:867    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccfbzopY.s:921    .debug_str:0000000000000228 .LASF0
+     /tmp/ccfbzopY.s:907    .debug_str:00000000000001c5 .LASF1
+     /tmp/ccfbzopY.s:913    .debug_str:00000000000001f4 .LASF2
+     /tmp/ccfbzopY.s:881    .debug_str:0000000000000056 .LASF4
+     /tmp/ccfbzopY.s:903    .debug_str:000000000000019c .LASF3
+     /tmp/ccfbzopY.s:873    .debug_str:0000000000000025 .LASF5
+     /tmp/ccfbzopY.s:871    .debug_str:0000000000000012 .LASF6
+     /tmp/ccfbzopY.s:893    .debug_str:0000000000000150 .LASF7
+     /tmp/ccfbzopY.s:931    .debug_str:000000000000026e .LASF8
+     /tmp/ccfbzopY.s:891    .debug_str:0000000000000142 .LASF9
+     /tmp/ccfbzopY.s:963    .debug_str:00000000000003af .LASF10
+     /tmp/ccfbzopY.s:927    .debug_str:000000000000024f .LASF11
+     /tmp/ccfbzopY.s:957    .debug_str:0000000000000378 .LASF12
+     /tmp/ccfbzopY.s:939    .debug_str:00000000000002c0 .LASF13
+     /tmp/ccfbzopY.s:911    .debug_str:00000000000001e8 .LASF14
+     /tmp/ccfbzopY.s:879    .debug_str:0000000000000040 .LASF15
+     /tmp/ccfbzopY.s:935    .debug_str:000000000000029d .LASF16
+     /tmp/ccfbzopY.s:923    .debug_str:0000000000000235 .LASF17
+     /tmp/ccfbzopY.s:885    .debug_str:0000000000000121 .LASF18
+     /tmp/ccfbzopY.s:953    .debug_str:000000000000034d .LASF42
+     /tmp/ccfbzopY.s:917    .debug_str:0000000000000210 .LASF19
+     /tmp/ccfbzopY.s:897    .debug_str:0000000000000173 .LASF20
+     /tmp/ccfbzopY.s:943    .debug_str:00000000000002fd .LASF21
+     /tmp/ccfbzopY.s:899    .debug_str:0000000000000184 .LASF23
+     /tmp/ccfbzopY.s:887    .debug_str:0000000000000126 .LASF43
+     /tmp/ccfbzopY.s:961    .debug_str:0000000000000392 .LASF44
+     /tmp/ccfbzopY.s:959    .debug_str:0000000000000388 .LASF45
+     /tmp/ccfbzopY.s:949    .debug_str:0000000000000323 .LASF46
+     /tmp/ccfbzopY.s:875    .debug_str:000000000000002c .LASF22
+     /tmp/ccfbzopY.s:905    .debug_str:00000000000001ae .LASF24
+     /tmp/ccfbzopY.s:869    .debug_str:0000000000000000 .LASF25
+     /tmp/ccfbzopY.s:877    .debug_str:0000000000000035 .LASF26
+     /tmp/ccfbzopY.s:947    .debug_str:0000000000000311 .LASF27
+     /tmp/ccfbzopY.s:895    .debug_str:0000000000000163 .LASF28
+     /tmp/ccfbzopY.s:929    .debug_str:000000000000025e .LASF29
+     /tmp/ccfbzopY.s:915    .debug_str:0000000000000202 .LASF30
+     /tmp/ccfbzopY.s:945    .debug_str:0000000000000302 .LASF31
+     /tmp/ccfbzopY.s:937    .debug_str:00000000000002b3 .LASF32
+     /tmp/ccfbzopY.s:909    .debug_str:00000000000001d8 .LASF33
+GAS LISTING /tmp/ccfbzopY.s 			page 7
+
+
+     /tmp/ccfbzopY.s:889    .debug_str:0000000000000134 .LASF34
+     /tmp/ccfbzopY.s:951    .debug_str:000000000000033b .LASF35
+     /tmp/ccfbzopY.s:919    .debug_str:0000000000000218 .LASF36
+     /tmp/ccfbzopY.s:933    .debug_str:000000000000027e .LASF37
+     /tmp/ccfbzopY.s:925    .debug_str:000000000000023a .LASF38
+     /tmp/ccfbzopY.s:80     .text:0000000000000064 .LFB114
+     /tmp/ccfbzopY.s:118    .text:00000000000000b0 .LFE114
+     /tmp/ccfbzopY.s:13     .text:0000000000000000 .LFB113
+     /tmp/ccfbzopY.s:74     .text:0000000000000064 .LFE113
+     /tmp/ccfbzopY.s:901    .debug_str:0000000000000197 .LASF47
+     /tmp/ccfbzopY.s:818    .debug_loc:0000000000000000 .LLST0
+     /tmp/ccfbzopY.s:847    .debug_loc:0000000000000075 .LLST1
+     /tmp/ccfbzopY.s:17     .text:0000000000000000 .LVL0
+     /tmp/ccfbzopY.s:34     .text:0000000000000028 .LVL1
+     /tmp/ccfbzopY.s:40     .text:0000000000000030 .LVL2
+     /tmp/ccfbzopY.s:62     .text:0000000000000054 .LVL5
+     /tmp/ccfbzopY.s:67     .text:0000000000000058 .LVL6
+     /tmp/ccfbzopY.s:47     .text:0000000000000040 .LVL3
+     /tmp/ccfbzopY.s:52     .text:0000000000000048 .LVL4
+     /tmp/ccfbzopY.s:139    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+HEAP_END_ADDR
+HEAP_START_ADDR

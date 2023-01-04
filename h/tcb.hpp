@@ -29,8 +29,13 @@ public:
     };
     
     ~TCB(){ 
-        MemoryAllocator& allocator = MemoryAllocator::getInstance(); 
-        allocator.mem_free(this->stack);
+        if(isKernelThread()){
+            SlabAllocator::getInstance().kfree(this->stack);
+        }
+        else{
+            MemoryAllocator& allocator = MemoryAllocator::getInstance(); 
+            allocator.mem_free(this->stack);
+        }
     }
     
     //nestaticki metodi

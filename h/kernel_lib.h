@@ -42,4 +42,16 @@ extern "C" uint64 USER_TEXT_START;
 
 /* user .text section end address */
 extern "C" uint64 USER_TEXT_END; 
+
+extern "C" uint64 USER_BSS_START;
+
+extern "C" uint64 USER_BSS_END;
+
+extern "C" uint64 USER_DATA_START;
+
+extern "C" uint64 USER_DATA_END;
+
+extern "C" uint64 USER_RODATA_START;
+
+extern "C" uint64 USER_RODATA_END;
 #endif 

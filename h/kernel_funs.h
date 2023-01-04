@@ -10,7 +10,7 @@ extern "C" void interruptvec();
 extern void userMain(); 
 
 /* kernel wrapper function for starting userMain */
-void userMainWrapper(void*); 
+extern void userMainWrapper(void*); 
 
 /* idle function in user mode that loops when scheduler is empty */
 void idleFunction(void*); 

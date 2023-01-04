@@ -1,0 +1,1284 @@
+GAS LISTING /tmp/ccN29RR0.s 			page 1
+
+
+   1              		.file	"slab_allocator.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_ZN13SlabAllocatorC2Ev
+  12              	_ZN13SlabAllocatorC2Ev:
+  13              	.LFB117:
+  14              		.file 1 "src/kernel/mmanagement/slab_allocator.cpp"
+   1:src/kernel/mmanagement/slab_allocator.cpp **** #include "../../../h/kernel_lib.h"
+   2:src/kernel/mmanagement/slab_allocator.cpp **** 
+   3:src/kernel/mmanagement/slab_allocator.cpp **** 
+   4:src/kernel/mmanagement/slab_allocator.cpp **** 
+   5:src/kernel/mmanagement/slab_allocator.cpp **** SlabAllocator* SlabAllocator::allocator;
+   6:src/kernel/mmanagement/slab_allocator.cpp **** const char* SlabAllocator::buff_cache_names[13] = 
+   7:src/kernel/mmanagement/slab_allocator.cpp ****         { "smb_cache_5", "smb_cache_6", "smb_cache_7" 
+   8:src/kernel/mmanagement/slab_allocator.cpp ****         , "smb_cache_8", "smb_cache_9", "smb_cache_10"
+   9:src/kernel/mmanagement/slab_allocator.cpp ****         , "smb_cache_11", "smb_cache_12", "smb_cache_13"
+  10:src/kernel/mmanagement/slab_allocator.cpp ****         , "smb_cache_14", "smb_cache_15", "smb_cache_16"
+  11:src/kernel/mmanagement/slab_allocator.cpp ****         , "smb_cache_17" };
+  12:src/kernel/mmanagement/slab_allocator.cpp **** 
+  13:src/kernel/mmanagement/slab_allocator.cpp **** 
+  14:src/kernel/mmanagement/slab_allocator.cpp **** 
+  15:src/kernel/mmanagement/slab_allocator.cpp **** SlabAllocator::SlabAllocator():objcache_cache("objcache_cache", sizeof(ObjectCache),nullptr,nullptr
+  15              		.loc 1 15 1
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101F7 		addi	sp,sp,-144
+  19              		.cfi_def_cfa_offset 144
+  20 0004 23341108 		sd	ra,136(sp)
+  21 0008 23308108 		sd	s0,128(sp)
+  22 000c 233C9106 		sd	s1,120(sp)
+  23 0010 23382107 		sd	s2,112(sp)
+  24 0014 23343107 		sd	s3,104(sp)
+  25              		.cfi_offset 1, -8
+  26              		.cfi_offset 8, -16
+  27              		.cfi_offset 9, -24
+  28              		.cfi_offset 18, -32
+  29              		.cfi_offset 19, -40
+  30 0018 13040109 		addi	s0,sp,144
+  31              		.cfi_def_cfa 8, 0
+  32 001c 93090500 		mv	s3,a0
+  33              	.LBB11:
+  16:src/kernel/mmanagement/slab_allocator.cpp ****     slab_cache("slab_meta_cache", sizeof(Slab), nullptr, nullptr, SMT::SLAB_SLAB){
+  34              		.loc 1 16 81 is_stmt 0
+  35 0020 93070000 		li	a5,0
+  36 0024 13070000 		li	a4,0
+  37 0028 93060000 		li	a3,0
+  38 002c 13068005 		li	a2,88
+  39 0030 97050000 		lla	a1,.LC0
+  39      93850500 
+  40 0038 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+  40      E7800000 
+GAS LISTING /tmp/ccN29RR0.s 			page 2
+
+
+  41              	.LVL1:
+  42 0040 93072000 		li	a5,2
+  43 0044 13070000 		li	a4,0
+  44 0048 93060000 		li	a3,0
+  45 004c 1306800B 		li	a2,184
+  46 0050 97050000 		lla	a1,.LC1
+  46      93850500 
+  47 0058 13858905 		addi	a0,s3,88
+  48 005c 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+  48      E7800000 
+  49              	.LVL2:
+  50 0064 1389090B 		addi	s2,s3,176
+  51 0068 9304C000 		li	s1,12
+  52 006c 6F000002 		j	.L3
+  53              	.L7:
+  54              	.LVL3:
+  55              	.LBB12:
+  56              	.LBB13:
+  57              		.file 2 "src/kernel/mmanagement/../../../h/../h/../h/object_cache.h"
+   1:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** #ifndef OBJECT_CACHE_H
+   2:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** #define OBJECT_CACHE_H
+   3:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** #include"../lib/hw.h"
+   4:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** #include"../h/list.h"
+   5:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** 
+   6:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** class SlabAllocator;
+   7:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** class Slab;
+   8:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** 
+   9:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** class ObjectCache{
+  10:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** 
+  11:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** public:
+  12:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****     enum SlabMetaType{
+  13:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****         NONE ,
+  14:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****         OFF_SLAB ,
+  15:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****         SLAB_SLAB ,
+  16:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****         ON_SLAB,
+  17:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****         BUFF_SLAB
+  18:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****     };
+  19:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h **** 
+  20:src/kernel/mmanagement/../../../h/../h/../h/object_cache.h ****     ObjectCache() = default;
+  58              		.loc 2 20 5
+  59 0070 13060000 		li	a2,0
+  60 0074 93050000 		li	a1,0
+  61 0078 13058903 		addi	a0,s2,56
+  62 007c 97000000 		call	_ZN6list_tC1EPS_S0_
+  62      E7800000 
+  63              	.LVL4:
+  64              	.LBE13:
+  65              	.LBE12:
+  66              		.loc 1 16 81
+  67 0084 13098905 		addi	s2,s2,88
+  68 0088 9384F4FF 		addi	s1,s1,-1
+  69              	.L3:
+  70              		.loc 1 16 81 discriminator 4
+  71 008c E3D204FE 		bge	s1,zero,.L7
+  72              	.LBB14:
+  17:src/kernel/mmanagement/slab_allocator.cpp **** 
+  18:src/kernel/mmanagement/slab_allocator.cpp ****     for(int i = MIN_BUFFER_ORDER; i <= MAX_BUFFER_ORDER; i++)
+GAS LISTING /tmp/ccN29RR0.s 			page 3
+
+
+  73              		.loc 1 18 13
+  74 0090 13095000 		li	s2,5
+  75 0094 6F00400A 		j	.L2
+  76              	.LVL5:
+  77              	.L8:
+  19:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i-MIN_BUFFER_ORDER] = 
+  78              		.loc 1 19 9 is_stmt 1 discriminator 2
+  20:src/kernel/mmanagement/slab_allocator.cpp ****             ObjectCache(buff_cache_names[i-MIN_BUFFER_ORDER], 1 << i
+  79              		.loc 1 20 43 is_stmt 0 discriminator 2
+  80 0098 9B04B9FF 		addiw	s1,s2,-5
+  81              		.loc 1 20 13 discriminator 2
+  82 009c 93973400 		slli	a5,s1,3
+  83 00a0 97050000 		lla	a1,.LANCHOR0
+  83      93850500 
+  84 00a8 B385F500 		add	a1,a1,a5
+  85 00ac 93074000 		li	a5,4
+  86 00b0 13070000 		li	a4,0
+  87 00b4 93060000 		li	a3,0
+  88 00b8 13061000 		li	a2,1
+  89 00bc 3B162601 		sllw	a2,a2,s2
+  90 00c0 83B50500 		ld	a1,0(a1)
+  91 00c4 130584F7 		addi	a0,s0,-136
+  92 00c8 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+  92      E7800000 
+  93              	.LVL6:
+  19:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i-MIN_BUFFER_ORDER] = 
+  94              		.loc 1 19 40 discriminator 2
+  95 00d0 93078005 		li	a5,88
+  96 00d4 B387F402 		mul	a5,s1,a5
+  97 00d8 B387F900 		add	a5,s3,a5
+  98 00dc 033784F7 		ld	a4,-136(s0)
+  99 00e0 23B8E70A 		sd	a4,176(a5)
+ 100 00e4 033704F8 		ld	a4,-128(s0)
+ 101 00e8 23BCE70A 		sd	a4,184(a5)
+ 102 00ec 033784F8 		ld	a4,-120(s0)
+ 103 00f0 23B0E70C 		sd	a4,192(a5)
+ 104 00f4 033704F9 		ld	a4,-112(s0)
+ 105 00f8 23B4E70C 		sd	a4,200(a5)
+ 106 00fc 033784F9 		ld	a4,-104(s0)
+ 107 0100 23B8E70C 		sd	a4,208(a5)
+ 108 0104 033704FA 		ld	a4,-96(s0)
+ 109 0108 23BCE70C 		sd	a4,216(a5)
+ 110 010c 033784FA 		ld	a4,-88(s0)
+ 111 0110 23B0E70E 		sd	a4,224(a5)
+ 112 0114 033704FB 		ld	a4,-80(s0)
+ 113 0118 23B4E70E 		sd	a4,232(a5)
+ 114 011c 033784FB 		ld	a4,-72(s0)
+ 115 0120 23B8E70E 		sd	a4,240(a5)
+ 116 0124 033704FC 		ld	a4,-64(s0)
+ 117 0128 23BCE70E 		sd	a4,248(a5)
+ 118 012c 033784FC 		ld	a4,-56(s0)
+ 119 0130 23B0E710 		sd	a4,256(a5)
+  18:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i-MIN_BUFFER_ORDER] = 
+ 120              		.loc 1 18 5 discriminator 2
+ 121 0134 1B091900 		addiw	s2,s2,1
+ 122              	.LVL7:
+ 123              	.L2:
+GAS LISTING /tmp/ccN29RR0.s 			page 4
+
+
+  18:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i-MIN_BUFFER_ORDER] = 
+ 124              		.loc 1 18 37 discriminator 3
+ 125 0138 93071001 		li	a5,17
+ 126 013c E3DE27F5 		ble	s2,a5,.L8
+ 127              	.LBE14:
+ 128              	.LBE11:
+  21:src/kernel/mmanagement/slab_allocator.cpp ****                 , nullptr, nullptr, SMT::BUFF_SLAB);
+  22:src/kernel/mmanagement/slab_allocator.cpp **** 
+  23:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 129              		.loc 1 23 1
+ 130 0140 83308108 		ld	ra,136(sp)
+ 131              		.cfi_restore 1
+ 132 0144 03340108 		ld	s0,128(sp)
+ 133              		.cfi_restore 8
+ 134              		.cfi_def_cfa 2, 144
+ 135 0148 83348107 		ld	s1,120(sp)
+ 136              		.cfi_restore 9
+ 137 014c 03390107 		ld	s2,112(sp)
+ 138              		.cfi_restore 18
+ 139              	.LVL8:
+ 140 0150 83398106 		ld	s3,104(sp)
+ 141              		.cfi_restore 19
+ 142              	.LVL9:
+ 143 0154 13010109 		addi	sp,sp,144
+ 144              		.cfi_def_cfa_offset 0
+ 145 0158 67800000 		jr	ra
+ 146              		.cfi_endproc
+ 147              	.LFE117:
+ 149              		.globl	_ZN13SlabAllocatorC1Ev
+ 150              		.set	_ZN13SlabAllocatorC1Ev,_ZN13SlabAllocatorC2Ev
+ 151              		.align	2
+ 152              		.globl	_ZN13SlabAllocator11getInstanceEv
+ 154              	_ZN13SlabAllocator11getInstanceEv:
+ 155              	.LFB119:
+  24:src/kernel/mmanagement/slab_allocator.cpp **** 
+  25:src/kernel/mmanagement/slab_allocator.cpp **** 
+  26:src/kernel/mmanagement/slab_allocator.cpp **** 
+  27:src/kernel/mmanagement/slab_allocator.cpp **** SlabAllocator& SlabAllocator::getInstance(){
+ 156              		.loc 1 27 44 is_stmt 1
+ 157              		.cfi_startproc
+  28:src/kernel/mmanagement/slab_allocator.cpp ****     
+  29:src/kernel/mmanagement/slab_allocator.cpp ****     if(!allocator) { allocator = new SlabAllocator; }
+ 158              		.loc 1 29 5
+ 159              		.loc 1 29 8 is_stmt 0
+ 160 015c 97070000 		lla	a5,_ZN13SlabAllocator9allocatorE
+ 160      93870700 
+ 161 0164 83B70700 		ld	a5,0(a5)
+ 162              		.loc 1 29 5
+ 163 0168 638A0700 		beq	a5,zero,.L15
+  30:src/kernel/mmanagement/slab_allocator.cpp **** 
+  31:src/kernel/mmanagement/slab_allocator.cpp ****     return *allocator;
+ 164              		.loc 1 31 5 is_stmt 1
+  32:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 165              		.loc 1 32 1 is_stmt 0
+ 166 016c 97070000 		lla	a5,_ZN13SlabAllocator9allocatorE
+ 166      93870700 
+ 167 0174 03B50700 		ld	a0,0(a5)
+GAS LISTING /tmp/ccN29RR0.s 			page 5
+
+
+ 168 0178 67800000 		ret
+ 169              	.L15:
+  27:src/kernel/mmanagement/slab_allocator.cpp ****     
+ 170              		.loc 1 27 44
+ 171 017c 130101FE 		addi	sp,sp,-32
+ 172              		.cfi_def_cfa_offset 32
+ 173 0180 233C1100 		sd	ra,24(sp)
+ 174 0184 23388100 		sd	s0,16(sp)
+ 175 0188 23349100 		sd	s1,8(sp)
+ 176              		.cfi_offset 1, -8
+ 177              		.cfi_offset 8, -16
+ 178              		.cfi_offset 9, -24
+ 179 018c 13040102 		addi	s0,sp,32
+ 180              		.cfi_def_cfa 8, 0
+  29:src/kernel/mmanagement/slab_allocator.cpp **** 
+ 181              		.loc 1 29 22 is_stmt 1
+ 182              	.LVL10:
+ 183              	.LBB15:
+ 184              	.LBB16:
+ 185              		.file 3 "src/kernel/mmanagement/../../../h/../h/slab_allocator.h"
+   1:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #ifndef SLAB_ALLOCATOR_H
+   2:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #define SLAB_ALLOCATOR_H
+   3:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #include"../h/object_cache.h"
+   4:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #include"../lib/hw.h"
+   5:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #include "list.h"
+   6:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #include "noalloc_allocator.hpp"
+   7:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #include "kernel_funs.h"
+   8:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** 
+   9:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** #define __SLAB_ALLOCATION__(typename, ctor, dtor) \
+  10:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     void* operator new(size_t sz){ \
+  11:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         if(!cache){ \
+  12:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****             cache = new ObjectCache( #typename "_cache", sz, ctor, dtor); \
+  13:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         } \
+  14:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         return cache->alloc_obj(); \
+  15:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     } \
+  16:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     void* operator new[](size_t sz){ \
+  17:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         return SlabAllocator::getInstance().kmalloc(sz);\
+  18:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     }  \
+  19:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     void operator delete(void* ptr){ \
+  20:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         cache->free_obj(ptr); \
+  21:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     }  \
+  22:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     void operator delete[](void* ptr){ \
+  23:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         SlabAllocator::getInstance().kfree(ptr); \
+  24:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     }\
+  25:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** 
+  26:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** 
+  27:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** typedef class SlabAllocator{
+  28:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     typedef ObjectCache::SlabMetaType SMT;
+  29:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     friend ObjectCache;
+  30:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     friend Slab;
+  31:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     
+  32:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     static const char* buff_cache_names[13];
+  33:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     static SlabAllocator* allocator;
+  34:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** 
+  35:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     static const int MIN_BUFFER_ORDER = 5,
+  36:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****         MAX_BUFFER_ORDER = 17;
+  37:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     ObjectCache objcache_cache;
+GAS LISTING /tmp/ccN29RR0.s 			page 6
+
+
+  38:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     ObjectCache slab_cache;
+  39:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     ObjectCache smb_caches[13];
+  40:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     list_t* cache_head;
+  41:src/kernel/mmanagement/../../../h/../h/slab_allocator.h **** 
+  42:src/kernel/mmanagement/../../../h/../h/slab_allocator.h ****     __NOALLOC_OPERATORS__
+ 186              		.loc 3 42 5
+ 187 0190 13050053 		li	a0,1328
+ 188 0194 97000000 		call	_ZN7NoAlloc9mem_allocEm
+ 188      E7800000 
+ 189              	.LVL11:
+ 190 019c 93040500 		mv	s1,a0
+ 191              	.LVL12:
+ 192              	.LBE16:
+ 193              	.LBE15:
+  29:src/kernel/mmanagement/slab_allocator.cpp **** 
+ 194              		.loc 1 29 38 is_stmt 0
+ 195 01a0 97000000 		call	_ZN13SlabAllocatorC1Ev
+ 195      E7800000 
+ 196              	.LVL13:
+  29:src/kernel/mmanagement/slab_allocator.cpp **** 
+ 197              		.loc 1 29 32
+ 198 01a8 97070000 		sd	s1,_ZN13SlabAllocator9allocatorE,a5
+ 198      23B09700 
+  31:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 199              		.loc 1 31 5 is_stmt 1
+ 200              		.loc 1 32 1 is_stmt 0
+ 201 01b0 97070000 		lla	a5,_ZN13SlabAllocator9allocatorE
+ 201      93870700 
+ 202 01b8 03B50700 		ld	a0,0(a5)
+ 203 01bc 83308101 		ld	ra,24(sp)
+ 204              		.cfi_restore 1
+ 205 01c0 03340101 		ld	s0,16(sp)
+ 206              		.cfi_restore 8
+ 207              		.cfi_def_cfa 2, 32
+ 208 01c4 83348100 		ld	s1,8(sp)
+ 209              		.cfi_restore 9
+ 210 01c8 13010102 		addi	sp,sp,32
+ 211              		.cfi_def_cfa_offset 0
+ 212 01cc 67800000 		jr	ra
+ 213              		.cfi_endproc
+ 214              	.LFE119:
+ 216              		.align	2
+ 217              		.globl	_ZN13SlabAllocator11print_stateEc
+ 219              	_ZN13SlabAllocator11print_stateEc:
+ 220              	.LFB120:
+  33:src/kernel/mmanagement/slab_allocator.cpp **** 
+  34:src/kernel/mmanagement/slab_allocator.cpp **** 
+  35:src/kernel/mmanagement/slab_allocator.cpp **** 
+  36:src/kernel/mmanagement/slab_allocator.cpp **** void SlabAllocator::print_state(char flags){
+ 221              		.loc 1 36 44 is_stmt 1
+ 222              		.cfi_startproc
+ 223              	.LVL14:
+ 224 01d0 130101FD 		addi	sp,sp,-48
+ 225              		.cfi_def_cfa_offset 48
+ 226 01d4 23341102 		sd	ra,40(sp)
+ 227 01d8 23308102 		sd	s0,32(sp)
+ 228 01dc 233C9100 		sd	s1,24(sp)
+GAS LISTING /tmp/ccN29RR0.s 			page 7
+
+
+ 229 01e0 23382101 		sd	s2,16(sp)
+ 230 01e4 23343101 		sd	s3,8(sp)
+ 231              		.cfi_offset 1, -8
+ 232              		.cfi_offset 8, -16
+ 233              		.cfi_offset 9, -24
+ 234              		.cfi_offset 18, -32
+ 235              		.cfi_offset 19, -40
+ 236 01e8 13040103 		addi	s0,sp,48
+ 237              		.cfi_def_cfa 8, 0
+ 238 01ec 13090500 		mv	s2,a0
+ 239 01f0 93890500 		mv	s3,a1
+  37:src/kernel/mmanagement/slab_allocator.cpp **** 
+  38:src/kernel/mmanagement/slab_allocator.cpp ****     objcache_cache.printInfo(flags);
+ 240              		.loc 1 38 5
+ 241              		.loc 1 38 29 is_stmt 0
+ 242 01f4 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 242      E7800000 
+ 243              	.LVL15:
+  39:src/kernel/mmanagement/slab_allocator.cpp ****     slab_cache.printInfo(flags);
+ 244              		.loc 1 39 5 is_stmt 1
+ 245              		.loc 1 39 25 is_stmt 0
+ 246 01fc 93850900 		mv	a1,s3
+ 247 0200 13058905 		addi	a0,s2,88
+ 248 0204 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 248      E7800000 
+ 249              	.LVL16:
+  40:src/kernel/mmanagement/slab_allocator.cpp **** 
+  41:src/kernel/mmanagement/slab_allocator.cpp ****     for(int i = MIN_BUFFER_ORDER; i <= MAX_BUFFER_ORDER; i++)
+ 250              		.loc 1 41 5 is_stmt 1
+ 251              	.LBB17:
+ 252              		.loc 1 41 13 is_stmt 0
+ 253 020c 93045000 		li	s1,5
+ 254 0210 6F008002 		j	.L18
+ 255              	.LVL17:
+ 256              	.L20:
+  42:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i - MIN_BUFFER_ORDER].printInfo(flags);
+ 257              		.loc 1 42 9 is_stmt 1 discriminator 2
+ 258              		.loc 1 42 22 is_stmt 0 discriminator 2
+ 259 0214 1B85B4FF 		addiw	a0,s1,-5
+ 260              		.loc 1 42 51 discriminator 2
+ 261 0218 93078005 		li	a5,88
+ 262 021c 3305F502 		mul	a0,a0,a5
+ 263 0220 1305050B 		addi	a0,a0,176
+ 264 0224 93850900 		mv	a1,s3
+ 265 0228 3305A900 		add	a0,s2,a0
+ 266 022c 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 266      E7800000 
+ 267              	.LVL18:
+  41:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i - MIN_BUFFER_ORDER].printInfo(flags);
+ 268              		.loc 1 41 5 discriminator 2
+ 269 0234 9B841400 		addiw	s1,s1,1
+ 270              	.LVL19:
+ 271              	.L18:
+  41:src/kernel/mmanagement/slab_allocator.cpp ****         smb_caches[i - MIN_BUFFER_ORDER].printInfo(flags);
+ 272              		.loc 1 41 37 discriminator 3
+ 273 0238 93071001 		li	a5,17
+ 274 023c E3DC97FC 		ble	s1,a5,.L20
+GAS LISTING /tmp/ccN29RR0.s 			page 8
+
+
+ 275              	.LBE17:
+  43:src/kernel/mmanagement/slab_allocator.cpp **** 
+  44:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 276              		.loc 1 44 1
+ 277 0240 83308102 		ld	ra,40(sp)
+ 278              		.cfi_restore 1
+ 279 0244 03340102 		ld	s0,32(sp)
+ 280              		.cfi_restore 8
+ 281              		.cfi_def_cfa 2, 48
+ 282 0248 83348101 		ld	s1,24(sp)
+ 283              		.cfi_restore 9
+ 284              	.LVL20:
+ 285 024c 03390101 		ld	s2,16(sp)
+ 286              		.cfi_restore 18
+ 287              	.LVL21:
+ 288 0250 83398100 		ld	s3,8(sp)
+ 289              		.cfi_restore 19
+ 290 0254 13010103 		addi	sp,sp,48
+ 291              		.cfi_def_cfa_offset 0
+ 292 0258 67800000 		jr	ra
+ 293              		.cfi_endproc
+ 294              	.LFE120:
+ 296              		.align	2
+ 297              		.globl	_ZN13SlabAllocator7kmallocEm
+ 299              	_ZN13SlabAllocator7kmallocEm:
+ 300              	.LFB121:
+  45:src/kernel/mmanagement/slab_allocator.cpp **** 
+  46:src/kernel/mmanagement/slab_allocator.cpp **** 
+  47:src/kernel/mmanagement/slab_allocator.cpp **** 
+  48:src/kernel/mmanagement/slab_allocator.cpp **** void* SlabAllocator::kmalloc(size_t size){
+ 301              		.loc 1 48 42 is_stmt 1
+ 302              		.cfi_startproc
+ 303              	.LVL22:
+  49:src/kernel/mmanagement/slab_allocator.cpp ****     if(size == 0)
+ 304              		.loc 1 49 5
+ 305 025c 638A0506 		beq	a1,zero,.L24
+  48:src/kernel/mmanagement/slab_allocator.cpp ****     if(size == 0)
+ 306              		.loc 1 48 42 is_stmt 0
+ 307 0260 130101FE 		addi	sp,sp,-32
+ 308              		.cfi_def_cfa_offset 32
+ 309 0264 233C1100 		sd	ra,24(sp)
+ 310 0268 23388100 		sd	s0,16(sp)
+ 311 026c 23349100 		sd	s1,8(sp)
+ 312              		.cfi_offset 1, -8
+ 313              		.cfi_offset 8, -16
+ 314              		.cfi_offset 9, -24
+ 315 0270 13040102 		addi	s0,sp,32
+ 316              		.cfi_def_cfa 8, 0
+ 317 0274 93040500 		mv	s1,a0
+  50:src/kernel/mmanagement/slab_allocator.cpp ****         return nullptr;
+  51:src/kernel/mmanagement/slab_allocator.cpp ****     
+  52:src/kernel/mmanagement/slab_allocator.cpp ****     uchar size_order = log2(size - 1) + 1;
+ 318              		.loc 1 52 5 is_stmt 1
+ 319              		.loc 1 52 28 is_stmt 0
+ 320 0278 1385F5FF 		addi	a0,a1,-1
+ 321              	.LVL23:
+ 322 027c 97000000 		call	_Z4log2m
+GAS LISTING /tmp/ccN29RR0.s 			page 9
+
+
+ 322      E7800000 
+ 323              	.LVL24:
+ 324              		.loc 1 52 41
+ 325 0284 9B071500 		addiw	a5,a0,1
+ 326 0288 93F7F70F 		andi	a5,a5,0xff
+ 327              	.LVL25:
+  53:src/kernel/mmanagement/slab_allocator.cpp ****     if(size_order > 17)
+ 328              		.loc 1 53 5 is_stmt 1
+ 329 028c 13071001 		li	a4,17
+ 330 0290 6364F704 		bgtu	a5,a4,.L25
+  54:src/kernel/mmanagement/slab_allocator.cpp ****         return nullptr;
+  55:src/kernel/mmanagement/slab_allocator.cpp ****     
+  56:src/kernel/mmanagement/slab_allocator.cpp ****     if(size_order < 5)
+ 331              		.loc 1 56 5
+ 332 0294 13074000 		li	a4,4
+ 333 0298 6364F700 		bgtu	a5,a4,.L23
+  57:src/kernel/mmanagement/slab_allocator.cpp ****         size_order = 5;
+ 334              		.loc 1 57 20 is_stmt 0
+ 335 029c 93075000 		li	a5,5
+ 336              	.LVL26:
+ 337              	.L23:
+  58:src/kernel/mmanagement/slab_allocator.cpp **** 
+  59:src/kernel/mmanagement/slab_allocator.cpp ****     return smb_caches[size_order-5].alloc_obj();
+ 338              		.loc 1 59 5 is_stmt 1
+ 339              		.loc 1 59 33 is_stmt 0
+ 340 02a0 9B87B7FF 		addiw	a5,a5,-5
+ 341              	.LVL27:
+ 342              		.loc 1 59 46
+ 343 02a4 13058005 		li	a0,88
+ 344 02a8 B387A702 		mul	a5,a5,a0
+ 345 02ac 9387070B 		addi	a5,a5,176
+ 346 02b0 3385F400 		add	a0,s1,a5
+ 347 02b4 97000000 		call	_ZN11ObjectCache9alloc_objEv
+ 347      E7800000 
+ 348              	.LVL28:
+ 349              	.L21:
+  60:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 350              		.loc 1 60 1
+ 351 02bc 83308101 		ld	ra,24(sp)
+ 352              		.cfi_restore 1
+ 353 02c0 03340101 		ld	s0,16(sp)
+ 354              		.cfi_restore 8
+ 355              		.cfi_def_cfa 2, 32
+ 356 02c4 83348100 		ld	s1,8(sp)
+ 357              		.cfi_restore 9
+ 358              	.LVL29:
+ 359 02c8 13010102 		addi	sp,sp,32
+ 360              		.cfi_def_cfa_offset 0
+ 361 02cc 67800000 		jr	ra
+ 362              	.LVL30:
+ 363              	.L24:
+  50:src/kernel/mmanagement/slab_allocator.cpp ****     
+ 364              		.loc 1 50 16
+ 365 02d0 13050000 		li	a0,0
+ 366              	.LVL31:
+ 367              		.loc 1 60 1
+ 368 02d4 67800000 		ret
+GAS LISTING /tmp/ccN29RR0.s 			page 10
+
+
+ 369              	.LVL32:
+ 370              	.L25:
+ 371              		.cfi_def_cfa_register 8
+ 372              		.cfi_offset 1, -8
+ 373              		.cfi_offset 8, -16
+ 374              		.cfi_offset 9, -24
+  54:src/kernel/mmanagement/slab_allocator.cpp ****     
+ 375              		.loc 1 54 16
+ 376 02d8 13050000 		li	a0,0
+ 377 02dc 6FF01FFE 		j	.L21
+ 378              		.cfi_endproc
+ 379              	.LFE121:
+ 381              		.align	2
+ 382              		.globl	_ZN13SlabAllocator5kfreeEPv
+ 384              	_ZN13SlabAllocator5kfreeEPv:
+ 385              	.LFB122:
+  61:src/kernel/mmanagement/slab_allocator.cpp **** 
+  62:src/kernel/mmanagement/slab_allocator.cpp **** 
+  63:src/kernel/mmanagement/slab_allocator.cpp **** 
+  64:src/kernel/mmanagement/slab_allocator.cpp **** int SlabAllocator::kfree(void* p){
+ 386              		.loc 1 64 34 is_stmt 1
+ 387              		.cfi_startproc
+ 388              	.LVL33:
+ 389 02e0 130101FD 		addi	sp,sp,-48
+ 390              		.cfi_def_cfa_offset 48
+ 391 02e4 23341102 		sd	ra,40(sp)
+ 392 02e8 23308102 		sd	s0,32(sp)
+ 393 02ec 233C9100 		sd	s1,24(sp)
+ 394 02f0 23382101 		sd	s2,16(sp)
+ 395 02f4 23343101 		sd	s3,8(sp)
+ 396 02f8 23304101 		sd	s4,0(sp)
+ 397              		.cfi_offset 1, -8
+ 398              		.cfi_offset 8, -16
+ 399              		.cfi_offset 9, -24
+ 400              		.cfi_offset 18, -32
+ 401              		.cfi_offset 19, -40
+ 402              		.cfi_offset 20, -48
+ 403 02fc 13040103 		addi	s0,sp,48
+ 404              		.cfi_def_cfa 8, 0
+ 405 0300 138A0500 		mv	s4,a1
+  65:src/kernel/mmanagement/slab_allocator.cpp ****     for(ObjectCache& smb_cache: smb_caches){
+ 406              		.loc 1 65 5
+ 407              	.LBB18:
+ 408              		.loc 1 65 33 is_stmt 0
+ 409 0304 9304050B 		addi	s1,a0,176
+ 410              	.LVL34:
+ 411 0308 93098552 		addi	s3,a0,1320
+ 412              	.LVL35:
+ 413              	.L34:
+ 414              		.loc 1 65 33 discriminator 1
+ 415 030c 638A3403 		beq	s1,s3,.L35
+ 416              	.LVL36:
+  66:src/kernel/mmanagement/slab_allocator.cpp ****         if(!smb_cache.free_obj(p)){
+ 417              		.loc 1 66 9 is_stmt 1 discriminator 2
+ 418              		.loc 1 66 31 is_stmt 0 discriminator 2
+ 419 0310 93050A00 		mv	a1,s4
+ 420 0314 13850400 		mv	a0,s1
+GAS LISTING /tmp/ccN29RR0.s 			page 11
+
+
+ 421 0318 97000000 		call	_ZN11ObjectCache8free_objEPv
+ 421      E7800000 
+ 422              	.LVL37:
+ 423 0320 13090500 		mv	s2,a0
+ 424              		.loc 1 66 9 discriminator 2
+ 425 0324 63060500 		beq	a0,zero,.L37
+  65:src/kernel/mmanagement/slab_allocator.cpp ****     for(ObjectCache& smb_cache: smb_caches){
+ 426              		.loc 1 65 5 discriminator 3
+ 427 0328 93848405 		addi	s1,s1,88
+ 428              	.LVL38:
+ 429 032c 6FF01FFE 		j	.L34
+ 430              	.LVL39:
+ 431              	.L37:
+  67:src/kernel/mmanagement/slab_allocator.cpp ****             smb_cache.shrink();
+ 432              		.loc 1 67 13 is_stmt 1
+ 433              		.loc 1 67 29 is_stmt 0
+ 434 0330 13850400 		mv	a0,s1
+ 435 0334 97000000 		call	_ZN11ObjectCache6shrinkEv
+ 435      E7800000 
+ 436              	.LVL40:
+  68:src/kernel/mmanagement/slab_allocator.cpp ****             return 0;
+ 437              		.loc 1 68 13 is_stmt 1
+ 438              		.loc 1 68 20 is_stmt 0
+ 439 033c 6F008000 		j	.L32
+ 440              	.LVL41:
+ 441              	.L35:
+ 442              	.LBE18:
+  69:src/kernel/mmanagement/slab_allocator.cpp ****         }
+  70:src/kernel/mmanagement/slab_allocator.cpp ****     }
+  71:src/kernel/mmanagement/slab_allocator.cpp ****     return 1;
+ 443              		.loc 1 71 12
+ 444 0340 13091000 		li	s2,1
+ 445              	.L32:
+  72:src/kernel/mmanagement/slab_allocator.cpp **** }
+ 446              		.loc 1 72 1
+ 447 0344 13050900 		mv	a0,s2
+ 448 0348 83308102 		ld	ra,40(sp)
+ 449              		.cfi_restore 1
+ 450 034c 03340102 		ld	s0,32(sp)
+ 451              		.cfi_restore 8
+ 452              		.cfi_def_cfa 2, 48
+ 453 0350 83348101 		ld	s1,24(sp)
+ 454              		.cfi_restore 9
+ 455              	.LVL42:
+ 456 0354 03390101 		ld	s2,16(sp)
+ 457              		.cfi_restore 18
+ 458 0358 83398100 		ld	s3,8(sp)
+ 459              		.cfi_restore 19
+ 460              	.LVL43:
+ 461 035c 033A0100 		ld	s4,0(sp)
+ 462              		.cfi_restore 20
+ 463              	.LVL44:
+ 464 0360 13010103 		addi	sp,sp,48
+ 465              		.cfi_def_cfa_offset 0
+ 466 0364 67800000 		jr	ra
+ 467              		.cfi_endproc
+ 468              	.LFE122:
+GAS LISTING /tmp/ccN29RR0.s 			page 12
+
+
+ 470              		.globl	_ZN13SlabAllocator16buff_cache_namesE
+ 471              		.globl	_ZN13SlabAllocator9allocatorE
+ 472              		.data
+ 473              		.align	3
+ 474              		.set	.LANCHOR0,. + 0
+ 477              	_ZN13SlabAllocator16buff_cache_namesE:
+ 478 0000 00000000 		.dword	.LC2
+ 478      00000000 
+ 479 0008 00000000 		.dword	.LC3
+ 479      00000000 
+ 480 0010 00000000 		.dword	.LC4
+ 480      00000000 
+ 481 0018 00000000 		.dword	.LC5
+ 481      00000000 
+ 482 0020 00000000 		.dword	.LC6
+ 482      00000000 
+ 483 0028 00000000 		.dword	.LC7
+ 483      00000000 
+ 484 0030 00000000 		.dword	.LC8
+ 484      00000000 
+ 485 0038 00000000 		.dword	.LC9
+ 485      00000000 
+ 486 0040 00000000 		.dword	.LC10
+ 486      00000000 
+ 487 0048 00000000 		.dword	.LC11
+ 487      00000000 
+ 488 0050 00000000 		.dword	.LC12
+ 488      00000000 
+ 489 0058 00000000 		.dword	.LC13
+ 489      00000000 
+ 490 0060 00000000 		.dword	.LC14
+ 490      00000000 
+ 491              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 492              		.align	3
+ 493              	.LC0:
+ 494 0000 6F626A63 		.string	"objcache_cache"
+ 494      61636865 
+ 494      5F636163 
+ 494      686500
+ 495 000f 00       		.zero	1
+ 496              	.LC1:
+ 497 0010 736C6162 		.string	"slab_meta_cache"
+ 497      5F6D6574 
+ 497      615F6361 
+ 497      63686500 
+ 498              	.LC2:
+ 499 0020 736D625F 		.string	"smb_cache_5"
+ 499      63616368 
+ 499      655F3500 
+ 500 002c 00000000 		.zero	4
+ 501              	.LC3:
+ 502 0030 736D625F 		.string	"smb_cache_6"
+ 502      63616368 
+ 502      655F3600 
+ 503 003c 00000000 		.zero	4
+ 504              	.LC4:
+ 505 0040 736D625F 		.string	"smb_cache_7"
+GAS LISTING /tmp/ccN29RR0.s 			page 13
+
+
+ 505      63616368 
+ 505      655F3700 
+ 506 004c 00000000 		.zero	4
+ 507              	.LC5:
+ 508 0050 736D625F 		.string	"smb_cache_8"
+ 508      63616368 
+ 508      655F3800 
+ 509 005c 00000000 		.zero	4
+ 510              	.LC6:
+ 511 0060 736D625F 		.string	"smb_cache_9"
+ 511      63616368 
+ 511      655F3900 
+ 512 006c 00000000 		.zero	4
+ 513              	.LC7:
+ 514 0070 736D625F 		.string	"smb_cache_10"
+ 514      63616368 
+ 514      655F3130 
+ 514      00
+ 515 007d 000000   		.zero	3
+ 516              	.LC8:
+ 517 0080 736D625F 		.string	"smb_cache_11"
+ 517      63616368 
+ 517      655F3131 
+ 517      00
+ 518 008d 000000   		.zero	3
+ 519              	.LC9:
+ 520 0090 736D625F 		.string	"smb_cache_12"
+ 520      63616368 
+ 520      655F3132 
+ 520      00
+ 521 009d 000000   		.zero	3
+ 522              	.LC10:
+ 523 00a0 736D625F 		.string	"smb_cache_13"
+ 523      63616368 
+ 523      655F3133 
+ 523      00
+ 524 00ad 000000   		.zero	3
+ 525              	.LC11:
+ 526 00b0 736D625F 		.string	"smb_cache_14"
+ 526      63616368 
+ 526      655F3134 
+ 526      00
+ 527 00bd 000000   		.zero	3
+ 528              	.LC12:
+ 529 00c0 736D625F 		.string	"smb_cache_15"
+ 529      63616368 
+ 529      655F3135 
+ 529      00
+ 530 00cd 000000   		.zero	3
+ 531              	.LC13:
+ 532 00d0 736D625F 		.string	"smb_cache_16"
+ 532      63616368 
+ 532      655F3136 
+ 532      00
+ 533 00dd 000000   		.zero	3
+ 534              	.LC14:
+ 535 00e0 736D625F 		.string	"smb_cache_17"
+GAS LISTING /tmp/ccN29RR0.s 			page 14
+
+
+ 535      63616368 
+ 535      655F3137 
+ 535      00
+ 536              		.section	.sbss,"aw",@nobits
+ 537              		.align	3
+ 540              	_ZN13SlabAllocator9allocatorE:
+ 541 0000 00000000 		.zero	8
+ 541      00000000 
+ 542              		.text
+ 543              	.Letext0:
+ 544              		.file 4 "src/kernel/mmanagement/../../../h/../h/../lib/hw.h"
+ 545              		.file 5 "src/kernel/mmanagement/../../../h/../h/../h/../h/list.h"
+ 546              		.file 6 "src/kernel/mmanagement/../../../h/../h/noalloc_allocator.hpp"
+ 547              		.file 7 "src/kernel/mmanagement/../../../h/kernel_lib.h"
+ 548              		.file 8 "src/kernel/mmanagement/../../../h/../h/kernel_funs.h"
+GAS LISTING /tmp/ccN29RR0.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 slab_allocator.cpp
+     /tmp/ccN29RR0.s:12     .text:0000000000000000 _ZN13SlabAllocatorC2Ev
+     /tmp/ccN29RR0.s:16     .text:0000000000000000 .L0 
+     /tmp/ccN29RR0.s:18     .text:0000000000000000 .L0 
+     /tmp/ccN29RR0.s:19     .text:0000000000000004 .L0 
+     /tmp/ccN29RR0.s:25     .text:0000000000000018 .L0 
+     /tmp/ccN29RR0.s:26     .text:0000000000000018 .L0 
+     /tmp/ccN29RR0.s:27     .text:0000000000000018 .L0 
+     /tmp/ccN29RR0.s:28     .text:0000000000000018 .L0 
+     /tmp/ccN29RR0.s:29     .text:0000000000000018 .L0 
+     /tmp/ccN29RR0.s:31     .text:000000000000001c .L0 
+     /tmp/ccN29RR0.s:35     .text:0000000000000020 .L0 
+     /tmp/ccN29RR0.s:59     .text:0000000000000070 .L0 
+     /tmp/ccN29RR0.s:67     .text:0000000000000084 .L0 
+     /tmp/ccN29RR0.s:71     .text:000000000000008c .L0 
+     /tmp/ccN29RR0.s:74     .text:0000000000000090 .L0 
+     /tmp/ccN29RR0.s:79     .text:0000000000000098 .L0 
+     /tmp/ccN29RR0.s:80     .text:0000000000000098 .L0 
+     /tmp/ccN29RR0.s:82     .text:000000000000009c .L0 
+     /tmp/ccN29RR0.s:95     .text:00000000000000d0 .L0 
+     /tmp/ccN29RR0.s:121    .text:0000000000000134 .L0 
+     /tmp/ccN29RR0.s:125    .text:0000000000000138 .L0 
+     /tmp/ccN29RR0.s:130    .text:0000000000000140 .L0 
+     /tmp/ccN29RR0.s:131    .text:0000000000000144 .L0 
+     /tmp/ccN29RR0.s:133    .text:0000000000000148 .L0 
+     /tmp/ccN29RR0.s:134    .text:0000000000000148 .L0 
+     /tmp/ccN29RR0.s:136    .text:000000000000014c .L0 
+     /tmp/ccN29RR0.s:138    .text:0000000000000150 .L0 
+     /tmp/ccN29RR0.s:141    .text:0000000000000154 .L0 
+     /tmp/ccN29RR0.s:144    .text:0000000000000158 .L0 
+     /tmp/ccN29RR0.s:146    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:12     .text:0000000000000000 _ZN13SlabAllocatorC1Ev
+     /tmp/ccN29RR0.s:154    .text:000000000000015c _ZN13SlabAllocator11getInstanceEv
+     /tmp/ccN29RR0.s:157    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:158    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:159    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:540    .sbss:0000000000000000 _ZN13SlabAllocator9allocatorE
+     /tmp/ccN29RR0.s:160    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:163    .text:0000000000000168 .L0 
+     /tmp/ccN29RR0.s:165    .text:000000000000016c .L0 
+     /tmp/ccN29RR0.s:166    .text:000000000000016c .L0 
+     /tmp/ccN29RR0.s:171    .text:000000000000017c .L0 
+     /tmp/ccN29RR0.s:172    .text:0000000000000180 .L0 
+     /tmp/ccN29RR0.s:176    .text:000000000000018c .L0 
+     /tmp/ccN29RR0.s:177    .text:000000000000018c .L0 
+     /tmp/ccN29RR0.s:178    .text:000000000000018c .L0 
+     /tmp/ccN29RR0.s:180    .text:0000000000000190 .L0 
+     /tmp/ccN29RR0.s:186    .text:0000000000000190 .L0 
+     /tmp/ccN29RR0.s:187    .text:0000000000000190 .L0 
+     /tmp/ccN29RR0.s:195    .text:00000000000001a0 .L0 
+     /tmp/ccN29RR0.s:198    .text:00000000000001a8 .L0 
+     /tmp/ccN29RR0.s:200    .text:00000000000001b0 .L0 
+     /tmp/ccN29RR0.s:201    .text:00000000000001b0 .L0 
+     /tmp/ccN29RR0.s:204    .text:00000000000001c0 .L0 
+     /tmp/ccN29RR0.s:206    .text:00000000000001c4 .L0 
+     /tmp/ccN29RR0.s:207    .text:00000000000001c4 .L0 
+GAS LISTING /tmp/ccN29RR0.s 			page 16
+
+
+     /tmp/ccN29RR0.s:209    .text:00000000000001c8 .L0 
+     /tmp/ccN29RR0.s:211    .text:00000000000001cc .L0 
+     /tmp/ccN29RR0.s:213    .text:00000000000001d0 .L0 
+     /tmp/ccN29RR0.s:219    .text:00000000000001d0 _ZN13SlabAllocator11print_stateEc
+     /tmp/ccN29RR0.s:222    .text:00000000000001d0 .L0 
+     /tmp/ccN29RR0.s:224    .text:00000000000001d0 .L0 
+     /tmp/ccN29RR0.s:225    .text:00000000000001d4 .L0 
+     /tmp/ccN29RR0.s:231    .text:00000000000001e8 .L0 
+     /tmp/ccN29RR0.s:232    .text:00000000000001e8 .L0 
+     /tmp/ccN29RR0.s:233    .text:00000000000001e8 .L0 
+     /tmp/ccN29RR0.s:234    .text:00000000000001e8 .L0 
+     /tmp/ccN29RR0.s:235    .text:00000000000001e8 .L0 
+     /tmp/ccN29RR0.s:237    .text:00000000000001ec .L0 
+     /tmp/ccN29RR0.s:241    .text:00000000000001f4 .L0 
+     /tmp/ccN29RR0.s:242    .text:00000000000001f4 .L0 
+     /tmp/ccN29RR0.s:245    .text:00000000000001fc .L0 
+     /tmp/ccN29RR0.s:246    .text:00000000000001fc .L0 
+     /tmp/ccN29RR0.s:252    .text:000000000000020c .L0 
+     /tmp/ccN29RR0.s:253    .text:000000000000020c .L0 
+     /tmp/ccN29RR0.s:258    .text:0000000000000214 .L0 
+     /tmp/ccN29RR0.s:259    .text:0000000000000214 .L0 
+     /tmp/ccN29RR0.s:261    .text:0000000000000218 .L0 
+     /tmp/ccN29RR0.s:269    .text:0000000000000234 .L0 
+     /tmp/ccN29RR0.s:273    .text:0000000000000238 .L0 
+     /tmp/ccN29RR0.s:277    .text:0000000000000240 .L0 
+     /tmp/ccN29RR0.s:278    .text:0000000000000244 .L0 
+     /tmp/ccN29RR0.s:280    .text:0000000000000248 .L0 
+     /tmp/ccN29RR0.s:281    .text:0000000000000248 .L0 
+     /tmp/ccN29RR0.s:283    .text:000000000000024c .L0 
+     /tmp/ccN29RR0.s:286    .text:0000000000000250 .L0 
+     /tmp/ccN29RR0.s:289    .text:0000000000000254 .L0 
+     /tmp/ccN29RR0.s:291    .text:0000000000000258 .L0 
+     /tmp/ccN29RR0.s:293    .text:000000000000025c .L0 
+     /tmp/ccN29RR0.s:299    .text:000000000000025c _ZN13SlabAllocator7kmallocEm
+     /tmp/ccN29RR0.s:302    .text:000000000000025c .L0 
+     /tmp/ccN29RR0.s:304    .text:000000000000025c .L0 
+     /tmp/ccN29RR0.s:305    .text:000000000000025c .L0 
+     /tmp/ccN29RR0.s:307    .text:0000000000000260 .L0 
+     /tmp/ccN29RR0.s:308    .text:0000000000000264 .L0 
+     /tmp/ccN29RR0.s:312    .text:0000000000000270 .L0 
+     /tmp/ccN29RR0.s:313    .text:0000000000000270 .L0 
+     /tmp/ccN29RR0.s:314    .text:0000000000000270 .L0 
+     /tmp/ccN29RR0.s:316    .text:0000000000000274 .L0 
+     /tmp/ccN29RR0.s:319    .text:0000000000000278 .L0 
+     /tmp/ccN29RR0.s:320    .text:0000000000000278 .L0 
+     /tmp/ccN29RR0.s:325    .text:0000000000000284 .L0 
+     /tmp/ccN29RR0.s:329    .text:000000000000028c .L0 
+     /tmp/ccN29RR0.s:332    .text:0000000000000294 .L0 
+     /tmp/ccN29RR0.s:335    .text:000000000000029c .L0 
+     /tmp/ccN29RR0.s:339    .text:00000000000002a0 .L0 
+     /tmp/ccN29RR0.s:340    .text:00000000000002a0 .L0 
+     /tmp/ccN29RR0.s:343    .text:00000000000002a4 .L0 
+     /tmp/ccN29RR0.s:351    .text:00000000000002bc .L0 
+     /tmp/ccN29RR0.s:352    .text:00000000000002c0 .L0 
+     /tmp/ccN29RR0.s:354    .text:00000000000002c4 .L0 
+     /tmp/ccN29RR0.s:355    .text:00000000000002c4 .L0 
+     /tmp/ccN29RR0.s:357    .text:00000000000002c8 .L0 
+GAS LISTING /tmp/ccN29RR0.s 			page 17
+
+
+     /tmp/ccN29RR0.s:360    .text:00000000000002cc .L0 
+     /tmp/ccN29RR0.s:365    .text:00000000000002d0 .L0 
+     /tmp/ccN29RR0.s:368    .text:00000000000002d4 .L0 
+     /tmp/ccN29RR0.s:371    .text:00000000000002d8 .L0 
+     /tmp/ccN29RR0.s:372    .text:00000000000002d8 .L0 
+     /tmp/ccN29RR0.s:373    .text:00000000000002d8 .L0 
+     /tmp/ccN29RR0.s:374    .text:00000000000002d8 .L0 
+     /tmp/ccN29RR0.s:376    .text:00000000000002d8 .L0 
+     /tmp/ccN29RR0.s:378    .text:00000000000002e0 .L0 
+     /tmp/ccN29RR0.s:384    .text:00000000000002e0 _ZN13SlabAllocator5kfreeEPv
+     /tmp/ccN29RR0.s:387    .text:00000000000002e0 .L0 
+     /tmp/ccN29RR0.s:389    .text:00000000000002e0 .L0 
+     /tmp/ccN29RR0.s:390    .text:00000000000002e4 .L0 
+     /tmp/ccN29RR0.s:397    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:398    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:399    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:400    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:401    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:402    .text:00000000000002fc .L0 
+     /tmp/ccN29RR0.s:404    .text:0000000000000300 .L0 
+     /tmp/ccN29RR0.s:408    .text:0000000000000304 .L0 
+     /tmp/ccN29RR0.s:409    .text:0000000000000304 .L0 
+     /tmp/ccN29RR0.s:415    .text:000000000000030c .L0 
+     /tmp/ccN29RR0.s:418    .text:0000000000000310 .L0 
+     /tmp/ccN29RR0.s:419    .text:0000000000000310 .L0 
+     /tmp/ccN29RR0.s:425    .text:0000000000000324 .L0 
+     /tmp/ccN29RR0.s:427    .text:0000000000000328 .L0 
+     /tmp/ccN29RR0.s:433    .text:0000000000000330 .L0 
+     /tmp/ccN29RR0.s:434    .text:0000000000000330 .L0 
+     /tmp/ccN29RR0.s:438    .text:000000000000033c .L0 
+     /tmp/ccN29RR0.s:439    .text:000000000000033c .L0 
+     /tmp/ccN29RR0.s:444    .text:0000000000000340 .L0 
+     /tmp/ccN29RR0.s:447    .text:0000000000000344 .L0 
+     /tmp/ccN29RR0.s:449    .text:000000000000034c .L0 
+     /tmp/ccN29RR0.s:451    .text:0000000000000350 .L0 
+     /tmp/ccN29RR0.s:452    .text:0000000000000350 .L0 
+     /tmp/ccN29RR0.s:454    .text:0000000000000354 .L0 
+     /tmp/ccN29RR0.s:457    .text:0000000000000358 .L0 
+     /tmp/ccN29RR0.s:459    .text:000000000000035c .L0 
+     /tmp/ccN29RR0.s:462    .text:0000000000000360 .L0 
+     /tmp/ccN29RR0.s:465    .text:0000000000000364 .L0 
+     /tmp/ccN29RR0.s:467    .text:0000000000000368 .L0 
+     /tmp/ccN29RR0.s:477    .data:0000000000000000 _ZN13SlabAllocator16buff_cache_namesE
+     /tmp/ccN29RR0.s:474    .data:0000000000000000 .LANCHOR0
+     /tmp/ccN29RR0.s:549    .text:0000000000000368 .L0 
+     /tmp/ccN29RR0.s:493    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccN29RR0.s:39     .text:0000000000000030 .L0 
+     /tmp/ccN29RR0.s:496    .rodata.str1.8:0000000000000010 .LC1
+     /tmp/ccN29RR0.s:46     .text:0000000000000050 .L0 
+     /tmp/ccN29RR0.s:83     .text:00000000000000a0 .L0 
+     /tmp/ccN29RR0.s:160    .text:000000000000015c .L0 
+     /tmp/ccN29RR0.s:166    .text:000000000000016c .L0 
+     /tmp/ccN29RR0.s:198    .text:00000000000001a8 .L0 
+     /tmp/ccN29RR0.s:201    .text:00000000000001b0 .L0 
+     /tmp/ccN29RR0.s:69     .text:000000000000008c .L3
+     /tmp/ccN29RR0.s:53     .text:0000000000000070 .L7
+     /tmp/ccN29RR0.s:123    .text:0000000000000138 .L2
+GAS LISTING /tmp/ccN29RR0.s 			page 18
+
+
+     /tmp/ccN29RR0.s:77     .text:0000000000000098 .L8
+     /tmp/ccN29RR0.s:169    .text:000000000000017c .L15
+     /tmp/ccN29RR0.s:271    .text:0000000000000238 .L18
+     /tmp/ccN29RR0.s:256    .text:0000000000000214 .L20
+     /tmp/ccN29RR0.s:363    .text:00000000000002d0 .L24
+     /tmp/ccN29RR0.s:370    .text:00000000000002d8 .L25
+     /tmp/ccN29RR0.s:337    .text:00000000000002a0 .L23
+     /tmp/ccN29RR0.s:349    .text:00000000000002bc .L21
+     /tmp/ccN29RR0.s:441    .text:0000000000000340 .L35
+     /tmp/ccN29RR0.s:431    .text:0000000000000330 .L37
+     /tmp/ccN29RR0.s:413    .text:000000000000030c .L34
+     /tmp/ccN29RR0.s:445    .text:0000000000000344 .L32
+     /tmp/ccN29RR0.s:498    .rodata.str1.8:0000000000000020 .LC2
+     /tmp/ccN29RR0.s:501    .rodata.str1.8:0000000000000030 .LC3
+     /tmp/ccN29RR0.s:504    .rodata.str1.8:0000000000000040 .LC4
+     /tmp/ccN29RR0.s:507    .rodata.str1.8:0000000000000050 .LC5
+     /tmp/ccN29RR0.s:510    .rodata.str1.8:0000000000000060 .LC6
+     /tmp/ccN29RR0.s:513    .rodata.str1.8:0000000000000070 .LC7
+     /tmp/ccN29RR0.s:516    .rodata.str1.8:0000000000000080 .LC8
+     /tmp/ccN29RR0.s:519    .rodata.str1.8:0000000000000090 .LC9
+     /tmp/ccN29RR0.s:522    .rodata.str1.8:00000000000000a0 .LC10
+     /tmp/ccN29RR0.s:525    .rodata.str1.8:00000000000000b0 .LC11
+     /tmp/ccN29RR0.s:528    .rodata.str1.8:00000000000000c0 .LC12
+     /tmp/ccN29RR0.s:531    .rodata.str1.8:00000000000000d0 .LC13
+     /tmp/ccN29RR0.s:534    .rodata.str1.8:00000000000000e0 .LC14
+     /tmp/ccN29RR0.s:2255   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccN29RR0.s:3880   .debug_str:0000000000000470 .LASF161
+     /tmp/ccN29RR0.s:3884   .debug_str:0000000000000556 .LASF162
+     /tmp/ccN29RR0.s:4000   .debug_str:0000000000000909 .LASF163
+     /tmp/ccN29RR0.s:8      .text:0000000000000000 .Ltext0
+     /tmp/ccN29RR0.s:543    .text:0000000000000368 .Letext0
+     /tmp/ccN29RR0.s:3742   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccN29RR0.s:3772   .debug_str:00000000000000c2 .LASF0
+     /tmp/ccN29RR0.s:4062   .debug_str:0000000000000abb .LASF1
+     /tmp/ccN29RR0.s:4060   .debug_str:0000000000000ab5 .LASF3
+     /tmp/ccN29RR0.s:4030   .debug_str:00000000000009c8 .LASF2
+     /tmp/ccN29RR0.s:4006   .debug_str:000000000000093d .LASF4
+     /tmp/ccN29RR0.s:4018   .debug_str:0000000000000981 .LASF5
+     /tmp/ccN29RR0.s:3846   .debug_str:000000000000033c .LASF6
+     /tmp/ccN29RR0.s:3890   .debug_str:000000000000059c .LASF7
+     /tmp/ccN29RR0.s:3980   .debug_str:0000000000000877 .LASF8
+     /tmp/ccN29RR0.s:3788   .debug_str:000000000000010e .LASF9
+     /tmp/ccN29RR0.s:4054   .debug_str:0000000000000a74 .LASF10
+     /tmp/ccN29RR0.s:3850   .debug_str:000000000000034b .LASF11
+     /tmp/ccN29RR0.s:3812   .debug_str:00000000000001f3 .LASF12
+     /tmp/ccN29RR0.s:3900   .debug_str:00000000000005ec .LASF13
+     /tmp/ccN29RR0.s:3854   .debug_str:0000000000000368 .LASF14
+     /tmp/ccN29RR0.s:3996   .debug_str:00000000000008f8 .LASF15
+     /tmp/ccN29RR0.s:3856   .debug_str:0000000000000378 .LASF16
+     /tmp/ccN29RR0.s:3840   .debug_str:0000000000000301 .LASF17
+     /tmp/ccN29RR0.s:4074   .debug_str:0000000000000b46 .LASF64
+     /tmp/ccN29RR0.s:3774   .debug_str:00000000000000cf .LASF18
+     /tmp/ccN29RR0.s:3796   .debug_str:000000000000013c .LASF19
+     /tmp/ccN29RR0.s:3802   .debug_str:0000000000000197 .LASF66
+     /tmp/ccN29RR0.s:3986   .debug_str:00000000000008b5 .LASF25
+     /tmp/ccN29RR0.s:3876   .debug_str:000000000000045a .LASF164
+     /tmp/ccN29RR0.s:3776   .debug_str:00000000000000d4 .LASF20
+GAS LISTING /tmp/ccN29RR0.s 			page 19
+
+
+     /tmp/ccN29RR0.s:4036   .debug_str:00000000000009e8 .LASF21
+     /tmp/ccN29RR0.s:4070   .debug_str:0000000000000b24 .LASF22
+     /tmp/ccN29RR0.s:3764   .debug_str:000000000000008d .LASF23
+     /tmp/ccN29RR0.s:3910   .debug_str:0000000000000639 .LASF24
+     /tmp/ccN29RR0.s:3834   .debug_str:00000000000002ae .LASF30
+     /tmp/ccN29RR0.s:3800   .debug_str:0000000000000164 .LASF27
+     /tmp/ccN29RR0.s:3960   .debug_str:00000000000007e8 .LASF26
+     /tmp/ccN29RR0.s:3964   .debug_str:0000000000000809 .LASF28
+     /tmp/ccN29RR0.s:3952   .debug_str:00000000000007a7 .LASF38
+     /tmp/ccN29RR0.s:3864   .debug_str:00000000000003eb .LASF40
+     /tmp/ccN29RR0.s:3872   .debug_str:0000000000000432 .LASF29
+     /tmp/ccN29RR0.s:3978   .debug_str:000000000000085a .LASF31
+     /tmp/ccN29RR0.s:3892   .debug_str:00000000000005af .LASF32
+     /tmp/ccN29RR0.s:3942   .debug_str:000000000000071c .LASF33
+     /tmp/ccN29RR0.s:3954   .debug_str:00000000000007b7 .LASF34
+     /tmp/ccN29RR0.s:3914   .debug_str:000000000000064e .LASF35
+     /tmp/ccN29RR0.s:4032   .debug_str:00000000000009d6 .LASF36
+     /tmp/ccN29RR0.s:3948   .debug_str:0000000000000778 .LASF37
+     /tmp/ccN29RR0.s:4052   .debug_str:0000000000000a67 .LASF39
+     /tmp/ccN29RR0.s:3944   .debug_str:0000000000000739 .LASF41
+     /tmp/ccN29RR0.s:3760   .debug_str:0000000000000055 .LASF42
+     /tmp/ccN29RR0.s:3946   .debug_str:000000000000075b .LASF43
+     /tmp/ccN29RR0.s:4002   .debug_str:000000000000092c .LASF44
+     /tmp/ccN29RR0.s:3790   .debug_str:000000000000011e .LASF45
+     /tmp/ccN29RR0.s:4026   .debug_str:00000000000009bb .LASF46
+     /tmp/ccN29RR0.s:4028   .debug_str:00000000000009c3 .LASF47
+     /tmp/ccN29RR0.s:3930   .debug_str:00000000000006b7 .LASF48
+     /tmp/ccN29RR0.s:3922   .debug_str:0000000000000695 .LASF49
+     /tmp/ccN29RR0.s:4022   .debug_str:00000000000009a1 .LASF50
+     /tmp/ccN29RR0.s:3988   .debug_str:00000000000008c1 .LASF51
+     /tmp/ccN29RR0.s:3778   .debug_str:00000000000000d9 .LASF52
+     /tmp/ccN29RR0.s:3972   .debug_str:0000000000000846 .LASF53
+     /tmp/ccN29RR0.s:4046   .debug_str:0000000000000a3b .LASF54
+     /tmp/ccN29RR0.s:3940   .debug_str:00000000000006f6 .LASF55
+     /tmp/ccN29RR0.s:3934   .debug_str:00000000000006cc .LASF56
+     /tmp/ccN29RR0.s:3994   .debug_str:00000000000008d9 .LASF57
+     /tmp/ccN29RR0.s:3866   .debug_str:0000000000000401 .LASF58
+     /tmp/ccN29RR0.s:3798   .debug_str:0000000000000141 .LASF59
+     /tmp/ccN29RR0.s:4020   .debug_str:0000000000000993 .LASF60
+     /tmp/ccN29RR0.s:3860   .debug_str:00000000000003ba .LASF61
+     /tmp/ccN29RR0.s:4058   .debug_str:0000000000000aa4 .LASF62
+     /tmp/ccN29RR0.s:3838   .debug_str:00000000000002d6 .LASF63
+     /tmp/ccN29RR0.s:4048   .debug_str:0000000000000a45 .LASF65
+     /tmp/ccN29RR0.s:3858   .debug_str:000000000000038e .LASF67
+     /tmp/ccN29RR0.s:3886   .debug_str:0000000000000580 .LASF68
+     /tmp/ccN29RR0.s:3998   .debug_str:0000000000000904 .LASF69
+     /tmp/ccN29RR0.s:4082   .debug_str:0000000000000b78 .LASF108
+     /tmp/ccN29RR0.s:3974   .debug_str:000000000000084b .LASF70
+     /tmp/ccN29RR0.s:3782   .debug_str:00000000000000ed .LASF71
+     /tmp/ccN29RR0.s:3916   .debug_str:0000000000000668 .LASF72
+     /tmp/ccN29RR0.s:4008   .debug_str:0000000000000944 .LASF73
+     /tmp/ccN29RR0.s:3816   .debug_str:0000000000000212 .LASF74
+     /tmp/ccN29RR0.s:3918   .debug_str:000000000000066e .LASF75
+     /tmp/ccN29RR0.s:4080   .debug_str:0000000000000b70 .LASF76
+     /tmp/ccN29RR0.s:4068   .debug_str:0000000000000b11 .LASF77
+     /tmp/ccN29RR0.s:3970   .debug_str:000000000000083c .LASF78
+     /tmp/ccN29RR0.s:3894   .debug_str:00000000000005b8 .LASF79
+GAS LISTING /tmp/ccN29RR0.s 			page 20
+
+
+     /tmp/ccN29RR0.s:3848   .debug_str:0000000000000343 .LASF80
+     /tmp/ccN29RR0.s:3956   .debug_str:00000000000007be .LASF81
+     /tmp/ccN29RR0.s:3826   .debug_str:000000000000025f .LASF82
+     /tmp/ccN29RR0.s:3920   .debug_str:000000000000068b .LASF122
+     /tmp/ccN29RR0.s:3810   .debug_str:00000000000001e3 .LASF165
+     /tmp/ccN29RR0.s:3744   .debug_str:0000000000000000 .LASF83
+     /tmp/ccN29RR0.s:4076   .debug_str:0000000000000b4d .LASF84
+     /tmp/ccN29RR0.s:3976   .debug_str:0000000000000852 .LASF85
+     /tmp/ccN29RR0.s:3962   .debug_str:00000000000007f5 .LASF86
+     /tmp/ccN29RR0.s:3750   .debug_str:0000000000000022 .LASF87
+     /tmp/ccN29RR0.s:4078   .debug_str:0000000000000b60 .LASF88
+     /tmp/ccN29RR0.s:3870   .debug_str:000000000000042d .LASF89
+     /tmp/ccN29RR0.s:3814   .debug_str:0000000000000202 .LASF90
+     /tmp/ccN29RR0.s:3792   .debug_str:0000000000000124 .LASF91
+     /tmp/ccN29RR0.s:3828   .debug_str:000000000000026c .LASF92
+     /tmp/ccN29RR0.s:3878   .debug_str:0000000000000467 .LASF93
+     /tmp/ccN29RR0.s:3896   .debug_str:00000000000005cd .LASF94
+     /tmp/ccN29RR0.s:3992   .debug_str:00000000000008d4 .LASF95
+     /tmp/ccN29RR0.s:3786   .debug_str:0000000000000106 .LASF96
+     /tmp/ccN29RR0.s:3756   .debug_str:0000000000000042 .LASF97
+     /tmp/ccN29RR0.s:3752   .debug_str:0000000000000027 .LASF98
+     /tmp/ccN29RR0.s:4012   .debug_str:000000000000095b .LASF101
+     /tmp/ccN29RR0.s:3832   .debug_str:000000000000029b .LASF103
+     /tmp/ccN29RR0.s:3852   .debug_str:000000000000035a .LASF129
+     /tmp/ccN29RR0.s:3868   .debug_str:0000000000000410 .LASF131
+     /tmp/ccN29RR0.s:3748   .debug_str:0000000000000018 .LASF99
+     /tmp/ccN29RR0.s:4072   .debug_str:0000000000000b2e .LASF100
+     /tmp/ccN29RR0.s:3806   .debug_str:00000000000001c2 .LASF102
+     /tmp/ccN29RR0.s:3804   .debug_str:00000000000001ab .LASF104
+     /tmp/ccN29RR0.s:4040   .debug_str:0000000000000a02 .LASF105
+     /tmp/ccN29RR0.s:4038   .debug_str:00000000000009f1 .LASF106
+     /tmp/ccN29RR0.s:3754   .debug_str:0000000000000038 .LASF107
+     /tmp/ccN29RR0.s:3820   .debug_str:0000000000000237 .LASF109
+     /tmp/ccN29RR0.s:3908   .debug_str:0000000000000628 .LASF110
+     /tmp/ccN29RR0.s:3938   .debug_str:00000000000006e7 .LASF111
+     /tmp/ccN29RR0.s:3912   .debug_str:0000000000000643 .LASF112
+     /tmp/ccN29RR0.s:3932   .debug_str:00000000000006c1 .LASF113
+     /tmp/ccN29RR0.s:3758   .debug_str:000000000000004a .LASF114
+     /tmp/ccN29RR0.s:4016   .debug_str:000000000000096a .LASF115
+     /tmp/ccN29RR0.s:3746   .debug_str:0000000000000008 .LASF116
+     /tmp/ccN29RR0.s:3768   .debug_str:000000000000009b .LASF117
+     /tmp/ccN29RR0.s:3808   .debug_str:00000000000001cb .LASF118
+     /tmp/ccN29RR0.s:3836   .debug_str:00000000000002c3 .LASF119
+     /tmp/ccN29RR0.s:3830   .debug_str:0000000000000283 .LASF120
+     /tmp/ccN29RR0.s:3888   .debug_str:0000000000000585 .LASF121
+     /tmp/ccN29RR0.s:3968   .debug_str:0000000000000823 .LASF123
+     /tmp/ccN29RR0.s:3818   .debug_str:000000000000021d .LASF124
+     /tmp/ccN29RR0.s:3794   .debug_str:000000000000012f .LASF125
+     /tmp/ccN29RR0.s:3762   .debug_str:000000000000005e .LASF126
+     /tmp/ccN29RR0.s:3862   .debug_str:00000000000003dd .LASF127
+     /tmp/ccN29RR0.s:4066   .debug_str:0000000000000ae0 .LASF128
+     /tmp/ccN29RR0.s:3784   .debug_str:00000000000000fa .LASF130
+     /tmp/ccN29RR0.s:3882   .debug_str:0000000000000534 .LASF132
+     /tmp/ccN29RR0.s:4004   .debug_str:0000000000000931 .LASF133
+     /tmp/ccN29RR0.s:4056   .debug_str:0000000000000a82 .LASF134
+     /tmp/ccN29RR0.s:4034   .debug_str:00000000000009e0 .LASF135
+     /tmp/ccN29RR0.s:4044   .debug_str:0000000000000a1e .LASF136
+GAS LISTING /tmp/ccN29RR0.s 			page 21
+
+
+     /tmp/ccN29RR0.s:3928   .debug_str:00000000000006b1 .LASF137
+     /tmp/ccN29RR0.s:3842   .debug_str:0000000000000317 .LASF138
+     /tmp/ccN29RR0.s:4010   .debug_str:0000000000000949 .LASF139
+     /tmp/ccN29RR0.s:3904   .debug_str:0000000000000611 .LASF140
+     /tmp/ccN29RR0.s:3950   .debug_str:0000000000000795 .LASF141
+     /tmp/ccN29RR0.s:4050   .debug_str:0000000000000a57 .LASF142
+     /tmp/ccN29RR0.s:3770   .debug_str:00000000000000b2 .LASF143
+     /tmp/ccN29RR0.s:3990   .debug_str:00000000000008c6 .LASF144
+     /tmp/ccN29RR0.s:3780   .debug_str:00000000000000de .LASF145
+     /tmp/ccN29RR0.s:3926   .debug_str:00000000000006a4 .LASF146
+     /tmp/ccN29RR0.s:4024   .debug_str:00000000000009ab .LASF147
+     /tmp/ccN29RR0.s:4042   .debug_str:0000000000000a10 .LASF148
+     /tmp/ccN29RR0.s:4064   .debug_str:0000000000000ace .LASF149
+     /tmp/ccN29RR0.s:3936   .debug_str:00000000000006d7 .LASF150
+     /tmp/ccN29RR0.s:3874   .debug_str:000000000000043c .LASF151
+     /tmp/ccN29RR0.s:3982   .debug_str:000000000000088a .LASF152
+     /tmp/ccN29RR0.s:385    .text:00000000000002e0 .LFB122
+     /tmp/ccN29RR0.s:468    .text:0000000000000368 .LFE122
+     /tmp/ccN29RR0.s:3966   .debug_str:000000000000081e .LASF157
+     /tmp/ccN29RR0.s:3475   .debug_loc:0000000000000000 .LLST10
+     /tmp/ccN29RR0.s:3495   .debug_loc:000000000000004f .LLST11
+     /tmp/ccN29RR0.s:407    .text:0000000000000304 .LBB18
+     /tmp/ccN29RR0.s:442    .text:0000000000000340 .LBE18
+     /tmp/ccN29RR0.s:3898   .debug_str:00000000000005e2 .LASF153
+     /tmp/ccN29RR0.s:3513   .debug_loc:000000000000009b .LLST12
+     /tmp/ccN29RR0.s:3822   .debug_str:0000000000000248 .LASF154
+     /tmp/ccN29RR0.s:3530   .debug_loc:00000000000000e7 .LLST13
+     /tmp/ccN29RR0.s:3906   .debug_str:000000000000061c .LASF155
+     /tmp/ccN29RR0.s:3552   .debug_loc:0000000000000139 .LLST14
+     /tmp/ccN29RR0.s:4014   .debug_str:0000000000000960 .LASF156
+     /tmp/ccN29RR0.s:3559   .debug_loc:000000000000015c .LLST15
+     /tmp/ccN29RR0.s:422    .text:0000000000000320 .LVL37
+     /tmp/ccN29RR0.s:436    .text:000000000000033c .LVL40
+     /tmp/ccN29RR0.s:300    .text:000000000000025c .LFB121
+     /tmp/ccN29RR0.s:379    .text:00000000000002e0 .LFE121
+     /tmp/ccN29RR0.s:3575   .debug_loc:0000000000000198 .LLST7
+     /tmp/ccN29RR0.s:3924   .debug_str:000000000000069f .LASF158
+     /tmp/ccN29RR0.s:3608   .debug_loc:0000000000000220 .LLST8
+     /tmp/ccN29RR0.s:3824   .debug_str:0000000000000254 .LASF159
+     /tmp/ccN29RR0.s:3633   .debug_loc:0000000000000282 .LLST9
+     /tmp/ccN29RR0.s:323    .text:0000000000000284 .LVL24
+     /tmp/ccN29RR0.s:348    .text:00000000000002bc .LVL28
+     /tmp/ccN29RR0.s:220    .text:00000000000001d0 .LFB120
+     /tmp/ccN29RR0.s:294    .text:000000000000025c .LFE120
+     /tmp/ccN29RR0.s:3644   .debug_loc:00000000000002b8 .LLST4
+     /tmp/ccN29RR0.s:3766   .debug_str:0000000000000095 .LASF160
+     /tmp/ccN29RR0.s:3662   .debug_loc:0000000000000304 .LLST5
+     /tmp/ccN29RR0.s:251    .text:000000000000020c .LBB17
+     /tmp/ccN29RR0.s:275    .text:0000000000000240 .LBE17
+     /tmp/ccN29RR0.s:3676   .debug_loc:000000000000033d .LLST6
+     /tmp/ccN29RR0.s:267    .text:0000000000000234 .LVL18
+     /tmp/ccN29RR0.s:243    .text:00000000000001fc .LVL15
+     /tmp/ccN29RR0.s:249    .text:000000000000020c .LVL16
+     /tmp/ccN29RR0.s:155    .text:000000000000015c .LFB119
+     /tmp/ccN29RR0.s:214    .text:00000000000001d0 .LFE119
+     /tmp/ccN29RR0.s:183    .text:0000000000000190 .LBB15
+     /tmp/ccN29RR0.s:193    .text:00000000000001a0 .LBE15
+GAS LISTING /tmp/ccN29RR0.s 			page 22
+
+
+     /tmp/ccN29RR0.s:3688   .debug_loc:0000000000000374 .LLST3
+     /tmp/ccN29RR0.s:189    .text:000000000000019c .LVL11
+     /tmp/ccN29RR0.s:196    .text:00000000000001a8 .LVL13
+     /tmp/ccN29RR0.s:3958   .debug_str:00000000000007d1 .LASF166
+     /tmp/ccN29RR0.s:13     .text:0000000000000000 .LFB117
+     /tmp/ccN29RR0.s:147    .text:000000000000015c .LFE117
+     /tmp/ccN29RR0.s:3697   .debug_loc:000000000000039a .LLST0
+     /tmp/ccN29RR0.s:55     .text:0000000000000070 .LBB12
+     /tmp/ccN29RR0.s:65     .text:0000000000000084 .LBE12
+     /tmp/ccN29RR0.s:3715   .debug_loc:00000000000003e6 .LLST1
+     /tmp/ccN29RR0.s:63     .text:0000000000000084 .LVL4
+     /tmp/ccN29RR0.s:72     .text:0000000000000090 .LBB14
+     /tmp/ccN29RR0.s:127    .text:0000000000000140 .LBE14
+     /tmp/ccN29RR0.s:3722   .debug_loc:0000000000000409 .LLST2
+     /tmp/ccN29RR0.s:93     .text:00000000000000d0 .LVL6
+     /tmp/ccN29RR0.s:41     .text:0000000000000040 .LVL1
+     /tmp/ccN29RR0.s:49     .text:0000000000000064 .LVL2
+     /tmp/ccN29RR0.s:3902   .debug_str:00000000000005fc .LASF167
+     /tmp/ccN29RR0.s:3844   .debug_str:0000000000000333 .LASF168
+     /tmp/ccN29RR0.s:3984   .debug_str:00000000000008b0 .LASF169
+     /tmp/ccN29RR0.s:388    .text:00000000000002e0 .LVL33
+     /tmp/ccN29RR0.s:412    .text:000000000000030c .LVL35
+     /tmp/ccN29RR0.s:460    .text:000000000000035c .LVL43
+     /tmp/ccN29RR0.s:463    .text:0000000000000360 .LVL44
+     /tmp/ccN29RR0.s:416    .text:0000000000000310 .LVL36
+     /tmp/ccN29RR0.s:428    .text:000000000000032c .LVL38
+     /tmp/ccN29RR0.s:430    .text:0000000000000330 .LVL39
+     /tmp/ccN29RR0.s:440    .text:0000000000000340 .LVL41
+     /tmp/ccN29RR0.s:410    .text:0000000000000308 .LVL34
+     /tmp/ccN29RR0.s:455    .text:0000000000000354 .LVL42
+     /tmp/ccN29RR0.s:303    .text:000000000000025c .LVL22
+     /tmp/ccN29RR0.s:321    .text:000000000000027c .LVL23
+     /tmp/ccN29RR0.s:358    .text:00000000000002c8 .LVL29
+     /tmp/ccN29RR0.s:362    .text:00000000000002d0 .LVL30
+     /tmp/ccN29RR0.s:366    .text:00000000000002d4 .LVL31
+     /tmp/ccN29RR0.s:369    .text:00000000000002d8 .LVL32
+     /tmp/ccN29RR0.s:327    .text:000000000000028c .LVL25
+     /tmp/ccN29RR0.s:341    .text:00000000000002a4 .LVL27
+     /tmp/ccN29RR0.s:223    .text:00000000000001d0 .LVL14
+     /tmp/ccN29RR0.s:287    .text:0000000000000250 .LVL21
+     /tmp/ccN29RR0.s:255    .text:0000000000000214 .LVL17
+     /tmp/ccN29RR0.s:284    .text:000000000000024c .LVL20
+     /tmp/ccN29RR0.s:182    .text:0000000000000190 .LVL10
+     /tmp/ccN29RR0.s:191    .text:00000000000001a0 .LVL12
+     /tmp/ccN29RR0.s:17     .text:0000000000000000 .LVL0
+     /tmp/ccN29RR0.s:142    .text:0000000000000154 .LVL9
+     /tmp/ccN29RR0.s:54     .text:0000000000000070 .LVL3
+     /tmp/ccN29RR0.s:76     .text:0000000000000098 .LVL5
+     /tmp/ccN29RR0.s:139    .text:0000000000000150 .LVL8
+     /tmp/ccN29RR0.s:550    .debug_info:0000000000000000 .Ldebug_info0
+
+UNDEFINED SYMBOLS
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN6list_tC1EPS_S0_
+_ZN7NoAlloc9mem_allocEm
+_ZN11ObjectCache9printInfoEc
+_Z4log2m
+GAS LISTING /tmp/ccN29RR0.s 			page 23
+
+
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCache8free_objEPv
+_ZN11ObjectCache6shrinkEv

@@ -1,8 +1,4 @@
-#include"../../../h/scheduler.hpp"
-#include"../../../h/riscv.hpp"
-#include "../../../h/ksemaphore.hpp"
-#include"../../../h/syscall_c.h"
-#include"../../../h/stdio.hpp"
+#include"../../../h/kernel_lib.h"
 
 
 TCB* TCB::running = nullptr;
@@ -31,6 +27,9 @@ context({(uint64) &threadWrapper, stack ? (uint64)((char*)stack+DEFAULT_STACK_SI
         Scheduler::put(this);
         threadsUp++;
     }
+    // kprintString("TCB initalizing!\n");
+    // KCHECKPRINT(this);
+    // KCHECKPRINT(stack);
 }   
 
 void TCB::yield()
@@ -41,15 +40,17 @@ void TCB::yield()
 }
 
 void TCB::initalize(){
-    if(running->userMode)
-        Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+    if(running->userMode){
+        //Riscv::mc_sstatus(Riscv::SSTATUS_SPP);
+        running->setState(PREPARING);
+    }
     else {
-        Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
         if(running->locked)
             Riscv::mc_sstatus(Riscv::SSTATUS_SPIE);
         else
             Riscv::ms_sstatus(Riscv::SSTATUS_SPIE);
     }   
+    Riscv::ms_sstatus(Riscv::SSTATUS_SPP);
 }
 
 void TCB::threadWrapper()
@@ -57,6 +58,8 @@ void TCB::threadWrapper()
     //print("start of thread", (uint64)TCB::running, 0);
     initalize();
     Riscv::popSppSpie();
+    //__asm__ volatile ("csrw sepc, %0" : : "r" (running->body) );
+    //__asm__ volatile ("sret");
     running->body(running->args);
     thread_exit();
 }
@@ -151,6 +154,7 @@ void* TCB::operator new[](size_t sz){
     return SlabAllocator::getInstance().kmalloc(sz);
 } 
 void TCB::operator delete(void* ptr){ 
+    // kprintString("TCB dealloc!\n");
     cache->free_obj(ptr);
 } 
 void TCB::operator delete[](void* ptr){

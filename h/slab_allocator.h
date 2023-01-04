@@ -4,6 +4,7 @@
 #include"../lib/hw.h"
 #include "list.h"
 #include "noalloc_allocator.hpp"
+#include "kernel_funs.h"
 
 #define __SLAB_ALLOCATION__(typename, ctor, dtor) \
     void* operator new(size_t sz){ \

@@ -51,9 +51,10 @@ int Pager::id_map(void* start, void* end, PMTEntryBits flag){
 }
 
 int Pager::map_kernel(){
-    uint64 laa = (uint64)NoAlloc::getEndAddress();
+    //uint64 laa = (uint64)NoAlloc::getEndAddress();
+    uint64 laa = (uint64)HEAP_END_ADDR;
     uint64 fa = KERNEL_TEXT_START;
-
+    
     //map_ram
     id_map((void*)fa, (void*)laa, (PMTEntryBits)
             (PMTEntryBits::write | PMTEntryBits::read | PMTEntryBits::execute ));
@@ -88,6 +89,33 @@ int Pager::map_kernel(){
 
 
     return 0;        
+}
+
+int Pager::map_user(){
+    id_map(
+                (void*)USER_TEXT_START,
+                (void*)USER_TEXT_END,
+                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::execute | PMTEntryBits::user)
+    );
+
+    id_map(
+                (void*)USER_BSS_START,
+                (void*)USER_BSS_END,
+                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+    );
+
+    id_map(
+                (void*)USER_DATA_START,
+                (void*)USER_DATA_END,
+                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+    );
+
+    id_map(
+                (void*)USER_RODATA_START,
+                (void*)USER_RODATA_END,
+                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::user)
+    );
+    return 0;
 }
 
 int Pager::start_paging(){

@@ -21,7 +21,8 @@ void StdIO::initalize()
     iostatus = (unsigned char*)CONSOLE_STATUS;
     idata = (char*)CONSOLE_RX_DATA;
     odata = (char*)CONSOLE_TX_DATA;
-    uint64* stack = (uint64*)MemoryAllocator::getInstance().mem_alloc((DEFAULT_STACK_SIZE-1)/MEM_BLOCK_SIZE + 1);
+    // uint64* stack = (uint64*)MemoryAllocator::getInstance().mem_alloc((DEFAULT_STACK_SIZE-1)/MEM_BLOCK_SIZE + 1);
+    uint64* stack = (uint64*)SlabAllocator::getInstance().kmalloc(DEFAULT_STACK_SIZE);
     out_thread = TCB::createThread(outputWorker, nullptr, stack);
     out_thread->setKernelMode();
     out_thread->setKernelLocked();

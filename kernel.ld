@@ -14,8 +14,9 @@ SECTIONS
     *(.entry_os) 
     
     . = ALIGN(0x1000);
+    
     EXCLUDE_FILE (build/src/*) *(.text .text.*)
-
+   
     . = ALIGN(0x1000);
     build/src/kernel/*(.text .text.*)
     PROVIDE(_kernel_text_end = .);
@@ -30,24 +31,47 @@ SECTIONS
   }
 
   .rodata : {
+    
     . = ALIGN(16);
+    PROVIDE(_user_rodata_start = .);
     *(.srodata .srodata.*) /* do not need to distinguish this from .rodata */
     . = ALIGN(16);
     *(.rodata .rodata.*)
+    PROVIDE(_user_rodata_end = .);
+   
+    . = ALIGN(0x1000);
   }
 
   .data : {
     . = ALIGN(16);
-    *(.sdata .sdata.*) /* do not need to distinguish this from .data */
+    EXCLUDE_FILE (build/src/user/*) *(.sdata .sdata.*) /* do not need to distinguish this from .data */
     . = ALIGN(16);
-    *(.data .data.*)
+    EXCLUDE_FILE (build/src/user/*) *(.data .data.*)
+
+    . = ALIGN(0x1000);
+    PROVIDE(_user_data_start = .);
+    build/src/user/*(.sdata .sdata.*)
+    . = ALIGN(16);
+    build/src/user/*(.data .data.*)
+    PROVIDE(_user_data_end = .);
+
+    . = ALIGN(0x1000);
   }
 
   .bss : {
     . = ALIGN(16);
-    *(.sbss .sbss.*) /* do not need to distinguish this from .bss */
+    EXCLUDE_FILE (build/src/user/*) *(.sbss .sbss.*) /* do not need to distinguish this from .bss */
     . = ALIGN(16);
-    *(.bss .bss.*)
+    EXCLUDE_FILE (build/sr/user/*) *(.bss .bss.*)
+
+    
+    . = ALIGN(0x1000);
+    PROVIDE(_user_bss_start = .);
+    build/src/user/*(.sbss .sbss.*)
+    . = ALIGN(16);
+    build/src/user/*(.bss .bss.*)
+    PROVIDE(_user_bss_end = .);
+    
   }
 
   PROVIDE(end = .);

@@ -110,8 +110,11 @@ namespace ConsumerProducerCPP {
             return;
         }
 
+        printString("\n-----USER---NIT-----\nAlokacija BufferCpp: ");
         BufferCPP *buffer = new BufferCPP(n);
-
+        printInt((uint64)buffer, 16);
+        printString("\nsizeof(BufferCPP): "); printInt(sizeof(BufferCPP), 16); printString(".\n");
+        printString("\n----USER-NIT---\n");
         waitForAll = new Semaphore(0);
         Thread *producers[threadNum];
         thread_data threadData[threadNum + 1];
@@ -119,7 +122,13 @@ namespace ConsumerProducerCPP {
         threadData[threadNum].id = threadNum;
         threadData[threadNum].buffer = buffer;
         threadData[threadNum].sem = waitForAll;
+
+        printString("\n-----USER---NIT-----\nAlokacija Consumer: ");
         Thread *consumer = new Consumer(&threadData[threadNum]);
+        printInt((uint64)consumer, 16);
+        printString("\nsizeof(Consumer): "); printInt(sizeof(Consumer), 16); printString(".\n");
+        printString("\n----USER-NIT---\n");
+        
         consumer->start();
 
         threadData[0].id = 0;
@@ -133,7 +142,12 @@ namespace ConsumerProducerCPP {
             threadData[i].buffer = buffer;
             threadData[i].sem = waitForAll;
 
+            printString("\n-----USER---NIT-----\nAlokacija Producer: ");
             producers[i] = new Producer(&threadData[i]);
+            printInt((uint64)producers[i], 16);
+            printString("\nsizeof(Producer): "); printInt(sizeof(Producer), 16); printString(".\n");
+            printString("\n");
+
             producers[i]->start();
 
         }

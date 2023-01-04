@@ -1,9 +1,10 @@
 #include"../../../h/kernel_lib.h"
 
-
-void userMainWrapper(void*)
-{
-    userMain();
+namespace KSysCall{
+    void thread_dispatch(){
+        __asm__ volatile("mv a0, %0" : : "r" (0x13));
+        __asm__ volatile("ecall");  
+    }
 }
 
 void idleFunction(void*)
@@ -20,7 +21,7 @@ void idleFunction(void*)
         *   that will lock the thread when executing critical section code! TODO or NOT
         *    
         */
-        thread_dispatch();
+        KSysCall::thread_dispatch();
     }
 }
 
@@ -58,6 +59,12 @@ int kernelInit()
     KCHECKPRINT(KERNEL_TEXT_END);
     KCHECKPRINT(USER_TEXT_START);
     KCHECKPRINT(USER_TEXT_END);
+    KCHECKPRINT(USER_BSS_START);
+    KCHECKPRINT(USER_BSS_END);
+    KCHECKPRINT(USER_DATA_START);
+    KCHECKPRINT(USER_DATA_END);
+    KCHECKPRINT(USER_RODATA_START);
+    KCHECKPRINT(USER_RODATA_END);
     KCHECKPRINT(sizeof(PMT));
     kprintString("\n\n");
 
@@ -73,10 +80,19 @@ int kernelInit()
     }
     kprintString("kmem initalized!!!\n");
 
+
+    kprintString("Paging init!\n");
+    Riscv::ms_sstatus(Riscv::BitMaskSstatus::SSTATUS_SUM);
+    Pager& pager = Pager::getInstance();
+    pager.map_kernel();
+    pager.map_user();
+    pager.start_paging();
+    kprintString("Paging initalized!\n");
+
     Riscv::w_stvec((uint64)interruptvec); 
     kprintString("stvec initalized!\n");
     
-    MemoryAllocator::getInstance();
+    MemoryAllocator::getInstance().print_list();
     kprintString("MemoryAllocator initalized!\n");
     
     Scheduler::initalize();
@@ -92,8 +108,9 @@ int kernelInit()
     uint64* userMainStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
     TCB* userMainThread = TCB::createThread(userMainWrapper, nullptr, userMainStack);
 
-    uint64* idleThreadStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+    uint64* idleThreadStack = (uint64*)SlabAllocator::getInstance().kmalloc(DEFAULT_STACK_SIZE);
     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
+    idleThread->setKernelMode();
     if(userMainStack && idleThreadStack && idleThread && userMainThread)
         kprintString("Threads successfully initalized!\n");
     else

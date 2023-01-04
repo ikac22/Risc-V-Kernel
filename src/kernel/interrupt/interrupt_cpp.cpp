@@ -28,6 +28,7 @@ enum intNum
     IW = 7,
     PFL = 13,
     PFI = 12,
+    PFW = 15
 };
 
 void timer_handler()
@@ -54,19 +55,21 @@ void timer_handler()
     Riscv::mc_sip(Riscv::SIP_SSIE);
 }
 
-uint64 usrEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
+volatile uint64 usrEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
 {
     uint64 sepc = Riscv::r_sepc()+4, sstatus = Riscv::r_sstatus(), ret = a0;
 
     if(a0 == MA){
         //mem_alloc
         ret = (uint64)MemoryAllocator::getInstance().mem_alloc(a1);
+        //KCHECKPRINT(ret);
     }
     else if(a0 == MF)
     {
         //mem_free
+        // KCHECKPRINT(a1);
+        // MemoryAllocator::getInstance().print_all_list();
         ret = (uint64)MemoryAllocator::getInstance().mem_free((void*)a1);
-
     }
     else if(a0 == TC)
     {
@@ -91,6 +94,7 @@ uint64 usrEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
     else if(a0 == DTH)
     {
         //delete thread handle
+        // KCHECKPRINT(a1);
         TCB::deleteThread((TCB*)a1);
     }
     else if(a0 == SO)
@@ -248,9 +252,43 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
         timer_handler();      
     
     }
-    else if(scause == PFL || scause == PFI ){
-        kprintString("PAGE FAULT");
-        while(true);
+    else if(scause == PFI){
+        if(TCB::running->getState() == TCB::TCBState::PREPARING){
+            TCB::running->setState(TCB::TCBState::READY);
+            asm volatile("sd %0, 1 * 8(s0)" :: "r" (thread_exit));
+            Riscv::mc_sstatus(Riscv::BitMaskSstatus::SSTATUS_SPP);
+        }
+    }
+    else if(scause == PFL || scause == PFW){
+        uint64 stval = Riscv::r_stval(), sepc = Riscv::r_sepc(),
+            sstatus = Riscv::r_sstatus();
+        if(sstatus & Riscv::BitMaskSstatus::SSTATUS_SPP){
+            KCHECKPRINT(scause);
+            KCHECKPRINT(sepc);
+            KCHECKPRINT(stval);
+            kprintString("PAGE FAULT\n");
+            while(true);
+        }
+        else{
+            MemoryAllocator& allocator = MemoryAllocator::getInstance();
+            FreeSegment* fs = allocator.getFreeSegmentMeta((void*)stval);
+            
+            if(fs){
+                Pager::getInstance().id_map(
+                    fs->addr, 
+                    (char*)fs->addr+fs->size, 
+                    (PMTEntryBits)(PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+                );
+            }
+            else{
+                KCHECKPRINT(scause);
+                KCHECKPRINT(sepc);
+                KCHECKPRINT(stval);
+                while(true);
+                
+            }
+        }
+        
     }
     else if(scause == II || scause == IR || scause == IW)
     {
@@ -273,7 +311,10 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
         }
     }
     else{
-        kprintString("GRESKA");
+        KCHECKPRINT(scause);
+        kprintString("GRESKA\n");
+        while(1);
+
     }
                     
     

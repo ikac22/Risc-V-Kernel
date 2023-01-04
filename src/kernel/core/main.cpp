@@ -14,7 +14,7 @@ int oldKernelMain(){
     }
    
     uint64 sstatus = Riscv::r_sstatus();
-    kprintString("Starting User Process");
+    kprintString("Starting User Process\n");
     TCB::yield();
     Riscv::w_sstatus(sstatus);
     
