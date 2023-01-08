@@ -52,6 +52,7 @@ void* MemoryAllocator::mem_alloc(size_t size){
     // }
     if(best->size != size){
         curr = (FreeSegment*)node_cache->alloc_obj();
+        if(!curr) return nullptr;
         curr->next = best->next;
         curr->size = best->size - size;
         curr->addr = (char*)best->addr + size;

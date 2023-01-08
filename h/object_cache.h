@@ -21,7 +21,7 @@ public:
     ObjectCache(const char* name_t, size_t objsize_t,
         void (*ctor_t)(void*), void (*dtor)(void*),
         SlabMetaType t_type = NONE);
-    
+    ~ObjectCache();
     void* operator new(size_t size);
     void operator delete(void* addr);
     
@@ -29,7 +29,8 @@ public:
     int free_obj(void*);
     int shrink();
 
-    void printInfo(char flag);
+    void printInfo(char flag = 0);
+    int printError();
     static void linking_ctor(void*);
     void zero_out(void* t);
 
@@ -47,12 +48,15 @@ private:
     void (*ctor)(void*);
     void (*dtor)(void*);
     
+
     Slab* find_slab(void* addr, list_t* head);
     Slab* slab_alloc();
     SlabMetaType calculate_type();
     size_t get_slab_size(uchar* buddy_level=nullptr);
     void list_update_free(Slab* slab_meta, bool was_full);
     void list_update_alloc(Slab* slab_meta, bool was_free);
+    void print_private(char flags);
+    void free_slabs(list_t* head);
 };
 
 #endif

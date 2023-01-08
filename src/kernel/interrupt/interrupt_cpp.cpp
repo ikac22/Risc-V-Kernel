@@ -258,6 +258,14 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
             asm volatile("sd %0, 1 * 8(s0)" :: "r" (thread_exit));
             Riscv::mc_sstatus(Riscv::BitMaskSstatus::SSTATUS_SPP);
         }
+        else{
+            uint64 stval = Riscv::r_stval(), sepc = Riscv::r_sepc();
+            kprintString("\n!!!PANIC DUE TO NOT HANDLED INSTRUCTION PAGE FAULT !!!\n");
+            KCHECKPRINT(scause);
+            KCHECKPRINT(sepc);
+            KCHECKPRINT(stval);
+            while(true);
+        }
     }
     else if(scause == PFL || scause == PFW){
         uint64 stval = Riscv::r_stval(), sepc = Riscv::r_sepc(),
@@ -266,7 +274,7 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
             KCHECKPRINT(scause);
             KCHECKPRINT(sepc);
             KCHECKPRINT(stval);
-            kprintString("PAGE FAULT\n");
+            kprintString("\n!!!PANIC DUE TO SUPERVISOR PAGE FAULT!!!\n");
             while(true);
         }
         else{
@@ -281,6 +289,7 @@ extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, 
                 );
             }
             else{
+                kprintString("\n!!!PANIC DUE TO NOT HANDLED USER DATA PAGE FAULT !!!\n");
                 KCHECKPRINT(scause);
                 KCHECKPRINT(sepc);
                 KCHECKPRINT(stval);

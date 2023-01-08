@@ -21,17 +21,18 @@ Thread::Thread(void (*body)(void*), void* arg)
     myHandle = (thread_t)(new _Wrap{nullptr, body, arg});
 }
 
-void Thread::start(){
+int Thread::start(){
     if(myHandle)
     {
         _Wrap* w = (_Wrap*) myHandle;
-        thread_create(&w->handle, w->body, w->arg);    
+        return thread_create(&w->handle, w->body, w->arg);    
     }
     else 
     {
         _Wrap* w = new _Wrap{nullptr, nullptr, nullptr};
+        if(!w) return -7;
         myHandle = (thread_t)w;
-        thread_create(&w->handle, &runWrapper, this);   
+        return thread_create(&w->handle, &runWrapper, this);   
     }
 }
 
@@ -44,6 +45,7 @@ void Thread::runWrapper(void* thread)
 Thread::~Thread()
 {
     _Wrap* w = (_Wrap*)myHandle;
+    if(!w) return;
     if(w->handle){
         delete w->handle;
     }

@@ -83,6 +83,7 @@ public:
 
     Slab() = default;
     Slab& operator=(const Slab&) = default;
+    
     void* get_obj();
     int put_obj(void*);
     bool full(){ return front == RB_SIZE; }

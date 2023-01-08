@@ -25,6 +25,8 @@ kprintInt((uint64)val, 16); kprintString("\n")
 #include"../h/object_cache.h"
 #include"../h/slab_allocator.h" 
 #include"../h/list.h"
+#include"../h/slab.h"
+
 /* start address of Kernel */
 static const size_t KERNEL_START_ADDR = 0x80000000; 
 

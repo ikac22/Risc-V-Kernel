@@ -12,6 +12,8 @@ ObjectCache::ObjectCache(const char* t_name, size_t t_objsize,
     
     type = t_type;
     if(t_type == NONE){ type = calculate_type(); }
+
+    error = nullptr;
 }
 
 
@@ -161,7 +163,10 @@ void* ObjectCache::alloc_obj(){
     else {
         if(free_head){ 
             t = get_list_parent(free_head, Slab, node); 
-        } else {  t = slab_alloc(); }
+        } else {  
+            t = slab_alloc(); 
+            if(t == nullptr) return nullptr;
+        }
         was_free = true;
     }
     obj = t->get_obj();
@@ -270,57 +275,119 @@ int ObjectCache::shrink(){
 }
 
 
-
+void ObjectCache::print_private(char flags){
+    KCHECKPRINT(objsize);
+        KVALCHECKPRINT(SLAB SIZE, get_slab_size());
+        kprintString("SLAB TYPE: ");
+        switch (type) {
+            case NONE : kprintString("NONE\n");
+            break;
+            case OFF_SLAB : kprintString("OFF_SLAB\n");
+            break;
+            case SLAB_SLAB : kprintString("SLAB_SLAB\n");
+            break;
+            case ON_SLAB: kprintString("ON_SLAB\n");
+            break;
+            case BUFF_SLAB: kprintString("BUFF_SLAB\n");
+            break;
+        }
+        kprintString("!!!!!!FREE SLAB LIST!!!!!! \n");
+        list_t* tmp = free_head;
+        while(tmp){
+            Slab* tmp_slab = get_list_parent(tmp, Slab, node);
+            tmp_slab->print_info(flags);
+            kprintString("\n");
+            tmp = tmp->next;
+        }
+        kprintString("!!!!!!PARTIAL SLAB LIST!!!!!! \n");
+        tmp = part_head;
+        while(tmp){
+            Slab* tmp_slab = get_list_parent(tmp, Slab, node);
+            tmp_slab->print_info(flags);
+            kprintString("\n");
+            tmp = tmp->next;
+        }
+        kprintString("!!!!!!FULL SLAB LIST!!!!!!\n");
+        tmp = full_head;
+        while(tmp){
+            Slab* tmp_slab = get_list_parent(tmp, Slab, node);
+            tmp_slab->print_info(flags);
+            kprintString("\n");
+            tmp = tmp->next;
+        }
+}
 
 void ObjectCache::printInfo(char flags){
+
+
     kprintString("\n--------OBJCACHE ");kprintString(name); kprintString("--------\n");
    
-     
+    size_t alloc_obj_num = 0, slab_size = get_slab_size(), max_obj_num_in_slab, free_slab_num = 0, partial_slab_num = 0, full_slab_num = 0;
+
+    if(type == BUFF_SLAB)
+        max_obj_num_in_slab = slab_size/objsize;
+    else if(type == SLAB_SLAB)
+        max_obj_num_in_slab = (slab_size - sizeof(void*) - objsize)/objsize;
+    else
+        max_obj_num_in_slab = (slab_size - sizeof(void*))/objsize;
+
+    list_t* cur;
+    for(cur = free_head; cur; cur = cur->next) free_slab_num++;
+
+    for(cur = part_head; cur; cur = cur->next){
+        partial_slab_num++;
+        Slab* s = get_list_parent(cur, Slab, node);
+        if(s->front < s->rear) 
+            alloc_obj_num += s->cap - (s->rear - s->front);
+        else
+            alloc_obj_num += s->front - s->rear;
+    }
+
+    for(cur = full_head; cur; cur = cur->next){
+        full_slab_num++;
+        alloc_obj_num += max_obj_num_in_slab;
+    }
+
+    KCHECKPRINT(free_slab_num);
+    KCHECKPRINT(partial_slab_num);
+    KCHECKPRINT(full_slab_num);
+    KCHECKPRINT(slab_size);
     KCHECKPRINT(objsize);
-    KVALCHECKPRINT(SLAB SIZE, get_slab_size());
-    kprintString("SLAB TYPE: ");
-    switch (type) {
-        case NONE : kprintString("NONE\n");
-        break;
-        case OFF_SLAB : kprintString("OFF_SLAB\n");
-        break;
-        case SLAB_SLAB : kprintString("SLAB_SLAB\n");
-        break;
-        case ON_SLAB: kprintString("ON_SLAB\n");
-        break;
-        case BUFF_SLAB: kprintString("BUFF_SLAB\n");
-        break;
-    }
-    kprintString("!!!!!!FREE SLAB LIST!!!!!! \n");
-    list_t* tmp = free_head;
-    while(tmp){
-        Slab* tmp_slab = get_list_parent(tmp, Slab, node);
-        tmp_slab->print_info(flags);
-        kprintString("\n");
-        tmp = tmp->next;
-    }
-    kprintString("!!!!!!PARTIAL SLAB LIST!!!!!! \n");
-    tmp = part_head;
-    while(tmp){
-        Slab* tmp_slab = get_list_parent(tmp, Slab, node);
-        tmp_slab->print_info(flags);
-        kprintString("\n");
-        tmp = tmp->next;
-    }
-    kprintString("!!!!!!FULL SLAB LIST!!!!!!\n");
-    tmp = full_head;
-    while(tmp){
-        Slab* tmp_slab = get_list_parent(tmp, Slab, node);
-        tmp_slab->print_info(flags);
-        kprintString("\n");
-        tmp = tmp->next;
-    }
+    KCHECKPRINT(max_obj_num_in_slab);
+    KCHECKPRINT(alloc_obj_num);
+
+    
+    if(flags){ print_private(flags); }
     kprintString("------OBJCACHE ");kprintString(name); kprintString(" END------\n\n");
     
 }
 
+void ObjectCache::free_slabs(list_t* head){
+    while(head){
+        Slab* slab = get_list_parent(head, Slab, node);
+        head = remove(head);
+        
+        uchar buddy_level;
+        get_slab_size(&buddy_level);
 
+        Buddy::getInstance().mem_free(slab->addr_start, buddy_level);
+        if(type == BUFF_SLAB || type == OFF_SLAB)
+            SlabAllocator::getInstance().slab_cache.free_obj(slab);
+    }
+}
 
+ObjectCache::~ObjectCache(){
+    free_slabs(free_head);
+    free_slabs(part_head);
+    free_slabs(full_head);
+
+}
+int ObjectCache::printError(){
+    if(!error) return 0;
+
+    kprintString(error);
+    return 1; 
+}
 
 void ObjectCache::zero_out(void* t){
     for( char* ptr = (char*)t; ptr < (char*)t + objsize; ptr++ )

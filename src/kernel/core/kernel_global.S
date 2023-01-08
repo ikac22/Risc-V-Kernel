@@ -28,4 +28,6 @@ USER_RODATA_START: .dword _user_rodata_start
 .global USER_RODATA_END
 USER_RODATA_END: .dword _user_rodata_end
 
+.global kTestMain
+
 #---Slab Allocator---

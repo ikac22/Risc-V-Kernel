@@ -9,7 +9,7 @@ class Thread {
 public:
     Thread (void (*body)(void*), void* arg);
     virtual ~Thread ();
-    void start ();
+    int start ();
     static void dispatch () { thread_dispatch(); }
     static void sleep (time_t time){ time_sleep(time); }
 protected:

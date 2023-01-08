@@ -15,9 +15,6 @@ extern void userMainWrapper(void*);
 /* idle function in user mode that loops when scheduler is empty */
 void idleFunction(void*); 
 
-/* kernel memory alloc */
-void* kmalloc(size_t size); 
-
 /* kernel print string (UNFORMATED) (PRINTING WITHOUT NEWLINE) */
 void kprintString(const char*); 
  

@@ -25,12 +25,6 @@ void idleFunction(void*)
     }
 }
 
-void* kmalloc(size_t size)
-{
-    size = (size-1)/MEM_BLOCK_SIZE + 1;
-    return MemoryAllocator::getInstance().mem_alloc(size);
-}
-
 void kputc(char c){
     char* odata = (char*)CONSOLE_TX_DATA, 
     *iostatus = (char*)CONSOLE_STATUS;
@@ -105,7 +99,7 @@ int kernelInit()
     kprintString("Main kenrel thread initalized!\n");
 
     kprintString("Initalizing user thread and idle thread...\n");
-    uint64* userMainStack = (uint64*)kmalloc(DEFAULT_STACK_SIZE);
+    uint64* userMainStack = (uint64*)MemoryAllocator::getInstance().mem_alloc((DEFAULT_STACK_SIZE-1)/MEM_BLOCK_SIZE + 1);
     TCB* userMainThread = TCB::createThread(userMainWrapper, nullptr, userMainStack);
 
     uint64* idleThreadStack = (uint64*)SlabAllocator::getInstance().kmalloc(DEFAULT_STACK_SIZE);
