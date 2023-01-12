@@ -93,6 +93,11 @@ Slab* ObjectCache::slab_alloc(){
         // get slab_meta object from slab_meta cache
         case OFF_SLAB: 
             slab_meta = (Slab*)slab_cache_ptr->alloc_obj();
+            if(!slab_meta){
+                error = "Not enough memory left";
+                Buddy::getInstance().mem_free(start, buddy_level);
+                return nullptr;
+            }
             break;
 
         
@@ -165,7 +170,7 @@ void* ObjectCache::alloc_obj(){
             t = get_list_parent(free_head, Slab, node); 
         } else {  
             t = slab_alloc(); 
-            if(t == nullptr) return nullptr;
+            if(t == nullptr) { return nullptr; }
         }
         was_free = true;
     }

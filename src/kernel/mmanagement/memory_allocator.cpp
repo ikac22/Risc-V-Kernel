@@ -68,6 +68,8 @@ void* MemoryAllocator::mem_alloc(size_t size){
     // return (char*)best+sizeof(FreeSegment);
     // print_all_list();
     // print_list();
+    Pager::getInstance().id_map(best->addr, (char*)best->addr+best->size, (PMTEntryBits)
+        (PMTEntryBits::user | PMTEntryBits::read | PMTEntryBits::write));
     return best->addr;
 }
 

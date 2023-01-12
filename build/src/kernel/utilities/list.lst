@@ -1,0 +1,369 @@
+GAS LISTING /tmp/ccoAeNAr.s 			page 1
+
+
+   1              		.file	"list.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_ZN6list_tC2EPS_S0_
+  12              	_ZN6list_tC2EPS_S0_:
+  13              	.LFB114:
+  14              		.file 1 "src/kernel/utilities/list.cpp"
+   1:src/kernel/utilities/list.cpp **** #include"../../../h/kernel_lib.h"
+   2:src/kernel/utilities/list.cpp **** 
+   3:src/kernel/utilities/list.cpp **** list_t::list_t(list_t* t_next, list_t* t_prev):next(t_next),prev(t_prev){}
+  15              		.loc 1 3 1
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101FF 		addi	sp,sp,-16
+  19              		.cfi_def_cfa_offset 16
+  20 0004 23348100 		sd	s0,8(sp)
+  21              		.cfi_offset 8, -8
+  22 0008 13040101 		addi	s0,sp,16
+  23              		.cfi_def_cfa 8, 0
+  24              	.LBB2:
+  25              		.loc 1 3 72 is_stmt 0
+  26 000c 2330B500 		sd	a1,0(a0)
+  27 0010 2334C500 		sd	a2,8(a0)
+  28              	.LBE2:
+  29              		.loc 1 3 74
+  30 0014 03348100 		ld	s0,8(sp)
+  31              		.cfi_restore 8
+  32              		.cfi_def_cfa 2, 16
+  33 0018 13010101 		addi	sp,sp,16
+  34              		.cfi_def_cfa_offset 0
+  35 001c 67800000 		jr	ra
+  36              		.cfi_endproc
+  37              	.LFE114:
+  39              		.globl	_ZN6list_tC1EPS_S0_
+  40              		.set	_ZN6list_tC1EPS_S0_,_ZN6list_tC2EPS_S0_
+  41              		.align	2
+  42              		.globl	_Z6removeP6list_t
+  44              	_Z6removeP6list_t:
+  45              	.LFB116:
+   4:src/kernel/utilities/list.cpp **** 
+   5:src/kernel/utilities/list.cpp **** list_t* remove(list_t* head){
+  46              		.loc 1 5 29 is_stmt 1
+  47              		.cfi_startproc
+  48              	.LVL1:
+  49 0020 130101FF 		addi	sp,sp,-16
+  50              		.cfi_def_cfa_offset 16
+  51 0024 23348100 		sd	s0,8(sp)
+  52              		.cfi_offset 8, -8
+  53 0028 13040101 		addi	s0,sp,16
+  54              		.cfi_def_cfa 8, 0
+  55 002c 93070500 		mv	a5,a0
+GAS LISTING /tmp/ccoAeNAr.s 			page 2
+
+
+   6:src/kernel/utilities/list.cpp ****     if(!head) return nullptr;
+  56              		.loc 1 6 5
+  57 0030 63080502 		beq	a0,zero,.L3
+   7:src/kernel/utilities/list.cpp **** 
+   8:src/kernel/utilities/list.cpp ****     if(head->next) head -> next -> prev = head -> prev;
+  58              		.loc 1 8 5
+  59              		.loc 1 8 14 is_stmt 0
+  60 0034 03370500 		ld	a4,0(a0)
+  61              		.loc 1 8 5
+  62 0038 63060700 		beq	a4,zero,.L5
+  63              		.loc 1 8 20 is_stmt 1 discriminator 1
+  64              		.loc 1 8 51 is_stmt 0 discriminator 1
+  65 003c 83368500 		ld	a3,8(a0)
+  66              		.loc 1 8 41 discriminator 1
+  67 0040 2334D700 		sd	a3,8(a4)
+  68              	.L5:
+   9:src/kernel/utilities/list.cpp ****     if(head->prev) head -> prev -> next = head -> next;
+  69              		.loc 1 9 5 is_stmt 1
+  70              		.loc 1 9 14 is_stmt 0
+  71 0044 03B78700 		ld	a4,8(a5)
+  72              		.loc 1 9 5
+  73 0048 63060700 		beq	a4,zero,.L6
+  74              		.loc 1 9 20 is_stmt 1 discriminator 1
+  75              		.loc 1 9 51 is_stmt 0 discriminator 1
+  76 004c 83B60700 		ld	a3,0(a5)
+  77              		.loc 1 9 41 discriminator 1
+  78 0050 2330D700 		sd	a3,0(a4)
+  79              	.L6:
+  10:src/kernel/utilities/list.cpp ****     list_t* node = head;
+  80              		.loc 1 10 5 is_stmt 1
+  81              	.LVL2:
+  11:src/kernel/utilities/list.cpp ****     head = head->next;
+  82              		.loc 1 11 5
+  83              		.loc 1 11 10 is_stmt 0
+  84 0054 03B50700 		ld	a0,0(a5)
+  85              	.LVL3:
+  12:src/kernel/utilities/list.cpp ****     node -> next = nullptr;
+  86              		.loc 1 12 5 is_stmt 1
+  87              		.loc 1 12 18 is_stmt 0
+  88 0058 23B00700 		sd	zero,0(a5)
+  13:src/kernel/utilities/list.cpp ****     node -> prev = nullptr;
+  89              		.loc 1 13 5 is_stmt 1
+  90              		.loc 1 13 18 is_stmt 0
+  91 005c 23B40700 		sd	zero,8(a5)
+  14:src/kernel/utilities/list.cpp **** 
+  15:src/kernel/utilities/list.cpp ****     return head; 
+  92              		.loc 1 15 5 is_stmt 1
+  93              	.LVL4:
+  94              	.L3:
+  16:src/kernel/utilities/list.cpp **** }
+  95              		.loc 1 16 1 is_stmt 0
+  96 0060 03348100 		ld	s0,8(sp)
+  97              		.cfi_restore 8
+  98              		.cfi_def_cfa 2, 16
+  99 0064 13010101 		addi	sp,sp,16
+ 100              		.cfi_def_cfa_offset 0
+ 101 0068 67800000 		jr	ra
+GAS LISTING /tmp/ccoAeNAr.s 			page 3
+
+
+ 102              		.cfi_endproc
+ 103              	.LFE116:
+ 105              		.align	2
+ 106              		.globl	_Z6insertP6list_tS0_
+ 108              	_Z6insertP6list_tS0_:
+ 109              	.LFB117:
+  17:src/kernel/utilities/list.cpp **** list_t* insert(list_t* node, list_t* head){
+ 110              		.loc 1 17 43 is_stmt 1
+ 111              		.cfi_startproc
+ 112              	.LVL5:
+ 113 006c 130101FF 		addi	sp,sp,-16
+ 114              		.cfi_def_cfa_offset 16
+ 115 0070 23348100 		sd	s0,8(sp)
+ 116              		.cfi_offset 8, -8
+ 117 0074 13040101 		addi	s0,sp,16
+ 118              		.cfi_def_cfa 8, 0
+  18:src/kernel/utilities/list.cpp ****     if(!node) return head;
+ 119              		.loc 1 18 5
+ 120 0078 63080502 		beq	a0,zero,.L12
+  19:src/kernel/utilities/list.cpp ****     node->next = nullptr;
+ 121              		.loc 1 19 5
+  20:src/kernel/utilities/list.cpp ****     node->prev = nullptr;
+ 122              		.loc 1 20 5
+ 123              		.loc 1 20 16 is_stmt 0
+ 124 007c 23340500 		sd	zero,8(a0)
+  21:src/kernel/utilities/list.cpp **** 
+  22:src/kernel/utilities/list.cpp ****     node -> next = head;
+ 125              		.loc 1 22 5 is_stmt 1
+ 126              		.loc 1 22 18 is_stmt 0
+ 127 0080 2330B500 		sd	a1,0(a0)
+  23:src/kernel/utilities/list.cpp ****     if(head){
+ 128              		.loc 1 23 5 is_stmt 1
+ 129 0084 638C0500 		beq	a1,zero,.L10
+  24:src/kernel/utilities/list.cpp ****         node -> prev = head->prev;
+ 130              		.loc 1 24 9
+ 131              		.loc 1 24 30 is_stmt 0
+ 132 0088 83B78500 		ld	a5,8(a1)
+ 133              		.loc 1 24 22
+ 134 008c 2334F500 		sd	a5,8(a0)
+  25:src/kernel/utilities/list.cpp ****         if(head->prev) head->prev->next = node;
+ 135              		.loc 1 25 9 is_stmt 1
+ 136 0090 63840700 		beq	a5,zero,.L11
+ 137              		.loc 1 25 24 discriminator 1
+ 138              		.loc 1 25 41 is_stmt 0 discriminator 1
+ 139 0094 23B0A700 		sd	a0,0(a5)
+ 140              	.L11:
+  26:src/kernel/utilities/list.cpp ****         head->prev = node;
+ 141              		.loc 1 26 9 is_stmt 1
+ 142              		.loc 1 26 20 is_stmt 0
+ 143 0098 23B4A500 		sd	a0,8(a1)
+ 144              	.LVL6:
+ 145              	.L10:
+  27:src/kernel/utilities/list.cpp ****     }
+  28:src/kernel/utilities/list.cpp ****     return node;
+  29:src/kernel/utilities/list.cpp **** }
+ 146              		.loc 1 29 1
+ 147 009c 03348100 		ld	s0,8(sp)
+GAS LISTING /tmp/ccoAeNAr.s 			page 4
+
+
+ 148              		.cfi_remember_state
+ 149              		.cfi_restore 8
+ 150              		.cfi_def_cfa 2, 16
+ 151 00a0 13010101 		addi	sp,sp,16
+ 152              		.cfi_def_cfa_offset 0
+ 153 00a4 67800000 		jr	ra
+ 154              	.LVL7:
+ 155              	.L12:
+ 156              		.cfi_restore_state
+  18:src/kernel/utilities/list.cpp ****     node->next = nullptr;
+ 157              		.loc 1 18 22
+ 158 00a8 13850500 		mv	a0,a1
+ 159              	.LVL8:
+ 160 00ac 6FF01FFF 		j	.L10
+ 161              		.cfi_endproc
+ 162              	.LFE117:
+ 164              	.Letext0:
+ 165              		.file 2 "src/kernel/utilities/../../../h/../h/../lib/hw.h"
+ 166              		.file 3 "src/kernel/utilities/../../../h/../h/../h/../h/list.h"
+ 167              		.file 4 "src/kernel/utilities/../../../h/../h/slab.h"
+ 168              		.file 5 "src/kernel/utilities/../../../h/kernel_lib.h"
+GAS LISTING /tmp/ccoAeNAr.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 list.cpp
+     /tmp/ccoAeNAr.s:12     .text:0000000000000000 _ZN6list_tC2EPS_S0_
+     /tmp/ccoAeNAr.s:16     .text:0000000000000000 .L0 
+     /tmp/ccoAeNAr.s:18     .text:0000000000000000 .L0 
+     /tmp/ccoAeNAr.s:19     .text:0000000000000004 .L0 
+     /tmp/ccoAeNAr.s:21     .text:0000000000000008 .L0 
+     /tmp/ccoAeNAr.s:23     .text:000000000000000c .L0 
+     /tmp/ccoAeNAr.s:26     .text:000000000000000c .L0 
+     /tmp/ccoAeNAr.s:30     .text:0000000000000014 .L0 
+     /tmp/ccoAeNAr.s:31     .text:0000000000000018 .L0 
+     /tmp/ccoAeNAr.s:32     .text:0000000000000018 .L0 
+     /tmp/ccoAeNAr.s:34     .text:000000000000001c .L0 
+     /tmp/ccoAeNAr.s:36     .text:0000000000000020 .L0 
+     /tmp/ccoAeNAr.s:12     .text:0000000000000000 _ZN6list_tC1EPS_S0_
+     /tmp/ccoAeNAr.s:44     .text:0000000000000020 _Z6removeP6list_t
+     /tmp/ccoAeNAr.s:47     .text:0000000000000020 .L0 
+     /tmp/ccoAeNAr.s:49     .text:0000000000000020 .L0 
+     /tmp/ccoAeNAr.s:50     .text:0000000000000024 .L0 
+     /tmp/ccoAeNAr.s:52     .text:0000000000000028 .L0 
+     /tmp/ccoAeNAr.s:54     .text:000000000000002c .L0 
+     /tmp/ccoAeNAr.s:57     .text:0000000000000030 .L0 
+     /tmp/ccoAeNAr.s:59     .text:0000000000000034 .L0 
+     /tmp/ccoAeNAr.s:60     .text:0000000000000034 .L0 
+     /tmp/ccoAeNAr.s:62     .text:0000000000000038 .L0 
+     /tmp/ccoAeNAr.s:64     .text:000000000000003c .L0 
+     /tmp/ccoAeNAr.s:65     .text:000000000000003c .L0 
+     /tmp/ccoAeNAr.s:67     .text:0000000000000040 .L0 
+     /tmp/ccoAeNAr.s:70     .text:0000000000000044 .L0 
+     /tmp/ccoAeNAr.s:71     .text:0000000000000044 .L0 
+     /tmp/ccoAeNAr.s:73     .text:0000000000000048 .L0 
+     /tmp/ccoAeNAr.s:75     .text:000000000000004c .L0 
+     /tmp/ccoAeNAr.s:76     .text:000000000000004c .L0 
+     /tmp/ccoAeNAr.s:78     .text:0000000000000050 .L0 
+     /tmp/ccoAeNAr.s:82     .text:0000000000000054 .L0 
+     /tmp/ccoAeNAr.s:83     .text:0000000000000054 .L0 
+     /tmp/ccoAeNAr.s:84     .text:0000000000000054 .L0 
+     /tmp/ccoAeNAr.s:87     .text:0000000000000058 .L0 
+     /tmp/ccoAeNAr.s:88     .text:0000000000000058 .L0 
+     /tmp/ccoAeNAr.s:90     .text:000000000000005c .L0 
+     /tmp/ccoAeNAr.s:91     .text:000000000000005c .L0 
+     /tmp/ccoAeNAr.s:95     .text:0000000000000060 .L0 
+     /tmp/ccoAeNAr.s:96     .text:0000000000000060 .L0 
+     /tmp/ccoAeNAr.s:97     .text:0000000000000064 .L0 
+     /tmp/ccoAeNAr.s:98     .text:0000000000000064 .L0 
+     /tmp/ccoAeNAr.s:100    .text:0000000000000068 .L0 
+     /tmp/ccoAeNAr.s:102    .text:000000000000006c .L0 
+     /tmp/ccoAeNAr.s:108    .text:000000000000006c _Z6insertP6list_tS0_
+     /tmp/ccoAeNAr.s:111    .text:000000000000006c .L0 
+     /tmp/ccoAeNAr.s:113    .text:000000000000006c .L0 
+     /tmp/ccoAeNAr.s:114    .text:0000000000000070 .L0 
+     /tmp/ccoAeNAr.s:116    .text:0000000000000074 .L0 
+     /tmp/ccoAeNAr.s:118    .text:0000000000000078 .L0 
+     /tmp/ccoAeNAr.s:120    .text:0000000000000078 .L0 
+     /tmp/ccoAeNAr.s:122    .text:000000000000007c .L0 
+     /tmp/ccoAeNAr.s:123    .text:000000000000007c .L0 
+     /tmp/ccoAeNAr.s:124    .text:000000000000007c .L0 
+GAS LISTING /tmp/ccoAeNAr.s 			page 6
+
+
+     /tmp/ccoAeNAr.s:126    .text:0000000000000080 .L0 
+     /tmp/ccoAeNAr.s:127    .text:0000000000000080 .L0 
+     /tmp/ccoAeNAr.s:129    .text:0000000000000084 .L0 
+     /tmp/ccoAeNAr.s:131    .text:0000000000000088 .L0 
+     /tmp/ccoAeNAr.s:132    .text:0000000000000088 .L0 
+     /tmp/ccoAeNAr.s:134    .text:000000000000008c .L0 
+     /tmp/ccoAeNAr.s:136    .text:0000000000000090 .L0 
+     /tmp/ccoAeNAr.s:138    .text:0000000000000094 .L0 
+     /tmp/ccoAeNAr.s:139    .text:0000000000000094 .L0 
+     /tmp/ccoAeNAr.s:142    .text:0000000000000098 .L0 
+     /tmp/ccoAeNAr.s:143    .text:0000000000000098 .L0 
+     /tmp/ccoAeNAr.s:147    .text:000000000000009c .L0 
+     /tmp/ccoAeNAr.s:148    .text:00000000000000a0 .L0 
+     /tmp/ccoAeNAr.s:149    .text:00000000000000a0 .L0 
+     /tmp/ccoAeNAr.s:150    .text:00000000000000a0 .L0 
+     /tmp/ccoAeNAr.s:152    .text:00000000000000a4 .L0 
+     /tmp/ccoAeNAr.s:156    .text:00000000000000a8 .L0 
+     /tmp/ccoAeNAr.s:158    .text:00000000000000a8 .L0 
+     /tmp/ccoAeNAr.s:161    .text:00000000000000b0 .L0 
+     /tmp/ccoAeNAr.s:169    .text:00000000000000b0 .L0 
+     /tmp/ccoAeNAr.s:94     .text:0000000000000060 .L3
+     /tmp/ccoAeNAr.s:68     .text:0000000000000044 .L5
+     /tmp/ccoAeNAr.s:79     .text:0000000000000054 .L6
+     /tmp/ccoAeNAr.s:155    .text:00000000000000a8 .L12
+     /tmp/ccoAeNAr.s:145    .text:000000000000009c .L10
+     /tmp/ccoAeNAr.s:140    .text:0000000000000098 .L11
+     /tmp/ccoAeNAr.s:529    .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccoAeNAr.s:1014   .debug_str:0000000000000142 .LASF42
+     /tmp/ccoAeNAr.s:1050   .debug_str:00000000000002f6 .LASF43
+     /tmp/ccoAeNAr.s:1056   .debug_str:000000000000032b .LASF44
+     /tmp/ccoAeNAr.s:8      .text:0000000000000000 .Ltext0
+     /tmp/ccoAeNAr.s:164    .text:00000000000000b0 .Letext0
+     /tmp/ccoAeNAr.s:964    .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccoAeNAr.s:1022   .debug_str:000000000000022e .LASF0
+     /tmp/ccoAeNAr.s:1002   .debug_str:00000000000000ec .LASF1
+     /tmp/ccoAeNAr.s:996    .debug_str:00000000000000c7 .LASF2
+     /tmp/ccoAeNAr.s:980    .debug_str:0000000000000059 .LASF4
+     /tmp/ccoAeNAr.s:1010   .debug_str:0000000000000122 .LASF3
+     /tmp/ccoAeNAr.s:970    .debug_str:0000000000000025 .LASF5
+     /tmp/ccoAeNAr.s:968    .debug_str:0000000000000012 .LASF6
+     /tmp/ccoAeNAr.s:990    .debug_str:0000000000000095 .LASF7
+     /tmp/ccoAeNAr.s:1034   .debug_str:0000000000000269 .LASF8
+     /tmp/ccoAeNAr.s:986    .debug_str:0000000000000073 .LASF9
+     /tmp/ccoAeNAr.s:1062   .debug_str:0000000000000363 .LASF10
+     /tmp/ccoAeNAr.s:994    .debug_str:00000000000000b8 .LASF11
+     /tmp/ccoAeNAr.s:1058   .debug_str:000000000000034e .LASF12
+     /tmp/ccoAeNAr.s:1042   .debug_str:00000000000002b1 .LASF13
+     /tmp/ccoAeNAr.s:1006   .debug_str:000000000000010f .LASF14
+     /tmp/ccoAeNAr.s:978    .debug_str:0000000000000043 .LASF15
+     /tmp/ccoAeNAr.s:1038   .debug_str:000000000000028e .LASF16
+     /tmp/ccoAeNAr.s:1018   .debug_str:0000000000000217 .LASF45
+     /tmp/ccoAeNAr.s:972    .debug_str:000000000000002c .LASF17
+     /tmp/ccoAeNAr.s:1060   .debug_str:000000000000035e .LASF18
+     /tmp/ccoAeNAr.s:988    .debug_str:0000000000000081 .LASF46
+     /tmp/ccoAeNAr.s:1026   .debug_str:0000000000000242 .LASF19
+     /tmp/ccoAeNAr.s:982    .debug_str:0000000000000060 .LASF20
+     /tmp/ccoAeNAr.s:1028   .debug_str:0000000000000247 .LASF21
+GAS LISTING /tmp/ccoAeNAr.s 			page 7
+
+
+     /tmp/ccoAeNAr.s:1000   .debug_str:00000000000000da .LASF22
+     /tmp/ccoAeNAr.s:976    .debug_str:0000000000000038 .LASF23
+     /tmp/ccoAeNAr.s:1048   .debug_str:00000000000002e4 .LASF24
+     /tmp/ccoAeNAr.s:992    .debug_str:00000000000000a8 .LASF25
+     /tmp/ccoAeNAr.s:1032   .debug_str:0000000000000259 .LASF26
+     /tmp/ccoAeNAr.s:1012   .debug_str:0000000000000134 .LASF27
+     /tmp/ccoAeNAr.s:1046   .debug_str:00000000000002d5 .LASF28
+     /tmp/ccoAeNAr.s:1040   .debug_str:00000000000002a4 .LASF29
+     /tmp/ccoAeNAr.s:1004   .debug_str:00000000000000ff .LASF30
+     /tmp/ccoAeNAr.s:984    .debug_str:0000000000000065 .LASF31
+     /tmp/ccoAeNAr.s:1052   .debug_str:0000000000000314 .LASF32
+     /tmp/ccoAeNAr.s:1020   .debug_str:000000000000021e .LASF33
+     /tmp/ccoAeNAr.s:1030   .debug_str:0000000000000252 .LASF36
+     /tmp/ccoAeNAr.s:1036   .debug_str:0000000000000279 .LASF38
+     /tmp/ccoAeNAr.s:109    .text:000000000000006c .LFB117
+     /tmp/ccoAeNAr.s:162    .text:00000000000000b0 .LFE117
+     /tmp/ccoAeNAr.s:1054   .debug_str:0000000000000326 .LASF34
+     /tmp/ccoAeNAr.s:904    .debug_loc:0000000000000000 .LLST2
+     /tmp/ccoAeNAr.s:1016   .debug_str:0000000000000212 .LASF35
+     /tmp/ccoAeNAr.s:1008   .debug_str:000000000000011b .LASF37
+     /tmp/ccoAeNAr.s:966    .debug_str:0000000000000000 .LASF39
+     /tmp/ccoAeNAr.s:45     .text:0000000000000020 .LFB116
+     /tmp/ccoAeNAr.s:103    .text:000000000000006c .LFE116
+     /tmp/ccoAeNAr.s:929    .debug_loc:0000000000000062 .LLST0
+     /tmp/ccoAeNAr.s:940    .debug_loc:0000000000000098 .LLST1
+     /tmp/ccoAeNAr.s:998    .debug_str:00000000000000d5 .LASF47
+     /tmp/ccoAeNAr.s:1024   .debug_str:000000000000023b .LASF40
+     /tmp/ccoAeNAr.s:974    .debug_str:0000000000000031 .LASF41
+     /tmp/ccoAeNAr.s:1044   .debug_str:00000000000002c1 .LASF48
+     /tmp/ccoAeNAr.s:13     .text:0000000000000000 .LFB114
+     /tmp/ccoAeNAr.s:37     .text:0000000000000020 .LFE114
+     /tmp/ccoAeNAr.s:112    .text:000000000000006c .LVL5
+     /tmp/ccoAeNAr.s:144    .text:000000000000009c .LVL6
+     /tmp/ccoAeNAr.s:154    .text:00000000000000a8 .LVL7
+     /tmp/ccoAeNAr.s:159    .text:00000000000000ac .LVL8
+     /tmp/ccoAeNAr.s:48     .text:0000000000000020 .LVL1
+     /tmp/ccoAeNAr.s:85     .text:0000000000000058 .LVL3
+     /tmp/ccoAeNAr.s:81     .text:0000000000000054 .LVL2
+     /tmp/ccoAeNAr.s:93     .text:0000000000000060 .LVL4
+     /tmp/ccoAeNAr.s:170    .debug_info:0000000000000000 .Ldebug_info0
+
+NO UNDEFINED SYMBOLS

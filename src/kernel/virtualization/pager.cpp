@@ -51,8 +51,8 @@ int Pager::id_map(void* start, void* end, PMTEntryBits flag){
 }
 
 int Pager::map_kernel(){
-    //uint64 laa = (uint64)NoAlloc::getEndAddress();
-    uint64 laa = (uint64)HEAP_END_ADDR;
+    uint64 laa = (uint64)NoAlloc::getEndAddress();
+    //int64 laa = (uint64)HEAP_END_ADDR;
     uint64 fa = KERNEL_TEXT_START;
     
     //map_ram
