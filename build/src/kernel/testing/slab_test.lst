@@ -1,0 +1,3357 @@
+GAS LISTING /tmp/ccUGcsIN.s 			page 1
+
+
+   1              		.file	"slab_test.cpp"
+   2              		.option nopic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p0_m2p0_a2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              	.Ltext0:
+   9              		.align	2
+  10              		.globl	_Z4ctorPv
+  12              	_Z4ctorPv:
+  13              	.LFB120:
+  14              		.file 1 "src/kernel/testing/slab_test.cpp"
+   1:src/kernel/testing/slab_test.cpp **** #include"../../../h/kernel_lib.h"
+   2:src/kernel/testing/slab_test.cpp **** #include"../../../h/kernel_test.h"
+   3:src/kernel/testing/slab_test.cpp **** 
+   4:src/kernel/testing/slab_test.cpp **** void cache_alloc_test(ObjectCache** oc_arr,int size, size_t objsize = 32, char flags = Slab::pb_mas
+   5:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Cache Allocating=============\n\n");
+   6:src/kernel/testing/slab_test.cpp ****     
+   7:src/kernel/testing/slab_test.cpp ****     kprintString("Allocating "); kprintInt(size); kprintString(" caches!!\n");
+   8:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+   9:src/kernel/testing/slab_test.cpp ****         oc_arr[i] = new ObjectCache("oc", objsize, nullptr, nullptr);
+  10:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+  11:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+  12:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+  13:src/kernel/testing/slab_test.cpp ****             return;
+  14:src/kernel/testing/slab_test.cpp ****         }
+  15:src/kernel/testing/slab_test.cpp ****         oc_arr[i]->printInfo(flags);
+  16:src/kernel/testing/slab_test.cpp ****         kprintString("\n");
+  17:src/kernel/testing/slab_test.cpp ****     
+  18:src/kernel/testing/slab_test.cpp ****     }
+  19:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance().print_state(flags);
+  20:src/kernel/testing/slab_test.cpp **** 
+  21:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========Object Cache Allocating End===========\n\n");
+  22:src/kernel/testing/slab_test.cpp ****     
+  23:src/kernel/testing/slab_test.cpp **** }
+  24:src/kernel/testing/slab_test.cpp **** 
+  25:src/kernel/testing/slab_test.cpp **** 
+  26:src/kernel/testing/slab_test.cpp **** 
+  27:src/kernel/testing/slab_test.cpp **** 
+  28:src/kernel/testing/slab_test.cpp **** void cache_dealloc_test(ObjectCache** oc_arr, int size, char flags = Slab::pb_mask::FREE){
+  29:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Cache Deallocating=============\n\n");
+  30:src/kernel/testing/slab_test.cpp ****     
+  31:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+  32:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+  33:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+  34:src/kernel/testing/slab_test.cpp ****             delete oc_arr[i];
+  35:src/kernel/testing/slab_test.cpp ****             oc_arr[i] = 0;
+  36:src/kernel/testing/slab_test.cpp ****         }
+  37:src/kernel/testing/slab_test.cpp ****         else{
+  38:src/kernel/testing/slab_test.cpp ****             kprintString("Given address not valid!\n");
+  39:src/kernel/testing/slab_test.cpp ****             return;
+  40:src/kernel/testing/slab_test.cpp ****         }
+  41:src/kernel/testing/slab_test.cpp ****     }
+  42:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance().print_state(flags);
+  43:src/kernel/testing/slab_test.cpp **** 
+  44:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========Object Cache Dellocating End===========\n\n");
+GAS LISTING /tmp/ccUGcsIN.s 			page 2
+
+
+  45:src/kernel/testing/slab_test.cpp ****     
+  46:src/kernel/testing/slab_test.cpp **** }
+  47:src/kernel/testing/slab_test.cpp **** 
+  48:src/kernel/testing/slab_test.cpp **** 
+  49:src/kernel/testing/slab_test.cpp **** 
+  50:src/kernel/testing/slab_test.cpp **** 
+  51:src/kernel/testing/slab_test.cpp **** void kmalloc_test(void** buff_arr, int size, size_t objsize = 32, char flags = Slab::pb_mask::FREE)
+  52:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============SMALL MEMORY BUFFER ALLOC=============\n\n");
+  53:src/kernel/testing/slab_test.cpp ****     
+  54:src/kernel/testing/slab_test.cpp ****     for(int i = 0 ; i < size; i++){
+  55:src/kernel/testing/slab_test.cpp ****         buff_arr[i] = SlabAllocator::getInstance().kmalloc(objsize);
+  56:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+  57:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+  58:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+  59:src/kernel/testing/slab_test.cpp ****             return;
+  60:src/kernel/testing/slab_test.cpp ****         }
+  61:src/kernel/testing/slab_test.cpp ****     }
+  62:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance().print_state(flags);
+  63:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n");
+  64:src/kernel/testing/slab_test.cpp ****     
+  65:src/kernel/testing/slab_test.cpp **** }
+  66:src/kernel/testing/slab_test.cpp **** 
+  67:src/kernel/testing/slab_test.cpp **** 
+  68:src/kernel/testing/slab_test.cpp **** 
+  69:src/kernel/testing/slab_test.cpp **** void kfree_test(void** buff_arr, int size, char flags = Slab::pb_mask::FREE){
+  70:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============SMALL MEMORY BUFFER DEALLOC=============\n\n");
+  71:src/kernel/testing/slab_test.cpp ****     
+  72:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+  73:src/kernel/testing/slab_test.cpp ****         if(!buff_arr[i]){
+  74:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid free address given!!");
+  75:src/kernel/testing/slab_test.cpp ****             return;
+  76:src/kernel/testing/slab_test.cpp ****         }
+  77:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+  78:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+  79:src/kernel/testing/slab_test.cpp ****     }
+  80:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance().print_state(flags); 
+  81:src/kernel/testing/slab_test.cpp **** 
+  82:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========SMALL MEMORY BUFFER DEALLOC END===========\n\n");
+  83:src/kernel/testing/slab_test.cpp ****     
+  84:src/kernel/testing/slab_test.cpp **** }
+  85:src/kernel/testing/slab_test.cpp **** 
+  86:src/kernel/testing/slab_test.cpp **** 
+  87:src/kernel/testing/slab_test.cpp **** 
+  88:src/kernel/testing/slab_test.cpp **** void slab_allocator_state_ceck(char flags = Slab::pb_mask::FREE){
+  89:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Slab Allocator State Check=============\n\n");
+  90:src/kernel/testing/slab_test.cpp ****     
+  91:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance().print_state(flags);
+  92:src/kernel/testing/slab_test.cpp ****     
+  93:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========Slab Allocator State Check End===========\n\n");
+  94:src/kernel/testing/slab_test.cpp **** }
+  95:src/kernel/testing/slab_test.cpp **** 
+  96:src/kernel/testing/slab_test.cpp **** 
+  97:src/kernel/testing/slab_test.cpp **** 
+  98:src/kernel/testing/slab_test.cpp **** void cache_obj_alloc_test(void** object, int size, ObjectCache* cache, char flags){
+  99:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Allocate Test=============\n\n");
+ 100:src/kernel/testing/slab_test.cpp ****     
+ 101:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+GAS LISTING /tmp/ccUGcsIN.s 			page 3
+
+
+ 102:src/kernel/testing/slab_test.cpp ****         object[i] = cache->alloc_obj();
+ 103:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 104:src/kernel/testing/slab_test.cpp ****             kprintString("Object not corresctly allocated!!\n");   
+ 105:src/kernel/testing/slab_test.cpp ****             return;
+ 106:src/kernel/testing/slab_test.cpp ****         }
+ 107:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+ 108:src/kernel/testing/slab_test.cpp ****     }
+ 109:src/kernel/testing/slab_test.cpp ****     cache->printInfo(flags);
+ 110:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 111:src/kernel/testing/slab_test.cpp **** 
+ 112:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========Object Allocate Test End===========\n\n");
+ 113:src/kernel/testing/slab_test.cpp ****     
+ 114:src/kernel/testing/slab_test.cpp **** }
+ 115:src/kernel/testing/slab_test.cpp **** 
+ 116:src/kernel/testing/slab_test.cpp **** 
+ 117:src/kernel/testing/slab_test.cpp **** 
+ 118:src/kernel/testing/slab_test.cpp **** void cache_obj_dealloca_test(void** object, int size, ObjectCache* cache, char flags){
+ 119:src/kernel/testing/slab_test.cpp **** 
+ 120:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Deallocate Test=============\n\n");
+ 121:src/kernel/testing/slab_test.cpp ****     
+ 122:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 123:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+ 124:src/kernel/testing/slab_test.cpp ****         
+ 125:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 126:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid object address!\n");   
+ 127:src/kernel/testing/slab_test.cpp ****             return;
+ 128:src/kernel/testing/slab_test.cpp ****         }
+ 129:src/kernel/testing/slab_test.cpp ****         
+ 130:src/kernel/testing/slab_test.cpp ****         cache->free_obj(object[i]);
+ 131:src/kernel/testing/slab_test.cpp ****         
+ 132:src/kernel/testing/slab_test.cpp ****     }
+ 133:src/kernel/testing/slab_test.cpp ****     cache->printInfo(flags);
+ 134:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 135:src/kernel/testing/slab_test.cpp **** 
+ 136:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Dellocate Test End=============\n\n");
+ 137:src/kernel/testing/slab_test.cpp ****     
+ 138:src/kernel/testing/slab_test.cpp **** }
+ 139:src/kernel/testing/slab_test.cpp **** 
+ 140:src/kernel/testing/slab_test.cpp **** 
+ 141:src/kernel/testing/slab_test.cpp **** void ctor(void* ptr){
+  15              		.loc 1 141 21
+  16              		.cfi_startproc
+  17              	.LVL0:
+  18 0000 130101FC 		addi	sp,sp,-64
+  19              		.cfi_def_cfa_offset 64
+  20 0004 233C1102 		sd	ra,56(sp)
+  21 0008 23388102 		sd	s0,48(sp)
+  22              		.cfi_offset 1, -8
+  23              		.cfi_offset 8, -16
+  24 000c 13040104 		addi	s0,sp,64
+  25              		.cfi_def_cfa 8, 0
+  26 0010 93070500 		mv	a5,a0
+ 142:src/kernel/testing/slab_test.cpp ****    
+ 143:src/kernel/testing/slab_test.cpp ****     *(KSemaphore*)ptr = KSemaphore(1);
+  27              		.loc 1 143 5
+  28              	.LVL1:
+  29              	.LBB16:
+GAS LISTING /tmp/ccUGcsIN.s 			page 4
+
+
+  30              	.LBB17:
+  31              	.LBB18:
+  32              		.file 2 "src/kernel/testing/../../../h/../h/ksemaphore.hpp"
+   1:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** #ifndef __semaphore__
+   2:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** #define __semaphore__
+   3:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** 
+   4:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** #include"../h/ptr_queue.hpp"
+   5:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** #include "slab_allocator.h"
+   6:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** 
+   7:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** /* Class used to describe semaphore in kernel code */
+   8:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** 
+   9:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** class KSemaphore
+  10:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** {
+  11:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     static ObjectCache* cache; 
+  12:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** public:
+  13:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     //#include"../h/kernel_operators.hpp" /* allocation and deallocation */
+  14:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     
+  15:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     __SLAB_ALLOCATION__(KSemaphore, nullptr, nullptr)
+  16:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** 
+  17:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     KSemaphore(unsigned val):val(val)
+  33              		.loc 2 17 37 is_stmt 0
+  34 0014 13071000 		li	a4,1
+  35 0018 2328E4FC 		sw	a4,-48(s0)
+  36              	.LVL2:
+  37              	.LBB19:
+  38              	.LBB20:
+  39              	.LBB21:
+  40              		.file 3 "src/kernel/testing/../../../h/../h/ptr_queue.hpp"
+   1:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #ifndef _queue_h
+   2:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #define _queue_h
+   3:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** 
+   4:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** //#include"../h/tcb.hpp"
+   5:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** //#include"../h/testing.hpp"
+   6:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #include"../lib/hw.h"
+   7:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #include"../h/memory_allocator.hpp"
+   8:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #include "object_cache.h"
+   9:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** #include "slab_allocator.h"
+  10:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** 
+  11:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** class TCB;
+  12:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** 
+  13:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** class TcbQueue{
+  14:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****        
+  15:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     TCB *head, *tail;
+  16:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     int tmpNum;
+  17:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     void brisi(){
+  18:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****         while(!isEmpty())
+  19:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****             remove();
+  20:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     }
+  21:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     static ObjectCache* cache;
+  22:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** public:
+  23:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     //#include"../h/kernel_operators.hpp"
+  24:src/kernel/testing/../../../h/../h/ptr_queue.hpp **** 
+  25:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     __SLAB_ALLOCATION__(TcbQueue, nullptr, nullptr);
+  26:src/kernel/testing/../../../h/../h/ptr_queue.hpp ****     TcbQueue():head(nullptr), tail(nullptr), tmpNum(0){}
+  41              		.loc 3 26 54
+  42 001c 233C04FC 		sd	zero,-40(s0)
+  43 0020 233004FE 		sd	zero,-32(s0)
+GAS LISTING /tmp/ccUGcsIN.s 			page 5
+
+
+  44 0024 232404FE 		sw	zero,-24(s0)
+  45              	.LVL3:
+  46              	.LBE21:
+  47              	.LBE20:
+  48              	.LBE19:
+  18:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     {
+  19:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         /* 
+  20:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         *  Put semaphore on front 
+  21:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         *  of the list of active semaphores
+  22:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         */
+  23:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         next = activeSemaphores; 
+  49              		.loc 2 23 9 is_stmt 1
+  50              		.loc 2 23 14 is_stmt 0
+  51 0028 97060000 		lla	a3,_ZN10KSemaphore16activeSemaphoresE
+  51      93860600 
+  52 0030 03B70600 		ld	a4,0(a3)
+  53 0034 2334E4FC 		sd	a4,-56(s0)
+  24:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         activeSemaphores = this;
+  54              		.loc 2 24 9 is_stmt 1
+  55              		.loc 2 24 26 is_stmt 0
+  56 0038 130584FC 		addi	a0,s0,-56
+  57              	.LVL4:
+  58 003c 23B0A600 		sd	a0,0(a3)
+  59              	.LVL5:
+  60              	.LBE18:
+  61              	.LBE17:
+  62              	.LBE16:
+  63              		.loc 1 143 23
+  64 0040 23B0E700 		sd	a4,0(a5)
+  65 0044 033704FD 		ld	a4,-48(s0)
+  66 0048 23B4E700 		sd	a4,8(a5)
+  67 004c 23B80700 		sd	zero,16(a5)
+  68 0050 23BC0700 		sd	zero,24(a5)
+  69 0054 033784FE 		ld	a4,-24(s0)
+  70 0058 23B0E702 		sd	a4,32(a5)
+  71              		.loc 1 143 25
+  72 005c 97000000 		call	_ZN10KSemaphoreD1Ev
+  72      E7800000 
+  73              	.LVL6:
+ 144:src/kernel/testing/slab_test.cpp **** }
+  74              		.loc 1 144 1
+  75 0064 83308103 		ld	ra,56(sp)
+  76              		.cfi_restore 1
+  77 0068 03340103 		ld	s0,48(sp)
+  78              		.cfi_restore 8
+  79              		.cfi_def_cfa 2, 64
+  80 006c 13010104 		addi	sp,sp,64
+  81              		.cfi_def_cfa_offset 0
+  82 0070 67800000 		jr	ra
+  83              		.cfi_endproc
+  84              	.LFE120:
+  86              		.align	2
+  87              		.globl	_Z16cache_alloc_testPP11ObjectCacheimc
+  89              	_Z16cache_alloc_testPP11ObjectCacheimc:
+  90              	.LFB113:
+   4:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Cache Allocating=============\n\n");
+  91              		.loc 1 4 108 is_stmt 1
+GAS LISTING /tmp/ccUGcsIN.s 			page 6
+
+
+  92              		.cfi_startproc
+  93              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  94              		.cfi_lsda 0x1b,.LLSDA113
+  95              	.LVL7:
+  96 0074 130101FB 		addi	sp,sp,-80
+  97              		.cfi_def_cfa_offset 80
+  98 0078 23341104 		sd	ra,72(sp)
+  99 007c 23308104 		sd	s0,64(sp)
+ 100 0080 233C9102 		sd	s1,56(sp)
+ 101 0084 23382103 		sd	s2,48(sp)
+ 102 0088 23343103 		sd	s3,40(sp)
+ 103 008c 23304103 		sd	s4,32(sp)
+ 104 0090 233C5101 		sd	s5,24(sp)
+ 105 0094 23386101 		sd	s6,16(sp)
+ 106 0098 23347101 		sd	s7,8(sp)
+ 107              		.cfi_offset 1, -8
+ 108              		.cfi_offset 8, -16
+ 109              		.cfi_offset 9, -24
+ 110              		.cfi_offset 18, -32
+ 111              		.cfi_offset 19, -40
+ 112              		.cfi_offset 20, -48
+ 113              		.cfi_offset 21, -56
+ 114              		.cfi_offset 22, -64
+ 115              		.cfi_offset 23, -72
+ 116 009c 13040105 		addi	s0,sp,80
+ 117              		.cfi_def_cfa 8, 0
+ 118 00a0 130A0500 		mv	s4,a0
+ 119 00a4 938A0500 		mv	s5,a1
+ 120 00a8 930B0600 		mv	s7,a2
+ 121 00ac 138B0600 		mv	s6,a3
+   5:src/kernel/testing/slab_test.cpp ****     
+ 122              		.loc 1 5 5
+   5:src/kernel/testing/slab_test.cpp ****     
+ 123              		.loc 1 5 17 is_stmt 0
+ 124 00b0 17050000 		lla	a0,.LC0
+ 124      13050500 
+ 125              	.LVL8:
+ 126              	.LEHB0:
+ 127 00b8 97000000 		call	_Z12kprintStringPKc
+ 127      E7800000 
+ 128              	.LVL9:
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 129              		.loc 1 7 5 is_stmt 1
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 130              		.loc 1 7 17 is_stmt 0
+ 131 00c0 17050000 		lla	a0,.LC1
+ 131      13050500 
+ 132 00c8 97000000 		call	_Z12kprintStringPKc
+ 132      E7800000 
+ 133              	.LVL10:
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 134              		.loc 1 7 34 is_stmt 1
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 135              		.loc 1 7 43 is_stmt 0
+ 136 00d0 13060000 		li	a2,0
+ 137 00d4 9305A000 		li	a1,10
+ 138 00d8 13850A00 		mv	a0,s5
+GAS LISTING /tmp/ccUGcsIN.s 			page 7
+
+
+ 139 00dc 97000000 		call	_Z9kprintIntmib
+ 139      E7800000 
+ 140              	.LVL11:
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 141              		.loc 1 7 51 is_stmt 1
+   7:src/kernel/testing/slab_test.cpp ****     for(int i = 0; i < size; i++){
+ 142              		.loc 1 7 63 is_stmt 0
+ 143 00e4 17050000 		lla	a0,.LC2
+ 143      13050500 
+ 144 00ec 97000000 		call	_Z12kprintStringPKc
+ 144      E7800000 
+ 145              	.LVL12:
+   8:src/kernel/testing/slab_test.cpp ****         oc_arr[i] = new ObjectCache("oc", objsize, nullptr, nullptr);
+ 146              		.loc 1 8 5 is_stmt 1
+ 147              	.LBB22:
+   8:src/kernel/testing/slab_test.cpp ****         oc_arr[i] = new ObjectCache("oc", objsize, nullptr, nullptr);
+ 148              		.loc 1 8 13 is_stmt 0
+ 149 00f4 13090000 		li	s2,0
+ 150 00f8 6F000009 		j	.L8
+ 151              	.LVL13:
+ 152              	.L5:
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 153              		.loc 1 9 17 discriminator 6
+ 154 00fc 93143900 		slli	s1,s2,3
+ 155 0100 B3049A00 		add	s1,s4,s1
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 156              		.loc 1 9 19 discriminator 6
+ 157 0104 23B03401 		sd	s3,0(s1)
+  10:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+ 158              		.loc 1 10 9 is_stmt 1 discriminator 6
+ 159 0108 17050000 		lla	a0,.LC4
+ 159      13050500 
+ 160 0110 97000000 		call	_Z12kprintStringPKc
+ 160      E7800000 
+ 161              	.LVL14:
+  10:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+ 162              		.loc 1 10 9 discriminator 6
+ 163 0118 13060000 		li	a2,0
+ 164 011c 9305A000 		li	a1,10
+ 165 0120 13050900 		mv	a0,s2
+ 166 0124 97000000 		call	_Z9kprintIntmib
+ 166      E7800000 
+ 167              	.LVL15:
+  10:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+ 168              		.loc 1 10 9 discriminator 6
+ 169 012c 17050000 		lla	a0,.LC5
+ 169      13050500 
+ 170 0134 97000000 		call	_Z12kprintStringPKc
+ 170      E7800000 
+ 171              	.LVL16:
+  10:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+ 172              		.loc 1 10 9 discriminator 6
+ 173 013c 13060000 		li	a2,0
+ 174 0140 93050001 		li	a1,16
+ 175 0144 03B50400 		ld	a0,0(s1)
+ 176 0148 97000000 		call	_Z9kprintIntmib
+ 176      E7800000 
+GAS LISTING /tmp/ccUGcsIN.s 			page 8
+
+
+ 177              	.LVL17:
+  10:src/kernel/testing/slab_test.cpp ****         if(oc_arr == nullptr){
+ 178              		.loc 1 10 9 discriminator 6
+ 179 0150 17050000 		lla	a0,.LC6
+ 179      13050500 
+ 180 0158 97000000 		call	_Z12kprintStringPKc
+ 180      E7800000 
+ 181              	.LVL18:
+  11:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+ 182              		.loc 1 11 9 discriminator 6
+ 183 0160 63020A06 		beq	s4,zero,.L12
+  15:src/kernel/testing/slab_test.cpp ****         kprintString("\n");
+ 184              		.loc 1 15 9 discriminator 2
+  15:src/kernel/testing/slab_test.cpp ****         kprintString("\n");
+ 185              		.loc 1 15 29 is_stmt 0 discriminator 2
+ 186 0164 93050B00 		mv	a1,s6
+ 187 0168 03B50400 		ld	a0,0(s1)
+ 188 016c 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 188      E7800000 
+ 189              	.LVL19:
+  16:src/kernel/testing/slab_test.cpp ****     
+ 190              		.loc 1 16 9 is_stmt 1 discriminator 2
+  16:src/kernel/testing/slab_test.cpp ****     
+ 191              		.loc 1 16 21 is_stmt 0 discriminator 2
+ 192 0174 17050000 		lla	a0,.LC6
+ 192      13050500 
+ 193 017c 97000000 		call	_Z12kprintStringPKc
+ 193      E7800000 
+ 194              	.LVL20:
+   8:src/kernel/testing/slab_test.cpp ****         oc_arr[i] = new ObjectCache("oc", objsize, nullptr, nullptr);
+ 195              		.loc 1 8 5 discriminator 2
+ 196 0184 1B091900 		addiw	s2,s2,1
+ 197              	.LVL21:
+ 198              	.L8:
+   8:src/kernel/testing/slab_test.cpp ****         oc_arr[i] = new ObjectCache("oc", objsize, nullptr, nullptr);
+ 199              		.loc 1 8 22 discriminator 1
+ 200 0188 63585905 		bge	s2,s5,.L4
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 201              		.loc 1 9 9 is_stmt 1
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 202              		.loc 1 9 68 is_stmt 0
+ 203 018c 13058005 		li	a0,88
+ 204 0190 97000000 		call	_ZN11ObjectCachenwEm
+ 204      E7800000 
+ 205              	.LVL22:
+ 206              	.LEHE0:
+ 207 0198 93090500 		mv	s3,a0
+ 208 019c E30005F6 		beq	a0,zero,.L5
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 209              		.loc 1 9 68 discriminator 1
+ 210 01a0 93070000 		li	a5,0
+ 211 01a4 13070000 		li	a4,0
+ 212 01a8 93060000 		li	a3,0
+ 213 01ac 13860B00 		mv	a2,s7
+ 214 01b0 97050000 		lla	a1,.LC3
+ 214      93850500 
+ 215              	.LEHB1:
+GAS LISTING /tmp/ccUGcsIN.s 			page 9
+
+
+ 216 01b8 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+ 216      E7800000 
+ 217              	.LVL23:
+ 218              	.LEHE1:
+ 219 01c0 6FF0DFF3 		j	.L5
+ 220              	.L12:
+  12:src/kernel/testing/slab_test.cpp ****             return;
+ 221              		.loc 1 12 13 is_stmt 1
+  12:src/kernel/testing/slab_test.cpp ****             return;
+ 222              		.loc 1 12 25 is_stmt 0
+ 223 01c4 17050000 		lla	a0,.LC7
+ 223      13050500 
+ 224              	.LEHB2:
+ 225 01cc 97000000 		call	_Z12kprintStringPKc
+ 225      E7800000 
+ 226              	.LVL24:
+  13:src/kernel/testing/slab_test.cpp ****         }
+ 227              		.loc 1 13 13 is_stmt 1
+ 228 01d4 6F008002 		j	.L3
+ 229              	.L4:
+ 230              	.LBE22:
+  19:src/kernel/testing/slab_test.cpp **** 
+ 231              		.loc 1 19 5
+  19:src/kernel/testing/slab_test.cpp **** 
+ 232              		.loc 1 19 25 is_stmt 0
+ 233 01d8 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 233      E7800000 
+ 234              	.LVL25:
+  19:src/kernel/testing/slab_test.cpp **** 
+ 235              		.loc 1 19 38
+ 236 01e0 93050B00 		mv	a1,s6
+ 237 01e4 97000000 		call	_ZN13SlabAllocator11print_stateEc
+ 237      E7800000 
+ 238              	.LVL26:
+  21:src/kernel/testing/slab_test.cpp ****     
+ 239              		.loc 1 21 5 is_stmt 1
+  21:src/kernel/testing/slab_test.cpp ****     
+ 240              		.loc 1 21 17 is_stmt 0
+ 241 01ec 17050000 		lla	a0,.LC8
+ 241      13050500 
+ 242 01f4 97000000 		call	_Z12kprintStringPKc
+ 242      E7800000 
+ 243              	.LVL27:
+ 244              	.LEHE2:
+ 245              	.L3:
+  23:src/kernel/testing/slab_test.cpp **** 
+ 246              		.loc 1 23 1
+ 247 01fc 83308104 		ld	ra,72(sp)
+ 248              		.cfi_remember_state
+ 249              		.cfi_restore 1
+ 250 0200 03340104 		ld	s0,64(sp)
+ 251              		.cfi_restore 8
+ 252              		.cfi_def_cfa 2, 80
+ 253 0204 83348103 		ld	s1,56(sp)
+ 254              		.cfi_restore 9
+ 255 0208 03390103 		ld	s2,48(sp)
+ 256              		.cfi_restore 18
+GAS LISTING /tmp/ccUGcsIN.s 			page 10
+
+
+ 257              	.LVL28:
+ 258 020c 83398102 		ld	s3,40(sp)
+ 259              		.cfi_restore 19
+ 260 0210 033A0102 		ld	s4,32(sp)
+ 261              		.cfi_restore 20
+ 262              	.LVL29:
+ 263 0214 833A8101 		ld	s5,24(sp)
+ 264              		.cfi_restore 21
+ 265 0218 033B0101 		ld	s6,16(sp)
+ 266              		.cfi_restore 22
+ 267 021c 833B8100 		ld	s7,8(sp)
+ 268              		.cfi_restore 23
+ 269              	.LVL30:
+ 270 0220 13010105 		addi	sp,sp,80
+ 271              		.cfi_def_cfa_offset 0
+ 272 0224 67800000 		jr	ra
+ 273              	.LVL31:
+ 274              	.L10:
+ 275              		.cfi_restore_state
+ 276 0228 93040500 		mv	s1,a0
+ 277              	.LBB23:
+   9:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 278              		.loc 1 9 68
+ 279 022c 13850900 		mv	a0,s3
+ 280 0230 97000000 		call	_ZN11ObjectCachedlEPv
+ 280      E7800000 
+ 281              	.LVL32:
+ 282 0238 13850400 		mv	a0,s1
+ 283              	.LEHB3:
+ 284 023c 97000000 		call	_Unwind_Resume
+ 284      E7800000 
+ 285              	.LVL33:
+ 286              	.LEHE3:
+ 287              	.LBE23:
+ 288              		.cfi_endproc
+ 289              	.LFE113:
+ 290              		.globl	__gxx_personality_v0
+ 291              		.section	.gcc_except_table,"aw",@progbits
+ 292              	.LLSDA113:
+ 293 0000 FF       		.byte	0xff
+ 294 0001 FF       		.byte	0xff
+ 295 0002 03       		.byte	0x3
+ 296 0003 34       		.byte	0x34
+ 297 0004 00000000 		.4byte	.LEHB0-.LFB113
+ 298 0008 00000000 		.4byte	.LEHE0-.LEHB0
+ 299 000c 00000000 		.4byte	0
+ 300 0010 00       		.byte	0
+ 301 0011 00000000 		.4byte	.LEHB1-.LFB113
+ 302 0015 00000000 		.4byte	.LEHE1-.LEHB1
+ 303 0019 00000000 		.4byte	.L10-.LFB113
+ 304 001d 00       		.byte	0
+ 305 001e 00000000 		.4byte	.LEHB2-.LFB113
+ 306 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 307 0026 00000000 		.4byte	0
+ 308 002a 00       		.byte	0
+ 309 002b 00000000 		.4byte	.LEHB3-.LFB113
+ 310 002f 00000000 		.4byte	.LEHE3-.LEHB3
+GAS LISTING /tmp/ccUGcsIN.s 			page 11
+
+
+ 311 0033 00000000 		.4byte	0
+ 312 0037 00       		.byte	0
+ 313              		.text
+ 315              		.align	2
+ 316              		.globl	_Z18cache_dealloc_testPP11ObjectCacheic
+ 318              	_Z18cache_dealloc_testPP11ObjectCacheic:
+ 319              	.LFB114:
+  28:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Cache Deallocating=============\n\n");
+ 320              		.loc 1 28 90 is_stmt 1
+ 321              		.cfi_startproc
+ 322              	.LVL34:
+ 323 0244 130101FC 		addi	sp,sp,-64
+ 324              		.cfi_def_cfa_offset 64
+ 325 0248 233C1102 		sd	ra,56(sp)
+ 326 024c 23388102 		sd	s0,48(sp)
+ 327 0250 23349102 		sd	s1,40(sp)
+ 328 0254 23302103 		sd	s2,32(sp)
+ 329 0258 233C3101 		sd	s3,24(sp)
+ 330 025c 23384101 		sd	s4,16(sp)
+ 331 0260 23345101 		sd	s5,8(sp)
+ 332 0264 23306101 		sd	s6,0(sp)
+ 333              		.cfi_offset 1, -8
+ 334              		.cfi_offset 8, -16
+ 335              		.cfi_offset 9, -24
+ 336              		.cfi_offset 18, -32
+ 337              		.cfi_offset 19, -40
+ 338              		.cfi_offset 20, -48
+ 339              		.cfi_offset 21, -56
+ 340              		.cfi_offset 22, -64
+ 341 0268 13040104 		addi	s0,sp,64
+ 342              		.cfi_def_cfa 8, 0
+ 343 026c 930A0500 		mv	s5,a0
+ 344 0270 138A0500 		mv	s4,a1
+ 345 0274 130B0600 		mv	s6,a2
+  29:src/kernel/testing/slab_test.cpp ****     
+ 346              		.loc 1 29 5
+  29:src/kernel/testing/slab_test.cpp ****     
+ 347              		.loc 1 29 17 is_stmt 0
+ 348 0278 17050000 		lla	a0,.LC9
+ 348      13050500 
+ 349              	.LVL35:
+ 350 0280 97000000 		call	_Z12kprintStringPKc
+ 350      E7800000 
+ 351              	.LVL36:
+  31:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 352              		.loc 1 31 5 is_stmt 1
+ 353              	.LBB24:
+  31:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 354              		.loc 1 31 13 is_stmt 0
+ 355 0288 13090000 		li	s2,0
+ 356              	.LVL37:
+ 357              	.L16:
+  31:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 358              		.loc 1 31 22 discriminator 1
+ 359 028c 6352490B 		bge	s2,s4,.L14
+  32:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+ 360              		.loc 1 32 9 is_stmt 1
+GAS LISTING /tmp/ccUGcsIN.s 			page 12
+
+
+ 361 0290 17050000 		lla	a0,.LC4
+ 361      13050500 
+ 362 0298 97000000 		call	_Z12kprintStringPKc
+ 362      E7800000 
+ 363              	.LVL38:
+  32:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+ 364              		.loc 1 32 9
+ 365 02a0 13060000 		li	a2,0
+ 366 02a4 9305A000 		li	a1,10
+ 367 02a8 13050900 		mv	a0,s2
+ 368 02ac 97000000 		call	_Z9kprintIntmib
+ 368      E7800000 
+ 369              	.LVL39:
+  32:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+ 370              		.loc 1 32 9
+ 371 02b4 17050000 		lla	a0,.LC5
+ 371      13050500 
+ 372 02bc 97000000 		call	_Z12kprintStringPKc
+ 372      E7800000 
+ 373              	.LVL40:
+  32:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+ 374              		.loc 1 32 9
+ 375 02c4 93143900 		slli	s1,s2,3
+ 376 02c8 B3849A00 		add	s1,s5,s1
+ 377 02cc 13060000 		li	a2,0
+ 378 02d0 93050001 		li	a1,16
+ 379 02d4 03B50400 		ld	a0,0(s1)
+ 380 02d8 97000000 		call	_Z9kprintIntmib
+ 380      E7800000 
+ 381              	.LVL41:
+  32:src/kernel/testing/slab_test.cpp ****         if(oc_arr[i]){
+ 382              		.loc 1 32 9
+ 383 02e0 17050000 		lla	a0,.LC6
+ 383      13050500 
+ 384 02e8 97000000 		call	_Z12kprintStringPKc
+ 384      E7800000 
+ 385              	.LVL42:
+  33:src/kernel/testing/slab_test.cpp ****             delete oc_arr[i];
+ 386              		.loc 1 33 9
+  33:src/kernel/testing/slab_test.cpp ****             delete oc_arr[i];
+ 387              		.loc 1 33 20 is_stmt 0
+ 388 02f0 83B90400 		ld	s3,0(s1)
+  33:src/kernel/testing/slab_test.cpp ****             delete oc_arr[i];
+ 389              		.loc 1 33 9
+ 390 02f4 63840902 		beq	s3,zero,.L15
+  34:src/kernel/testing/slab_test.cpp ****             oc_arr[i] = 0;
+ 391              		.loc 1 34 13 is_stmt 1 discriminator 1
+  34:src/kernel/testing/slab_test.cpp ****             oc_arr[i] = 0;
+ 392              		.loc 1 34 28 is_stmt 0 discriminator 1
+ 393 02f8 13850900 		mv	a0,s3
+ 394 02fc 97000000 		call	_ZN11ObjectCacheD1Ev
+ 394      E7800000 
+ 395              	.LVL43:
+ 396 0304 13850900 		mv	a0,s3
+ 397 0308 97000000 		call	_ZN11ObjectCachedlEPv
+ 397      E7800000 
+ 398              	.LVL44:
+GAS LISTING /tmp/ccUGcsIN.s 			page 13
+
+
+  35:src/kernel/testing/slab_test.cpp ****         }
+ 399              		.loc 1 35 13 is_stmt 1 discriminator 1
+  35:src/kernel/testing/slab_test.cpp ****         }
+ 400              		.loc 1 35 23 is_stmt 0 discriminator 1
+ 401 0310 23B00400 		sd	zero,0(s1)
+  31:src/kernel/testing/slab_test.cpp ****         KPRINTARR(oc_arr, i, oc_arr[i]);
+ 402              		.loc 1 31 5 discriminator 1
+ 403 0314 1B091900 		addiw	s2,s2,1
+ 404              	.LVL45:
+ 405 0318 6FF05FF7 		j	.L16
+ 406              	.LVL46:
+ 407              	.L15:
+  38:src/kernel/testing/slab_test.cpp ****             return;
+ 408              		.loc 1 38 13 is_stmt 1
+  38:src/kernel/testing/slab_test.cpp ****             return;
+ 409              		.loc 1 38 25 is_stmt 0
+ 410 031c 17050000 		lla	a0,.LC10
+ 410      13050500 
+ 411 0324 97000000 		call	_Z12kprintStringPKc
+ 411      E7800000 
+ 412              	.LVL47:
+  39:src/kernel/testing/slab_test.cpp ****         }
+ 413              		.loc 1 39 13 is_stmt 1
+ 414 032c 6F008002 		j	.L13
+ 415              	.L14:
+ 416              	.LBE24:
+  42:src/kernel/testing/slab_test.cpp **** 
+ 417              		.loc 1 42 5
+  42:src/kernel/testing/slab_test.cpp **** 
+ 418              		.loc 1 42 25 is_stmt 0
+ 419 0330 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 419      E7800000 
+ 420              	.LVL48:
+  42:src/kernel/testing/slab_test.cpp **** 
+ 421              		.loc 1 42 38
+ 422 0338 93050B00 		mv	a1,s6
+ 423 033c 97000000 		call	_ZN13SlabAllocator11print_stateEc
+ 423      E7800000 
+ 424              	.LVL49:
+  44:src/kernel/testing/slab_test.cpp ****     
+ 425              		.loc 1 44 5 is_stmt 1
+  44:src/kernel/testing/slab_test.cpp ****     
+ 426              		.loc 1 44 17 is_stmt 0
+ 427 0344 17050000 		lla	a0,.LC11
+ 427      13050500 
+ 428 034c 97000000 		call	_Z12kprintStringPKc
+ 428      E7800000 
+ 429              	.LVL50:
+ 430              	.L13:
+  46:src/kernel/testing/slab_test.cpp **** 
+ 431              		.loc 1 46 1
+ 432 0354 83308103 		ld	ra,56(sp)
+ 433              		.cfi_restore 1
+ 434 0358 03340103 		ld	s0,48(sp)
+ 435              		.cfi_restore 8
+ 436              		.cfi_def_cfa 2, 64
+ 437 035c 83348102 		ld	s1,40(sp)
+GAS LISTING /tmp/ccUGcsIN.s 			page 14
+
+
+ 438              		.cfi_restore 9
+ 439 0360 03390102 		ld	s2,32(sp)
+ 440              		.cfi_restore 18
+ 441              	.LVL51:
+ 442 0364 83398101 		ld	s3,24(sp)
+ 443              		.cfi_restore 19
+ 444 0368 033A0101 		ld	s4,16(sp)
+ 445              		.cfi_restore 20
+ 446 036c 833A8100 		ld	s5,8(sp)
+ 447              		.cfi_restore 21
+ 448              	.LVL52:
+ 449 0370 033B0100 		ld	s6,0(sp)
+ 450              		.cfi_restore 22
+ 451 0374 13010104 		addi	sp,sp,64
+ 452              		.cfi_def_cfa_offset 0
+ 453 0378 67800000 		jr	ra
+ 454              		.cfi_endproc
+ 455              	.LFE114:
+ 457              		.align	2
+ 458              		.globl	_Z12kmalloc_testPPvimc
+ 460              	_Z12kmalloc_testPPvimc:
+ 461              	.LFB115:
+  51:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============SMALL MEMORY BUFFER ALLOC=============\n\n");
+ 462              		.loc 1 51 100 is_stmt 1
+ 463              		.cfi_startproc
+ 464              	.LVL53:
+ 465 037c 130101FC 		addi	sp,sp,-64
+ 466              		.cfi_def_cfa_offset 64
+ 467 0380 233C1102 		sd	ra,56(sp)
+ 468 0384 23388102 		sd	s0,48(sp)
+ 469 0388 23349102 		sd	s1,40(sp)
+ 470 038c 23302103 		sd	s2,32(sp)
+ 471 0390 233C3101 		sd	s3,24(sp)
+ 472 0394 23384101 		sd	s4,16(sp)
+ 473 0398 23345101 		sd	s5,8(sp)
+ 474 039c 23306101 		sd	s6,0(sp)
+ 475              		.cfi_offset 1, -8
+ 476              		.cfi_offset 8, -16
+ 477              		.cfi_offset 9, -24
+ 478              		.cfi_offset 18, -32
+ 479              		.cfi_offset 19, -40
+ 480              		.cfi_offset 20, -48
+ 481              		.cfi_offset 21, -56
+ 482              		.cfi_offset 22, -64
+ 483 03a0 13040104 		addi	s0,sp,64
+ 484              		.cfi_def_cfa 8, 0
+ 485 03a4 930A0500 		mv	s5,a0
+ 486 03a8 93890500 		mv	s3,a1
+ 487 03ac 130A0600 		mv	s4,a2
+ 488 03b0 138B0600 		mv	s6,a3
+  52:src/kernel/testing/slab_test.cpp ****     
+ 489              		.loc 1 52 5
+  52:src/kernel/testing/slab_test.cpp ****     
+ 490              		.loc 1 52 17 is_stmt 0
+ 491 03b4 17050000 		lla	a0,.LC12
+ 491      13050500 
+ 492              	.LVL54:
+GAS LISTING /tmp/ccUGcsIN.s 			page 15
+
+
+ 493 03bc 97000000 		call	_Z12kprintStringPKc
+ 493      E7800000 
+ 494              	.LVL55:
+  54:src/kernel/testing/slab_test.cpp ****         buff_arr[i] = SlabAllocator::getInstance().kmalloc(objsize);
+ 495              		.loc 1 54 5 is_stmt 1
+ 496              	.LBB25:
+  54:src/kernel/testing/slab_test.cpp ****         buff_arr[i] = SlabAllocator::getInstance().kmalloc(objsize);
+ 497              		.loc 1 54 13 is_stmt 0
+ 498 03c4 13090000 		li	s2,0
+ 499              	.LVL56:
+ 500              	.L23:
+  54:src/kernel/testing/slab_test.cpp ****         buff_arr[i] = SlabAllocator::getInstance().kmalloc(objsize);
+ 501              		.loc 1 54 23 discriminator 1
+ 502 03c8 6350390B 		bge	s2,s3,.L20
+  55:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+ 503              		.loc 1 55 9 is_stmt 1
+  55:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+ 504              		.loc 1 55 50 is_stmt 0
+ 505 03cc 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 505      E7800000 
+ 506              	.LVL57:
+  55:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+ 507              		.loc 1 55 19
+ 508 03d4 93143900 		slli	s1,s2,3
+ 509 03d8 B3849A00 		add	s1,s5,s1
+  55:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+ 510              		.loc 1 55 59
+ 511 03dc 93050A00 		mv	a1,s4
+ 512 03e0 97000000 		call	_ZN13SlabAllocator7kmallocEm
+ 512      E7800000 
+ 513              	.LVL58:
+  55:src/kernel/testing/slab_test.cpp ****         KPRINTARR(buff_arr, i, buff_arr[i]);
+ 514              		.loc 1 55 21
+ 515 03e8 23B0A400 		sd	a0,0(s1)
+  56:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+ 516              		.loc 1 56 9 is_stmt 1
+ 517 03ec 17050000 		lla	a0,.LC13
+ 517      13050500 
+ 518 03f4 97000000 		call	_Z12kprintStringPKc
+ 518      E7800000 
+ 519              	.LVL59:
+  56:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+ 520              		.loc 1 56 9
+ 521 03fc 13060000 		li	a2,0
+ 522 0400 9305A000 		li	a1,10
+ 523 0404 13050900 		mv	a0,s2
+ 524 0408 97000000 		call	_Z9kprintIntmib
+ 524      E7800000 
+ 525              	.LVL60:
+  56:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+ 526              		.loc 1 56 9
+ 527 0410 17050000 		lla	a0,.LC5
+ 527      13050500 
+ 528 0418 97000000 		call	_Z12kprintStringPKc
+ 528      E7800000 
+ 529              	.LVL61:
+  56:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+GAS LISTING /tmp/ccUGcsIN.s 			page 16
+
+
+ 530              		.loc 1 56 9
+ 531 0420 13060000 		li	a2,0
+ 532 0424 93050001 		li	a1,16
+ 533 0428 03B50400 		ld	a0,0(s1)
+ 534 042c 97000000 		call	_Z9kprintIntmib
+ 534      E7800000 
+ 535              	.LVL62:
+  56:src/kernel/testing/slab_test.cpp ****         if(buff_arr[i] == nullptr){
+ 536              		.loc 1 56 9
+ 537 0434 17050000 		lla	a0,.LC6
+ 537      13050500 
+ 538 043c 97000000 		call	_Z12kprintStringPKc
+ 538      E7800000 
+ 539              	.LVL63:
+  57:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+ 540              		.loc 1 57 9
+  57:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+ 541              		.loc 1 57 22 is_stmt 0
+ 542 0444 83B70400 		ld	a5,0(s1)
+  57:src/kernel/testing/slab_test.cpp ****             kprintString("Not enough memory left!\n");
+ 543              		.loc 1 57 9
+ 544 0448 63860700 		beq	a5,zero,.L25
+  54:src/kernel/testing/slab_test.cpp ****         buff_arr[i] = SlabAllocator::getInstance().kmalloc(objsize);
+ 545              		.loc 1 54 5 discriminator 2
+ 546 044c 1B091900 		addiw	s2,s2,1
+ 547              	.LVL64:
+ 548 0450 6FF09FF7 		j	.L23
+ 549              	.LVL65:
+ 550              	.L25:
+  58:src/kernel/testing/slab_test.cpp ****             return;
+ 551              		.loc 1 58 13 is_stmt 1
+  58:src/kernel/testing/slab_test.cpp ****             return;
+ 552              		.loc 1 58 25 is_stmt 0
+ 553 0454 17050000 		lla	a0,.LC7
+ 553      13050500 
+ 554 045c 97000000 		call	_Z12kprintStringPKc
+ 554      E7800000 
+ 555              	.LVL66:
+  59:src/kernel/testing/slab_test.cpp ****         }
+ 556              		.loc 1 59 13 is_stmt 1
+ 557 0464 6F008002 		j	.L19
+ 558              	.L20:
+ 559              	.LBE25:
+  62:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n");
+ 560              		.loc 1 62 5
+  62:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n");
+ 561              		.loc 1 62 25 is_stmt 0
+ 562 0468 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 562      E7800000 
+ 563              	.LVL67:
+  62:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n");
+ 564              		.loc 1 62 38
+ 565 0470 93050B00 		mv	a1,s6
+ 566 0474 97000000 		call	_ZN13SlabAllocator11print_stateEc
+ 566      E7800000 
+ 567              	.LVL68:
+  63:src/kernel/testing/slab_test.cpp ****     
+GAS LISTING /tmp/ccUGcsIN.s 			page 17
+
+
+ 568              		.loc 1 63 5 is_stmt 1
+  63:src/kernel/testing/slab_test.cpp ****     
+ 569              		.loc 1 63 17 is_stmt 0
+ 570 047c 17050000 		lla	a0,.LC14
+ 570      13050500 
+ 571 0484 97000000 		call	_Z12kprintStringPKc
+ 571      E7800000 
+ 572              	.LVL69:
+ 573              	.L19:
+  65:src/kernel/testing/slab_test.cpp **** 
+ 574              		.loc 1 65 1
+ 575 048c 83308103 		ld	ra,56(sp)
+ 576              		.cfi_restore 1
+ 577 0490 03340103 		ld	s0,48(sp)
+ 578              		.cfi_restore 8
+ 579              		.cfi_def_cfa 2, 64
+ 580 0494 83348102 		ld	s1,40(sp)
+ 581              		.cfi_restore 9
+ 582 0498 03390102 		ld	s2,32(sp)
+ 583              		.cfi_restore 18
+ 584              	.LVL70:
+ 585 049c 83398101 		ld	s3,24(sp)
+ 586              		.cfi_restore 19
+ 587 04a0 033A0101 		ld	s4,16(sp)
+ 588              		.cfi_restore 20
+ 589              	.LVL71:
+ 590 04a4 833A8100 		ld	s5,8(sp)
+ 591              		.cfi_restore 21
+ 592              	.LVL72:
+ 593 04a8 033B0100 		ld	s6,0(sp)
+ 594              		.cfi_restore 22
+ 595 04ac 13010104 		addi	sp,sp,64
+ 596              		.cfi_def_cfa_offset 0
+ 597 04b0 67800000 		jr	ra
+ 598              		.cfi_endproc
+ 599              	.LFE115:
+ 601              		.align	2
+ 602              		.globl	_Z10kfree_testPPvic
+ 604              	_Z10kfree_testPPvic:
+ 605              	.LFB116:
+  69:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============SMALL MEMORY BUFFER DEALLOC=============\n\n");
+ 606              		.loc 1 69 77 is_stmt 1
+ 607              		.cfi_startproc
+ 608              	.LVL73:
+ 609 04b4 130101FC 		addi	sp,sp,-64
+ 610              		.cfi_def_cfa_offset 64
+ 611 04b8 233C1102 		sd	ra,56(sp)
+ 612 04bc 23388102 		sd	s0,48(sp)
+ 613 04c0 23349102 		sd	s1,40(sp)
+ 614 04c4 23302103 		sd	s2,32(sp)
+ 615 04c8 233C3101 		sd	s3,24(sp)
+ 616 04cc 23384101 		sd	s4,16(sp)
+ 617 04d0 23345101 		sd	s5,8(sp)
+ 618              		.cfi_offset 1, -8
+ 619              		.cfi_offset 8, -16
+ 620              		.cfi_offset 9, -24
+ 621              		.cfi_offset 18, -32
+GAS LISTING /tmp/ccUGcsIN.s 			page 18
+
+
+ 622              		.cfi_offset 19, -40
+ 623              		.cfi_offset 20, -48
+ 624              		.cfi_offset 21, -56
+ 625 04d4 13040104 		addi	s0,sp,64
+ 626              		.cfi_def_cfa 8, 0
+ 627 04d8 130A0500 		mv	s4,a0
+ 628 04dc 93890500 		mv	s3,a1
+ 629 04e0 930A0600 		mv	s5,a2
+  70:src/kernel/testing/slab_test.cpp ****     
+ 630              		.loc 1 70 5
+  70:src/kernel/testing/slab_test.cpp ****     
+ 631              		.loc 1 70 17 is_stmt 0
+ 632 04e4 17050000 		lla	a0,.LC15
+ 632      13050500 
+ 633              	.LVL74:
+ 634 04ec 97000000 		call	_Z12kprintStringPKc
+ 634      E7800000 
+ 635              	.LVL75:
+  72:src/kernel/testing/slab_test.cpp ****         if(!buff_arr[i]){
+ 636              		.loc 1 72 5 is_stmt 1
+ 637              	.LBB26:
+  72:src/kernel/testing/slab_test.cpp ****         if(!buff_arr[i]){
+ 638              		.loc 1 72 13 is_stmt 0
+ 639 04f4 13090000 		li	s2,0
+ 640              	.LVL76:
+ 641              	.L30:
+  72:src/kernel/testing/slab_test.cpp ****         if(!buff_arr[i]){
+ 642              		.loc 1 72 22 discriminator 1
+ 643 04f8 635E3909 		bge	s2,s3,.L27
+  73:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid free address given!!");
+ 644              		.loc 1 73 9 is_stmt 1
+  73:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid free address given!!");
+ 645              		.loc 1 73 23 is_stmt 0
+ 646 04fc 93143900 		slli	s1,s2,3
+ 647 0500 B3049A00 		add	s1,s4,s1
+ 648 0504 83B70400 		ld	a5,0(s1)
+  73:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid free address given!!");
+ 649              		.loc 1 73 9
+ 650 0508 638C0706 		beq	a5,zero,.L32
+  77:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+ 651              		.loc 1 77 9 is_stmt 1 discriminator 2
+ 652 050c 17050000 		lla	a0,.LC13
+ 652      13050500 
+ 653 0514 97000000 		call	_Z12kprintStringPKc
+ 653      E7800000 
+ 654              	.LVL77:
+  77:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+ 655              		.loc 1 77 9 discriminator 2
+ 656 051c 13060000 		li	a2,0
+ 657 0520 9305A000 		li	a1,10
+ 658 0524 13050900 		mv	a0,s2
+ 659 0528 97000000 		call	_Z9kprintIntmib
+ 659      E7800000 
+ 660              	.LVL78:
+  77:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+ 661              		.loc 1 77 9 discriminator 2
+ 662 0530 17050000 		lla	a0,.LC5
+GAS LISTING /tmp/ccUGcsIN.s 			page 19
+
+
+ 662      13050500 
+ 663 0538 97000000 		call	_Z12kprintStringPKc
+ 663      E7800000 
+ 664              	.LVL79:
+  77:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+ 665              		.loc 1 77 9 discriminator 2
+ 666 0540 13060000 		li	a2,0
+ 667 0544 93050001 		li	a1,16
+ 668 0548 03B50400 		ld	a0,0(s1)
+ 669 054c 97000000 		call	_Z9kprintIntmib
+ 669      E7800000 
+ 670              	.LVL80:
+  77:src/kernel/testing/slab_test.cpp ****         SlabAl::getInstance().kfree(buff_arr[i]);
+ 671              		.loc 1 77 9 discriminator 2
+ 672 0554 17050000 		lla	a0,.LC6
+ 672      13050500 
+ 673 055c 97000000 		call	_Z12kprintStringPKc
+ 673      E7800000 
+ 674              	.LVL81:
+  78:src/kernel/testing/slab_test.cpp ****     }
+ 675              		.loc 1 78 9 discriminator 2
+  78:src/kernel/testing/slab_test.cpp ****     }
+ 676              		.loc 1 78 29 is_stmt 0 discriminator 2
+ 677 0564 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 677      E7800000 
+ 678              	.LVL82:
+  78:src/kernel/testing/slab_test.cpp ****     }
+ 679              		.loc 1 78 36 discriminator 2
+ 680 056c 83B50400 		ld	a1,0(s1)
+ 681 0570 97000000 		call	_ZN13SlabAllocator5kfreeEPv
+ 681      E7800000 
+ 682              	.LVL83:
+  72:src/kernel/testing/slab_test.cpp ****         if(!buff_arr[i]){
+ 683              		.loc 1 72 5 discriminator 2
+ 684 0578 1B091900 		addiw	s2,s2,1
+ 685              	.LVL84:
+ 686 057c 6FF0DFF7 		j	.L30
+ 687              	.LVL85:
+ 688              	.L32:
+  74:src/kernel/testing/slab_test.cpp ****             return;
+ 689              		.loc 1 74 13 is_stmt 1
+  74:src/kernel/testing/slab_test.cpp ****             return;
+ 690              		.loc 1 74 25 is_stmt 0
+ 691 0580 17050000 		lla	a0,.LC16
+ 691      13050500 
+ 692 0588 97000000 		call	_Z12kprintStringPKc
+ 692      E7800000 
+ 693              	.LVL86:
+  75:src/kernel/testing/slab_test.cpp ****         }
+ 694              		.loc 1 75 13 is_stmt 1
+ 695 0590 6F008002 		j	.L26
+ 696              	.L27:
+ 697              	.LBE26:
+  80:src/kernel/testing/slab_test.cpp **** 
+ 698              		.loc 1 80 5
+  80:src/kernel/testing/slab_test.cpp **** 
+ 699              		.loc 1 80 25 is_stmt 0
+GAS LISTING /tmp/ccUGcsIN.s 			page 20
+
+
+ 700 0594 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 700      E7800000 
+ 701              	.LVL87:
+  80:src/kernel/testing/slab_test.cpp **** 
+ 702              		.loc 1 80 38
+ 703 059c 93850A00 		mv	a1,s5
+ 704 05a0 97000000 		call	_ZN13SlabAllocator11print_stateEc
+ 704      E7800000 
+ 705              	.LVL88:
+  82:src/kernel/testing/slab_test.cpp ****     
+ 706              		.loc 1 82 5 is_stmt 1
+  82:src/kernel/testing/slab_test.cpp ****     
+ 707              		.loc 1 82 17 is_stmt 0
+ 708 05a8 17050000 		lla	a0,.LC17
+ 708      13050500 
+ 709 05b0 97000000 		call	_Z12kprintStringPKc
+ 709      E7800000 
+ 710              	.LVL89:
+ 711              	.L26:
+  84:src/kernel/testing/slab_test.cpp **** 
+ 712              		.loc 1 84 1
+ 713 05b8 83308103 		ld	ra,56(sp)
+ 714              		.cfi_restore 1
+ 715 05bc 03340103 		ld	s0,48(sp)
+ 716              		.cfi_restore 8
+ 717              		.cfi_def_cfa 2, 64
+ 718 05c0 83348102 		ld	s1,40(sp)
+ 719              		.cfi_restore 9
+ 720 05c4 03390102 		ld	s2,32(sp)
+ 721              		.cfi_restore 18
+ 722              	.LVL90:
+ 723 05c8 83398101 		ld	s3,24(sp)
+ 724              		.cfi_restore 19
+ 725 05cc 033A0101 		ld	s4,16(sp)
+ 726              		.cfi_restore 20
+ 727              	.LVL91:
+ 728 05d0 833A8100 		ld	s5,8(sp)
+ 729              		.cfi_restore 21
+ 730 05d4 13010104 		addi	sp,sp,64
+ 731              		.cfi_def_cfa_offset 0
+ 732 05d8 67800000 		jr	ra
+ 733              		.cfi_endproc
+ 734              	.LFE116:
+ 736              		.align	2
+ 737              		.globl	_Z25slab_allocator_state_ceckc
+ 739              	_Z25slab_allocator_state_ceckc:
+ 740              	.LFB117:
+  88:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Slab Allocator State Check=============\n\n");
+ 741              		.loc 1 88 65 is_stmt 1
+ 742              		.cfi_startproc
+ 743              	.LVL92:
+ 744 05dc 130101FE 		addi	sp,sp,-32
+ 745              		.cfi_def_cfa_offset 32
+ 746 05e0 233C1100 		sd	ra,24(sp)
+ 747 05e4 23388100 		sd	s0,16(sp)
+ 748 05e8 23349100 		sd	s1,8(sp)
+ 749              		.cfi_offset 1, -8
+GAS LISTING /tmp/ccUGcsIN.s 			page 21
+
+
+ 750              		.cfi_offset 8, -16
+ 751              		.cfi_offset 9, -24
+ 752 05ec 13040102 		addi	s0,sp,32
+ 753              		.cfi_def_cfa 8, 0
+ 754 05f0 93040500 		mv	s1,a0
+  89:src/kernel/testing/slab_test.cpp ****     
+ 755              		.loc 1 89 5
+  89:src/kernel/testing/slab_test.cpp ****     
+ 756              		.loc 1 89 17 is_stmt 0
+ 757 05f4 17050000 		lla	a0,.LC18
+ 757      13050500 
+ 758              	.LVL93:
+ 759 05fc 97000000 		call	_Z12kprintStringPKc
+ 759      E7800000 
+ 760              	.LVL94:
+  91:src/kernel/testing/slab_test.cpp ****     
+ 761              		.loc 1 91 5 is_stmt 1
+  91:src/kernel/testing/slab_test.cpp ****     
+ 762              		.loc 1 91 25 is_stmt 0
+ 763 0604 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 763      E7800000 
+ 764              	.LVL95:
+  91:src/kernel/testing/slab_test.cpp ****     
+ 765              		.loc 1 91 38
+ 766 060c 93850400 		mv	a1,s1
+ 767 0610 97000000 		call	_ZN13SlabAllocator11print_stateEc
+ 767      E7800000 
+ 768              	.LVL96:
+  93:src/kernel/testing/slab_test.cpp **** }
+ 769              		.loc 1 93 5 is_stmt 1
+  93:src/kernel/testing/slab_test.cpp **** }
+ 770              		.loc 1 93 17 is_stmt 0
+ 771 0618 17050000 		lla	a0,.LC19
+ 771      13050500 
+ 772 0620 97000000 		call	_Z12kprintStringPKc
+ 772      E7800000 
+ 773              	.LVL97:
+  94:src/kernel/testing/slab_test.cpp **** 
+ 774              		.loc 1 94 1
+ 775 0628 83308101 		ld	ra,24(sp)
+ 776              		.cfi_restore 1
+ 777 062c 03340101 		ld	s0,16(sp)
+ 778              		.cfi_restore 8
+ 779              		.cfi_def_cfa 2, 32
+ 780 0630 83348100 		ld	s1,8(sp)
+ 781              		.cfi_restore 9
+ 782 0634 13010102 		addi	sp,sp,32
+ 783              		.cfi_def_cfa_offset 0
+ 784 0638 67800000 		jr	ra
+ 785              		.cfi_endproc
+ 786              	.LFE117:
+ 788              		.align	2
+ 789              		.globl	_Z20cache_obj_alloc_testPPviP11ObjectCachec
+ 791              	_Z20cache_obj_alloc_testPPviP11ObjectCachec:
+ 792              	.LFB118:
+  98:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n=============Object Allocate Test=============\n\n");
+ 793              		.loc 1 98 83 is_stmt 1
+GAS LISTING /tmp/ccUGcsIN.s 			page 22
+
+
+ 794              		.cfi_startproc
+ 795              	.LVL98:
+ 796 063c 130101FC 		addi	sp,sp,-64
+ 797              		.cfi_def_cfa_offset 64
+ 798 0640 233C1102 		sd	ra,56(sp)
+ 799 0644 23388102 		sd	s0,48(sp)
+ 800 0648 23349102 		sd	s1,40(sp)
+ 801 064c 23302103 		sd	s2,32(sp)
+ 802 0650 233C3101 		sd	s3,24(sp)
+ 803 0654 23384101 		sd	s4,16(sp)
+ 804 0658 23345101 		sd	s5,8(sp)
+ 805 065c 23306101 		sd	s6,0(sp)
+ 806              		.cfi_offset 1, -8
+ 807              		.cfi_offset 8, -16
+ 808              		.cfi_offset 9, -24
+ 809              		.cfi_offset 18, -32
+ 810              		.cfi_offset 19, -40
+ 811              		.cfi_offset 20, -48
+ 812              		.cfi_offset 21, -56
+ 813              		.cfi_offset 22, -64
+ 814 0660 13040104 		addi	s0,sp,64
+ 815              		.cfi_def_cfa 8, 0
+ 816 0664 930A0500 		mv	s5,a0
+ 817 0668 138A0500 		mv	s4,a1
+ 818 066c 93090600 		mv	s3,a2
+ 819 0670 138B0600 		mv	s6,a3
+  99:src/kernel/testing/slab_test.cpp ****     
+ 820              		.loc 1 99 5
+  99:src/kernel/testing/slab_test.cpp ****     
+ 821              		.loc 1 99 17 is_stmt 0
+ 822 0674 17050000 		lla	a0,.LC20
+ 822      13050500 
+ 823              	.LVL99:
+ 824 067c 97000000 		call	_Z12kprintStringPKc
+ 824      E7800000 
+ 825              	.LVL100:
+ 101:src/kernel/testing/slab_test.cpp ****         object[i] = cache->alloc_obj();
+ 826              		.loc 1 101 5 is_stmt 1
+ 827              	.LBB27:
+ 101:src/kernel/testing/slab_test.cpp ****         object[i] = cache->alloc_obj();
+ 828              		.loc 1 101 13 is_stmt 0
+ 829 0684 93040000 		li	s1,0
+ 830              	.LVL101:
+ 831              	.L39:
+ 101:src/kernel/testing/slab_test.cpp ****         object[i] = cache->alloc_obj();
+ 832              		.loc 1 101 22 discriminator 1
+ 833 0688 63DA4409 		bge	s1,s4,.L36
+ 102:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 834              		.loc 1 102 9 is_stmt 1
+ 102:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 835              		.loc 1 102 17 is_stmt 0
+ 836 068c 13993400 		slli	s2,s1,3
+ 837 0690 33892A01 		add	s2,s5,s2
+ 102:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 838              		.loc 1 102 37
+ 839 0694 13850900 		mv	a0,s3
+ 840 0698 97000000 		call	_ZN11ObjectCache9alloc_objEv
+GAS LISTING /tmp/ccUGcsIN.s 			page 23
+
+
+ 840      E7800000 
+ 841              	.LVL102:
+ 102:src/kernel/testing/slab_test.cpp ****         if(!object[i]){
+ 842              		.loc 1 102 19
+ 843 06a0 2330A900 		sd	a0,0(s2)
+ 103:src/kernel/testing/slab_test.cpp ****             kprintString("Object not corresctly allocated!!\n");   
+ 844              		.loc 1 103 9 is_stmt 1
+ 845 06a4 63020506 		beq	a0,zero,.L41
+ 107:src/kernel/testing/slab_test.cpp ****     }
+ 846              		.loc 1 107 9 discriminator 2
+ 847 06a8 17050000 		lla	a0,.LC22
+ 847      13050500 
+ 848 06b0 97000000 		call	_Z12kprintStringPKc
+ 848      E7800000 
+ 849              	.LVL103:
+ 107:src/kernel/testing/slab_test.cpp ****     }
+ 850              		.loc 1 107 9 discriminator 2
+ 851 06b8 13060000 		li	a2,0
+ 852 06bc 9305A000 		li	a1,10
+ 853 06c0 13850400 		mv	a0,s1
+ 854 06c4 97000000 		call	_Z9kprintIntmib
+ 854      E7800000 
+ 855              	.LVL104:
+ 107:src/kernel/testing/slab_test.cpp ****     }
+ 856              		.loc 1 107 9 discriminator 2
+ 857 06cc 17050000 		lla	a0,.LC5
+ 857      13050500 
+ 858 06d4 97000000 		call	_Z12kprintStringPKc
+ 858      E7800000 
+ 859              	.LVL105:
+ 107:src/kernel/testing/slab_test.cpp ****     }
+ 860              		.loc 1 107 9 discriminator 2
+ 861 06dc 13060000 		li	a2,0
+ 862 06e0 93050001 		li	a1,16
+ 863 06e4 03350900 		ld	a0,0(s2)
+ 864 06e8 97000000 		call	_Z9kprintIntmib
+ 864      E7800000 
+ 865              	.LVL106:
+ 107:src/kernel/testing/slab_test.cpp ****     }
+ 866              		.loc 1 107 9 discriminator 2
+ 867 06f0 17050000 		lla	a0,.LC6
+ 867      13050500 
+ 868 06f8 97000000 		call	_Z12kprintStringPKc
+ 868      E7800000 
+ 869              	.LVL107:
+ 101:src/kernel/testing/slab_test.cpp ****         object[i] = cache->alloc_obj();
+ 870              		.loc 1 101 5 is_stmt 0 discriminator 2
+ 871 0700 9B841400 		addiw	s1,s1,1
+ 872              	.LVL108:
+ 873 0704 6FF05FF8 		j	.L39
+ 874              	.LVL109:
+ 875              	.L41:
+ 104:src/kernel/testing/slab_test.cpp ****             return;
+ 876              		.loc 1 104 13 is_stmt 1
+ 104:src/kernel/testing/slab_test.cpp ****             return;
+ 877              		.loc 1 104 25 is_stmt 0
+ 878 0708 17050000 		lla	a0,.LC21
+GAS LISTING /tmp/ccUGcsIN.s 			page 24
+
+
+ 878      13050500 
+ 879 0710 97000000 		call	_Z12kprintStringPKc
+ 879      E7800000 
+ 880              	.LVL110:
+ 105:src/kernel/testing/slab_test.cpp ****         }
+ 881              		.loc 1 105 13 is_stmt 1
+ 882 0718 6F000003 		j	.L35
+ 883              	.L36:
+ 884              	.LBE27:
+ 109:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 885              		.loc 1 109 5
+ 109:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 886              		.loc 1 109 21 is_stmt 0
+ 887 071c 93050B00 		mv	a1,s6
+ 888 0720 13850900 		mv	a0,s3
+ 889 0724 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 889      E7800000 
+ 890              	.LVL111:
+ 110:src/kernel/testing/slab_test.cpp **** 
+ 891              		.loc 1 110 5 is_stmt 1
+ 110:src/kernel/testing/slab_test.cpp **** 
+ 892              		.loc 1 110 30 is_stmt 0
+ 893 072c 13050B00 		mv	a0,s6
+ 894 0730 97000000 		call	_Z25slab_allocator_state_ceckc
+ 894      E7800000 
+ 895              	.LVL112:
+ 112:src/kernel/testing/slab_test.cpp ****     
+ 896              		.loc 1 112 5 is_stmt 1
+ 112:src/kernel/testing/slab_test.cpp ****     
+ 897              		.loc 1 112 17 is_stmt 0
+ 898 0738 17050000 		lla	a0,.LC23
+ 898      13050500 
+ 899 0740 97000000 		call	_Z12kprintStringPKc
+ 899      E7800000 
+ 900              	.LVL113:
+ 901              	.L35:
+ 114:src/kernel/testing/slab_test.cpp **** 
+ 902              		.loc 1 114 1
+ 903 0748 83308103 		ld	ra,56(sp)
+ 904              		.cfi_restore 1
+ 905 074c 03340103 		ld	s0,48(sp)
+ 906              		.cfi_restore 8
+ 907              		.cfi_def_cfa 2, 64
+ 908 0750 83348102 		ld	s1,40(sp)
+ 909              		.cfi_restore 9
+ 910              	.LVL114:
+ 911 0754 03390102 		ld	s2,32(sp)
+ 912              		.cfi_restore 18
+ 913 0758 83398101 		ld	s3,24(sp)
+ 914              		.cfi_restore 19
+ 915              	.LVL115:
+ 916 075c 033A0101 		ld	s4,16(sp)
+ 917              		.cfi_restore 20
+ 918 0760 833A8100 		ld	s5,8(sp)
+ 919              		.cfi_restore 21
+ 920              	.LVL116:
+ 921 0764 033B0100 		ld	s6,0(sp)
+GAS LISTING /tmp/ccUGcsIN.s 			page 25
+
+
+ 922              		.cfi_restore 22
+ 923 0768 13010104 		addi	sp,sp,64
+ 924              		.cfi_def_cfa_offset 0
+ 925 076c 67800000 		jr	ra
+ 926              		.cfi_endproc
+ 927              	.LFE118:
+ 929              		.align	2
+ 930              		.globl	_Z23cache_obj_dealloca_testPPviP11ObjectCachec
+ 932              	_Z23cache_obj_dealloca_testPPviP11ObjectCachec:
+ 933              	.LFB119:
+ 118:src/kernel/testing/slab_test.cpp **** 
+ 934              		.loc 1 118 86 is_stmt 1
+ 935              		.cfi_startproc
+ 936              	.LVL117:
+ 937 0770 130101FC 		addi	sp,sp,-64
+ 938              		.cfi_def_cfa_offset 64
+ 939 0774 233C1102 		sd	ra,56(sp)
+ 940 0778 23388102 		sd	s0,48(sp)
+ 941 077c 23349102 		sd	s1,40(sp)
+ 942 0780 23302103 		sd	s2,32(sp)
+ 943 0784 233C3101 		sd	s3,24(sp)
+ 944 0788 23384101 		sd	s4,16(sp)
+ 945 078c 23345101 		sd	s5,8(sp)
+ 946 0790 23306101 		sd	s6,0(sp)
+ 947              		.cfi_offset 1, -8
+ 948              		.cfi_offset 8, -16
+ 949              		.cfi_offset 9, -24
+ 950              		.cfi_offset 18, -32
+ 951              		.cfi_offset 19, -40
+ 952              		.cfi_offset 20, -48
+ 953              		.cfi_offset 21, -56
+ 954              		.cfi_offset 22, -64
+ 955 0794 13040104 		addi	s0,sp,64
+ 956              		.cfi_def_cfa 8, 0
+ 957 0798 930A0500 		mv	s5,a0
+ 958 079c 93890500 		mv	s3,a1
+ 959 07a0 130A0600 		mv	s4,a2
+ 960 07a4 138B0600 		mv	s6,a3
+ 120:src/kernel/testing/slab_test.cpp ****     
+ 961              		.loc 1 120 5
+ 120:src/kernel/testing/slab_test.cpp ****     
+ 962              		.loc 1 120 17 is_stmt 0
+ 963 07a8 17050000 		lla	a0,.LC24
+ 963      13050500 
+ 964              	.LVL118:
+ 965 07b0 97000000 		call	_Z12kprintStringPKc
+ 965      E7800000 
+ 966              	.LVL119:
+ 122:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+ 967              		.loc 1 122 5 is_stmt 1
+ 968              	.LBB28:
+ 122:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+ 969              		.loc 1 122 13 is_stmt 0
+ 970 07b8 93040000 		li	s1,0
+ 971              	.LVL120:
+ 972              	.L46:
+ 122:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+GAS LISTING /tmp/ccUGcsIN.s 			page 26
+
+
+ 973              		.loc 1 122 22 discriminator 1
+ 974 07bc 63DA3409 		bge	s1,s3,.L43
+ 123:src/kernel/testing/slab_test.cpp ****         
+ 975              		.loc 1 123 9 is_stmt 1
+ 976 07c0 17050000 		lla	a0,.LC22
+ 976      13050500 
+ 977 07c8 97000000 		call	_Z12kprintStringPKc
+ 977      E7800000 
+ 978              	.LVL121:
+ 123:src/kernel/testing/slab_test.cpp ****         
+ 979              		.loc 1 123 9
+ 980 07d0 13060000 		li	a2,0
+ 981 07d4 9305A000 		li	a1,10
+ 982 07d8 13850400 		mv	a0,s1
+ 983 07dc 97000000 		call	_Z9kprintIntmib
+ 983      E7800000 
+ 984              	.LVL122:
+ 123:src/kernel/testing/slab_test.cpp ****         
+ 985              		.loc 1 123 9
+ 986 07e4 17050000 		lla	a0,.LC5
+ 986      13050500 
+ 987 07ec 97000000 		call	_Z12kprintStringPKc
+ 987      E7800000 
+ 988              	.LVL123:
+ 123:src/kernel/testing/slab_test.cpp ****         
+ 989              		.loc 1 123 9
+ 990 07f4 13993400 		slli	s2,s1,3
+ 991 07f8 33892A01 		add	s2,s5,s2
+ 992 07fc 13060000 		li	a2,0
+ 993 0800 93050001 		li	a1,16
+ 994 0804 03350900 		ld	a0,0(s2)
+ 995 0808 97000000 		call	_Z9kprintIntmib
+ 995      E7800000 
+ 996              	.LVL124:
+ 123:src/kernel/testing/slab_test.cpp ****         
+ 997              		.loc 1 123 9
+ 998 0810 17050000 		lla	a0,.LC6
+ 998      13050500 
+ 999 0818 97000000 		call	_Z12kprintStringPKc
+ 999      E7800000 
+ 1000              	.LVL125:
+ 125:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid object address!\n");   
+ 1001              		.loc 1 125 9
+ 125:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid object address!\n");   
+ 1002              		.loc 1 125 21 is_stmt 0
+ 1003 0820 83350900 		ld	a1,0(s2)
+ 125:src/kernel/testing/slab_test.cpp ****             kprintString("Invalid object address!\n");   
+ 1004              		.loc 1 125 9
+ 1005 0824 638C0500 		beq	a1,zero,.L48
+ 130:src/kernel/testing/slab_test.cpp ****         
+ 1006              		.loc 1 130 9 is_stmt 1 discriminator 2
+ 130:src/kernel/testing/slab_test.cpp ****         
+ 1007              		.loc 1 130 24 is_stmt 0 discriminator 2
+ 1008 0828 13050A00 		mv	a0,s4
+ 1009 082c 97000000 		call	_ZN11ObjectCache8free_objEPv
+ 1009      E7800000 
+ 1010              	.LVL126:
+GAS LISTING /tmp/ccUGcsIN.s 			page 27
+
+
+ 122:src/kernel/testing/slab_test.cpp ****         KPRINTARR(object, i, object[i]);
+ 1011              		.loc 1 122 5 discriminator 2
+ 1012 0834 9B841400 		addiw	s1,s1,1
+ 1013              	.LVL127:
+ 1014 0838 6FF05FF8 		j	.L46
+ 1015              	.LVL128:
+ 1016              	.L48:
+ 126:src/kernel/testing/slab_test.cpp ****             return;
+ 1017              		.loc 1 126 13 is_stmt 1
+ 126:src/kernel/testing/slab_test.cpp ****             return;
+ 1018              		.loc 1 126 25 is_stmt 0
+ 1019 083c 17050000 		lla	a0,.LC25
+ 1019      13050500 
+ 1020 0844 97000000 		call	_Z12kprintStringPKc
+ 1020      E7800000 
+ 1021              	.LVL129:
+ 127:src/kernel/testing/slab_test.cpp ****         }
+ 1022              		.loc 1 127 13 is_stmt 1
+ 1023 084c 6F000003 		j	.L42
+ 1024              	.L43:
+ 1025              	.LBE28:
+ 133:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 1026              		.loc 1 133 5
+ 133:src/kernel/testing/slab_test.cpp ****     slab_allocator_state_ceck(flags);
+ 1027              		.loc 1 133 21 is_stmt 0
+ 1028 0850 93050B00 		mv	a1,s6
+ 1029 0854 13050A00 		mv	a0,s4
+ 1030 0858 97000000 		call	_ZN11ObjectCache9printInfoEc
+ 1030      E7800000 
+ 1031              	.LVL130:
+ 134:src/kernel/testing/slab_test.cpp **** 
+ 1032              		.loc 1 134 5 is_stmt 1
+ 134:src/kernel/testing/slab_test.cpp **** 
+ 1033              		.loc 1 134 30 is_stmt 0
+ 1034 0860 13050B00 		mv	a0,s6
+ 1035 0864 97000000 		call	_Z25slab_allocator_state_ceckc
+ 1035      E7800000 
+ 1036              	.LVL131:
+ 136:src/kernel/testing/slab_test.cpp ****     
+ 1037              		.loc 1 136 5 is_stmt 1
+ 136:src/kernel/testing/slab_test.cpp ****     
+ 1038              		.loc 1 136 17 is_stmt 0
+ 1039 086c 17050000 		lla	a0,.LC26
+ 1039      13050500 
+ 1040 0874 97000000 		call	_Z12kprintStringPKc
+ 1040      E7800000 
+ 1041              	.LVL132:
+ 1042              	.L42:
+ 138:src/kernel/testing/slab_test.cpp **** 
+ 1043              		.loc 1 138 1
+ 1044 087c 83308103 		ld	ra,56(sp)
+ 1045              		.cfi_restore 1
+ 1046 0880 03340103 		ld	s0,48(sp)
+ 1047              		.cfi_restore 8
+ 1048              		.cfi_def_cfa 2, 64
+ 1049 0884 83348102 		ld	s1,40(sp)
+ 1050              		.cfi_restore 9
+GAS LISTING /tmp/ccUGcsIN.s 			page 28
+
+
+ 1051              	.LVL133:
+ 1052 0888 03390102 		ld	s2,32(sp)
+ 1053              		.cfi_restore 18
+ 1054 088c 83398101 		ld	s3,24(sp)
+ 1055              		.cfi_restore 19
+ 1056 0890 033A0101 		ld	s4,16(sp)
+ 1057              		.cfi_restore 20
+ 1058              	.LVL134:
+ 1059 0894 833A8100 		ld	s5,8(sp)
+ 1060              		.cfi_restore 21
+ 1061              	.LVL135:
+ 1062 0898 033B0100 		ld	s6,0(sp)
+ 1063              		.cfi_restore 22
+ 1064 089c 13010104 		addi	sp,sp,64
+ 1065              		.cfi_def_cfa_offset 0
+ 1066 08a0 67800000 		jr	ra
+ 1067              		.cfi_endproc
+ 1068              	.LFE119:
+ 1070              		.align	2
+ 1071              		.globl	_Z9slab_testv
+ 1073              	_Z9slab_testv:
+ 1074              	.LFB121:
+ 145:src/kernel/testing/slab_test.cpp **** 
+ 146:src/kernel/testing/slab_test.cpp **** 
+ 147:src/kernel/testing/slab_test.cpp **** void slab_test(){
+ 1075              		.loc 1 147 17 is_stmt 1
+ 1076              		.cfi_startproc
+ 1077              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 1078              		.cfi_lsda 0x1b,.LLSDA121
+ 1079 08a4 130101F4 		addi	sp,sp,-192
+ 1080              		.cfi_def_cfa_offset 192
+ 1081 08a8 233C110A 		sd	ra,184(sp)
+ 1082 08ac 2338810A 		sd	s0,176(sp)
+ 1083 08b0 2334910A 		sd	s1,168(sp)
+ 1084 08b4 2330210B 		sd	s2,160(sp)
+ 1085              		.cfi_offset 1, -8
+ 1086              		.cfi_offset 8, -16
+ 1087              		.cfi_offset 9, -24
+ 1088              		.cfi_offset 18, -32
+ 1089 08b8 1304010C 		addi	s0,sp,192
+ 1090              		.cfi_def_cfa 8, 0
+ 148:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n--------SLAB TEST--------\n\n");
+ 1091              		.loc 1 148 5
+ 1092              		.loc 1 148 17 is_stmt 0
+ 1093 08bc 17050000 		lla	a0,.LC27
+ 1093      13050500 
+ 1094              	.LEHB4:
+ 1095 08c4 97000000 		call	_Z12kprintStringPKc
+ 1095      E7800000 
+ 1096              	.LVL136:
+ 149:src/kernel/testing/slab_test.cpp ****     
+ 150:src/kernel/testing/slab_test.cpp ****     kprintString("Slab Allocator init!\n");
+ 1097              		.loc 1 150 5 is_stmt 1
+ 1098              		.loc 1 150 17 is_stmt 0
+ 1099 08cc 17050000 		lla	a0,.LC28
+ 1099      13050500 
+ 1100 08d4 97000000 		call	_Z12kprintStringPKc
+GAS LISTING /tmp/ccUGcsIN.s 			page 29
+
+
+ 1100      E7800000 
+ 1101              	.LVL137:
+ 151:src/kernel/testing/slab_test.cpp ****     SlabAl::getInstance();
+ 1102              		.loc 1 151 5 is_stmt 1
+ 1103              		.loc 1 151 25 is_stmt 0
+ 1104 08dc 97000000 		call	_ZN13SlabAllocator11getInstanceEv
+ 1104      E7800000 
+ 1105              	.LVL138:
+ 152:src/kernel/testing/slab_test.cpp ****     
+ 153:src/kernel/testing/slab_test.cpp ****     // slab_allocator_state_ceck(Slab::pb_mask::ALLOC);
+ 154:src/kernel/testing/slab_test.cpp ****     
+ 155:src/kernel/testing/slab_test.cpp ****     char flagAllocFree = Slab::pb_mask::ALLOC | Slab::pb_mask::FREE;
+ 1106              		.loc 1 155 5 is_stmt 1
+ 156:src/kernel/testing/slab_test.cpp **** 
+ 157:src/kernel/testing/slab_test.cpp ****      int size = 10;
+ 1107              		.loc 1 157 6
+ 158:src/kernel/testing/slab_test.cpp ****      ObjectCache** oc = (ObjectCache**)NoAlloc::mem_alloc(size*sizeof(ObjectCache*));
+ 1108              		.loc 1 158 6
+ 1109              		.loc 1 158 58 is_stmt 0
+ 1110 08e4 13050005 		li	a0,80
+ 1111 08e8 97000000 		call	_ZN7NoAlloc9mem_allocEm
+ 1111      E7800000 
+ 1112              	.LVL139:
+ 1113 08f0 13090500 		mv	s2,a0
+ 1114              	.LVL140:
+ 159:src/kernel/testing/slab_test.cpp ****      cache_alloc_test(oc, size, 32, flagAllocFree);
+ 1115              		.loc 1 159 6 is_stmt 1
+ 1116              		.loc 1 159 22 is_stmt 0
+ 1117 08f4 93063000 		li	a3,3
+ 1118 08f8 13060002 		li	a2,32
+ 1119 08fc 9305A000 		li	a1,10
+ 1120 0900 97000000 		call	_Z16cache_alloc_testPP11ObjectCacheimc
+ 1120      E7800000 
+ 1121              	.LVL141:
+ 160:src/kernel/testing/slab_test.cpp **** 
+ 161:src/kernel/testing/slab_test.cpp ****     //int obj_num = 20;
+ 162:src/kernel/testing/slab_test.cpp ****     KSemaphore* x[20];
+ 1122              		.loc 1 162 5 is_stmt 1
+ 163:src/kernel/testing/slab_test.cpp ****     ObjectCache* semaphore_cache = new ObjectCache("ksemaphore_cache", sizeof(KSemaphore), ctor, nu
+ 1123              		.loc 1 163 5
+ 1124              		.loc 1 163 105 is_stmt 0
+ 1125 0908 13058005 		li	a0,88
+ 1126 090c 97000000 		call	_ZN11ObjectCachenwEm
+ 1126      E7800000 
+ 1127              	.LVL142:
+ 1128              	.LEHE4:
+ 1129 0914 93040500 		mv	s1,a0
+ 1130 0918 63040502 		beq	a0,zero,.L50
+ 1131              		.loc 1 163 105 discriminator 2
+ 1132 091c 93070000 		li	a5,0
+ 1133 0920 13070000 		li	a4,0
+ 1134 0924 97060000 		lla	a3,_Z4ctorPv
+ 1134      93860600 
+ 1135 092c 13068002 		li	a2,40
+ 1136 0930 97050000 		lla	a1,.LC29
+ 1136      93850500 
+ 1137              	.LEHB5:
+GAS LISTING /tmp/ccUGcsIN.s 			page 30
+
+
+ 1138 0938 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+ 1138      E7800000 
+ 1139              	.LVL143:
+ 1140              	.LEHE5:
+ 1141              	.L50:
+ 164:src/kernel/testing/slab_test.cpp **** 
+ 165:src/kernel/testing/slab_test.cpp ****     cache_obj_alloc_test((void**)x, 10, semaphore_cache, flagAllocFree);
+ 1142              		.loc 1 165 5 is_stmt 1 discriminator 7
+ 1143              		.loc 1 165 25 is_stmt 0 discriminator 7
+ 1144 0940 93063000 		li	a3,3
+ 1145 0944 13860400 		mv	a2,s1
+ 1146 0948 9305A000 		li	a1,10
+ 1147 094c 130504F4 		addi	a0,s0,-192
+ 1148              	.LEHB6:
+ 1149 0950 97000000 		call	_Z20cache_obj_alloc_testPPviP11ObjectCachec
+ 1149      E7800000 
+ 1150              	.LVL144:
+ 166:src/kernel/testing/slab_test.cpp **** 
+ 167:src/kernel/testing/slab_test.cpp ****     KCHECKPRINT(x[1]->get_val());
+ 1151              		.loc 1 167 5 is_stmt 1 discriminator 7
+ 1152 0958 17050000 		lla	a0,.LC30
+ 1152      13050500 
+ 1153 0960 97000000 		call	_Z12kprintStringPKc
+ 1153      E7800000 
+ 1154              	.LVL145:
+ 1155              		.loc 1 167 5 discriminator 7
+ 1156              	.LBB29:
+ 1157              	.LBB30:
+  25:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****         
+  26:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     }
+  27:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     
+  28:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     int wait(); /* classic wait method */
+  29:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     
+  30:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     int signal(); /* classic signal method */
+  31:src/kernel/testing/../../../h/../h/ksemaphore.hpp **** 
+  32:src/kernel/testing/../../../h/../h/ksemaphore.hpp ****     unsigned get_val() { return val; } 
+ 1158              		.loc 2 32 26 discriminator 7
+ 1159              	.LBE30:
+ 1160              	.LBE29:
+ 1161              		.loc 1 167 5 is_stmt 0 discriminator 7
+ 1162 0968 13060000 		li	a2,0
+ 1163 096c 93050001 		li	a1,16
+ 1164 0970 833784F4 		ld	a5,-184(s0)
+ 1165 0974 03E58700 		lwu	a0,8(a5)
+ 1166 0978 97000000 		call	_Z9kprintIntmib
+ 1166      E7800000 
+ 1167              	.LVL146:
+ 1168              		.loc 1 167 5 is_stmt 1 discriminator 7
+ 1169 0980 17050000 		lla	a0,.LC6
+ 1169      13050500 
+ 1170 0988 97000000 		call	_Z12kprintStringPKc
+ 1170      E7800000 
+ 1171              	.LVL147:
+ 168:src/kernel/testing/slab_test.cpp ****     KCHECKPRINT(x[8]->get_val());
+ 1172              		.loc 1 168 5 discriminator 7
+ 1173 0990 17050000 		lla	a0,.LC31
+ 1173      13050500 
+GAS LISTING /tmp/ccUGcsIN.s 			page 31
+
+
+ 1174 0998 97000000 		call	_Z12kprintStringPKc
+ 1174      E7800000 
+ 1175              	.LVL148:
+ 1176              		.loc 1 168 5 discriminator 7
+ 1177              	.LBB31:
+ 1178              	.LBB32:
+ 1179              		.loc 2 32 26 discriminator 7
+ 1180              	.LBE32:
+ 1181              	.LBE31:
+ 1182              		.loc 1 168 5 is_stmt 0 discriminator 7
+ 1183 09a0 13060000 		li	a2,0
+ 1184 09a4 93050001 		li	a1,16
+ 1185 09a8 833704F8 		ld	a5,-128(s0)
+ 1186 09ac 03E58700 		lwu	a0,8(a5)
+ 1187 09b0 97000000 		call	_Z9kprintIntmib
+ 1187      E7800000 
+ 1188              	.LVL149:
+ 1189              		.loc 1 168 5 is_stmt 1 discriminator 7
+ 1190 09b8 17050000 		lla	a0,.LC6
+ 1190      13050500 
+ 1191 09c0 97000000 		call	_Z12kprintStringPKc
+ 1191      E7800000 
+ 1192              	.LVL150:
+ 169:src/kernel/testing/slab_test.cpp **** 
+ 170:src/kernel/testing/slab_test.cpp ****     cache_dealloc_test(oc, size, flagAllocFree);
+ 1193              		.loc 1 170 5 discriminator 7
+ 1194              		.loc 1 170 23 is_stmt 0 discriminator 7
+ 1195 09c8 13063000 		li	a2,3
+ 1196 09cc 9305A000 		li	a1,10
+ 1197 09d0 13050900 		mv	a0,s2
+ 1198 09d4 97000000 		call	_Z18cache_dealloc_testPP11ObjectCacheic
+ 1198      E7800000 
+ 1199              	.LVL151:
+ 171:src/kernel/testing/slab_test.cpp **** 
+ 172:src/kernel/testing/slab_test.cpp ****     // void* buff_arr[18];
+ 173:src/kernel/testing/slab_test.cpp ****     // kmalloc_test(buff_arr, 18, 256, flagAllocFree);
+ 174:src/kernel/testing/slab_test.cpp ****     // kfree_test(buff_arr, 17, flagAllocFree);
+ 175:src/kernel/testing/slab_test.cpp **** 
+ 176:src/kernel/testing/slab_test.cpp ****     
+ 177:src/kernel/testing/slab_test.cpp ****     
+ 178:src/kernel/testing/slab_test.cpp ****    
+ 179:src/kernel/testing/slab_test.cpp ****    
+ 180:src/kernel/testing/slab_test.cpp ****     kprintString("\n\n------SLAB TEST END------\n\n");
+ 1200              		.loc 1 180 5 is_stmt 1 discriminator 7
+ 1201              		.loc 1 180 17 is_stmt 0 discriminator 7
+ 1202 09dc 17050000 		lla	a0,.LC32
+ 1202      13050500 
+ 1203 09e4 97000000 		call	_Z12kprintStringPKc
+ 1203      E7800000 
+ 1204              	.LVL152:
+ 1205              	.LEHE6:
+ 181:src/kernel/testing/slab_test.cpp **** 
+ 182:src/kernel/testing/slab_test.cpp **** 
+ 183:src/kernel/testing/slab_test.cpp **** }...
+ 1206              		.loc 1 183 1 discriminator 7
+ 1207 09ec 8330810B 		ld	ra,184(sp)
+ 1208              		.cfi_remember_state
+GAS LISTING /tmp/ccUGcsIN.s 			page 32
+
+
+ 1209              		.cfi_restore 1
+ 1210 09f0 0334010B 		ld	s0,176(sp)
+ 1211              		.cfi_restore 8
+ 1212              		.cfi_def_cfa 2, 192
+ 1213 09f4 8334810A 		ld	s1,168(sp)
+ 1214              		.cfi_restore 9
+ 1215              	.LVL153:
+ 1216 09f8 0339010A 		ld	s2,160(sp)
+ 1217              		.cfi_restore 18
+ 1218              	.LVL154:
+ 1219 09fc 1301010C 		addi	sp,sp,192
+ 1220              		.cfi_def_cfa_offset 0
+ 1221 0a00 67800000 		jr	ra
+ 1222              	.LVL155:
+ 1223              	.L52:
+ 1224              		.cfi_restore_state
+ 1225 0a04 13090500 		mv	s2,a0
+ 1226              	.LVL156:
+ 163:src/kernel/testing/slab_test.cpp ****     ObjectCache* semaphore_cache = new ObjectCache("ksemaphore_cache", sizeof(KSemaphore), ctor, nu
+ 1227              		.loc 1 163 105
+ 1228 0a08 13850400 		mv	a0,s1
+ 1229 0a0c 97000000 		call	_ZN11ObjectCachedlEPv
+ 1229      E7800000 
+ 1230              	.LVL157:
+ 1231 0a14 13050900 		mv	a0,s2
+ 1232              	.LEHB7:
+ 1233 0a18 97000000 		call	_Unwind_Resume
+ 1233      E7800000 
+ 1234              	.LVL158:
+ 1235              	.LEHE7:
+ 1236              		.cfi_endproc
+ 1237              	.LFE121:
+ 1238              		.section	.gcc_except_table
+ 1239              	.LLSDA121:
+ 1240 0038 FF       		.byte	0xff
+ 1241 0039 FF       		.byte	0xff
+ 1242 003a 03       		.byte	0x3
+ 1243 003b 34       		.byte	0x34
+ 1244 003c 00000000 		.4byte	.LEHB4-.LFB121
+ 1245 0040 00000000 		.4byte	.LEHE4-.LEHB4
+ 1246 0044 00000000 		.4byte	0
+ 1247 0048 00       		.byte	0
+ 1248 0049 00000000 		.4byte	.LEHB5-.LFB121
+ 1249 004d 00000000 		.4byte	.LEHE5-.LEHB5
+ 1250 0051 00000000 		.4byte	.L52-.LFB121
+ 1251 0055 00       		.byte	0
+ 1252 0056 00000000 		.4byte	.LEHB6-.LFB121
+ 1253 005a 00000000 		.4byte	.LEHE6-.LEHB6
+ 1254 005e 00000000 		.4byte	0
+ 1255 0062 00       		.byte	0
+ 1256 0063 00000000 		.4byte	.LEHB7-.LFB121
+ 1257 0067 00000000 		.4byte	.LEHE7-.LEHB7
+ 1258 006b 00000000 		.4byte	0
+ 1259 006f 00       		.byte	0
+ 1260              		.text
+ 1262              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 1263              		.align	3
+GAS LISTING /tmp/ccUGcsIN.s 			page 33
+
+
+ 1264              	.LC0:
+ 1265 0000 0A0A3D3D 		.string	"\n\n=============Object Cache Allocating=============\n\n"
+ 1265      3D3D3D3D 
+ 1265      3D3D3D3D 
+ 1265      3D3D3D4F 
+ 1265      626A6563 
+ 1266 0036 0000     		.zero	2
+ 1267              	.LC1:
+ 1268 0038 416C6C6F 		.string	"Allocating "
+ 1268      63617469 
+ 1268      6E672000 
+ 1269 0044 00000000 		.zero	4
+ 1270              	.LC2:
+ 1271 0048 20636163 		.string	" caches!!\n"
+ 1271      68657321 
+ 1271      210A00
+ 1272 0053 00000000 		.zero	5
+ 1272      00
+ 1273              	.LC3:
+ 1274 0058 6F6300   		.string	"oc"
+ 1275 005b 00000000 		.zero	5
+ 1275      00
+ 1276              	.LC4:
+ 1277 0060 6F635F61 		.string	"oc_arr["
+ 1277      72725B00 
+ 1278              	.LC5:
+ 1279 0068 5D3A2000 		.string	"]: "
+ 1280 006c 00000000 		.zero	4
+ 1281              	.LC6:
+ 1282 0070 0A00     		.string	"\n"
+ 1283 0072 00000000 		.zero	6
+ 1283      0000
+ 1284              	.LC7:
+ 1285 0078 4E6F7420 		.string	"Not enough memory left!\n"
+ 1285      656E6F75 
+ 1285      6768206D 
+ 1285      656D6F72 
+ 1285      79206C65 
+ 1286 0091 00000000 		.zero	7
+ 1286      000000
+ 1287              	.LC8:
+ 1288 0098 0A0A3D3D 		.string	"\n\n===========Object Cache Allocating End===========\n\n"
+ 1288      3D3D3D3D 
+ 1288      3D3D3D3D 
+ 1288      3D4F626A 
+ 1288      65637420 
+ 1289 00ce 0000     		.zero	2
+ 1290              	.LC9:
+ 1291 00d0 0A0A3D3D 		.string	"\n\n=============Object Cache Deallocating=============\n\n"
+ 1291      3D3D3D3D 
+ 1291      3D3D3D3D 
+ 1291      3D3D3D4F 
+ 1291      626A6563 
+ 1292              	.LC10:
+ 1293 0108 47697665 		.string	"Given address not valid!\n"
+ 1293      6E206164 
+ 1293      64726573 
+GAS LISTING /tmp/ccUGcsIN.s 			page 34
+
+
+ 1293      73206E6F 
+ 1293      74207661 
+ 1294 0122 00000000 		.zero	6
+ 1294      0000
+ 1295              	.LC11:
+ 1296 0128 0A0A3D3D 		.string	"\n\n===========Object Cache Dellocating End===========\n\n"
+ 1296      3D3D3D3D 
+ 1296      3D3D3D3D 
+ 1296      3D4F626A 
+ 1296      65637420 
+ 1297 015f 00       		.zero	1
+ 1298              	.LC12:
+ 1299 0160 0A0A3D3D 		.string	"\n\n=============SMALL MEMORY BUFFER ALLOC=============\n\n"
+ 1299      3D3D3D3D 
+ 1299      3D3D3D3D 
+ 1299      3D3D3D53 
+ 1299      4D414C4C 
+ 1300              	.LC13:
+ 1301 0198 62756666 		.string	"buff_arr["
+ 1301      5F617272 
+ 1301      5B00
+ 1302 01a2 00000000 		.zero	6
+ 1302      0000
+ 1303              	.LC14:
+ 1304 01a8 0A0A3D3D 		.string	"\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n"
+ 1304      3D3D3D3D 
+ 1304      3D3D3D3D 
+ 1304      3D534D41 
+ 1304      4C4C204D 
+ 1305              	.LC15:
+ 1306 01e0 0A0A3D3D 		.string	"\n\n=============SMALL MEMORY BUFFER DEALLOC=============\n\n"
+ 1306      3D3D3D3D 
+ 1306      3D3D3D3D 
+ 1306      3D3D3D53 
+ 1306      4D414C4C 
+ 1307 021a 00000000 		.zero	6
+ 1307      0000
+ 1308              	.LC16:
+ 1309 0220 496E7661 		.string	"Invalid free address given!!"
+ 1309      6C696420 
+ 1309      66726565 
+ 1309      20616464 
+ 1309      72657373 
+ 1310 023d 000000   		.zero	3
+ 1311              	.LC17:
+ 1312 0240 0A0A3D3D 		.string	"\n\n===========SMALL MEMORY BUFFER DEALLOC END===========\n\n"
+ 1312      3D3D3D3D 
+ 1312      3D3D3D3D 
+ 1312      3D534D41 
+ 1312      4C4C204D 
+ 1313 027a 00000000 		.zero	6
+ 1313      0000
+ 1314              	.LC18:
+ 1315 0280 0A0A3D3D 		.string	"\n\n=============Slab Allocator State Check=============\n\n"
+ 1315      3D3D3D3D 
+ 1315      3D3D3D3D 
+ 1315      3D3D3D53 
+GAS LISTING /tmp/ccUGcsIN.s 			page 35
+
+
+ 1315      6C616220 
+ 1316 02b9 00000000 		.zero	7
+ 1316      000000
+ 1317              	.LC19:
+ 1318 02c0 0A0A3D3D 		.string	"\n\n===========Slab Allocator State Check End===========\n\n"
+ 1318      3D3D3D3D 
+ 1318      3D3D3D3D 
+ 1318      3D536C61 
+ 1318      6220416C 
+ 1319 02f9 00000000 		.zero	7
+ 1319      000000
+ 1320              	.LC20:
+ 1321 0300 0A0A3D3D 		.string	"\n\n=============Object Allocate Test=============\n\n"
+ 1321      3D3D3D3D 
+ 1321      3D3D3D3D 
+ 1321      3D3D3D4F 
+ 1321      626A6563 
+ 1322 0333 00000000 		.zero	5
+ 1322      00
+ 1323              	.LC21:
+ 1324 0338 4F626A65 		.string	"Object not corresctly allocated!!\n"
+ 1324      6374206E 
+ 1324      6F742063 
+ 1324      6F727265 
+ 1324      7363746C 
+ 1325 035b 00000000 		.zero	5
+ 1325      00
+ 1326              	.LC22:
+ 1327 0360 6F626A65 		.string	"object["
+ 1327      63745B00 
+ 1328              	.LC23:
+ 1329 0368 0A0A3D3D 		.string	"\n\n===========Object Allocate Test End===========\n\n"
+ 1329      3D3D3D3D 
+ 1329      3D3D3D3D 
+ 1329      3D4F626A 
+ 1329      65637420 
+ 1330 039b 00000000 		.zero	5
+ 1330      00
+ 1331              	.LC24:
+ 1332 03a0 0A0A3D3D 		.string	"\n\n=============Object Deallocate Test=============\n\n"
+ 1332      3D3D3D3D 
+ 1332      3D3D3D3D 
+ 1332      3D3D3D4F 
+ 1332      626A6563 
+ 1333 03d5 000000   		.zero	3
+ 1334              	.LC25:
+ 1335 03d8 496E7661 		.string	"Invalid object address!\n"
+ 1335      6C696420 
+ 1335      6F626A65 
+ 1335      63742061 
+ 1335      64647265 
+ 1336 03f1 00000000 		.zero	7
+ 1336      000000
+ 1337              	.LC26:
+ 1338 03f8 0A0A3D3D 		.string	"\n\n=============Object Dellocate Test End=============\n\n"
+ 1338      3D3D3D3D 
+ 1338      3D3D3D3D 
+GAS LISTING /tmp/ccUGcsIN.s 			page 36
+
+
+ 1338      3D3D3D4F 
+ 1338      626A6563 
+ 1339              	.LC27:
+ 1340 0430 0A0A2D2D 		.string	"\n\n--------SLAB TEST--------\n\n"
+ 1340      2D2D2D2D 
+ 1340      2D2D534C 
+ 1340      41422054 
+ 1340      4553542D 
+ 1341 044e 0000     		.zero	2
+ 1342              	.LC28:
+ 1343 0450 536C6162 		.string	"Slab Allocator init!\n"
+ 1343      20416C6C 
+ 1343      6F636174 
+ 1343      6F722069 
+ 1343      6E697421 
+ 1344 0466 0000     		.zero	2
+ 1345              	.LC29:
+ 1346 0468 6B73656D 		.string	"ksemaphore_cache"
+ 1346      6170686F 
+ 1346      72655F63 
+ 1346      61636865 
+ 1346      00
+ 1347 0479 00000000 		.zero	7
+ 1347      000000
+ 1348              	.LC30:
+ 1349 0480 785B315D 		.string	"x[1]->get_val(): "
+ 1349      2D3E6765 
+ 1349      745F7661 
+ 1349      6C28293A 
+ 1349      2000
+ 1350 0492 00000000 		.zero	6
+ 1350      0000
+ 1351              	.LC31:
+ 1352 0498 785B385D 		.string	"x[8]->get_val(): "
+ 1352      2D3E6765 
+ 1352      745F7661 
+ 1352      6C28293A 
+ 1352      2000
+ 1353 04aa 00000000 		.zero	6
+ 1353      0000
+ 1354              	.LC32:
+ 1355 04b0 0A0A2D2D 		.string	"\n\n------SLAB TEST END------\n\n"
+ 1355      2D2D2D2D 
+ 1355      534C4142 
+ 1355      20544553 
+ 1355      5420454E 
+ 1356              		.text
+ 1357              	.Letext0:
+ 1358              		.file 4 "src/kernel/testing/../../../h/../h/../lib/hw.h"
+ 1359              		.file 5 "src/kernel/testing/../../../h/../h/../h/../h/list.h"
+ 1360              		.file 6 "src/kernel/testing/../../../h/../h/../h/object_cache.h"
+ 1361              		.file 7 "src/kernel/testing/../../../h/../h/slab_allocator.h"
+ 1362              		.file 8 "src/kernel/testing/../../../h/../h/noalloc_allocator.hpp"
+ 1363              		.file 9 "src/kernel/testing/../../../h/../h/tcb.hpp"
+ 1364              		.file 10 "src/kernel/testing/../../../h/../h/slab.h"
+ 1365              		.file 11 "src/kernel/testing/../../../h/kernel_lib.h"
+ 1366              		.file 12 "src/kernel/testing/../../../h/../h/kernel_funs.h"
+GAS LISTING /tmp/ccUGcsIN.s 			page 37
+
+
+ 7772              		.align	3
+ 7775              	DW.ref.__gxx_personality_v0:
+ 7776 0000 00000000 		.dword	__gxx_personality_v0
+ 7776      00000000 
+ 7777              		.ident	"GCC: () 8.3.0"
+GAS LISTING /tmp/ccUGcsIN.s 			page 38
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 slab_test.cpp
+     /tmp/ccUGcsIN.s:12     .text:0000000000000000 _Z4ctorPv
+     /tmp/ccUGcsIN.s:16     .text:0000000000000000 .L0 
+     /tmp/ccUGcsIN.s:18     .text:0000000000000000 .L0 
+     /tmp/ccUGcsIN.s:19     .text:0000000000000004 .L0 
+     /tmp/ccUGcsIN.s:22     .text:000000000000000c .L0 
+     /tmp/ccUGcsIN.s:23     .text:000000000000000c .L0 
+     /tmp/ccUGcsIN.s:25     .text:0000000000000010 .L0 
+     /tmp/ccUGcsIN.s:33     .text:0000000000000014 .L0 
+     /tmp/ccUGcsIN.s:34     .text:0000000000000014 .L0 
+     /tmp/ccUGcsIN.s:42     .text:000000000000001c .L0 
+     /tmp/ccUGcsIN.s:50     .text:0000000000000028 .L0 
+     /tmp/ccUGcsIN.s:51     .text:0000000000000028 .L0 
+     /tmp/ccUGcsIN.s:55     .text:0000000000000038 .L0 
+     /tmp/ccUGcsIN.s:56     .text:0000000000000038 .L0 
+     /tmp/ccUGcsIN.s:64     .text:0000000000000040 .L0 
+     /tmp/ccUGcsIN.s:72     .text:000000000000005c .L0 
+     /tmp/ccUGcsIN.s:75     .text:0000000000000064 .L0 
+     /tmp/ccUGcsIN.s:76     .text:0000000000000068 .L0 
+     /tmp/ccUGcsIN.s:78     .text:000000000000006c .L0 
+     /tmp/ccUGcsIN.s:79     .text:000000000000006c .L0 
+     /tmp/ccUGcsIN.s:81     .text:0000000000000070 .L0 
+     /tmp/ccUGcsIN.s:83     .text:0000000000000074 .L0 
+     /tmp/ccUGcsIN.s:89     .text:0000000000000074 _Z16cache_alloc_testPP11ObjectCacheimc
+     /tmp/ccUGcsIN.s:92     .text:0000000000000074 .L0 
+     /tmp/ccUGcsIN.s:7775   .sdata.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccUGcsIN.s:96     .text:0000000000000074 .L0 
+     /tmp/ccUGcsIN.s:97     .text:0000000000000078 .L0 
+     /tmp/ccUGcsIN.s:107    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:108    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:109    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:110    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:111    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:112    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:113    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:114    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:115    .text:000000000000009c .L0 
+     /tmp/ccUGcsIN.s:117    .text:00000000000000a0 .L0 
+     /tmp/ccUGcsIN.s:123    .text:00000000000000b0 .L0 
+     /tmp/ccUGcsIN.s:124    .text:00000000000000b0 .L0 
+     /tmp/ccUGcsIN.s:130    .text:00000000000000c0 .L0 
+     /tmp/ccUGcsIN.s:131    .text:00000000000000c0 .L0 
+     /tmp/ccUGcsIN.s:135    .text:00000000000000d0 .L0 
+     /tmp/ccUGcsIN.s:136    .text:00000000000000d0 .L0 
+     /tmp/ccUGcsIN.s:142    .text:00000000000000e4 .L0 
+     /tmp/ccUGcsIN.s:143    .text:00000000000000e4 .L0 
+     /tmp/ccUGcsIN.s:148    .text:00000000000000f4 .L0 
+     /tmp/ccUGcsIN.s:149    .text:00000000000000f4 .L0 
+     /tmp/ccUGcsIN.s:154    .text:00000000000000fc .L0 
+     /tmp/ccUGcsIN.s:157    .text:0000000000000104 .L0 
+     /tmp/ccUGcsIN.s:159    .text:0000000000000108 .L0 
+     /tmp/ccUGcsIN.s:163    .text:0000000000000118 .L0 
+     /tmp/ccUGcsIN.s:169    .text:000000000000012c .L0 
+     /tmp/ccUGcsIN.s:173    .text:000000000000013c .L0 
+     /tmp/ccUGcsIN.s:179    .text:0000000000000150 .L0 
+     /tmp/ccUGcsIN.s:183    .text:0000000000000160 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 39
+
+
+     /tmp/ccUGcsIN.s:185    .text:0000000000000164 .L0 
+     /tmp/ccUGcsIN.s:186    .text:0000000000000164 .L0 
+     /tmp/ccUGcsIN.s:191    .text:0000000000000174 .L0 
+     /tmp/ccUGcsIN.s:192    .text:0000000000000174 .L0 
+     /tmp/ccUGcsIN.s:196    .text:0000000000000184 .L0 
+     /tmp/ccUGcsIN.s:200    .text:0000000000000188 .L0 
+     /tmp/ccUGcsIN.s:202    .text:000000000000018c .L0 
+     /tmp/ccUGcsIN.s:203    .text:000000000000018c .L0 
+     /tmp/ccUGcsIN.s:210    .text:00000000000001a0 .L0 
+     /tmp/ccUGcsIN.s:222    .text:00000000000001c4 .L0 
+     /tmp/ccUGcsIN.s:223    .text:00000000000001c4 .L0 
+     /tmp/ccUGcsIN.s:228    .text:00000000000001d4 .L0 
+     /tmp/ccUGcsIN.s:232    .text:00000000000001d8 .L0 
+     /tmp/ccUGcsIN.s:233    .text:00000000000001d8 .L0 
+     /tmp/ccUGcsIN.s:236    .text:00000000000001e0 .L0 
+     /tmp/ccUGcsIN.s:240    .text:00000000000001ec .L0 
+     /tmp/ccUGcsIN.s:241    .text:00000000000001ec .L0 
+     /tmp/ccUGcsIN.s:247    .text:00000000000001fc .L0 
+     /tmp/ccUGcsIN.s:248    .text:0000000000000200 .L0 
+     /tmp/ccUGcsIN.s:249    .text:0000000000000200 .L0 
+     /tmp/ccUGcsIN.s:251    .text:0000000000000204 .L0 
+     /tmp/ccUGcsIN.s:252    .text:0000000000000204 .L0 
+     /tmp/ccUGcsIN.s:254    .text:0000000000000208 .L0 
+     /tmp/ccUGcsIN.s:256    .text:000000000000020c .L0 
+     /tmp/ccUGcsIN.s:259    .text:0000000000000210 .L0 
+     /tmp/ccUGcsIN.s:261    .text:0000000000000214 .L0 
+     /tmp/ccUGcsIN.s:264    .text:0000000000000218 .L0 
+     /tmp/ccUGcsIN.s:266    .text:000000000000021c .L0 
+     /tmp/ccUGcsIN.s:268    .text:0000000000000220 .L0 
+     /tmp/ccUGcsIN.s:271    .text:0000000000000224 .L0 
+     /tmp/ccUGcsIN.s:275    .text:0000000000000228 .L0 
+     /tmp/ccUGcsIN.s:279    .text:000000000000022c .L0 
+     /tmp/ccUGcsIN.s:288    .text:0000000000000244 .L0 
+     /tmp/ccUGcsIN.s:318    .text:0000000000000244 _Z18cache_dealloc_testPP11ObjectCacheic
+     /tmp/ccUGcsIN.s:321    .text:0000000000000244 .L0 
+     /tmp/ccUGcsIN.s:323    .text:0000000000000244 .L0 
+     /tmp/ccUGcsIN.s:324    .text:0000000000000248 .L0 
+     /tmp/ccUGcsIN.s:333    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:334    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:335    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:336    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:337    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:338    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:339    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:340    .text:0000000000000268 .L0 
+     /tmp/ccUGcsIN.s:342    .text:000000000000026c .L0 
+     /tmp/ccUGcsIN.s:347    .text:0000000000000278 .L0 
+     /tmp/ccUGcsIN.s:348    .text:0000000000000278 .L0 
+     /tmp/ccUGcsIN.s:354    .text:0000000000000288 .L0 
+     /tmp/ccUGcsIN.s:355    .text:0000000000000288 .L0 
+     /tmp/ccUGcsIN.s:359    .text:000000000000028c .L0 
+     /tmp/ccUGcsIN.s:361    .text:0000000000000290 .L0 
+     /tmp/ccUGcsIN.s:365    .text:00000000000002a0 .L0 
+     /tmp/ccUGcsIN.s:371    .text:00000000000002b4 .L0 
+     /tmp/ccUGcsIN.s:375    .text:00000000000002c4 .L0 
+     /tmp/ccUGcsIN.s:383    .text:00000000000002e0 .L0 
+     /tmp/ccUGcsIN.s:387    .text:00000000000002f0 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 40
+
+
+     /tmp/ccUGcsIN.s:388    .text:00000000000002f0 .L0 
+     /tmp/ccUGcsIN.s:390    .text:00000000000002f4 .L0 
+     /tmp/ccUGcsIN.s:392    .text:00000000000002f8 .L0 
+     /tmp/ccUGcsIN.s:393    .text:00000000000002f8 .L0 
+     /tmp/ccUGcsIN.s:400    .text:0000000000000310 .L0 
+     /tmp/ccUGcsIN.s:401    .text:0000000000000310 .L0 
+     /tmp/ccUGcsIN.s:403    .text:0000000000000314 .L0 
+     /tmp/ccUGcsIN.s:409    .text:000000000000031c .L0 
+     /tmp/ccUGcsIN.s:410    .text:000000000000031c .L0 
+     /tmp/ccUGcsIN.s:414    .text:000000000000032c .L0 
+     /tmp/ccUGcsIN.s:418    .text:0000000000000330 .L0 
+     /tmp/ccUGcsIN.s:419    .text:0000000000000330 .L0 
+     /tmp/ccUGcsIN.s:422    .text:0000000000000338 .L0 
+     /tmp/ccUGcsIN.s:426    .text:0000000000000344 .L0 
+     /tmp/ccUGcsIN.s:427    .text:0000000000000344 .L0 
+     /tmp/ccUGcsIN.s:432    .text:0000000000000354 .L0 
+     /tmp/ccUGcsIN.s:433    .text:0000000000000358 .L0 
+     /tmp/ccUGcsIN.s:435    .text:000000000000035c .L0 
+     /tmp/ccUGcsIN.s:436    .text:000000000000035c .L0 
+     /tmp/ccUGcsIN.s:438    .text:0000000000000360 .L0 
+     /tmp/ccUGcsIN.s:440    .text:0000000000000364 .L0 
+     /tmp/ccUGcsIN.s:443    .text:0000000000000368 .L0 
+     /tmp/ccUGcsIN.s:445    .text:000000000000036c .L0 
+     /tmp/ccUGcsIN.s:447    .text:0000000000000370 .L0 
+     /tmp/ccUGcsIN.s:450    .text:0000000000000374 .L0 
+     /tmp/ccUGcsIN.s:452    .text:0000000000000378 .L0 
+     /tmp/ccUGcsIN.s:454    .text:000000000000037c .L0 
+     /tmp/ccUGcsIN.s:460    .text:000000000000037c _Z12kmalloc_testPPvimc
+     /tmp/ccUGcsIN.s:463    .text:000000000000037c .L0 
+     /tmp/ccUGcsIN.s:465    .text:000000000000037c .L0 
+     /tmp/ccUGcsIN.s:466    .text:0000000000000380 .L0 
+     /tmp/ccUGcsIN.s:475    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:476    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:477    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:478    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:479    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:480    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:481    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:482    .text:00000000000003a0 .L0 
+     /tmp/ccUGcsIN.s:484    .text:00000000000003a4 .L0 
+     /tmp/ccUGcsIN.s:490    .text:00000000000003b4 .L0 
+     /tmp/ccUGcsIN.s:491    .text:00000000000003b4 .L0 
+     /tmp/ccUGcsIN.s:497    .text:00000000000003c4 .L0 
+     /tmp/ccUGcsIN.s:498    .text:00000000000003c4 .L0 
+     /tmp/ccUGcsIN.s:502    .text:00000000000003c8 .L0 
+     /tmp/ccUGcsIN.s:504    .text:00000000000003cc .L0 
+     /tmp/ccUGcsIN.s:505    .text:00000000000003cc .L0 
+     /tmp/ccUGcsIN.s:508    .text:00000000000003d4 .L0 
+     /tmp/ccUGcsIN.s:511    .text:00000000000003dc .L0 
+     /tmp/ccUGcsIN.s:515    .text:00000000000003e8 .L0 
+     /tmp/ccUGcsIN.s:517    .text:00000000000003ec .L0 
+     /tmp/ccUGcsIN.s:521    .text:00000000000003fc .L0 
+     /tmp/ccUGcsIN.s:527    .text:0000000000000410 .L0 
+     /tmp/ccUGcsIN.s:531    .text:0000000000000420 .L0 
+     /tmp/ccUGcsIN.s:537    .text:0000000000000434 .L0 
+     /tmp/ccUGcsIN.s:541    .text:0000000000000444 .L0 
+     /tmp/ccUGcsIN.s:542    .text:0000000000000444 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 41
+
+
+     /tmp/ccUGcsIN.s:544    .text:0000000000000448 .L0 
+     /tmp/ccUGcsIN.s:546    .text:000000000000044c .L0 
+     /tmp/ccUGcsIN.s:552    .text:0000000000000454 .L0 
+     /tmp/ccUGcsIN.s:553    .text:0000000000000454 .L0 
+     /tmp/ccUGcsIN.s:557    .text:0000000000000464 .L0 
+     /tmp/ccUGcsIN.s:561    .text:0000000000000468 .L0 
+     /tmp/ccUGcsIN.s:562    .text:0000000000000468 .L0 
+     /tmp/ccUGcsIN.s:565    .text:0000000000000470 .L0 
+     /tmp/ccUGcsIN.s:569    .text:000000000000047c .L0 
+     /tmp/ccUGcsIN.s:570    .text:000000000000047c .L0 
+     /tmp/ccUGcsIN.s:575    .text:000000000000048c .L0 
+     /tmp/ccUGcsIN.s:576    .text:0000000000000490 .L0 
+     /tmp/ccUGcsIN.s:578    .text:0000000000000494 .L0 
+     /tmp/ccUGcsIN.s:579    .text:0000000000000494 .L0 
+     /tmp/ccUGcsIN.s:581    .text:0000000000000498 .L0 
+     /tmp/ccUGcsIN.s:583    .text:000000000000049c .L0 
+     /tmp/ccUGcsIN.s:586    .text:00000000000004a0 .L0 
+     /tmp/ccUGcsIN.s:588    .text:00000000000004a4 .L0 
+     /tmp/ccUGcsIN.s:591    .text:00000000000004a8 .L0 
+     /tmp/ccUGcsIN.s:594    .text:00000000000004ac .L0 
+     /tmp/ccUGcsIN.s:596    .text:00000000000004b0 .L0 
+     /tmp/ccUGcsIN.s:598    .text:00000000000004b4 .L0 
+     /tmp/ccUGcsIN.s:604    .text:00000000000004b4 _Z10kfree_testPPvic
+     /tmp/ccUGcsIN.s:607    .text:00000000000004b4 .L0 
+     /tmp/ccUGcsIN.s:609    .text:00000000000004b4 .L0 
+     /tmp/ccUGcsIN.s:610    .text:00000000000004b8 .L0 
+     /tmp/ccUGcsIN.s:618    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:619    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:620    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:621    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:622    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:623    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:624    .text:00000000000004d4 .L0 
+     /tmp/ccUGcsIN.s:626    .text:00000000000004d8 .L0 
+     /tmp/ccUGcsIN.s:631    .text:00000000000004e4 .L0 
+     /tmp/ccUGcsIN.s:632    .text:00000000000004e4 .L0 
+     /tmp/ccUGcsIN.s:638    .text:00000000000004f4 .L0 
+     /tmp/ccUGcsIN.s:639    .text:00000000000004f4 .L0 
+     /tmp/ccUGcsIN.s:643    .text:00000000000004f8 .L0 
+     /tmp/ccUGcsIN.s:645    .text:00000000000004fc .L0 
+     /tmp/ccUGcsIN.s:646    .text:00000000000004fc .L0 
+     /tmp/ccUGcsIN.s:650    .text:0000000000000508 .L0 
+     /tmp/ccUGcsIN.s:652    .text:000000000000050c .L0 
+     /tmp/ccUGcsIN.s:656    .text:000000000000051c .L0 
+     /tmp/ccUGcsIN.s:662    .text:0000000000000530 .L0 
+     /tmp/ccUGcsIN.s:666    .text:0000000000000540 .L0 
+     /tmp/ccUGcsIN.s:672    .text:0000000000000554 .L0 
+     /tmp/ccUGcsIN.s:676    .text:0000000000000564 .L0 
+     /tmp/ccUGcsIN.s:677    .text:0000000000000564 .L0 
+     /tmp/ccUGcsIN.s:680    .text:000000000000056c .L0 
+     /tmp/ccUGcsIN.s:684    .text:0000000000000578 .L0 
+     /tmp/ccUGcsIN.s:690    .text:0000000000000580 .L0 
+     /tmp/ccUGcsIN.s:691    .text:0000000000000580 .L0 
+     /tmp/ccUGcsIN.s:695    .text:0000000000000590 .L0 
+     /tmp/ccUGcsIN.s:699    .text:0000000000000594 .L0 
+     /tmp/ccUGcsIN.s:700    .text:0000000000000594 .L0 
+     /tmp/ccUGcsIN.s:703    .text:000000000000059c .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 42
+
+
+     /tmp/ccUGcsIN.s:707    .text:00000000000005a8 .L0 
+     /tmp/ccUGcsIN.s:708    .text:00000000000005a8 .L0 
+     /tmp/ccUGcsIN.s:713    .text:00000000000005b8 .L0 
+     /tmp/ccUGcsIN.s:714    .text:00000000000005bc .L0 
+     /tmp/ccUGcsIN.s:716    .text:00000000000005c0 .L0 
+     /tmp/ccUGcsIN.s:717    .text:00000000000005c0 .L0 
+     /tmp/ccUGcsIN.s:719    .text:00000000000005c4 .L0 
+     /tmp/ccUGcsIN.s:721    .text:00000000000005c8 .L0 
+     /tmp/ccUGcsIN.s:724    .text:00000000000005cc .L0 
+     /tmp/ccUGcsIN.s:726    .text:00000000000005d0 .L0 
+     /tmp/ccUGcsIN.s:729    .text:00000000000005d4 .L0 
+     /tmp/ccUGcsIN.s:731    .text:00000000000005d8 .L0 
+     /tmp/ccUGcsIN.s:733    .text:00000000000005dc .L0 
+     /tmp/ccUGcsIN.s:739    .text:00000000000005dc _Z25slab_allocator_state_ceckc
+     /tmp/ccUGcsIN.s:742    .text:00000000000005dc .L0 
+     /tmp/ccUGcsIN.s:744    .text:00000000000005dc .L0 
+     /tmp/ccUGcsIN.s:745    .text:00000000000005e0 .L0 
+     /tmp/ccUGcsIN.s:749    .text:00000000000005ec .L0 
+     /tmp/ccUGcsIN.s:750    .text:00000000000005ec .L0 
+     /tmp/ccUGcsIN.s:751    .text:00000000000005ec .L0 
+     /tmp/ccUGcsIN.s:753    .text:00000000000005f0 .L0 
+     /tmp/ccUGcsIN.s:756    .text:00000000000005f4 .L0 
+     /tmp/ccUGcsIN.s:757    .text:00000000000005f4 .L0 
+     /tmp/ccUGcsIN.s:762    .text:0000000000000604 .L0 
+     /tmp/ccUGcsIN.s:763    .text:0000000000000604 .L0 
+     /tmp/ccUGcsIN.s:766    .text:000000000000060c .L0 
+     /tmp/ccUGcsIN.s:770    .text:0000000000000618 .L0 
+     /tmp/ccUGcsIN.s:771    .text:0000000000000618 .L0 
+     /tmp/ccUGcsIN.s:775    .text:0000000000000628 .L0 
+     /tmp/ccUGcsIN.s:776    .text:000000000000062c .L0 
+     /tmp/ccUGcsIN.s:778    .text:0000000000000630 .L0 
+     /tmp/ccUGcsIN.s:779    .text:0000000000000630 .L0 
+     /tmp/ccUGcsIN.s:781    .text:0000000000000634 .L0 
+     /tmp/ccUGcsIN.s:783    .text:0000000000000638 .L0 
+     /tmp/ccUGcsIN.s:785    .text:000000000000063c .L0 
+     /tmp/ccUGcsIN.s:791    .text:000000000000063c _Z20cache_obj_alloc_testPPviP11ObjectCachec
+     /tmp/ccUGcsIN.s:794    .text:000000000000063c .L0 
+     /tmp/ccUGcsIN.s:796    .text:000000000000063c .L0 
+     /tmp/ccUGcsIN.s:797    .text:0000000000000640 .L0 
+     /tmp/ccUGcsIN.s:806    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:807    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:808    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:809    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:810    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:811    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:812    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:813    .text:0000000000000660 .L0 
+     /tmp/ccUGcsIN.s:815    .text:0000000000000664 .L0 
+     /tmp/ccUGcsIN.s:821    .text:0000000000000674 .L0 
+     /tmp/ccUGcsIN.s:822    .text:0000000000000674 .L0 
+     /tmp/ccUGcsIN.s:828    .text:0000000000000684 .L0 
+     /tmp/ccUGcsIN.s:829    .text:0000000000000684 .L0 
+     /tmp/ccUGcsIN.s:833    .text:0000000000000688 .L0 
+     /tmp/ccUGcsIN.s:835    .text:000000000000068c .L0 
+     /tmp/ccUGcsIN.s:836    .text:000000000000068c .L0 
+     /tmp/ccUGcsIN.s:839    .text:0000000000000694 .L0 
+     /tmp/ccUGcsIN.s:843    .text:00000000000006a0 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 43
+
+
+     /tmp/ccUGcsIN.s:845    .text:00000000000006a4 .L0 
+     /tmp/ccUGcsIN.s:847    .text:00000000000006a8 .L0 
+     /tmp/ccUGcsIN.s:851    .text:00000000000006b8 .L0 
+     /tmp/ccUGcsIN.s:857    .text:00000000000006cc .L0 
+     /tmp/ccUGcsIN.s:861    .text:00000000000006dc .L0 
+     /tmp/ccUGcsIN.s:867    .text:00000000000006f0 .L0 
+     /tmp/ccUGcsIN.s:871    .text:0000000000000700 .L0 
+     /tmp/ccUGcsIN.s:877    .text:0000000000000708 .L0 
+     /tmp/ccUGcsIN.s:878    .text:0000000000000708 .L0 
+     /tmp/ccUGcsIN.s:882    .text:0000000000000718 .L0 
+     /tmp/ccUGcsIN.s:886    .text:000000000000071c .L0 
+     /tmp/ccUGcsIN.s:887    .text:000000000000071c .L0 
+     /tmp/ccUGcsIN.s:892    .text:000000000000072c .L0 
+     /tmp/ccUGcsIN.s:893    .text:000000000000072c .L0 
+     /tmp/ccUGcsIN.s:897    .text:0000000000000738 .L0 
+     /tmp/ccUGcsIN.s:898    .text:0000000000000738 .L0 
+     /tmp/ccUGcsIN.s:903    .text:0000000000000748 .L0 
+     /tmp/ccUGcsIN.s:904    .text:000000000000074c .L0 
+     /tmp/ccUGcsIN.s:906    .text:0000000000000750 .L0 
+     /tmp/ccUGcsIN.s:907    .text:0000000000000750 .L0 
+     /tmp/ccUGcsIN.s:909    .text:0000000000000754 .L0 
+     /tmp/ccUGcsIN.s:912    .text:0000000000000758 .L0 
+     /tmp/ccUGcsIN.s:914    .text:000000000000075c .L0 
+     /tmp/ccUGcsIN.s:917    .text:0000000000000760 .L0 
+     /tmp/ccUGcsIN.s:919    .text:0000000000000764 .L0 
+     /tmp/ccUGcsIN.s:922    .text:0000000000000768 .L0 
+     /tmp/ccUGcsIN.s:924    .text:000000000000076c .L0 
+     /tmp/ccUGcsIN.s:926    .text:0000000000000770 .L0 
+     /tmp/ccUGcsIN.s:932    .text:0000000000000770 _Z23cache_obj_dealloca_testPPviP11ObjectCachec
+     /tmp/ccUGcsIN.s:935    .text:0000000000000770 .L0 
+     /tmp/ccUGcsIN.s:937    .text:0000000000000770 .L0 
+     /tmp/ccUGcsIN.s:938    .text:0000000000000774 .L0 
+     /tmp/ccUGcsIN.s:947    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:948    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:949    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:950    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:951    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:952    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:953    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:954    .text:0000000000000794 .L0 
+     /tmp/ccUGcsIN.s:956    .text:0000000000000798 .L0 
+     /tmp/ccUGcsIN.s:962    .text:00000000000007a8 .L0 
+     /tmp/ccUGcsIN.s:963    .text:00000000000007a8 .L0 
+     /tmp/ccUGcsIN.s:969    .text:00000000000007b8 .L0 
+     /tmp/ccUGcsIN.s:970    .text:00000000000007b8 .L0 
+     /tmp/ccUGcsIN.s:974    .text:00000000000007bc .L0 
+     /tmp/ccUGcsIN.s:976    .text:00000000000007c0 .L0 
+     /tmp/ccUGcsIN.s:980    .text:00000000000007d0 .L0 
+     /tmp/ccUGcsIN.s:986    .text:00000000000007e4 .L0 
+     /tmp/ccUGcsIN.s:990    .text:00000000000007f4 .L0 
+     /tmp/ccUGcsIN.s:998    .text:0000000000000810 .L0 
+     /tmp/ccUGcsIN.s:1002   .text:0000000000000820 .L0 
+     /tmp/ccUGcsIN.s:1003   .text:0000000000000820 .L0 
+     /tmp/ccUGcsIN.s:1005   .text:0000000000000824 .L0 
+     /tmp/ccUGcsIN.s:1007   .text:0000000000000828 .L0 
+     /tmp/ccUGcsIN.s:1008   .text:0000000000000828 .L0 
+     /tmp/ccUGcsIN.s:1012   .text:0000000000000834 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 44
+
+
+     /tmp/ccUGcsIN.s:1018   .text:000000000000083c .L0 
+     /tmp/ccUGcsIN.s:1019   .text:000000000000083c .L0 
+     /tmp/ccUGcsIN.s:1023   .text:000000000000084c .L0 
+     /tmp/ccUGcsIN.s:1027   .text:0000000000000850 .L0 
+     /tmp/ccUGcsIN.s:1028   .text:0000000000000850 .L0 
+     /tmp/ccUGcsIN.s:1033   .text:0000000000000860 .L0 
+     /tmp/ccUGcsIN.s:1034   .text:0000000000000860 .L0 
+     /tmp/ccUGcsIN.s:1038   .text:000000000000086c .L0 
+     /tmp/ccUGcsIN.s:1039   .text:000000000000086c .L0 
+     /tmp/ccUGcsIN.s:1044   .text:000000000000087c .L0 
+     /tmp/ccUGcsIN.s:1045   .text:0000000000000880 .L0 
+     /tmp/ccUGcsIN.s:1047   .text:0000000000000884 .L0 
+     /tmp/ccUGcsIN.s:1048   .text:0000000000000884 .L0 
+     /tmp/ccUGcsIN.s:1050   .text:0000000000000888 .L0 
+     /tmp/ccUGcsIN.s:1053   .text:000000000000088c .L0 
+     /tmp/ccUGcsIN.s:1055   .text:0000000000000890 .L0 
+     /tmp/ccUGcsIN.s:1057   .text:0000000000000894 .L0 
+     /tmp/ccUGcsIN.s:1060   .text:0000000000000898 .L0 
+     /tmp/ccUGcsIN.s:1063   .text:000000000000089c .L0 
+     /tmp/ccUGcsIN.s:1065   .text:00000000000008a0 .L0 
+     /tmp/ccUGcsIN.s:1067   .text:00000000000008a4 .L0 
+     /tmp/ccUGcsIN.s:1073   .text:00000000000008a4 _Z9slab_testv
+     /tmp/ccUGcsIN.s:1076   .text:00000000000008a4 .L0 
+     /tmp/ccUGcsIN.s:1079   .text:00000000000008a4 .L0 
+     /tmp/ccUGcsIN.s:1080   .text:00000000000008a8 .L0 
+     /tmp/ccUGcsIN.s:1085   .text:00000000000008b8 .L0 
+     /tmp/ccUGcsIN.s:1086   .text:00000000000008b8 .L0 
+     /tmp/ccUGcsIN.s:1087   .text:00000000000008b8 .L0 
+     /tmp/ccUGcsIN.s:1088   .text:00000000000008b8 .L0 
+     /tmp/ccUGcsIN.s:1090   .text:00000000000008bc .L0 
+     /tmp/ccUGcsIN.s:1092   .text:00000000000008bc .L0 
+     /tmp/ccUGcsIN.s:1093   .text:00000000000008bc .L0 
+     /tmp/ccUGcsIN.s:1098   .text:00000000000008cc .L0 
+     /tmp/ccUGcsIN.s:1099   .text:00000000000008cc .L0 
+     /tmp/ccUGcsIN.s:1103   .text:00000000000008dc .L0 
+     /tmp/ccUGcsIN.s:1104   .text:00000000000008dc .L0 
+     /tmp/ccUGcsIN.s:1107   .text:00000000000008e4 .L0 
+     /tmp/ccUGcsIN.s:1108   .text:00000000000008e4 .L0 
+     /tmp/ccUGcsIN.s:1109   .text:00000000000008e4 .L0 
+     /tmp/ccUGcsIN.s:1110   .text:00000000000008e4 .L0 
+     /tmp/ccUGcsIN.s:1116   .text:00000000000008f4 .L0 
+     /tmp/ccUGcsIN.s:1117   .text:00000000000008f4 .L0 
+     /tmp/ccUGcsIN.s:1123   .text:0000000000000908 .L0 
+     /tmp/ccUGcsIN.s:1124   .text:0000000000000908 .L0 
+     /tmp/ccUGcsIN.s:1125   .text:0000000000000908 .L0 
+     /tmp/ccUGcsIN.s:1132   .text:000000000000091c .L0 
+     /tmp/ccUGcsIN.s:1143   .text:0000000000000940 .L0 
+     /tmp/ccUGcsIN.s:1144   .text:0000000000000940 .L0 
+     /tmp/ccUGcsIN.s:1152   .text:0000000000000958 .L0 
+     /tmp/ccUGcsIN.s:1158   .text:0000000000000968 .L0 
+     /tmp/ccUGcsIN.s:1161   .text:0000000000000968 .L0 
+     /tmp/ccUGcsIN.s:1162   .text:0000000000000968 .L0 
+     /tmp/ccUGcsIN.s:1169   .text:0000000000000980 .L0 
+     /tmp/ccUGcsIN.s:1173   .text:0000000000000990 .L0 
+     /tmp/ccUGcsIN.s:1179   .text:00000000000009a0 .L0 
+     /tmp/ccUGcsIN.s:1182   .text:00000000000009a0 .L0 
+     /tmp/ccUGcsIN.s:1183   .text:00000000000009a0 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 45
+
+
+     /tmp/ccUGcsIN.s:1190   .text:00000000000009b8 .L0 
+     /tmp/ccUGcsIN.s:1194   .text:00000000000009c8 .L0 
+     /tmp/ccUGcsIN.s:1195   .text:00000000000009c8 .L0 
+     /tmp/ccUGcsIN.s:1201   .text:00000000000009dc .L0 
+     /tmp/ccUGcsIN.s:1202   .text:00000000000009dc .L0 
+     /tmp/ccUGcsIN.s:1207   .text:00000000000009ec .L0 
+     /tmp/ccUGcsIN.s:1208   .text:00000000000009f0 .L0 
+     /tmp/ccUGcsIN.s:1209   .text:00000000000009f0 .L0 
+     /tmp/ccUGcsIN.s:1211   .text:00000000000009f4 .L0 
+     /tmp/ccUGcsIN.s:1212   .text:00000000000009f4 .L0 
+     /tmp/ccUGcsIN.s:1214   .text:00000000000009f8 .L0 
+     /tmp/ccUGcsIN.s:1217   .text:00000000000009fc .L0 
+     /tmp/ccUGcsIN.s:1220   .text:0000000000000a00 .L0 
+     /tmp/ccUGcsIN.s:1224   .text:0000000000000a04 .L0 
+     /tmp/ccUGcsIN.s:1228   .text:0000000000000a08 .L0 
+     /tmp/ccUGcsIN.s:1236   .text:0000000000000a20 .L0 
+     /tmp/ccUGcsIN.s:1367   .text:0000000000000a20 .L0 
+     /tmp/ccUGcsIN.s:51     .text:0000000000000028 .L0 
+     /tmp/ccUGcsIN.s:1264   .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccUGcsIN.s:124    .text:00000000000000b0 .L0 
+     /tmp/ccUGcsIN.s:1267   .rodata.str1.8:0000000000000038 .LC1
+     /tmp/ccUGcsIN.s:131    .text:00000000000000c0 .L0 
+     /tmp/ccUGcsIN.s:1270   .rodata.str1.8:0000000000000048 .LC2
+     /tmp/ccUGcsIN.s:143    .text:00000000000000e4 .L0 
+     /tmp/ccUGcsIN.s:1276   .rodata.str1.8:0000000000000060 .LC4
+     /tmp/ccUGcsIN.s:159    .text:0000000000000108 .L0 
+     /tmp/ccUGcsIN.s:1278   .rodata.str1.8:0000000000000068 .LC5
+     /tmp/ccUGcsIN.s:169    .text:000000000000012c .L0 
+     /tmp/ccUGcsIN.s:1281   .rodata.str1.8:0000000000000070 .LC6
+     /tmp/ccUGcsIN.s:179    .text:0000000000000150 .L0 
+     /tmp/ccUGcsIN.s:192    .text:0000000000000174 .L0 
+     /tmp/ccUGcsIN.s:1273   .rodata.str1.8:0000000000000058 .LC3
+     /tmp/ccUGcsIN.s:214    .text:00000000000001b0 .L0 
+     /tmp/ccUGcsIN.s:1284   .rodata.str1.8:0000000000000078 .LC7
+     /tmp/ccUGcsIN.s:223    .text:00000000000001c4 .L0 
+     /tmp/ccUGcsIN.s:1287   .rodata.str1.8:0000000000000098 .LC8
+     /tmp/ccUGcsIN.s:241    .text:00000000000001ec .L0 
+     /tmp/ccUGcsIN.s:1290   .rodata.str1.8:00000000000000d0 .LC9
+     /tmp/ccUGcsIN.s:348    .text:0000000000000278 .L0 
+     /tmp/ccUGcsIN.s:361    .text:0000000000000290 .L0 
+     /tmp/ccUGcsIN.s:371    .text:00000000000002b4 .L0 
+     /tmp/ccUGcsIN.s:383    .text:00000000000002e0 .L0 
+     /tmp/ccUGcsIN.s:1292   .rodata.str1.8:0000000000000108 .LC10
+     /tmp/ccUGcsIN.s:410    .text:000000000000031c .L0 
+     /tmp/ccUGcsIN.s:1295   .rodata.str1.8:0000000000000128 .LC11
+     /tmp/ccUGcsIN.s:427    .text:0000000000000344 .L0 
+     /tmp/ccUGcsIN.s:1298   .rodata.str1.8:0000000000000160 .LC12
+     /tmp/ccUGcsIN.s:491    .text:00000000000003b4 .L0 
+     /tmp/ccUGcsIN.s:1300   .rodata.str1.8:0000000000000198 .LC13
+     /tmp/ccUGcsIN.s:517    .text:00000000000003ec .L0 
+     /tmp/ccUGcsIN.s:527    .text:0000000000000410 .L0 
+     /tmp/ccUGcsIN.s:537    .text:0000000000000434 .L0 
+     /tmp/ccUGcsIN.s:553    .text:0000000000000454 .L0 
+     /tmp/ccUGcsIN.s:1303   .rodata.str1.8:00000000000001a8 .LC14
+     /tmp/ccUGcsIN.s:570    .text:000000000000047c .L0 
+     /tmp/ccUGcsIN.s:1305   .rodata.str1.8:00000000000001e0 .LC15
+     /tmp/ccUGcsIN.s:632    .text:00000000000004e4 .L0 
+GAS LISTING /tmp/ccUGcsIN.s 			page 46
+
+
+     /tmp/ccUGcsIN.s:652    .text:000000000000050c .L0 
+     /tmp/ccUGcsIN.s:662    .text:0000000000000530 .L0 
+     /tmp/ccUGcsIN.s:672    .text:0000000000000554 .L0 
+     /tmp/ccUGcsIN.s:1308   .rodata.str1.8:0000000000000220 .LC16
+     /tmp/ccUGcsIN.s:691    .text:0000000000000580 .L0 
+     /tmp/ccUGcsIN.s:1311   .rodata.str1.8:0000000000000240 .LC17
+     /tmp/ccUGcsIN.s:708    .text:00000000000005a8 .L0 
+     /tmp/ccUGcsIN.s:1314   .rodata.str1.8:0000000000000280 .LC18
+     /tmp/ccUGcsIN.s:757    .text:00000000000005f4 .L0 
+     /tmp/ccUGcsIN.s:1317   .rodata.str1.8:00000000000002c0 .LC19
+     /tmp/ccUGcsIN.s:771    .text:0000000000000618 .L0 
+     /tmp/ccUGcsIN.s:1320   .rodata.str1.8:0000000000000300 .LC20
+     /tmp/ccUGcsIN.s:822    .text:0000000000000674 .L0 
+     /tmp/ccUGcsIN.s:1326   .rodata.str1.8:0000000000000360 .LC22
+     /tmp/ccUGcsIN.s:847    .text:00000000000006a8 .L0 
+     /tmp/ccUGcsIN.s:857    .text:00000000000006cc .L0 
+     /tmp/ccUGcsIN.s:867    .text:00000000000006f0 .L0 
+     /tmp/ccUGcsIN.s:1323   .rodata.str1.8:0000000000000338 .LC21
+     /tmp/ccUGcsIN.s:878    .text:0000000000000708 .L0 
+     /tmp/ccUGcsIN.s:1328   .rodata.str1.8:0000000000000368 .LC23
+     /tmp/ccUGcsIN.s:898    .text:0000000000000738 .L0 
+     /tmp/ccUGcsIN.s:1331   .rodata.str1.8:00000000000003a0 .LC24
+     /tmp/ccUGcsIN.s:963    .text:00000000000007a8 .L0 
+     /tmp/ccUGcsIN.s:976    .text:00000000000007c0 .L0 
+     /tmp/ccUGcsIN.s:986    .text:00000000000007e4 .L0 
+     /tmp/ccUGcsIN.s:998    .text:0000000000000810 .L0 
+     /tmp/ccUGcsIN.s:1334   .rodata.str1.8:00000000000003d8 .LC25
+     /tmp/ccUGcsIN.s:1019   .text:000000000000083c .L0 
+     /tmp/ccUGcsIN.s:1337   .rodata.str1.8:00000000000003f8 .LC26
+     /tmp/ccUGcsIN.s:1039   .text:000000000000086c .L0 
+     /tmp/ccUGcsIN.s:1339   .rodata.str1.8:0000000000000430 .LC27
+     /tmp/ccUGcsIN.s:1093   .text:00000000000008bc .L0 
+     /tmp/ccUGcsIN.s:1342   .rodata.str1.8:0000000000000450 .LC28
+     /tmp/ccUGcsIN.s:1099   .text:00000000000008cc .L0 
+     /tmp/ccUGcsIN.s:1134   .text:0000000000000924 .L0 
+     /tmp/ccUGcsIN.s:1345   .rodata.str1.8:0000000000000468 .LC29
+     /tmp/ccUGcsIN.s:1136   .text:0000000000000930 .L0 
+     /tmp/ccUGcsIN.s:1348   .rodata.str1.8:0000000000000480 .LC30
+     /tmp/ccUGcsIN.s:1152   .text:0000000000000958 .L0 
+     /tmp/ccUGcsIN.s:1169   .text:0000000000000980 .L0 
+     /tmp/ccUGcsIN.s:1351   .rodata.str1.8:0000000000000498 .LC31
+     /tmp/ccUGcsIN.s:1173   .text:0000000000000990 .L0 
+     /tmp/ccUGcsIN.s:1190   .text:00000000000009b8 .L0 
+     /tmp/ccUGcsIN.s:1354   .rodata.str1.8:00000000000004b0 .LC32
+     /tmp/ccUGcsIN.s:1202   .text:00000000000009dc .L0 
+     /tmp/ccUGcsIN.s:198    .text:0000000000000188 .L8
+     /tmp/ccUGcsIN.s:220    .text:00000000000001c4 .L12
+     /tmp/ccUGcsIN.s:229    .text:00000000000001d8 .L4
+     /tmp/ccUGcsIN.s:152    .text:00000000000000fc .L5
+     /tmp/ccUGcsIN.s:245    .text:00000000000001fc .L3
+     /tmp/ccUGcsIN.s:415    .text:0000000000000330 .L14
+     /tmp/ccUGcsIN.s:407    .text:000000000000031c .L15
+     /tmp/ccUGcsIN.s:357    .text:000000000000028c .L16
+     /tmp/ccUGcsIN.s:430    .text:0000000000000354 .L13
+     /tmp/ccUGcsIN.s:558    .text:0000000000000468 .L20
+     /tmp/ccUGcsIN.s:550    .text:0000000000000454 .L25
+     /tmp/ccUGcsIN.s:500    .text:00000000000003c8 .L23
+GAS LISTING /tmp/ccUGcsIN.s 			page 47
+
+
+     /tmp/ccUGcsIN.s:573    .text:000000000000048c .L19
+     /tmp/ccUGcsIN.s:696    .text:0000000000000594 .L27
+     /tmp/ccUGcsIN.s:688    .text:0000000000000580 .L32
+     /tmp/ccUGcsIN.s:641    .text:00000000000004f8 .L30
+     /tmp/ccUGcsIN.s:711    .text:00000000000005b8 .L26
+     /tmp/ccUGcsIN.s:883    .text:000000000000071c .L36
+     /tmp/ccUGcsIN.s:875    .text:0000000000000708 .L41
+     /tmp/ccUGcsIN.s:831    .text:0000000000000688 .L39
+     /tmp/ccUGcsIN.s:901    .text:0000000000000748 .L35
+     /tmp/ccUGcsIN.s:1024   .text:0000000000000850 .L43
+     /tmp/ccUGcsIN.s:1016   .text:000000000000083c .L48
+     /tmp/ccUGcsIN.s:972    .text:00000000000007bc .L46
+     /tmp/ccUGcsIN.s:1042   .text:000000000000087c .L42
+     /tmp/ccUGcsIN.s:1141   .text:0000000000000940 .L50
+     /tmp/ccUGcsIN.s:126    .text:00000000000000b8 .LEHB0
+     /tmp/ccUGcsIN.s:90     .text:0000000000000074 .LFB113
+     /tmp/ccUGcsIN.s:206    .text:0000000000000198 .LEHE0
+     /tmp/ccUGcsIN.s:215    .text:00000000000001b8 .LEHB1
+     /tmp/ccUGcsIN.s:218    .text:00000000000001c0 .LEHE1
+     /tmp/ccUGcsIN.s:274    .text:0000000000000228 .L10
+     /tmp/ccUGcsIN.s:224    .text:00000000000001cc .LEHB2
+     /tmp/ccUGcsIN.s:244    .text:00000000000001fc .LEHE2
+     /tmp/ccUGcsIN.s:283    .text:000000000000023c .LEHB3
+     /tmp/ccUGcsIN.s:286    .text:0000000000000244 .LEHE3
+     /tmp/ccUGcsIN.s:1094   .text:00000000000008c4 .LEHB4
+     /tmp/ccUGcsIN.s:1074   .text:00000000000008a4 .LFB121
+     /tmp/ccUGcsIN.s:1128   .text:0000000000000914 .LEHE4
+     /tmp/ccUGcsIN.s:1137   .text:0000000000000938 .LEHB5
+     /tmp/ccUGcsIN.s:1140   .text:0000000000000940 .LEHE5
+     /tmp/ccUGcsIN.s:1223   .text:0000000000000a04 .L52
+     /tmp/ccUGcsIN.s:1148   .text:0000000000000950 .LEHB6
+     /tmp/ccUGcsIN.s:1205   .text:00000000000009ec .LEHE6
+     /tmp/ccUGcsIN.s:1232   .text:0000000000000a18 .LEHB7
+     /tmp/ccUGcsIN.s:1235   .text:0000000000000a20 .LEHE7
+     /tmp/ccUGcsIN.s:5299   .debug_abbrev:0000000000000000 .Ldebug_abbrev0
+     /tmp/ccUGcsIN.s:7417   .debug_str:00000000000009c3 .LASF313
+     /tmp/ccUGcsIN.s:7195   .debug_str:00000000000001e3 .LASF314
+     /tmp/ccUGcsIN.s:7605   .debug_str:0000000000001024 .LASF315
+     /tmp/ccUGcsIN.s:8      .text:0000000000000000 .Ltext0
+     /tmp/ccUGcsIN.s:1357   .text:0000000000000a20 .Letext0
+     /tmp/ccUGcsIN.s:7121   .debug_line:0000000000000000 .Ldebug_line0
+     /tmp/ccUGcsIN.s:7173   .debug_str:000000000000017e .LASF0
+     /tmp/ccUGcsIN.s:7723   .debug_str:0000000000001377 .LASF1
+     /tmp/ccUGcsIN.s:7715   .debug_str:000000000000132a .LASF3
+     /tmp/ccUGcsIN.s:7645   .debug_str:0000000000001120 .LASF2
+     /tmp/ccUGcsIN.s:7613   .debug_str:000000000000105e .LASF4
+     /tmp/ccUGcsIN.s:7625   .debug_str:00000000000010a4 .LASF5
+     /tmp/ccUGcsIN.s:7309   .debug_str:000000000000062f .LASF6
+     /tmp/ccUGcsIN.s:7411   .debug_str:0000000000000997 .LASF7
+     /tmp/ccUGcsIN.s:7391   .debug_str:00000000000008f3 .LASF8
+     /tmp/ccUGcsIN.s:7561   .debug_str:0000000000000f08 .LASF9
+     /tmp/ccUGcsIN.s:7209   .debug_str:000000000000024d .LASF10
+     /tmp/ccUGcsIN.s:7703   .debug_str:00000000000012bf .LASF11
+     /tmp/ccUGcsIN.s:7315   .debug_str:000000000000064e .LASF12
+     /tmp/ccUGcsIN.s:7245   .debug_str:0000000000000391 .LASF13
+     /tmp/ccUGcsIN.s:7415   .debug_str:00000000000009b3 .LASF14
+     /tmp/ccUGcsIN.s:7323   .debug_str:0000000000000693 .LASF15
+GAS LISTING /tmp/ccUGcsIN.s 			page 48
+
+
+     /tmp/ccUGcsIN.s:7601   .debug_str:0000000000001013 .LASF16
+     /tmp/ccUGcsIN.s:7325   .debug_str:00000000000006a3 .LASF17
+     /tmp/ccUGcsIN.s:7295   .debug_str:000000000000059d .LASF18
+     /tmp/ccUGcsIN.s:7755   .debug_str:00000000000014e3 .LASF73
+     /tmp/ccUGcsIN.s:7175   .debug_str:000000000000018b .LASF19
+     /tmp/ccUGcsIN.s:7221   .debug_str:0000000000000298 .LASF20
+     /tmp/ccUGcsIN.s:7361   .debug_str:00000000000007d5 .LASF75
+     /tmp/ccUGcsIN.s:7577   .debug_str:0000000000000f76 .LASF26
+     /tmp/ccUGcsIN.s:7351   .debug_str:0000000000000790 .LASF79
+     /tmp/ccUGcsIN.s:7183   .debug_str:00000000000001b5 .LASF21
+     /tmp/ccUGcsIN.s:7663   .debug_str:00000000000011b6 .LASF22
+     /tmp/ccUGcsIN.s:7745   .debug_str:0000000000001477 .LASF23
+     /tmp/ccUGcsIN.s:7153   .debug_str:0000000000000100 .LASF24
+     /tmp/ccUGcsIN.s:7441   .debug_str:0000000000000b5a .LASF25
+     /tmp/ccUGcsIN.s:7285   .debug_str:0000000000000521 .LASF33
+     /tmp/ccUGcsIN.s:7225   .debug_str:00000000000002c0 .LASF28
+     /tmp/ccUGcsIN.s:7303   .debug_str:00000000000005fb .LASF27
+     /tmp/ccUGcsIN.s:7655   .debug_str:0000000000001166 .LASF29
+     /tmp/ccUGcsIN.s:7523   .debug_str:0000000000000e07 .LASF30
+     /tmp/ccUGcsIN.s:7531   .debug_str:0000000000000e3c .LASF31
+     /tmp/ccUGcsIN.s:7517   .debug_str:0000000000000ddd .LASF43
+     /tmp/ccUGcsIN.s:7335   .debug_str:000000000000071d .LASF45
+     /tmp/ccUGcsIN.s:7347   .debug_str:000000000000077a .LASF32
+     /tmp/ccUGcsIN.s:7371   .debug_str:0000000000000844 .LASF34
+     /tmp/ccUGcsIN.s:7393   .debug_str:0000000000000906 .LASF35
+     /tmp/ccUGcsIN.s:7499   .debug_str:0000000000000d1a .LASF36
+     /tmp/ccUGcsIN.s:7519   .debug_str:0000000000000ded .LASF37
+     /tmp/ccUGcsIN.s:7455   .debug_str:0000000000000bb9 .LASF38
+     /tmp/ccUGcsIN.s:7649   .debug_str:0000000000001145 .LASF39
+     /tmp/ccUGcsIN.s:7507   .debug_str:0000000000000d7c .LASF40
+     /tmp/ccUGcsIN.s:7479   .debug_str:0000000000000c75 .LASF41
+     /tmp/ccUGcsIN.s:7453   .debug_str:0000000000000b9a .LASF42
+     /tmp/ccUGcsIN.s:7699   .debug_str:000000000000129e .LASF44
+     /tmp/ccUGcsIN.s:7501   .debug_str:0000000000000d37 .LASF46
+     /tmp/ccUGcsIN.s:7147   .debug_str:00000000000000c1 .LASF47
+     /tmp/ccUGcsIN.s:7503   .debug_str:0000000000000d59 .LASF48
+     /tmp/ccUGcsIN.s:7607   .debug_str:0000000000001047 .LASF49
+     /tmp/ccUGcsIN.s:7211   .debug_str:000000000000025d .LASF50
+     /tmp/ccUGcsIN.s:7641   .debug_str:0000000000001113 .LASF51
+     /tmp/ccUGcsIN.s:7643   .debug_str:000000000000111b .LASF52
+     /tmp/ccUGcsIN.s:7481   .debug_str:0000000000000c80 .LASF53
+     /tmp/ccUGcsIN.s:7469   .debug_str:0000000000000c31 .LASF54
+     /tmp/ccUGcsIN.s:7631   .debug_str:00000000000010e0 .LASF55
+     /tmp/ccUGcsIN.s:7581   .debug_str:0000000000000f8a .LASF56
+     /tmp/ccUGcsIN.s:7185   .debug_str:00000000000001ba .LASF57
+     /tmp/ccUGcsIN.s:7551   .debug_str:0000000000000ed9 .LASF58
+     /tmp/ccUGcsIN.s:7683   .debug_str:000000000000123d .LASF59
+     /tmp/ccUGcsIN.s:7497   .debug_str:0000000000000cf4 .LASF60
+     /tmp/ccUGcsIN.s:7485   .debug_str:0000000000000c95 .LASF61
+     /tmp/ccUGcsIN.s:7597   .debug_str:0000000000000fe7 .LASF62
+     /tmp/ccUGcsIN.s:7337   .debug_str:0000000000000733 .LASF63
+     /tmp/ccUGcsIN.s:7223   .debug_str:000000000000029d .LASF64
+     /tmp/ccUGcsIN.s:7629   .debug_str:00000000000010d2 .LASF65
+     /tmp/ccUGcsIN.s:7331   .debug_str:00000000000006ec .LASF66
+     /tmp/ccUGcsIN.s:7713   .debug_str:0000000000001319 .LASF67
+     /tmp/ccUGcsIN.s:7291   .debug_str:0000000000000562 .LASF68
+     /tmp/ccUGcsIN.s:7689   .debug_str:0000000000001258 .LASF69
+GAS LISTING /tmp/ccUGcsIN.s 			page 49
+
+
+     /tmp/ccUGcsIN.s:7327   .debug_str:00000000000006b9 .LASF70
+     /tmp/ccUGcsIN.s:7423   .debug_str:0000000000000abc .LASF71
+     /tmp/ccUGcsIN.s:7509   .debug_str:0000000000000d99 .LASF72
+     /tmp/ccUGcsIN.s:7667   .debug_str:00000000000011d0 .LASF74
+     /tmp/ccUGcsIN.s:7735   .debug_str:00000000000013d9 .LASF76
+     /tmp/ccUGcsIN.s:7381   .debug_str:000000000000088d .LASF77
+     /tmp/ccUGcsIN.s:7603   .debug_str:000000000000101f .LASF78
+     /tmp/ccUGcsIN.s:7675   .debug_str:00000000000011fc .LASF80
+     /tmp/ccUGcsIN.s:7233   .debug_str:0000000000000320 .LASF81
+     /tmp/ccUGcsIN.s:7171   .debug_str:0000000000000179 .LASF82
+     /tmp/ccUGcsIN.s:7465   .debug_str:0000000000000c21 .LASF83
+     /tmp/ccUGcsIN.s:7767   .debug_str:000000000000152c .LASF122
+     /tmp/ccUGcsIN.s:7553   .debug_str:0000000000000ede .LASF84
+     /tmp/ccUGcsIN.s:7203   .debug_str:000000000000022c .LASF85
+     /tmp/ccUGcsIN.s:7459   .debug_str:0000000000000bea .LASF86
+     /tmp/ccUGcsIN.s:7615   .debug_str:0000000000001065 .LASF87
+     /tmp/ccUGcsIN.s:7257   .debug_str:00000000000003ec .LASF88
+     /tmp/ccUGcsIN.s:7463   .debug_str:0000000000000c04 .LASF89
+     /tmp/ccUGcsIN.s:7763   .debug_str:000000000000151b .LASF90
+     /tmp/ccUGcsIN.s:7741   .debug_str:0000000000001435 .LASF91
+     /tmp/ccUGcsIN.s:7541   .debug_str:0000000000000e95 .LASF92
+     /tmp/ccUGcsIN.s:7399   .debug_str:000000000000092c .LASF93
+     /tmp/ccUGcsIN.s:7311   .debug_str:0000000000000636 .LASF94
+     /tmp/ccUGcsIN.s:7521   .debug_str:0000000000000df4 .LASF95
+     /tmp/ccUGcsIN.s:7273   .debug_str:0000000000000491 .LASF96
+     /tmp/ccUGcsIN.s:7467   .debug_str:0000000000000c27 .LASF136
+     /tmp/ccUGcsIN.s:7243   .debug_str:0000000000000381 .LASF316
+     /tmp/ccUGcsIN.s:7125   .debug_str:0000000000000011 .LASF97
+     /tmp/ccUGcsIN.s:7759   .debug_str:00000000000014f8 .LASF98
+     /tmp/ccUGcsIN.s:7555   .debug_str:0000000000000ee5 .LASF99
+     /tmp/ccUGcsIN.s:7527   .debug_str:0000000000000e1f .LASF100
+     /tmp/ccUGcsIN.s:7131   .debug_str:0000000000000033 .LASF101
+     /tmp/ccUGcsIN.s:7761   .debug_str:000000000000150b .LASF102
+     /tmp/ccUGcsIN.s:7345   .debug_str:0000000000000775 .LASF103
+     /tmp/ccUGcsIN.s:7251   .debug_str:00000000000003bb .LASF104
+     /tmp/ccUGcsIN.s:7215   .debug_str:000000000000027b .LASF105
+     /tmp/ccUGcsIN.s:7279   .debug_str:00000000000004df .LASF106
+     /tmp/ccUGcsIN.s:7357   .debug_str:00000000000007bf .LASF107
+     /tmp/ccUGcsIN.s:7405   .debug_str:000000000000095d .LASF108
+     /tmp/ccUGcsIN.s:7593   .debug_str:0000000000000fce .LASF109
+     /tmp/ccUGcsIN.s:7207   .debug_str:0000000000000245 .LASF110
+     /tmp/ccUGcsIN.s:7141   .debug_str:0000000000000083 .LASF111
+     /tmp/ccUGcsIN.s:7133   .debug_str:0000000000000038 .LASF112
+     /tmp/ccUGcsIN.s:7621   .debug_str:0000000000001088 .LASF115
+     /tmp/ccUGcsIN.s:7283   .debug_str:000000000000050e .LASF117
+     /tmp/ccUGcsIN.s:7321   .debug_str:0000000000000685 .LASF143
+     /tmp/ccUGcsIN.s:7343   .debug_str:0000000000000758 .LASF145
+     /tmp/ccUGcsIN.s:7129   .debug_str:0000000000000029 .LASF113
+     /tmp/ccUGcsIN.s:7753   .debug_str:00000000000014cb .LASF114
+     /tmp/ccUGcsIN.s:7229   .debug_str:000000000000030a .LASF116
+     /tmp/ccUGcsIN.s:7227   .debug_str:00000000000002f3 .LASF118
+     /tmp/ccUGcsIN.s:7671   .debug_str:00000000000011e0 .LASF119
+     /tmp/ccUGcsIN.s:7665   .debug_str:00000000000011bf .LASF120
+     /tmp/ccUGcsIN.s:7135   .debug_str:0000000000000049 .LASF121
+     /tmp/ccUGcsIN.s:7263   .debug_str:0000000000000439 .LASF123
+     /tmp/ccUGcsIN.s:7431   .debug_str:0000000000000afd .LASF124
+     /tmp/ccUGcsIN.s:7491   .debug_str:0000000000000cc5 .LASF125
+GAS LISTING /tmp/ccUGcsIN.s 			page 50
+
+
+     /tmp/ccUGcsIN.s:7443   .debug_str:0000000000000b64 .LASF126
+     /tmp/ccUGcsIN.s:7483   .debug_str:0000000000000c8a .LASF127
+     /tmp/ccUGcsIN.s:7145   .debug_str:00000000000000b6 .LASF128
+     /tmp/ccUGcsIN.s:7623   .debug_str:000000000000108d .LASF129
+     /tmp/ccUGcsIN.s:7127   .debug_str:0000000000000019 .LASF130
+     /tmp/ccUGcsIN.s:7161   .debug_str:000000000000011f .LASF131
+     /tmp/ccUGcsIN.s:7237   .debug_str:000000000000033b .LASF132
+     /tmp/ccUGcsIN.s:7289   .debug_str:000000000000054f .LASF133
+     /tmp/ccUGcsIN.s:7281   .debug_str:00000000000004f6 .LASF134
+     /tmp/ccUGcsIN.s:7385   .debug_str:000000000000089b .LASF135
+     /tmp/ccUGcsIN.s:7539   .debug_str:0000000000000e7c .LASF137
+     /tmp/ccUGcsIN.s:7259   .debug_str:00000000000003f7 .LASF138
+     /tmp/ccUGcsIN.s:7219   .debug_str:000000000000028b .LASF139
+     /tmp/ccUGcsIN.s:7149   .debug_str:00000000000000ca .LASF140
+     /tmp/ccUGcsIN.s:7333   .debug_str:000000000000070f .LASF141
+     /tmp/ccUGcsIN.s:7739   .debug_str:0000000000001404 .LASF142
+     /tmp/ccUGcsIN.s:7205   .debug_str:0000000000000239 .LASF144
+     /tmp/ccUGcsIN.s:7369   .debug_str:0000000000000822 .LASF146
+     /tmp/ccUGcsIN.s:7609   .debug_str:000000000000104c .LASF147
+     /tmp/ccUGcsIN.s:7711   .debug_str:00000000000012f7 .LASF148
+     /tmp/ccUGcsIN.s:7653   .debug_str:000000000000115e .LASF149
+     /tmp/ccUGcsIN.s:7681   .debug_str:0000000000001220 .LASF150
+     /tmp/ccUGcsIN.s:7477   .debug_str:0000000000000c6f .LASF151
+     /tmp/ccUGcsIN.s:7307   .debug_str:0000000000000613 .LASF152
+     /tmp/ccUGcsIN.s:7547   .debug_str:0000000000000ec6 .LASF153
+     /tmp/ccUGcsIN.s:7189   .debug_str:00000000000001c9 .LASF154
+     /tmp/ccUGcsIN.s:7669   .debug_str:00000000000011db .LASF155
+     /tmp/ccUGcsIN.s:7201   .debug_str:0000000000000225 .LASF156
+     /tmp/ccUGcsIN.s:7679   .debug_str:000000000000121a .LASF157
+     /tmp/ccUGcsIN.s:7235   .debug_str:0000000000000326 .LASF158
+     /tmp/ccUGcsIN.s:7505   .debug_str:0000000000000d76 .LASF159
+     /tmp/ccUGcsIN.s:7177   .debug_str:0000000000000190 .LASF160
+     /tmp/ccUGcsIN.s:7339   .debug_str:0000000000000742 .LASF161
+     /tmp/ccUGcsIN.s:7403   .debug_str:000000000000094b .LASF162
+     /tmp/ccUGcsIN.s:7197   .debug_str:0000000000000204 .LASF163
+     /tmp/ccUGcsIN.s:7573   .debug_str:0000000000000f4b .LASF164
+     /tmp/ccUGcsIN.s:7571   .debug_str:0000000000000f44 .LASF165
+     /tmp/ccUGcsIN.s:7269   .debug_str:000000000000046f .LASF166
+     /tmp/ccUGcsIN.s:7271   .debug_str:000000000000048a .LASF167
+     /tmp/ccUGcsIN.s:7407   .debug_str:0000000000000972 .LASF168
+     /tmp/ccUGcsIN.s:7151   .debug_str:00000000000000f9 .LASF169
+     /tmp/ccUGcsIN.s:7537   .debug_str:0000000000000e66 .LASF170
+     /tmp/ccUGcsIN.s:7567   .debug_str:0000000000000f2a .LASF317
+     /tmp/ccUGcsIN.s:7579   .debug_str:0000000000000f82 .LASF171
+     /tmp/ccUGcsIN.s:7457   .debug_str:0000000000000bd3 .LASF172
+     /tmp/ccUGcsIN.s:7249   .debug_str:00000000000003b0 .LASF173
+     /tmp/ccUGcsIN.s:7319   .debug_str:000000000000066a .LASF174
+     /tmp/ccUGcsIN.s:7317   .debug_str:000000000000065d .LASF175
+     /tmp/ccUGcsIN.s:7143   .debug_str:000000000000008b .LASF176
+     /tmp/ccUGcsIN.s:7707   .debug_str:00000000000012da .LASF177
+     /tmp/ccUGcsIN.s:7301   .debug_str:00000000000005db .LASF178
+     /tmp/ccUGcsIN.s:7569   .debug_str:0000000000000f3d .LASF179
+     /tmp/ccUGcsIN.s:7677   .debug_str:0000000000001204 .LASF180
+     /tmp/ccUGcsIN.s:7447   .debug_str:0000000000000b86 .LASF181
+     /tmp/ccUGcsIN.s:7729   .debug_str:00000000000013b4 .LASF182
+     /tmp/ccUGcsIN.s:7451   .debug_str:0000000000000b94 .LASF183
+     /tmp/ccUGcsIN.s:7379   .debug_str:0000000000000884 .LASF184
+GAS LISTING /tmp/ccUGcsIN.s 			page 51
+
+
+     /tmp/ccUGcsIN.s:7765   .debug_str:0000000000001523 .LASF185
+     /tmp/ccUGcsIN.s:7401   .debug_str:0000000000000941 .LASF186
+     /tmp/ccUGcsIN.s:7557   .debug_str:0000000000000eed .LASF318
+     /tmp/ccUGcsIN.s:7363   .debug_str:00000000000007e9 .LASF187
+     /tmp/ccUGcsIN.s:7543   .debug_str:0000000000000e9f .LASF188
+     /tmp/ccUGcsIN.s:7191   .debug_str:00000000000001ce .LASF189
+     /tmp/ccUGcsIN.s:7599   .debug_str:0000000000001006 .LASF190
+     /tmp/ccUGcsIN.s:7737   .debug_str:00000000000013ff .LASF191
+     /tmp/ccUGcsIN.s:7165   .debug_str:0000000000000147 .LASF192
+     /tmp/ccUGcsIN.s:7731   .debug_str:00000000000013bc .LASF193
+     /tmp/ccUGcsIN.s:7387   .debug_str:00000000000008b2 .LASF194
+     /tmp/ccUGcsIN.s:7529   .debug_str:0000000000000e33 .LASF195
+     /tmp/ccUGcsIN.s:7733   .debug_str:00000000000013c5 .LASF196
+     /tmp/ccUGcsIN.s:7377   .debug_str:000000000000087d .LASF197
+     /tmp/ccUGcsIN.s:7123   .debug_str:0000000000000000 .LASF198
+     /tmp/ccUGcsIN.s:7375   .debug_str:0000000000000872 .LASF199
+     /tmp/ccUGcsIN.s:7167   .debug_str:0000000000000153 .LASF200
+     /tmp/ccUGcsIN.s:7231   .debug_str:0000000000000313 .LASF201
+     /tmp/ccUGcsIN.s:7429   .debug_str:0000000000000ae4 .LASF202
+     /tmp/ccUGcsIN.s:7619   .debug_str:000000000000107c .LASF203
+     /tmp/ccUGcsIN.s:7139   .debug_str:000000000000006c .LASF204
+     /tmp/ccUGcsIN.s:7495   .debug_str:0000000000000ce6 .LASF205
+     /tmp/ccUGcsIN.s:7719   .debug_str:000000000000134a .LASF206
+     /tmp/ccUGcsIN.s:7535   .debug_str:0000000000000e56 .LASF207
+     /tmp/ccUGcsIN.s:7299   .debug_str:00000000000005c0 .LASF208
+     /tmp/ccUGcsIN.s:7435   .debug_str:0000000000000b1e .LASF209
+     /tmp/ccUGcsIN.s:7239   .debug_str:0000000000000353 .LASF210
+     /tmp/ccUGcsIN.s:7297   .debug_str:00000000000005b3 .LASF211
+     /tmp/ccUGcsIN.s:7473   .debug_str:0000000000000c40 .LASF212
+     /tmp/ccUGcsIN.s:7341   .debug_str:0000000000000753 .LASF319
+     /tmp/ccUGcsIN.s:7439   .debug_str:0000000000000b54 .LASF213
+     /tmp/ccUGcsIN.s:7293   .debug_str:000000000000058d .LASF214
+     /tmp/ccUGcsIN.s:7427   .debug_str:0000000000000adb .LASF215
+     /tmp/ccUGcsIN.s:7659   .debug_str:0000000000001189 .LASF216
+     /tmp/ccUGcsIN.s:7587   .debug_str:0000000000000f9f .LASF217
+     /tmp/ccUGcsIN.s:7661   .debug_str:000000000000119c .LASF218
+     /tmp/ccUGcsIN.s:7687   .debug_str:0000000000001252 .LASF219
+     /tmp/ccUGcsIN.s:7433   .debug_str:0000000000000b0e .LASF220
+     /tmp/ccUGcsIN.s:7397   .debug_str:0000000000000915 .LASF221
+     /tmp/ccUGcsIN.s:7389   .debug_str:00000000000008d1 .LASF222
+     /tmp/ccUGcsIN.s:7187   .debug_str:00000000000001bf .LASF223
+     /tmp/ccUGcsIN.s:7721   .debug_str:0000000000001363 .LASF224
+     /tmp/ccUGcsIN.s:7313   .debug_str:000000000000063e .LASF225
+     /tmp/ccUGcsIN.s:7627   .debug_str:00000000000010b6 .LASF226
+     /tmp/ccUGcsIN.s:7353   .debug_str:000000000000079d .LASF227
+     /tmp/ccUGcsIN.s:7137   .debug_str:0000000000000053 .LASF228
+     /tmp/ccUGcsIN.s:7425   .debug_str:0000000000000aca .LASF229
+     /tmp/ccUGcsIN.s:7583   .debug_str:0000000000000f8f .LASF230
+     /tmp/ccUGcsIN.s:7409   .debug_str:000000000000098c .LASF231
+     /tmp/ccUGcsIN.s:7705   .debug_str:00000000000012cd .LASF232
+     /tmp/ccUGcsIN.s:7635   .debug_str:00000000000010fa .LASF233
+     /tmp/ccUGcsIN.s:7747   .debug_str:0000000000001481 .LASF234
+     /tmp/ccUGcsIN.s:7639   .debug_str:000000000000110e .LASF235
+     /tmp/ccUGcsIN.s:7217   .debug_str:0000000000000286 .LASF236
+     /tmp/ccUGcsIN.s:7611   .debug_str:0000000000001058 .LASF237
+     /tmp/ccUGcsIN.s:7155   .debug_str:0000000000000108 .LASF238
+     /tmp/ccUGcsIN.s:7691   .debug_str:000000000000126a .LASF239
+GAS LISTING /tmp/ccUGcsIN.s 			page 52
+
+
+     /tmp/ccUGcsIN.s:7513   .debug_str:0000000000000dc8 .LASF240
+     /tmp/ccUGcsIN.s:7515   .debug_str:0000000000000dd4 .LASF241
+     /tmp/ccUGcsIN.s:7563   .debug_str:0000000000000f1b .LASF242
+     /tmp/ccUGcsIN.s:7565   .debug_str:0000000000000f22 .LASF243
+     /tmp/ccUGcsIN.s:7255   .debug_str:00000000000003d5 .LASF320
+     /tmp/ccUGcsIN.s:7757   .debug_str:00000000000014ea .LASF246
+     /tmp/ccUGcsIN.s:7287   .debug_str:0000000000000536 .LASF248
+     /tmp/ccUGcsIN.s:7697   .debug_str:0000000000001290 .LASF244
+     /tmp/ccUGcsIN.s:7275   .debug_str:000000000000049e .LASF245
+     /tmp/ccUGcsIN.s:7179   .debug_str:00000000000001a1 .LASF247
+     /tmp/ccUGcsIN.s:7591   .debug_str:0000000000000fba .LASF249
+     /tmp/ccUGcsIN.s:7525   .debug_str:0000000000000e14 .LASF250
+     /tmp/ccUGcsIN.s:7419   .debug_str:0000000000000a93 .LASF251
+     /tmp/ccUGcsIN.s:7241   .debug_str:000000000000036d .LASF252
+     /tmp/ccUGcsIN.s:7413   .debug_str:000000000000099e .LASF253
+     /tmp/ccUGcsIN.s:7487   .debug_str:0000000000000ca0 .LASF254
+     /tmp/ccUGcsIN.s:7461   .debug_str:0000000000000bf0 .LASF255
+     /tmp/ccUGcsIN.s:7449   .debug_str:0000000000000b8f .LASF256
+     /tmp/ccUGcsIN.s:7445   .debug_str:0000000000000b6f .LASF257
+     /tmp/ccUGcsIN.s:7157   .debug_str:0000000000000112 .LASF258
+     /tmp/ccUGcsIN.s:7277   .debug_str:00000000000004c6 .LASF259
+     /tmp/ccUGcsIN.s:7585   .debug_str:0000000000000f97 .LASF260
+     /tmp/ccUGcsIN.s:7717   .debug_str:0000000000001330 .LASF261
+     /tmp/ccUGcsIN.s:7395   .debug_str:000000000000090f .LASF262
+     /tmp/ccUGcsIN.s:7575   .debug_str:0000000000000f5c .LASF263
+     /tmp/ccUGcsIN.s:7545   .debug_str:0000000000000eab .LASF264
+     /tmp/ccUGcsIN.s:7349   .debug_str:0000000000000784 .LASF265
+     /tmp/ccUGcsIN.s:7701   .debug_str:00000000000012ab .LASF266
+     /tmp/ccUGcsIN.s:7709   .debug_str:00000000000012e6 .LASF267
+     /tmp/ccUGcsIN.s:7193   .debug_str:00000000000001db .LASF268
+     /tmp/ccUGcsIN.s:7685   .debug_str:0000000000001247 .LASF269
+     /tmp/ccUGcsIN.s:7617   .debug_str:000000000000106a .LASF270
+     /tmp/ccUGcsIN.s:7305   .debug_str:0000000000000608 .LASF271
+     /tmp/ccUGcsIN.s:7493   .debug_str:0000000000000cd4 .LASF272
+     /tmp/ccUGcsIN.s:7693   .debug_str:0000000000001270 .LASF273
+     /tmp/ccUGcsIN.s:7169   .debug_str:0000000000000169 .LASF274
+     /tmp/ccUGcsIN.s:7589   .debug_str:0000000000000fac .LASF275
+     /tmp/ccUGcsIN.s:7199   .debug_str:0000000000000216 .LASF276
+     /tmp/ccUGcsIN.s:7475   .debug_str:0000000000000c62 .LASF277
+     /tmp/ccUGcsIN.s:7633   .debug_str:00000000000010ea .LASF278
+     /tmp/ccUGcsIN.s:7673   .debug_str:00000000000011ee .LASF279
+     /tmp/ccUGcsIN.s:7725   .debug_str:000000000000138a .LASF280
+     /tmp/ccUGcsIN.s:7489   .debug_str:0000000000000cb5 .LASF281
+     /tmp/ccUGcsIN.s:7253   .debug_str:00000000000003cb .LASF282
+     /tmp/ccUGcsIN.s:7657   .debug_str:000000000000117b .LASF283
+     /tmp/ccUGcsIN.s:1237   .text:0000000000000a20 .LFE121
+     /tmp/ccUGcsIN.s:7365   .debug_str:00000000000007f5 .LASF284
+     /tmp/ccUGcsIN.s:7471   .debug_str:0000000000000c3b .LASF285
+     /tmp/ccUGcsIN.s:6564   .debug_loc:0000000000000000 .LLST33
+     /tmp/ccUGcsIN.s:7247   .debug_str:00000000000003a0 .LASF286
+     /tmp/ccUGcsIN.s:6579   .debug_loc:0000000000000049 .LLST34
+     /tmp/ccUGcsIN.s:1156   .text:0000000000000968 .LBB29
+     /tmp/ccUGcsIN.s:1160   .text:0000000000000968 .LBE29
+     /tmp/ccUGcsIN.s:1177   .text:00000000000009a0 .LBB31
+     /tmp/ccUGcsIN.s:1181   .text:00000000000009a0 .LBE31
+     /tmp/ccUGcsIN.s:1096   .text:00000000000008cc .LVL136
+     /tmp/ccUGcsIN.s:1101   .text:00000000000008dc .LVL137
+GAS LISTING /tmp/ccUGcsIN.s 			page 53
+
+
+     /tmp/ccUGcsIN.s:1105   .text:00000000000008e4 .LVL138
+     /tmp/ccUGcsIN.s:1112   .text:00000000000008f0 .LVL139
+     /tmp/ccUGcsIN.s:1121   .text:0000000000000908 .LVL141
+     /tmp/ccUGcsIN.s:1127   .text:0000000000000914 .LVL142
+     /tmp/ccUGcsIN.s:1139   .text:0000000000000940 .LVL143
+     /tmp/ccUGcsIN.s:1150   .text:0000000000000958 .LVL144
+     /tmp/ccUGcsIN.s:1154   .text:0000000000000968 .LVL145
+     /tmp/ccUGcsIN.s:1167   .text:0000000000000980 .LVL146
+     /tmp/ccUGcsIN.s:1171   .text:0000000000000990 .LVL147
+     /tmp/ccUGcsIN.s:1175   .text:00000000000009a0 .LVL148
+     /tmp/ccUGcsIN.s:1188   .text:00000000000009b8 .LVL149
+     /tmp/ccUGcsIN.s:1192   .text:00000000000009c8 .LVL150
+     /tmp/ccUGcsIN.s:1199   .text:00000000000009dc .LVL151
+     /tmp/ccUGcsIN.s:1204   .text:00000000000009ec .LVL152
+     /tmp/ccUGcsIN.s:1230   .text:0000000000000a14 .LVL157
+     /tmp/ccUGcsIN.s:1234   .text:0000000000000a20 .LVL158
+     /tmp/ccUGcsIN.s:7181   .debug_str:00000000000001ab .LASF287
+     /tmp/ccUGcsIN.s:13     .text:0000000000000000 .LFB120
+     /tmp/ccUGcsIN.s:84     .text:0000000000000074 .LFE120
+     /tmp/ccUGcsIN.s:6586   .debug_loc:000000000000006c .LLST0
+     /tmp/ccUGcsIN.s:29     .text:0000000000000014 .LBB16
+     /tmp/ccUGcsIN.s:62     .text:0000000000000040 .LBE16
+     /tmp/ccUGcsIN.s:6604   .debug_loc:00000000000000b8 .LLST1
+     /tmp/ccUGcsIN.s:6612   .debug_loc:00000000000000dc .LLST2
+     /tmp/ccUGcsIN.s:37     .text:000000000000001c .LBB19
+     /tmp/ccUGcsIN.s:48     .text:0000000000000028 .LBE19
+     /tmp/ccUGcsIN.s:6625   .debug_loc:0000000000000114 .LLST3
+     /tmp/ccUGcsIN.s:73     .text:0000000000000064 .LVL6
+     /tmp/ccUGcsIN.s:7213   .debug_str:0000000000000263 .LASF288
+     /tmp/ccUGcsIN.s:7743   .debug_str:0000000000001448 .LASF289
+     /tmp/ccUGcsIN.s:933    .text:0000000000000770 .LFB119
+     /tmp/ccUGcsIN.s:1068   .text:00000000000008a4 .LFE119
+     /tmp/ccUGcsIN.s:7329   .debug_str:00000000000006e5 .LASF290
+     /tmp/ccUGcsIN.s:6634   .debug_loc:0000000000000139 .LLST28
+     /tmp/ccUGcsIN.s:6652   .debug_loc:0000000000000185 .LLST29
+     /tmp/ccUGcsIN.s:6666   .debug_loc:00000000000001be .LLST30
+     /tmp/ccUGcsIN.s:7159   .debug_str:0000000000000119 .LASF291
+     /tmp/ccUGcsIN.s:6684   .debug_loc:000000000000020a .LLST31
+     /tmp/ccUGcsIN.s:968    .text:00000000000007b8 .LBB28
+     /tmp/ccUGcsIN.s:1025   .text:0000000000000850 .LBE28
+     /tmp/ccUGcsIN.s:6698   .debug_loc:0000000000000243 .LLST32
+     /tmp/ccUGcsIN.s:978    .text:00000000000007d0 .LVL121
+     /tmp/ccUGcsIN.s:984    .text:00000000000007e4 .LVL122
+     /tmp/ccUGcsIN.s:988    .text:00000000000007f4 .LVL123
+     /tmp/ccUGcsIN.s:996    .text:0000000000000810 .LVL124
+     /tmp/ccUGcsIN.s:1000   .text:0000000000000820 .LVL125
+     /tmp/ccUGcsIN.s:1010   .text:0000000000000834 .LVL126
+     /tmp/ccUGcsIN.s:1021   .text:000000000000084c .LVL129
+     /tmp/ccUGcsIN.s:966    .text:00000000000007b8 .LVL119
+     /tmp/ccUGcsIN.s:1031   .text:0000000000000860 .LVL130
+     /tmp/ccUGcsIN.s:1036   .text:000000000000086c .LVL131
+     /tmp/ccUGcsIN.s:1041   .text:000000000000087c .LVL132
+     /tmp/ccUGcsIN.s:7421   .debug_str:0000000000000aa7 .LASF292
+     /tmp/ccUGcsIN.s:7751   .debug_str:000000000000149f .LASF293
+     /tmp/ccUGcsIN.s:792    .text:000000000000063c .LFB118
+     /tmp/ccUGcsIN.s:927    .text:0000000000000770 .LFE118
+     /tmp/ccUGcsIN.s:6714   .debug_loc:000000000000028d .LLST23
+GAS LISTING /tmp/ccUGcsIN.s 			page 54
+
+
+     /tmp/ccUGcsIN.s:6732   .debug_loc:00000000000002d9 .LLST24
+     /tmp/ccUGcsIN.s:6746   .debug_loc:0000000000000312 .LLST25
+     /tmp/ccUGcsIN.s:6764   .debug_loc:000000000000035e .LLST26
+     /tmp/ccUGcsIN.s:827    .text:0000000000000684 .LBB27
+     /tmp/ccUGcsIN.s:884    .text:000000000000071c .LBE27
+     /tmp/ccUGcsIN.s:6778   .debug_loc:0000000000000397 .LLST27
+     /tmp/ccUGcsIN.s:841    .text:00000000000006a0 .LVL102
+     /tmp/ccUGcsIN.s:849    .text:00000000000006b8 .LVL103
+     /tmp/ccUGcsIN.s:855    .text:00000000000006cc .LVL104
+     /tmp/ccUGcsIN.s:859    .text:00000000000006dc .LVL105
+     /tmp/ccUGcsIN.s:865    .text:00000000000006f0 .LVL106
+     /tmp/ccUGcsIN.s:869    .text:0000000000000700 .LVL107
+     /tmp/ccUGcsIN.s:880    .text:0000000000000718 .LVL110
+     /tmp/ccUGcsIN.s:825    .text:0000000000000684 .LVL100
+     /tmp/ccUGcsIN.s:890    .text:000000000000072c .LVL111
+     /tmp/ccUGcsIN.s:895    .text:0000000000000738 .LVL112
+     /tmp/ccUGcsIN.s:900    .text:0000000000000748 .LVL113
+     /tmp/ccUGcsIN.s:7267   .debug_str:0000000000000455 .LASF294
+     /tmp/ccUGcsIN.s:7367   .debug_str:0000000000000803 .LASF295
+     /tmp/ccUGcsIN.s:740    .text:00000000000005dc .LFB117
+     /tmp/ccUGcsIN.s:786    .text:000000000000063c .LFE117
+     /tmp/ccUGcsIN.s:6794   .debug_loc:00000000000003e1 .LLST22
+     /tmp/ccUGcsIN.s:760    .text:0000000000000604 .LVL94
+     /tmp/ccUGcsIN.s:764    .text:000000000000060c .LVL95
+     /tmp/ccUGcsIN.s:768    .text:0000000000000618 .LVL96
+     /tmp/ccUGcsIN.s:773    .text:0000000000000628 .LVL97
+     /tmp/ccUGcsIN.s:7265   .debug_str:000000000000044a .LASF296
+     /tmp/ccUGcsIN.s:7355   .debug_str:00000000000007ab .LASF297
+     /tmp/ccUGcsIN.s:605    .text:00000000000004b4 .LFB116
+     /tmp/ccUGcsIN.s:734    .text:00000000000005dc .LFE116
+     /tmp/ccUGcsIN.s:7383   .debug_str:0000000000000892 .LASF298
+     /tmp/ccUGcsIN.s:6808   .debug_loc:000000000000041a .LLST18
+     /tmp/ccUGcsIN.s:6826   .debug_loc:0000000000000466 .LLST19
+     /tmp/ccUGcsIN.s:6840   .debug_loc:000000000000049f .LLST20
+     /tmp/ccUGcsIN.s:637    .text:00000000000004f4 .LBB26
+     /tmp/ccUGcsIN.s:697    .text:0000000000000594 .LBE26
+     /tmp/ccUGcsIN.s:6854   .debug_loc:00000000000004d8 .LLST21
+     /tmp/ccUGcsIN.s:654    .text:000000000000051c .LVL77
+     /tmp/ccUGcsIN.s:660    .text:0000000000000530 .LVL78
+     /tmp/ccUGcsIN.s:664    .text:0000000000000540 .LVL79
+     /tmp/ccUGcsIN.s:670    .text:0000000000000554 .LVL80
+     /tmp/ccUGcsIN.s:674    .text:0000000000000564 .LVL81
+     /tmp/ccUGcsIN.s:678    .text:000000000000056c .LVL82
+     /tmp/ccUGcsIN.s:682    .text:0000000000000578 .LVL83
+     /tmp/ccUGcsIN.s:693    .text:0000000000000590 .LVL86
+     /tmp/ccUGcsIN.s:635    .text:00000000000004f4 .LVL75
+     /tmp/ccUGcsIN.s:701    .text:000000000000059c .LVL87
+     /tmp/ccUGcsIN.s:705    .text:00000000000005a8 .LVL88
+     /tmp/ccUGcsIN.s:710    .text:00000000000005b8 .LVL89
+     /tmp/ccUGcsIN.s:7359   .debug_str:00000000000007c8 .LASF299
+     /tmp/ccUGcsIN.s:7647   .debug_str:000000000000112e .LASF300
+     /tmp/ccUGcsIN.s:461    .text:000000000000037c .LFB115
+     /tmp/ccUGcsIN.s:599    .text:00000000000004b4 .LFE115
+     /tmp/ccUGcsIN.s:6870   .debug_loc:0000000000000522 .LLST13
+     /tmp/ccUGcsIN.s:6888   .debug_loc:000000000000056e .LLST14
+     /tmp/ccUGcsIN.s:6902   .debug_loc:00000000000005a7 .LLST15
+     /tmp/ccUGcsIN.s:6920   .debug_loc:00000000000005f3 .LLST16
+GAS LISTING /tmp/ccUGcsIN.s 			page 55
+
+
+     /tmp/ccUGcsIN.s:496    .text:00000000000003c4 .LBB25
+     /tmp/ccUGcsIN.s:559    .text:0000000000000468 .LBE25
+     /tmp/ccUGcsIN.s:6934   .debug_loc:000000000000062c .LLST17
+     /tmp/ccUGcsIN.s:506    .text:00000000000003d4 .LVL57
+     /tmp/ccUGcsIN.s:513    .text:00000000000003e8 .LVL58
+     /tmp/ccUGcsIN.s:519    .text:00000000000003fc .LVL59
+     /tmp/ccUGcsIN.s:525    .text:0000000000000410 .LVL60
+     /tmp/ccUGcsIN.s:529    .text:0000000000000420 .LVL61
+     /tmp/ccUGcsIN.s:535    .text:0000000000000434 .LVL62
+     /tmp/ccUGcsIN.s:539    .text:0000000000000444 .LVL63
+     /tmp/ccUGcsIN.s:555    .text:0000000000000464 .LVL66
+     /tmp/ccUGcsIN.s:494    .text:00000000000003c4 .LVL55
+     /tmp/ccUGcsIN.s:563    .text:0000000000000470 .LVL67
+     /tmp/ccUGcsIN.s:567    .text:000000000000047c .LVL68
+     /tmp/ccUGcsIN.s:572    .text:000000000000048c .LVL69
+     /tmp/ccUGcsIN.s:7559   .debug_str:0000000000000ef5 .LASF301
+     /tmp/ccUGcsIN.s:7261   .debug_str:0000000000000411 .LASF302
+     /tmp/ccUGcsIN.s:319    .text:0000000000000244 .LFB114
+     /tmp/ccUGcsIN.s:455    .text:000000000000037c .LFE114
+     /tmp/ccUGcsIN.s:7637   .debug_str:0000000000001107 .LASF303
+     /tmp/ccUGcsIN.s:6950   .debug_loc:0000000000000676 .LLST9
+     /tmp/ccUGcsIN.s:6968   .debug_loc:00000000000006c2 .LLST10
+     /tmp/ccUGcsIN.s:6982   .debug_loc:00000000000006fb .LLST11
+     /tmp/ccUGcsIN.s:353    .text:0000000000000288 .LBB24
+     /tmp/ccUGcsIN.s:416    .text:0000000000000330 .LBE24
+     /tmp/ccUGcsIN.s:6996   .debug_loc:0000000000000734 .LLST12
+     /tmp/ccUGcsIN.s:363    .text:00000000000002a0 .LVL38
+     /tmp/ccUGcsIN.s:369    .text:00000000000002b4 .LVL39
+     /tmp/ccUGcsIN.s:373    .text:00000000000002c4 .LVL40
+     /tmp/ccUGcsIN.s:381    .text:00000000000002e0 .LVL41
+     /tmp/ccUGcsIN.s:385    .text:00000000000002f0 .LVL42
+     /tmp/ccUGcsIN.s:395    .text:0000000000000304 .LVL43
+     /tmp/ccUGcsIN.s:398    .text:0000000000000310 .LVL44
+     /tmp/ccUGcsIN.s:412    .text:000000000000032c .LVL47
+     /tmp/ccUGcsIN.s:351    .text:0000000000000288 .LVL36
+     /tmp/ccUGcsIN.s:420    .text:0000000000000338 .LVL48
+     /tmp/ccUGcsIN.s:424    .text:0000000000000344 .LVL49
+     /tmp/ccUGcsIN.s:429    .text:0000000000000354 .LVL50
+     /tmp/ccUGcsIN.s:7163   .debug_str:0000000000000136 .LASF304
+     /tmp/ccUGcsIN.s:7437   .debug_str:0000000000000b2d .LASF305
+     /tmp/ccUGcsIN.s:289    .text:0000000000000244 .LFE113
+     /tmp/ccUGcsIN.s:7012   .debug_loc:000000000000077e .LLST4
+     /tmp/ccUGcsIN.s:7034   .debug_loc:00000000000007dd .LLST5
+     /tmp/ccUGcsIN.s:7048   .debug_loc:0000000000000816 .LLST6
+     /tmp/ccUGcsIN.s:7070   .debug_loc:0000000000000875 .LLST7
+     /tmp/ccUGcsIN.s:7113   .debug_ranges:0000000000000000 .Ldebug_ranges0
+     /tmp/ccUGcsIN.s:7084   .debug_loc:00000000000008ae .LLST8
+     /tmp/ccUGcsIN.s:161    .text:0000000000000118 .LVL14
+     /tmp/ccUGcsIN.s:167    .text:000000000000012c .LVL15
+     /tmp/ccUGcsIN.s:171    .text:000000000000013c .LVL16
+     /tmp/ccUGcsIN.s:177    .text:0000000000000150 .LVL17
+     /tmp/ccUGcsIN.s:181    .text:0000000000000160 .LVL18
+     /tmp/ccUGcsIN.s:189    .text:0000000000000174 .LVL19
+     /tmp/ccUGcsIN.s:194    .text:0000000000000184 .LVL20
+     /tmp/ccUGcsIN.s:205    .text:0000000000000198 .LVL22
+     /tmp/ccUGcsIN.s:217    .text:00000000000001c0 .LVL23
+     /tmp/ccUGcsIN.s:226    .text:00000000000001d4 .LVL24
+GAS LISTING /tmp/ccUGcsIN.s 			page 56
+
+
+     /tmp/ccUGcsIN.s:281    .text:0000000000000238 .LVL32
+     /tmp/ccUGcsIN.s:128    .text:00000000000000c0 .LVL9
+     /tmp/ccUGcsIN.s:133    .text:00000000000000d0 .LVL10
+     /tmp/ccUGcsIN.s:140    .text:00000000000000e4 .LVL11
+     /tmp/ccUGcsIN.s:145    .text:00000000000000f4 .LVL12
+     /tmp/ccUGcsIN.s:234    .text:00000000000001e0 .LVL25
+     /tmp/ccUGcsIN.s:238    .text:00000000000001ec .LVL26
+     /tmp/ccUGcsIN.s:243    .text:00000000000001fc .LVL27
+     /tmp/ccUGcsIN.s:285    .text:0000000000000244 .LVL33
+     /tmp/ccUGcsIN.s:7533   .debug_str:0000000000000e51 .LASF306
+     /tmp/ccUGcsIN.s:7595   .debug_str:0000000000000fd3 .LASF307
+     /tmp/ccUGcsIN.s:7373   .debug_str:0000000000000861 .LASF308
+     /tmp/ccUGcsIN.s:7749   .debug_str:000000000000148b .LASF309
+     /tmp/ccUGcsIN.s:7511   .debug_str:0000000000000dbb .LASF311
+     /tmp/ccUGcsIN.s:7695   .debug_str:0000000000001280 .LASF310
+     /tmp/ccUGcsIN.s:7549   .debug_str:0000000000000ecf .LASF312
+     /tmp/ccUGcsIN.s:7651   .debug_str:000000000000114f .LASF321
+     /tmp/ccUGcsIN.s:7727   .debug_str:000000000000139c .LASF322
+     /tmp/ccUGcsIN.s:1114   .text:00000000000008f4 .LVL140
+     /tmp/ccUGcsIN.s:1218   .text:00000000000009fc .LVL154
+     /tmp/ccUGcsIN.s:1222   .text:0000000000000a04 .LVL155
+     /tmp/ccUGcsIN.s:1226   .text:0000000000000a08 .LVL156
+     /tmp/ccUGcsIN.s:1215   .text:00000000000009f8 .LVL153
+     /tmp/ccUGcsIN.s:17     .text:0000000000000000 .LVL0
+     /tmp/ccUGcsIN.s:57     .text:000000000000003c .LVL4
+     /tmp/ccUGcsIN.s:28     .text:0000000000000014 .LVL1
+     /tmp/ccUGcsIN.s:59     .text:0000000000000040 .LVL5
+     /tmp/ccUGcsIN.s:36     .text:000000000000001c .LVL2
+     /tmp/ccUGcsIN.s:45     .text:0000000000000028 .LVL3
+     /tmp/ccUGcsIN.s:936    .text:0000000000000770 .LVL117
+     /tmp/ccUGcsIN.s:964    .text:00000000000007b0 .LVL118
+     /tmp/ccUGcsIN.s:1061   .text:0000000000000898 .LVL135
+     /tmp/ccUGcsIN.s:1058   .text:0000000000000894 .LVL134
+     /tmp/ccUGcsIN.s:971    .text:00000000000007bc .LVL120
+     /tmp/ccUGcsIN.s:1013   .text:0000000000000838 .LVL127
+     /tmp/ccUGcsIN.s:1015   .text:000000000000083c .LVL128
+     /tmp/ccUGcsIN.s:1051   .text:0000000000000888 .LVL133
+     /tmp/ccUGcsIN.s:795    .text:000000000000063c .LVL98
+     /tmp/ccUGcsIN.s:823    .text:000000000000067c .LVL99
+     /tmp/ccUGcsIN.s:920    .text:0000000000000764 .LVL116
+     /tmp/ccUGcsIN.s:915    .text:000000000000075c .LVL115
+     /tmp/ccUGcsIN.s:830    .text:0000000000000688 .LVL101
+     /tmp/ccUGcsIN.s:872    .text:0000000000000704 .LVL108
+     /tmp/ccUGcsIN.s:874    .text:0000000000000708 .LVL109
+     /tmp/ccUGcsIN.s:910    .text:0000000000000754 .LVL114
+     /tmp/ccUGcsIN.s:743    .text:00000000000005dc .LVL92
+     /tmp/ccUGcsIN.s:758    .text:00000000000005fc .LVL93
+     /tmp/ccUGcsIN.s:608    .text:00000000000004b4 .LVL73
+     /tmp/ccUGcsIN.s:633    .text:00000000000004ec .LVL74
+     /tmp/ccUGcsIN.s:727    .text:00000000000005d0 .LVL91
+     /tmp/ccUGcsIN.s:640    .text:00000000000004f8 .LVL76
+     /tmp/ccUGcsIN.s:685    .text:000000000000057c .LVL84
+     /tmp/ccUGcsIN.s:687    .text:0000000000000580 .LVL85
+     /tmp/ccUGcsIN.s:722    .text:00000000000005c8 .LVL90
+     /tmp/ccUGcsIN.s:464    .text:000000000000037c .LVL53
+     /tmp/ccUGcsIN.s:492    .text:00000000000003bc .LVL54
+     /tmp/ccUGcsIN.s:592    .text:00000000000004a8 .LVL72
+GAS LISTING /tmp/ccUGcsIN.s 			page 57
+
+
+     /tmp/ccUGcsIN.s:589    .text:00000000000004a4 .LVL71
+     /tmp/ccUGcsIN.s:499    .text:00000000000003c8 .LVL56
+     /tmp/ccUGcsIN.s:547    .text:0000000000000450 .LVL64
+     /tmp/ccUGcsIN.s:549    .text:0000000000000454 .LVL65
+     /tmp/ccUGcsIN.s:584    .text:000000000000049c .LVL70
+     /tmp/ccUGcsIN.s:322    .text:0000000000000244 .LVL34
+     /tmp/ccUGcsIN.s:349    .text:0000000000000280 .LVL35
+     /tmp/ccUGcsIN.s:448    .text:0000000000000370 .LVL52
+     /tmp/ccUGcsIN.s:356    .text:000000000000028c .LVL37
+     /tmp/ccUGcsIN.s:404    .text:0000000000000318 .LVL45
+     /tmp/ccUGcsIN.s:406    .text:000000000000031c .LVL46
+     /tmp/ccUGcsIN.s:441    .text:0000000000000364 .LVL51
+     /tmp/ccUGcsIN.s:95     .text:0000000000000074 .LVL7
+     /tmp/ccUGcsIN.s:125    .text:00000000000000b8 .LVL8
+     /tmp/ccUGcsIN.s:262    .text:0000000000000214 .LVL29
+     /tmp/ccUGcsIN.s:273    .text:0000000000000228 .LVL31
+     /tmp/ccUGcsIN.s:269    .text:0000000000000220 .LVL30
+     /tmp/ccUGcsIN.s:151    .text:00000000000000fc .LVL13
+     /tmp/ccUGcsIN.s:257    .text:000000000000020c .LVL28
+     /tmp/ccUGcsIN.s:1368   .debug_info:0000000000000000 .Ldebug_info0
+     /tmp/ccUGcsIN.s:147    .text:00000000000000f4 .LBB22
+     /tmp/ccUGcsIN.s:230    .text:00000000000001d8 .LBE22
+     /tmp/ccUGcsIN.s:277    .text:000000000000022c .LBB23
+     /tmp/ccUGcsIN.s:287    .text:0000000000000244 .LBE23
+     /tmp/ccUGcsIN.s:292    .gcc_except_table:0000000000000000 .LLSDA113
+     /tmp/ccUGcsIN.s:1239   .gcc_except_table:0000000000000038 .LLSDA121
+
+UNDEFINED SYMBOLS
+_ZN10KSemaphore16activeSemaphoresE
+_ZN10KSemaphoreD1Ev
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN11ObjectCache9printInfoEc
+_ZN11ObjectCachenwEm
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN13SlabAllocator11getInstanceEv
+_ZN13SlabAllocator11print_stateEc
+_ZN11ObjectCachedlEPv
+_Unwind_Resume
+__gxx_personality_v0
+_ZN11ObjectCacheD1Ev
+_ZN13SlabAllocator7kmallocEm
+_ZN13SlabAllocator5kfreeEPv
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCache8free_objEPv
+_ZN7NoAlloc9mem_allocEm

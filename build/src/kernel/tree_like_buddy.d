@@ -1,0 +1,114 @@
+build/src/kernel/tree_like_buddy.o: src/kernel/tree_like_buddy.cpp \
+ src/kernel/../../h/kernel_lib.h src/kernel/../../h/../h/ptr_queue.hpp \
+ src/kernel/../../h/../h/../lib/hw.h \
+ src/kernel/../../h/../h/../h/memory_allocator.hpp \
+ src/kernel/../../h/../h/../h/object_cache.h \
+ src/kernel/../../h/../h/../h/../h/list.h \
+ src/kernel/../../h/../h/object_cache.h \
+ src/kernel/../../h/../h/slab_allocator.h \
+ src/kernel/../../h/../h/../h/object_cache.h \
+ src/kernel/../../h/../h/list.h \
+ src/kernel/../../h/../h/noalloc_allocator.hpp \
+ src/kernel/../../h/../h/kernel_funs.h src/kernel/../../h/../h/riscv.hpp \
+ src/kernel/../../h/../h/syscall_cpp.hpp \
+ src/kernel/../../h/../h/syscall_c.h \
+ src/kernel/../../h/../h/../h/_thread.h \
+ src/kernel/../../h/../h/../h/_semaphore.h \
+ src/kernel/../../h/../h/tcb.hpp \
+ src/kernel/../../h/../h/../h/slab_allocator.h \
+ src/kernel/../../h/../h/ksemaphore.hpp \
+ src/kernel/../../h/../h/../h/ptr_queue.hpp \
+ src/kernel/../../h/../h/stdio.hpp \
+ src/kernel/../../h/../h/../h/shared_buffer.hpp \
+ src/kernel/../../h/../h/../h/../h/ksemaphore.hpp \
+ src/kernel/../../h/../h/../h/slab_allocator.h \
+ src/kernel/../../h/../h/tcb.hpp src/kernel/../../h/../h/scheduler.hpp \
+ src/kernel/../../h/../h/memory_allocator.hpp \
+ src/kernel/../../h/../h/kernel_funs.h \
+ src/kernel/../../h/../h/noalloc_allocator.hpp \
+ src/kernel/../../h/../h/pmt.h src/kernel/../../h/../h/pager.h \
+ src/kernel/../../h/../h/../h/pmt.h src/kernel/../../h/../h/buddy.h \
+ src/kernel/../../h/../h/../h/noalloc_allocator.hpp \
+ src/kernel/../../h/../h/object_cache.h \
+ src/kernel/../../h/../h/slab_allocator.h src/kernel/../../h/../h/list.h \
+ src/kernel/../../h/../h/slab.h src/kernel/../../h/tree_like_buddy.h
+
+src/kernel/../../h/kernel_lib.h:
+
+src/kernel/../../h/../h/ptr_queue.hpp:
+
+src/kernel/../../h/../h/../lib/hw.h:
+
+src/kernel/../../h/../h/../h/memory_allocator.hpp:
+
+src/kernel/../../h/../h/../h/object_cache.h:
+
+src/kernel/../../h/../h/../h/../h/list.h:
+
+src/kernel/../../h/../h/object_cache.h:
+
+src/kernel/../../h/../h/slab_allocator.h:
+
+src/kernel/../../h/../h/../h/object_cache.h:
+
+src/kernel/../../h/../h/list.h:
+
+src/kernel/../../h/../h/noalloc_allocator.hpp:
+
+src/kernel/../../h/../h/kernel_funs.h:
+
+src/kernel/../../h/../h/riscv.hpp:
+
+src/kernel/../../h/../h/syscall_cpp.hpp:
+
+src/kernel/../../h/../h/syscall_c.h:
+
+src/kernel/../../h/../h/../h/_thread.h:
+
+src/kernel/../../h/../h/../h/_semaphore.h:
+
+src/kernel/../../h/../h/tcb.hpp:
+
+src/kernel/../../h/../h/../h/slab_allocator.h:
+
+src/kernel/../../h/../h/ksemaphore.hpp:
+
+src/kernel/../../h/../h/../h/ptr_queue.hpp:
+
+src/kernel/../../h/../h/stdio.hpp:
+
+src/kernel/../../h/../h/../h/shared_buffer.hpp:
+
+src/kernel/../../h/../h/../h/../h/ksemaphore.hpp:
+
+src/kernel/../../h/../h/../h/slab_allocator.h:
+
+src/kernel/../../h/../h/tcb.hpp:
+
+src/kernel/../../h/../h/scheduler.hpp:
+
+src/kernel/../../h/../h/memory_allocator.hpp:
+
+src/kernel/../../h/../h/kernel_funs.h:
+
+src/kernel/../../h/../h/noalloc_allocator.hpp:
+
+src/kernel/../../h/../h/pmt.h:
+
+src/kernel/../../h/../h/pager.h:
+
+src/kernel/../../h/../h/../h/pmt.h:
+
+src/kernel/../../h/../h/buddy.h:
+
+src/kernel/../../h/../h/../h/noalloc_allocator.hpp:
+
+src/kernel/../../h/../h/object_cache.h:
+
+src/kernel/../../h/../h/slab_allocator.h:
+
+src/kernel/../../h/../h/list.h:
+
+src/kernel/../../h/../h/slab.h:
+
+src/kernel/../../h/tree_like_buddy.h:
