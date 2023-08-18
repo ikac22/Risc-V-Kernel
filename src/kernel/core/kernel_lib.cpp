@@ -64,39 +64,39 @@ int kernelInit()
 
     /* INITALIZING MAIN KERNEL OBJECTS */
     NoAlloc::init();
-    kprintString("NoAlloc initalized: ");
+    kprintString("NoAlloc initialized: ");
     KVALCHECKPRINT(NOALLOC_END_ADDR, NoAlloc::getEndAddress());
 
-    kprintString("Initalizing kmem!!!\n");
+    kprintString("Initializing kmem!!!\n");
     if(kmi()){
-        kprintString("KMEM NOT SUCCESSFULLY INITALIZED!!!\n");
+        kprintString("KMEM NOT SUCCESSFULLY INITIALIZED!!!\n");
         return 1;
     }
-    kprintString("kmem initalized!!!\n");
+    kprintString("kmem initialized!!!\n");
 
 
-    kprintString("Paging init!\n");
+    kprintString("Paging initialized!\n");
     Riscv::ms_sstatus(Riscv::BitMaskSstatus::SSTATUS_SUM);
     Pager& pager = Pager::getInstance();
     pager.map_kernel();
     pager.map_user();
     pager.start_paging();
-    kprintString("Paging initalized!\n");
+    kprintString("Paging initialized!\n");
 
     Riscv::w_stvec((uint64)interruptvec); 
-    kprintString("stvec initalized!\n");
+    kprintString("stvec initialized!\n");
     
     MemoryAllocator::getInstance().print_list();
-    kprintString("MemoryAllocator initalized!\n");
+    kprintString("MemoryAllocator initialized!\n");
     
     Scheduler::initalize();
-    kprintString("Scheduler initalized!\n");
+    kprintString("Scheduler initialized!\n");
     
     StdIO::initalize();
-    kprintString("StdIO initalized!\n");
+    kprintString("StdIO initialized!\n");
     
     TCB::createMainKernelThread();
-    kprintString("Main kenrel thread initalized!\n");
+    kprintString("Main kenrel thread initialized!\n");
 
     kprintString("Initalizing user thread and idle thread...\n");
     uint64* userMainStack = (uint64*)MemoryAllocator::getInstance().mem_alloc((DEFAULT_STACK_SIZE-1)/MEM_BLOCK_SIZE + 1);
@@ -106,10 +106,10 @@ int kernelInit()
     TCB* idleThread = TCB::createThread(idleFunction, nullptr, idleThreadStack);
     idleThread->setKernelMode();
     if(userMainStack && idleThreadStack && idleThread && userMainThread)
-        kprintString("Threads successfully initalized!\n");
+        kprintString("Threads successfully initialized!\n");
     else
         return -1; /* EXCEPTION */
-    kprintString("-----------KERNEL INITALIZED-----------\n\n");
+    kprintString("-----------KERNEL INITIALIZED-----------\n\n");
 
     return 0;
 }
@@ -146,18 +146,18 @@ int newKernelInit(){
 
     /* INITALIZING MAIN KERNEL OBJECTS */
     NoAlloc::init(); /* No Allocator init */ 
-    kprintString("NoAlloc initalized: ");
+    kprintString("NoAlloc initialized: ");
     KVALCHECKPRINT(NOALLOC_END_ADDR, NoAlloc::getEndAddress());
     
 
     kprintString("Initalizing kmem!!!\n");
     if(kmi()){
-        kprintString("KMEM NOT SUCCESSFULLY INITALIZED!!!\n");
+        kprintString("KMEM NOT SUCCESSFULLY INITIALIZED!!!\n");
         return 1;
     }
     KVALCHECKPRINT(NOALLOC_END_ADDR, NoAlloc::getEndAddress());
     /* Pager Init */
-    kprintString("-----------KERNEL INITALIZED-----------\n\n");
+    kprintString("-----------KERNEL INITIALIZED-----------\n\n");
     return 0;
 }
 

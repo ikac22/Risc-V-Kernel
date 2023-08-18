@@ -16,7 +16,7 @@ int oldKernelMain(){
         return -1;
     }
    
-    kTestMain();
+    // kTestMain(); // This function is for testing the kernel itself (Slab and Buddy Allocator KERNEL API)
 
     uint64 sstatus = Riscv::r_sstatus();
     kprintString("Starting User Process\n");
