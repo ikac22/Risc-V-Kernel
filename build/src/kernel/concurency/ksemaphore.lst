@@ -1,0 +1,392 @@
+GAS LISTING /tmp/ccAytjIM.s 			page 1
+
+
+   1              		.file	"ksemaphore.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN10KSemaphore4waitEv
+  11              	_ZN10KSemaphore4waitEv:
+  12              	.LFB113:
+  13              		.cfi_startproc
+  14 0000 83278500 		lw	a5,8(a0)
+  15 0004 638A0700 		beq	a5,zero,.L2
+  16 0008 9B87F7FF 		addiw	a5,a5,-1
+  17 000c 2324F500 		sw	a5,8(a0)
+  18 0010 13050000 		li	a0,0
+  19 0014 67800000 		ret
+  20              	.L2:
+  21 0018 130101FE 		addi	sp,sp,-32
+  22              		.cfi_def_cfa_offset 32
+  23 001c 233C1100 		sd	ra,24(sp)
+  24 0020 23388100 		sd	s0,16(sp)
+  25 0024 23349100 		sd	s1,8(sp)
+  26              		.cfi_offset 1, -8
+  27              		.cfi_offset 8, -16
+  28              		.cfi_offset 9, -24
+  29 0028 13040102 		addi	s0,sp,32
+  30              		.cfi_def_cfa 8, 0
+  31 002c 97040000 		la	s1,_ZN3TCB7runningE
+  31      83B40400 
+  32 0034 83B50400 		ld	a1,0(s1)
+  33 0038 23A80502 		sw	zero,48(a1)
+  34 003c 13050501 		addi	a0,a0,16
+  35 0040 97000000 		call	_ZN8TcbQueue6insertEP3TCB@plt
+  35      E7800000 
+  36 0048 97000000 		call	_ZN3TCB5yieldEv@plt
+  36      E7800000 
+  37 0050 83B70400 		ld	a5,0(s1)
+  38 0054 03A70703 		lw	a4,48(a5)
+  39 0058 63120702 		bne	a4,zero,.L4
+  40 005c 13071000 		li	a4,1
+  41 0060 23A8E702 		sw	a4,48(a5)
+  42 0064 13050000 		li	a0,0
+  43              	.L3:
+  44 0068 83308101 		ld	ra,24(sp)
+  45              		.cfi_remember_state
+  46              		.cfi_restore 1
+  47 006c 03340101 		ld	s0,16(sp)
+  48              		.cfi_restore 8
+  49              		.cfi_def_cfa 2, 32
+  50 0070 83348100 		ld	s1,8(sp)
+  51              		.cfi_restore 9
+  52 0074 13010102 		addi	sp,sp,32
+  53              		.cfi_def_cfa_offset 0
+  54 0078 67800000 		jr	ra
+  55              	.L4:
+GAS LISTING /tmp/ccAytjIM.s 			page 2
+
+
+  56              		.cfi_restore_state
+  57 007c 1305E0FF 		li	a0,-2
+  58 0080 6FF09FFE 		j	.L3
+  59              		.cfi_endproc
+  60              	.LFE113:
+  62              		.align	2
+  63              		.globl	_ZN10KSemaphore6signalEv
+  65              	_ZN10KSemaphore6signalEv:
+  66              	.LFB114:
+  67              		.cfi_startproc
+  68 0084 83370501 		ld	a5,16(a0)
+  69 0088 638E0702 		beq	a5,zero,.L9
+  70 008c 130101FF 		addi	sp,sp,-16
+  71              		.cfi_def_cfa_offset 16
+  72 0090 23341100 		sd	ra,8(sp)
+  73 0094 23308100 		sd	s0,0(sp)
+  74              		.cfi_offset 1, -8
+  75              		.cfi_offset 8, -16
+  76 0098 13040101 		addi	s0,sp,16
+  77              		.cfi_def_cfa 8, 0
+  78 009c 13050501 		addi	a0,a0,16
+  79 00a0 97000000 		call	_ZN8TcbQueue6removeEv@plt
+  79      E7800000 
+  80 00a8 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
+  80      E7800000 
+  81 00b0 13050000 		li	a0,0
+  82 00b4 83308100 		ld	ra,8(sp)
+  83              		.cfi_restore 1
+  84 00b8 03340100 		ld	s0,0(sp)
+  85              		.cfi_restore 8
+  86              		.cfi_def_cfa 2, 16
+  87 00bc 13010101 		addi	sp,sp,16
+  88              		.cfi_def_cfa_offset 0
+  89 00c0 67800000 		jr	ra
+  90              	.L9:
+  91 00c4 83278500 		lw	a5,8(a0)
+  92 00c8 9B871700 		addiw	a5,a5,1
+  93 00cc 2324F500 		sw	a5,8(a0)
+  94 00d0 13050000 		li	a0,0
+  95 00d4 67800000 		ret
+  96              		.cfi_endproc
+  97              	.LFE114:
+  99              		.align	2
+ 100              		.globl	_ZN10KSemaphoreD2Ev
+ 102              	_ZN10KSemaphoreD2Ev:
+ 103              	.LFB116:
+ 104              		.cfi_startproc
+ 105              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 106              		.cfi_lsda 0x1b,.LLSDA116
+ 107 00d8 130101FE 		addi	sp,sp,-32
+ 108              		.cfi_def_cfa_offset 32
+ 109 00dc 233C1100 		sd	ra,24(sp)
+ 110 00e0 23388100 		sd	s0,16(sp)
+ 111 00e4 23349100 		sd	s1,8(sp)
+ 112              		.cfi_offset 1, -8
+ 113              		.cfi_offset 8, -16
+ 114              		.cfi_offset 9, -24
+GAS LISTING /tmp/ccAytjIM.s 			page 3
+
+
+ 115 00e8 13040102 		addi	s0,sp,32
+ 116              		.cfi_def_cfa 8, 0
+ 117 00ec 93040500 		mv	s1,a0
+ 118 00f0 6F000002 		j	.L16
+ 119              	.L17:
+ 120 00f4 13850401 		addi	a0,s1,16
+ 121 00f8 97000000 		call	_ZN8TcbQueue6removeEv@plt
+ 121      E7800000 
+ 122 0100 93071000 		li	a5,1
+ 123 0104 2328F502 		sw	a5,48(a0)
+ 124 0108 97000000 		call	_ZN9Scheduler3putEP3TCB@plt
+ 124      E7800000 
+ 125              	.L16:
+ 126 0110 83B70401 		ld	a5,16(s1)
+ 127 0114 E39007FE 		bne	a5,zero,.L17
+ 128 0118 83308101 		ld	ra,24(sp)
+ 129              		.cfi_restore 1
+ 130 011c 03340101 		ld	s0,16(sp)
+ 131              		.cfi_restore 8
+ 132              		.cfi_def_cfa 2, 32
+ 133 0120 83348100 		ld	s1,8(sp)
+ 134              		.cfi_restore 9
+ 135 0124 13010102 		addi	sp,sp,32
+ 136              		.cfi_def_cfa_offset 0
+ 137 0128 67800000 		jr	ra
+ 138              		.cfi_endproc
+ 139              	.LFE116:
+ 140              		.globl	__gxx_personality_v0
+ 141              		.section	.gcc_except_table,"a",@progbits
+ 142              	.LLSDA116:
+ 143 0000 FF       		.byte	0xff
+ 144 0001 FF       		.byte	0xff
+ 145 0002 03       		.byte	0x3
+ 146 0003 00       		.byte	0
+ 147              		.text
+ 149              		.globl	_ZN10KSemaphoreD1Ev
+ 150              		.set	_ZN10KSemaphoreD1Ev,_ZN10KSemaphoreD2Ev
+ 151              		.align	2
+ 152              		.globl	_ZN10KSemaphore5closeEPS_
+ 154              	_ZN10KSemaphore5closeEPS_:
+ 155              	.LFB118:
+ 156              		.cfi_startproc
+ 157 012c 130101FE 		addi	sp,sp,-32
+ 158              		.cfi_def_cfa_offset 32
+ 159 0130 233C1100 		sd	ra,24(sp)
+ 160 0134 23388100 		sd	s0,16(sp)
+ 161 0138 23349100 		sd	s1,8(sp)
+ 162              		.cfi_offset 1, -8
+ 163              		.cfi_offset 8, -16
+ 164              		.cfi_offset 9, -24
+ 165 013c 13040102 		addi	s0,sp,32
+ 166              		.cfi_def_cfa 8, 0
+ 167 0140 97040000 		ld	s1,.LANCHOR0
+ 167      83B40400 
+ 168 0148 93070000 		li	a5,0
+ 169 014c 6F00C000 		j	.L20
+ 170              	.L28:
+GAS LISTING /tmp/ccAytjIM.s 			page 4
+
+
+ 171 0150 93870400 		mv	a5,s1
+ 172 0154 83B40400 		ld	s1,0(s1)
+ 173              	.L20:
+ 174 0158 63840400 		beq	s1,zero,.L21
+ 175 015c E39AA4FE 		bne	s1,a0,.L28
+ 176              	.L21:
+ 177 0160 63800406 		beq	s1,zero,.L26
+ 178 0164 63840704 		beq	a5,zero,.L24
+ 179 0168 03B70400 		ld	a4,0(s1)
+ 180 016c 23B0E700 		sd	a4,0(a5)
+ 181 0170 23B00400 		sd	zero,0(s1)
+ 182              	.L25:
+ 183 0174 13850400 		mv	a0,s1
+ 184 0178 97000000 		call	_ZN10KSemaphoreD1Ev
+ 184      E7800000 
+ 185 0180 93850400 		mv	a1,s1
+ 186 0184 17050000 		ld	a0,.LANCHOR0+8
+ 186      03350500 
+ 187 018c 97000000 		call	_ZN11ObjectCache8free_objEPv@plt
+ 187      E7800000 
+ 188 0194 13050000 		li	a0,0
+ 189              	.L23:
+ 190 0198 83308101 		ld	ra,24(sp)
+ 191              		.cfi_remember_state
+ 192              		.cfi_restore 1
+ 193 019c 03340101 		ld	s0,16(sp)
+ 194              		.cfi_restore 8
+ 195              		.cfi_def_cfa 2, 32
+ 196 01a0 83348100 		ld	s1,8(sp)
+ 197              		.cfi_restore 9
+ 198 01a4 13010102 		addi	sp,sp,32
+ 199              		.cfi_def_cfa_offset 0
+ 200 01a8 67800000 		jr	ra
+ 201              	.L24:
+ 202              		.cfi_restore_state
+ 203 01ac 83B70400 		ld	a5,0(s1)
+ 204 01b0 17070000 		sd	a5,.LANCHOR0,a4
+ 204      2330F700 
+ 205 01b8 23B00400 		sd	zero,0(s1)
+ 206 01bc 6FF09FFB 		j	.L25
+ 207              	.L26:
+ 208 01c0 1305F0FF 		li	a0,-1
+ 209 01c4 6FF05FFD 		j	.L23
+ 210              		.cfi_endproc
+ 211              	.LFE118:
+ 213              		.align	2
+ 214              		.globl	_ZN10KSemaphore6existsEPS_
+ 216              	_ZN10KSemaphore6existsEPS_:
+ 217              	.LFB119:
+ 218              		.cfi_startproc
+ 219 01c8 130101FF 		addi	sp,sp,-16
+ 220              		.cfi_def_cfa_offset 16
+ 221 01cc 23348100 		sd	s0,8(sp)
+ 222              		.cfi_offset 8, -8
+ 223 01d0 13040101 		addi	s0,sp,16
+ 224              		.cfi_def_cfa 8, 0
+ 225 01d4 97070000 		ld	a5,.LANCHOR0
+GAS LISTING /tmp/ccAytjIM.s 			page 5
+
+
+ 225      83B70700 
+ 226 01dc 6F008000 		j	.L30
+ 227              	.L36:
+ 228 01e0 83B70700 		ld	a5,0(a5)
+ 229              	.L30:
+ 230 01e4 63880700 		beq	a5,zero,.L35
+ 231 01e8 E39CA7FE 		bne	a5,a0,.L36
+ 232 01ec 13051000 		li	a0,1
+ 233 01f0 6F008000 		j	.L31
+ 234              	.L35:
+ 235 01f4 13050000 		li	a0,0
+ 236              	.L31:
+ 237 01f8 03348100 		ld	s0,8(sp)
+ 238              		.cfi_restore 8
+ 239              		.cfi_def_cfa 2, 16
+ 240 01fc 13010101 		addi	sp,sp,16
+ 241              		.cfi_def_cfa_offset 0
+ 242 0200 67800000 		jr	ra
+ 243              		.cfi_endproc
+ 244              	.LFE119:
+ 246              		.globl	_ZN10KSemaphore5cacheE
+ 247              		.globl	_ZN10KSemaphore16activeSemaphoresE
+ 248              		.bss
+ 249              		.align	3
+ 250              		.set	.LANCHOR0,. + 0
+ 253              	_ZN10KSemaphore16activeSemaphoresE:
+ 254 0000 00000000 		.zero	8
+ 254      00000000 
+ 257              	_ZN10KSemaphore5cacheE:
+ 258 0008 00000000 		.zero	8
+ 258      00000000 
+ 259              		.hidden	DW.ref.__gxx_personality_v0
+ 260              		.weak	DW.ref.__gxx_personality_v0
+ 261              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 262              		.align	3
+ 265              	DW.ref.__gxx_personality_v0:
+ 266 0000 00000000 		.dword	__gxx_personality_v0
+ 266      00000000 
+ 267              		.ident	"GCC: (GNU) 12.2.0"
+ 268              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccAytjIM.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 ksemaphore.cpp
+     /tmp/ccAytjIM.s:11     .text:0000000000000000 _ZN10KSemaphore4waitEv
+     /tmp/ccAytjIM.s:13     .text:0000000000000000 .L0 
+     /tmp/ccAytjIM.s:14     .text:0000000000000000 $x
+     /tmp/ccAytjIM.s:22     .text:000000000000001c .L0 
+     /tmp/ccAytjIM.s:26     .text:0000000000000028 .L0 
+     /tmp/ccAytjIM.s:27     .text:0000000000000028 .L0 
+     /tmp/ccAytjIM.s:28     .text:0000000000000028 .L0 
+     /tmp/ccAytjIM.s:30     .text:000000000000002c .L0 
+     /tmp/ccAytjIM.s:45     .text:000000000000006c .L0 
+     /tmp/ccAytjIM.s:46     .text:000000000000006c .L0 
+     /tmp/ccAytjIM.s:48     .text:0000000000000070 .L0 
+     /tmp/ccAytjIM.s:49     .text:0000000000000070 .L0 
+     /tmp/ccAytjIM.s:51     .text:0000000000000074 .L0 
+     /tmp/ccAytjIM.s:53     .text:0000000000000078 .L0 
+     /tmp/ccAytjIM.s:56     .text:000000000000007c .L0 
+     /tmp/ccAytjIM.s:59     .text:0000000000000084 .L0 
+     /tmp/ccAytjIM.s:65     .text:0000000000000084 _ZN10KSemaphore6signalEv
+     /tmp/ccAytjIM.s:67     .text:0000000000000084 .L0 
+     /tmp/ccAytjIM.s:71     .text:0000000000000090 .L0 
+     /tmp/ccAytjIM.s:74     .text:0000000000000098 .L0 
+     /tmp/ccAytjIM.s:75     .text:0000000000000098 .L0 
+     /tmp/ccAytjIM.s:77     .text:000000000000009c .L0 
+     /tmp/ccAytjIM.s:83     .text:00000000000000b8 .L0 
+     /tmp/ccAytjIM.s:85     .text:00000000000000bc .L0 
+     /tmp/ccAytjIM.s:86     .text:00000000000000bc .L0 
+     /tmp/ccAytjIM.s:88     .text:00000000000000c0 .L0 
+     /tmp/ccAytjIM.s:96     .text:00000000000000d8 .L0 
+     /tmp/ccAytjIM.s:102    .text:00000000000000d8 _ZN10KSemaphoreD2Ev
+     /tmp/ccAytjIM.s:104    .text:00000000000000d8 .L0 
+     /tmp/ccAytjIM.s:265    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccAytjIM.s:108    .text:00000000000000dc .L0 
+     /tmp/ccAytjIM.s:112    .text:00000000000000e8 .L0 
+     /tmp/ccAytjIM.s:113    .text:00000000000000e8 .L0 
+     /tmp/ccAytjIM.s:114    .text:00000000000000e8 .L0 
+     /tmp/ccAytjIM.s:116    .text:00000000000000ec .L0 
+     /tmp/ccAytjIM.s:129    .text:000000000000011c .L0 
+     /tmp/ccAytjIM.s:131    .text:0000000000000120 .L0 
+     /tmp/ccAytjIM.s:132    .text:0000000000000120 .L0 
+     /tmp/ccAytjIM.s:134    .text:0000000000000124 .L0 
+     /tmp/ccAytjIM.s:136    .text:0000000000000128 .L0 
+     /tmp/ccAytjIM.s:138    .text:000000000000012c .L0 
+     /tmp/ccAytjIM.s:102    .text:00000000000000d8 _ZN10KSemaphoreD1Ev
+     /tmp/ccAytjIM.s:154    .text:000000000000012c _ZN10KSemaphore5closeEPS_
+     /tmp/ccAytjIM.s:156    .text:000000000000012c .L0 
+     /tmp/ccAytjIM.s:158    .text:0000000000000130 .L0 
+     /tmp/ccAytjIM.s:162    .text:000000000000013c .L0 
+     /tmp/ccAytjIM.s:163    .text:000000000000013c .L0 
+     /tmp/ccAytjIM.s:164    .text:000000000000013c .L0 
+     /tmp/ccAytjIM.s:166    .text:0000000000000140 .L0 
+     /tmp/ccAytjIM.s:191    .text:000000000000019c .L0 
+     /tmp/ccAytjIM.s:192    .text:000000000000019c .L0 
+     /tmp/ccAytjIM.s:194    .text:00000000000001a0 .L0 
+     /tmp/ccAytjIM.s:195    .text:00000000000001a0 .L0 
+     /tmp/ccAytjIM.s:197    .text:00000000000001a4 .L0 
+     /tmp/ccAytjIM.s:199    .text:00000000000001a8 .L0 
+GAS LISTING /tmp/ccAytjIM.s 			page 7
+
+
+     /tmp/ccAytjIM.s:202    .text:00000000000001ac .L0 
+     /tmp/ccAytjIM.s:210    .text:00000000000001c8 .L0 
+     /tmp/ccAytjIM.s:216    .text:00000000000001c8 _ZN10KSemaphore6existsEPS_
+     /tmp/ccAytjIM.s:218    .text:00000000000001c8 .L0 
+     /tmp/ccAytjIM.s:220    .text:00000000000001cc .L0 
+     /tmp/ccAytjIM.s:222    .text:00000000000001d0 .L0 
+     /tmp/ccAytjIM.s:224    .text:00000000000001d4 .L0 
+     /tmp/ccAytjIM.s:238    .text:00000000000001fc .L0 
+     /tmp/ccAytjIM.s:239    .text:00000000000001fc .L0 
+     /tmp/ccAytjIM.s:241    .text:0000000000000200 .L0 
+     /tmp/ccAytjIM.s:243    .text:0000000000000204 .L0 
+     /tmp/ccAytjIM.s:257    .bss:0000000000000008 _ZN10KSemaphore5cacheE
+     /tmp/ccAytjIM.s:253    .bss:0000000000000000 _ZN10KSemaphore16activeSemaphoresE
+     /tmp/ccAytjIM.s:250    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccAytjIM.s:31     .text:000000000000002c .L0 
+     /tmp/ccAytjIM.s:167    .text:0000000000000140 .L0 
+     /tmp/ccAytjIM.s:186    .text:0000000000000184 .L0 
+     /tmp/ccAytjIM.s:204    .text:00000000000001b0 .L0 
+     /tmp/ccAytjIM.s:225    .text:00000000000001d4 .L0 
+     /tmp/ccAytjIM.s:20     .text:0000000000000018 .L2
+     /tmp/ccAytjIM.s:55     .text:000000000000007c .L4
+     /tmp/ccAytjIM.s:43     .text:0000000000000068 .L3
+     /tmp/ccAytjIM.s:90     .text:00000000000000c4 .L9
+     /tmp/ccAytjIM.s:125    .text:0000000000000110 .L16
+     /tmp/ccAytjIM.s:119    .text:00000000000000f4 .L17
+     /tmp/ccAytjIM.s:173    .text:0000000000000158 .L20
+     /tmp/ccAytjIM.s:176    .text:0000000000000160 .L21
+     /tmp/ccAytjIM.s:170    .text:0000000000000150 .L28
+     /tmp/ccAytjIM.s:207    .text:00000000000001c0 .L26
+     /tmp/ccAytjIM.s:201    .text:00000000000001ac .L24
+     /tmp/ccAytjIM.s:182    .text:0000000000000174 .L25
+     /tmp/ccAytjIM.s:189    .text:0000000000000198 .L23
+     /tmp/ccAytjIM.s:229    .text:00000000000001e4 .L30
+     /tmp/ccAytjIM.s:234    .text:00000000000001f4 .L35
+     /tmp/ccAytjIM.s:227    .text:00000000000001e0 .L36
+     /tmp/ccAytjIM.s:236    .text:00000000000001f8 .L31
+     /tmp/ccAytjIM.s:142    .gcc_except_table:0000000000000000 .LLSDA116
+
+UNDEFINED SYMBOLS
+_ZN3TCB7runningE
+_ZN8TcbQueue6insertEP3TCB
+_ZN3TCB5yieldEv
+_ZN8TcbQueue6removeEv
+_ZN9Scheduler3putEP3TCB
+__gxx_personality_v0
+_ZN11ObjectCache8free_objEPv

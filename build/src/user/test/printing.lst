@@ -1,0 +1,383 @@
+GAS LISTING /tmp/ccdS41Ww.s 			page 1
+
+
+   1              		.file	"printing.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_Z11printStringPKc
+  11              	_Z11printStringPKc:
+  12              	.LFB1:
+  13              		.cfi_startproc
+  14 0000 130101FE 		addi	sp,sp,-32
+  15              		.cfi_def_cfa_offset 32
+  16 0004 233C1100 		sd	ra,24(sp)
+  17 0008 23388100 		sd	s0,16(sp)
+  18 000c 23349100 		sd	s1,8(sp)
+  19              		.cfi_offset 1, -8
+  20              		.cfi_offset 8, -16
+  21              		.cfi_offset 9, -24
+  22 0010 13040102 		addi	s0,sp,32
+  23              		.cfi_def_cfa 8, 0
+  24 0014 93040500 		mv	s1,a0
+  25              	.L2:
+  26 0018 13061000 		li	a2,1
+  27 001c 93050000 		li	a1,0
+  28 0020 17050000 		lla	a0,.LANCHOR0
+  28      13050500 
+  29 0028 97000000 		call	copy_and_swap@plt
+  29      E7800000 
+  30 0030 E31405FE 		bne	a0,zero,.L2
+  31 0034 6F000001 		j	.L3
+  32              	.L4:
+  33 0038 97000000 		call	putc@plt
+  33      E7800000 
+  34 0040 93841400 		addi	s1,s1,1
+  35              	.L3:
+  36 0044 03C50400 		lbu	a0,0(s1)
+  37 0048 E31805FE 		bne	a0,zero,.L4
+  38              	.L5:
+  39 004c 13060000 		li	a2,0
+  40 0050 93051000 		li	a1,1
+  41 0054 17050000 		lla	a0,.LANCHOR0
+  41      13050500 
+  42 005c 97000000 		call	copy_and_swap@plt
+  42      E7800000 
+  43 0064 E31405FE 		bne	a0,zero,.L5
+  44 0068 83308101 		ld	ra,24(sp)
+  45              		.cfi_restore 1
+  46 006c 03340101 		ld	s0,16(sp)
+  47              		.cfi_restore 8
+  48              		.cfi_def_cfa 2, 32
+  49 0070 83348100 		ld	s1,8(sp)
+  50              		.cfi_restore 9
+  51 0074 13010102 		addi	sp,sp,32
+  52              		.cfi_def_cfa_offset 0
+  53 0078 67800000 		jr	ra
+GAS LISTING /tmp/ccdS41Ww.s 			page 2
+
+
+  54              		.cfi_endproc
+  55              	.LFE1:
+  57              		.align	2
+  58              		.globl	_Z9getStringPci
+  60              	_Z9getStringPci:
+  61              	.LFB2:
+  62              		.cfi_startproc
+  63 007c 130101FD 		addi	sp,sp,-48
+  64              		.cfi_def_cfa_offset 48
+  65 0080 23341102 		sd	ra,40(sp)
+  66 0084 23308102 		sd	s0,32(sp)
+  67 0088 233C9100 		sd	s1,24(sp)
+  68 008c 23382101 		sd	s2,16(sp)
+  69 0090 23343101 		sd	s3,8(sp)
+  70 0094 23304101 		sd	s4,0(sp)
+  71              		.cfi_offset 1, -8
+  72              		.cfi_offset 8, -16
+  73              		.cfi_offset 9, -24
+  74              		.cfi_offset 18, -32
+  75              		.cfi_offset 19, -40
+  76              		.cfi_offset 20, -48
+  77 0098 13040103 		addi	s0,sp,48
+  78              		.cfi_def_cfa 8, 0
+  79 009c 93090500 		mv	s3,a0
+  80 00a0 138A0500 		mv	s4,a1
+  81              	.L8:
+  82 00a4 13061000 		li	a2,1
+  83 00a8 93050000 		li	a1,0
+  84 00ac 17050000 		lla	a0,.LANCHOR0
+  84      13050500 
+  85 00b4 97000000 		call	copy_and_swap@plt
+  85      E7800000 
+  86 00bc E31405FE 		bne	a0,zero,.L8
+  87 00c0 13090000 		li	s2,0
+  88              	.L9:
+  89 00c4 93040900 		mv	s1,s2
+  90 00c8 1B091900 		addiw	s2,s2,1
+  91 00cc 635A4903 		bge	s2,s4,.L10
+  92 00d0 97000000 		call	getc@plt
+  92      E7800000 
+  93 00d8 63040502 		beq	a0,zero,.L10
+  94 00dc B3849900 		add	s1,s3,s1
+  95 00e0 2380A400 		sb	a0,0(s1)
+  96 00e4 9307A000 		li	a5,10
+  97 00e8 630AF500 		beq	a0,a5,.L13
+  98 00ec 9307D000 		li	a5,13
+  99 00f0 E31AF5FC 		bne	a0,a5,.L9
+ 100 00f4 93040900 		mv	s1,s2
+ 101 00f8 6F008000 		j	.L10
+ 102              	.L13:
+ 103 00fc 93040900 		mv	s1,s2
+ 104              	.L10:
+ 105 0100 B3849900 		add	s1,s3,s1
+ 106 0104 23800400 		sb	zero,0(s1)
+ 107              	.L12:
+ 108 0108 13060000 		li	a2,0
+ 109 010c 93051000 		li	a1,1
+GAS LISTING /tmp/ccdS41Ww.s 			page 3
+
+
+ 110 0110 17050000 		lla	a0,.LANCHOR0
+ 110      13050500 
+ 111 0118 97000000 		call	copy_and_swap@plt
+ 111      E7800000 
+ 112 0120 E31405FE 		bne	a0,zero,.L12
+ 113 0124 13850900 		mv	a0,s3
+ 114 0128 83308102 		ld	ra,40(sp)
+ 115              		.cfi_restore 1
+ 116 012c 03340102 		ld	s0,32(sp)
+ 117              		.cfi_restore 8
+ 118              		.cfi_def_cfa 2, 48
+ 119 0130 83348101 		ld	s1,24(sp)
+ 120              		.cfi_restore 9
+ 121 0134 03390101 		ld	s2,16(sp)
+ 122              		.cfi_restore 18
+ 123 0138 83398100 		ld	s3,8(sp)
+ 124              		.cfi_restore 19
+ 125 013c 033A0100 		ld	s4,0(sp)
+ 126              		.cfi_restore 20
+ 127 0140 13010103 		addi	sp,sp,48
+ 128              		.cfi_def_cfa_offset 0
+ 129 0144 67800000 		jr	ra
+ 130              		.cfi_endproc
+ 131              	.LFE2:
+ 133              		.align	2
+ 134              		.globl	_Z11stringToIntPKc
+ 136              	_Z11stringToIntPKc:
+ 137              	.LFB3:
+ 138              		.cfi_startproc
+ 139 0148 130101FF 		addi	sp,sp,-16
+ 140              		.cfi_def_cfa_offset 16
+ 141 014c 23348100 		sd	s0,8(sp)
+ 142              		.cfi_offset 8, -8
+ 143 0150 13040101 		addi	s0,sp,16
+ 144              		.cfi_def_cfa 8, 0
+ 145 0154 13070500 		mv	a4,a0
+ 146 0158 13050000 		li	a0,0
+ 147 015c 6F00C001 		j	.L17
+ 148              	.L18:
+ 149 0160 9B172500 		slliw	a5,a0,2
+ 150 0164 BB87A700 		addw	a5,a5,a0
+ 151 0168 9B971700 		slliw	a5,a5,1
+ 152 016c 13071700 		addi	a4,a4,1
+ 153 0170 BB87D700 		addw	a5,a5,a3
+ 154 0174 1B8507FD 		addiw	a0,a5,-48
+ 155              	.L17:
+ 156 0178 83460700 		lbu	a3,0(a4)
+ 157 017c 9B8706FD 		addiw	a5,a3,-48
+ 158 0180 93F7F70F 		andi	a5,a5,0xff
+ 159 0184 13069000 		li	a2,9
+ 160 0188 E37CF6FC 		bleu	a5,a2,.L18
+ 161 018c 03348100 		ld	s0,8(sp)
+ 162              		.cfi_restore 8
+ 163              		.cfi_def_cfa 2, 16
+ 164 0190 13010101 		addi	sp,sp,16
+ 165              		.cfi_def_cfa_offset 0
+ 166 0194 67800000 		jr	ra
+GAS LISTING /tmp/ccdS41Ww.s 			page 4
+
+
+ 167              		.cfi_endproc
+ 168              	.LFE3:
+ 170              		.align	2
+ 171              		.globl	_Z8printIntmi
+ 173              	_Z8printIntmi:
+ 174              	.LFB4:
+ 175              		.cfi_startproc
+ 176 0198 130101FC 		addi	sp,sp,-64
+ 177              		.cfi_def_cfa_offset 64
+ 178 019c 233C1102 		sd	ra,56(sp)
+ 179 01a0 23388102 		sd	s0,48(sp)
+ 180 01a4 23349102 		sd	s1,40(sp)
+ 181 01a8 23302103 		sd	s2,32(sp)
+ 182 01ac 233C3101 		sd	s3,24(sp)
+ 183              		.cfi_offset 1, -8
+ 184              		.cfi_offset 8, -16
+ 185              		.cfi_offset 9, -24
+ 186              		.cfi_offset 18, -32
+ 187              		.cfi_offset 19, -40
+ 188 01b0 13040104 		addi	s0,sp,64
+ 189              		.cfi_def_cfa 8, 0
+ 190 01b4 13090500 		mv	s2,a0
+ 191 01b8 93890500 		mv	s3,a1
+ 192              	.L21:
+ 193 01bc 13061000 		li	a2,1
+ 194 01c0 93050000 		li	a1,0
+ 195 01c4 17050000 		lla	a0,.LANCHOR0
+ 195      13050500 
+ 196 01cc 97000000 		call	copy_and_swap@plt
+ 196      E7800000 
+ 197 01d4 E31405FE 		bne	a0,zero,.L21
+ 198 01d8 93040000 		li	s1,0
+ 199              	.L22:
+ 200 01dc B3763903 		remu	a3,s2,s3
+ 201 01e0 17070000 		lla	a4,.LANCHOR1
+ 201      13070700 
+ 202 01e8 3307D700 		add	a4,a4,a3
+ 203 01ec 03470700 		lbu	a4,0(a4)
+ 204 01f0 938704FD 		addi	a5,s1,-48
+ 205 01f4 B3878700 		add	a5,a5,s0
+ 206 01f8 9B841400 		addiw	s1,s1,1
+ 207 01fc 2388E7FE 		sb	a4,-16(a5)
+ 208 0200 93070900 		mv	a5,s2
+ 209 0204 33593903 		divu	s2,s2,s3
+ 210 0208 E3FA37FD 		bleu	s3,a5,.L22
+ 211 020c 6F008001 		j	.L23
+ 212              	.L24:
+ 213 0210 938704FD 		addi	a5,s1,-48
+ 214 0214 B3878700 		add	a5,a5,s0
+ 215 0218 03C507FF 		lbu	a0,-16(a5)
+ 216 021c 97000000 		call	putc@plt
+ 216      E7800000 
+ 217              	.L23:
+ 218 0224 9B84F4FF 		addiw	s1,s1,-1
+ 219 0228 E3D404FE 		bge	s1,zero,.L24
+ 220              	.L25:
+ 221 022c 13060000 		li	a2,0
+GAS LISTING /tmp/ccdS41Ww.s 			page 5
+
+
+ 222 0230 93051000 		li	a1,1
+ 223 0234 17050000 		lla	a0,.LANCHOR0
+ 223      13050500 
+ 224 023c 97000000 		call	copy_and_swap@plt
+ 224      E7800000 
+ 225 0244 E31405FE 		bne	a0,zero,.L25
+ 226 0248 83308103 		ld	ra,56(sp)
+ 227              		.cfi_restore 1
+ 228 024c 03340103 		ld	s0,48(sp)
+ 229              		.cfi_restore 8
+ 230              		.cfi_def_cfa 2, 64
+ 231 0250 83348102 		ld	s1,40(sp)
+ 232              		.cfi_restore 9
+ 233 0254 03390102 		ld	s2,32(sp)
+ 234              		.cfi_restore 18
+ 235 0258 83398101 		ld	s3,24(sp)
+ 236              		.cfi_restore 19
+ 237 025c 13010104 		addi	sp,sp,64
+ 238              		.cfi_def_cfa_offset 0
+ 239 0260 67800000 		jr	ra
+ 240              		.cfi_endproc
+ 241              	.LFE4:
+ 243              		.globl	digits
+ 244              		.globl	lockPrint
+ 245              		.data
+ 246              		.align	3
+ 247              		.set	.LANCHOR1,. + 0
+ 250              	digits:
+ 251 0000 30313233 		.string	"0123456789ABCDEF"
+ 251      34353637 
+ 251      38394142 
+ 251      43444546 
+ 251      00
+ 252              		.bss
+ 253              		.align	3
+ 254              		.set	.LANCHOR0,. + 0
+ 257              	lockPrint:
+ 258 0000 00000000 		.zero	8
+ 258      00000000 
+ 259              		.ident	"GCC: (GNU) 12.2.0"
+ 260              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccdS41Ww.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 printing.cpp
+     /tmp/ccdS41Ww.s:11     .text:0000000000000000 _Z11printStringPKc
+     /tmp/ccdS41Ww.s:13     .text:0000000000000000 .L0 
+     /tmp/ccdS41Ww.s:14     .text:0000000000000000 $x
+     /tmp/ccdS41Ww.s:15     .text:0000000000000004 .L0 
+     /tmp/ccdS41Ww.s:19     .text:0000000000000010 .L0 
+     /tmp/ccdS41Ww.s:20     .text:0000000000000010 .L0 
+     /tmp/ccdS41Ww.s:21     .text:0000000000000010 .L0 
+     /tmp/ccdS41Ww.s:23     .text:0000000000000014 .L0 
+     /tmp/ccdS41Ww.s:45     .text:000000000000006c .L0 
+     /tmp/ccdS41Ww.s:47     .text:0000000000000070 .L0 
+     /tmp/ccdS41Ww.s:48     .text:0000000000000070 .L0 
+     /tmp/ccdS41Ww.s:50     .text:0000000000000074 .L0 
+     /tmp/ccdS41Ww.s:52     .text:0000000000000078 .L0 
+     /tmp/ccdS41Ww.s:54     .text:000000000000007c .L0 
+     /tmp/ccdS41Ww.s:60     .text:000000000000007c _Z9getStringPci
+     /tmp/ccdS41Ww.s:62     .text:000000000000007c .L0 
+     /tmp/ccdS41Ww.s:64     .text:0000000000000080 .L0 
+     /tmp/ccdS41Ww.s:71     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:72     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:73     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:74     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:75     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:76     .text:0000000000000098 .L0 
+     /tmp/ccdS41Ww.s:78     .text:000000000000009c .L0 
+     /tmp/ccdS41Ww.s:115    .text:000000000000012c .L0 
+     /tmp/ccdS41Ww.s:117    .text:0000000000000130 .L0 
+     /tmp/ccdS41Ww.s:118    .text:0000000000000130 .L0 
+     /tmp/ccdS41Ww.s:120    .text:0000000000000134 .L0 
+     /tmp/ccdS41Ww.s:122    .text:0000000000000138 .L0 
+     /tmp/ccdS41Ww.s:124    .text:000000000000013c .L0 
+     /tmp/ccdS41Ww.s:126    .text:0000000000000140 .L0 
+     /tmp/ccdS41Ww.s:128    .text:0000000000000144 .L0 
+     /tmp/ccdS41Ww.s:130    .text:0000000000000148 .L0 
+     /tmp/ccdS41Ww.s:136    .text:0000000000000148 _Z11stringToIntPKc
+     /tmp/ccdS41Ww.s:138    .text:0000000000000148 .L0 
+     /tmp/ccdS41Ww.s:140    .text:000000000000014c .L0 
+     /tmp/ccdS41Ww.s:142    .text:0000000000000150 .L0 
+     /tmp/ccdS41Ww.s:144    .text:0000000000000154 .L0 
+     /tmp/ccdS41Ww.s:162    .text:0000000000000190 .L0 
+     /tmp/ccdS41Ww.s:163    .text:0000000000000190 .L0 
+     /tmp/ccdS41Ww.s:165    .text:0000000000000194 .L0 
+     /tmp/ccdS41Ww.s:167    .text:0000000000000198 .L0 
+     /tmp/ccdS41Ww.s:173    .text:0000000000000198 _Z8printIntmi
+     /tmp/ccdS41Ww.s:175    .text:0000000000000198 .L0 
+     /tmp/ccdS41Ww.s:177    .text:000000000000019c .L0 
+     /tmp/ccdS41Ww.s:183    .text:00000000000001b0 .L0 
+     /tmp/ccdS41Ww.s:184    .text:00000000000001b0 .L0 
+     /tmp/ccdS41Ww.s:185    .text:00000000000001b0 .L0 
+     /tmp/ccdS41Ww.s:186    .text:00000000000001b0 .L0 
+     /tmp/ccdS41Ww.s:187    .text:00000000000001b0 .L0 
+     /tmp/ccdS41Ww.s:189    .text:00000000000001b4 .L0 
+     /tmp/ccdS41Ww.s:227    .text:000000000000024c .L0 
+     /tmp/ccdS41Ww.s:229    .text:0000000000000250 .L0 
+     /tmp/ccdS41Ww.s:230    .text:0000000000000250 .L0 
+     /tmp/ccdS41Ww.s:232    .text:0000000000000254 .L0 
+GAS LISTING /tmp/ccdS41Ww.s 			page 7
+
+
+     /tmp/ccdS41Ww.s:234    .text:0000000000000258 .L0 
+     /tmp/ccdS41Ww.s:236    .text:000000000000025c .L0 
+     /tmp/ccdS41Ww.s:238    .text:0000000000000260 .L0 
+     /tmp/ccdS41Ww.s:240    .text:0000000000000264 .L0 
+     /tmp/ccdS41Ww.s:250    .data:0000000000000000 digits
+     /tmp/ccdS41Ww.s:257    .bss:0000000000000000 lockPrint
+     /tmp/ccdS41Ww.s:247    .data:0000000000000000 .LANCHOR1
+     /tmp/ccdS41Ww.s:254    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccdS41Ww.s:28     .text:0000000000000020 .L0 
+     /tmp/ccdS41Ww.s:41     .text:0000000000000054 .L0 
+     /tmp/ccdS41Ww.s:84     .text:00000000000000ac .L0 
+     /tmp/ccdS41Ww.s:110    .text:0000000000000110 .L0 
+     /tmp/ccdS41Ww.s:195    .text:00000000000001c4 .L0 
+     /tmp/ccdS41Ww.s:201    .text:00000000000001e0 .L0 
+     /tmp/ccdS41Ww.s:223    .text:0000000000000234 .L0 
+     /tmp/ccdS41Ww.s:25     .text:0000000000000018 .L2
+     /tmp/ccdS41Ww.s:35     .text:0000000000000044 .L3
+     /tmp/ccdS41Ww.s:32     .text:0000000000000038 .L4
+     /tmp/ccdS41Ww.s:38     .text:000000000000004c .L5
+     /tmp/ccdS41Ww.s:81     .text:00000000000000a4 .L8
+     /tmp/ccdS41Ww.s:104    .text:0000000000000100 .L10
+     /tmp/ccdS41Ww.s:102    .text:00000000000000fc .L13
+     /tmp/ccdS41Ww.s:88     .text:00000000000000c4 .L9
+     /tmp/ccdS41Ww.s:107    .text:0000000000000108 .L12
+     /tmp/ccdS41Ww.s:155    .text:0000000000000178 .L17
+     /tmp/ccdS41Ww.s:148    .text:0000000000000160 .L18
+     /tmp/ccdS41Ww.s:192    .text:00000000000001bc .L21
+     /tmp/ccdS41Ww.s:199    .text:00000000000001dc .L22
+     /tmp/ccdS41Ww.s:217    .text:0000000000000224 .L23
+     /tmp/ccdS41Ww.s:212    .text:0000000000000210 .L24
+     /tmp/ccdS41Ww.s:220    .text:000000000000022c .L25
+
+UNDEFINED SYMBOLS
+copy_and_swap
+putc
+getc

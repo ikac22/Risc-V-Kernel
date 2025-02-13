@@ -1,0 +1,2372 @@
+GAS LISTING /tmp/ccmESeAu.s 			page 1
+
+
+   1              		.file	"interrupt_cpp.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata._ZN10KSemaphorenwEm.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 4B53656D 		.string	"KSemaphore_cache"
+  11      6170686F 
+  11      72655F63 
+  11      61636865 
+  11      00
+  12              		.section	.text._ZN10KSemaphorenwEm,"axG",@progbits,_ZN10KSemaphorenwEm,comdat
+  13              		.align	2
+  14              		.weak	_ZN10KSemaphorenwEm
+  16              	_ZN10KSemaphorenwEm:
+  17              	.LFB84:
+  18              		.cfi_startproc
+  19              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  20              		.cfi_lsda 0x1b,.LLSDA84
+  21 0000 130101FE 		addi	sp,sp,-32
+  22              		.cfi_def_cfa_offset 32
+  23 0004 233C1100 		sd	ra,24(sp)
+  24 0008 23388100 		sd	s0,16(sp)
+  25 000c 23349100 		sd	s1,8(sp)
+  26 0010 23302101 		sd	s2,0(sp)
+  27              		.cfi_offset 1, -8
+  28              		.cfi_offset 8, -16
+  29              		.cfi_offset 9, -24
+  30              		.cfi_offset 18, -32
+  31 0014 13040102 		addi	s0,sp,32
+  32              		.cfi_def_cfa 8, 0
+  33 0018 97070000 		la	a5,_ZN10KSemaphore5cacheE
+  33      83B70700 
+  34 0020 83B70700 		ld	a5,0(a5)
+  35 0024 63880702 		beq	a5,zero,.L8
+  36              	.L2:
+  37 0028 97070000 		la	a5,_ZN10KSemaphore5cacheE
+  37      83B70700 
+  38 0030 03B50700 		ld	a0,0(a5)
+  39              	.LEHB0:
+  40 0034 97000000 		call	_ZN11ObjectCache9alloc_objEv@plt
+  40      E7800000 
+  41 003c 83308101 		ld	ra,24(sp)
+  42              		.cfi_remember_state
+  43              		.cfi_restore 1
+  44 0040 03340101 		ld	s0,16(sp)
+  45              		.cfi_restore 8
+  46              		.cfi_def_cfa 2, 32
+  47 0044 83348100 		ld	s1,8(sp)
+  48              		.cfi_restore 9
+  49 0048 03390100 		ld	s2,0(sp)
+  50              		.cfi_restore 18
+  51 004c 13010102 		addi	sp,sp,32
+GAS LISTING /tmp/ccmESeAu.s 			page 2
+
+
+  52              		.cfi_def_cfa_offset 0
+  53 0050 67800000 		jr	ra
+  54              	.L8:
+  55              		.cfi_restore_state
+  56 0054 93040500 		mv	s1,a0
+  57 0058 13058005 		li	a0,88
+  58 005c 97000000 		call	_ZN11ObjectCachenwEm@plt
+  58      E7800000 
+  59              	.LEHE0:
+  60 0064 13090500 		mv	s2,a0
+  61 0068 63020502 		beq	a0,zero,.L3
+  62 006c 93070000 		li	a5,0
+  63 0070 13070000 		li	a4,0
+  64 0074 93060000 		li	a3,0
+  65 0078 13860400 		mv	a2,s1
+  66 007c 97050000 		lla	a1,.LC0
+  66      93850500 
+  67              	.LEHB1:
+  68 0084 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+  68      E7800000 
+  69              	.LEHE1:
+  70              	.L3:
+  71 008c 97070000 		la	a5,_ZN10KSemaphore5cacheE
+  71      83B70700 
+  72 0094 23B02701 		sd	s2,0(a5)
+  73 0098 6FF01FF9 		j	.L2
+  74              	.L5:
+  75 009c 93040500 		mv	s1,a0
+  76 00a0 13050900 		mv	a0,s2
+  77 00a4 97000000 		call	_ZN11ObjectCachedlEPv@plt
+  77      E7800000 
+  78 00ac 13850400 		mv	a0,s1
+  79              	.LEHB2:
+  80 00b0 97000000 		call	_Unwind_Resume@plt
+  80      E7800000 
+  81              	.LEHE2:
+  82              		.cfi_endproc
+  83              	.LFE84:
+  84              		.globl	__gxx_personality_v0
+  85              		.section	.gcc_except_table._ZN10KSemaphorenwEm,"aG",@progbits,_ZN10KSemaphorenwEm,comdat
+  86              	.LLSDA84:
+  87 0000 FF       		.byte	0xff
+  88 0001 FF       		.byte	0xff
+  89 0002 03       		.byte	0x3
+  90 0003 27       		.byte	0x27
+  91 0004 00000000 		.4byte	.LEHB0-.LFB84
+  92 0008 00000000 		.4byte	.LEHE0-.LEHB0
+  93 000c 00000000 		.4byte	0
+  94 0010 00       		.byte	0
+  95 0011 00000000 		.4byte	.LEHB1-.LFB84
+  96 0015 00000000 		.4byte	.LEHE1-.LEHB1
+  97 0019 00000000 		.4byte	.L5-.LFB84
+  98 001d 00       		.byte	0
+  99 001e 00000000 		.4byte	.LEHB2-.LFB84
+ 100 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 101 0026 00000000 		.4byte	0
+ 102 002a 00       		.byte	0
+GAS LISTING /tmp/ccmESeAu.s 			page 3
+
+
+ 103              		.section	.text._ZN10KSemaphorenwEm,"axG",@progbits,_ZN10KSemaphorenwEm,comdat
+ 105              		.text
+ 106              		.align	2
+ 107              		.globl	_Z13timer_handlerv
+ 109              	_Z13timer_handlerv:
+ 110              	.LFB113:
+ 111              		.cfi_startproc
+ 112 0000 130101FD 		addi	sp,sp,-48
+ 113              		.cfi_def_cfa_offset 48
+ 114 0004 23341102 		sd	ra,40(sp)
+ 115 0008 23308102 		sd	s0,32(sp)
+ 116 000c 233C9100 		sd	s1,24(sp)
+ 117 0010 23382101 		sd	s2,16(sp)
+ 118              		.cfi_offset 1, -8
+ 119              		.cfi_offset 8, -16
+ 120              		.cfi_offset 9, -24
+ 121              		.cfi_offset 18, -32
+ 122 0014 13040103 		addi	s0,sp,48
+ 123              		.cfi_def_cfa 8, 0
+ 124 0018 97000000 		call	_ZN9Scheduler12update_sleepEv@plt
+ 124      E7800000 
+ 125 0020 17070000 		la	a4,_ZN3TCB16timeSliceCounterE
+ 125      03370700 
+ 126 0028 83370700 		ld	a5,0(a4)
+ 127 002c 93871700 		addi	a5,a5,1
+ 128 0030 2330F700 		sd	a5,0(a4)
+ 129 0034 17070000 		la	a4,_ZN3TCB7runningE
+ 129      03370700 
+ 130 003c 03370700 		ld	a4,0(a4)
+ 131 0040 03378702 		ld	a4,40(a4)
+ 132 0044 63F2E702 		bgeu	a5,a4,.L12
+ 133              	.L10:
+ 134 0048 93072000 		li	a5,2
+ 135              	#APP
+ 136              	# 175 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+   1              	#ifndef __riscv__
+   2              	#define __riscv__
+   3              	
+   4              	#include"../lib/hw.h"
+   5              	
+   6              	class Riscv{
+   7              	public:
+   8              	/* 
+   9              	--------------------SUPERVISOR REGISTERS--------------------    
+  10              	*/
+  11              	    static void w_scause(uint64);
+  12              	    static uint64 r_scause(); 
+  13              	
+  14              	    static void w_sepc(uint64);
+  15              	    static uint64 r_sepc();
+  16              	    static void ni_sepc();
+  17              	
+  18              	    static void w_stvec(uint64);
+  19              	    static uint64 r_stvec();
+  20              	     
+  21              	    static void w_stval(uint64);
+  22              	    static uint64 r_stval();
+GAS LISTING /tmp/ccmESeAu.s 			page 4
+
+
+  23              	
+  24              	    static void w_satp(uint64);
+  25              	    static uint64 r_satp();
+  26              	    
+  27              	    enum BitMaskSip{
+  28              	        SIP_SSIE = (1<<1),
+  29              	        SIP_STIE = (1<<5),
+  30              	        SIP_SEIE = (1<<9),
+  31              	    };
+  32              	
+  33              	    static void ms_sip(uint64);
+  34              	    static void mc_sip(uint64);
+  35              	
+  36              	    static void w_sip(uint64);
+  37              	    static uint64 r_sip();
+  38              	
+  39              	    static void ms_sie(uint64);
+  40              	    static void mc_sie(uint64);
+  41              	
+  42              	    static void w_sie(uint64);
+  43              	    static uint64 r_sie();
+  44              	
+  45              	    enum BitMaskSstatus{
+  46              	        SSTATUS_SIE = (1<<1),
+  47              	        SSTATUS_SPIE = (1<<5),
+  48              	        SSTATUS_SPP = (1<<8),
+  49              	        SSTATUS_SUM = (1<<18),
+  50              	    };
+  51              	
+  52              	    static void ms_sstatus(uint64);
+  53              	    static void mc_sstatus(uint64);
+  54              	
+  55              	    static void w_sstatus(uint64);
+  56              	    static uint64 r_sstatus();
+  57              	
+  58              	/* 
+  59              	--------------------CLASSIC REGISTERS--------------------    
+  60              	*/
+  61              	    static uint64 r_sp();
+  62              	    static uint64 r_a0(); /* parameter registers */
+  63              	    static uint64 s_a0(uint64 a0);
+  64              	    static uint64 r_a1();
+  65              	    static uint64 r_a2();
+  66              	    static uint64 r_a3();
+  67              	    static uint64 r_a4();
+  68              	
+  69              	    static void popRegisters(); /* pop all context registers */
+  70              	    static void pushRegisters(); /* push all context registers */
+  71              	 
+  72              	    static void popSppSpie(); /* jump from kernel to start of thread */
+  73              	
+  74              	/* 
+  75              	--------------------CONSOLE REGISTERS--------------------    
+  76              	*/
+  77              	    static void mc_cstatus(uint64 mask); 
+  78              	    static bool cstatus_ready(uint64 mask);
+  79              	};
+GAS LISTING /tmp/ccmESeAu.s 			page 5
+
+
+  80              	
+  81              	/* 
+  82              	--------------------CLASSIC REGISTERS--------------------    
+  83              	*/
+  84              	
+  85              	inline uint64 Riscv::r_sp(){
+  86              	    uint64 a0;
+  87              	    asm volatile("mv %0, sp" : "=r" (a0));
+  88              	    return a0;
+  89              	}
+  90              	
+  91              	inline uint64 Riscv::r_a0(){
+  92              	    uint64 a0;
+  93              	    asm volatile("mv %0, a0" : "=r" (a0));
+  94              	    return a0;
+  95              	}
+  96              	
+  97              	inline uint64 Riscv::r_a1(){
+  98              	    uint64 a0;
+  99              	    asm volatile("mv %0, a1" : "=r" (a0));
+ 100              	    return a0;
+ 101              	}
+ 102              	
+ 103              	inline uint64 Riscv::r_a2(){
+ 104              	    uint64 a0;
+ 105              	    asm volatile("mv %0, a2" : "=r" (a0));
+ 106              	    return a0;
+ 107              	}
+ 108              	
+ 109              	inline uint64 Riscv::r_a3(){
+ 110              	    uint64 a0;
+ 111              	    asm volatile("mv %0, a3" : "=r" (a0));
+ 112              	    return a0;
+ 113              	}
+ 114              	
+ 115              	inline uint64 Riscv::r_a4(){
+ 116              	    uint64 a0;
+ 117              	    asm volatile("mv %0, a4" : "=r" (a0));
+ 118              	    return a0;
+ 119              	}
+ 120              	
+ 121              	
+ 122              	inline uint64 Riscv::s_a0(uint64 a0){
+ 123              	    return a0;
+ 124              	}
+ 125              	
+ 126              	/* 
+ 127              	--------------------SUPERVISOR REGISTERS--------------------    
+ 128              	*/
+ 129              	
+ 130              	inline void Riscv::w_scause(uint64 scause){
+ 131              	    asm volatile("csrw scause, %0" : : "r" (scause));
+ 132              	}
+ 133              	
+ 134              	inline uint64 Riscv::r_scause(){
+ 135              	    uint64 volatile scause;
+ 136              	    asm volatile("csrr %0, scause" : "=r" (scause));
+GAS LISTING /tmp/ccmESeAu.s 			page 6
+
+
+ 137              	    return scause;
+ 138              	} 
+ 139              	
+ 140              	inline void Riscv::w_sepc(uint64 sepc){
+ 141              	    asm volatile("csrw sepc, %0" : : "r" (sepc));
+ 142              	}
+ 143              	
+ 144              	inline uint64 Riscv::r_sepc(){
+ 145              	    uint64 volatile sepc;
+ 146              	    asm volatile("csrr %0, sepc" : "=r" (sepc));
+ 147              	    return sepc;
+ 148              	} 
+ 149              	
+ 150              	inline void Riscv::w_stvec(uint64 stvec){
+ 151              	    asm volatile("csrw stvec, %0" : : "r" (stvec));
+ 152              	}
+ 153              	
+ 154              	inline uint64 Riscv::r_stvec(){
+ 155              	    uint64 volatile stvec;
+ 156              	    asm volatile("csrr %0, stvec" : "=r" (stvec));
+ 157              	    return stvec;
+ 158              	} 
+ 159              	
+ 160              	inline void Riscv::w_stval(uint64 stval){
+ 161              	    asm volatile("csrw stval, %0" : : "r" (stval));
+ 162              	}
+ 163              	
+ 164              	inline uint64 Riscv::r_stval(){
+ 165              	    uint64 volatile stval;
+ 166              	    asm volatile("csrr %0, stval" : "=r" (stval));
+ 167              	    return stval;
+ 168              	} 
+ 169              	
+ 170              	inline void Riscv::ms_sip(uint64 mask){
+ 171              	    asm volatile ("csrs sip, %0" : : "r" (mask));
+ 172              	}
+ 173              	
+ 174              	inline void Riscv::mc_sip(uint64 mask){
+ 175 004c 73B04714 	    asm volatile ("csrc sip, %0" : : "r" (mask));
+ 176              	}
+ 137              		csrc sip, a5
+ 138              	# 0 "" 2
+ 139              	#NO_APP
+ 140 0050 83308102 		ld	ra,40(sp)
+ 141              		.cfi_remember_state
+ 142              		.cfi_restore 1
+ 143 0054 03340102 		ld	s0,32(sp)
+ 144              		.cfi_restore 8
+ 145              		.cfi_def_cfa 2, 48
+ 146 0058 83348101 		ld	s1,24(sp)
+ 147              		.cfi_restore 9
+ 148 005c 03390101 		ld	s2,16(sp)
+ 149              		.cfi_restore 18
+ 150 0060 13010103 		addi	sp,sp,48
+ 151              		.cfi_def_cfa_offset 0
+ 152 0064 67800000 		jr	ra
+ 153              	.L12:
+GAS LISTING /tmp/ccmESeAu.s 			page 7
+
+
+ 154              		.cfi_restore_state
+ 155              	#APP
+ 156              	# 220 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 177              	
+ 178              	inline void Riscv::w_sip(uint64 sip){
+ 179              	    asm volatile("csrw sip, %0" : : "r" (sip));
+ 180              	}
+ 181              	
+ 182              	inline uint64 Riscv::r_sip(){
+ 183              	    uint64 volatile sip;
+ 184              	    asm volatile("csrr %0, sip" : "=r" (sip));
+ 185              	    return sip;
+ 186              	} 
+ 187              	
+ 188              	inline void Riscv::ms_sie(uint64 mask){
+ 189              	    asm volatile ("csrs sie, %0" : : "r" (mask));
+ 190              	}
+ 191              	
+ 192              	inline void Riscv::mc_sie(uint64 mask){
+ 193              	    asm volatile ("csrc sie, %0" : : "r" (mask));
+ 194              	}
+ 195              	
+ 196              	inline void Riscv::w_sie(uint64 sie){
+ 197              	    asm volatile("csrw sie, %0" : : "r" (sie));
+ 198              	}
+ 199              	
+ 200              	inline uint64 Riscv::r_sie(){
+ 201              	    uint64 volatile sie;
+ 202              	    asm volatile("csrr %0, sie" : "=r" (sie));
+ 203              	    return sie;
+ 204              	} 
+ 205              	
+ 206              	inline void Riscv::ms_sstatus(uint64 mask){
+ 207              	    asm volatile ("csrs sstatus, %0" : : "r" (mask));
+ 208              	}
+ 209              	
+ 210              	inline void Riscv::mc_sstatus(uint64 mask){
+ 211              	    asm volatile ("csrc sstatus, %0" : : "r" (mask));
+ 212              	}
+ 213              	
+ 214              	inline void Riscv::w_sstatus(uint64 sstatus){
+ 215              	    asm volatile("csrw sstatus, %0" : : "r" (sstatus));
+ 216              	}
+ 217              	
+ 218              	inline uint64 Riscv::r_sstatus(){
+ 219              	    uint64 volatile sstatus;
+ 220 0068 F3270010 	    asm volatile("csrr %0, sstatus" : "=r" (sstatus));
+ 221              	    return sstatus;
+ 157              		csrr a5, sstatus
+ 158              	# 0 "" 2
+ 159              	#NO_APP
+ 160 006c 233CF4FC 		sd	a5,-40(s0)
+ 161 0070 033984FD 		ld	s2,-40(s0)
+ 162              	#APP
+ 163              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 164              		csrr a5, sepc
+ 165              	# 0 "" 2
+GAS LISTING /tmp/ccmESeAu.s 			page 8
+
+
+ 166              	#NO_APP
+ 167 0078 2338F4FC 		sd	a5,-48(s0)
+ 168 007c 833404FD 		ld	s1,-48(s0)
+ 169 0080 97070000 		la	a5,_ZN3TCB16timeSliceCounterE
+ 169      83B70700 
+ 170 0088 23B00700 		sd	zero,0(a5)
+ 171 008c 97000000 		call	_ZN3TCB5yieldEv@plt
+ 171      E7800000 
+ 172              	#APP
+ 173              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 174              		csrw sstatus, s2
+ 175              	# 0 "" 2
+ 176              	# 141 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 177              		csrw sepc, s1
+ 178              	# 0 "" 2
+ 179              	#NO_APP
+ 180 009c 6FF0DFFA 		j	.L10
+ 181              		.cfi_endproc
+ 182              	.LFE113:
+ 184              		.section	.text._ZN12SharedBufferIcE3getEv,"axG",@progbits,_ZN12SharedBufferIcE3getEv,comdat
+ 185              		.align	2
+ 186              		.weak	_ZN12SharedBufferIcE3getEv
+ 188              	_ZN12SharedBufferIcE3getEv:
+ 189              	.LFB117:
+ 190              		.cfi_startproc
+ 191 0000 130101FD 		addi	sp,sp,-48
+ 192              		.cfi_def_cfa_offset 48
+ 193 0004 23341102 		sd	ra,40(sp)
+ 194 0008 23308102 		sd	s0,32(sp)
+ 195 000c 233C9100 		sd	s1,24(sp)
+ 196 0010 23382101 		sd	s2,16(sp)
+ 197 0014 23343101 		sd	s3,8(sp)
+ 198              		.cfi_offset 1, -8
+ 199              		.cfi_offset 8, -16
+ 200              		.cfi_offset 9, -24
+ 201              		.cfi_offset 18, -32
+ 202              		.cfi_offset 19, -40
+ 203 0018 13040103 		addi	s0,sp,48
+ 204              		.cfi_def_cfa 8, 0
+ 205 001c 93040500 		mv	s1,a0
+ 206 0020 13058542 		addi	a0,a0,1064
+ 207 0024 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 207      E7800000 
+ 208 002c 13890440 		addi	s2,s1,1024
+ 209 0030 13050900 		mv	a0,s2
+ 210 0034 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 210      E7800000 
+ 211 003c 83A70448 		lw	a5,1152(s1)
+ 212 0040 9B87F7FF 		addiw	a5,a5,-1
+ 213 0044 23A0F448 		sw	a5,1152(s1)
+ 214 0048 83A78447 		lw	a5,1144(s1)
+ 215 004c 3387F400 		add	a4,s1,a5
+ 216 0050 83490700 		lbu	s3,0(a4)
+ 217 0054 9B871700 		addiw	a5,a5,1
+ 218 0058 1BD7F741 		sraiw	a4,a5,31
+ 219 005c 1B576701 		srliw	a4,a4,22
+ 220 0060 BB87E700 		addw	a5,a5,a4
+GAS LISTING /tmp/ccmESeAu.s 			page 9
+
+
+ 221 0064 93F7F73F 		andi	a5,a5,1023
+ 222 0068 BB87E740 		subw	a5,a5,a4
+ 223 006c 23ACF446 		sw	a5,1144(s1)
+ 224 0070 13850445 		addi	a0,s1,1104
+ 225 0074 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 225      E7800000 
+ 226 007c 13050900 		mv	a0,s2
+ 227 0080 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 227      E7800000 
+ 228 0088 13850900 		mv	a0,s3
+ 229 008c 83308102 		ld	ra,40(sp)
+ 230              		.cfi_restore 1
+ 231 0090 03340102 		ld	s0,32(sp)
+ 232              		.cfi_restore 8
+ 233              		.cfi_def_cfa 2, 48
+ 234 0094 83348101 		ld	s1,24(sp)
+ 235              		.cfi_restore 9
+ 236 0098 03390101 		ld	s2,16(sp)
+ 237              		.cfi_restore 18
+ 238 009c 83398100 		ld	s3,8(sp)
+ 239              		.cfi_restore 19
+ 240 00a0 13010103 		addi	sp,sp,48
+ 241              		.cfi_def_cfa_offset 0
+ 242 00a4 67800000 		jr	ra
+ 243              		.cfi_endproc
+ 244              	.LFE117:
+ 246              		.section	.text._ZN12SharedBufferIcE3putEc,"axG",@progbits,_ZN12SharedBufferIcE3putEc,comdat
+ 247              		.align	2
+ 248              		.weak	_ZN12SharedBufferIcE3putEc
+ 250              	_ZN12SharedBufferIcE3putEc:
+ 251              	.LFB118:
+ 252              		.cfi_startproc
+ 253 0000 130101FD 		addi	sp,sp,-48
+ 254              		.cfi_def_cfa_offset 48
+ 255 0004 23341102 		sd	ra,40(sp)
+ 256 0008 23308102 		sd	s0,32(sp)
+ 257 000c 233C9100 		sd	s1,24(sp)
+ 258 0010 23382101 		sd	s2,16(sp)
+ 259 0014 23343101 		sd	s3,8(sp)
+ 260              		.cfi_offset 1, -8
+ 261              		.cfi_offset 8, -16
+ 262              		.cfi_offset 9, -24
+ 263              		.cfi_offset 18, -32
+ 264              		.cfi_offset 19, -40
+ 265 0018 13040103 		addi	s0,sp,48
+ 266              		.cfi_def_cfa 8, 0
+ 267 001c 93040500 		mv	s1,a0
+ 268 0020 13890500 		mv	s2,a1
+ 269 0024 13050545 		addi	a0,a0,1104
+ 270 0028 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 270      E7800000 
+ 271 0030 93890440 		addi	s3,s1,1024
+ 272 0034 13850900 		mv	a0,s3
+ 273 0038 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 273      E7800000 
+ 274 0040 83A70448 		lw	a5,1152(s1)
+ 275 0044 9B871700 		addiw	a5,a5,1
+GAS LISTING /tmp/ccmESeAu.s 			page 10
+
+
+ 276 0048 23A0F448 		sw	a5,1152(s1)
+ 277 004c 83A7C447 		lw	a5,1148(s1)
+ 278 0050 3387F400 		add	a4,s1,a5
+ 279 0054 23002701 		sb	s2,0(a4)
+ 280 0058 9B871700 		addiw	a5,a5,1
+ 281 005c 1BD7F741 		sraiw	a4,a5,31
+ 282 0060 1B576701 		srliw	a4,a4,22
+ 283 0064 BB87E700 		addw	a5,a5,a4
+ 284 0068 93F7F73F 		andi	a5,a5,1023
+ 285 006c BB87E740 		subw	a5,a5,a4
+ 286 0070 23AEF446 		sw	a5,1148(s1)
+ 287 0074 13858442 		addi	a0,s1,1064
+ 288 0078 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 288      E7800000 
+ 289 0080 13850900 		mv	a0,s3
+ 290 0084 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 290      E7800000 
+ 291 008c 83308102 		ld	ra,40(sp)
+ 292              		.cfi_restore 1
+ 293 0090 03340102 		ld	s0,32(sp)
+ 294              		.cfi_restore 8
+ 295              		.cfi_def_cfa 2, 48
+ 296 0094 83348101 		ld	s1,24(sp)
+ 297              		.cfi_restore 9
+ 298 0098 03390101 		ld	s2,16(sp)
+ 299              		.cfi_restore 18
+ 300 009c 83398100 		ld	s3,8(sp)
+ 301              		.cfi_restore 19
+ 302 00a0 13010103 		addi	sp,sp,48
+ 303              		.cfi_def_cfa_offset 0
+ 304 00a4 67800000 		jr	ra
+ 305              		.cfi_endproc
+ 306              	.LFE118:
+ 308              		.text
+ 309              		.align	2
+ 310              		.globl	_Z8usrEcallmmmmm
+ 312              	_Z8usrEcallmmmmm:
+ 313              	.LFB114:
+ 314              		.cfi_startproc
+ 315 00a0 130101FB 		addi	sp,sp,-80
+ 316              		.cfi_def_cfa_offset 80
+ 317 00a4 23341104 		sd	ra,72(sp)
+ 318 00a8 23308104 		sd	s0,64(sp)
+ 319 00ac 233C9102 		sd	s1,56(sp)
+ 320 00b0 23382103 		sd	s2,48(sp)
+ 321 00b4 23343103 		sd	s3,40(sp)
+ 322 00b8 23304103 		sd	s4,32(sp)
+ 323 00bc 233C5101 		sd	s5,24(sp)
+ 324              		.cfi_offset 1, -8
+ 325              		.cfi_offset 8, -16
+ 326              		.cfi_offset 9, -24
+ 327              		.cfi_offset 18, -32
+ 328              		.cfi_offset 19, -40
+ 329              		.cfi_offset 20, -48
+ 330              		.cfi_offset 21, -56
+ 331 00c0 13040105 		addi	s0,sp,80
+ 332              		.cfi_def_cfa 8, 0
+GAS LISTING /tmp/ccmESeAu.s 			page 11
+
+
+ 333 00c4 93890500 		mv	s3,a1
+ 334              	#APP
+ 335              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 336              		csrr a5, sepc
+ 337              	# 0 "" 2
+ 338              	#NO_APP
+ 339 00cc 233CF4FA 		sd	a5,-72(s0)
+ 340 00d0 033984FB 		ld	s2,-72(s0)
+ 341 00d4 13094900 		addi	s2,s2,4
+ 342              	#APP
+ 343              	# 220 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 344              		csrr a5, sstatus
+ 345              	# 0 "" 2
+ 346              	#NO_APP
+ 347 00dc 2338F4FA 		sd	a5,-80(s0)
+ 348 00e0 833A04FB 		ld	s5,-80(s0)
+ 349 00e4 93071000 		li	a5,1
+ 350 00e8 6300F504 		beq	a0,a5,.L41
+ 351 00ec 93040500 		mv	s1,a0
+ 352 00f0 130A0600 		mv	s4,a2
+ 353 00f4 93072004 		li	a5,66
+ 354 00f8 63ECA706 		bgtu	a0,a5,.L20
+ 355 00fc 93072000 		li	a5,2
+ 356 0100 6360F504 		bltu	a0,a5,.L19
+ 357 0104 93072004 		li	a5,66
+ 358 0108 63ECA702 		bgtu	a0,a5,.L19
+ 359 010c 93172500 		slli	a5,a0,2
+ 360 0110 17060000 		lla	a2,.L22
+ 360      13060600 
+ 361 0118 B387C700 		add	a5,a5,a2
+ 362 011c 83A70700 		lw	a5,0(a5)
+ 363 0120 B387C700 		add	a5,a5,a2
+ 364 0124 67800700 		jr	a5
+ 365              		.section	.rodata
+ 366              		.align	2
+ 367              		.align	2
+ 368              	.L22:
+ 369 0000 00000000 		.word	.L19-.L22
+ 370 0004 00000000 		.word	.L19-.L22
+ 371 0008 00000000 		.word	.L32-.L22
+ 372 000c 00000000 		.word	.L19-.L22
+ 373 0010 00000000 		.word	.L19-.L22
+ 374 0014 00000000 		.word	.L19-.L22
+ 375 0018 00000000 		.word	.L19-.L22
+ 376 001c 00000000 		.word	.L19-.L22
+ 377 0020 00000000 		.word	.L19-.L22
+ 378 0024 00000000 		.word	.L19-.L22
+ 379 0028 00000000 		.word	.L19-.L22
+ 380 002c 00000000 		.word	.L19-.L22
+ 381 0030 00000000 		.word	.L19-.L22
+ 382 0034 00000000 		.word	.L19-.L22
+ 383 0038 00000000 		.word	.L19-.L22
+ 384 003c 00000000 		.word	.L19-.L22
+ 385 0040 00000000 		.word	.L19-.L22
+ 386 0044 00000000 		.word	.L31-.L22
+ 387 0048 00000000 		.word	.L30-.L22
+ 388 004c 00000000 		.word	.L29-.L22
+GAS LISTING /tmp/ccmESeAu.s 			page 12
+
+
+ 389 0050 00000000 		.word	.L19-.L22
+ 390 0054 00000000 		.word	.L19-.L22
+ 391 0058 00000000 		.word	.L19-.L22
+ 392 005c 00000000 		.word	.L19-.L22
+ 393 0060 00000000 		.word	.L19-.L22
+ 394 0064 00000000 		.word	.L19-.L22
+ 395 0068 00000000 		.word	.L19-.L22
+ 396 006c 00000000 		.word	.L19-.L22
+ 397 0070 00000000 		.word	.L19-.L22
+ 398 0074 00000000 		.word	.L19-.L22
+ 399 0078 00000000 		.word	.L19-.L22
+ 400 007c 00000000 		.word	.L19-.L22
+ 401 0080 00000000 		.word	.L19-.L22
+ 402 0084 00000000 		.word	.L28-.L22
+ 403 0088 00000000 		.word	.L27-.L22
+ 404 008c 00000000 		.word	.L26-.L22
+ 405 0090 00000000 		.word	.L25-.L22
+ 406 0094 00000000 		.word	.L19-.L22
+ 407 0098 00000000 		.word	.L19-.L22
+ 408 009c 00000000 		.word	.L19-.L22
+ 409 00a0 00000000 		.word	.L19-.L22
+ 410 00a4 00000000 		.word	.L19-.L22
+ 411 00a8 00000000 		.word	.L19-.L22
+ 412 00ac 00000000 		.word	.L19-.L22
+ 413 00b0 00000000 		.word	.L19-.L22
+ 414 00b4 00000000 		.word	.L19-.L22
+ 415 00b8 00000000 		.word	.L19-.L22
+ 416 00bc 00000000 		.word	.L19-.L22
+ 417 00c0 00000000 		.word	.L19-.L22
+ 418 00c4 00000000 		.word	.L24-.L22
+ 419 00c8 00000000 		.word	.L19-.L22
+ 420 00cc 00000000 		.word	.L19-.L22
+ 421 00d0 00000000 		.word	.L19-.L22
+ 422 00d4 00000000 		.word	.L19-.L22
+ 423 00d8 00000000 		.word	.L19-.L22
+ 424 00dc 00000000 		.word	.L19-.L22
+ 425 00e0 00000000 		.word	.L19-.L22
+ 426 00e4 00000000 		.word	.L19-.L22
+ 427 00e8 00000000 		.word	.L19-.L22
+ 428 00ec 00000000 		.word	.L19-.L22
+ 429 00f0 00000000 		.word	.L19-.L22
+ 430 00f4 00000000 		.word	.L19-.L22
+ 431 00f8 00000000 		.word	.L19-.L22
+ 432 00fc 00000000 		.word	.L19-.L22
+ 433 0100 00000000 		.word	.L19-.L22
+ 434 0104 00000000 		.word	.L23-.L22
+ 435 0108 00000000 		.word	.L21-.L22
+ 436              		.text
+ 437              	.L41:
+ 438 0128 97000000 		call	_ZN15MemoryAllocator11getInstanceEv@plt
+ 438      E7800000 
+ 439 0130 93850900 		mv	a1,s3
+ 440 0134 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
+ 440      E7800000 
+ 441 013c 93040500 		mv	s1,a0
+ 442              	.L19:
+ 443              	#APP
+GAS LISTING /tmp/ccmESeAu.s 			page 13
+
+
+ 444              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 445              		csrw sstatus, s5
+ 446              	# 0 "" 2
+ 447              	# 141 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 448              		csrw sepc, s2
+ 449              	# 0 "" 2
+ 450              	#NO_APP
+ 451 0148 13850400 		mv	a0,s1
+ 452 014c 83308104 		ld	ra,72(sp)
+ 453              		.cfi_remember_state
+ 454              		.cfi_restore 1
+ 455 0150 03340104 		ld	s0,64(sp)
+ 456              		.cfi_restore 8
+ 457              		.cfi_def_cfa 2, 80
+ 458 0154 83348103 		ld	s1,56(sp)
+ 459              		.cfi_restore 9
+ 460 0158 03390103 		ld	s2,48(sp)
+ 461              		.cfi_restore 18
+ 462 015c 83398102 		ld	s3,40(sp)
+ 463              		.cfi_restore 19
+ 464 0160 033A0102 		ld	s4,32(sp)
+ 465              		.cfi_restore 20
+ 466 0164 833A8101 		ld	s5,24(sp)
+ 467              		.cfi_restore 21
+ 468 0168 13010105 		addi	sp,sp,80
+ 469              		.cfi_def_cfa_offset 0
+ 470 016c 67800000 		jr	ra
+ 471              	.L20:
+ 472              		.cfi_restore_state
+ 473 0170 93079006 		li	a5,105
+ 474 0174 E316F5FC 		bne	a0,a5,.L19
+ 475 0178 13850500 		mv	a0,a1
+ 476 017c 97000000 		call	_ZN3TCB12deleteThreadEPS_@plt
+ 476      E7800000 
+ 477 0184 6FF0DFFB 		j	.L19
+ 478              	.L32:
+ 479 0188 97000000 		call	_ZN15MemoryAllocator11getInstanceEv@plt
+ 479      E7800000 
+ 480 0190 93850900 		mv	a1,s3
+ 481 0194 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
+ 481      E7800000 
+ 482 019c 93040500 		mv	s1,a0
+ 483 01a0 6FF01FFA 		j	.L19
+ 484              	.L31:
+ 485 01a4 13060700 		mv	a2,a4
+ 486 01a8 93850600 		mv	a1,a3
+ 487 01ac 13050A00 		mv	a0,s4
+ 488 01b0 97000000 		call	_ZN3TCB12createThreadEPFvPvES0_Pm@plt
+ 488      E7800000 
+ 489 01b8 23B0A900 		sd	a0,0(s3)
+ 490 01bc 63060500 		beq	a0,zero,.L42
+ 491 01c0 93040000 		li	s1,0
+ 492 01c4 6FF0DFF7 		j	.L19
+ 493              	.L42:
+ 494 01c8 9304C0FF 		li	s1,-4
+ 495 01cc 6FF05FF7 		j	.L19
+ 496              	.L30:
+GAS LISTING /tmp/ccmESeAu.s 			page 14
+
+
+ 497 01d0 97070000 		la	a5,_ZN3TCB7runningE
+ 497      83B70700 
+ 498 01d8 83B70700 		ld	a5,0(a5)
+ 499 01dc 13072000 		li	a4,2
+ 500 01e0 23A8E702 		sw	a4,48(a5)
+ 501 01e4 97000000 		call	_ZN3TCB8dispatchEv@plt
+ 501      E7800000 
+ 502 01ec 6FF05FF5 		j	.L19
+ 503              	.L29:
+ 504 01f0 97070000 		la	a5,_ZN3TCB16timeSliceCounterE
+ 504      83B70700 
+ 505 01f8 23B00700 		sd	zero,0(a5)
+ 506 01fc 97000000 		call	_ZN3TCB5yieldEv@plt
+ 506      E7800000 
+ 507 0204 6FF0DFF3 		j	.L19
+ 508              	.L28:
+ 509 0208 13058002 		li	a0,40
+ 510 020c 97000000 		call	_ZN10KSemaphorenwEm
+ 510      E7800000 
+ 511 0214 63040502 		beq	a0,zero,.L35
+ 512 0218 23244501 		sw	s4,8(a0)
+ 513 021c 23380500 		sd	zero,16(a0)
+ 514 0220 233C0500 		sd	zero,24(a0)
+ 515 0224 23200502 		sw	zero,32(a0)
+ 516 0228 97070000 		la	a5,_ZN10KSemaphore16activeSemaphoresE
+ 516      83B70700 
+ 517 0230 03B70700 		ld	a4,0(a5)
+ 518 0234 2330E500 		sd	a4,0(a0)
+ 519 0238 23B0A700 		sd	a0,0(a5)
+ 520              	.L35:
+ 521 023c 23B0A900 		sd	a0,0(s3)
+ 522 0240 63060500 		beq	a0,zero,.L43
+ 523 0244 93040000 		li	s1,0
+ 524 0248 6FF09FEF 		j	.L19
+ 525              	.L43:
+ 526 024c 9304E0FF 		li	s1,-2
+ 527 0250 6FF01FEF 		j	.L19
+ 528              	.L27:
+ 529 0254 13850500 		mv	a0,a1
+ 530 0258 97000000 		call	_ZN10KSemaphore5closeEPS_@plt
+ 530      E7800000 
+ 531 0260 93040500 		mv	s1,a0
+ 532 0264 6FF0DFED 		j	.L19
+ 533              	.L26:
+ 534 0268 13850500 		mv	a0,a1
+ 535 026c 97000000 		call	_ZN10KSemaphore6existsEPS_@plt
+ 535      E7800000 
+ 536 0274 63160500 		bne	a0,zero,.L44
+ 537 0278 9304F0FF 		li	s1,-1
+ 538 027c 6FF05FEC 		j	.L19
+ 539              	.L44:
+ 540 0280 13850900 		mv	a0,s3
+ 541 0284 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 541      E7800000 
+ 542 028c 93040500 		mv	s1,a0
+ 543 0290 6FF01FEB 		j	.L19
+ 544              	.L25:
+GAS LISTING /tmp/ccmESeAu.s 			page 15
+
+
+ 545 0294 13850500 		mv	a0,a1
+ 546 0298 97000000 		call	_ZN10KSemaphore6existsEPS_@plt
+ 546      E7800000 
+ 547 02a0 63160500 		bne	a0,zero,.L45
+ 548 02a4 9304F0FF 		li	s1,-1
+ 549 02a8 6FF09FE9 		j	.L19
+ 550              	.L45:
+ 551 02ac 13850900 		mv	a0,s3
+ 552 02b0 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 552      E7800000 
+ 553 02b8 93040500 		mv	s1,a0
+ 554 02bc 6FF05FE8 		j	.L19
+ 555              	.L24:
+ 556 02c0 13850500 		mv	a0,a1
+ 557 02c4 97000000 		call	_ZN3TCB5sleepEm@plt
+ 557      E7800000 
+ 558 02cc 6FF05FE7 		j	.L19
+ 559              	.L23:
+ 560 02d0 97070000 		la	a5,_ZN5StdIO7ibufferE
+ 560      83B70700 
+ 561 02d8 03B50700 		ld	a0,0(a5)
+ 562 02dc 97000000 		call	_ZN12SharedBufferIcE3getEv
+ 562      E7800000 
+ 563 02e4 93040500 		mv	s1,a0
+ 564 02e8 6FF09FE5 		j	.L19
+ 565              	.L21:
+ 566 02ec 93F5F50F 		andi	a1,a1,0xff
+ 567 02f0 97070000 		la	a5,_ZN5StdIO7obufferE
+ 567      83B70700 
+ 568 02f8 03B50700 		ld	a0,0(a5)
+ 569 02fc 97000000 		call	_ZN12SharedBufferIcE3putEc
+ 569      E7800000 
+ 570 0304 6FF0DFE3 		j	.L19
+ 571              		.cfi_endproc
+ 572              	.LFE114:
+ 574              		.align	2
+ 575              		.globl	_Z8sysEcallmmmmm
+ 577              	_Z8sysEcallmmmmm:
+ 578              	.LFB115:
+ 579              		.cfi_startproc
+ 580 0308 130101FB 		addi	sp,sp,-80
+ 581              		.cfi_def_cfa_offset 80
+ 582 030c 23341104 		sd	ra,72(sp)
+ 583 0310 23308104 		sd	s0,64(sp)
+ 584 0314 233C9102 		sd	s1,56(sp)
+ 585 0318 23382103 		sd	s2,48(sp)
+ 586 031c 23343103 		sd	s3,40(sp)
+ 587 0320 23304103 		sd	s4,32(sp)
+ 588 0324 233C5101 		sd	s5,24(sp)
+ 589              		.cfi_offset 1, -8
+ 590              		.cfi_offset 8, -16
+ 591              		.cfi_offset 9, -24
+ 592              		.cfi_offset 18, -32
+ 593              		.cfi_offset 19, -40
+ 594              		.cfi_offset 20, -48
+ 595              		.cfi_offset 21, -56
+ 596 0328 13040105 		addi	s0,sp,80
+GAS LISTING /tmp/ccmESeAu.s 			page 16
+
+
+ 597              		.cfi_def_cfa 8, 0
+ 598 032c 93890500 		mv	s3,a1
+ 599              	#APP
+ 600              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 601              		csrr a5, sepc
+ 602              	# 0 "" 2
+ 603              	#NO_APP
+ 604 0334 233CF4FA 		sd	a5,-72(s0)
+ 605 0338 033984FB 		ld	s2,-72(s0)
+ 606 033c 13094900 		addi	s2,s2,4
+ 607              	#APP
+ 608              	# 220 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 609              		csrr a5, sstatus
+ 610              	# 0 "" 2
+ 611              	#NO_APP
+ 612 0344 2338F4FA 		sd	a5,-80(s0)
+ 613 0348 833A04FB 		ld	s5,-80(s0)
+ 614 034c 93071000 		li	a5,1
+ 615 0350 6300F504 		beq	a0,a5,.L67
+ 616 0354 93040500 		mv	s1,a0
+ 617 0358 130A0600 		mv	s4,a2
+ 618 035c 93072004 		li	a5,66
+ 619 0360 63EAA706 		bgtu	a0,a5,.L49
+ 620 0364 93072000 		li	a5,2
+ 621 0368 6360F504 		bltu	a0,a5,.L48
+ 622 036c 93072004 		li	a5,66
+ 623 0370 63ECA702 		bgtu	a0,a5,.L48
+ 624 0374 93172500 		slli	a5,a0,2
+ 625 0378 17060000 		lla	a2,.L51
+ 625      13060600 
+ 626 0380 B387C700 		add	a5,a5,a2
+ 627 0384 83A70700 		lw	a5,0(a5)
+ 628 0388 B387C700 		add	a5,a5,a2
+ 629 038c 67800700 		jr	a5
+ 630              		.section	.rodata
+ 631              		.align	2
+ 632              		.align	2
+ 633              	.L51:
+ 634 010c 00000000 		.word	.L48-.L51
+ 635 0110 00000000 		.word	.L48-.L51
+ 636 0114 00000000 		.word	.L61-.L51
+ 637 0118 00000000 		.word	.L48-.L51
+ 638 011c 00000000 		.word	.L48-.L51
+ 639 0120 00000000 		.word	.L48-.L51
+ 640 0124 00000000 		.word	.L48-.L51
+ 641 0128 00000000 		.word	.L48-.L51
+ 642 012c 00000000 		.word	.L48-.L51
+ 643 0130 00000000 		.word	.L48-.L51
+ 644 0134 00000000 		.word	.L48-.L51
+ 645 0138 00000000 		.word	.L48-.L51
+ 646 013c 00000000 		.word	.L48-.L51
+ 647 0140 00000000 		.word	.L48-.L51
+ 648 0144 00000000 		.word	.L48-.L51
+ 649 0148 00000000 		.word	.L48-.L51
+ 650 014c 00000000 		.word	.L48-.L51
+ 651 0150 00000000 		.word	.L60-.L51
+ 652 0154 00000000 		.word	.L59-.L51
+GAS LISTING /tmp/ccmESeAu.s 			page 17
+
+
+ 653 0158 00000000 		.word	.L58-.L51
+ 654 015c 00000000 		.word	.L48-.L51
+ 655 0160 00000000 		.word	.L48-.L51
+ 656 0164 00000000 		.word	.L48-.L51
+ 657 0168 00000000 		.word	.L48-.L51
+ 658 016c 00000000 		.word	.L48-.L51
+ 659 0170 00000000 		.word	.L48-.L51
+ 660 0174 00000000 		.word	.L48-.L51
+ 661 0178 00000000 		.word	.L48-.L51
+ 662 017c 00000000 		.word	.L48-.L51
+ 663 0180 00000000 		.word	.L48-.L51
+ 664 0184 00000000 		.word	.L48-.L51
+ 665 0188 00000000 		.word	.L48-.L51
+ 666 018c 00000000 		.word	.L48-.L51
+ 667 0190 00000000 		.word	.L57-.L51
+ 668 0194 00000000 		.word	.L56-.L51
+ 669 0198 00000000 		.word	.L55-.L51
+ 670 019c 00000000 		.word	.L54-.L51
+ 671 01a0 00000000 		.word	.L48-.L51
+ 672 01a4 00000000 		.word	.L48-.L51
+ 673 01a8 00000000 		.word	.L48-.L51
+ 674 01ac 00000000 		.word	.L48-.L51
+ 675 01b0 00000000 		.word	.L48-.L51
+ 676 01b4 00000000 		.word	.L48-.L51
+ 677 01b8 00000000 		.word	.L48-.L51
+ 678 01bc 00000000 		.word	.L48-.L51
+ 679 01c0 00000000 		.word	.L48-.L51
+ 680 01c4 00000000 		.word	.L48-.L51
+ 681 01c8 00000000 		.word	.L48-.L51
+ 682 01cc 00000000 		.word	.L48-.L51
+ 683 01d0 00000000 		.word	.L53-.L51
+ 684 01d4 00000000 		.word	.L48-.L51
+ 685 01d8 00000000 		.word	.L48-.L51
+ 686 01dc 00000000 		.word	.L48-.L51
+ 687 01e0 00000000 		.word	.L48-.L51
+ 688 01e4 00000000 		.word	.L48-.L51
+ 689 01e8 00000000 		.word	.L48-.L51
+ 690 01ec 00000000 		.word	.L48-.L51
+ 691 01f0 00000000 		.word	.L48-.L51
+ 692 01f4 00000000 		.word	.L48-.L51
+ 693 01f8 00000000 		.word	.L48-.L51
+ 694 01fc 00000000 		.word	.L48-.L51
+ 695 0200 00000000 		.word	.L48-.L51
+ 696 0204 00000000 		.word	.L48-.L51
+ 697 0208 00000000 		.word	.L48-.L51
+ 698 020c 00000000 		.word	.L48-.L51
+ 699 0210 00000000 		.word	.L52-.L51
+ 700 0214 00000000 		.word	.L50-.L51
+ 701              		.text
+ 702              	.L67:
+ 703 0390 97000000 		call	_ZN15MemoryAllocator11getInstanceEv@plt
+ 703      E7800000 
+ 704 0398 93850900 		mv	a1,s3
+ 705 039c 97000000 		call	_ZN15MemoryAllocator9mem_allocEm@plt
+ 705      E7800000 
+ 706 03a4 93040500 		mv	s1,a0
+ 707              	.L48:
+GAS LISTING /tmp/ccmESeAu.s 			page 18
+
+
+ 708              	#APP
+ 709              	# 141 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 710              		csrw sepc, s2
+ 711              	# 0 "" 2
+ 712              	#NO_APP
+ 713 03ac 13850400 		mv	a0,s1
+ 714 03b0 83308104 		ld	ra,72(sp)
+ 715              		.cfi_remember_state
+ 716              		.cfi_restore 1
+ 717 03b4 03340104 		ld	s0,64(sp)
+ 718              		.cfi_restore 8
+ 719              		.cfi_def_cfa 2, 80
+ 720 03b8 83348103 		ld	s1,56(sp)
+ 721              		.cfi_restore 9
+ 722 03bc 03390103 		ld	s2,48(sp)
+ 723              		.cfi_restore 18
+ 724 03c0 83398102 		ld	s3,40(sp)
+ 725              		.cfi_restore 19
+ 726 03c4 033A0102 		ld	s4,32(sp)
+ 727              		.cfi_restore 20
+ 728 03c8 833A8101 		ld	s5,24(sp)
+ 729              		.cfi_restore 21
+ 730 03cc 13010105 		addi	sp,sp,80
+ 731              		.cfi_def_cfa_offset 0
+ 732 03d0 67800000 		jr	ra
+ 733              	.L49:
+ 734              		.cfi_restore_state
+ 735 03d4 93079006 		li	a5,105
+ 736 03d8 E318F5FC 		bne	a0,a5,.L48
+ 737 03dc 13850500 		mv	a0,a1
+ 738 03e0 97000000 		call	_ZN3TCB12deleteThreadEPS_@plt
+ 738      E7800000 
+ 739 03e8 6FF01FFC 		j	.L48
+ 740              	.L61:
+ 741 03ec 97000000 		call	_ZN15MemoryAllocator11getInstanceEv@plt
+ 741      E7800000 
+ 742 03f4 93850900 		mv	a1,s3
+ 743 03f8 97000000 		call	_ZN15MemoryAllocator8mem_freeEPv@plt
+ 743      E7800000 
+ 744 0400 93040500 		mv	s1,a0
+ 745 0404 6FF05FFA 		j	.L48
+ 746              	.L60:
+ 747 0408 13060700 		mv	a2,a4
+ 748 040c 93850600 		mv	a1,a3
+ 749 0410 13050A00 		mv	a0,s4
+ 750 0414 97000000 		call	_ZN3TCB12createThreadEPFvPvES0_Pm@plt
+ 750      E7800000 
+ 751 041c 23B0A900 		sd	a0,0(s3)
+ 752 0420 63060500 		beq	a0,zero,.L68
+ 753 0424 93040000 		li	s1,0
+ 754 0428 6FF01FF8 		j	.L48
+ 755              	.L68:
+ 756 042c 9304C0FF 		li	s1,-4
+ 757 0430 6FF09FF7 		j	.L48
+ 758              	.L59:
+ 759 0434 97070000 		la	a5,_ZN3TCB7runningE
+ 759      83B70700 
+GAS LISTING /tmp/ccmESeAu.s 			page 19
+
+
+ 760 043c 83B70700 		ld	a5,0(a5)
+ 761 0440 13072000 		li	a4,2
+ 762 0444 23A8E702 		sw	a4,48(a5)
+ 763 0448 97000000 		call	_ZN3TCB8dispatchEv@plt
+ 763      E7800000 
+ 764              	#APP
+ 765              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 766              		csrw sstatus, s5
+ 767              	# 0 "" 2
+ 768              	#NO_APP
+ 769 0454 6FF05FF5 		j	.L48
+ 770              	.L58:
+ 771 0458 97070000 		la	a5,_ZN3TCB16timeSliceCounterE
+ 771      83B70700 
+ 772 0460 23B00700 		sd	zero,0(a5)
+ 773 0464 97000000 		call	_ZN3TCB5yieldEv@plt
+ 773      E7800000 
+ 774              	#APP
+ 775              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 776              		csrw sstatus, s5
+ 777              	# 0 "" 2
+ 778              	#NO_APP
+ 779 0470 6FF09FF3 		j	.L48
+ 780              	.L57:
+ 781 0474 13058002 		li	a0,40
+ 782 0478 97000000 		call	_ZN10KSemaphorenwEm
+ 782      E7800000 
+ 783 0480 63040502 		beq	a0,zero,.L64
+ 784 0484 23244501 		sw	s4,8(a0)
+ 785 0488 23380500 		sd	zero,16(a0)
+ 786 048c 233C0500 		sd	zero,24(a0)
+ 787 0490 23200502 		sw	zero,32(a0)
+ 788 0494 97070000 		la	a5,_ZN10KSemaphore16activeSemaphoresE
+ 788      83B70700 
+ 789 049c 03B70700 		ld	a4,0(a5)
+ 790 04a0 2330E500 		sd	a4,0(a0)
+ 791 04a4 23B0A700 		sd	a0,0(a5)
+ 792              	.L64:
+ 793 04a8 23B0A900 		sd	a0,0(s3)
+ 794 04ac 6FF0DFEF 		j	.L48
+ 795              	.L56:
+ 796 04b0 E38C05EE 		beq	a1,zero,.L48
+ 797 04b4 13850500 		mv	a0,a1
+ 798 04b8 97000000 		call	_ZN10KSemaphoreD1Ev@plt
+ 798      E7800000 
+ 799 04c0 93850900 		mv	a1,s3
+ 800 04c4 97070000 		la	a5,_ZN10KSemaphore5cacheE
+ 800      83B70700 
+ 801 04cc 03B50700 		ld	a0,0(a5)
+ 802 04d0 97000000 		call	_ZN11ObjectCache8free_objEPv@plt
+ 802      E7800000 
+ 803 04d8 6FF01FED 		j	.L48
+ 804              	.L55:
+ 805 04dc 13850500 		mv	a0,a1
+ 806 04e0 97000000 		call	_ZN10KSemaphore4waitEv@plt
+ 806      E7800000 
+ 807 04e8 93040500 		mv	s1,a0
+GAS LISTING /tmp/ccmESeAu.s 			page 20
+
+
+ 808              	#APP
+ 809              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 810              		csrw sstatus, s5
+ 811              	# 0 "" 2
+ 812              	#NO_APP
+ 813 04f0 6FF09FEB 		j	.L48
+ 814              	.L54:
+ 815 04f4 13850500 		mv	a0,a1
+ 816 04f8 97000000 		call	_ZN10KSemaphore6signalEv@plt
+ 816      E7800000 
+ 817 0500 6FF09FEA 		j	.L48
+ 818              	.L53:
+ 819 0504 13850500 		mv	a0,a1
+ 820 0508 97000000 		call	_ZN3TCB5sleepEm@plt
+ 820      E7800000 
+ 821              	#APP
+ 822              	# 215 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 823              		csrw sstatus, s5
+ 824              	# 0 "" 2
+ 825              	#NO_APP
+ 826 0514 6FF05FE9 		j	.L48
+ 827              	.L52:
+ 828 0518 97070000 		la	a5,_ZN5StdIO7ibufferE
+ 828      83B70700 
+ 829 0520 03B50700 		ld	a0,0(a5)
+ 830 0524 97000000 		call	_ZN12SharedBufferIcE3getEv
+ 830      E7800000 
+ 831 052c 93040500 		mv	s1,a0
+ 832 0530 6FF09FE7 		j	.L48
+ 833              	.L50:
+ 834 0534 93F5F50F 		andi	a1,a1,0xff
+ 835 0538 97070000 		la	a5,_ZN5StdIO7obufferE
+ 835      83B70700 
+ 836 0540 03B50700 		ld	a0,0(a5)
+ 837 0544 97000000 		call	_ZN12SharedBufferIcE3putEc
+ 837      E7800000 
+ 838 054c 6FF0DFE5 		j	.L48
+ 839              		.cfi_endproc
+ 840              	.LFE115:
+ 842              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 843              		.align	3
+ 844              	.LC1:
+ 845 0000 0A212121 		.string	"\n!!!PANIC DUE TO NOT HANDLED INSTRUCTION PAGE FAULT !!!\n"
+ 845      50414E49 
+ 845      43204455 
+ 845      4520544F 
+ 845      204E4F54 
+ 846 0039 00000000 		.align	3
+ 846      000000
+ 847              	.LC2:
+ 848 0040 73636175 		.string	"scause: "
+ 848      73653A20 
+ 848      00
+ 849 0049 00000000 		.align	3
+ 849      000000
+ 850              	.LC3:
+ 851 0050 0A00     		.string	"\n"
+GAS LISTING /tmp/ccmESeAu.s 			page 21
+
+
+ 852 0052 00000000 		.align	3
+ 852      0000
+ 853              	.LC4:
+ 854 0058 73657063 		.string	"sepc: "
+ 854      3A2000
+ 855 005f 00       		.align	3
+ 856              	.LC5:
+ 857 0060 73747661 		.string	"stval: "
+ 857      6C3A2000 
+ 858              		.align	3
+ 859              	.LC6:
+ 860 0068 0A212121 		.string	"\n!!!PANIC DUE TO SUPERVISOR PAGE FAULT!!!\n"
+ 860      50414E49 
+ 860      43204455 
+ 860      4520544F 
+ 860      20535550 
+ 861 0093 00000000 		.align	3
+ 861      00
+ 862              	.LC7:
+ 863 0098 0A212121 		.string	"\n!!!PANIC DUE TO NOT HANDLED USER DATA PAGE FAULT !!!\n"
+ 863      50414E49 
+ 863      43204455 
+ 863      4520544F 
+ 863      204E4F54 
+ 864 00cf 00       		.align	3
+ 865              	.LC8:
+ 866 00d0 0A455252 		.string	"\nERROR: Thread stopped due to unauthorised access!!\n"
+ 866      4F523A20 
+ 866      54687265 
+ 866      61642073 
+ 866      746F7070 
+ 867 0105 000000   		.align	3
+ 868              	.LC9:
+ 869 0108 53434155 		.string	"SCAUSE: "
+ 869      53453A20 
+ 869      00
+ 870 0111 00000000 		.align	3
+ 870      000000
+ 871              	.LC10:
+ 872 0118 53455043 		.string	"SEPC: "
+ 872      3A2000
+ 873 011f 00       		.align	3
+ 874              	.LC11:
+ 875 0120 53545641 		.string	"STVAL: "
+ 875      4C3A2000 
+ 876              		.align	3
+ 877              	.LC12:
+ 878 0128 0A0A00   		.string	"\n\n"
+ 879 012b 00000000 		.align	3
+ 879      00
+ 880              	.LC13:
+ 881 0130 0A464154 		.string	"\nFATAL KERNEL ERROR: unauthorised access prompted!!\n"
+ 881      414C204B 
+ 881      45524E45 
+ 881      4C204552 
+ 881      524F523A 
+ 882 0165 000000   		.align	3
+GAS LISTING /tmp/ccmESeAu.s 			page 22
+
+
+ 883              	.LC14:
+ 884 0168 47524553 		.string	"GRESKA\n"
+ 884      4B410A00 
+ 885              		.text
+ 886              		.align	2
+ 887              		.globl	interrupt
+ 889              	interrupt:
+ 890              	.LFB116:
+ 891              		.cfi_startproc
+ 892 0550 130101FA 		addi	sp,sp,-96
+ 893              		.cfi_def_cfa_offset 96
+ 894 0554 233C1104 		sd	ra,88(sp)
+ 895 0558 23388104 		sd	s0,80(sp)
+ 896 055c 23349104 		sd	s1,72(sp)
+ 897 0560 23302105 		sd	s2,64(sp)
+ 898 0564 233C3103 		sd	s3,56(sp)
+ 899 0568 23384103 		sd	s4,48(sp)
+ 900              		.cfi_offset 1, -8
+ 901              		.cfi_offset 8, -16
+ 902              		.cfi_offset 9, -24
+ 903              		.cfi_offset 18, -32
+ 904              		.cfi_offset 19, -40
+ 905              		.cfi_offset 20, -48
+ 906 056c 13040106 		addi	s0,sp,96
+ 907              		.cfi_def_cfa 8, 0
+ 908              	#APP
+ 909              	# 136 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 910              		csrr a5, scause
+ 911              	# 0 "" 2
+ 912              	#NO_APP
+ 913 0574 2334F4FA 		sd	a5,-88(s0)
+ 914 0578 833484FA 		ld	s1,-88(s0)
+ 915 057c 93079000 		li	a5,9
+ 916 0580 638EF404 		beq	s1,a5,.L90
+ 917 0584 9307D000 		li	a5,13
+ 918 0588 638EF410 		beq	s1,a5,.L72
+ 919 058c 63E2970E 		bgtu	s1,a5,.L73
+ 920 0590 93078000 		li	a5,8
+ 921 0594 6386F41E 		beq	s1,a5,.L74
+ 922 0598 63F89706 		bleu	s1,a5,.L91
+ 923 059c 9307C000 		li	a5,12
+ 924 05a0 6394F408 		bne	s1,a5,.L76
+ 925 05a4 97070000 		la	a5,_ZN3TCB7runningE
+ 925      83B70700 
+ 926 05ac 83B70700 		ld	a5,0(a5)
+ 927 05b0 83A60703 		lw	a3,48(a5)
+ 928 05b4 13074000 		li	a4,4
+ 929 05b8 6392E61E 		bne	a3,a4,.L81
+ 930 05bc 13071000 		li	a4,1
+ 931 05c0 23A8E702 		sw	a4,48(a5)
+ 932 05c4 97070000 		la	a5,thread_exit
+ 932      83B70700 
+ 933              	#APP
+ 934              	# 258 "src/kernel/interrupt/interrupt_cpp.cpp" 1
+   1              	#include"../../../h/kernel_lib.h"
+   2              	
+   3              	enum sysCallNum
+GAS LISTING /tmp/ccmESeAu.s 			page 23
+
+
+   4              	{
+   5              	    MA = 0x1, 
+   6              	    MF = 0x2,
+   7              	    TC = 0x11,
+   8              	    TE = 0x12,
+   9              	    TD = 0x13,
+  10              	    SO = 0x21,
+  11              	    SC = 0x22,
+  12              	    SW = 0x23,
+  13              	    SS = 0x24,
+  14              	    DTH = 0x69,
+  15              	    TS = 0x31,
+  16              	    GC = 0x41,
+  17              	    PC = 0x42,     
+  18              	};
+  19              	
+  20              	enum intNum
+  21              	{
+  22              	    IH = 0x8000000000000009,
+  23              	    IT = 0x8000000000000001,
+  24              	    IS = 9,
+  25              	    IU = 8,
+  26              	    II = 2,
+  27              	    IR = 5,
+  28              	    IW = 7,
+  29              	    PFL = 13,
+  30              	    PFI = 12,
+  31              	    PFW = 15
+  32              	};
+  33              	
+  34              	void timer_handler()
+  35              	{
+  36              	    Scheduler::update_sleep();
+  37              	
+  38              	    //uvecavanje vremena koriscenja procesora tekuceg thread
+  39              	    TCB::timeSliceCounter++;
+  40              	    
+  41              	    if(TCB::timeSliceCounter >= TCB::running->getTimeSlice())
+  42              	    {
+  43              	        uint64 sstatus = Riscv::r_sstatus(),
+  44              	        sepc = Riscv::r_sepc();
+  45              	        
+  46              	        TCB::timeSliceCounter = 0;
+  47              	        
+  48              	        TCB::yield();
+  49              	
+  50              	        Riscv::w_sstatus(sstatus);
+  51              	        Riscv::w_sepc(sepc);
+  52              	    } 
+  53              	
+  54              	    
+  55              	    Riscv::mc_sip(Riscv::SIP_SSIE);
+  56              	}
+  57              	
+  58              	volatile uint64 usrEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
+  59              	{
+  60              	    uint64 sepc = Riscv::r_sepc()+4, sstatus = Riscv::r_sstatus(), ret = a0;
+GAS LISTING /tmp/ccmESeAu.s 			page 24
+
+
+  61              	
+  62              	    if(a0 == MA){
+  63              	        //mem_alloc
+  64              	        ret = (uint64)MemoryAllocator::getInstance().mem_alloc(a1);
+  65              	        //KCHECKPRINT(ret);
+  66              	    }
+  67              	    else if(a0 == MF)
+  68              	    {
+  69              	        //mem_free
+  70              	        // KCHECKPRINT(a1);
+  71              	        // MemoryAllocator::getInstance().print_all_list();
+  72              	        ret = (uint64)MemoryAllocator::getInstance().mem_free((void*)a1);
+  73              	    }
+  74              	    else if(a0 == TC)
+  75              	    {
+  76              	        //thread_create
+  77              	        uint64* t = (uint64*)a1;
+  78              	        *t = (uint64)TCB::createThread((TCB::Body)a2, (void*)a3, (uint64*)a4);
+  79              	        if(!(*t)) ret = -4;
+  80              	        else ret = 0;
+  81              	    }
+  82              	    else if(a0 == TE)
+  83              	    {
+  84              	        //thread_exit
+  85              	        TCB::running->finish();
+  86              	        TCB::dispatch();
+  87              	    }
+  88              	    else if(a0 == TD)
+  89              	    {
+  90              	        //thread_dispatch
+  91              	        TCB::timeSliceCounter = 0;
+  92              	        TCB::yield();
+  93              	    }
+  94              	    else if(a0 == DTH)
+  95              	    {
+  96              	        //delete thread handle
+  97              	        // KCHECKPRINT(a1);
+  98              	        TCB::deleteThread((TCB*)a1);
+  99              	    }
+ 100              	    else if(a0 == SO)
+ 101              	    {
+ 102              	        uint64* t = (uint64*)a1;
+ 103              	        *t = (uint64)(new KSemaphore(a2));
+ 104              	        if(!(*t)) ret = -2;
+ 105              	        else ret = 0;
+ 106              	    }
+ 107              	    else if(a0 == SC)
+ 108              	    {
+ 109              	        KSemaphore* t = (KSemaphore*)a1;
+ 110              	        ret = KSemaphore::close(t);
+ 111              	    }
+ 112              	    else if(a0 == SW)
+ 113              	    {
+ 114              	        KSemaphore* t = (KSemaphore*)a1;
+ 115              	        if(KSemaphore::exists(t))
+ 116              	            ret = t->wait();
+ 117              	        else
+GAS LISTING /tmp/ccmESeAu.s 			page 25
+
+
+ 118              	            ret = -1;
+ 119              	    }
+ 120              	    else if(a0 == SS)
+ 121              	    {
+ 122              	        KSemaphore* t = (KSemaphore*)a1;
+ 123              	        if(KSemaphore::exists(t))
+ 124              	            ret = t->signal();
+ 125              	        else
+ 126              	            ret = -1;
+ 127              	    }
+ 128              	    else if(a0 == TS)
+ 129              	    {
+ 130              	        TCB::sleep(a1);
+ 131              	    }
+ 132              	    else if(a0 == GC)
+ 133              	    {
+ 134              	        ret = StdIO::ibuffer->get();
+ 135              	    }
+ 136              	    else if(a0 == PC)
+ 137              	    {
+ 138              	        StdIO::obuffer->put((char)a1); 
+ 139              	    }
+ 140              	    Riscv::w_sstatus(sstatus);
+ 141              	    Riscv::w_sepc(sepc);
+ 142              	    return ret;
+ 143              	}
+ 144              	
+ 145              	uint64 sysEcall(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
+ 146              	{    
+ 147              	    uint64 sepc = Riscv::r_sepc()+4, sstatus = Riscv::r_sstatus(), ret = a0;
+ 148              	    
+ 149              	    if(a0 == MA){
+ 150              	        //mem_alloc
+ 151              	        ret = (uint64)MemoryAllocator::getInstance().mem_alloc(a1);    
+ 152              	    }
+ 153              	    else if(a0 == MF)
+ 154              	    {
+ 155              	        //mem_free
+ 156              	        ret = (uint64)MemoryAllocator::getInstance().mem_free((void*)a1);
+ 157              	    
+ 158              	    }
+ 159              	    else if(a0 == TC)
+ 160              	    {
+ 161              	        //thread_create
+ 162              	        uint64* t = (uint64*)a1;
+ 163              	        *t = (uint64)TCB::createThread((TCB::Body)a2, (void*)a3, (uint64*)a4); 
+ 164              	        if(!(*t)) ret = -4;
+ 165              	        else ret = 0;
+ 166              	    }
+ 167              	    else if(a0 == TE)
+ 168              	    {
+ 169              	        //thread_exit
+ 170              	        TCB::running->finish();
+ 171              	        TCB::dispatch();
+ 172              	        Riscv::w_sstatus(sstatus);
+ 173              	    }
+ 174              	    else if(a0 == TD)
+GAS LISTING /tmp/ccmESeAu.s 			page 26
+
+
+ 175              	    {
+ 176              	        //thread_dispatch
+ 177              	        TCB::timeSliceCounter = 0; 
+ 178              	        TCB::yield();
+ 179              	        Riscv::w_sstatus(sstatus);
+ 180              	    }
+ 181              	    else if(a0 == DTH)
+ 182              	    {
+ 183              	        //delete thread handle
+ 184              	        TCB::deleteThread((TCB*)a1);
+ 185              	    }
+ 186              	    else if(a0 == SO)
+ 187              	    {
+ 188              	        uint64* t = (uint64*)a1;
+ 189              	        *t = (uint64)(new KSemaphore(a2));
+ 190              	    }
+ 191              	    else if(a0 == SC)
+ 192              	    {
+ 193              	        KSemaphore* t = (KSemaphore*)a1;
+ 194              	        delete t;
+ 195              	    }
+ 196              	    else if(a0 == SW)
+ 197              	    {
+ 198              	        KSemaphore* t = (KSemaphore*)a1;
+ 199              	        ret = t->wait();
+ 200              	        Riscv::w_sstatus(sstatus);
+ 201              	    }
+ 202              	    else if(a0 == SS)
+ 203              	    {
+ 204              	        KSemaphore* t = (KSemaphore*)a1;
+ 205              	        t->signal();
+ 206              	    }
+ 207              	    else if(a0 == TS)
+ 208              	    {      
+ 209              	        TCB::sleep(a1);
+ 210              	        Riscv::w_sstatus(sstatus);
+ 211              	    }
+ 212              	    else if(a0 == GC)
+ 213              	    {
+ 214              	        ret = StdIO::ibuffer->get();
+ 215              	    }
+ 216              	    else if(a0 == PC)
+ 217              	    {
+ 218              	        StdIO::obuffer->put((char)a1);
+ 219              	    }
+ 220              	    Riscv::w_sepc(sepc);
+ 221              	    return ret;
+ 222              	}
+ 223              	
+ 224              	extern "C" volatile  void interrupt(uint64 a0, uint64 a1, uint64 a2, uint64 a3, uint64 a4)
+ 225              	{
+ 226              	    uint64 scause = Riscv::r_scause();
+ 227              	    //static bool panic = 0;
+ 228              	    //KCHECKPRINT(scause);
+ 229              	    if(scause == IS)
+ 230              	    {
+ 231              	        //ecall iz sistemskog rezima
+GAS LISTING /tmp/ccmESeAu.s 			page 27
+
+
+ 232              	        a0 = sysEcall(a0, a1, a2, a3, a4);
+ 233              	        asm volatile("sd %0, 10 * 8(s0)" :: "r" (a0));
+ 234              	    
+ 235              	    } 
+ 236              	    else if(scause == IU)
+ 237              	    {
+ 238              	        //ecall iz korisnickog rezima
+ 239              	        a0 = usrEcall(a0, a1, a2, a3, a4);
+ 240              	        asm volatile("sd %0, 10 * 8(s0)" :: "r" (a0));
+ 241              	        
+ 242              	    } 
+ 243              	    else if(scause == IH)
+ 244              	    {
+ 245              	        //hardverski prekid
+ 246              	       StdIO::console_handler();
+ 247              	    
+ 248              	    } 
+ 249              	    else if(scause == IT)
+ 250              	    {
+ 251              	        //prekid od timera
+ 252              	        timer_handler();      
+ 253              	    
+ 254              	    }
+ 255              	    else if(scause == PFI){
+ 256              	        if(TCB::running->getState() == TCB::TCBState::PREPARING){
+ 257              	            TCB::running->setState(TCB::TCBState::READY);
+ 258 05cc 2334F400 	            asm volatile("sd %0, 1 * 8(s0)" :: "r" (thread_exit));
+ 259              	            Riscv::mc_sstatus(Riscv::BitMaskSstatus::SSTATUS_SPP);
+ 935              		sd a5, 1 * 8(s0)
+ 936              	# 0 "" 2
+ 937              	#NO_APP
+ 938 05d0 93070010 		li	a5,256
+ 939              	#APP
+ 940              	# 211 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 941              		csrc sstatus, a5
+ 942              	# 0 "" 2
+ 943              	#NO_APP
+ 944 05d8 6F000001 		j	.L69
+ 945              	.L90:
+ 946 05dc 97000000 		call	_Z8sysEcallmmmmm
+ 946      E7800000 
+ 947              	#APP
+ 948              	# 233 "src/kernel/interrupt/interrupt_cpp.cpp" 1
+ 949              		sd a0, 10 * 8(s0)
+ 950              	# 0 "" 2
+ 951              	#NO_APP
+ 952              	.L69:
+ 953 05e8 83308105 		ld	ra,88(sp)
+ 954              		.cfi_remember_state
+ 955              		.cfi_restore 1
+ 956 05ec 03340105 		ld	s0,80(sp)
+ 957              		.cfi_restore 8
+ 958              		.cfi_def_cfa 2, 96
+ 959 05f0 83348104 		ld	s1,72(sp)
+ 960              		.cfi_restore 9
+ 961 05f4 03390104 		ld	s2,64(sp)
+ 962              		.cfi_restore 18
+GAS LISTING /tmp/ccmESeAu.s 			page 28
+
+
+ 963 05f8 83398103 		ld	s3,56(sp)
+ 964              		.cfi_restore 19
+ 965 05fc 033A0103 		ld	s4,48(sp)
+ 966              		.cfi_restore 20
+ 967 0600 13010106 		addi	sp,sp,96
+ 968              		.cfi_def_cfa_offset 0
+ 969 0604 67800000 		jr	ra
+ 970              	.L91:
+ 971              		.cfi_restore_state
+ 972 0608 93077000 		li	a5,7
+ 973 060c 63EE9700 		bgtu	s1,a5,.L76
+ 974 0610 93072000 		li	a5,2
+ 975 0614 63EAF400 		bltu	s1,a5,.L76
+ 976 0618 9307400A 		li	a5,164
+ 977 061c B3D79700 		srl	a5,a5,s1
+ 978 0620 93F71700 		andi	a5,a5,1
+ 979 0624 63980732 		bne	a5,zero,.L77
+ 980              	.L76:
+ 981 0628 17050000 		lla	a0,.LC2
+ 981      13050500 
+ 982 0630 97000000 		call	_Z12kprintStringPKc@plt
+ 982      E7800000 
+ 983 0638 13060000 		li	a2,0
+ 984 063c 93050001 		li	a1,16
+ 985 0640 13850400 		mv	a0,s1
+ 986 0644 97000000 		call	_Z9kprintIntmib@plt
+ 986      E7800000 
+ 987 064c 17050000 		lla	a0,.LC3
+ 987      13050500 
+ 988 0654 97000000 		call	_Z12kprintStringPKc@plt
+ 988      E7800000 
+ 989 065c 17050000 		lla	a0,.LC14
+ 989      13050500 
+ 990 0664 97000000 		call	_Z12kprintStringPKc@plt
+ 990      E7800000 
+ 991              	.L88:
+ 992 066c 6F000000 		j	.L88
+ 993              	.L73:
+ 994 0670 9307F0FF 		li	a5,-1
+ 995 0674 9397F703 		slli	a5,a5,63
+ 996 0678 93871700 		addi	a5,a5,1
+ 997 067c 638AF410 		beq	s1,a5,.L79
+ 998 0680 9307F0FF 		li	a5,-1
+ 999 0684 9397F703 		slli	a5,a5,63
+ 1000 0688 93879700 		addi	a5,a5,9
+ 1001 068c 6398F400 		bne	s1,a5,.L92
+ 1002 0690 97000000 		call	_ZN5StdIO15console_handlerEv@plt
+ 1002      E7800000 
+ 1003 0698 6FF01FF5 		j	.L69
+ 1004              	.L92:
+ 1005 069c 9307F000 		li	a5,15
+ 1006 06a0 E394F4F8 		bne	s1,a5,.L76
+ 1007              	.L72:
+ 1008              	#APP
+ 1009              	# 166 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1010              		csrr a5, stval
+ 1011              	# 0 "" 2
+GAS LISTING /tmp/ccmESeAu.s 			page 29
+
+
+ 1012              	#NO_APP
+ 1013 06a8 2330F4FC 		sd	a5,-64(s0)
+ 1014 06ac 833904FC 		ld	s3,-64(s0)
+ 1015              	#APP
+ 1016              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1017              		csrr a5, sepc
+ 1018              	# 0 "" 2
+ 1019              	#NO_APP
+ 1020 06b4 233CF4FA 		sd	a5,-72(s0)
+ 1021 06b8 033A84FB 		ld	s4,-72(s0)
+ 1022              	#APP
+ 1023              	# 220 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1024              		csrr a5, sstatus
+ 1025              	# 0 "" 2
+ 1026              	#NO_APP
+ 1027 06c0 2338F4FA 		sd	a5,-80(s0)
+ 1028 06c4 833704FB 		ld	a5,-80(s0)
+ 1029 06c8 93F70710 		andi	a5,a5,256
+ 1030 06cc 638C0718 		beq	a5,zero,.L83
+ 1031 06d0 17050000 		lla	a0,.LC2
+ 1031      13050500 
+ 1032 06d8 97000000 		call	_Z12kprintStringPKc@plt
+ 1032      E7800000 
+ 1033 06e0 13060000 		li	a2,0
+ 1034 06e4 93050001 		li	a1,16
+ 1035 06e8 13850400 		mv	a0,s1
+ 1036 06ec 97000000 		call	_Z9kprintIntmib@plt
+ 1036      E7800000 
+ 1037 06f4 17050000 		lla	a0,.LC3
+ 1037      13050500 
+ 1038 06fc 97000000 		call	_Z12kprintStringPKc@plt
+ 1038      E7800000 
+ 1039 0704 17050000 		lla	a0,.LC4
+ 1039      13050500 
+ 1040 070c 97000000 		call	_Z12kprintStringPKc@plt
+ 1040      E7800000 
+ 1041 0714 13060000 		li	a2,0
+ 1042 0718 93050001 		li	a1,16
+ 1043 071c 13050A00 		mv	a0,s4
+ 1044 0720 97000000 		call	_Z9kprintIntmib@plt
+ 1044      E7800000 
+ 1045 0728 17050000 		lla	a0,.LC3
+ 1045      13050500 
+ 1046 0730 97000000 		call	_Z12kprintStringPKc@plt
+ 1046      E7800000 
+ 1047 0738 17050000 		lla	a0,.LC5
+ 1047      13050500 
+ 1048 0740 97000000 		call	_Z12kprintStringPKc@plt
+ 1048      E7800000 
+ 1049 0748 13060000 		li	a2,0
+ 1050 074c 93050001 		li	a1,16
+ 1051 0750 13850900 		mv	a0,s3
+ 1052 0754 97000000 		call	_Z9kprintIntmib@plt
+ 1052      E7800000 
+ 1053 075c 17050000 		lla	a0,.LC3
+ 1053      13050500 
+ 1054 0764 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/ccmESeAu.s 			page 30
+
+
+ 1054      E7800000 
+ 1055 076c 17050000 		lla	a0,.LC6
+ 1055      13050500 
+ 1056 0774 97000000 		call	_Z12kprintStringPKc@plt
+ 1056      E7800000 
+ 1057              	.L84:
+ 1058 077c 6F000000 		j	.L84
+ 1059              	.L74:
+ 1060 0780 97000000 		call	_Z8usrEcallmmmmm
+ 1060      E7800000 
+ 1061              	#APP
+ 1062              	# 240 "src/kernel/interrupt/interrupt_cpp.cpp" 1
+ 1063              		sd a0, 10 * 8(s0)
+ 1064              	# 0 "" 2
+ 1065              	#NO_APP
+ 1066 078c 6FF0DFE5 		j	.L69
+ 1067              	.L79:
+ 1068 0790 97000000 		call	_Z13timer_handlerv
+ 1068      E7800000 
+ 1069 0798 6FF01FE5 		j	.L69
+ 1070              	.L81:
+ 1071              	#APP
+ 1072              	# 166 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1073              		csrr a5, stval
+ 1074              	# 0 "" 2
+ 1075              	#NO_APP
+ 1076 07a0 2334F4FC 		sd	a5,-56(s0)
+ 1077 07a4 033984FC 		ld	s2,-56(s0)
+ 1078              	#APP
+ 1079              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1080              		csrr a5, sepc
+ 1081              	# 0 "" 2
+ 1082              	#NO_APP
+ 1083 07ac 2330F4FC 		sd	a5,-64(s0)
+ 1084 07b0 833904FC 		ld	s3,-64(s0)
+ 1085 07b4 17050000 		lla	a0,.LC1
+ 1085      13050500 
+ 1086 07bc 97000000 		call	_Z12kprintStringPKc@plt
+ 1086      E7800000 
+ 1087 07c4 17050000 		lla	a0,.LC2
+ 1087      13050500 
+ 1088 07cc 97000000 		call	_Z12kprintStringPKc@plt
+ 1088      E7800000 
+ 1089 07d4 13060000 		li	a2,0
+ 1090 07d8 93050001 		li	a1,16
+ 1091 07dc 13850400 		mv	a0,s1
+ 1092 07e0 97000000 		call	_Z9kprintIntmib@plt
+ 1092      E7800000 
+ 1093 07e8 17050000 		lla	a0,.LC3
+ 1093      13050500 
+ 1094 07f0 97000000 		call	_Z12kprintStringPKc@plt
+ 1094      E7800000 
+ 1095 07f8 17050000 		lla	a0,.LC4
+ 1095      13050500 
+ 1096 0800 97000000 		call	_Z12kprintStringPKc@plt
+ 1096      E7800000 
+ 1097 0808 13060000 		li	a2,0
+GAS LISTING /tmp/ccmESeAu.s 			page 31
+
+
+ 1098 080c 93050001 		li	a1,16
+ 1099 0810 13850900 		mv	a0,s3
+ 1100 0814 97000000 		call	_Z9kprintIntmib@plt
+ 1100      E7800000 
+ 1101 081c 17050000 		lla	a0,.LC3
+ 1101      13050500 
+ 1102 0824 97000000 		call	_Z12kprintStringPKc@plt
+ 1102      E7800000 
+ 1103 082c 17050000 		lla	a0,.LC5
+ 1103      13050500 
+ 1104 0834 97000000 		call	_Z12kprintStringPKc@plt
+ 1104      E7800000 
+ 1105 083c 13060000 		li	a2,0
+ 1106 0840 93050001 		li	a1,16
+ 1107 0844 13050900 		mv	a0,s2
+ 1108 0848 97000000 		call	_Z9kprintIntmib@plt
+ 1108      E7800000 
+ 1109 0850 17050000 		lla	a0,.LC3
+ 1109      13050500 
+ 1110 0858 97000000 		call	_Z12kprintStringPKc@plt
+ 1110      E7800000 
+ 1111              	.L82:
+ 1112 0860 6F000000 		j	.L82
+ 1113              	.L83:
+ 1114 0864 97000000 		call	_ZN15MemoryAllocator11getInstanceEv@plt
+ 1114      E7800000 
+ 1115 086c 93850900 		mv	a1,s3
+ 1116 0870 97000000 		call	_ZN15MemoryAllocator18getFreeSegmentMetaEPv@plt
+ 1116      E7800000 
+ 1117 0878 13090500 		mv	s2,a0
+ 1118 087c 63040502 		beq	a0,zero,.L85
+ 1119 0880 97000000 		call	_ZN5Pager11getInstanceEv@plt
+ 1119      E7800000 
+ 1120 0888 83350901 		ld	a1,16(s2)
+ 1121 088c 03368900 		ld	a2,8(s2)
+ 1122 0890 93066001 		li	a3,22
+ 1123 0894 3386C500 		add	a2,a1,a2
+ 1124 0898 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits@plt
+ 1124      E7800000 
+ 1125 08a0 6FF09FD4 		j	.L69
+ 1126              	.L85:
+ 1127 08a4 17050000 		lla	a0,.LC7
+ 1127      13050500 
+ 1128 08ac 97000000 		call	_Z12kprintStringPKc@plt
+ 1128      E7800000 
+ 1129 08b4 17050000 		lla	a0,.LC2
+ 1129      13050500 
+ 1130 08bc 97000000 		call	_Z12kprintStringPKc@plt
+ 1130      E7800000 
+ 1131 08c4 13060000 		li	a2,0
+ 1132 08c8 93050001 		li	a1,16
+ 1133 08cc 13850400 		mv	a0,s1
+ 1134 08d0 97000000 		call	_Z9kprintIntmib@plt
+ 1134      E7800000 
+ 1135 08d8 17050000 		lla	a0,.LC3
+ 1135      13050500 
+ 1136 08e0 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/ccmESeAu.s 			page 32
+
+
+ 1136      E7800000 
+ 1137 08e8 17050000 		lla	a0,.LC4
+ 1137      13050500 
+ 1138 08f0 97000000 		call	_Z12kprintStringPKc@plt
+ 1138      E7800000 
+ 1139 08f8 13060000 		li	a2,0
+ 1140 08fc 93050001 		li	a1,16
+ 1141 0900 13050A00 		mv	a0,s4
+ 1142 0904 97000000 		call	_Z9kprintIntmib@plt
+ 1142      E7800000 
+ 1143 090c 17050000 		lla	a0,.LC3
+ 1143      13050500 
+ 1144 0914 97000000 		call	_Z12kprintStringPKc@plt
+ 1144      E7800000 
+ 1145 091c 17050000 		lla	a0,.LC5
+ 1145      13050500 
+ 1146 0924 97000000 		call	_Z12kprintStringPKc@plt
+ 1146      E7800000 
+ 1147 092c 13060000 		li	a2,0
+ 1148 0930 93050001 		li	a1,16
+ 1149 0934 13850900 		mv	a0,s3
+ 1150 0938 97000000 		call	_Z9kprintIntmib@plt
+ 1150      E7800000 
+ 1151 0940 17050000 		lla	a0,.LC3
+ 1151      13050500 
+ 1152 0948 97000000 		call	_Z12kprintStringPKc@plt
+ 1152      E7800000 
+ 1153              	.L86:
+ 1154 0950 6F000000 		j	.L86
+ 1155              	.L77:
+ 1156 0954 97070000 		la	a5,_ZN3TCB7runningE
+ 1156      83B70700 
+ 1157 095c 83B70700 		ld	a5,0(a5)
+ 1158 0960 83C75703 		lbu	a5,53(a5)
+ 1159 0964 638E070C 		beq	a5,zero,.L87
+ 1160              	#APP
+ 1161              	# 308 "src/kernel/interrupt/interrupt_cpp.cpp" 1
+ 260              	        }
+ 261              	        else{
+ 262              	            uint64 stval = Riscv::r_stval(), sepc = Riscv::r_sepc();
+ 263              	            kprintString("\n!!!PANIC DUE TO NOT HANDLED INSTRUCTION PAGE FAULT !!!\n");
+ 264              	            KCHECKPRINT(scause);
+ 265              	            KCHECKPRINT(sepc);
+ 266              	            KCHECKPRINT(stval);
+ 267              	            while(true);
+ 268              	        }
+ 269              	    }
+ 270              	    else if(scause == PFL || scause == PFW){
+ 271              	        uint64 stval = Riscv::r_stval(), sepc = Riscv::r_sepc(),
+ 272              	            sstatus = Riscv::r_sstatus();
+ 273              	        if(sstatus & Riscv::BitMaskSstatus::SSTATUS_SPP){
+ 274              	            KCHECKPRINT(scause);
+ 275              	            KCHECKPRINT(sepc);
+ 276              	            KCHECKPRINT(stval);
+ 277              	            kprintString("\n!!!PANIC DUE TO SUPERVISOR PAGE FAULT!!!\n");
+ 278              	            while(true);
+ 279              	        }
+GAS LISTING /tmp/ccmESeAu.s 			page 33
+
+
+ 280              	        else{
+ 281              	            MemoryAllocator& allocator = MemoryAllocator::getInstance();
+ 282              	            FreeSegment* fs = allocator.getFreeSegmentMeta((void*)stval);
+ 283              	            
+ 284              	            if(fs){
+ 285              	                Pager::getInstance().id_map(
+ 286              	                    fs->addr, 
+ 287              	                    (char*)fs->addr+fs->size, 
+ 288              	                    (PMTEntryBits)(PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+ 289              	                );
+ 290              	            }
+ 291              	            else{
+ 292              	                kprintString("\n!!!PANIC DUE TO NOT HANDLED USER DATA PAGE FAULT !!!\n");
+ 293              	                KCHECKPRINT(scause);
+ 294              	                KCHECKPRINT(sepc);
+ 295              	                KCHECKPRINT(stval);
+ 296              	                while(true);
+ 297              	                
+ 298              	            }
+ 299              	        }
+ 300              	        
+ 301              	    }
+ 302              	    else if(scause == II || scause == IR || scause == IW)
+ 303              	    {
+ 304              	        //ilegalna instrukcija
+ 305              	        if(!TCB::running->isKernelThread())
+ 306              	        {
+ 307              	            uint64 stval;
+ 308 0968 73293014 	            asm volatile("csrr %0, stval" : "=r" (stval));
+ 309              	            kprintString("\nERROR: Thread stopped due to unauthorised access!!\n");
+ 1162              		csrr s2, stval
+ 1163              	# 0 "" 2
+ 1164              	#NO_APP
+ 1165 096c 17050000 		lla	a0,.LC8
+ 1165      13050500 
+ 1166 0974 97000000 		call	_Z12kprintStringPKc@plt
+ 1166      E7800000 
+ 1167 097c 17050000 		lla	a0,.LC9
+ 1167      13050500 
+ 1168 0984 97000000 		call	_Z12kprintStringPKc@plt
+ 1168      E7800000 
+ 1169 098c 13060000 		li	a2,0
+ 1170 0990 93050001 		li	a1,16
+ 1171 0994 13850400 		mv	a0,s1
+ 1172 0998 97000000 		call	_Z9kprintIntmib@plt
+ 1172      E7800000 
+ 1173 09a0 17050000 		lla	a0,.LC3
+ 1173      13050500 
+ 1174 09a8 97000000 		call	_Z12kprintStringPKc@plt
+ 1174      E7800000 
+ 1175 09b0 17050000 		lla	a0,.LC10
+ 1175      13050500 
+ 1176 09b8 97000000 		call	_Z12kprintStringPKc@plt
+ 1176      E7800000 
+ 1177              	#APP
+ 1178              	# 146 "src/kernel/interrupt/../../../h/../h/riscv.hpp" 1
+ 1179              		csrr a5, sepc
+GAS LISTING /tmp/ccmESeAu.s 			page 34
+
+
+ 1180              	# 0 "" 2
+ 1181              	#NO_APP
+ 1182 09c4 2334F4FC 		sd	a5,-56(s0)
+ 1183 09c8 033584FC 		ld	a0,-56(s0)
+ 1184 09cc 13060000 		li	a2,0
+ 1185 09d0 93050001 		li	a1,16
+ 1186 09d4 97000000 		call	_Z9kprintIntmib@plt
+ 1186      E7800000 
+ 1187 09dc 17050000 		lla	a0,.LC3
+ 1187      13050500 
+ 1188 09e4 97000000 		call	_Z12kprintStringPKc@plt
+ 1188      E7800000 
+ 1189 09ec 17050000 		lla	a0,.LC11
+ 1189      13050500 
+ 1190 09f4 97000000 		call	_Z12kprintStringPKc@plt
+ 1190      E7800000 
+ 1191 09fc 13060000 		li	a2,0
+ 1192 0a00 93050001 		li	a1,16
+ 1193 0a04 13050900 		mv	a0,s2
+ 1194 0a08 97000000 		call	_Z9kprintIntmib@plt
+ 1194      E7800000 
+ 1195 0a10 17050000 		lla	a0,.LC12
+ 1195      13050500 
+ 1196 0a18 97000000 		call	_Z12kprintStringPKc@plt
+ 1196      E7800000 
+ 1197 0a20 97070000 		la	a5,_ZN3TCB7runningE
+ 1197      83B70700 
+ 1198 0a28 83B70700 		ld	a5,0(a5)
+ 1199 0a2c 13072000 		li	a4,2
+ 1200 0a30 23A8E702 		sw	a4,48(a5)
+ 1201 0a34 97000000 		call	_ZN3TCB8dispatchEv@plt
+ 1201      E7800000 
+ 1202 0a3c 6FF0DFBA 		j	.L69
+ 1203              	.L87:
+ 1204 0a40 17050000 		lla	a0,.LC13
+ 1204      13050500 
+ 1205 0a48 97000000 		call	_Z12kprintStringPKc@plt
+ 1205      E7800000 
+ 1206 0a50 97000000 		call	_ZN3TCB13panicDispatchEv@plt
+ 1206      E7800000 
+ 1207 0a58 6FF01FB9 		j	.L69
+ 1208              		.cfi_endproc
+ 1209              	.LFE116:
+ 1211              		.hidden	DW.ref.__gxx_personality_v0
+ 1212              		.weak	DW.ref.__gxx_personality_v0
+ 1213              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 1214              		.align	3
+ 1217              	DW.ref.__gxx_personality_v0:
+ 1218 0000 00000000 		.dword	__gxx_personality_v0
+ 1218      00000000 
+ 1219              		.ident	"GCC: (GNU) 12.2.0"
+ 1220              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccmESeAu.s 			page 35
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 interrupt_cpp.cpp
+     /tmp/ccmESeAu.s:16     .text._ZN10KSemaphorenwEm:0000000000000000 _ZN10KSemaphorenwEm
+     /tmp/ccmESeAu.s:18     .text._ZN10KSemaphorenwEm:0000000000000000 .L0 
+     /tmp/ccmESeAu.s:1217   .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccmESeAu.s:21     .text._ZN10KSemaphorenwEm:0000000000000000 $x
+     /tmp/ccmESeAu.s:22     .text._ZN10KSemaphorenwEm:0000000000000004 .L0 
+     /tmp/ccmESeAu.s:27     .text._ZN10KSemaphorenwEm:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:28     .text._ZN10KSemaphorenwEm:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:29     .text._ZN10KSemaphorenwEm:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:30     .text._ZN10KSemaphorenwEm:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:32     .text._ZN10KSemaphorenwEm:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:42     .text._ZN10KSemaphorenwEm:0000000000000040 .L0 
+     /tmp/ccmESeAu.s:43     .text._ZN10KSemaphorenwEm:0000000000000040 .L0 
+     /tmp/ccmESeAu.s:45     .text._ZN10KSemaphorenwEm:0000000000000044 .L0 
+     /tmp/ccmESeAu.s:46     .text._ZN10KSemaphorenwEm:0000000000000044 .L0 
+     /tmp/ccmESeAu.s:48     .text._ZN10KSemaphorenwEm:0000000000000048 .L0 
+     /tmp/ccmESeAu.s:50     .text._ZN10KSemaphorenwEm:000000000000004c .L0 
+     /tmp/ccmESeAu.s:52     .text._ZN10KSemaphorenwEm:0000000000000050 .L0 
+     /tmp/ccmESeAu.s:55     .text._ZN10KSemaphorenwEm:0000000000000054 .L0 
+     /tmp/ccmESeAu.s:82     .text._ZN10KSemaphorenwEm:00000000000000b8 .L0 
+     /tmp/ccmESeAu.s:109    .text:0000000000000000 _Z13timer_handlerv
+     /tmp/ccmESeAu.s:111    .text:0000000000000000 .L0 
+     /tmp/ccmESeAu.s:112    .text:0000000000000000 $x
+     /tmp/ccmESeAu.s:113    .text:0000000000000004 .L0 
+     /tmp/ccmESeAu.s:118    .text:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:119    .text:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:120    .text:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:121    .text:0000000000000014 .L0 
+     /tmp/ccmESeAu.s:123    .text:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:141    .text:0000000000000054 .L0 
+     /tmp/ccmESeAu.s:142    .text:0000000000000054 .L0 
+     /tmp/ccmESeAu.s:144    .text:0000000000000058 .L0 
+     /tmp/ccmESeAu.s:145    .text:0000000000000058 .L0 
+     /tmp/ccmESeAu.s:147    .text:000000000000005c .L0 
+     /tmp/ccmESeAu.s:149    .text:0000000000000060 .L0 
+     /tmp/ccmESeAu.s:151    .text:0000000000000064 .L0 
+     /tmp/ccmESeAu.s:154    .text:0000000000000068 .L0 
+     /tmp/ccmESeAu.s:181    .text:00000000000000a0 .L0 
+     /tmp/ccmESeAu.s:188    .text._ZN12SharedBufferIcE3getEv:0000000000000000 _ZN12SharedBufferIcE3getEv
+     /tmp/ccmESeAu.s:190    .text._ZN12SharedBufferIcE3getEv:0000000000000000 .L0 
+     /tmp/ccmESeAu.s:191    .text._ZN12SharedBufferIcE3getEv:0000000000000000 $x
+     /tmp/ccmESeAu.s:192    .text._ZN12SharedBufferIcE3getEv:0000000000000004 .L0 
+     /tmp/ccmESeAu.s:198    .text._ZN12SharedBufferIcE3getEv:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:199    .text._ZN12SharedBufferIcE3getEv:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:200    .text._ZN12SharedBufferIcE3getEv:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:201    .text._ZN12SharedBufferIcE3getEv:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:202    .text._ZN12SharedBufferIcE3getEv:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:204    .text._ZN12SharedBufferIcE3getEv:000000000000001c .L0 
+     /tmp/ccmESeAu.s:230    .text._ZN12SharedBufferIcE3getEv:0000000000000090 .L0 
+     /tmp/ccmESeAu.s:232    .text._ZN12SharedBufferIcE3getEv:0000000000000094 .L0 
+     /tmp/ccmESeAu.s:233    .text._ZN12SharedBufferIcE3getEv:0000000000000094 .L0 
+     /tmp/ccmESeAu.s:235    .text._ZN12SharedBufferIcE3getEv:0000000000000098 .L0 
+     /tmp/ccmESeAu.s:237    .text._ZN12SharedBufferIcE3getEv:000000000000009c .L0 
+     /tmp/ccmESeAu.s:239    .text._ZN12SharedBufferIcE3getEv:00000000000000a0 .L0 
+     /tmp/ccmESeAu.s:241    .text._ZN12SharedBufferIcE3getEv:00000000000000a4 .L0 
+     /tmp/ccmESeAu.s:243    .text._ZN12SharedBufferIcE3getEv:00000000000000a8 .L0 
+GAS LISTING /tmp/ccmESeAu.s 			page 36
+
+
+     /tmp/ccmESeAu.s:250    .text._ZN12SharedBufferIcE3putEc:0000000000000000 _ZN12SharedBufferIcE3putEc
+     /tmp/ccmESeAu.s:252    .text._ZN12SharedBufferIcE3putEc:0000000000000000 .L0 
+     /tmp/ccmESeAu.s:253    .text._ZN12SharedBufferIcE3putEc:0000000000000000 $x
+     /tmp/ccmESeAu.s:254    .text._ZN12SharedBufferIcE3putEc:0000000000000004 .L0 
+     /tmp/ccmESeAu.s:260    .text._ZN12SharedBufferIcE3putEc:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:261    .text._ZN12SharedBufferIcE3putEc:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:262    .text._ZN12SharedBufferIcE3putEc:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:263    .text._ZN12SharedBufferIcE3putEc:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:264    .text._ZN12SharedBufferIcE3putEc:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:266    .text._ZN12SharedBufferIcE3putEc:000000000000001c .L0 
+     /tmp/ccmESeAu.s:292    .text._ZN12SharedBufferIcE3putEc:0000000000000090 .L0 
+     /tmp/ccmESeAu.s:294    .text._ZN12SharedBufferIcE3putEc:0000000000000094 .L0 
+     /tmp/ccmESeAu.s:295    .text._ZN12SharedBufferIcE3putEc:0000000000000094 .L0 
+     /tmp/ccmESeAu.s:297    .text._ZN12SharedBufferIcE3putEc:0000000000000098 .L0 
+     /tmp/ccmESeAu.s:299    .text._ZN12SharedBufferIcE3putEc:000000000000009c .L0 
+     /tmp/ccmESeAu.s:301    .text._ZN12SharedBufferIcE3putEc:00000000000000a0 .L0 
+     /tmp/ccmESeAu.s:303    .text._ZN12SharedBufferIcE3putEc:00000000000000a4 .L0 
+     /tmp/ccmESeAu.s:305    .text._ZN12SharedBufferIcE3putEc:00000000000000a8 .L0 
+     /tmp/ccmESeAu.s:312    .text:00000000000000a0 _Z8usrEcallmmmmm
+     /tmp/ccmESeAu.s:314    .text:00000000000000a0 .L0 
+     /tmp/ccmESeAu.s:316    .text:00000000000000a4 .L0 
+     /tmp/ccmESeAu.s:324    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:325    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:326    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:327    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:328    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:329    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:330    .text:00000000000000c0 .L0 
+     /tmp/ccmESeAu.s:332    .text:00000000000000c4 .L0 
+     /tmp/ccmESeAu.s:453    .text:0000000000000150 .L0 
+     /tmp/ccmESeAu.s:454    .text:0000000000000150 .L0 
+     /tmp/ccmESeAu.s:456    .text:0000000000000154 .L0 
+     /tmp/ccmESeAu.s:457    .text:0000000000000154 .L0 
+     /tmp/ccmESeAu.s:459    .text:0000000000000158 .L0 
+     /tmp/ccmESeAu.s:461    .text:000000000000015c .L0 
+     /tmp/ccmESeAu.s:463    .text:0000000000000160 .L0 
+     /tmp/ccmESeAu.s:465    .text:0000000000000164 .L0 
+     /tmp/ccmESeAu.s:467    .text:0000000000000168 .L0 
+     /tmp/ccmESeAu.s:469    .text:000000000000016c .L0 
+     /tmp/ccmESeAu.s:472    .text:0000000000000170 .L0 
+     /tmp/ccmESeAu.s:571    .text:0000000000000308 .L0 
+     /tmp/ccmESeAu.s:577    .text:0000000000000308 _Z8sysEcallmmmmm
+     /tmp/ccmESeAu.s:579    .text:0000000000000308 .L0 
+     /tmp/ccmESeAu.s:581    .text:000000000000030c .L0 
+     /tmp/ccmESeAu.s:589    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:590    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:591    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:592    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:593    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:594    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:595    .text:0000000000000328 .L0 
+     /tmp/ccmESeAu.s:597    .text:000000000000032c .L0 
+     /tmp/ccmESeAu.s:715    .text:00000000000003b4 .L0 
+     /tmp/ccmESeAu.s:716    .text:00000000000003b4 .L0 
+     /tmp/ccmESeAu.s:718    .text:00000000000003b8 .L0 
+     /tmp/ccmESeAu.s:719    .text:00000000000003b8 .L0 
+     /tmp/ccmESeAu.s:721    .text:00000000000003bc .L0 
+GAS LISTING /tmp/ccmESeAu.s 			page 37
+
+
+     /tmp/ccmESeAu.s:723    .text:00000000000003c0 .L0 
+     /tmp/ccmESeAu.s:725    .text:00000000000003c4 .L0 
+     /tmp/ccmESeAu.s:727    .text:00000000000003c8 .L0 
+     /tmp/ccmESeAu.s:729    .text:00000000000003cc .L0 
+     /tmp/ccmESeAu.s:731    .text:00000000000003d0 .L0 
+     /tmp/ccmESeAu.s:734    .text:00000000000003d4 .L0 
+     /tmp/ccmESeAu.s:839    .text:0000000000000550 .L0 
+     /tmp/ccmESeAu.s:889    .text:0000000000000550 interrupt
+     /tmp/ccmESeAu.s:891    .text:0000000000000550 .L0 
+     /tmp/ccmESeAu.s:893    .text:0000000000000554 .L0 
+     /tmp/ccmESeAu.s:900    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:901    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:902    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:903    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:904    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:905    .text:000000000000056c .L0 
+     /tmp/ccmESeAu.s:907    .text:0000000000000570 .L0 
+     /tmp/ccmESeAu.s:954    .text:00000000000005ec .L0 
+     /tmp/ccmESeAu.s:955    .text:00000000000005ec .L0 
+     /tmp/ccmESeAu.s:957    .text:00000000000005f0 .L0 
+     /tmp/ccmESeAu.s:958    .text:00000000000005f0 .L0 
+     /tmp/ccmESeAu.s:960    .text:00000000000005f4 .L0 
+     /tmp/ccmESeAu.s:962    .text:00000000000005f8 .L0 
+     /tmp/ccmESeAu.s:964    .text:00000000000005fc .L0 
+     /tmp/ccmESeAu.s:966    .text:0000000000000600 .L0 
+     /tmp/ccmESeAu.s:968    .text:0000000000000604 .L0 
+     /tmp/ccmESeAu.s:971    .text:0000000000000608 .L0 
+     /tmp/ccmESeAu.s:1208   .text:0000000000000a5c .L0 
+     /tmp/ccmESeAu.s:125    .text:0000000000000020 .L0 
+     /tmp/ccmESeAu.s:129    .text:0000000000000034 .L0 
+     /tmp/ccmESeAu.s:169    .text:0000000000000080 .L0 
+     /tmp/ccmESeAu.s:368    .rodata:0000000000000000 .L22
+     /tmp/ccmESeAu.s:360    .text:0000000000000110 .L0 
+     /tmp/ccmESeAu.s:497    .text:00000000000001d0 .L0 
+     /tmp/ccmESeAu.s:504    .text:00000000000001f0 .L0 
+     /tmp/ccmESeAu.s:516    .text:0000000000000228 .L0 
+     /tmp/ccmESeAu.s:560    .text:00000000000002d0 .L0 
+     /tmp/ccmESeAu.s:567    .text:00000000000002f0 .L0 
+     /tmp/ccmESeAu.s:633    .rodata:000000000000010c .L51
+     /tmp/ccmESeAu.s:625    .text:0000000000000378 .L0 
+     /tmp/ccmESeAu.s:759    .text:0000000000000434 .L0 
+     /tmp/ccmESeAu.s:771    .text:0000000000000458 .L0 
+     /tmp/ccmESeAu.s:788    .text:0000000000000494 .L0 
+     /tmp/ccmESeAu.s:800    .text:00000000000004c4 .L0 
+     /tmp/ccmESeAu.s:828    .text:0000000000000518 .L0 
+     /tmp/ccmESeAu.s:835    .text:0000000000000538 .L0 
+     /tmp/ccmESeAu.s:925    .text:00000000000005a4 .L0 
+     /tmp/ccmESeAu.s:932    .text:00000000000005c4 .L0 
+     /tmp/ccmESeAu.s:847    .rodata.str1.8:0000000000000040 .LC2
+     /tmp/ccmESeAu.s:981    .text:0000000000000628 .L0 
+     /tmp/ccmESeAu.s:850    .rodata.str1.8:0000000000000050 .LC3
+     /tmp/ccmESeAu.s:987    .text:000000000000064c .L0 
+     /tmp/ccmESeAu.s:883    .rodata.str1.8:0000000000000168 .LC14
+     /tmp/ccmESeAu.s:989    .text:000000000000065c .L0 
+     /tmp/ccmESeAu.s:1031   .text:00000000000006d0 .L0 
+     /tmp/ccmESeAu.s:1037   .text:00000000000006f4 .L0 
+     /tmp/ccmESeAu.s:853    .rodata.str1.8:0000000000000058 .LC4
+GAS LISTING /tmp/ccmESeAu.s 			page 38
+
+
+     /tmp/ccmESeAu.s:1039   .text:0000000000000704 .L0 
+     /tmp/ccmESeAu.s:1045   .text:0000000000000728 .L0 
+     /tmp/ccmESeAu.s:856    .rodata.str1.8:0000000000000060 .LC5
+     /tmp/ccmESeAu.s:1047   .text:0000000000000738 .L0 
+     /tmp/ccmESeAu.s:1053   .text:000000000000075c .L0 
+     /tmp/ccmESeAu.s:859    .rodata.str1.8:0000000000000068 .LC6
+     /tmp/ccmESeAu.s:1055   .text:000000000000076c .L0 
+     /tmp/ccmESeAu.s:844    .rodata.str1.8:0000000000000000 .LC1
+     /tmp/ccmESeAu.s:1085   .text:00000000000007b4 .L0 
+     /tmp/ccmESeAu.s:1087   .text:00000000000007c4 .L0 
+     /tmp/ccmESeAu.s:1093   .text:00000000000007e8 .L0 
+     /tmp/ccmESeAu.s:1095   .text:00000000000007f8 .L0 
+     /tmp/ccmESeAu.s:1101   .text:000000000000081c .L0 
+     /tmp/ccmESeAu.s:1103   .text:000000000000082c .L0 
+     /tmp/ccmESeAu.s:1109   .text:0000000000000850 .L0 
+     /tmp/ccmESeAu.s:862    .rodata.str1.8:0000000000000098 .LC7
+     /tmp/ccmESeAu.s:1127   .text:00000000000008a4 .L0 
+     /tmp/ccmESeAu.s:1129   .text:00000000000008b4 .L0 
+     /tmp/ccmESeAu.s:1135   .text:00000000000008d8 .L0 
+     /tmp/ccmESeAu.s:1137   .text:00000000000008e8 .L0 
+     /tmp/ccmESeAu.s:1143   .text:000000000000090c .L0 
+     /tmp/ccmESeAu.s:1145   .text:000000000000091c .L0 
+     /tmp/ccmESeAu.s:1151   .text:0000000000000940 .L0 
+     /tmp/ccmESeAu.s:1156   .text:0000000000000954 .L0 
+     /tmp/ccmESeAu.s:865    .rodata.str1.8:00000000000000d0 .LC8
+     /tmp/ccmESeAu.s:1165   .text:000000000000096c .L0 
+     /tmp/ccmESeAu.s:868    .rodata.str1.8:0000000000000108 .LC9
+     /tmp/ccmESeAu.s:1167   .text:000000000000097c .L0 
+     /tmp/ccmESeAu.s:1173   .text:00000000000009a0 .L0 
+     /tmp/ccmESeAu.s:871    .rodata.str1.8:0000000000000118 .LC10
+     /tmp/ccmESeAu.s:1175   .text:00000000000009b0 .L0 
+     /tmp/ccmESeAu.s:1187   .text:00000000000009dc .L0 
+     /tmp/ccmESeAu.s:874    .rodata.str1.8:0000000000000120 .LC11
+     /tmp/ccmESeAu.s:1189   .text:00000000000009ec .L0 
+     /tmp/ccmESeAu.s:877    .rodata.str1.8:0000000000000128 .LC12
+     /tmp/ccmESeAu.s:1195   .text:0000000000000a10 .L0 
+     /tmp/ccmESeAu.s:1197   .text:0000000000000a20 .L0 
+     /tmp/ccmESeAu.s:880    .rodata.str1.8:0000000000000130 .LC13
+     /tmp/ccmESeAu.s:1204   .text:0000000000000a40 .L0 
+     /tmp/ccmESeAu.s:153    .text:0000000000000068 .L12
+     /tmp/ccmESeAu.s:133    .text:0000000000000048 .L10
+     /tmp/ccmESeAu.s:437    .text:0000000000000128 .L41
+     /tmp/ccmESeAu.s:471    .text:0000000000000170 .L20
+     /tmp/ccmESeAu.s:442    .text:0000000000000140 .L19
+     /tmp/ccmESeAu.s:493    .text:00000000000001c8 .L42
+     /tmp/ccmESeAu.s:520    .text:000000000000023c .L35
+     /tmp/ccmESeAu.s:525    .text:000000000000024c .L43
+     /tmp/ccmESeAu.s:539    .text:0000000000000280 .L44
+     /tmp/ccmESeAu.s:550    .text:00000000000002ac .L45
+     /tmp/ccmESeAu.s:702    .text:0000000000000390 .L67
+     /tmp/ccmESeAu.s:733    .text:00000000000003d4 .L49
+     /tmp/ccmESeAu.s:707    .text:00000000000003a8 .L48
+     /tmp/ccmESeAu.s:755    .text:000000000000042c .L68
+     /tmp/ccmESeAu.s:792    .text:00000000000004a8 .L64
+     /tmp/ccmESeAu.s:945    .text:00000000000005dc .L90
+     /tmp/ccmESeAu.s:1007   .text:00000000000006a4 .L72
+     /tmp/ccmESeAu.s:993    .text:0000000000000670 .L73
+GAS LISTING /tmp/ccmESeAu.s 			page 39
+
+
+     /tmp/ccmESeAu.s:1059   .text:0000000000000780 .L74
+     /tmp/ccmESeAu.s:970    .text:0000000000000608 .L91
+     /tmp/ccmESeAu.s:980    .text:0000000000000628 .L76
+     /tmp/ccmESeAu.s:1070   .text:000000000000079c .L81
+     /tmp/ccmESeAu.s:952    .text:00000000000005e8 .L69
+     /tmp/ccmESeAu.s:1155   .text:0000000000000954 .L77
+     /tmp/ccmESeAu.s:991    .text:000000000000066c .L88
+     /tmp/ccmESeAu.s:1067   .text:0000000000000790 .L79
+     /tmp/ccmESeAu.s:1004   .text:000000000000069c .L92
+     /tmp/ccmESeAu.s:1113   .text:0000000000000864 .L83
+     /tmp/ccmESeAu.s:1057   .text:000000000000077c .L84
+     /tmp/ccmESeAu.s:1111   .text:0000000000000860 .L82
+     /tmp/ccmESeAu.s:1126   .text:00000000000008a4 .L85
+     /tmp/ccmESeAu.s:1153   .text:0000000000000950 .L86
+     /tmp/ccmESeAu.s:1203   .text:0000000000000a40 .L87
+     /tmp/ccmESeAu.s:33     .text._ZN10KSemaphorenwEm:0000000000000018 .L0 
+     /tmp/ccmESeAu.s:37     .text._ZN10KSemaphorenwEm:0000000000000028 .L0 
+     /tmp/ccmESeAu.s:10     .rodata._ZN10KSemaphorenwEm.str1.8:0000000000000000 .LC0
+     /tmp/ccmESeAu.s:66     .text._ZN10KSemaphorenwEm:000000000000007c .L0 
+     /tmp/ccmESeAu.s:71     .text._ZN10KSemaphorenwEm:000000000000008c .L0 
+     /tmp/ccmESeAu.s:54     .text._ZN10KSemaphorenwEm:0000000000000054 .L8
+     /tmp/ccmESeAu.s:70     .text._ZN10KSemaphorenwEm:000000000000008c .L3
+     /tmp/ccmESeAu.s:36     .text._ZN10KSemaphorenwEm:0000000000000028 .L2
+     /tmp/ccmESeAu.s:39     .text._ZN10KSemaphorenwEm:0000000000000034 .LEHB0
+     /tmp/ccmESeAu.s:17     .text._ZN10KSemaphorenwEm:0000000000000000 .LFB84
+     /tmp/ccmESeAu.s:59     .text._ZN10KSemaphorenwEm:0000000000000064 .LEHE0
+     /tmp/ccmESeAu.s:67     .text._ZN10KSemaphorenwEm:0000000000000084 .LEHB1
+     /tmp/ccmESeAu.s:69     .text._ZN10KSemaphorenwEm:000000000000008c .LEHE1
+     /tmp/ccmESeAu.s:74     .text._ZN10KSemaphorenwEm:000000000000009c .L5
+     /tmp/ccmESeAu.s:79     .text._ZN10KSemaphorenwEm:00000000000000b0 .LEHB2
+     /tmp/ccmESeAu.s:81     .text._ZN10KSemaphorenwEm:00000000000000b8 .LEHE2
+     /tmp/ccmESeAu.s:478    .text:0000000000000188 .L32
+     /tmp/ccmESeAu.s:484    .text:00000000000001a4 .L31
+     /tmp/ccmESeAu.s:496    .text:00000000000001d0 .L30
+     /tmp/ccmESeAu.s:503    .text:00000000000001f0 .L29
+     /tmp/ccmESeAu.s:508    .text:0000000000000208 .L28
+     /tmp/ccmESeAu.s:528    .text:0000000000000254 .L27
+     /tmp/ccmESeAu.s:533    .text:0000000000000268 .L26
+     /tmp/ccmESeAu.s:544    .text:0000000000000294 .L25
+     /tmp/ccmESeAu.s:555    .text:00000000000002c0 .L24
+     /tmp/ccmESeAu.s:559    .text:00000000000002d0 .L23
+     /tmp/ccmESeAu.s:565    .text:00000000000002ec .L21
+     /tmp/ccmESeAu.s:740    .text:00000000000003ec .L61
+     /tmp/ccmESeAu.s:746    .text:0000000000000408 .L60
+     /tmp/ccmESeAu.s:758    .text:0000000000000434 .L59
+     /tmp/ccmESeAu.s:770    .text:0000000000000458 .L58
+     /tmp/ccmESeAu.s:780    .text:0000000000000474 .L57
+     /tmp/ccmESeAu.s:795    .text:00000000000004b0 .L56
+     /tmp/ccmESeAu.s:804    .text:00000000000004dc .L55
+     /tmp/ccmESeAu.s:814    .text:00000000000004f4 .L54
+     /tmp/ccmESeAu.s:818    .text:0000000000000504 .L53
+     /tmp/ccmESeAu.s:827    .text:0000000000000518 .L52
+     /tmp/ccmESeAu.s:833    .text:0000000000000534 .L50
+     /tmp/ccmESeAu.s:86     .gcc_except_table._ZN10KSemaphorenwEm:0000000000000000 .LLSDA84
+
+UNDEFINED SYMBOLS
+_ZN10KSemaphore5cacheE
+GAS LISTING /tmp/ccmESeAu.s 			page 40
+
+
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCachenwEm
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN11ObjectCachedlEPv
+_Unwind_Resume
+__gxx_personality_v0
+_ZN9Scheduler12update_sleepEv
+_ZN3TCB16timeSliceCounterE
+_ZN3TCB7runningE
+_ZN3TCB5yieldEv
+_ZN10KSemaphore4waitEv
+_ZN10KSemaphore6signalEv
+_ZN15MemoryAllocator11getInstanceEv
+_ZN15MemoryAllocator9mem_allocEm
+_ZN3TCB12deleteThreadEPS_
+_ZN15MemoryAllocator8mem_freeEPv
+_ZN3TCB12createThreadEPFvPvES0_Pm
+_ZN3TCB8dispatchEv
+_ZN10KSemaphore16activeSemaphoresE
+_ZN10KSemaphore5closeEPS_
+_ZN10KSemaphore6existsEPS_
+_ZN3TCB5sleepEm
+_ZN5StdIO7ibufferE
+_ZN5StdIO7obufferE
+_ZN10KSemaphoreD1Ev
+_ZN11ObjectCache8free_objEPv
+thread_exit
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN5StdIO15console_handlerEv
+_ZN15MemoryAllocator18getFreeSegmentMetaEPv
+_ZN5Pager11getInstanceEv
+_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+_ZN3TCB13panicDispatchEv

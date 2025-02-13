@@ -1,0 +1,459 @@
+GAS LISTING /tmp/ccAlKSOS.s 			page 1
+
+
+   1              		.file	"tcb_queue.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZNK8TcbQueue6existsEP3TCB
+  11              	_ZNK8TcbQueue6existsEP3TCB:
+  12              	.LFB113:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 83370500 		ld	a5,0(a0)
+  21 0010 6F008000 		j	.L2
+  22              	.L8:
+  23 0014 83B70700 		ld	a5,0(a5)
+  24              	.L2:
+  25 0018 63880700 		beq	a5,zero,.L7
+  26 001c E39CB7FE 		bne	a5,a1,.L8
+  27 0020 13051000 		li	a0,1
+  28 0024 6F008000 		j	.L3
+  29              	.L7:
+  30 0028 13050000 		li	a0,0
+  31              	.L3:
+  32 002c 03348100 		ld	s0,8(sp)
+  33              		.cfi_restore 8
+  34              		.cfi_def_cfa 2, 16
+  35 0030 13010101 		addi	sp,sp,16
+  36              		.cfi_def_cfa_offset 0
+  37 0034 67800000 		jr	ra
+  38              		.cfi_endproc
+  39              	.LFE113:
+  41              		.align	2
+  42              		.globl	_ZN8TcbQueue6insertEP3TCB
+  44              	_ZN8TcbQueue6insertEP3TCB:
+  45              	.LFB114:
+  46              		.cfi_startproc
+  47 0038 130101FF 		addi	sp,sp,-16
+  48              		.cfi_def_cfa_offset 16
+  49 003c 23348100 		sd	s0,8(sp)
+  50              		.cfi_offset 8, -8
+  51 0040 13040101 		addi	s0,sp,16
+  52              		.cfi_def_cfa 8, 0
+  53 0044 23B00500 		sd	zero,0(a1)
+  54 0048 83378500 		ld	a5,8(a0)
+  55 004c 63820702 		beq	a5,zero,.L13
+  56 0050 23B0B700 		sd	a1,0(a5)
+  57              	.L11:
+  58 0054 2334B500 		sd	a1,8(a0)
+  59 0058 83270501 		lw	a5,16(a0)
+  60 005c 9B871700 		addiw	a5,a5,1
+GAS LISTING /tmp/ccAlKSOS.s 			page 2
+
+
+  61 0060 2328F500 		sw	a5,16(a0)
+  62 0064 03348100 		ld	s0,8(sp)
+  63              		.cfi_remember_state
+  64              		.cfi_restore 8
+  65              		.cfi_def_cfa 2, 16
+  66 0068 13010101 		addi	sp,sp,16
+  67              		.cfi_def_cfa_offset 0
+  68 006c 67800000 		jr	ra
+  69              	.L13:
+  70              		.cfi_restore_state
+  71 0070 2330B500 		sd	a1,0(a0)
+  72 0074 6FF01FFE 		j	.L11
+  73              		.cfi_endproc
+  74              	.LFE114:
+  76              		.align	2
+  77              		.globl	_ZN8TcbQueue6removeEv
+  79              	_ZN8TcbQueue6removeEv:
+  80              	.LFB115:
+  81              		.cfi_startproc
+  82 0078 130101FF 		addi	sp,sp,-16
+  83              		.cfi_def_cfa_offset 16
+  84 007c 23348100 		sd	s0,8(sp)
+  85              		.cfi_offset 8, -8
+  86 0080 13040101 		addi	s0,sp,16
+  87              		.cfi_def_cfa 8, 0
+  88 0084 93070500 		mv	a5,a0
+  89 0088 03350500 		ld	a0,0(a0)
+  90 008c 63020502 		beq	a0,zero,.L14
+  91 0090 03B78700 		ld	a4,8(a5)
+  92 0094 6304E502 		beq	a0,a4,.L19
+  93 0098 03370500 		ld	a4,0(a0)
+  94              	.L17:
+  95 009c 23B0E700 		sd	a4,0(a5)
+  96 00a0 23300500 		sd	zero,0(a0)
+  97 00a4 03A70701 		lw	a4,16(a5)
+  98 00a8 1B07F7FF 		addiw	a4,a4,-1
+  99 00ac 23A8E700 		sw	a4,16(a5)
+ 100              	.L14:
+ 101 00b0 03348100 		ld	s0,8(sp)
+ 102              		.cfi_remember_state
+ 103              		.cfi_restore 8
+ 104              		.cfi_def_cfa 2, 16
+ 105 00b4 13010101 		addi	sp,sp,16
+ 106              		.cfi_def_cfa_offset 0
+ 107 00b8 67800000 		jr	ra
+ 108              	.L19:
+ 109              		.cfi_restore_state
+ 110 00bc 23B40700 		sd	zero,8(a5)
+ 111 00c0 13070000 		li	a4,0
+ 112 00c4 6FF09FFD 		j	.L17
+ 113              		.cfi_endproc
+ 114              	.LFE115:
+ 116              		.align	2
+ 117              		.globl	_ZN8TcbQueue3topEv
+ 119              	_ZN8TcbQueue3topEv:
+ 120              	.LFB116:
+ 121              		.cfi_startproc
+GAS LISTING /tmp/ccAlKSOS.s 			page 3
+
+
+ 122 00c8 130101FF 		addi	sp,sp,-16
+ 123              		.cfi_def_cfa_offset 16
+ 124 00cc 23348100 		sd	s0,8(sp)
+ 125              		.cfi_offset 8, -8
+ 126 00d0 13040101 		addi	s0,sp,16
+ 127              		.cfi_def_cfa 8, 0
+ 128 00d4 03350500 		ld	a0,0(a0)
+ 129 00d8 03348100 		ld	s0,8(sp)
+ 130              		.cfi_restore 8
+ 131              		.cfi_def_cfa 2, 16
+ 132 00dc 13010101 		addi	sp,sp,16
+ 133              		.cfi_def_cfa_offset 0
+ 134 00e0 67800000 		jr	ra
+ 135              		.cfi_endproc
+ 136              	.LFE116:
+ 138              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 139              		.align	3
+ 140              	.LC0:
+ 141 0000 2D3E2000 		.string	"-> "
+ 142 0004 00000000 		.align	3
+ 143              	.LC1:
+ 144 0008 0A00     		.string	"\n"
+ 145              		.text
+ 146              		.align	2
+ 147              		.globl	_ZN8TcbQueue10printQueueEv
+ 149              	_ZN8TcbQueue10printQueueEv:
+ 150              	.LFB117:
+ 151              		.cfi_startproc
+ 152 00e4 130101FE 		addi	sp,sp,-32
+ 153              		.cfi_def_cfa_offset 32
+ 154 00e8 233C1100 		sd	ra,24(sp)
+ 155 00ec 23388100 		sd	s0,16(sp)
+ 156 00f0 23349100 		sd	s1,8(sp)
+ 157              		.cfi_offset 1, -8
+ 158              		.cfi_offset 8, -16
+ 159              		.cfi_offset 9, -24
+ 160 00f4 13040102 		addi	s0,sp,32
+ 161              		.cfi_def_cfa 8, 0
+ 162 00f8 83340500 		ld	s1,0(a0)
+ 163 00fc 6F00C003 		j	.L23
+ 164              	.L24:
+ 165 0100 17050000 		lla	a0,.LC0
+ 165      13050500 
+ 166 0108 97000000 		call	_Z12kprintStringPKc@plt
+ 166      E7800000 
+ 167 0110 13060000 		li	a2,0
+ 168 0114 9305A000 		li	a1,10
+ 169 0118 13850400 		mv	a0,s1
+ 170 011c 97000000 		call	_Z9kprintIntmib@plt
+ 170      E7800000 
+ 171 0124 17050000 		lla	a0,.LC1
+ 171      13050500 
+ 172 012c 97000000 		call	_Z12kprintStringPKc@plt
+ 172      E7800000 
+ 173 0134 83B40400 		ld	s1,0(s1)
+ 174              	.L23:
+ 175 0138 E39404FC 		bne	s1,zero,.L24
+GAS LISTING /tmp/ccAlKSOS.s 			page 4
+
+
+ 176 013c 17050000 		lla	a0,.LC1
+ 176      13050500 
+ 177 0144 97000000 		call	_Z12kprintStringPKc@plt
+ 177      E7800000 
+ 178 014c 83308101 		ld	ra,24(sp)
+ 179              		.cfi_restore 1
+ 180 0150 03340101 		ld	s0,16(sp)
+ 181              		.cfi_restore 8
+ 182              		.cfi_def_cfa 2, 32
+ 183 0154 83348100 		ld	s1,8(sp)
+ 184              		.cfi_restore 9
+ 185 0158 13010102 		addi	sp,sp,32
+ 186              		.cfi_def_cfa_offset 0
+ 187 015c 67800000 		jr	ra
+ 188              		.cfi_endproc
+ 189              	.LFE117:
+ 191              		.align	2
+ 192              		.globl	_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E
+ 194              	_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E:
+ 195              	.LFB118:
+ 196              		.cfi_startproc
+ 197 0160 130101FC 		addi	sp,sp,-64
+ 198              		.cfi_def_cfa_offset 64
+ 199 0164 233C1102 		sd	ra,56(sp)
+ 200 0168 23388102 		sd	s0,48(sp)
+ 201 016c 23349102 		sd	s1,40(sp)
+ 202 0170 23302103 		sd	s2,32(sp)
+ 203 0174 233C3101 		sd	s3,24(sp)
+ 204 0178 23384101 		sd	s4,16(sp)
+ 205 017c 23345101 		sd	s5,8(sp)
+ 206              		.cfi_offset 1, -8
+ 207              		.cfi_offset 8, -16
+ 208              		.cfi_offset 9, -24
+ 209              		.cfi_offset 18, -32
+ 210              		.cfi_offset 19, -40
+ 211              		.cfi_offset 20, -48
+ 212              		.cfi_offset 21, -56
+ 213 0180 13040104 		addi	s0,sp,64
+ 214              		.cfi_def_cfa 8, 0
+ 215 0184 930A0500 		mv	s5,a0
+ 216 0188 13890500 		mv	s2,a1
+ 217 018c 93090600 		mv	s3,a2
+ 218 0190 83340500 		ld	s1,0(a0)
+ 219 0194 130A0000 		li	s4,0
+ 220 0198 6F00C000 		j	.L28
+ 221              	.L34:
+ 222 019c 138A0400 		mv	s4,s1
+ 223 01a0 83B40400 		ld	s1,0(s1)
+ 224              	.L28:
+ 225 01a4 638A0400 		beq	s1,zero,.L27
+ 226 01a8 93850400 		mv	a1,s1
+ 227 01ac 13050900 		mv	a0,s2
+ 228 01b0 E7800900 		jalr	s3
+ 229 01b4 E35405FE 		bge	a0,zero,.L34
+ 230              	.L27:
+ 231 01b8 63000A04 		beq	s4,zero,.L35
+ 232 01bc 23309900 		sd	s1,0(s2)
+GAS LISTING /tmp/ccAlKSOS.s 			page 5
+
+
+ 233 01c0 638A0404 		beq	s1,zero,.L36
+ 234              	.L32:
+ 235 01c4 23302A01 		sd	s2,0(s4)
+ 236              	.L31:
+ 237 01c8 83A70A01 		lw	a5,16(s5)
+ 238 01cc 9B871700 		addiw	a5,a5,1
+ 239 01d0 23A8FA00 		sw	a5,16(s5)
+ 240 01d4 83308103 		ld	ra,56(sp)
+ 241              		.cfi_remember_state
+ 242              		.cfi_restore 1
+ 243 01d8 03340103 		ld	s0,48(sp)
+ 244              		.cfi_restore 8
+ 245              		.cfi_def_cfa 2, 64
+ 246 01dc 83348102 		ld	s1,40(sp)
+ 247              		.cfi_restore 9
+ 248 01e0 03390102 		ld	s2,32(sp)
+ 249              		.cfi_restore 18
+ 250 01e4 83398101 		ld	s3,24(sp)
+ 251              		.cfi_restore 19
+ 252 01e8 033A0101 		ld	s4,16(sp)
+ 253              		.cfi_restore 20
+ 254 01ec 833A8100 		ld	s5,8(sp)
+ 255              		.cfi_restore 21
+ 256 01f0 13010104 		addi	sp,sp,64
+ 257              		.cfi_def_cfa_offset 0
+ 258 01f4 67800000 		jr	ra
+ 259              	.L35:
+ 260              		.cfi_restore_state
+ 261 01f8 83B70A00 		ld	a5,0(s5)
+ 262 01fc 2330F900 		sd	a5,0(s2)
+ 263 0200 63860700 		beq	a5,zero,.L37
+ 264              	.L30:
+ 265 0204 23B02A01 		sd	s2,0(s5)
+ 266 0208 6FF01FFC 		j	.L31
+ 267              	.L37:
+ 268 020c 23B42A01 		sd	s2,8(s5)
+ 269 0210 6FF05FFF 		j	.L30
+ 270              	.L36:
+ 271 0214 23B42A01 		sd	s2,8(s5)
+ 272 0218 6FF0DFFA 		j	.L32
+ 273              		.cfi_endproc
+ 274              	.LFE118:
+ 276              		.align	2
+ 277              		.globl	_ZN8TcbQueue11insertFrontEP3TCB
+ 279              	_ZN8TcbQueue11insertFrontEP3TCB:
+ 280              	.LFB119:
+ 281              		.cfi_startproc
+ 282 021c 130101FF 		addi	sp,sp,-16
+ 283              		.cfi_def_cfa_offset 16
+ 284 0220 23348100 		sd	s0,8(sp)
+ 285              		.cfi_offset 8, -8
+ 286 0224 13040101 		addi	s0,sp,16
+ 287              		.cfi_def_cfa 8, 0
+ 288 0228 83370500 		ld	a5,0(a0)
+ 289 022c 23B0F500 		sd	a5,0(a1)
+ 290 0230 63800702 		beq	a5,zero,.L41
+ 291              	.L39:
+GAS LISTING /tmp/ccAlKSOS.s 			page 6
+
+
+ 292 0234 2330B500 		sd	a1,0(a0)
+ 293 0238 83270501 		lw	a5,16(a0)
+ 294 023c 9B871700 		addiw	a5,a5,1
+ 295 0240 2328F500 		sw	a5,16(a0)
+ 296 0244 03348100 		ld	s0,8(sp)
+ 297              		.cfi_remember_state
+ 298              		.cfi_restore 8
+ 299              		.cfi_def_cfa 2, 16
+ 300 0248 13010101 		addi	sp,sp,16
+ 301              		.cfi_def_cfa_offset 0
+ 302 024c 67800000 		jr	ra
+ 303              	.L41:
+ 304              		.cfi_restore_state
+ 305 0250 2334B500 		sd	a1,8(a0)
+ 306 0254 6FF01FFE 		j	.L39
+ 307              		.cfi_endproc
+ 308              	.LFE119:
+ 310              		.globl	_ZN8TcbQueue5cacheE
+ 311              		.bss
+ 312              		.align	3
+ 315              	_ZN8TcbQueue5cacheE:
+ 316 0000 00000000 		.zero	8
+ 316      00000000 
+ 317              		.ident	"GCC: (GNU) 12.2.0"
+ 318              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccAlKSOS.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tcb_queue.cpp
+     /tmp/ccAlKSOS.s:11     .text:0000000000000000 _ZNK8TcbQueue6existsEP3TCB
+     /tmp/ccAlKSOS.s:13     .text:0000000000000000 .L0 
+     /tmp/ccAlKSOS.s:14     .text:0000000000000000 $x
+     /tmp/ccAlKSOS.s:15     .text:0000000000000004 .L0 
+     /tmp/ccAlKSOS.s:17     .text:0000000000000008 .L0 
+     /tmp/ccAlKSOS.s:19     .text:000000000000000c .L0 
+     /tmp/ccAlKSOS.s:33     .text:0000000000000030 .L0 
+     /tmp/ccAlKSOS.s:34     .text:0000000000000030 .L0 
+     /tmp/ccAlKSOS.s:36     .text:0000000000000034 .L0 
+     /tmp/ccAlKSOS.s:38     .text:0000000000000038 .L0 
+     /tmp/ccAlKSOS.s:44     .text:0000000000000038 _ZN8TcbQueue6insertEP3TCB
+     /tmp/ccAlKSOS.s:46     .text:0000000000000038 .L0 
+     /tmp/ccAlKSOS.s:48     .text:000000000000003c .L0 
+     /tmp/ccAlKSOS.s:50     .text:0000000000000040 .L0 
+     /tmp/ccAlKSOS.s:52     .text:0000000000000044 .L0 
+     /tmp/ccAlKSOS.s:63     .text:0000000000000068 .L0 
+     /tmp/ccAlKSOS.s:64     .text:0000000000000068 .L0 
+     /tmp/ccAlKSOS.s:65     .text:0000000000000068 .L0 
+     /tmp/ccAlKSOS.s:67     .text:000000000000006c .L0 
+     /tmp/ccAlKSOS.s:70     .text:0000000000000070 .L0 
+     /tmp/ccAlKSOS.s:73     .text:0000000000000078 .L0 
+     /tmp/ccAlKSOS.s:79     .text:0000000000000078 _ZN8TcbQueue6removeEv
+     /tmp/ccAlKSOS.s:81     .text:0000000000000078 .L0 
+     /tmp/ccAlKSOS.s:83     .text:000000000000007c .L0 
+     /tmp/ccAlKSOS.s:85     .text:0000000000000080 .L0 
+     /tmp/ccAlKSOS.s:87     .text:0000000000000084 .L0 
+     /tmp/ccAlKSOS.s:102    .text:00000000000000b4 .L0 
+     /tmp/ccAlKSOS.s:103    .text:00000000000000b4 .L0 
+     /tmp/ccAlKSOS.s:104    .text:00000000000000b4 .L0 
+     /tmp/ccAlKSOS.s:106    .text:00000000000000b8 .L0 
+     /tmp/ccAlKSOS.s:109    .text:00000000000000bc .L0 
+     /tmp/ccAlKSOS.s:113    .text:00000000000000c8 .L0 
+     /tmp/ccAlKSOS.s:119    .text:00000000000000c8 _ZN8TcbQueue3topEv
+     /tmp/ccAlKSOS.s:121    .text:00000000000000c8 .L0 
+     /tmp/ccAlKSOS.s:123    .text:00000000000000cc .L0 
+     /tmp/ccAlKSOS.s:125    .text:00000000000000d0 .L0 
+     /tmp/ccAlKSOS.s:127    .text:00000000000000d4 .L0 
+     /tmp/ccAlKSOS.s:130    .text:00000000000000dc .L0 
+     /tmp/ccAlKSOS.s:131    .text:00000000000000dc .L0 
+     /tmp/ccAlKSOS.s:133    .text:00000000000000e0 .L0 
+     /tmp/ccAlKSOS.s:135    .text:00000000000000e4 .L0 
+     /tmp/ccAlKSOS.s:149    .text:00000000000000e4 _ZN8TcbQueue10printQueueEv
+     /tmp/ccAlKSOS.s:151    .text:00000000000000e4 .L0 
+     /tmp/ccAlKSOS.s:153    .text:00000000000000e8 .L0 
+     /tmp/ccAlKSOS.s:157    .text:00000000000000f4 .L0 
+     /tmp/ccAlKSOS.s:158    .text:00000000000000f4 .L0 
+     /tmp/ccAlKSOS.s:159    .text:00000000000000f4 .L0 
+     /tmp/ccAlKSOS.s:161    .text:00000000000000f8 .L0 
+     /tmp/ccAlKSOS.s:179    .text:0000000000000150 .L0 
+     /tmp/ccAlKSOS.s:181    .text:0000000000000154 .L0 
+     /tmp/ccAlKSOS.s:182    .text:0000000000000154 .L0 
+     /tmp/ccAlKSOS.s:184    .text:0000000000000158 .L0 
+     /tmp/ccAlKSOS.s:186    .text:000000000000015c .L0 
+     /tmp/ccAlKSOS.s:188    .text:0000000000000160 .L0 
+     /tmp/ccAlKSOS.s:194    .text:0000000000000160 _ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E
+GAS LISTING /tmp/ccAlKSOS.s 			page 8
+
+
+     /tmp/ccAlKSOS.s:196    .text:0000000000000160 .L0 
+     /tmp/ccAlKSOS.s:198    .text:0000000000000164 .L0 
+     /tmp/ccAlKSOS.s:206    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:207    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:208    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:209    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:210    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:211    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:212    .text:0000000000000180 .L0 
+     /tmp/ccAlKSOS.s:214    .text:0000000000000184 .L0 
+     /tmp/ccAlKSOS.s:241    .text:00000000000001d8 .L0 
+     /tmp/ccAlKSOS.s:242    .text:00000000000001d8 .L0 
+     /tmp/ccAlKSOS.s:244    .text:00000000000001dc .L0 
+     /tmp/ccAlKSOS.s:245    .text:00000000000001dc .L0 
+     /tmp/ccAlKSOS.s:247    .text:00000000000001e0 .L0 
+     /tmp/ccAlKSOS.s:249    .text:00000000000001e4 .L0 
+     /tmp/ccAlKSOS.s:251    .text:00000000000001e8 .L0 
+     /tmp/ccAlKSOS.s:253    .text:00000000000001ec .L0 
+     /tmp/ccAlKSOS.s:255    .text:00000000000001f0 .L0 
+     /tmp/ccAlKSOS.s:257    .text:00000000000001f4 .L0 
+     /tmp/ccAlKSOS.s:260    .text:00000000000001f8 .L0 
+     /tmp/ccAlKSOS.s:273    .text:000000000000021c .L0 
+     /tmp/ccAlKSOS.s:279    .text:000000000000021c _ZN8TcbQueue11insertFrontEP3TCB
+     /tmp/ccAlKSOS.s:281    .text:000000000000021c .L0 
+     /tmp/ccAlKSOS.s:283    .text:0000000000000220 .L0 
+     /tmp/ccAlKSOS.s:285    .text:0000000000000224 .L0 
+     /tmp/ccAlKSOS.s:287    .text:0000000000000228 .L0 
+     /tmp/ccAlKSOS.s:297    .text:0000000000000248 .L0 
+     /tmp/ccAlKSOS.s:298    .text:0000000000000248 .L0 
+     /tmp/ccAlKSOS.s:299    .text:0000000000000248 .L0 
+     /tmp/ccAlKSOS.s:301    .text:000000000000024c .L0 
+     /tmp/ccAlKSOS.s:304    .text:0000000000000250 .L0 
+     /tmp/ccAlKSOS.s:307    .text:0000000000000258 .L0 
+     /tmp/ccAlKSOS.s:315    .bss:0000000000000000 _ZN8TcbQueue5cacheE
+     /tmp/ccAlKSOS.s:140    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccAlKSOS.s:165    .text:0000000000000100 .L0 
+     /tmp/ccAlKSOS.s:143    .rodata.str1.8:0000000000000008 .LC1
+     /tmp/ccAlKSOS.s:171    .text:0000000000000124 .L0 
+     /tmp/ccAlKSOS.s:176    .text:000000000000013c .L0 
+     /tmp/ccAlKSOS.s:24     .text:0000000000000018 .L2
+     /tmp/ccAlKSOS.s:29     .text:0000000000000028 .L7
+     /tmp/ccAlKSOS.s:22     .text:0000000000000014 .L8
+     /tmp/ccAlKSOS.s:31     .text:000000000000002c .L3
+     /tmp/ccAlKSOS.s:69     .text:0000000000000070 .L13
+     /tmp/ccAlKSOS.s:57     .text:0000000000000054 .L11
+     /tmp/ccAlKSOS.s:100    .text:00000000000000b0 .L14
+     /tmp/ccAlKSOS.s:108    .text:00000000000000bc .L19
+     /tmp/ccAlKSOS.s:94     .text:000000000000009c .L17
+     /tmp/ccAlKSOS.s:174    .text:0000000000000138 .L23
+     /tmp/ccAlKSOS.s:164    .text:0000000000000100 .L24
+     /tmp/ccAlKSOS.s:224    .text:00000000000001a4 .L28
+     /tmp/ccAlKSOS.s:230    .text:00000000000001b8 .L27
+     /tmp/ccAlKSOS.s:221    .text:000000000000019c .L34
+     /tmp/ccAlKSOS.s:259    .text:00000000000001f8 .L35
+     /tmp/ccAlKSOS.s:270    .text:0000000000000214 .L36
+     /tmp/ccAlKSOS.s:267    .text:000000000000020c .L37
+     /tmp/ccAlKSOS.s:236    .text:00000000000001c8 .L31
+GAS LISTING /tmp/ccAlKSOS.s 			page 9
+
+
+     /tmp/ccAlKSOS.s:264    .text:0000000000000204 .L30
+     /tmp/ccAlKSOS.s:234    .text:00000000000001c4 .L32
+     /tmp/ccAlKSOS.s:303    .text:0000000000000250 .L41
+     /tmp/ccAlKSOS.s:291    .text:0000000000000234 .L39
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_Z9kprintIntmib

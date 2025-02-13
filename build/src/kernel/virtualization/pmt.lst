@@ -1,0 +1,688 @@
+GAS LISTING /tmp/cch8LbNK.s 			page 1
+
+
+   1              		.file	"pmt.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 50413A20 		.string	"PA: "
+  11      00
+  12 0005 000000   		.align	3
+  13              	.LC1:
+  14 0008 0A00     		.string	"\n"
+  15 000a 00000000 		.align	3
+  15      0000
+  16              	.LC2:
+  17 0010 62697473 		.string	"bits: "
+  17      3A2000
+  18              		.text
+  19              		.align	2
+  20              		.globl	_ZN8PMTEntry5printEv
+  22              	_ZN8PMTEntry5printEv:
+  23              	.LFB114:
+  24              		.cfi_startproc
+  25 0000 130101FE 		addi	sp,sp,-32
+  26              		.cfi_def_cfa_offset 32
+  27 0004 233C1100 		sd	ra,24(sp)
+  28 0008 23388100 		sd	s0,16(sp)
+  29 000c 23349100 		sd	s1,8(sp)
+  30              		.cfi_offset 1, -8
+  31              		.cfi_offset 8, -16
+  32              		.cfi_offset 9, -24
+  33 0010 13040102 		addi	s0,sp,32
+  34              		.cfi_def_cfa 8, 0
+  35 0014 93040500 		mv	s1,a0
+  36 0018 17050000 		lla	a0,.LC0
+  36      13050500 
+  37 0020 97000000 		call	_Z12kprintStringPKc@plt
+  37      E7800000 
+  38 0028 03B50400 		ld	a0,0(s1)
+  39 002c 1355A500 		srli	a0,a0,10
+  40 0030 13060000 		li	a2,0
+  41 0034 93050001 		li	a1,16
+  42 0038 1315C500 		slli	a0,a0,12
+  43 003c 97000000 		call	_Z9kprintIntmib@plt
+  43      E7800000 
+  44 0044 17050000 		lla	a0,.LC1
+  44      13050500 
+  45 004c 97000000 		call	_Z12kprintStringPKc@plt
+  45      E7800000 
+  46 0054 17050000 		lla	a0,.LC2
+  46      13050500 
+  47 005c 97000000 		call	_Z12kprintStringPKc@plt
+  47      E7800000 
+  48 0064 03B50400 		ld	a0,0(s1)
+GAS LISTING /tmp/cch8LbNK.s 			page 2
+
+
+  49 0068 13060000 		li	a2,0
+  50 006c 93052000 		li	a1,2
+  51 0070 1375F51F 		andi	a0,a0,511
+  52 0074 97000000 		call	_Z9kprintIntmib@plt
+  52      E7800000 
+  53 007c 17050000 		lla	a0,.LC1
+  53      13050500 
+  54 0084 97000000 		call	_Z12kprintStringPKc@plt
+  54      E7800000 
+  55 008c 83308101 		ld	ra,24(sp)
+  56              		.cfi_restore 1
+  57 0090 03340101 		ld	s0,16(sp)
+  58              		.cfi_restore 8
+  59              		.cfi_def_cfa 2, 32
+  60 0094 83348100 		ld	s1,8(sp)
+  61              		.cfi_restore 9
+  62 0098 13010102 		addi	sp,sp,32
+  63              		.cfi_def_cfa_offset 0
+  64 009c 67800000 		jr	ra
+  65              		.cfi_endproc
+  66              	.LFE114:
+  68              		.align	2
+  69              		.globl	_ZN8PMTEntry9set_flagsE12PMTEntryBits
+  71              	_ZN8PMTEntry9set_flagsE12PMTEntryBits:
+  72              	.LFB115:
+  73              		.cfi_startproc
+  74 00a0 130101FF 		addi	sp,sp,-16
+  75              		.cfi_def_cfa_offset 16
+  76 00a4 23348100 		sd	s0,8(sp)
+  77              		.cfi_offset 8, -8
+  78 00a8 13040101 		addi	s0,sp,16
+  79              		.cfi_def_cfa 8, 0
+  80 00ac 83370500 		ld	a5,0(a0)
+  81 00b0 B3E7B700 		or	a5,a5,a1
+  82 00b4 2330F500 		sd	a5,0(a0)
+  83 00b8 03348100 		ld	s0,8(sp)
+  84              		.cfi_restore 8
+  85              		.cfi_def_cfa 2, 16
+  86 00bc 13010101 		addi	sp,sp,16
+  87              		.cfi_def_cfa_offset 0
+  88 00c0 67800000 		jr	ra
+  89              		.cfi_endproc
+  90              	.LFE115:
+  92              		.align	2
+  93              		.globl	_ZN8PMTEntry11clear_flagsE12PMTEntryBits
+  95              	_ZN8PMTEntry11clear_flagsE12PMTEntryBits:
+  96              	.LFB116:
+  97              		.cfi_startproc
+  98 00c4 130101FF 		addi	sp,sp,-16
+  99              		.cfi_def_cfa_offset 16
+ 100 00c8 23348100 		sd	s0,8(sp)
+ 101              		.cfi_offset 8, -8
+ 102 00cc 13040101 		addi	s0,sp,16
+ 103              		.cfi_def_cfa 8, 0
+ 104 00d0 83370500 		ld	a5,0(a0)
+ 105 00d4 93C5F5FF 		not	a1,a1
+ 106 00d8 B3F7B700 		and	a5,a5,a1
+GAS LISTING /tmp/cch8LbNK.s 			page 3
+
+
+ 107 00dc 2330F500 		sd	a5,0(a0)
+ 108 00e0 03348100 		ld	s0,8(sp)
+ 109              		.cfi_restore 8
+ 110              		.cfi_def_cfa 2, 16
+ 111 00e4 13010101 		addi	sp,sp,16
+ 112              		.cfi_def_cfa_offset 0
+ 113 00e8 67800000 		jr	ra
+ 114              		.cfi_endproc
+ 115              	.LFE116:
+ 117              		.align	2
+ 118              		.globl	_ZN8PMTEntry5clearEv
+ 120              	_ZN8PMTEntry5clearEv:
+ 121              	.LFB117:
+ 122              		.cfi_startproc
+ 123 00ec 130101FF 		addi	sp,sp,-16
+ 124              		.cfi_def_cfa_offset 16
+ 125 00f0 23348100 		sd	s0,8(sp)
+ 126              		.cfi_offset 8, -8
+ 127 00f4 13040101 		addi	s0,sp,16
+ 128              		.cfi_def_cfa 8, 0
+ 129 00f8 23300500 		sd	zero,0(a0)
+ 130 00fc 03348100 		ld	s0,8(sp)
+ 131              		.cfi_restore 8
+ 132              		.cfi_def_cfa 2, 16
+ 133 0100 13010101 		addi	sp,sp,16
+ 134              		.cfi_def_cfa_offset 0
+ 135 0104 67800000 		jr	ra
+ 136              		.cfi_endproc
+ 137              	.LFE117:
+ 139              		.align	2
+ 140              		.globl	_ZN8PMTEntry6get_paEv
+ 142              	_ZN8PMTEntry6get_paEv:
+ 143              	.LFB118:
+ 144              		.cfi_startproc
+ 145 0108 130101FF 		addi	sp,sp,-16
+ 146              		.cfi_def_cfa_offset 16
+ 147 010c 23348100 		sd	s0,8(sp)
+ 148              		.cfi_offset 8, -8
+ 149 0110 13040101 		addi	s0,sp,16
+ 150              		.cfi_def_cfa 8, 0
+ 151 0114 83370500 		ld	a5,0(a0)
+ 152 0118 93972700 		slli	a5,a5,2
+ 153 011c 37F5FFFF 		li	a0,-4096
+ 154 0120 33F5A700 		and	a0,a5,a0
+ 155 0124 03348100 		ld	s0,8(sp)
+ 156              		.cfi_restore 8
+ 157              		.cfi_def_cfa 2, 16
+ 158 0128 13010101 		addi	sp,sp,16
+ 159              		.cfi_def_cfa_offset 0
+ 160 012c 67800000 		jr	ra
+ 161              		.cfi_endproc
+ 162              	.LFE118:
+ 164              		.align	2
+ 165              		.globl	_ZN8PMTEntry6set_paEPv
+ 167              	_ZN8PMTEntry6set_paEPv:
+ 168              	.LFB119:
+ 169              		.cfi_startproc
+GAS LISTING /tmp/cch8LbNK.s 			page 4
+
+
+ 170 0130 130101FF 		addi	sp,sp,-16
+ 171              		.cfi_def_cfa_offset 16
+ 172 0134 23348100 		sd	s0,8(sp)
+ 173              		.cfi_offset 8, -8
+ 174 0138 13040101 		addi	s0,sp,16
+ 175              		.cfi_def_cfa 8, 0
+ 176 013c B7170000 		li	a5,4096
+ 177 0140 9387F7FF 		addi	a5,a5,-1
+ 178 0144 B3F7F500 		and	a5,a1,a5
+ 179 0148 63960702 		bne	a5,zero,.L13
+ 180 014c 83370500 		ld	a5,0(a0)
+ 181 0150 93F7F73F 		andi	a5,a5,1023
+ 182 0154 2330F500 		sd	a5,0(a0)
+ 183 0158 93D52500 		srli	a1,a1,2
+ 184 015c B3E7B700 		or	a5,a5,a1
+ 185 0160 2330F500 		sd	a5,0(a0)
+ 186 0164 13050000 		li	a0,0
+ 187              	.L12:
+ 188 0168 03348100 		ld	s0,8(sp)
+ 189              		.cfi_remember_state
+ 190              		.cfi_restore 8
+ 191              		.cfi_def_cfa 2, 16
+ 192 016c 13010101 		addi	sp,sp,16
+ 193              		.cfi_def_cfa_offset 0
+ 194 0170 67800000 		jr	ra
+ 195              	.L13:
+ 196              		.cfi_restore_state
+ 197 0174 1305F0FF 		li	a0,-1
+ 198 0178 6FF01FFF 		j	.L12
+ 199              		.cfi_endproc
+ 200              	.LFE119:
+ 202              		.align	2
+ 203              		.globl	_ZN8PMTEntry9chk_flagsE12PMTEntryBits
+ 205              	_ZN8PMTEntry9chk_flagsE12PMTEntryBits:
+ 206              	.LFB120:
+ 207              		.cfi_startproc
+ 208 017c 130101FF 		addi	sp,sp,-16
+ 209              		.cfi_def_cfa_offset 16
+ 210 0180 23348100 		sd	s0,8(sp)
+ 211              		.cfi_offset 8, -8
+ 212 0184 13040101 		addi	s0,sp,16
+ 213              		.cfi_def_cfa 8, 0
+ 214 0188 83370500 		ld	a5,0(a0)
+ 215 018c B3F7B700 		and	a5,a5,a1
+ 216 0190 B385F540 		sub	a1,a1,a5
+ 217 0194 13B51500 		seqz	a0,a1
+ 218 0198 03348100 		ld	s0,8(sp)
+ 219              		.cfi_restore 8
+ 220              		.cfi_def_cfa 2, 16
+ 221 019c 13010101 		addi	sp,sp,16
+ 222              		.cfi_def_cfa_offset 0
+ 223 01a0 67800000 		jr	ra
+ 224              		.cfi_endproc
+ 225              	.LFE120:
+ 227              		.align	2
+ 228              		.globl	_ZN3PMT9get_entryEhPv
+ 230              	_ZN3PMT9get_entryEhPv:
+GAS LISTING /tmp/cch8LbNK.s 			page 5
+
+
+ 231              	.LFB121:
+ 232              		.cfi_startproc
+ 233 01a4 130101FF 		addi	sp,sp,-16
+ 234              		.cfi_def_cfa_offset 16
+ 235 01a8 23348100 		sd	s0,8(sp)
+ 236              		.cfi_offset 8, -8
+ 237 01ac 13040101 		addi	s0,sp,16
+ 238              		.cfi_def_cfa 8, 0
+ 239 01b0 93072000 		li	a5,2
+ 240 01b4 63E6B704 		bgtu	a1,a5,.L19
+ 241 01b8 9307F0FF 		li	a5,-1
+ 242 01bc 93D79701 		srli	a5,a5,25
+ 243 01c0 63E4C704 		bgtu	a2,a5,.L20
+ 244 01c4 13973500 		slli	a4,a1,3
+ 245 01c8 97070000 		lla	a5,.LANCHOR0
+ 245      93870700 
+ 246 01d0 B387E700 		add	a5,a5,a4
+ 247 01d4 83B70700 		ld	a5,0(a5)
+ 248 01d8 3376F600 		and	a2,a2,a5
+ 249 01dc 9B973500 		slliw	a5,a1,3
+ 250 01e0 BB87B700 		addw	a5,a5,a1
+ 251 01e4 9B87C700 		addiw	a5,a5,12
+ 252 01e8 3356F600 		srl	a2,a2,a5
+ 253 01ec 13163600 		slli	a2,a2,3
+ 254 01f0 3305C500 		add	a0,a0,a2
+ 255              	.L17:
+ 256 01f4 03348100 		ld	s0,8(sp)
+ 257              		.cfi_remember_state
+ 258              		.cfi_restore 8
+ 259              		.cfi_def_cfa 2, 16
+ 260 01f8 13010101 		addi	sp,sp,16
+ 261              		.cfi_def_cfa_offset 0
+ 262 01fc 67800000 		jr	ra
+ 263              	.L19:
+ 264              		.cfi_restore_state
+ 265 0200 13050000 		li	a0,0
+ 266 0204 6FF01FFF 		j	.L17
+ 267              	.L20:
+ 268 0208 13050000 		li	a0,0
+ 269 020c 6FF09FFE 		j	.L17
+ 270              		.cfi_endproc
+ 271              	.LFE121:
+ 273              		.align	2
+ 274              		.globl	_ZN3PMT9get_entryEm
+ 276              	_ZN3PMT9get_entryEm:
+ 277              	.LFB122:
+ 278              		.cfi_startproc
+ 279 0210 130101FF 		addi	sp,sp,-16
+ 280              		.cfi_def_cfa_offset 16
+ 281 0214 23348100 		sd	s0,8(sp)
+ 282              		.cfi_offset 8, -8
+ 283 0218 13040101 		addi	s0,sp,16
+ 284              		.cfi_def_cfa 8, 0
+ 285 021c 93953500 		slli	a1,a1,3
+ 286 0220 3305B500 		add	a0,a0,a1
+ 287 0224 03348100 		ld	s0,8(sp)
+ 288              		.cfi_restore 8
+GAS LISTING /tmp/cch8LbNK.s 			page 6
+
+
+ 289              		.cfi_def_cfa 2, 16
+ 290 0228 13010101 		addi	sp,sp,16
+ 291              		.cfi_def_cfa_offset 0
+ 292 022c 67800000 		jr	ra
+ 293              		.cfi_endproc
+ 294              	.LFE122:
+ 296              		.align	2
+ 297              		.globl	_ZN3PMT5clearEv
+ 299              	_ZN3PMT5clearEv:
+ 300              	.LFB123:
+ 301              		.cfi_startproc
+ 302 0230 130101FE 		addi	sp,sp,-32
+ 303              		.cfi_def_cfa_offset 32
+ 304 0234 233C1100 		sd	ra,24(sp)
+ 305 0238 23388100 		sd	s0,16(sp)
+ 306 023c 23349100 		sd	s1,8(sp)
+ 307 0240 23302101 		sd	s2,0(sp)
+ 308              		.cfi_offset 1, -8
+ 309              		.cfi_offset 8, -16
+ 310              		.cfi_offset 9, -24
+ 311              		.cfi_offset 18, -32
+ 312 0244 13040102 		addi	s0,sp,32
+ 313              		.cfi_def_cfa 8, 0
+ 314 0248 13090500 		mv	s2,a0
+ 315 024c 93040000 		li	s1,0
+ 316 0250 6F008001 		j	.L25
+ 317              	.L26:
+ 318 0254 13953400 		slli	a0,s1,3
+ 319 0258 3305A900 		add	a0,s2,a0
+ 320 025c 97000000 		call	_ZN8PMTEntry5clearEv
+ 320      E7800000 
+ 321 0264 93841400 		addi	s1,s1,1
+ 322              	.L25:
+ 323 0268 9307F01F 		li	a5,511
+ 324 026c E3F497FE 		bleu	s1,a5,.L26
+ 325 0270 83308101 		ld	ra,24(sp)
+ 326              		.cfi_restore 1
+ 327 0274 03340101 		ld	s0,16(sp)
+ 328              		.cfi_restore 8
+ 329              		.cfi_def_cfa 2, 32
+ 330 0278 83348100 		ld	s1,8(sp)
+ 331              		.cfi_restore 9
+ 332 027c 03390100 		ld	s2,0(sp)
+ 333              		.cfi_restore 18
+ 334 0280 13010102 		addi	sp,sp,32
+ 335              		.cfi_def_cfa_offset 0
+ 336 0284 67800000 		jr	ra
+ 337              		.cfi_endproc
+ 338              	.LFE123:
+ 340              		.align	2
+ 341              		.globl	_ZN3PMT12allocate_pmtEv
+ 343              	_ZN3PMT12allocate_pmtEv:
+ 344              	.LFB113:
+ 345              		.cfi_startproc
+ 346 0288 130101FE 		addi	sp,sp,-32
+ 347              		.cfi_def_cfa_offset 32
+ 348 028c 233C1100 		sd	ra,24(sp)
+GAS LISTING /tmp/cch8LbNK.s 			page 7
+
+
+ 349 0290 23388100 		sd	s0,16(sp)
+ 350 0294 23349100 		sd	s1,8(sp)
+ 351              		.cfi_offset 1, -8
+ 352              		.cfi_offset 8, -16
+ 353              		.cfi_offset 9, -24
+ 354 0298 13040102 		addi	s0,sp,32
+ 355              		.cfi_def_cfa 8, 0
+ 356 029c 97000000 		call	_ZN5Buddy11getInstanceEv@plt
+ 356      E7800000 
+ 357 02a4 93040500 		mv	s1,a0
+ 358 02a8 37150000 		li	a0,4096
+ 359 02ac 97000000 		call	_Z4log2m@plt
+ 359      E7800000 
+ 360 02b4 B7170000 		li	a5,4096
+ 361 02b8 9387F7FF 		addi	a5,a5,-1
+ 362 02bc 33D5A700 		srl	a0,a5,a0
+ 363 02c0 13051500 		addi	a0,a0,1
+ 364 02c4 97000000 		call	_Z4log2m@plt
+ 364      E7800000 
+ 365 02cc 93050500 		mv	a1,a0
+ 366 02d0 13850400 		mv	a0,s1
+ 367 02d4 97000000 		call	_ZN5Buddy9mem_allocEh@plt
+ 367      E7800000 
+ 368 02dc 93040500 		mv	s1,a0
+ 369 02e0 97000000 		call	_ZN3PMT5clearEv
+ 369      E7800000 
+ 370 02e8 13850400 		mv	a0,s1
+ 371 02ec 83308101 		ld	ra,24(sp)
+ 372              		.cfi_restore 1
+ 373 02f0 03340101 		ld	s0,16(sp)
+ 374              		.cfi_restore 8
+ 375              		.cfi_def_cfa 2, 32
+ 376 02f4 83348100 		ld	s1,8(sp)
+ 377              		.cfi_restore 9
+ 378 02f8 13010102 		addi	sp,sp,32
+ 379              		.cfi_def_cfa_offset 0
+ 380 02fc 67800000 		jr	ra
+ 381              		.cfi_endproc
+ 382              	.LFE113:
+ 384              		.section	.rodata.str1.8
+ 385 0017 00       		.align	3
+ 386              	.LC3:
+ 387 0018 656E7472 		.string	"entry["
+ 387      795B00
+ 388 001f 00       		.align	3
+ 389              	.LC4:
+ 390 0020 5D3A2000 		.string	"]: "
+ 391              		.text
+ 392              		.align	2
+ 393              		.globl	_ZN3PMT5printEv
+ 395              	_ZN3PMT5printEv:
+ 396              	.LFB124:
+ 397              		.cfi_startproc
+ 398 0300 130101FD 		addi	sp,sp,-48
+ 399              		.cfi_def_cfa_offset 48
+ 400 0304 23341102 		sd	ra,40(sp)
+ 401 0308 23308102 		sd	s0,32(sp)
+GAS LISTING /tmp/cch8LbNK.s 			page 8
+
+
+ 402 030c 233C9100 		sd	s1,24(sp)
+ 403 0310 23382101 		sd	s2,16(sp)
+ 404 0314 23343101 		sd	s3,8(sp)
+ 405              		.cfi_offset 1, -8
+ 406              		.cfi_offset 8, -16
+ 407              		.cfi_offset 9, -24
+ 408              		.cfi_offset 18, -32
+ 409              		.cfi_offset 19, -40
+ 410 0318 13040103 		addi	s0,sp,48
+ 411              		.cfi_def_cfa 8, 0
+ 412 031c 93090500 		mv	s3,a0
+ 413 0320 13090000 		li	s2,0
+ 414 0324 6F008000 		j	.L31
+ 415              	.L32:
+ 416 0328 13091900 		addi	s2,s2,1
+ 417              	.L31:
+ 418 032c 9307F01F 		li	a5,511
+ 419 0330 63EA2709 		bgtu	s2,a5,.L35
+ 420 0334 93143900 		slli	s1,s2,3
+ 421 0338 B3849900 		add	s1,s3,s1
+ 422 033c 93051000 		li	a1,1
+ 423 0340 13850400 		mv	a0,s1
+ 424 0344 97000000 		call	_ZN8PMTEntry9chk_flagsE12PMTEntryBits
+ 424      E7800000 
+ 425 034c E30E05FC 		beq	a0,zero,.L32
+ 426 0350 17050000 		lla	a0,.LC3
+ 426      13050500 
+ 427 0358 97000000 		call	_Z12kprintStringPKc@plt
+ 427      E7800000 
+ 428 0360 13060000 		li	a2,0
+ 429 0364 9305A000 		li	a1,10
+ 430 0368 13050900 		mv	a0,s2
+ 431 036c 97000000 		call	_Z9kprintIntmib@plt
+ 431      E7800000 
+ 432 0374 17050000 		lla	a0,.LC4
+ 432      13050500 
+ 433 037c 97000000 		call	_Z12kprintStringPKc@plt
+ 433      E7800000 
+ 434 0384 93051000 		li	a1,1
+ 435 0388 13850400 		mv	a0,s1
+ 436 038c 97000000 		call	_ZN8PMTEntry9chk_flagsE12PMTEntryBits
+ 436      E7800000 
+ 437 0394 13060000 		li	a2,0
+ 438 0398 93050001 		li	a1,16
+ 439 039c 97000000 		call	_Z9kprintIntmib@plt
+ 439      E7800000 
+ 440 03a4 17050000 		lla	a0,.LC1
+ 440      13050500 
+ 441 03ac 97000000 		call	_Z12kprintStringPKc@plt
+ 441      E7800000 
+ 442 03b4 13850400 		mv	a0,s1
+ 443 03b8 97000000 		call	_ZN8PMTEntry5printEv
+ 443      E7800000 
+ 444 03c0 6FF09FF6 		j	.L32
+ 445              	.L35:
+ 446 03c4 83308102 		ld	ra,40(sp)
+ 447              		.cfi_restore 1
+GAS LISTING /tmp/cch8LbNK.s 			page 9
+
+
+ 448 03c8 03340102 		ld	s0,32(sp)
+ 449              		.cfi_restore 8
+ 450              		.cfi_def_cfa 2, 48
+ 451 03cc 83348101 		ld	s1,24(sp)
+ 452              		.cfi_restore 9
+ 453 03d0 03390101 		ld	s2,16(sp)
+ 454              		.cfi_restore 18
+ 455 03d4 83398100 		ld	s3,8(sp)
+ 456              		.cfi_restore 19
+ 457 03d8 13010103 		addi	sp,sp,48
+ 458              		.cfi_def_cfa_offset 0
+ 459 03dc 67800000 		jr	ra
+ 460              		.cfi_endproc
+ 461              	.LFE124:
+ 463              		.globl	_ZN3PMT10VADDR_MASKE
+ 464              		.section	.rodata
+ 465              		.align	3
+ 466              		.set	.LANCHOR0,. + 0
+ 469              	_ZN3PMT10VADDR_MASKE:
+ 470 0000 00F01F00 		.dword	2093056
+ 470      00000000 
+ 471 0008 0000E03F 		.dword	1071644672
+ 471      00000000 
+ 472 0010 000000C0 		.dword	548682072064
+ 472      7F000000 
+ 473              		.ident	"GCC: (GNU) 12.2.0"
+ 474              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cch8LbNK.s 			page 10
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 pmt.cpp
+     /tmp/cch8LbNK.s:22     .text:0000000000000000 _ZN8PMTEntry5printEv
+     /tmp/cch8LbNK.s:24     .text:0000000000000000 .L0 
+     /tmp/cch8LbNK.s:25     .text:0000000000000000 $x
+     /tmp/cch8LbNK.s:26     .text:0000000000000004 .L0 
+     /tmp/cch8LbNK.s:30     .text:0000000000000010 .L0 
+     /tmp/cch8LbNK.s:31     .text:0000000000000010 .L0 
+     /tmp/cch8LbNK.s:32     .text:0000000000000010 .L0 
+     /tmp/cch8LbNK.s:34     .text:0000000000000014 .L0 
+     /tmp/cch8LbNK.s:56     .text:0000000000000090 .L0 
+     /tmp/cch8LbNK.s:58     .text:0000000000000094 .L0 
+     /tmp/cch8LbNK.s:59     .text:0000000000000094 .L0 
+     /tmp/cch8LbNK.s:61     .text:0000000000000098 .L0 
+     /tmp/cch8LbNK.s:63     .text:000000000000009c .L0 
+     /tmp/cch8LbNK.s:65     .text:00000000000000a0 .L0 
+     /tmp/cch8LbNK.s:71     .text:00000000000000a0 _ZN8PMTEntry9set_flagsE12PMTEntryBits
+     /tmp/cch8LbNK.s:73     .text:00000000000000a0 .L0 
+     /tmp/cch8LbNK.s:75     .text:00000000000000a4 .L0 
+     /tmp/cch8LbNK.s:77     .text:00000000000000a8 .L0 
+     /tmp/cch8LbNK.s:79     .text:00000000000000ac .L0 
+     /tmp/cch8LbNK.s:84     .text:00000000000000bc .L0 
+     /tmp/cch8LbNK.s:85     .text:00000000000000bc .L0 
+     /tmp/cch8LbNK.s:87     .text:00000000000000c0 .L0 
+     /tmp/cch8LbNK.s:89     .text:00000000000000c4 .L0 
+     /tmp/cch8LbNK.s:95     .text:00000000000000c4 _ZN8PMTEntry11clear_flagsE12PMTEntryBits
+     /tmp/cch8LbNK.s:97     .text:00000000000000c4 .L0 
+     /tmp/cch8LbNK.s:99     .text:00000000000000c8 .L0 
+     /tmp/cch8LbNK.s:101    .text:00000000000000cc .L0 
+     /tmp/cch8LbNK.s:103    .text:00000000000000d0 .L0 
+     /tmp/cch8LbNK.s:109    .text:00000000000000e4 .L0 
+     /tmp/cch8LbNK.s:110    .text:00000000000000e4 .L0 
+     /tmp/cch8LbNK.s:112    .text:00000000000000e8 .L0 
+     /tmp/cch8LbNK.s:114    .text:00000000000000ec .L0 
+     /tmp/cch8LbNK.s:120    .text:00000000000000ec _ZN8PMTEntry5clearEv
+     /tmp/cch8LbNK.s:122    .text:00000000000000ec .L0 
+     /tmp/cch8LbNK.s:124    .text:00000000000000f0 .L0 
+     /tmp/cch8LbNK.s:126    .text:00000000000000f4 .L0 
+     /tmp/cch8LbNK.s:128    .text:00000000000000f8 .L0 
+     /tmp/cch8LbNK.s:131    .text:0000000000000100 .L0 
+     /tmp/cch8LbNK.s:132    .text:0000000000000100 .L0 
+     /tmp/cch8LbNK.s:134    .text:0000000000000104 .L0 
+     /tmp/cch8LbNK.s:136    .text:0000000000000108 .L0 
+     /tmp/cch8LbNK.s:142    .text:0000000000000108 _ZN8PMTEntry6get_paEv
+     /tmp/cch8LbNK.s:144    .text:0000000000000108 .L0 
+     /tmp/cch8LbNK.s:146    .text:000000000000010c .L0 
+     /tmp/cch8LbNK.s:148    .text:0000000000000110 .L0 
+     /tmp/cch8LbNK.s:150    .text:0000000000000114 .L0 
+     /tmp/cch8LbNK.s:156    .text:0000000000000128 .L0 
+     /tmp/cch8LbNK.s:157    .text:0000000000000128 .L0 
+     /tmp/cch8LbNK.s:159    .text:000000000000012c .L0 
+     /tmp/cch8LbNK.s:161    .text:0000000000000130 .L0 
+     /tmp/cch8LbNK.s:167    .text:0000000000000130 _ZN8PMTEntry6set_paEPv
+     /tmp/cch8LbNK.s:169    .text:0000000000000130 .L0 
+     /tmp/cch8LbNK.s:171    .text:0000000000000134 .L0 
+     /tmp/cch8LbNK.s:173    .text:0000000000000138 .L0 
+     /tmp/cch8LbNK.s:175    .text:000000000000013c .L0 
+GAS LISTING /tmp/cch8LbNK.s 			page 11
+
+
+     /tmp/cch8LbNK.s:189    .text:000000000000016c .L0 
+     /tmp/cch8LbNK.s:190    .text:000000000000016c .L0 
+     /tmp/cch8LbNK.s:191    .text:000000000000016c .L0 
+     /tmp/cch8LbNK.s:193    .text:0000000000000170 .L0 
+     /tmp/cch8LbNK.s:196    .text:0000000000000174 .L0 
+     /tmp/cch8LbNK.s:199    .text:000000000000017c .L0 
+     /tmp/cch8LbNK.s:205    .text:000000000000017c _ZN8PMTEntry9chk_flagsE12PMTEntryBits
+     /tmp/cch8LbNK.s:207    .text:000000000000017c .L0 
+     /tmp/cch8LbNK.s:209    .text:0000000000000180 .L0 
+     /tmp/cch8LbNK.s:211    .text:0000000000000184 .L0 
+     /tmp/cch8LbNK.s:213    .text:0000000000000188 .L0 
+     /tmp/cch8LbNK.s:219    .text:000000000000019c .L0 
+     /tmp/cch8LbNK.s:220    .text:000000000000019c .L0 
+     /tmp/cch8LbNK.s:222    .text:00000000000001a0 .L0 
+     /tmp/cch8LbNK.s:224    .text:00000000000001a4 .L0 
+     /tmp/cch8LbNK.s:230    .text:00000000000001a4 _ZN3PMT9get_entryEhPv
+     /tmp/cch8LbNK.s:232    .text:00000000000001a4 .L0 
+     /tmp/cch8LbNK.s:234    .text:00000000000001a8 .L0 
+     /tmp/cch8LbNK.s:236    .text:00000000000001ac .L0 
+     /tmp/cch8LbNK.s:238    .text:00000000000001b0 .L0 
+     /tmp/cch8LbNK.s:257    .text:00000000000001f8 .L0 
+     /tmp/cch8LbNK.s:258    .text:00000000000001f8 .L0 
+     /tmp/cch8LbNK.s:259    .text:00000000000001f8 .L0 
+     /tmp/cch8LbNK.s:261    .text:00000000000001fc .L0 
+     /tmp/cch8LbNK.s:264    .text:0000000000000200 .L0 
+     /tmp/cch8LbNK.s:270    .text:0000000000000210 .L0 
+     /tmp/cch8LbNK.s:276    .text:0000000000000210 _ZN3PMT9get_entryEm
+     /tmp/cch8LbNK.s:278    .text:0000000000000210 .L0 
+     /tmp/cch8LbNK.s:280    .text:0000000000000214 .L0 
+     /tmp/cch8LbNK.s:282    .text:0000000000000218 .L0 
+     /tmp/cch8LbNK.s:284    .text:000000000000021c .L0 
+     /tmp/cch8LbNK.s:288    .text:0000000000000228 .L0 
+     /tmp/cch8LbNK.s:289    .text:0000000000000228 .L0 
+     /tmp/cch8LbNK.s:291    .text:000000000000022c .L0 
+     /tmp/cch8LbNK.s:293    .text:0000000000000230 .L0 
+     /tmp/cch8LbNK.s:299    .text:0000000000000230 _ZN3PMT5clearEv
+     /tmp/cch8LbNK.s:301    .text:0000000000000230 .L0 
+     /tmp/cch8LbNK.s:303    .text:0000000000000234 .L0 
+     /tmp/cch8LbNK.s:308    .text:0000000000000244 .L0 
+     /tmp/cch8LbNK.s:309    .text:0000000000000244 .L0 
+     /tmp/cch8LbNK.s:310    .text:0000000000000244 .L0 
+     /tmp/cch8LbNK.s:311    .text:0000000000000244 .L0 
+     /tmp/cch8LbNK.s:313    .text:0000000000000248 .L0 
+     /tmp/cch8LbNK.s:326    .text:0000000000000274 .L0 
+     /tmp/cch8LbNK.s:328    .text:0000000000000278 .L0 
+     /tmp/cch8LbNK.s:329    .text:0000000000000278 .L0 
+     /tmp/cch8LbNK.s:331    .text:000000000000027c .L0 
+     /tmp/cch8LbNK.s:333    .text:0000000000000280 .L0 
+     /tmp/cch8LbNK.s:335    .text:0000000000000284 .L0 
+     /tmp/cch8LbNK.s:337    .text:0000000000000288 .L0 
+     /tmp/cch8LbNK.s:343    .text:0000000000000288 _ZN3PMT12allocate_pmtEv
+     /tmp/cch8LbNK.s:345    .text:0000000000000288 .L0 
+     /tmp/cch8LbNK.s:347    .text:000000000000028c .L0 
+     /tmp/cch8LbNK.s:351    .text:0000000000000298 .L0 
+     /tmp/cch8LbNK.s:352    .text:0000000000000298 .L0 
+     /tmp/cch8LbNK.s:353    .text:0000000000000298 .L0 
+     /tmp/cch8LbNK.s:355    .text:000000000000029c .L0 
+GAS LISTING /tmp/cch8LbNK.s 			page 12
+
+
+     /tmp/cch8LbNK.s:372    .text:00000000000002f0 .L0 
+     /tmp/cch8LbNK.s:374    .text:00000000000002f4 .L0 
+     /tmp/cch8LbNK.s:375    .text:00000000000002f4 .L0 
+     /tmp/cch8LbNK.s:377    .text:00000000000002f8 .L0 
+     /tmp/cch8LbNK.s:379    .text:00000000000002fc .L0 
+     /tmp/cch8LbNK.s:381    .text:0000000000000300 .L0 
+     /tmp/cch8LbNK.s:395    .text:0000000000000300 _ZN3PMT5printEv
+     /tmp/cch8LbNK.s:397    .text:0000000000000300 .L0 
+     /tmp/cch8LbNK.s:399    .text:0000000000000304 .L0 
+     /tmp/cch8LbNK.s:405    .text:0000000000000318 .L0 
+     /tmp/cch8LbNK.s:406    .text:0000000000000318 .L0 
+     /tmp/cch8LbNK.s:407    .text:0000000000000318 .L0 
+     /tmp/cch8LbNK.s:408    .text:0000000000000318 .L0 
+     /tmp/cch8LbNK.s:409    .text:0000000000000318 .L0 
+     /tmp/cch8LbNK.s:411    .text:000000000000031c .L0 
+     /tmp/cch8LbNK.s:447    .text:00000000000003c8 .L0 
+     /tmp/cch8LbNK.s:449    .text:00000000000003cc .L0 
+     /tmp/cch8LbNK.s:450    .text:00000000000003cc .L0 
+     /tmp/cch8LbNK.s:452    .text:00000000000003d0 .L0 
+     /tmp/cch8LbNK.s:454    .text:00000000000003d4 .L0 
+     /tmp/cch8LbNK.s:456    .text:00000000000003d8 .L0 
+     /tmp/cch8LbNK.s:458    .text:00000000000003dc .L0 
+     /tmp/cch8LbNK.s:460    .text:00000000000003e0 .L0 
+     /tmp/cch8LbNK.s:469    .rodata:0000000000000000 _ZN3PMT10VADDR_MASKE
+     /tmp/cch8LbNK.s:466    .rodata:0000000000000000 .LANCHOR0
+     /tmp/cch8LbNK.s:10     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cch8LbNK.s:36     .text:0000000000000018 .L0 
+     /tmp/cch8LbNK.s:13     .rodata.str1.8:0000000000000008 .LC1
+     /tmp/cch8LbNK.s:44     .text:0000000000000044 .L0 
+     /tmp/cch8LbNK.s:16     .rodata.str1.8:0000000000000010 .LC2
+     /tmp/cch8LbNK.s:46     .text:0000000000000054 .L0 
+     /tmp/cch8LbNK.s:53     .text:000000000000007c .L0 
+     /tmp/cch8LbNK.s:245    .text:00000000000001c8 .L0 
+     /tmp/cch8LbNK.s:386    .rodata.str1.8:0000000000000018 .LC3
+     /tmp/cch8LbNK.s:426    .text:0000000000000350 .L0 
+     /tmp/cch8LbNK.s:389    .rodata.str1.8:0000000000000020 .LC4
+     /tmp/cch8LbNK.s:432    .text:0000000000000374 .L0 
+     /tmp/cch8LbNK.s:440    .text:00000000000003a4 .L0 
+     /tmp/cch8LbNK.s:195    .text:0000000000000174 .L13
+     /tmp/cch8LbNK.s:187    .text:0000000000000168 .L12
+     /tmp/cch8LbNK.s:263    .text:0000000000000200 .L19
+     /tmp/cch8LbNK.s:267    .text:0000000000000208 .L20
+     /tmp/cch8LbNK.s:255    .text:00000000000001f4 .L17
+     /tmp/cch8LbNK.s:322    .text:0000000000000268 .L25
+     /tmp/cch8LbNK.s:317    .text:0000000000000254 .L26
+     /tmp/cch8LbNK.s:417    .text:000000000000032c .L31
+     /tmp/cch8LbNK.s:445    .text:00000000000003c4 .L35
+     /tmp/cch8LbNK.s:415    .text:0000000000000328 .L32
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN5Buddy11getInstanceEv
+_Z4log2m
+_ZN5Buddy9mem_allocEh

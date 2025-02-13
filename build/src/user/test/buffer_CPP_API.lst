@@ -1,0 +1,860 @@
+GAS LISTING /tmp/ccYgmquU.s 			page 1
+
+
+   1              		.file	"buffer_CPP_API.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.text._ZN9SemaphoreD2Ev,"axG",@progbits,_ZN9SemaphoreD5Ev,comdat
+   9              		.align	2
+  10              		.weak	_ZN9SemaphoreD2Ev
+  12              	_ZN9SemaphoreD2Ev:
+  13              	.LFB11:
+  14              		.cfi_startproc
+  15              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  16              		.cfi_lsda 0x1b,.LLSDA11
+  17 0000 130101FF 		addi	sp,sp,-16
+  18              		.cfi_def_cfa_offset 16
+  19 0004 23341100 		sd	ra,8(sp)
+  20 0008 23308100 		sd	s0,0(sp)
+  21              		.cfi_offset 1, -8
+  22              		.cfi_offset 8, -16
+  23 000c 13040101 		addi	s0,sp,16
+  24              		.cfi_def_cfa 8, 0
+  25 0010 97070000 		lla	a5,_ZTV9Semaphore+16
+  25      93870700 
+  26 0018 2330F500 		sd	a5,0(a0)
+  27 001c 03358500 		ld	a0,8(a0)
+  28 0020 97000000 		call	sem_close@plt
+  28      E7800000 
+  29 0028 83308100 		ld	ra,8(sp)
+  30              		.cfi_restore 1
+  31 002c 03340100 		ld	s0,0(sp)
+  32              		.cfi_restore 8
+  33              		.cfi_def_cfa 2, 16
+  34 0030 13010101 		addi	sp,sp,16
+  35              		.cfi_def_cfa_offset 0
+  36 0034 67800000 		jr	ra
+  37              		.cfi_endproc
+  38              	.LFE11:
+  39              		.globl	__gxx_personality_v0
+  40              		.section	.gcc_except_table._ZN9SemaphoreD2Ev,"aG",@progbits,_ZN9SemaphoreD5Ev,comdat
+  41              	.LLSDA11:
+  42 0000 FF       		.byte	0xff
+  43 0001 FF       		.byte	0xff
+  44 0002 03       		.byte	0x3
+  45 0003 00       		.byte	0
+  46              		.section	.text._ZN9SemaphoreD2Ev,"axG",@progbits,_ZN9SemaphoreD5Ev,comdat
+  48              		.weak	_ZN9SemaphoreD1Ev
+  49              		.set	_ZN9SemaphoreD1Ev,_ZN9SemaphoreD2Ev
+  50              		.section	.text._ZN9SemaphoreD0Ev,"axG",@progbits,_ZN9SemaphoreD5Ev,comdat
+  51              		.align	2
+  52              		.weak	_ZN9SemaphoreD0Ev
+  54              	_ZN9SemaphoreD0Ev:
+  55              	.LFB13:
+  56              		.cfi_startproc
+  57              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  58              		.cfi_lsda 0x1b,.LLSDA13
+GAS LISTING /tmp/ccYgmquU.s 			page 2
+
+
+  59 0000 130101FE 		addi	sp,sp,-32
+  60              		.cfi_def_cfa_offset 32
+  61 0004 233C1100 		sd	ra,24(sp)
+  62 0008 23388100 		sd	s0,16(sp)
+  63 000c 23349100 		sd	s1,8(sp)
+  64              		.cfi_offset 1, -8
+  65              		.cfi_offset 8, -16
+  66              		.cfi_offset 9, -24
+  67 0010 13040102 		addi	s0,sp,32
+  68              		.cfi_def_cfa 8, 0
+  69 0014 93040500 		mv	s1,a0
+  70 0018 97070000 		lla	a5,_ZTV9Semaphore+16
+  70      93870700 
+  71 0020 2330F500 		sd	a5,0(a0)
+  72 0024 03358500 		ld	a0,8(a0)
+  73 0028 97000000 		call	sem_close@plt
+  73      E7800000 
+  74 0030 13850400 		mv	a0,s1
+  75              	.LEHB0:
+  76 0034 97000000 		call	_ZdlPv@plt
+  76      E7800000 
+  77              	.LEHE0:
+  78 003c 83308101 		ld	ra,24(sp)
+  79              		.cfi_restore 1
+  80 0040 03340101 		ld	s0,16(sp)
+  81              		.cfi_restore 8
+  82              		.cfi_def_cfa 2, 32
+  83 0044 83348100 		ld	s1,8(sp)
+  84              		.cfi_restore 9
+  85 0048 13010102 		addi	sp,sp,32
+  86              		.cfi_def_cfa_offset 0
+  87 004c 67800000 		jr	ra
+  88              		.cfi_endproc
+  89              	.LFE13:
+  90              		.section	.gcc_except_table._ZN9SemaphoreD0Ev,"aG",@progbits,_ZN9SemaphoreD5Ev,comdat
+  91              	.LLSDA13:
+  92 0000 FF       		.byte	0xff
+  93 0001 FF       		.byte	0xff
+  94 0002 03       		.byte	0x3
+  95 0003 0D       		.byte	0xd
+  96 0004 00000000 		.4byte	.LEHB0-.LFB13
+  97 0008 00000000 		.4byte	.LEHE0-.LEHB0
+  98 000c 00000000 		.4byte	0
+  99 0010 00       		.byte	0
+ 100              		.section	.text._ZN9SemaphoreD0Ev,"axG",@progbits,_ZN9SemaphoreD5Ev,comdat
+ 102              		.text
+ 103              		.align	2
+ 104              		.globl	_ZN9BufferCPPC2Ei
+ 106              	_ZN9BufferCPPC2Ei:
+ 107              	.LFB20:
+ 108              		.cfi_startproc
+ 109              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 110              		.cfi_lsda 0x1b,.LLSDA20
+ 111 0000 130101FD 		addi	sp,sp,-48
+ 112              		.cfi_def_cfa_offset 48
+ 113 0004 23341102 		sd	ra,40(sp)
+ 114 0008 23308102 		sd	s0,32(sp)
+GAS LISTING /tmp/ccYgmquU.s 			page 3
+
+
+ 115 000c 233C9100 		sd	s1,24(sp)
+ 116 0010 23382101 		sd	s2,16(sp)
+ 117 0014 23343101 		sd	s3,8(sp)
+ 118              		.cfi_offset 1, -8
+ 119              		.cfi_offset 8, -16
+ 120              		.cfi_offset 9, -24
+ 121              		.cfi_offset 18, -32
+ 122              		.cfi_offset 19, -40
+ 123 0018 13040103 		addi	s0,sp,48
+ 124              		.cfi_def_cfa 8, 0
+ 125 001c 93040500 		mv	s1,a0
+ 126 0020 93890500 		mv	s3,a1
+ 127 0024 9B871500 		addiw	a5,a1,1
+ 128 0028 1B850700 		sext.w	a0,a5
+ 129 002c 23A0F400 		sw	a5,0(s1)
+ 130 0030 23A80400 		sw	zero,16(s1)
+ 131 0034 23AA0400 		sw	zero,20(s1)
+ 132 0038 13152500 		slli	a0,a0,2
+ 133              	.LEHB1:
+ 134 003c 97000000 		call	mem_alloc@plt
+ 134      E7800000 
+ 135 0044 23B4A400 		sd	a0,8(s1)
+ 136 0048 13050001 		li	a0,16
+ 137 004c 97000000 		call	_Znwm@plt
+ 137      E7800000 
+ 138              	.LEHE1:
+ 139 0054 13090500 		mv	s2,a0
+ 140 0058 63000502 		beq	a0,zero,.L6
+ 141 005c 97070000 		lla	a5,_ZTV9Semaphore+16
+ 141      93870700 
+ 142 0064 2330F500 		sd	a5,0(a0)
+ 143 0068 93050000 		li	a1,0
+ 144 006c 13058500 		addi	a0,a0,8
+ 145              	.LEHB2:
+ 146 0070 97000000 		call	sem_open@plt
+ 146      E7800000 
+ 147              	.LEHE2:
+ 148              	.L6:
+ 149 0078 23B02403 		sd	s2,32(s1)
+ 150 007c 13050001 		li	a0,16
+ 151              	.LEHB3:
+ 152 0080 97000000 		call	_Znwm@plt
+ 152      E7800000 
+ 153              	.LEHE3:
+ 154 0088 13090500 		mv	s2,a0
+ 155 008c 63000502 		beq	a0,zero,.L7
+ 156 0090 97070000 		lla	a5,_ZTV9Semaphore+16
+ 156      93870700 
+ 157 0098 2330F500 		sd	a5,0(a0)
+ 158 009c 93850900 		mv	a1,s3
+ 159 00a0 13058500 		addi	a0,a0,8
+ 160              	.LEHB4:
+ 161 00a4 97000000 		call	sem_open@plt
+ 161      E7800000 
+ 162              	.LEHE4:
+ 163              	.L7:
+ 164 00ac 23BC2401 		sd	s2,24(s1)
+GAS LISTING /tmp/ccYgmquU.s 			page 4
+
+
+ 165 00b0 13050001 		li	a0,16
+ 166              	.LEHB5:
+ 167 00b4 97000000 		call	_Znwm@plt
+ 167      E7800000 
+ 168              	.LEHE5:
+ 169 00bc 13090500 		mv	s2,a0
+ 170 00c0 63000502 		beq	a0,zero,.L8
+ 171 00c4 97070000 		lla	a5,_ZTV9Semaphore+16
+ 171      93870700 
+ 172 00cc 2330F500 		sd	a5,0(a0)
+ 173 00d0 93051000 		li	a1,1
+ 174 00d4 13058500 		addi	a0,a0,8
+ 175              	.LEHB6:
+ 176 00d8 97000000 		call	sem_open@plt
+ 176      E7800000 
+ 177              	.LEHE6:
+ 178              	.L8:
+ 179 00e0 23B42403 		sd	s2,40(s1)
+ 180 00e4 13050001 		li	a0,16
+ 181              	.LEHB7:
+ 182 00e8 97000000 		call	_Znwm@plt
+ 182      E7800000 
+ 183              	.LEHE7:
+ 184 00f0 13090500 		mv	s2,a0
+ 185 00f4 63000502 		beq	a0,zero,.L9
+ 186 00f8 97070000 		lla	a5,_ZTV9Semaphore+16
+ 186      93870700 
+ 187 0100 2330F500 		sd	a5,0(a0)
+ 188 0104 93051000 		li	a1,1
+ 189 0108 13058500 		addi	a0,a0,8
+ 190              	.LEHB8:
+ 191 010c 97000000 		call	sem_open@plt
+ 191      E7800000 
+ 192              	.LEHE8:
+ 193              	.L9:
+ 194 0114 23B82403 		sd	s2,48(s1)
+ 195 0118 83308102 		ld	ra,40(sp)
+ 196              		.cfi_remember_state
+ 197              		.cfi_restore 1
+ 198 011c 03340102 		ld	s0,32(sp)
+ 199              		.cfi_restore 8
+ 200              		.cfi_def_cfa 2, 48
+ 201 0120 83348101 		ld	s1,24(sp)
+ 202              		.cfi_restore 9
+ 203 0124 03390101 		ld	s2,16(sp)
+ 204              		.cfi_restore 18
+ 205 0128 83398100 		ld	s3,8(sp)
+ 206              		.cfi_restore 19
+ 207 012c 13010103 		addi	sp,sp,48
+ 208              		.cfi_def_cfa_offset 0
+ 209 0130 67800000 		jr	ra
+ 210              	.L14:
+ 211              		.cfi_restore_state
+ 212 0134 93040500 		mv	s1,a0
+ 213 0138 13050900 		mv	a0,s2
+ 214 013c 97000000 		call	_ZdlPv@plt
+ 214      E7800000 
+GAS LISTING /tmp/ccYgmquU.s 			page 5
+
+
+ 215 0144 13850400 		mv	a0,s1
+ 216              	.LEHB9:
+ 217 0148 97000000 		call	_Unwind_Resume@plt
+ 217      E7800000 
+ 218              	.LEHE9:
+ 219              	.L15:
+ 220 0150 93040500 		mv	s1,a0
+ 221 0154 13050900 		mv	a0,s2
+ 222 0158 97000000 		call	_ZdlPv@plt
+ 222      E7800000 
+ 223 0160 13850400 		mv	a0,s1
+ 224              	.LEHB10:
+ 225 0164 97000000 		call	_Unwind_Resume@plt
+ 225      E7800000 
+ 226              	.LEHE10:
+ 227              	.L16:
+ 228 016c 93040500 		mv	s1,a0
+ 229 0170 13050900 		mv	a0,s2
+ 230 0174 97000000 		call	_ZdlPv@plt
+ 230      E7800000 
+ 231 017c 13850400 		mv	a0,s1
+ 232              	.LEHB11:
+ 233 0180 97000000 		call	_Unwind_Resume@plt
+ 233      E7800000 
+ 234              	.LEHE11:
+ 235              	.L17:
+ 236 0188 93040500 		mv	s1,a0
+ 237 018c 13050900 		mv	a0,s2
+ 238 0190 97000000 		call	_ZdlPv@plt
+ 238      E7800000 
+ 239 0198 13850400 		mv	a0,s1
+ 240              	.LEHB12:
+ 241 019c 97000000 		call	_Unwind_Resume@plt
+ 241      E7800000 
+ 242              	.LEHE12:
+ 243              		.cfi_endproc
+ 244              	.LFE20:
+ 245              		.section	.gcc_except_table,"a",@progbits
+ 246              	.LLSDA20:
+ 247 0000 FF       		.byte	0xff
+ 248 0001 FF       		.byte	0xff
+ 249 0002 03       		.byte	0x3
+ 250 0003 9C01     		.byte	0x9c,0x1
+ 251 0005 00000000 		.4byte	.LEHB1-.LFB20
+ 252 0009 00000000 		.4byte	.LEHE1-.LEHB1
+ 253 000d 00000000 		.4byte	0
+ 254 0011 00       		.byte	0
+ 255 0012 00000000 		.4byte	.LEHB2-.LFB20
+ 256 0016 00000000 		.4byte	.LEHE2-.LEHB2
+ 257 001a 00000000 		.4byte	.L14-.LFB20
+ 258 001e 00       		.byte	0
+ 259 001f 00000000 		.4byte	.LEHB3-.LFB20
+ 260 0023 00000000 		.4byte	.LEHE3-.LEHB3
+ 261 0027 00000000 		.4byte	0
+ 262 002b 00       		.byte	0
+ 263 002c 00000000 		.4byte	.LEHB4-.LFB20
+ 264 0030 00000000 		.4byte	.LEHE4-.LEHB4
+GAS LISTING /tmp/ccYgmquU.s 			page 6
+
+
+ 265 0034 00000000 		.4byte	.L15-.LFB20
+ 266 0038 00       		.byte	0
+ 267 0039 00000000 		.4byte	.LEHB5-.LFB20
+ 268 003d 00000000 		.4byte	.LEHE5-.LEHB5
+ 269 0041 00000000 		.4byte	0
+ 270 0045 00       		.byte	0
+ 271 0046 00000000 		.4byte	.LEHB6-.LFB20
+ 272 004a 00000000 		.4byte	.LEHE6-.LEHB6
+ 273 004e 00000000 		.4byte	.L16-.LFB20
+ 274 0052 00       		.byte	0
+ 275 0053 00000000 		.4byte	.LEHB7-.LFB20
+ 276 0057 00000000 		.4byte	.LEHE7-.LEHB7
+ 277 005b 00000000 		.4byte	0
+ 278 005f 00       		.byte	0
+ 279 0060 00000000 		.4byte	.LEHB8-.LFB20
+ 280 0064 00000000 		.4byte	.LEHE8-.LEHB8
+ 281 0068 00000000 		.4byte	.L17-.LFB20
+ 282 006c 00       		.byte	0
+ 283 006d 00000000 		.4byte	.LEHB9-.LFB20
+ 284 0071 00000000 		.4byte	.LEHE9-.LEHB9
+ 285 0075 00000000 		.4byte	0
+ 286 0079 00       		.byte	0
+ 287 007a 00000000 		.4byte	.LEHB10-.LFB20
+ 288 007e 00000000 		.4byte	.LEHE10-.LEHB10
+ 289 0082 00000000 		.4byte	0
+ 290 0086 00       		.byte	0
+ 291 0087 00000000 		.4byte	.LEHB11-.LFB20
+ 292 008b 00000000 		.4byte	.LEHE11-.LEHB11
+ 293 008f 00000000 		.4byte	0
+ 294 0093 00       		.byte	0
+ 295 0094 00000000 		.4byte	.LEHB12-.LFB20
+ 296 0098 00000000 		.4byte	.LEHE12-.LEHB12
+ 297 009c 00000000 		.4byte	0
+ 298 00a0 00       		.byte	0
+ 299              		.text
+ 301              		.globl	_ZN9BufferCPPC1Ei
+ 302              		.set	_ZN9BufferCPPC1Ei,_ZN9BufferCPPC2Ei
+ 303              		.align	2
+ 304              		.globl	_ZN9BufferCPP3putEi
+ 306              	_ZN9BufferCPP3putEi:
+ 307              	.LFB25:
+ 308              		.cfi_startproc
+ 309 01a4 130101FE 		addi	sp,sp,-32
+ 310              		.cfi_def_cfa_offset 32
+ 311 01a8 233C1100 		sd	ra,24(sp)
+ 312 01ac 23388100 		sd	s0,16(sp)
+ 313 01b0 23349100 		sd	s1,8(sp)
+ 314 01b4 23302101 		sd	s2,0(sp)
+ 315              		.cfi_offset 1, -8
+ 316              		.cfi_offset 8, -16
+ 317              		.cfi_offset 9, -24
+ 318              		.cfi_offset 18, -32
+ 319 01b8 13040102 		addi	s0,sp,32
+ 320              		.cfi_def_cfa 8, 0
+ 321 01bc 93040500 		mv	s1,a0
+ 322 01c0 13890500 		mv	s2,a1
+ 323 01c4 83378501 		ld	a5,24(a0)
+GAS LISTING /tmp/ccYgmquU.s 			page 7
+
+
+ 324 01c8 03B58700 		ld	a0,8(a5)
+ 325 01cc 97000000 		call	sem_wait@plt
+ 325      E7800000 
+ 326 01d4 83B70403 		ld	a5,48(s1)
+ 327 01d8 03B58700 		ld	a0,8(a5)
+ 328 01dc 97000000 		call	sem_wait@plt
+ 328      E7800000 
+ 329 01e4 83B78400 		ld	a5,8(s1)
+ 330 01e8 03A74401 		lw	a4,20(s1)
+ 331 01ec 13172700 		slli	a4,a4,2
+ 332 01f0 B387E700 		add	a5,a5,a4
+ 333 01f4 23A02701 		sw	s2,0(a5)
+ 334 01f8 83A74401 		lw	a5,20(s1)
+ 335 01fc 9B871700 		addiw	a5,a5,1
+ 336 0200 03A70400 		lw	a4,0(s1)
+ 337 0204 BBE7E702 		remw	a5,a5,a4
+ 338 0208 23AAF400 		sw	a5,20(s1)
+ 339 020c 83B70403 		ld	a5,48(s1)
+ 340 0210 03B58700 		ld	a0,8(a5)
+ 341 0214 97000000 		call	sem_signal@plt
+ 341      E7800000 
+ 342 021c 83B70402 		ld	a5,32(s1)
+ 343 0220 03B58700 		ld	a0,8(a5)
+ 344 0224 97000000 		call	sem_signal@plt
+ 344      E7800000 
+ 345 022c 83308101 		ld	ra,24(sp)
+ 346              		.cfi_restore 1
+ 347 0230 03340101 		ld	s0,16(sp)
+ 348              		.cfi_restore 8
+ 349              		.cfi_def_cfa 2, 32
+ 350 0234 83348100 		ld	s1,8(sp)
+ 351              		.cfi_restore 9
+ 352 0238 03390100 		ld	s2,0(sp)
+ 353              		.cfi_restore 18
+ 354 023c 13010102 		addi	sp,sp,32
+ 355              		.cfi_def_cfa_offset 0
+ 356 0240 67800000 		jr	ra
+ 357              		.cfi_endproc
+ 358              	.LFE25:
+ 360              		.align	2
+ 361              		.globl	_ZN9BufferCPP3getEv
+ 363              	_ZN9BufferCPP3getEv:
+ 364              	.LFB26:
+ 365              		.cfi_startproc
+ 366 0244 130101FE 		addi	sp,sp,-32
+ 367              		.cfi_def_cfa_offset 32
+ 368 0248 233C1100 		sd	ra,24(sp)
+ 369 024c 23388100 		sd	s0,16(sp)
+ 370 0250 23349100 		sd	s1,8(sp)
+ 371 0254 23302101 		sd	s2,0(sp)
+ 372              		.cfi_offset 1, -8
+ 373              		.cfi_offset 8, -16
+ 374              		.cfi_offset 9, -24
+ 375              		.cfi_offset 18, -32
+ 376 0258 13040102 		addi	s0,sp,32
+ 377              		.cfi_def_cfa 8, 0
+ 378 025c 93040500 		mv	s1,a0
+GAS LISTING /tmp/ccYgmquU.s 			page 8
+
+
+ 379 0260 83370502 		ld	a5,32(a0)
+ 380 0264 03B58700 		ld	a0,8(a5)
+ 381 0268 97000000 		call	sem_wait@plt
+ 381      E7800000 
+ 382 0270 83B78402 		ld	a5,40(s1)
+ 383 0274 03B58700 		ld	a0,8(a5)
+ 384 0278 97000000 		call	sem_wait@plt
+ 384      E7800000 
+ 385 0280 03B78400 		ld	a4,8(s1)
+ 386 0284 83A70401 		lw	a5,16(s1)
+ 387 0288 93962700 		slli	a3,a5,2
+ 388 028c 3307D700 		add	a4,a4,a3
+ 389 0290 03290700 		lw	s2,0(a4)
+ 390 0294 9B871700 		addiw	a5,a5,1
+ 391 0298 03A70400 		lw	a4,0(s1)
+ 392 029c BBE7E702 		remw	a5,a5,a4
+ 393 02a0 23A8F400 		sw	a5,16(s1)
+ 394 02a4 83B78402 		ld	a5,40(s1)
+ 395 02a8 03B58700 		ld	a0,8(a5)
+ 396 02ac 97000000 		call	sem_signal@plt
+ 396      E7800000 
+ 397 02b4 83B78401 		ld	a5,24(s1)
+ 398 02b8 03B58700 		ld	a0,8(a5)
+ 399 02bc 97000000 		call	sem_signal@plt
+ 399      E7800000 
+ 400 02c4 13050900 		mv	a0,s2
+ 401 02c8 83308101 		ld	ra,24(sp)
+ 402              		.cfi_restore 1
+ 403 02cc 03340101 		ld	s0,16(sp)
+ 404              		.cfi_restore 8
+ 405              		.cfi_def_cfa 2, 32
+ 406 02d0 83348100 		ld	s1,8(sp)
+ 407              		.cfi_restore 9
+ 408 02d4 03390100 		ld	s2,0(sp)
+ 409              		.cfi_restore 18
+ 410 02d8 13010102 		addi	sp,sp,32
+ 411              		.cfi_def_cfa_offset 0
+ 412 02dc 67800000 		jr	ra
+ 413              		.cfi_endproc
+ 414              	.LFE26:
+ 416              		.align	2
+ 417              		.globl	_ZN9BufferCPP6getCntEv
+ 419              	_ZN9BufferCPP6getCntEv:
+ 420              	.LFB27:
+ 421              		.cfi_startproc
+ 422 02e0 130101FE 		addi	sp,sp,-32
+ 423              		.cfi_def_cfa_offset 32
+ 424 02e4 233C1100 		sd	ra,24(sp)
+ 425 02e8 23388100 		sd	s0,16(sp)
+ 426 02ec 23349100 		sd	s1,8(sp)
+ 427 02f0 23302101 		sd	s2,0(sp)
+ 428              		.cfi_offset 1, -8
+ 429              		.cfi_offset 8, -16
+ 430              		.cfi_offset 9, -24
+ 431              		.cfi_offset 18, -32
+ 432 02f4 13040102 		addi	s0,sp,32
+ 433              		.cfi_def_cfa 8, 0
+GAS LISTING /tmp/ccYgmquU.s 			page 9
+
+
+ 434 02f8 93040500 		mv	s1,a0
+ 435 02fc 83378502 		ld	a5,40(a0)
+ 436 0300 03B58700 		ld	a0,8(a5)
+ 437 0304 97000000 		call	sem_wait@plt
+ 437      E7800000 
+ 438 030c 83B70403 		ld	a5,48(s1)
+ 439 0310 03B58700 		ld	a0,8(a5)
+ 440 0314 97000000 		call	sem_wait@plt
+ 440      E7800000 
+ 441 031c 83A74401 		lw	a5,20(s1)
+ 442 0320 03A70401 		lw	a4,16(s1)
+ 443 0324 63C2E704 		blt	a5,a4,.L25
+ 444 0328 3B89E740 		subw	s2,a5,a4
+ 445              	.L26:
+ 446 032c 83B70403 		ld	a5,48(s1)
+ 447 0330 03B58700 		ld	a0,8(a5)
+ 448 0334 97000000 		call	sem_signal@plt
+ 448      E7800000 
+ 449 033c 83B78402 		ld	a5,40(s1)
+ 450 0340 03B58700 		ld	a0,8(a5)
+ 451 0344 97000000 		call	sem_signal@plt
+ 451      E7800000 
+ 452 034c 13050900 		mv	a0,s2
+ 453 0350 83308101 		ld	ra,24(sp)
+ 454              		.cfi_remember_state
+ 455              		.cfi_restore 1
+ 456 0354 03340101 		ld	s0,16(sp)
+ 457              		.cfi_restore 8
+ 458              		.cfi_def_cfa 2, 32
+ 459 0358 83348100 		ld	s1,8(sp)
+ 460              		.cfi_restore 9
+ 461 035c 03390100 		ld	s2,0(sp)
+ 462              		.cfi_restore 18
+ 463 0360 13010102 		addi	sp,sp,32
+ 464              		.cfi_def_cfa_offset 0
+ 465 0364 67800000 		jr	ra
+ 466              	.L25:
+ 467              		.cfi_restore_state
+ 468 0368 83A60400 		lw	a3,0(s1)
+ 469 036c 3B87E640 		subw	a4,a3,a4
+ 470 0370 3B09F700 		addw	s2,a4,a5
+ 471 0374 6FF09FFB 		j	.L26
+ 472              		.cfi_endproc
+ 473              	.LFE27:
+ 475              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 476              		.align	3
+ 477              	.LC0:
+ 478 0000 42756666 		.string	"Buffer deleted!\n"
+ 478      65722064 
+ 478      656C6574 
+ 478      6564210A 
+ 478      00
+ 479              		.text
+ 480              		.align	2
+ 481              		.globl	_ZN9BufferCPPD2Ev
+ 483              	_ZN9BufferCPPD2Ev:
+ 484              	.LFB23:
+GAS LISTING /tmp/ccYgmquU.s 			page 10
+
+
+ 485              		.cfi_startproc
+ 486              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 487              		.cfi_lsda 0x1b,.LLSDA23
+ 488 0378 130101FE 		addi	sp,sp,-32
+ 489              		.cfi_def_cfa_offset 32
+ 490 037c 233C1100 		sd	ra,24(sp)
+ 491 0380 23388100 		sd	s0,16(sp)
+ 492 0384 23349100 		sd	s1,8(sp)
+ 493              		.cfi_offset 1, -8
+ 494              		.cfi_offset 8, -16
+ 495              		.cfi_offset 9, -24
+ 496 0388 13040102 		addi	s0,sp,32
+ 497              		.cfi_def_cfa 8, 0
+ 498 038c 93040500 		mv	s1,a0
+ 499 0390 1305A000 		li	a0,10
+ 500 0394 97000000 		call	putc@plt
+ 500      E7800000 
+ 501 039c 17050000 		lla	a0,.LC0
+ 501      13050500 
+ 502 03a4 97000000 		call	_Z11printStringPKc@plt
+ 502      E7800000 
+ 503 03ac 6F004003 		j	.L29
+ 504              	.L30:
+ 505 03b0 83B78400 		ld	a5,8(s1)
+ 506 03b4 03A70401 		lw	a4,16(s1)
+ 507 03b8 13172700 		slli	a4,a4,2
+ 508 03bc B387E700 		add	a5,a5,a4
+ 509 03c0 03C50700 		lbu	a0,0(a5)
+ 510 03c4 97000000 		call	putc@plt
+ 510      E7800000 
+ 511 03cc 83A70401 		lw	a5,16(s1)
+ 512 03d0 9B871700 		addiw	a5,a5,1
+ 513 03d4 03A70400 		lw	a4,0(s1)
+ 514 03d8 BBE7E702 		remw	a5,a5,a4
+ 515 03dc 23A8F400 		sw	a5,16(s1)
+ 516              	.L29:
+ 517 03e0 13850400 		mv	a0,s1
+ 518 03e4 97000000 		call	_ZN9BufferCPP6getCntEv
+ 518      E7800000 
+ 519 03ec E31205FC 		bne	a0,zero,.L30
+ 520 03f0 13051002 		li	a0,33
+ 521 03f4 97000000 		call	putc@plt
+ 521      E7800000 
+ 522 03fc 1305A000 		li	a0,10
+ 523 0400 97000000 		call	putc@plt
+ 523      E7800000 
+ 524 0408 03B58400 		ld	a0,8(s1)
+ 525 040c 97000000 		call	mem_free@plt
+ 525      E7800000 
+ 526 0414 03B50402 		ld	a0,32(s1)
+ 527 0418 63080500 		beq	a0,zero,.L31
+ 528 041c 83370500 		ld	a5,0(a0)
+ 529 0420 83B78700 		ld	a5,8(a5)
+ 530 0424 E7800700 		jalr	a5
+ 531              	.L31:
+ 532 0428 03B58401 		ld	a0,24(s1)
+ 533 042c 63080500 		beq	a0,zero,.L32
+GAS LISTING /tmp/ccYgmquU.s 			page 11
+
+
+ 534 0430 83370500 		ld	a5,0(a0)
+ 535 0434 83B78700 		ld	a5,8(a5)
+ 536 0438 E7800700 		jalr	a5
+ 537              	.L32:
+ 538 043c 03B50403 		ld	a0,48(s1)
+ 539 0440 63080500 		beq	a0,zero,.L33
+ 540 0444 83370500 		ld	a5,0(a0)
+ 541 0448 83B78700 		ld	a5,8(a5)
+ 542 044c E7800700 		jalr	a5
+ 543              	.L33:
+ 544 0450 03B58402 		ld	a0,40(s1)
+ 545 0454 63080500 		beq	a0,zero,.L28
+ 546 0458 83370500 		ld	a5,0(a0)
+ 547 045c 83B78700 		ld	a5,8(a5)
+ 548 0460 E7800700 		jalr	a5
+ 549              	.L28:
+ 550 0464 83308101 		ld	ra,24(sp)
+ 551              		.cfi_restore 1
+ 552 0468 03340101 		ld	s0,16(sp)
+ 553              		.cfi_restore 8
+ 554              		.cfi_def_cfa 2, 32
+ 555 046c 83348100 		ld	s1,8(sp)
+ 556              		.cfi_restore 9
+ 557 0470 13010102 		addi	sp,sp,32
+ 558              		.cfi_def_cfa_offset 0
+ 559 0474 67800000 		jr	ra
+ 560              		.cfi_endproc
+ 561              	.LFE23:
+ 562              		.section	.gcc_except_table
+ 563              	.LLSDA23:
+ 564 00a1 FF       		.byte	0xff
+ 565 00a2 FF       		.byte	0xff
+ 566 00a3 03       		.byte	0x3
+ 567 00a4 00       		.byte	0
+ 568              		.text
+ 570              		.globl	_ZN9BufferCPPD1Ev
+ 571              		.set	_ZN9BufferCPPD1Ev,_ZN9BufferCPPD2Ev
+ 572              		.weak	_ZTV9Semaphore
+ 573              		.section	.data.rel.ro.local._ZTV9Semaphore,"awG",@progbits,_ZTV9Semaphore,comdat
+ 574              		.align	3
+ 577              	_ZTV9Semaphore:
+ 578 0000 00000000 		.dword	0
+ 578      00000000 
+ 579 0008 00000000 		.dword	0
+ 579      00000000 
+ 580 0010 00000000 		.dword	_ZN9SemaphoreD1Ev
+ 580      00000000 
+ 581 0018 00000000 		.dword	_ZN9SemaphoreD0Ev
+ 581      00000000 
+ 582              		.hidden	DW.ref.__gxx_personality_v0
+ 583              		.weak	DW.ref.__gxx_personality_v0
+ 584              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 585              		.align	3
+ 588              	DW.ref.__gxx_personality_v0:
+ 589 0000 00000000 		.dword	__gxx_personality_v0
+ 589      00000000 
+ 590              		.ident	"GCC: (GNU) 12.2.0"
+GAS LISTING /tmp/ccYgmquU.s 			page 12
+
+
+ 591              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccYgmquU.s 			page 13
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 buffer_CPP_API.cpp
+     /tmp/ccYgmquU.s:12     .text._ZN9SemaphoreD2Ev:0000000000000000 _ZN9SemaphoreD2Ev
+     /tmp/ccYgmquU.s:14     .text._ZN9SemaphoreD2Ev:0000000000000000 .L0 
+     /tmp/ccYgmquU.s:588    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccYgmquU.s:17     .text._ZN9SemaphoreD2Ev:0000000000000000 $x
+     /tmp/ccYgmquU.s:18     .text._ZN9SemaphoreD2Ev:0000000000000004 .L0 
+     /tmp/ccYgmquU.s:21     .text._ZN9SemaphoreD2Ev:000000000000000c .L0 
+     /tmp/ccYgmquU.s:22     .text._ZN9SemaphoreD2Ev:000000000000000c .L0 
+     /tmp/ccYgmquU.s:24     .text._ZN9SemaphoreD2Ev:0000000000000010 .L0 
+     /tmp/ccYgmquU.s:577    .data.rel.ro.local._ZTV9Semaphore:0000000000000000 _ZTV9Semaphore
+     /tmp/ccYgmquU.s:30     .text._ZN9SemaphoreD2Ev:000000000000002c .L0 
+     /tmp/ccYgmquU.s:32     .text._ZN9SemaphoreD2Ev:0000000000000030 .L0 
+     /tmp/ccYgmquU.s:33     .text._ZN9SemaphoreD2Ev:0000000000000030 .L0 
+     /tmp/ccYgmquU.s:35     .text._ZN9SemaphoreD2Ev:0000000000000034 .L0 
+     /tmp/ccYgmquU.s:37     .text._ZN9SemaphoreD2Ev:0000000000000038 .L0 
+     /tmp/ccYgmquU.s:12     .text._ZN9SemaphoreD2Ev:0000000000000000 _ZN9SemaphoreD1Ev
+     /tmp/ccYgmquU.s:54     .text._ZN9SemaphoreD0Ev:0000000000000000 _ZN9SemaphoreD0Ev
+     /tmp/ccYgmquU.s:56     .text._ZN9SemaphoreD0Ev:0000000000000000 .L0 
+     /tmp/ccYgmquU.s:59     .text._ZN9SemaphoreD0Ev:0000000000000000 $x
+     /tmp/ccYgmquU.s:60     .text._ZN9SemaphoreD0Ev:0000000000000004 .L0 
+     /tmp/ccYgmquU.s:64     .text._ZN9SemaphoreD0Ev:0000000000000010 .L0 
+     /tmp/ccYgmquU.s:65     .text._ZN9SemaphoreD0Ev:0000000000000010 .L0 
+     /tmp/ccYgmquU.s:66     .text._ZN9SemaphoreD0Ev:0000000000000010 .L0 
+     /tmp/ccYgmquU.s:68     .text._ZN9SemaphoreD0Ev:0000000000000014 .L0 
+     /tmp/ccYgmquU.s:79     .text._ZN9SemaphoreD0Ev:0000000000000040 .L0 
+     /tmp/ccYgmquU.s:81     .text._ZN9SemaphoreD0Ev:0000000000000044 .L0 
+     /tmp/ccYgmquU.s:82     .text._ZN9SemaphoreD0Ev:0000000000000044 .L0 
+     /tmp/ccYgmquU.s:84     .text._ZN9SemaphoreD0Ev:0000000000000048 .L0 
+     /tmp/ccYgmquU.s:86     .text._ZN9SemaphoreD0Ev:000000000000004c .L0 
+     /tmp/ccYgmquU.s:88     .text._ZN9SemaphoreD0Ev:0000000000000050 .L0 
+     /tmp/ccYgmquU.s:106    .text:0000000000000000 _ZN9BufferCPPC2Ei
+     /tmp/ccYgmquU.s:108    .text:0000000000000000 .L0 
+     /tmp/ccYgmquU.s:111    .text:0000000000000000 $x
+     /tmp/ccYgmquU.s:112    .text:0000000000000004 .L0 
+     /tmp/ccYgmquU.s:118    .text:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:119    .text:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:120    .text:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:121    .text:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:122    .text:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:124    .text:000000000000001c .L0 
+     /tmp/ccYgmquU.s:196    .text:000000000000011c .L0 
+     /tmp/ccYgmquU.s:197    .text:000000000000011c .L0 
+     /tmp/ccYgmquU.s:199    .text:0000000000000120 .L0 
+     /tmp/ccYgmquU.s:200    .text:0000000000000120 .L0 
+     /tmp/ccYgmquU.s:202    .text:0000000000000124 .L0 
+     /tmp/ccYgmquU.s:204    .text:0000000000000128 .L0 
+     /tmp/ccYgmquU.s:206    .text:000000000000012c .L0 
+     /tmp/ccYgmquU.s:208    .text:0000000000000130 .L0 
+     /tmp/ccYgmquU.s:211    .text:0000000000000134 .L0 
+     /tmp/ccYgmquU.s:243    .text:00000000000001a4 .L0 
+     /tmp/ccYgmquU.s:106    .text:0000000000000000 _ZN9BufferCPPC1Ei
+     /tmp/ccYgmquU.s:306    .text:00000000000001a4 _ZN9BufferCPP3putEi
+     /tmp/ccYgmquU.s:308    .text:00000000000001a4 .L0 
+     /tmp/ccYgmquU.s:310    .text:00000000000001a8 .L0 
+     /tmp/ccYgmquU.s:315    .text:00000000000001b8 .L0 
+     /tmp/ccYgmquU.s:316    .text:00000000000001b8 .L0 
+GAS LISTING /tmp/ccYgmquU.s 			page 14
+
+
+     /tmp/ccYgmquU.s:317    .text:00000000000001b8 .L0 
+     /tmp/ccYgmquU.s:318    .text:00000000000001b8 .L0 
+     /tmp/ccYgmquU.s:320    .text:00000000000001bc .L0 
+     /tmp/ccYgmquU.s:346    .text:0000000000000230 .L0 
+     /tmp/ccYgmquU.s:348    .text:0000000000000234 .L0 
+     /tmp/ccYgmquU.s:349    .text:0000000000000234 .L0 
+     /tmp/ccYgmquU.s:351    .text:0000000000000238 .L0 
+     /tmp/ccYgmquU.s:353    .text:000000000000023c .L0 
+     /tmp/ccYgmquU.s:355    .text:0000000000000240 .L0 
+     /tmp/ccYgmquU.s:357    .text:0000000000000244 .L0 
+     /tmp/ccYgmquU.s:363    .text:0000000000000244 _ZN9BufferCPP3getEv
+     /tmp/ccYgmquU.s:365    .text:0000000000000244 .L0 
+     /tmp/ccYgmquU.s:367    .text:0000000000000248 .L0 
+     /tmp/ccYgmquU.s:372    .text:0000000000000258 .L0 
+     /tmp/ccYgmquU.s:373    .text:0000000000000258 .L0 
+     /tmp/ccYgmquU.s:374    .text:0000000000000258 .L0 
+     /tmp/ccYgmquU.s:375    .text:0000000000000258 .L0 
+     /tmp/ccYgmquU.s:377    .text:000000000000025c .L0 
+     /tmp/ccYgmquU.s:402    .text:00000000000002cc .L0 
+     /tmp/ccYgmquU.s:404    .text:00000000000002d0 .L0 
+     /tmp/ccYgmquU.s:405    .text:00000000000002d0 .L0 
+     /tmp/ccYgmquU.s:407    .text:00000000000002d4 .L0 
+     /tmp/ccYgmquU.s:409    .text:00000000000002d8 .L0 
+     /tmp/ccYgmquU.s:411    .text:00000000000002dc .L0 
+     /tmp/ccYgmquU.s:413    .text:00000000000002e0 .L0 
+     /tmp/ccYgmquU.s:419    .text:00000000000002e0 _ZN9BufferCPP6getCntEv
+     /tmp/ccYgmquU.s:421    .text:00000000000002e0 .L0 
+     /tmp/ccYgmquU.s:423    .text:00000000000002e4 .L0 
+     /tmp/ccYgmquU.s:428    .text:00000000000002f4 .L0 
+     /tmp/ccYgmquU.s:429    .text:00000000000002f4 .L0 
+     /tmp/ccYgmquU.s:430    .text:00000000000002f4 .L0 
+     /tmp/ccYgmquU.s:431    .text:00000000000002f4 .L0 
+     /tmp/ccYgmquU.s:433    .text:00000000000002f8 .L0 
+     /tmp/ccYgmquU.s:454    .text:0000000000000354 .L0 
+     /tmp/ccYgmquU.s:455    .text:0000000000000354 .L0 
+     /tmp/ccYgmquU.s:457    .text:0000000000000358 .L0 
+     /tmp/ccYgmquU.s:458    .text:0000000000000358 .L0 
+     /tmp/ccYgmquU.s:460    .text:000000000000035c .L0 
+     /tmp/ccYgmquU.s:462    .text:0000000000000360 .L0 
+     /tmp/ccYgmquU.s:464    .text:0000000000000364 .L0 
+     /tmp/ccYgmquU.s:467    .text:0000000000000368 .L0 
+     /tmp/ccYgmquU.s:472    .text:0000000000000378 .L0 
+     /tmp/ccYgmquU.s:483    .text:0000000000000378 _ZN9BufferCPPD2Ev
+     /tmp/ccYgmquU.s:485    .text:0000000000000378 .L0 
+     /tmp/ccYgmquU.s:489    .text:000000000000037c .L0 
+     /tmp/ccYgmquU.s:493    .text:0000000000000388 .L0 
+     /tmp/ccYgmquU.s:494    .text:0000000000000388 .L0 
+     /tmp/ccYgmquU.s:495    .text:0000000000000388 .L0 
+     /tmp/ccYgmquU.s:497    .text:000000000000038c .L0 
+     /tmp/ccYgmquU.s:551    .text:0000000000000468 .L0 
+     /tmp/ccYgmquU.s:553    .text:000000000000046c .L0 
+     /tmp/ccYgmquU.s:554    .text:000000000000046c .L0 
+     /tmp/ccYgmquU.s:556    .text:0000000000000470 .L0 
+     /tmp/ccYgmquU.s:558    .text:0000000000000474 .L0 
+     /tmp/ccYgmquU.s:560    .text:0000000000000478 .L0 
+     /tmp/ccYgmquU.s:483    .text:0000000000000378 _ZN9BufferCPPD1Ev
+     /tmp/ccYgmquU.s:141    .text:000000000000005c .L0 
+GAS LISTING /tmp/ccYgmquU.s 			page 15
+
+
+     /tmp/ccYgmquU.s:156    .text:0000000000000090 .L0 
+     /tmp/ccYgmquU.s:171    .text:00000000000000c4 .L0 
+     /tmp/ccYgmquU.s:186    .text:00000000000000f8 .L0 
+     /tmp/ccYgmquU.s:477    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccYgmquU.s:501    .text:000000000000039c .L0 
+     /tmp/ccYgmquU.s:148    .text:0000000000000078 .L6
+     /tmp/ccYgmquU.s:163    .text:00000000000000ac .L7
+     /tmp/ccYgmquU.s:178    .text:00000000000000e0 .L8
+     /tmp/ccYgmquU.s:193    .text:0000000000000114 .L9
+     /tmp/ccYgmquU.s:466    .text:0000000000000368 .L25
+     /tmp/ccYgmquU.s:445    .text:000000000000032c .L26
+     /tmp/ccYgmquU.s:516    .text:00000000000003e0 .L29
+     /tmp/ccYgmquU.s:504    .text:00000000000003b0 .L30
+     /tmp/ccYgmquU.s:531    .text:0000000000000428 .L31
+     /tmp/ccYgmquU.s:537    .text:000000000000043c .L32
+     /tmp/ccYgmquU.s:543    .text:0000000000000450 .L33
+     /tmp/ccYgmquU.s:549    .text:0000000000000464 .L28
+     /tmp/ccYgmquU.s:25     .text._ZN9SemaphoreD2Ev:0000000000000010 .L0 
+     /tmp/ccYgmquU.s:70     .text._ZN9SemaphoreD0Ev:0000000000000018 .L0 
+     /tmp/ccYgmquU.s:75     .text._ZN9SemaphoreD0Ev:0000000000000034 .LEHB0
+     /tmp/ccYgmquU.s:55     .text._ZN9SemaphoreD0Ev:0000000000000000 .LFB13
+     /tmp/ccYgmquU.s:77     .text._ZN9SemaphoreD0Ev:000000000000003c .LEHE0
+     /tmp/ccYgmquU.s:133    .text:000000000000003c .LEHB1
+     /tmp/ccYgmquU.s:107    .text:0000000000000000 .LFB20
+     /tmp/ccYgmquU.s:138    .text:0000000000000054 .LEHE1
+     /tmp/ccYgmquU.s:145    .text:0000000000000070 .LEHB2
+     /tmp/ccYgmquU.s:147    .text:0000000000000078 .LEHE2
+     /tmp/ccYgmquU.s:210    .text:0000000000000134 .L14
+     /tmp/ccYgmquU.s:151    .text:0000000000000080 .LEHB3
+     /tmp/ccYgmquU.s:153    .text:0000000000000088 .LEHE3
+     /tmp/ccYgmquU.s:160    .text:00000000000000a4 .LEHB4
+     /tmp/ccYgmquU.s:162    .text:00000000000000ac .LEHE4
+     /tmp/ccYgmquU.s:219    .text:0000000000000150 .L15
+     /tmp/ccYgmquU.s:166    .text:00000000000000b4 .LEHB5
+     /tmp/ccYgmquU.s:168    .text:00000000000000bc .LEHE5
+     /tmp/ccYgmquU.s:175    .text:00000000000000d8 .LEHB6
+     /tmp/ccYgmquU.s:177    .text:00000000000000e0 .LEHE6
+     /tmp/ccYgmquU.s:227    .text:000000000000016c .L16
+     /tmp/ccYgmquU.s:181    .text:00000000000000e8 .LEHB7
+     /tmp/ccYgmquU.s:183    .text:00000000000000f0 .LEHE7
+     /tmp/ccYgmquU.s:190    .text:000000000000010c .LEHB8
+     /tmp/ccYgmquU.s:192    .text:0000000000000114 .LEHE8
+     /tmp/ccYgmquU.s:235    .text:0000000000000188 .L17
+     /tmp/ccYgmquU.s:216    .text:0000000000000148 .LEHB9
+     /tmp/ccYgmquU.s:218    .text:0000000000000150 .LEHE9
+     /tmp/ccYgmquU.s:224    .text:0000000000000164 .LEHB10
+     /tmp/ccYgmquU.s:226    .text:000000000000016c .LEHE10
+     /tmp/ccYgmquU.s:232    .text:0000000000000180 .LEHB11
+     /tmp/ccYgmquU.s:234    .text:0000000000000188 .LEHE11
+     /tmp/ccYgmquU.s:240    .text:000000000000019c .LEHB12
+     /tmp/ccYgmquU.s:242    .text:00000000000001a4 .LEHE12
+     /tmp/ccYgmquU.s:41     .gcc_except_table._ZN9SemaphoreD2Ev:0000000000000000 .LLSDA11
+     /tmp/ccYgmquU.s:91     .gcc_except_table._ZN9SemaphoreD0Ev:0000000000000000 .LLSDA13
+     /tmp/ccYgmquU.s:246    .gcc_except_table:0000000000000000 .LLSDA20
+     /tmp/ccYgmquU.s:563    .gcc_except_table:00000000000000a1 .LLSDA23
+                           .group:0000000000000000 _ZN9SemaphoreD5Ev
+
+GAS LISTING /tmp/ccYgmquU.s 			page 16
+
+
+UNDEFINED SYMBOLS
+sem_close
+__gxx_personality_v0
+_ZdlPv
+mem_alloc
+_Znwm
+sem_open
+_Unwind_Resume
+sem_wait
+sem_signal
+putc
+_Z11printStringPKc
+mem_free

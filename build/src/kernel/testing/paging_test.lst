@@ -1,0 +1,441 @@
+GAS LISTING /tmp/ccqwPDQs.s 			page 1
+
+
+   1              		.file	"paging_test.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 2D2D2D2D 		.string	"--------PAGING TEST--------\n"
+  11      2D2D2D2D 
+  11      50414749 
+  11      4E472054 
+  11      4553542D 
+  12 001d 000000   		.align	3
+  13              	.LC1:
+  14 0020 47455449 		.string	"GETING PAGER iNSTANCE\n"
+  14      4E472050 
+  14      41474552 
+  14      20694E53 
+  14      54414E43 
+  15 0037 00       		.align	3
+  16              	.LC2:
+  17 0038 4D415050 		.string	"MAPPING KERNEL\n"
+  17      494E4720 
+  17      4B45524E 
+  17      454C0A00 
+  18              		.align	3
+  19              	.LC3:
+  20 0048 50414749 		.string	"PAGING BEGIN\n"
+  20      4E472042 
+  20      4547494E 
+  20      0A00
+  21 0056 0000     		.align	3
+  22              	.LC4:
+  23 0058 4D6F7A65 		.string	"Moze li\n"
+  23      206C690A 
+  23      00
+  24 0061 00000000 		.align	3
+  24      000000
+  25              	.LC5:
+  26 0068 693A2000 		.string	"i: "
+  27 006c 00000000 		.align	3
+  28              	.LC6:
+  29 0070 0A00     		.string	"\n"
+  30 0072 00000000 		.align	3
+  30      0000
+  31              	.LC7:
+  32 0078 2D2D2D2D 		.string	"------PAGING TEST END------\n"
+  32      2D2D5041 
+  32      47494E47 
+  32      20544553 
+  32      5420454E 
+  33              		.text
+  34              		.align	2
+  35              		.globl	_Z11paging_testv
+GAS LISTING /tmp/ccqwPDQs.s 			page 2
+
+
+  37              	_Z11paging_testv:
+  38              	.LFB113:
+  39              		.cfi_startproc
+  40 0000 130101FE 		addi	sp,sp,-32
+  41              		.cfi_def_cfa_offset 32
+  42 0004 233C1100 		sd	ra,24(sp)
+  43 0008 23388100 		sd	s0,16(sp)
+  44 000c 23349100 		sd	s1,8(sp)
+  45 0010 23302101 		sd	s2,0(sp)
+  46              		.cfi_offset 1, -8
+  47              		.cfi_offset 8, -16
+  48              		.cfi_offset 9, -24
+  49              		.cfi_offset 18, -32
+  50 0014 13040102 		addi	s0,sp,32
+  51              		.cfi_def_cfa 8, 0
+  52 0018 17050000 		lla	a0,.LC0
+  52      13050500 
+  53 0020 97000000 		call	_Z12kprintStringPKc@plt
+  53      E7800000 
+  54 0028 17050000 		lla	a0,.LC1
+  54      13050500 
+  55 0030 97000000 		call	_Z12kprintStringPKc@plt
+  55      E7800000 
+  56 0038 97000000 		call	_ZN5Pager11getInstanceEv@plt
+  56      E7800000 
+  57 0040 13090500 		mv	s2,a0
+  58 0044 17050000 		lla	a0,.LC2
+  58      13050500 
+  59 004c 97000000 		call	_Z12kprintStringPKc@plt
+  59      E7800000 
+  60 0054 13050900 		mv	a0,s2
+  61 0058 97000000 		call	_ZN5Pager10map_kernelEv@plt
+  61      E7800000 
+  62 0060 17050000 		lla	a0,.LC3
+  62      13050500 
+  63 0068 97000000 		call	_Z12kprintStringPKc@plt
+  63      E7800000 
+  64 0070 B7070400 		li	a5,262144
+  65              	#APP
+  66              	# 207 "src/kernel/testing/../../../h/../h/riscv.hpp" 1
+   1              	#ifndef __riscv__
+   2              	#define __riscv__
+   3              	
+   4              	#include"../lib/hw.h"
+   5              	
+   6              	class Riscv{
+   7              	public:
+   8              	/* 
+   9              	--------------------SUPERVISOR REGISTERS--------------------    
+  10              	*/
+  11              	    static void w_scause(uint64);
+  12              	    static uint64 r_scause(); 
+  13              	
+  14              	    static void w_sepc(uint64);
+  15              	    static uint64 r_sepc();
+  16              	    static void ni_sepc();
+  17              	
+GAS LISTING /tmp/ccqwPDQs.s 			page 3
+
+
+  18              	    static void w_stvec(uint64);
+  19              	    static uint64 r_stvec();
+  20              	     
+  21              	    static void w_stval(uint64);
+  22              	    static uint64 r_stval();
+  23              	
+  24              	    static void w_satp(uint64);
+  25              	    static uint64 r_satp();
+  26              	    
+  27              	    enum BitMaskSip{
+  28              	        SIP_SSIE = (1<<1),
+  29              	        SIP_STIE = (1<<5),
+  30              	        SIP_SEIE = (1<<9),
+  31              	    };
+  32              	
+  33              	    static void ms_sip(uint64);
+  34              	    static void mc_sip(uint64);
+  35              	
+  36              	    static void w_sip(uint64);
+  37              	    static uint64 r_sip();
+  38              	
+  39              	    static void ms_sie(uint64);
+  40              	    static void mc_sie(uint64);
+  41              	
+  42              	    static void w_sie(uint64);
+  43              	    static uint64 r_sie();
+  44              	
+  45              	    enum BitMaskSstatus{
+  46              	        SSTATUS_SIE = (1<<1),
+  47              	        SSTATUS_SPIE = (1<<5),
+  48              	        SSTATUS_SPP = (1<<8),
+  49              	        SSTATUS_SUM = (1<<18),
+  50              	    };
+  51              	
+  52              	    static void ms_sstatus(uint64);
+  53              	    static void mc_sstatus(uint64);
+  54              	
+  55              	    static void w_sstatus(uint64);
+  56              	    static uint64 r_sstatus();
+  57              	
+  58              	/* 
+  59              	--------------------CLASSIC REGISTERS--------------------    
+  60              	*/
+  61              	    static uint64 r_sp();
+  62              	    static uint64 r_a0(); /* parameter registers */
+  63              	    static uint64 s_a0(uint64 a0);
+  64              	    static uint64 r_a1();
+  65              	    static uint64 r_a2();
+  66              	    static uint64 r_a3();
+  67              	    static uint64 r_a4();
+  68              	
+  69              	    static void popRegisters(); /* pop all context registers */
+  70              	    static void pushRegisters(); /* push all context registers */
+  71              	 
+  72              	    static void popSppSpie(); /* jump from kernel to start of thread */
+  73              	
+  74              	/* 
+GAS LISTING /tmp/ccqwPDQs.s 			page 4
+
+
+  75              	--------------------CONSOLE REGISTERS--------------------    
+  76              	*/
+  77              	    static void mc_cstatus(uint64 mask); 
+  78              	    static bool cstatus_ready(uint64 mask);
+  79              	};
+  80              	
+  81              	/* 
+  82              	--------------------CLASSIC REGISTERS--------------------    
+  83              	*/
+  84              	
+  85              	inline uint64 Riscv::r_sp(){
+  86              	    uint64 a0;
+  87              	    asm volatile("mv %0, sp" : "=r" (a0));
+  88              	    return a0;
+  89              	}
+  90              	
+  91              	inline uint64 Riscv::r_a0(){
+  92              	    uint64 a0;
+  93              	    asm volatile("mv %0, a0" : "=r" (a0));
+  94              	    return a0;
+  95              	}
+  96              	
+  97              	inline uint64 Riscv::r_a1(){
+  98              	    uint64 a0;
+  99              	    asm volatile("mv %0, a1" : "=r" (a0));
+ 100              	    return a0;
+ 101              	}
+ 102              	
+ 103              	inline uint64 Riscv::r_a2(){
+ 104              	    uint64 a0;
+ 105              	    asm volatile("mv %0, a2" : "=r" (a0));
+ 106              	    return a0;
+ 107              	}
+ 108              	
+ 109              	inline uint64 Riscv::r_a3(){
+ 110              	    uint64 a0;
+ 111              	    asm volatile("mv %0, a3" : "=r" (a0));
+ 112              	    return a0;
+ 113              	}
+ 114              	
+ 115              	inline uint64 Riscv::r_a4(){
+ 116              	    uint64 a0;
+ 117              	    asm volatile("mv %0, a4" : "=r" (a0));
+ 118              	    return a0;
+ 119              	}
+ 120              	
+ 121              	
+ 122              	inline uint64 Riscv::s_a0(uint64 a0){
+ 123              	    return a0;
+ 124              	}
+ 125              	
+ 126              	/* 
+ 127              	--------------------SUPERVISOR REGISTERS--------------------    
+ 128              	*/
+ 129              	
+ 130              	inline void Riscv::w_scause(uint64 scause){
+ 131              	    asm volatile("csrw scause, %0" : : "r" (scause));
+GAS LISTING /tmp/ccqwPDQs.s 			page 5
+
+
+ 132              	}
+ 133              	
+ 134              	inline uint64 Riscv::r_scause(){
+ 135              	    uint64 volatile scause;
+ 136              	    asm volatile("csrr %0, scause" : "=r" (scause));
+ 137              	    return scause;
+ 138              	} 
+ 139              	
+ 140              	inline void Riscv::w_sepc(uint64 sepc){
+ 141              	    asm volatile("csrw sepc, %0" : : "r" (sepc));
+ 142              	}
+ 143              	
+ 144              	inline uint64 Riscv::r_sepc(){
+ 145              	    uint64 volatile sepc;
+ 146              	    asm volatile("csrr %0, sepc" : "=r" (sepc));
+ 147              	    return sepc;
+ 148              	} 
+ 149              	
+ 150              	inline void Riscv::w_stvec(uint64 stvec){
+ 151              	    asm volatile("csrw stvec, %0" : : "r" (stvec));
+ 152              	}
+ 153              	
+ 154              	inline uint64 Riscv::r_stvec(){
+ 155              	    uint64 volatile stvec;
+ 156              	    asm volatile("csrr %0, stvec" : "=r" (stvec));
+ 157              	    return stvec;
+ 158              	} 
+ 159              	
+ 160              	inline void Riscv::w_stval(uint64 stval){
+ 161              	    asm volatile("csrw stval, %0" : : "r" (stval));
+ 162              	}
+ 163              	
+ 164              	inline uint64 Riscv::r_stval(){
+ 165              	    uint64 volatile stval;
+ 166              	    asm volatile("csrr %0, stval" : "=r" (stval));
+ 167              	    return stval;
+ 168              	} 
+ 169              	
+ 170              	inline void Riscv::ms_sip(uint64 mask){
+ 171              	    asm volatile ("csrs sip, %0" : : "r" (mask));
+ 172              	}
+ 173              	
+ 174              	inline void Riscv::mc_sip(uint64 mask){
+ 175              	    asm volatile ("csrc sip, %0" : : "r" (mask));
+ 176              	}
+ 177              	
+ 178              	inline void Riscv::w_sip(uint64 sip){
+ 179              	    asm volatile("csrw sip, %0" : : "r" (sip));
+ 180              	}
+ 181              	
+ 182              	inline uint64 Riscv::r_sip(){
+ 183              	    uint64 volatile sip;
+ 184              	    asm volatile("csrr %0, sip" : "=r" (sip));
+ 185              	    return sip;
+ 186              	} 
+ 187              	
+ 188              	inline void Riscv::ms_sie(uint64 mask){
+GAS LISTING /tmp/ccqwPDQs.s 			page 6
+
+
+ 189              	    asm volatile ("csrs sie, %0" : : "r" (mask));
+ 190              	}
+ 191              	
+ 192              	inline void Riscv::mc_sie(uint64 mask){
+ 193              	    asm volatile ("csrc sie, %0" : : "r" (mask));
+ 194              	}
+ 195              	
+ 196              	inline void Riscv::w_sie(uint64 sie){
+ 197              	    asm volatile("csrw sie, %0" : : "r" (sie));
+ 198              	}
+ 199              	
+ 200              	inline uint64 Riscv::r_sie(){
+ 201              	    uint64 volatile sie;
+ 202              	    asm volatile("csrr %0, sie" : "=r" (sie));
+ 203              	    return sie;
+ 204              	} 
+ 205              	
+ 206              	inline void Riscv::ms_sstatus(uint64 mask){
+ 207 0074 73A00710 	    asm volatile ("csrs sstatus, %0" : : "r" (mask));
+ 208              	}
+  67              		csrs sstatus, a5
+  68              	# 0 "" 2
+  69              	#NO_APP
+  70 0078 17050000 		lla	a0,.LC4
+  70      13050500 
+  71 0080 97000000 		call	_Z12kprintStringPKc@plt
+  71      E7800000 
+  72 0088 13050900 		mv	a0,s2
+  73 008c 97000000 		call	_ZN5Pager12start_pagingEv@plt
+  73      E7800000 
+  74 0094 93040000 		li	s1,0
+  75 0098 6F00C003 		j	.L2
+  76              	.L3:
+  77 009c 17050000 		lla	a0,.LC5
+  77      13050500 
+  78 00a4 97000000 		call	_Z12kprintStringPKc@plt
+  78      E7800000 
+  79 00ac 13060000 		li	a2,0
+  80 00b0 93050001 		li	a1,16
+  81 00b4 13850400 		mv	a0,s1
+  82 00b8 97000000 		call	_Z9kprintIntmib@plt
+  82      E7800000 
+  83 00c0 17050000 		lla	a0,.LC6
+  83      13050500 
+  84 00c8 97000000 		call	_Z12kprintStringPKc@plt
+  84      E7800000 
+  85 00d0 9B841400 		addiw	s1,s1,1
+  86              	.L2:
+  87 00d4 93074000 		li	a5,4
+  88 00d8 E3D297FC 		ble	s1,a5,.L3
+  89 00dc 97070000 		la	a5,HEAP_END_ADDR
+  89      83B70700 
+  90 00e4 83B40700 		ld	s1,0(a5)
+  91 00e8 938504EC 		addi	a1,s1,-320
+  92 00ec 93066001 		li	a3,22
+  93 00f0 37F6FFFF 		li	a2,-4096
+  94 00f4 33F6C500 		and	a2,a1,a2
+GAS LISTING /tmp/ccqwPDQs.s 			page 7
+
+
+  95 00f8 13050900 		mv	a0,s2
+  96 00fc 97000000 		call	_ZN5Pager3mapEPvS0_12PMTEntryBits@plt
+  96      E7800000 
+  97 0104 13050900 		mv	a0,s2
+  98 0108 97000000 		call	_ZN5Pager5printEv@plt
+  98      E7800000 
+  99 0110 9307D000 		li	a5,13
+ 100 0114 23B0F4EC 		sd	a5,-320(s1)
+ 101 0118 17050000 		lla	a0,.LC7
+ 101      13050500 
+ 102 0120 97000000 		call	_Z12kprintStringPKc@plt
+ 102      E7800000 
+ 103 0128 83308101 		ld	ra,24(sp)
+ 104              		.cfi_restore 1
+ 105 012c 03340101 		ld	s0,16(sp)
+ 106              		.cfi_restore 8
+ 107              		.cfi_def_cfa 2, 32
+ 108 0130 83348100 		ld	s1,8(sp)
+ 109              		.cfi_restore 9
+ 110 0134 03390100 		ld	s2,0(sp)
+ 111              		.cfi_restore 18
+ 112 0138 13010102 		addi	sp,sp,32
+ 113              		.cfi_def_cfa_offset 0
+ 114 013c 67800000 		jr	ra
+ 115              		.cfi_endproc
+ 116              	.LFE113:
+ 118              		.ident	"GCC: (GNU) 12.2.0"
+ 119              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccqwPDQs.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 paging_test.cpp
+     /tmp/ccqwPDQs.s:37     .text:0000000000000000 _Z11paging_testv
+     /tmp/ccqwPDQs.s:39     .text:0000000000000000 .L0 
+     /tmp/ccqwPDQs.s:40     .text:0000000000000000 $x
+     /tmp/ccqwPDQs.s:41     .text:0000000000000004 .L0 
+     /tmp/ccqwPDQs.s:46     .text:0000000000000014 .L0 
+     /tmp/ccqwPDQs.s:47     .text:0000000000000014 .L0 
+     /tmp/ccqwPDQs.s:48     .text:0000000000000014 .L0 
+     /tmp/ccqwPDQs.s:49     .text:0000000000000014 .L0 
+     /tmp/ccqwPDQs.s:51     .text:0000000000000018 .L0 
+     /tmp/ccqwPDQs.s:104    .text:000000000000012c .L0 
+     /tmp/ccqwPDQs.s:106    .text:0000000000000130 .L0 
+     /tmp/ccqwPDQs.s:107    .text:0000000000000130 .L0 
+     /tmp/ccqwPDQs.s:109    .text:0000000000000134 .L0 
+     /tmp/ccqwPDQs.s:111    .text:0000000000000138 .L0 
+     /tmp/ccqwPDQs.s:113    .text:000000000000013c .L0 
+     /tmp/ccqwPDQs.s:115    .text:0000000000000140 .L0 
+     /tmp/ccqwPDQs.s:10     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccqwPDQs.s:52     .text:0000000000000018 .L0 
+     /tmp/ccqwPDQs.s:13     .rodata.str1.8:0000000000000020 .LC1
+     /tmp/ccqwPDQs.s:54     .text:0000000000000028 .L0 
+     /tmp/ccqwPDQs.s:16     .rodata.str1.8:0000000000000038 .LC2
+     /tmp/ccqwPDQs.s:58     .text:0000000000000044 .L0 
+     /tmp/ccqwPDQs.s:19     .rodata.str1.8:0000000000000048 .LC3
+     /tmp/ccqwPDQs.s:62     .text:0000000000000060 .L0 
+     /tmp/ccqwPDQs.s:22     .rodata.str1.8:0000000000000058 .LC4
+     /tmp/ccqwPDQs.s:70     .text:0000000000000078 .L0 
+     /tmp/ccqwPDQs.s:25     .rodata.str1.8:0000000000000068 .LC5
+     /tmp/ccqwPDQs.s:77     .text:000000000000009c .L0 
+     /tmp/ccqwPDQs.s:28     .rodata.str1.8:0000000000000070 .LC6
+     /tmp/ccqwPDQs.s:83     .text:00000000000000c0 .L0 
+     /tmp/ccqwPDQs.s:89     .text:00000000000000dc .L0 
+     /tmp/ccqwPDQs.s:31     .rodata.str1.8:0000000000000078 .LC7
+     /tmp/ccqwPDQs.s:101    .text:0000000000000118 .L0 
+     /tmp/ccqwPDQs.s:86     .text:00000000000000d4 .L2
+     /tmp/ccqwPDQs.s:76     .text:000000000000009c .L3
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_ZN5Pager11getInstanceEv
+_ZN5Pager10map_kernelEv
+_ZN5Pager12start_pagingEv
+_Z9kprintIntmib
+HEAP_END_ADDR
+_ZN5Pager3mapEPvS0_12PMTEntryBits
+_ZN5Pager5printEv

@@ -1,0 +1,370 @@
+GAS LISTING /tmp/ccfRkGug.s 			page 1
+
+
+   1              		.file	"tree_like_buddy.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN13TreeLikeBuddyC2EPvm
+  11              	_ZN13TreeLikeBuddyC2EPvm:
+  12              	.LFB119:
+  13              		.cfi_startproc
+  14 0000 130101FD 		addi	sp,sp,-48
+  15              		.cfi_def_cfa_offset 48
+  16 0004 23341102 		sd	ra,40(sp)
+  17 0008 23308102 		sd	s0,32(sp)
+  18 000c 233C9100 		sd	s1,24(sp)
+  19 0010 23382101 		sd	s2,16(sp)
+  20 0014 23343101 		sd	s3,8(sp)
+  21 0018 23304101 		sd	s4,0(sp)
+  22              		.cfi_offset 1, -8
+  23              		.cfi_offset 8, -16
+  24              		.cfi_offset 9, -24
+  25              		.cfi_offset 18, -32
+  26              		.cfi_offset 19, -40
+  27              		.cfi_offset 20, -48
+  28 001c 13040103 		addi	s0,sp,48
+  29              		.cfi_def_cfa 8, 0
+  30 0020 93040500 		mv	s1,a0
+  31 0024 13050600 		mv	a0,a2
+  32 0028 97000000 		call	_Z4log2m@plt
+  32      E7800000 
+  33 0030 1B051500 		addiw	a0,a0,1
+  34 0034 1375F50F 		andi	a0,a0,0xff
+  35 0038 2380A402 		sb	a0,32(s1)
+  36 003c 13153500 		slli	a0,a0,3
+  37 0040 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+  37      E7800000 
+  38 0048 23BCA400 		sd	a0,24(s1)
+  39 004c 03C50402 		lbu	a0,32(s1)
+  40 0050 13153500 		slli	a0,a0,3
+  41 0054 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+  41      E7800000 
+  42 005c 23B8A400 		sd	a0,16(s1)
+  43 0060 93090000 		li	s3,0
+  44 0064 6F004003 		j	.L2
+  45              	.L4:
+  46 0068 83B70401 		ld	a5,16(s1)
+  47 006c B3872701 		add	a5,a5,s2
+  48 0070 83B70700 		ld	a5,0(a5)
+  49 0074 B387E700 		add	a5,a5,a4
+  50 0078 23800700 		sb	zero,0(a5)
+  51 007c 13071700 		addi	a4,a4,1
+  52              	.L3:
+  53 0080 83B78401 		ld	a5,24(s1)
+  54 0084 B3872701 		add	a5,a5,s2
+  55 0088 83B70700 		ld	a5,0(a5)
+GAS LISTING /tmp/ccfRkGug.s 			page 2
+
+
+  56 008c E36EF7FC 		bgtu	a5,a4,.L4
+  57 0090 9B891900 		addiw	s3,s3,1
+  58 0094 93F9F90F 		andi	s3,s3,0xff
+  59              	.L2:
+  60 0098 83C70402 		lbu	a5,32(s1)
+  61 009c 63F6F904 		bleu	a5,s3,.L7
+  62 00a0 BB873741 		subw	a5,a5,s3
+  63 00a4 9B87F7FF 		addiw	a5,a5,-1
+  64 00a8 03B78401 		ld	a4,24(s1)
+  65 00ac 13993900 		slli	s2,s3,3
+  66 00b0 33072701 		add	a4,a4,s2
+  67 00b4 93061000 		li	a3,1
+  68 00b8 B397F600 		sll	a5,a3,a5
+  69 00bc 2330F700 		sd	a5,0(a4)
+  70 00c0 83B78401 		ld	a5,24(s1)
+  71 00c4 B3872701 		add	a5,a5,s2
+  72 00c8 03BA0401 		ld	s4,16(s1)
+  73 00cc 330A2A01 		add	s4,s4,s2
+  74 00d0 03B50700 		ld	a0,0(a5)
+  75 00d4 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+  75      E7800000 
+  76 00dc 2330AA00 		sd	a0,0(s4)
+  77 00e0 13070000 		li	a4,0
+  78 00e4 6FF0DFF9 		j	.L3
+  79              	.L7:
+  80 00e8 03B70401 		ld	a4,16(s1)
+  81 00ec 93973700 		slli	a5,a5,3
+  82 00f0 938787FF 		addi	a5,a5,-8
+  83 00f4 B307F700 		add	a5,a4,a5
+  84 00f8 83B70700 		ld	a5,0(a5)
+  85 00fc 13071000 		li	a4,1
+  86 0100 2380E700 		sb	a4,0(a5)
+  87 0104 83308102 		ld	ra,40(sp)
+  88              		.cfi_restore 1
+  89 0108 03340102 		ld	s0,32(sp)
+  90              		.cfi_restore 8
+  91              		.cfi_def_cfa 2, 48
+  92 010c 83348101 		ld	s1,24(sp)
+  93              		.cfi_restore 9
+  94 0110 03390101 		ld	s2,16(sp)
+  95              		.cfi_restore 18
+  96 0114 83398100 		ld	s3,8(sp)
+  97              		.cfi_restore 19
+  98 0118 033A0100 		ld	s4,0(sp)
+  99              		.cfi_restore 20
+ 100 011c 13010103 		addi	sp,sp,48
+ 101              		.cfi_def_cfa_offset 0
+ 102 0120 67800000 		jr	ra
+ 103              		.cfi_endproc
+ 104              	.LFE119:
+ 106              		.globl	_ZN13TreeLikeBuddyC1EPvm
+ 107              		.set	_ZN13TreeLikeBuddyC1EPvm,_ZN13TreeLikeBuddyC2EPvm
+ 108              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 109              		.align	3
+ 110              	.LC0:
+ 111 0000 42554444 		.string	"BUDDY NOT INITALIZED!!!"
+ 111      59204E4F 
+GAS LISTING /tmp/ccfRkGug.s 			page 3
+
+
+ 111      5420494E 
+ 111      4954414C 
+ 111      495A4544 
+ 112              		.align	3
+ 113              	.LC1:
+ 114 0018 2D2D2D2D 		.string	"------BUDDY STATUS PRINT------\n"
+ 114      2D2D4255 
+ 114      44445920 
+ 114      53544154 
+ 114      55532050 
+ 115              		.align	3
+ 116              	.LC2:
+ 117 0038 62756464 		.string	"buddy: "
+ 117      793A2000 
+ 118              		.align	3
+ 119              	.LC3:
+ 120 0040 0A00     		.string	"\n"
+ 121 0042 00000000 		.align	3
+ 121      0000
+ 122              	.LC4:
+ 123 0048 73746172 		.string	"start_address: "
+ 123      745F6164 
+ 123      64726573 
+ 123      733A2000 
+ 124              		.align	3
+ 125              	.LC5:
+ 126 0058 73697A65 		.string	"size: "
+ 126      3A2000
+ 127 005f 00       		.align	3
+ 128              	.LC6:
+ 129 0060 092D2D2D 		.string	"\t------MEMORY META------\n"
+ 129      2D2D2D4D 
+ 129      454D4F52 
+ 129      59204D45 
+ 129      54412D2D 
+ 130 007a 00000000 		.align	3
+ 130      0000
+ 131              	.LC7:
+ 132 0080 092D2D2D 		.string	"\t----END MEMORY META----\n"
+ 132      2D454E44 
+ 132      204D454D 
+ 132      4F525920 
+ 132      4D455441 
+ 133 009a 00000000 		.align	3
+ 133      0000
+ 134              	.LC8:
+ 135 00a0 2D2D2D2D 		.string	"-------END BUDDY STATUS-------\n"
+ 135      2D2D2D45 
+ 135      4E442042 
+ 135      55444459 
+ 135      20535441 
+ 136              		.text
+ 137              		.align	2
+ 138              		.globl	_ZN13TreeLikeBuddy12status_printEv
+ 140              	_ZN13TreeLikeBuddy12status_printEv:
+ 141              	.LFB121:
+ 142              		.cfi_startproc
+GAS LISTING /tmp/ccfRkGug.s 			page 4
+
+
+ 143 0124 130101FE 		addi	sp,sp,-32
+ 144              		.cfi_def_cfa_offset 32
+ 145 0128 233C1100 		sd	ra,24(sp)
+ 146 012c 23388100 		sd	s0,16(sp)
+ 147 0130 23349100 		sd	s1,8(sp)
+ 148              		.cfi_offset 1, -8
+ 149              		.cfi_offset 8, -16
+ 150              		.cfi_offset 9, -24
+ 151 0134 13040102 		addi	s0,sp,32
+ 152              		.cfi_def_cfa 8, 0
+ 153 0138 97070000 		ld	a5,.LANCHOR0
+ 153      83B70700 
+ 154 0140 638E070E 		beq	a5,zero,.L12
+ 155 0144 93040500 		mv	s1,a0
+ 156 0148 17050000 		lla	a0,.LC1
+ 156      13050500 
+ 157 0150 97000000 		call	_Z12kprintStringPKc@plt
+ 157      E7800000 
+ 158 0158 17050000 		lla	a0,.LC2
+ 158      13050500 
+ 159 0160 97000000 		call	_Z12kprintStringPKc@plt
+ 159      E7800000 
+ 160 0168 13060000 		li	a2,0
+ 161 016c 93050001 		li	a1,16
+ 162 0170 17050000 		ld	a0,.LANCHOR0
+ 162      03350500 
+ 163 0178 97000000 		call	_Z9kprintIntmib@plt
+ 163      E7800000 
+ 164 0180 17050000 		lla	a0,.LC3
+ 164      13050500 
+ 165 0188 97000000 		call	_Z12kprintStringPKc@plt
+ 165      E7800000 
+ 166 0190 17050000 		lla	a0,.LC4
+ 166      13050500 
+ 167 0198 97000000 		call	_Z12kprintStringPKc@plt
+ 167      E7800000 
+ 168 01a0 13060000 		li	a2,0
+ 169 01a4 93050001 		li	a1,16
+ 170 01a8 03B50400 		ld	a0,0(s1)
+ 171 01ac 97000000 		call	_Z9kprintIntmib@plt
+ 171      E7800000 
+ 172 01b4 17050000 		lla	a0,.LC3
+ 172      13050500 
+ 173 01bc 97000000 		call	_Z12kprintStringPKc@plt
+ 173      E7800000 
+ 174 01c4 17050000 		lla	a0,.LC5
+ 174      13050500 
+ 175 01cc 97000000 		call	_Z12kprintStringPKc@plt
+ 175      E7800000 
+ 176 01d4 13060000 		li	a2,0
+ 177 01d8 93050001 		li	a1,16
+ 178 01dc 03B58400 		ld	a0,8(s1)
+ 179 01e0 97000000 		call	_Z9kprintIntmib@plt
+ 179      E7800000 
+ 180 01e8 17050000 		lla	a0,.LC3
+ 180      13050500 
+ 181 01f0 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/ccfRkGug.s 			page 5
+
+
+ 181      E7800000 
+ 182 01f8 17050000 		lla	a0,.LC6
+ 182      13050500 
+ 183 0200 97000000 		call	_Z12kprintStringPKc@plt
+ 183      E7800000 
+ 184 0208 17050000 		lla	a0,.LC7
+ 184      13050500 
+ 185 0210 97000000 		call	_Z12kprintStringPKc@plt
+ 185      E7800000 
+ 186 0218 17050000 		lla	a0,.LC8
+ 186      13050500 
+ 187 0220 97000000 		call	_Z12kprintStringPKc@plt
+ 187      E7800000 
+ 188              	.L8:
+ 189 0228 83308101 		ld	ra,24(sp)
+ 190              		.cfi_remember_state
+ 191              		.cfi_restore 1
+ 192 022c 03340101 		ld	s0,16(sp)
+ 193              		.cfi_restore 8
+ 194              		.cfi_def_cfa 2, 32
+ 195 0230 83348100 		ld	s1,8(sp)
+ 196              		.cfi_restore 9
+ 197 0234 13010102 		addi	sp,sp,32
+ 198              		.cfi_def_cfa_offset 0
+ 199 0238 67800000 		jr	ra
+ 200              	.L12:
+ 201              		.cfi_restore_state
+ 202 023c 17050000 		lla	a0,.LC0
+ 202      13050500 
+ 203 0244 97000000 		call	_Z12kprintStringPKc@plt
+ 203      E7800000 
+ 204 024c 6FF0DFFD 		j	.L8
+ 205              		.cfi_endproc
+ 206              	.LFE121:
+ 208              		.globl	_ZN13TreeLikeBuddy18BLOCK_SIZE_BIT_LENE
+ 209              		.globl	_ZN13TreeLikeBuddy5buddyE
+ 210              		.bss
+ 211              		.align	3
+ 212              		.set	.LANCHOR0,. + 0
+ 215              	_ZN13TreeLikeBuddy5buddyE:
+ 216 0000 00000000 		.zero	8
+ 216      00000000 
+ 219              	_ZN13TreeLikeBuddy18BLOCK_SIZE_BIT_LENE:
+ 220 0008 00       		.zero	1
+ 221              		.ident	"GCC: (GNU) 12.2.0"
+ 222              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccfRkGug.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 tree_like_buddy.cpp
+     /tmp/ccfRkGug.s:11     .text:0000000000000000 _ZN13TreeLikeBuddyC2EPvm
+     /tmp/ccfRkGug.s:13     .text:0000000000000000 .L0 
+     /tmp/ccfRkGug.s:14     .text:0000000000000000 $x
+     /tmp/ccfRkGug.s:15     .text:0000000000000004 .L0 
+     /tmp/ccfRkGug.s:22     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:23     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:24     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:25     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:26     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:27     .text:000000000000001c .L0 
+     /tmp/ccfRkGug.s:29     .text:0000000000000020 .L0 
+     /tmp/ccfRkGug.s:88     .text:0000000000000108 .L0 
+     /tmp/ccfRkGug.s:90     .text:000000000000010c .L0 
+     /tmp/ccfRkGug.s:91     .text:000000000000010c .L0 
+     /tmp/ccfRkGug.s:93     .text:0000000000000110 .L0 
+     /tmp/ccfRkGug.s:95     .text:0000000000000114 .L0 
+     /tmp/ccfRkGug.s:97     .text:0000000000000118 .L0 
+     /tmp/ccfRkGug.s:99     .text:000000000000011c .L0 
+     /tmp/ccfRkGug.s:101    .text:0000000000000120 .L0 
+     /tmp/ccfRkGug.s:103    .text:0000000000000124 .L0 
+     /tmp/ccfRkGug.s:11     .text:0000000000000000 _ZN13TreeLikeBuddyC1EPvm
+     /tmp/ccfRkGug.s:140    .text:0000000000000124 _ZN13TreeLikeBuddy12status_printEv
+     /tmp/ccfRkGug.s:142    .text:0000000000000124 .L0 
+     /tmp/ccfRkGug.s:144    .text:0000000000000128 .L0 
+     /tmp/ccfRkGug.s:148    .text:0000000000000134 .L0 
+     /tmp/ccfRkGug.s:149    .text:0000000000000134 .L0 
+     /tmp/ccfRkGug.s:150    .text:0000000000000134 .L0 
+     /tmp/ccfRkGug.s:152    .text:0000000000000138 .L0 
+     /tmp/ccfRkGug.s:190    .text:000000000000022c .L0 
+     /tmp/ccfRkGug.s:191    .text:000000000000022c .L0 
+     /tmp/ccfRkGug.s:193    .text:0000000000000230 .L0 
+     /tmp/ccfRkGug.s:194    .text:0000000000000230 .L0 
+     /tmp/ccfRkGug.s:196    .text:0000000000000234 .L0 
+     /tmp/ccfRkGug.s:198    .text:0000000000000238 .L0 
+     /tmp/ccfRkGug.s:201    .text:000000000000023c .L0 
+     /tmp/ccfRkGug.s:205    .text:0000000000000250 .L0 
+     /tmp/ccfRkGug.s:219    .bss:0000000000000008 _ZN13TreeLikeBuddy18BLOCK_SIZE_BIT_LENE
+     /tmp/ccfRkGug.s:215    .bss:0000000000000000 _ZN13TreeLikeBuddy5buddyE
+     /tmp/ccfRkGug.s:212    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccfRkGug.s:153    .text:0000000000000138 .L0 
+     /tmp/ccfRkGug.s:113    .rodata.str1.8:0000000000000018 .LC1
+     /tmp/ccfRkGug.s:156    .text:0000000000000148 .L0 
+     /tmp/ccfRkGug.s:116    .rodata.str1.8:0000000000000038 .LC2
+     /tmp/ccfRkGug.s:158    .text:0000000000000158 .L0 
+     /tmp/ccfRkGug.s:162    .text:0000000000000170 .L0 
+     /tmp/ccfRkGug.s:119    .rodata.str1.8:0000000000000040 .LC3
+     /tmp/ccfRkGug.s:164    .text:0000000000000180 .L0 
+     /tmp/ccfRkGug.s:122    .rodata.str1.8:0000000000000048 .LC4
+     /tmp/ccfRkGug.s:166    .text:0000000000000190 .L0 
+     /tmp/ccfRkGug.s:172    .text:00000000000001b4 .L0 
+     /tmp/ccfRkGug.s:125    .rodata.str1.8:0000000000000058 .LC5
+     /tmp/ccfRkGug.s:174    .text:00000000000001c4 .L0 
+     /tmp/ccfRkGug.s:180    .text:00000000000001e8 .L0 
+     /tmp/ccfRkGug.s:128    .rodata.str1.8:0000000000000060 .LC6
+     /tmp/ccfRkGug.s:182    .text:00000000000001f8 .L0 
+GAS LISTING /tmp/ccfRkGug.s 			page 7
+
+
+     /tmp/ccfRkGug.s:131    .rodata.str1.8:0000000000000080 .LC7
+     /tmp/ccfRkGug.s:184    .text:0000000000000208 .L0 
+     /tmp/ccfRkGug.s:134    .rodata.str1.8:00000000000000a0 .LC8
+     /tmp/ccfRkGug.s:186    .text:0000000000000218 .L0 
+     /tmp/ccfRkGug.s:110    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccfRkGug.s:202    .text:000000000000023c .L0 
+     /tmp/ccfRkGug.s:59     .text:0000000000000098 .L2
+     /tmp/ccfRkGug.s:45     .text:0000000000000068 .L4
+     /tmp/ccfRkGug.s:79     .text:00000000000000e8 .L7
+     /tmp/ccfRkGug.s:52     .text:0000000000000080 .L3
+     /tmp/ccfRkGug.s:200    .text:000000000000023c .L12
+     /tmp/ccfRkGug.s:188    .text:0000000000000228 .L8
+
+UNDEFINED SYMBOLS
+_Z4log2m
+_ZN7NoAlloc9mem_allocEm
+_Z12kprintStringPKc
+_Z9kprintIntmib

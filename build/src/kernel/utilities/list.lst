@@ -1,0 +1,153 @@
+GAS LISTING /tmp/ccKKI9zz.s 			page 1
+
+
+   1              		.file	"list.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN6list_tC2EPS_S0_
+  11              	_ZN6list_tC2EPS_S0_:
+  12              	.LFB114:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 2330B500 		sd	a1,0(a0)
+  21 0010 2334C500 		sd	a2,8(a0)
+  22 0014 03348100 		ld	s0,8(sp)
+  23              		.cfi_restore 8
+  24              		.cfi_def_cfa 2, 16
+  25 0018 13010101 		addi	sp,sp,16
+  26              		.cfi_def_cfa_offset 0
+  27 001c 67800000 		jr	ra
+  28              		.cfi_endproc
+  29              	.LFE114:
+  31              		.globl	_ZN6list_tC1EPS_S0_
+  32              		.set	_ZN6list_tC1EPS_S0_,_ZN6list_tC2EPS_S0_
+  33              		.align	2
+  34              		.globl	_Z6removeP6list_t
+  36              	_Z6removeP6list_t:
+  37              	.LFB116:
+  38              		.cfi_startproc
+  39 0020 130101FF 		addi	sp,sp,-16
+  40              		.cfi_def_cfa_offset 16
+  41 0024 23348100 		sd	s0,8(sp)
+  42              		.cfi_offset 8, -8
+  43 0028 13040101 		addi	s0,sp,16
+  44              		.cfi_def_cfa 8, 0
+  45 002c 93070500 		mv	a5,a0
+  46 0030 63080502 		beq	a0,zero,.L3
+  47 0034 03370500 		ld	a4,0(a0)
+  48 0038 63060700 		beq	a4,zero,.L5
+  49 003c 83368500 		ld	a3,8(a0)
+  50 0040 2334D700 		sd	a3,8(a4)
+  51              	.L5:
+  52 0044 03B78700 		ld	a4,8(a5)
+  53 0048 63060700 		beq	a4,zero,.L6
+  54 004c 83B60700 		ld	a3,0(a5)
+  55 0050 2330D700 		sd	a3,0(a4)
+  56              	.L6:
+  57 0054 03B50700 		ld	a0,0(a5)
+  58 0058 23B00700 		sd	zero,0(a5)
+  59 005c 23B40700 		sd	zero,8(a5)
+  60              	.L3:
+GAS LISTING /tmp/ccKKI9zz.s 			page 2
+
+
+  61 0060 03348100 		ld	s0,8(sp)
+  62              		.cfi_restore 8
+  63              		.cfi_def_cfa 2, 16
+  64 0064 13010101 		addi	sp,sp,16
+  65              		.cfi_def_cfa_offset 0
+  66 0068 67800000 		jr	ra
+  67              		.cfi_endproc
+  68              	.LFE116:
+  70              		.align	2
+  71              		.globl	_Z6insertP6list_tS0_
+  73              	_Z6insertP6list_tS0_:
+  74              	.LFB117:
+  75              		.cfi_startproc
+  76 006c 130101FF 		addi	sp,sp,-16
+  77              		.cfi_def_cfa_offset 16
+  78 0070 23348100 		sd	s0,8(sp)
+  79              		.cfi_offset 8, -8
+  80 0074 13040101 		addi	s0,sp,16
+  81              		.cfi_def_cfa 8, 0
+  82 0078 630A0502 		beq	a0,zero,.L12
+  83 007c 23300500 		sd	zero,0(a0)
+  84 0080 23340500 		sd	zero,8(a0)
+  85 0084 2330B500 		sd	a1,0(a0)
+  86 0088 638C0500 		beq	a1,zero,.L10
+  87 008c 83B78500 		ld	a5,8(a1)
+  88 0090 2334F500 		sd	a5,8(a0)
+  89 0094 63840700 		beq	a5,zero,.L11
+  90 0098 23B0A700 		sd	a0,0(a5)
+  91              	.L11:
+  92 009c 23B4A500 		sd	a0,8(a1)
+  93              	.L10:
+  94 00a0 03348100 		ld	s0,8(sp)
+  95              		.cfi_remember_state
+  96              		.cfi_restore 8
+  97              		.cfi_def_cfa 2, 16
+  98 00a4 13010101 		addi	sp,sp,16
+  99              		.cfi_def_cfa_offset 0
+ 100 00a8 67800000 		jr	ra
+ 101              	.L12:
+ 102              		.cfi_restore_state
+ 103 00ac 13850500 		mv	a0,a1
+ 104 00b0 6FF01FFF 		j	.L10
+ 105              		.cfi_endproc
+ 106              	.LFE117:
+ 108              		.ident	"GCC: (GNU) 12.2.0"
+ 109              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccKKI9zz.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 list.cpp
+     /tmp/ccKKI9zz.s:11     .text:0000000000000000 _ZN6list_tC2EPS_S0_
+     /tmp/ccKKI9zz.s:13     .text:0000000000000000 .L0 
+     /tmp/ccKKI9zz.s:14     .text:0000000000000000 $x
+     /tmp/ccKKI9zz.s:15     .text:0000000000000004 .L0 
+     /tmp/ccKKI9zz.s:17     .text:0000000000000008 .L0 
+     /tmp/ccKKI9zz.s:19     .text:000000000000000c .L0 
+     /tmp/ccKKI9zz.s:23     .text:0000000000000018 .L0 
+     /tmp/ccKKI9zz.s:24     .text:0000000000000018 .L0 
+     /tmp/ccKKI9zz.s:26     .text:000000000000001c .L0 
+     /tmp/ccKKI9zz.s:28     .text:0000000000000020 .L0 
+     /tmp/ccKKI9zz.s:11     .text:0000000000000000 _ZN6list_tC1EPS_S0_
+     /tmp/ccKKI9zz.s:36     .text:0000000000000020 _Z6removeP6list_t
+     /tmp/ccKKI9zz.s:38     .text:0000000000000020 .L0 
+     /tmp/ccKKI9zz.s:40     .text:0000000000000024 .L0 
+     /tmp/ccKKI9zz.s:42     .text:0000000000000028 .L0 
+     /tmp/ccKKI9zz.s:44     .text:000000000000002c .L0 
+     /tmp/ccKKI9zz.s:62     .text:0000000000000064 .L0 
+     /tmp/ccKKI9zz.s:63     .text:0000000000000064 .L0 
+     /tmp/ccKKI9zz.s:65     .text:0000000000000068 .L0 
+     /tmp/ccKKI9zz.s:67     .text:000000000000006c .L0 
+     /tmp/ccKKI9zz.s:73     .text:000000000000006c _Z6insertP6list_tS0_
+     /tmp/ccKKI9zz.s:75     .text:000000000000006c .L0 
+     /tmp/ccKKI9zz.s:77     .text:0000000000000070 .L0 
+     /tmp/ccKKI9zz.s:79     .text:0000000000000074 .L0 
+     /tmp/ccKKI9zz.s:81     .text:0000000000000078 .L0 
+     /tmp/ccKKI9zz.s:95     .text:00000000000000a4 .L0 
+     /tmp/ccKKI9zz.s:96     .text:00000000000000a4 .L0 
+     /tmp/ccKKI9zz.s:97     .text:00000000000000a4 .L0 
+     /tmp/ccKKI9zz.s:99     .text:00000000000000a8 .L0 
+     /tmp/ccKKI9zz.s:102    .text:00000000000000ac .L0 
+     /tmp/ccKKI9zz.s:105    .text:00000000000000b4 .L0 
+     /tmp/ccKKI9zz.s:60     .text:0000000000000060 .L3
+     /tmp/ccKKI9zz.s:51     .text:0000000000000044 .L5
+     /tmp/ccKKI9zz.s:56     .text:0000000000000054 .L6
+     /tmp/ccKKI9zz.s:101    .text:00000000000000ac .L12
+     /tmp/ccKKI9zz.s:93     .text:00000000000000a0 .L10
+     /tmp/ccKKI9zz.s:91     .text:000000000000009c .L11
+
+NO UNDEFINED SYMBOLS

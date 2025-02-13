@@ -1,0 +1,527 @@
+GAS LISTING /tmp/cc4gEDbw.s 			page 1
+
+
+   1              		.file	"main.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 0A4B4552 		.string	"\nKERNEL FAILED TO INITALIZE!!!!\n\n"
+  11      4E454C20 
+  11      4641494C 
+  11      45442054 
+  11      4F20494E 
+  12 0022 00000000 		.align	3
+  12      0000
+  13              	.LC1:
+  14 0028 53746172 		.string	"Starting User Process\n"
+  14      74696E67 
+  14      20557365 
+  14      72205072 
+  14      6F636573 
+  15 003f 00       		.align	3
+  16              	.LC2:
+  17 0040 53524543 		.string	"SRECNA NOVA GODINAAAA!!!!!\n\n"
+  17      4E41204E 
+  17      4F564120 
+  17      474F4449 
+  17      4E414141 
+  18              		.text
+  19              		.align	2
+  20              		.globl	_Z13oldKernelMainv
+  22              	_Z13oldKernelMainv:
+  23              	.LFB113:
+  24              		.cfi_startproc
+  25 0000 130101FD 		addi	sp,sp,-48
+  26              		.cfi_def_cfa_offset 48
+  27 0004 23341102 		sd	ra,40(sp)
+  28 0008 23308102 		sd	s0,32(sp)
+  29 000c 233C9100 		sd	s1,24(sp)
+  30              		.cfi_offset 1, -8
+  31              		.cfi_offset 8, -16
+  32              		.cfi_offset 9, -24
+  33 0010 13040103 		addi	s0,sp,48
+  34              		.cfi_def_cfa 8, 0
+  35              	#APP
+  36              	# 9 "src/kernel/core/main.cpp" 1
+   1              	#include"../../../h/kernel_lib.h"
+   2              	#include"../../../h/kernel_test.h"
+   3              	
+   4              	
+   5              	extern "C" void kTestMain();
+   6              	
+   7              	int oldKernelMain(){
+   8              	    uint64 ra, sp;
+   9 0014 13850000 	    asm volatile("mv %0, ra" : "=r" (ra));
+GAS LISTING /tmp/cc4gEDbw.s 			page 2
+
+
+  10              	    asm volatile("mv %0, sp" : "=r" (sp));
+  37              		mv a0, ra
+  38              	# 0 "" 2
+  39              	# 10 "src/kernel/core/main.cpp" 1
+  11              	    TCB::setPanicContext(ra,sp);
+  40              		mv a1, sp
+  41              	# 0 "" 2
+  42              	#NO_APP
+  43 001c 97000000 		call	_ZN3TCB15setPanicContextEmm@plt
+  43      E7800000 
+  44 0024 97000000 		call	_Z10kernelInitv@plt
+  44      E7800000 
+  45 002c 634A0504 		blt	a0,zero,.L5
+  46              	#APP
+  47              	# 220 "src/kernel/core/../../../h/../h/riscv.hpp" 1
+   1              	#ifndef __riscv__
+   2              	#define __riscv__
+   3              	
+   4              	#include"../lib/hw.h"
+   5              	
+   6              	class Riscv{
+   7              	public:
+   8              	/* 
+   9              	--------------------SUPERVISOR REGISTERS--------------------    
+  10              	*/
+  11              	    static void w_scause(uint64);
+  12              	    static uint64 r_scause(); 
+  13              	
+  14              	    static void w_sepc(uint64);
+  15              	    static uint64 r_sepc();
+  16              	    static void ni_sepc();
+  17              	
+  18              	    static void w_stvec(uint64);
+  19              	    static uint64 r_stvec();
+  20              	     
+  21              	    static void w_stval(uint64);
+  22              	    static uint64 r_stval();
+  23              	
+  24              	    static void w_satp(uint64);
+  25              	    static uint64 r_satp();
+  26              	    
+  27              	    enum BitMaskSip{
+  28              	        SIP_SSIE = (1<<1),
+  29              	        SIP_STIE = (1<<5),
+  30              	        SIP_SEIE = (1<<9),
+  31              	    };
+  32              	
+  33              	    static void ms_sip(uint64);
+  34              	    static void mc_sip(uint64);
+  35              	
+  36              	    static void w_sip(uint64);
+  37              	    static uint64 r_sip();
+  38              	
+  39              	    static void ms_sie(uint64);
+  40              	    static void mc_sie(uint64);
+  41              	
+  42              	    static void w_sie(uint64);
+GAS LISTING /tmp/cc4gEDbw.s 			page 3
+
+
+  43              	    static uint64 r_sie();
+  44              	
+  45              	    enum BitMaskSstatus{
+  46              	        SSTATUS_SIE = (1<<1),
+  47              	        SSTATUS_SPIE = (1<<5),
+  48              	        SSTATUS_SPP = (1<<8),
+  49              	        SSTATUS_SUM = (1<<18),
+  50              	    };
+  51              	
+  52              	    static void ms_sstatus(uint64);
+  53              	    static void mc_sstatus(uint64);
+  54              	
+  55              	    static void w_sstatus(uint64);
+  56              	    static uint64 r_sstatus();
+  57              	
+  58              	/* 
+  59              	--------------------CLASSIC REGISTERS--------------------    
+  60              	*/
+  61              	    static uint64 r_sp();
+  62              	    static uint64 r_a0(); /* parameter registers */
+  63              	    static uint64 s_a0(uint64 a0);
+  64              	    static uint64 r_a1();
+  65              	    static uint64 r_a2();
+  66              	    static uint64 r_a3();
+  67              	    static uint64 r_a4();
+  68              	
+  69              	    static void popRegisters(); /* pop all context registers */
+  70              	    static void pushRegisters(); /* push all context registers */
+  71              	 
+  72              	    static void popSppSpie(); /* jump from kernel to start of thread */
+  73              	
+  74              	/* 
+  75              	--------------------CONSOLE REGISTERS--------------------    
+  76              	*/
+  77              	    static void mc_cstatus(uint64 mask); 
+  78              	    static bool cstatus_ready(uint64 mask);
+  79              	};
+  80              	
+  81              	/* 
+  82              	--------------------CLASSIC REGISTERS--------------------    
+  83              	*/
+  84              	
+  85              	inline uint64 Riscv::r_sp(){
+  86              	    uint64 a0;
+  87              	    asm volatile("mv %0, sp" : "=r" (a0));
+  88              	    return a0;
+  89              	}
+  90              	
+  91              	inline uint64 Riscv::r_a0(){
+  92              	    uint64 a0;
+  93              	    asm volatile("mv %0, a0" : "=r" (a0));
+  94              	    return a0;
+  95              	}
+  96              	
+  97              	inline uint64 Riscv::r_a1(){
+  98              	    uint64 a0;
+  99              	    asm volatile("mv %0, a1" : "=r" (a0));
+GAS LISTING /tmp/cc4gEDbw.s 			page 4
+
+
+ 100              	    return a0;
+ 101              	}
+ 102              	
+ 103              	inline uint64 Riscv::r_a2(){
+ 104              	    uint64 a0;
+ 105              	    asm volatile("mv %0, a2" : "=r" (a0));
+ 106              	    return a0;
+ 107              	}
+ 108              	
+ 109              	inline uint64 Riscv::r_a3(){
+ 110              	    uint64 a0;
+ 111              	    asm volatile("mv %0, a3" : "=r" (a0));
+ 112              	    return a0;
+ 113              	}
+ 114              	
+ 115              	inline uint64 Riscv::r_a4(){
+ 116              	    uint64 a0;
+ 117              	    asm volatile("mv %0, a4" : "=r" (a0));
+ 118              	    return a0;
+ 119              	}
+ 120              	
+ 121              	
+ 122              	inline uint64 Riscv::s_a0(uint64 a0){
+ 123              	    return a0;
+ 124              	}
+ 125              	
+ 126              	/* 
+ 127              	--------------------SUPERVISOR REGISTERS--------------------    
+ 128              	*/
+ 129              	
+ 130              	inline void Riscv::w_scause(uint64 scause){
+ 131              	    asm volatile("csrw scause, %0" : : "r" (scause));
+ 132              	}
+ 133              	
+ 134              	inline uint64 Riscv::r_scause(){
+ 135              	    uint64 volatile scause;
+ 136              	    asm volatile("csrr %0, scause" : "=r" (scause));
+ 137              	    return scause;
+ 138              	} 
+ 139              	
+ 140              	inline void Riscv::w_sepc(uint64 sepc){
+ 141              	    asm volatile("csrw sepc, %0" : : "r" (sepc));
+ 142              	}
+ 143              	
+ 144              	inline uint64 Riscv::r_sepc(){
+ 145              	    uint64 volatile sepc;
+ 146              	    asm volatile("csrr %0, sepc" : "=r" (sepc));
+ 147              	    return sepc;
+ 148              	} 
+ 149              	
+ 150              	inline void Riscv::w_stvec(uint64 stvec){
+ 151              	    asm volatile("csrw stvec, %0" : : "r" (stvec));
+ 152              	}
+ 153              	
+ 154              	inline uint64 Riscv::r_stvec(){
+ 155              	    uint64 volatile stvec;
+ 156              	    asm volatile("csrr %0, stvec" : "=r" (stvec));
+GAS LISTING /tmp/cc4gEDbw.s 			page 5
+
+
+ 157              	    return stvec;
+ 158              	} 
+ 159              	
+ 160              	inline void Riscv::w_stval(uint64 stval){
+ 161              	    asm volatile("csrw stval, %0" : : "r" (stval));
+ 162              	}
+ 163              	
+ 164              	inline uint64 Riscv::r_stval(){
+ 165              	    uint64 volatile stval;
+ 166              	    asm volatile("csrr %0, stval" : "=r" (stval));
+ 167              	    return stval;
+ 168              	} 
+ 169              	
+ 170              	inline void Riscv::ms_sip(uint64 mask){
+ 171              	    asm volatile ("csrs sip, %0" : : "r" (mask));
+ 172              	}
+ 173              	
+ 174              	inline void Riscv::mc_sip(uint64 mask){
+ 175              	    asm volatile ("csrc sip, %0" : : "r" (mask));
+ 176              	}
+ 177              	
+ 178              	inline void Riscv::w_sip(uint64 sip){
+ 179              	    asm volatile("csrw sip, %0" : : "r" (sip));
+ 180              	}
+ 181              	
+ 182              	inline uint64 Riscv::r_sip(){
+ 183              	    uint64 volatile sip;
+ 184              	    asm volatile("csrr %0, sip" : "=r" (sip));
+ 185              	    return sip;
+ 186              	} 
+ 187              	
+ 188              	inline void Riscv::ms_sie(uint64 mask){
+ 189              	    asm volatile ("csrs sie, %0" : : "r" (mask));
+ 190              	}
+ 191              	
+ 192              	inline void Riscv::mc_sie(uint64 mask){
+ 193              	    asm volatile ("csrc sie, %0" : : "r" (mask));
+ 194              	}
+ 195              	
+ 196              	inline void Riscv::w_sie(uint64 sie){
+ 197              	    asm volatile("csrw sie, %0" : : "r" (sie));
+ 198              	}
+ 199              	
+ 200              	inline uint64 Riscv::r_sie(){
+ 201              	    uint64 volatile sie;
+ 202              	    asm volatile("csrr %0, sie" : "=r" (sie));
+ 203              	    return sie;
+ 204              	} 
+ 205              	
+ 206              	inline void Riscv::ms_sstatus(uint64 mask){
+ 207              	    asm volatile ("csrs sstatus, %0" : : "r" (mask));
+ 208              	}
+ 209              	
+ 210              	inline void Riscv::mc_sstatus(uint64 mask){
+ 211              	    asm volatile ("csrc sstatus, %0" : : "r" (mask));
+ 212              	}
+ 213              	
+GAS LISTING /tmp/cc4gEDbw.s 			page 6
+
+
+ 214              	inline void Riscv::w_sstatus(uint64 sstatus){
+ 215              	    asm volatile("csrw sstatus, %0" : : "r" (sstatus));
+ 216              	}
+ 217              	
+ 218              	inline uint64 Riscv::r_sstatus(){
+ 219              	    uint64 volatile sstatus;
+ 220 0030 F3270010 	    asm volatile("csrr %0, sstatus" : "=r" (sstatus));
+ 221              	    return sstatus;
+  48              		csrr a5, sstatus
+  49              	# 0 "" 2
+  50              	#NO_APP
+  51 0034 233CF4FC 		sd	a5,-40(s0)
+  52 0038 833484FD 		ld	s1,-40(s0)
+  53 003c 17050000 		lla	a0,.LC1
+  53      13050500 
+  54 0044 97000000 		call	_Z12kprintStringPKc@plt
+  54      E7800000 
+  55 004c 97000000 		call	_ZN3TCB5yieldEv@plt
+  55      E7800000 
+  56              	#APP
+  57              	# 215 "src/kernel/core/../../../h/../h/riscv.hpp" 1
+  58              		csrw sstatus, s1
+  59              	# 0 "" 2
+  60              	#NO_APP
+  61 0058 17050000 		lla	a0,.LC2
+  61      13050500 
+  62 0060 97000000 		call	_Z12kprintStringPKc@plt
+  62      E7800000 
+  63 0068 13050000 		li	a0,0
+  64              	.L3:
+  65 006c 83308102 		ld	ra,40(sp)
+  66              		.cfi_remember_state
+  67              		.cfi_restore 1
+  68 0070 03340102 		ld	s0,32(sp)
+  69              		.cfi_restore 8
+  70              		.cfi_def_cfa 2, 48
+  71 0074 83348101 		ld	s1,24(sp)
+  72              		.cfi_restore 9
+  73 0078 13010103 		addi	sp,sp,48
+  74              		.cfi_def_cfa_offset 0
+  75 007c 67800000 		jr	ra
+  76              	.L5:
+  77              		.cfi_restore_state
+  78 0080 17050000 		lla	a0,.LC0
+  78      13050500 
+  79 0088 97000000 		call	_Z12kprintStringPKc@plt
+  79      E7800000 
+  80 0090 1305F0FF 		li	a0,-1
+  81 0094 6FF09FFD 		j	.L3
+  82              		.cfi_endproc
+  83              	.LFE113:
+  85              		.align	2
+  86              		.globl	_Z13newKernelMainv
+  88              	_Z13newKernelMainv:
+  89              	.LFB114:
+  90              		.cfi_startproc
+  91 0098 130101FF 		addi	sp,sp,-16
+GAS LISTING /tmp/cc4gEDbw.s 			page 7
+
+
+  92              		.cfi_def_cfa_offset 16
+  93 009c 23341100 		sd	ra,8(sp)
+  94 00a0 23308100 		sd	s0,0(sp)
+  95              		.cfi_offset 1, -8
+  96              		.cfi_offset 8, -16
+  97 00a4 13040101 		addi	s0,sp,16
+  98              		.cfi_def_cfa 8, 0
+  99              	#APP
+ 100              	# 34 "src/kernel/core/main.cpp" 1
+  12              	
+  13              	    int panic = kernelInit();
+  14              	    if(panic < 0){
+  15              	        kprintString("\nKERNEL FAILED TO INITALIZE!!!!\n\n");
+  16              	        return -1;
+  17              	    }
+  18              	   
+  19              	    // kTestMain(); // This function is for testing the kernel itself (Slab and Buddy Allocator KER
+  20              	
+  21              	    uint64 sstatus = Riscv::r_sstatus();
+  22              	    kprintString("Starting User Process\n");
+  23              	    TCB::yield();
+  24              	    Riscv::w_sstatus(sstatus);
+  25              	    
+  26              	
+  27              	    kprintString("SRECNA NOVA GODINAAAA!!!!!\n\n");
+  28              	    //kprintString("\n\nKERNEL ENDED SUCCESSFULLY!\n\n");
+  29              	    return 0;
+  30              	}
+  31              	
+  32              	int newKernelMain(){
+  33              	    uint64 ra, sp;
+  34 00a8 13850000 	    asm volatile("mv %0, ra" : "=r" (ra));
+  35              	    asm volatile("mv %0, sp" : "=r" (sp));
+ 101              		mv a0, ra
+ 102              	# 0 "" 2
+ 103              	# 35 "src/kernel/core/main.cpp" 1
+  36              	    TCB::setPanicContext(ra,sp);
+ 104              		mv a1, sp
+ 105              	# 0 "" 2
+ 106              	#NO_APP
+ 107 00b0 97000000 		call	_ZN3TCB15setPanicContextEmm@plt
+ 107      E7800000 
+ 108 00b8 97000000 		call	_Z10kernelInitv@plt
+ 108      E7800000 
+ 109 00c0 63400502 		blt	a0,zero,.L10
+ 110 00c4 97000000 		call	kTestMain@plt
+ 110      E7800000 
+ 111 00cc 13050000 		li	a0,0
+ 112              	.L8:
+ 113 00d0 83308100 		ld	ra,8(sp)
+ 114              		.cfi_remember_state
+ 115              		.cfi_restore 1
+ 116 00d4 03340100 		ld	s0,0(sp)
+ 117              		.cfi_restore 8
+ 118              		.cfi_def_cfa 2, 16
+ 119 00d8 13010101 		addi	sp,sp,16
+ 120              		.cfi_def_cfa_offset 0
+GAS LISTING /tmp/cc4gEDbw.s 			page 8
+
+
+ 121 00dc 67800000 		jr	ra
+ 122              	.L10:
+ 123              		.cfi_restore_state
+ 124 00e0 17050000 		lla	a0,.LC0
+ 124      13050500 
+ 125 00e8 97000000 		call	_Z12kprintStringPKc@plt
+ 125      E7800000 
+ 126 00f0 1305F0FF 		li	a0,-1
+ 127 00f4 6FF0DFFD 		j	.L8
+ 128              		.cfi_endproc
+ 129              	.LFE114:
+ 131              		.align	2
+ 132              		.globl	main
+ 134              	main:
+ 135              	.LFB115:
+ 136              		.cfi_startproc
+ 137 00f8 130101FF 		addi	sp,sp,-16
+ 138              		.cfi_def_cfa_offset 16
+ 139 00fc 23341100 		sd	ra,8(sp)
+ 140 0100 23308100 		sd	s0,0(sp)
+ 141              		.cfi_offset 1, -8
+ 142              		.cfi_offset 8, -16
+ 143 0104 13040101 		addi	s0,sp,16
+ 144              		.cfi_def_cfa 8, 0
+ 145 0108 97000000 		call	_Z13oldKernelMainv
+ 145      E7800000 
+ 146 0110 83308100 		ld	ra,8(sp)
+ 147              		.cfi_restore 1
+ 148 0114 03340100 		ld	s0,0(sp)
+ 149              		.cfi_restore 8
+ 150              		.cfi_def_cfa 2, 16
+ 151 0118 13010101 		addi	sp,sp,16
+ 152              		.cfi_def_cfa_offset 0
+ 153 011c 67800000 		jr	ra
+ 154              		.cfi_endproc
+ 155              	.LFE115:
+ 157              		.ident	"GCC: (GNU) 12.2.0"
+ 158              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cc4gEDbw.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 main.cpp
+     /tmp/cc4gEDbw.s:22     .text:0000000000000000 _Z13oldKernelMainv
+     /tmp/cc4gEDbw.s:24     .text:0000000000000000 .L0 
+     /tmp/cc4gEDbw.s:25     .text:0000000000000000 $x
+     /tmp/cc4gEDbw.s:26     .text:0000000000000004 .L0 
+     /tmp/cc4gEDbw.s:30     .text:0000000000000010 .L0 
+     /tmp/cc4gEDbw.s:31     .text:0000000000000010 .L0 
+     /tmp/cc4gEDbw.s:32     .text:0000000000000010 .L0 
+     /tmp/cc4gEDbw.s:34     .text:0000000000000014 .L0 
+     /tmp/cc4gEDbw.s:66     .text:0000000000000070 .L0 
+     /tmp/cc4gEDbw.s:67     .text:0000000000000070 .L0 
+     /tmp/cc4gEDbw.s:69     .text:0000000000000074 .L0 
+     /tmp/cc4gEDbw.s:70     .text:0000000000000074 .L0 
+     /tmp/cc4gEDbw.s:72     .text:0000000000000078 .L0 
+     /tmp/cc4gEDbw.s:74     .text:000000000000007c .L0 
+     /tmp/cc4gEDbw.s:77     .text:0000000000000080 .L0 
+     /tmp/cc4gEDbw.s:82     .text:0000000000000098 .L0 
+     /tmp/cc4gEDbw.s:88     .text:0000000000000098 _Z13newKernelMainv
+     /tmp/cc4gEDbw.s:90     .text:0000000000000098 .L0 
+     /tmp/cc4gEDbw.s:92     .text:000000000000009c .L0 
+     /tmp/cc4gEDbw.s:95     .text:00000000000000a4 .L0 
+     /tmp/cc4gEDbw.s:96     .text:00000000000000a4 .L0 
+     /tmp/cc4gEDbw.s:98     .text:00000000000000a8 .L0 
+     /tmp/cc4gEDbw.s:114    .text:00000000000000d4 .L0 
+     /tmp/cc4gEDbw.s:115    .text:00000000000000d4 .L0 
+     /tmp/cc4gEDbw.s:117    .text:00000000000000d8 .L0 
+     /tmp/cc4gEDbw.s:118    .text:00000000000000d8 .L0 
+     /tmp/cc4gEDbw.s:120    .text:00000000000000dc .L0 
+     /tmp/cc4gEDbw.s:123    .text:00000000000000e0 .L0 
+     /tmp/cc4gEDbw.s:128    .text:00000000000000f8 .L0 
+     /tmp/cc4gEDbw.s:134    .text:00000000000000f8 main
+     /tmp/cc4gEDbw.s:136    .text:00000000000000f8 .L0 
+     /tmp/cc4gEDbw.s:138    .text:00000000000000fc .L0 
+     /tmp/cc4gEDbw.s:141    .text:0000000000000104 .L0 
+     /tmp/cc4gEDbw.s:142    .text:0000000000000104 .L0 
+     /tmp/cc4gEDbw.s:144    .text:0000000000000108 .L0 
+     /tmp/cc4gEDbw.s:147    .text:0000000000000114 .L0 
+     /tmp/cc4gEDbw.s:149    .text:0000000000000118 .L0 
+     /tmp/cc4gEDbw.s:150    .text:0000000000000118 .L0 
+     /tmp/cc4gEDbw.s:152    .text:000000000000011c .L0 
+     /tmp/cc4gEDbw.s:154    .text:0000000000000120 .L0 
+     /tmp/cc4gEDbw.s:13     .rodata.str1.8:0000000000000028 .LC1
+     /tmp/cc4gEDbw.s:53     .text:000000000000003c .L0 
+     /tmp/cc4gEDbw.s:16     .rodata.str1.8:0000000000000040 .LC2
+     /tmp/cc4gEDbw.s:61     .text:0000000000000058 .L0 
+     /tmp/cc4gEDbw.s:10     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cc4gEDbw.s:78     .text:0000000000000080 .L0 
+     /tmp/cc4gEDbw.s:124    .text:00000000000000e0 .L0 
+     /tmp/cc4gEDbw.s:76     .text:0000000000000080 .L5
+     /tmp/cc4gEDbw.s:64     .text:000000000000006c .L3
+     /tmp/cc4gEDbw.s:122    .text:00000000000000e0 .L10
+     /tmp/cc4gEDbw.s:112    .text:00000000000000d0 .L8
+
+UNDEFINED SYMBOLS
+_ZN3TCB15setPanicContextEmm
+_Z10kernelInitv
+GAS LISTING /tmp/cc4gEDbw.s 			page 10
+
+
+_Z12kprintStringPKc
+_ZN3TCB5yieldEv
+kTestMain

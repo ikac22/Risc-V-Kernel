@@ -1,0 +1,11 @@
+services:
+  kernel-gdb:
+    image: kernel-gdb 
+    build: .
+    volumes:
+      - ./Multi-thread-kernel:/app
+    ports:
+      - 25000:25000
+    stdin_open: true
+    tty: true
+

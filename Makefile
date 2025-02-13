@@ -39,11 +39,11 @@ LD      = ${TOOLPREFIX}ld
 OBJCOPY = ${TOOLPREFIX}objcopy
 OBJDUMP = ${TOOLPREFIX}objdump
 
-ASFLAGS = -ggdb -march=rv64ima -mabi=lp64
+ASFLAGS =  -march=rv64ima_zicsr -mabi=lp64 #-ggdb
 
-CFLAGS  = -Wall -Werror -Og -ggdb
+CFLAGS  = -Wall -Werror -Og # -ggdb
 CFLAGS += -nostdlib
-CFLAGS += -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax
+CFLAGS += -march=rv64ima_zicsr -mabi=lp64 -mcmodel=medany -mno-relax
 CFLAGS += -fno-omit-frame-pointer -ffreestanding -fno-common
 CFLAGS += $(shell ${CC} -fno-stack-protector -E -x c /dev/null >/dev/null 2>&1 && echo -fno-stack-protector)
 CFLAGS += ${DEBUG_FLAG}
@@ -58,9 +58,9 @@ ifneq ($(shell ${CC} -dumpspecs 2>/dev/null | grep -e '[^f]nopie'),)
 CFLAGS += -fno-pie -nopie
 endif
 
-CXXFLAGS  = -Wall -Werror -Og -ggdb
+CXXFLAGS  = -Wall -Werror -Og # -ggdb
 CXXFLAGS += -nostdlib -std=c++11
-CXXFLAGS += -march=rv64ima -mabi=lp64 -mcmodel=medany -mno-relax
+CXXFLAGS += -march=rv64ima_zicsr -mabi=lp64 -mcmodel=medany -mno-relax
 CXXFLAGS += -fno-omit-frame-pointer -ffreestanding -fno-common
 CXXFLAGS += -fno-rtti -fno-threadsafe-statics -fcheck-new
 #CXXFLAGS += -I./${DIR_LIBS} -I./${DIR_INC}

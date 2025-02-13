@@ -1,0 +1,788 @@
+GAS LISTING /tmp/cc2xYG5H.s 			page 1
+
+
+   1              		.file	"slab_allocator.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 6F626A63 		.string	"objcache_cache"
+  11      61636865 
+  11      5F636163 
+  11      686500
+  12 000f 00       		.align	3
+  13              	.LC1:
+  14 0010 736C6162 		.string	"slab_meta_cache"
+  14      5F6D6574 
+  14      615F6361 
+  14      63686500 
+  15              		.text
+  16              		.align	2
+  17              		.globl	_ZN13SlabAllocatorC2Ev
+  19              	_ZN13SlabAllocatorC2Ev:
+  20              	.LFB117:
+  21              		.cfi_startproc
+  22              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  23              		.cfi_lsda 0x1b,.LLSDA117
+  24 0000 130101F6 		addi	sp,sp,-160
+  25              		.cfi_def_cfa_offset 160
+  26 0004 233C1108 		sd	ra,152(sp)
+  27 0008 23388108 		sd	s0,144(sp)
+  28 000c 23349108 		sd	s1,136(sp)
+  29 0010 23302109 		sd	s2,128(sp)
+  30 0014 233C3107 		sd	s3,120(sp)
+  31 0018 23384107 		sd	s4,112(sp)
+  32 001c 23345107 		sd	s5,104(sp)
+  33              		.cfi_offset 1, -8
+  34              		.cfi_offset 8, -16
+  35              		.cfi_offset 9, -24
+  36              		.cfi_offset 18, -32
+  37              		.cfi_offset 19, -40
+  38              		.cfi_offset 20, -48
+  39              		.cfi_offset 21, -56
+  40 0020 1304010A 		addi	s0,sp,160
+  41              		.cfi_def_cfa 8, 0
+  42 0024 93090500 		mv	s3,a0
+  43 0028 93070000 		li	a5,0
+  44 002c 13070000 		li	a4,0
+  45 0030 93060000 		li	a3,0
+  46 0034 13068005 		li	a2,88
+  47 0038 97050000 		lla	a1,.LC0
+  47      93850500 
+  48              	.LEHB0:
+  49 0040 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+  49      E7800000 
+  50              	.LEHE0:
+GAS LISTING /tmp/cc2xYG5H.s 			page 2
+
+
+  51 0048 938A8905 		addi	s5,s3,88
+  52 004c 93072000 		li	a5,2
+  53 0050 13070000 		li	a4,0
+  54 0054 93060000 		li	a3,0
+  55 0058 1306800B 		li	a2,184
+  56 005c 97050000 		lla	a1,.LC1
+  56      93850500 
+  57 0064 13850A00 		mv	a0,s5
+  58              	.LEHB1:
+  59 0068 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+  59      E7800000 
+  60              	.LEHE1:
+  61 0070 138A090B 		addi	s4,s3,176
+  62 0074 13090A00 		mv	s2,s4
+  63 0078 9304C000 		li	s1,12
+  64 007c 6F00C000 		j	.L2
+  65              	.L20:
+  66 0080 9384F4FF 		addi	s1,s1,-1
+  67 0084 13098905 		addi	s2,s2,88
+  68              	.L2:
+  69 0088 63CE0400 		blt	s1,zero,.L19
+  70 008c 13060000 		li	a2,0
+  71 0090 93050000 		li	a1,0
+  72 0094 13058903 		addi	a0,s2,56
+  73              	.LEHB2:
+  74 0098 97000000 		call	_ZN6list_tC1EPS_S0_@plt
+  74      E7800000 
+  75              	.LEHE2:
+  76 00a0 6FF01FFE 		j	.L20
+  77              	.L19:
+  78 00a4 13095000 		li	s2,5
+  79 00a8 6F008007 		j	.L4
+  80              	.L22:
+  81 00ac 93078005 		li	a5,88
+  82 00b0 B387F402 		mul	a5,s1,a5
+  83 00b4 B387F900 		add	a5,s3,a5
+  84 00b8 033784F6 		ld	a4,-152(s0)
+  85 00bc 23B8E70A 		sd	a4,176(a5)
+  86 00c0 033704F7 		ld	a4,-144(s0)
+  87 00c4 23BCE70A 		sd	a4,184(a5)
+  88 00c8 033784F7 		ld	a4,-136(s0)
+  89 00cc 23B0E70C 		sd	a4,192(a5)
+  90 00d0 033704F8 		ld	a4,-128(s0)
+  91 00d4 23B4E70C 		sd	a4,200(a5)
+  92 00d8 033784F8 		ld	a4,-120(s0)
+  93 00dc 23B8E70C 		sd	a4,208(a5)
+  94 00e0 033704F9 		ld	a4,-112(s0)
+  95 00e4 23BCE70C 		sd	a4,216(a5)
+  96 00e8 033784F9 		ld	a4,-104(s0)
+  97 00ec 23B0E70E 		sd	a4,224(a5)
+  98 00f0 033704FA 		ld	a4,-96(s0)
+  99 00f4 23B4E70E 		sd	a4,232(a5)
+ 100 00f8 033784FA 		ld	a4,-88(s0)
+ 101 00fc 23B8E70E 		sd	a4,240(a5)
+ 102 0100 033704FB 		ld	a4,-80(s0)
+ 103 0104 23BCE70E 		sd	a4,248(a5)
+ 104 0108 033784FB 		ld	a4,-72(s0)
+GAS LISTING /tmp/cc2xYG5H.s 			page 3
+
+
+ 105 010c 23B0E710 		sd	a4,256(a5)
+ 106 0110 130584F6 		addi	a0,s0,-152
+ 107 0114 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 107      E7800000 
+ 108 011c 1B091900 		addiw	s2,s2,1
+ 109              	.L4:
+ 110 0120 93071001 		li	a5,17
+ 111 0124 63C2270D 		bgt	s2,a5,.L21
+ 112 0128 9B04B9FF 		addiw	s1,s2,-5
+ 113 012c 93973400 		slli	a5,s1,3
+ 114 0130 97050000 		lla	a1,.LANCHOR0
+ 114      93850500 
+ 115 0138 B385F500 		add	a1,a1,a5
+ 116 013c 93074000 		li	a5,4
+ 117 0140 13070000 		li	a4,0
+ 118 0144 93060000 		li	a3,0
+ 119 0148 13061000 		li	a2,1
+ 120 014c 3B162601 		sllw	a2,a2,s2
+ 121 0150 83B50500 		ld	a1,0(a1)
+ 122 0154 130584F6 		addi	a0,s0,-152
+ 123              	.LEHB3:
+ 124 0158 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+ 124      E7800000 
+ 125              	.LEHE3:
+ 126 0160 6FF0DFF4 		j	.L22
+ 127              	.L15:
+ 128 0164 13090500 		mv	s2,a0
+ 129 0168 63080A02 		beq	s4,zero,.L7
+ 130 016c 9307C000 		li	a5,12
+ 131 0170 B3849740 		sub	s1,a5,s1
+ 132 0174 93078005 		li	a5,88
+ 133 0178 B384F402 		mul	s1,s1,a5
+ 134 017c B3049A00 		add	s1,s4,s1
+ 135              	.L8:
+ 136 0180 638C4401 		beq	s1,s4,.L7
+ 137 0184 938484FA 		addi	s1,s1,-88
+ 138 0188 13850400 		mv	a0,s1
+ 139 018c 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 139      E7800000 
+ 140 0194 6FF0DFFE 		j	.L8
+ 141              	.L7:
+ 142 0198 93040900 		mv	s1,s2
+ 143              	.L9:
+ 144 019c 13850A00 		mv	a0,s5
+ 145 01a0 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 145      E7800000 
+ 146              	.L13:
+ 147 01a8 13850900 		mv	a0,s3
+ 148 01ac 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 148      E7800000 
+ 149 01b4 13850400 		mv	a0,s1
+ 150              	.LEHB4:
+ 151 01b8 97000000 		call	_Unwind_Resume@plt
+ 151      E7800000 
+ 152              	.LEHE4:
+ 153              	.L16:
+ 154 01c0 93040500 		mv	s1,a0
+GAS LISTING /tmp/cc2xYG5H.s 			page 4
+
+
+ 155 01c4 13898952 		addi	s2,s3,1320
+ 156              	.L12:
+ 157 01c8 E30A49FD 		beq	s2,s4,.L9
+ 158 01cc 130989FA 		addi	s2,s2,-88
+ 159 01d0 13050900 		mv	a0,s2
+ 160 01d4 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 160      E7800000 
+ 161 01dc 6FF0DFFE 		j	.L12
+ 162              	.L14:
+ 163 01e0 93040500 		mv	s1,a0
+ 164 01e4 6FF05FFC 		j	.L13
+ 165              	.L21:
+ 166 01e8 83308109 		ld	ra,152(sp)
+ 167              		.cfi_restore 1
+ 168 01ec 03340109 		ld	s0,144(sp)
+ 169              		.cfi_restore 8
+ 170              		.cfi_def_cfa 2, 160
+ 171 01f0 83348108 		ld	s1,136(sp)
+ 172              		.cfi_restore 9
+ 173 01f4 03390108 		ld	s2,128(sp)
+ 174              		.cfi_restore 18
+ 175 01f8 83398107 		ld	s3,120(sp)
+ 176              		.cfi_restore 19
+ 177 01fc 033A0107 		ld	s4,112(sp)
+ 178              		.cfi_restore 20
+ 179 0200 833A8106 		ld	s5,104(sp)
+ 180              		.cfi_restore 21
+ 181 0204 1301010A 		addi	sp,sp,160
+ 182              		.cfi_def_cfa_offset 0
+ 183 0208 67800000 		jr	ra
+ 184              		.cfi_endproc
+ 185              	.LFE117:
+ 186              		.globl	__gxx_personality_v0
+ 187              		.section	.gcc_except_table,"a",@progbits
+ 188              	.LLSDA117:
+ 189 0000 FF       		.byte	0xff
+ 190 0001 FF       		.byte	0xff
+ 191 0002 03       		.byte	0x3
+ 192 0003 41       		.byte	0x41
+ 193 0004 00000000 		.4byte	.LEHB0-.LFB117
+ 194 0008 00000000 		.4byte	.LEHE0-.LEHB0
+ 195 000c 00000000 		.4byte	0
+ 196 0010 00       		.byte	0
+ 197 0011 00000000 		.4byte	.LEHB1-.LFB117
+ 198 0015 00000000 		.4byte	.LEHE1-.LEHB1
+ 199 0019 00000000 		.4byte	.L14-.LFB117
+ 200 001d 00       		.byte	0
+ 201 001e 00000000 		.4byte	.LEHB2-.LFB117
+ 202 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 203 0026 00000000 		.4byte	.L15-.LFB117
+ 204 002a 00       		.byte	0
+ 205 002b 00000000 		.4byte	.LEHB3-.LFB117
+ 206 002f 00000000 		.4byte	.LEHE3-.LEHB3
+ 207 0033 00000000 		.4byte	.L16-.LFB117
+ 208 0037 00       		.byte	0
+ 209 0038 00000000 		.4byte	.LEHB4-.LFB117
+ 210 003c 00000000 		.4byte	.LEHE4-.LEHB4
+GAS LISTING /tmp/cc2xYG5H.s 			page 5
+
+
+ 211 0040 00000000 		.4byte	0
+ 212 0044 00       		.byte	0
+ 213              		.text
+ 215              		.globl	_ZN13SlabAllocatorC1Ev
+ 216              		.set	_ZN13SlabAllocatorC1Ev,_ZN13SlabAllocatorC2Ev
+ 217              		.align	2
+ 218              		.globl	_ZN13SlabAllocator11getInstanceEv
+ 220              	_ZN13SlabAllocator11getInstanceEv:
+ 221              	.LFB119:
+ 222              		.cfi_startproc
+ 223 020c 97070000 		ld	a5,.LANCHOR1
+ 223      83B70700 
+ 224 0214 63880700 		beq	a5,zero,.L30
+ 225 0218 17050000 		ld	a0,.LANCHOR1
+ 225      03350500 
+ 226 0220 67800000 		ret
+ 227              	.L30:
+ 228 0224 130101FE 		addi	sp,sp,-32
+ 229              		.cfi_def_cfa_offset 32
+ 230 0228 233C1100 		sd	ra,24(sp)
+ 231 022c 23388100 		sd	s0,16(sp)
+ 232 0230 23349100 		sd	s1,8(sp)
+ 233              		.cfi_offset 1, -8
+ 234              		.cfi_offset 8, -16
+ 235              		.cfi_offset 9, -24
+ 236 0234 13040102 		addi	s0,sp,32
+ 237              		.cfi_def_cfa 8, 0
+ 238 0238 13050053 		li	a0,1328
+ 239 023c 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 239      E7800000 
+ 240 0244 93040500 		mv	s1,a0
+ 241 0248 63060500 		beq	a0,zero,.L25
+ 242 024c 97000000 		call	_ZN13SlabAllocatorC1Ev
+ 242      E7800000 
+ 243              	.L25:
+ 244 0254 97070000 		sd	s1,.LANCHOR1,a5
+ 244      23B09700 
+ 245 025c 17050000 		ld	a0,.LANCHOR1
+ 245      03350500 
+ 246 0264 83308101 		ld	ra,24(sp)
+ 247              		.cfi_restore 1
+ 248 0268 03340101 		ld	s0,16(sp)
+ 249              		.cfi_restore 8
+ 250              		.cfi_def_cfa 2, 32
+ 251 026c 83348100 		ld	s1,8(sp)
+ 252              		.cfi_restore 9
+ 253 0270 13010102 		addi	sp,sp,32
+ 254              		.cfi_def_cfa_offset 0
+ 255 0274 67800000 		jr	ra
+ 256              		.cfi_endproc
+ 257              	.LFE119:
+ 259              		.align	2
+ 260              		.globl	_ZN13SlabAllocator11print_stateEc
+ 262              	_ZN13SlabAllocator11print_stateEc:
+ 263              	.LFB120:
+ 264              		.cfi_startproc
+ 265 0278 130101FD 		addi	sp,sp,-48
+GAS LISTING /tmp/cc2xYG5H.s 			page 6
+
+
+ 266              		.cfi_def_cfa_offset 48
+ 267 027c 23341102 		sd	ra,40(sp)
+ 268 0280 23308102 		sd	s0,32(sp)
+ 269 0284 233C9100 		sd	s1,24(sp)
+ 270 0288 23382101 		sd	s2,16(sp)
+ 271 028c 23343101 		sd	s3,8(sp)
+ 272              		.cfi_offset 1, -8
+ 273              		.cfi_offset 8, -16
+ 274              		.cfi_offset 9, -24
+ 275              		.cfi_offset 18, -32
+ 276              		.cfi_offset 19, -40
+ 277 0290 13040103 		addi	s0,sp,48
+ 278              		.cfi_def_cfa 8, 0
+ 279 0294 13090500 		mv	s2,a0
+ 280 0298 93890500 		mv	s3,a1
+ 281 029c 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 281      E7800000 
+ 282 02a4 93850900 		mv	a1,s3
+ 283 02a8 13058905 		addi	a0,s2,88
+ 284 02ac 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 284      E7800000 
+ 285 02b4 93045000 		li	s1,5
+ 286 02b8 6F008002 		j	.L32
+ 287              	.L33:
+ 288 02bc 1B85B4FF 		addiw	a0,s1,-5
+ 289 02c0 93078005 		li	a5,88
+ 290 02c4 3305F502 		mul	a0,a0,a5
+ 291 02c8 1305050B 		addi	a0,a0,176
+ 292 02cc 93850900 		mv	a1,s3
+ 293 02d0 3305A900 		add	a0,s2,a0
+ 294 02d4 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 294      E7800000 
+ 295 02dc 9B841400 		addiw	s1,s1,1
+ 296              	.L32:
+ 297 02e0 93071001 		li	a5,17
+ 298 02e4 E3DC97FC 		ble	s1,a5,.L33
+ 299 02e8 83308102 		ld	ra,40(sp)
+ 300              		.cfi_restore 1
+ 301 02ec 03340102 		ld	s0,32(sp)
+ 302              		.cfi_restore 8
+ 303              		.cfi_def_cfa 2, 48
+ 304 02f0 83348101 		ld	s1,24(sp)
+ 305              		.cfi_restore 9
+ 306 02f4 03390101 		ld	s2,16(sp)
+ 307              		.cfi_restore 18
+ 308 02f8 83398100 		ld	s3,8(sp)
+ 309              		.cfi_restore 19
+ 310 02fc 13010103 		addi	sp,sp,48
+ 311              		.cfi_def_cfa_offset 0
+ 312 0300 67800000 		jr	ra
+ 313              		.cfi_endproc
+ 314              	.LFE120:
+ 316              		.align	2
+ 317              		.globl	_ZN13SlabAllocator7kmallocEm
+ 319              	_ZN13SlabAllocator7kmallocEm:
+ 320              	.LFB121:
+ 321              		.cfi_startproc
+GAS LISTING /tmp/cc2xYG5H.s 			page 7
+
+
+ 322 0304 638A0506 		beq	a1,zero,.L38
+ 323 0308 130101FE 		addi	sp,sp,-32
+ 324              		.cfi_def_cfa_offset 32
+ 325 030c 233C1100 		sd	ra,24(sp)
+ 326 0310 23388100 		sd	s0,16(sp)
+ 327 0314 23349100 		sd	s1,8(sp)
+ 328              		.cfi_offset 1, -8
+ 329              		.cfi_offset 8, -16
+ 330              		.cfi_offset 9, -24
+ 331 0318 13040102 		addi	s0,sp,32
+ 332              		.cfi_def_cfa 8, 0
+ 333 031c 93040500 		mv	s1,a0
+ 334 0320 1385F5FF 		addi	a0,a1,-1
+ 335 0324 97000000 		call	_Z4log2m@plt
+ 335      E7800000 
+ 336 032c 9B071500 		addiw	a5,a0,1
+ 337 0330 93F7F70F 		andi	a5,a5,0xff
+ 338 0334 13071001 		li	a4,17
+ 339 0338 6364F704 		bgtu	a5,a4,.L39
+ 340 033c 13074000 		li	a4,4
+ 341 0340 6364F700 		bgtu	a5,a4,.L37
+ 342 0344 93075000 		li	a5,5
+ 343              	.L37:
+ 344 0348 9B87B7FF 		addiw	a5,a5,-5
+ 345 034c 13078005 		li	a4,88
+ 346 0350 B387E702 		mul	a5,a5,a4
+ 347 0354 9387070B 		addi	a5,a5,176
+ 348 0358 3385F400 		add	a0,s1,a5
+ 349 035c 97000000 		call	_ZN11ObjectCache9alloc_objEv@plt
+ 349      E7800000 
+ 350              	.L35:
+ 351 0364 83308101 		ld	ra,24(sp)
+ 352              		.cfi_restore 1
+ 353 0368 03340101 		ld	s0,16(sp)
+ 354              		.cfi_restore 8
+ 355              		.cfi_def_cfa 2, 32
+ 356 036c 83348100 		ld	s1,8(sp)
+ 357              		.cfi_restore 9
+ 358 0370 13010102 		addi	sp,sp,32
+ 359              		.cfi_def_cfa_offset 0
+ 360 0374 67800000 		jr	ra
+ 361              	.L38:
+ 362 0378 13050000 		li	a0,0
+ 363 037c 67800000 		ret
+ 364              	.L39:
+ 365              		.cfi_def_cfa_register 8
+ 366              		.cfi_offset 1, -8
+ 367              		.cfi_offset 8, -16
+ 368              		.cfi_offset 9, -24
+ 369 0380 13050000 		li	a0,0
+ 370 0384 6FF01FFE 		j	.L35
+ 371              		.cfi_endproc
+ 372              	.LFE121:
+ 374              		.align	2
+ 375              		.globl	_ZN13SlabAllocator5kfreeEPv
+ 377              	_ZN13SlabAllocator5kfreeEPv:
+ 378              	.LFB122:
+GAS LISTING /tmp/cc2xYG5H.s 			page 8
+
+
+ 379              		.cfi_startproc
+ 380 0388 130101FD 		addi	sp,sp,-48
+ 381              		.cfi_def_cfa_offset 48
+ 382 038c 23341102 		sd	ra,40(sp)
+ 383 0390 23308102 		sd	s0,32(sp)
+ 384 0394 233C9100 		sd	s1,24(sp)
+ 385 0398 23382101 		sd	s2,16(sp)
+ 386 039c 23343101 		sd	s3,8(sp)
+ 387 03a0 23304101 		sd	s4,0(sp)
+ 388              		.cfi_offset 1, -8
+ 389              		.cfi_offset 8, -16
+ 390              		.cfi_offset 9, -24
+ 391              		.cfi_offset 18, -32
+ 392              		.cfi_offset 19, -40
+ 393              		.cfi_offset 20, -48
+ 394 03a4 13040103 		addi	s0,sp,48
+ 395              		.cfi_def_cfa 8, 0
+ 396 03a8 138A0500 		mv	s4,a1
+ 397 03ac 1309050B 		addi	s2,a0,176
+ 398 03b0 93098552 		addi	s3,a0,1320
+ 399              	.L46:
+ 400 03b4 630A3903 		beq	s2,s3,.L51
+ 401 03b8 93050A00 		mv	a1,s4
+ 402 03bc 13050900 		mv	a0,s2
+ 403 03c0 97000000 		call	_ZN11ObjectCache8free_objEPv@plt
+ 403      E7800000 
+ 404 03c8 93040500 		mv	s1,a0
+ 405 03cc 63060500 		beq	a0,zero,.L52
+ 406 03d0 13098905 		addi	s2,s2,88
+ 407 03d4 6FF01FFE 		j	.L46
+ 408              	.L52:
+ 409 03d8 13050900 		mv	a0,s2
+ 410 03dc 97000000 		call	_ZN11ObjectCache6shrinkEv@plt
+ 410      E7800000 
+ 411 03e4 6F008000 		j	.L48
+ 412              	.L51:
+ 413 03e8 93041000 		li	s1,1
+ 414              	.L48:
+ 415 03ec 13850400 		mv	a0,s1
+ 416 03f0 83308102 		ld	ra,40(sp)
+ 417              		.cfi_restore 1
+ 418 03f4 03340102 		ld	s0,32(sp)
+ 419              		.cfi_restore 8
+ 420              		.cfi_def_cfa 2, 48
+ 421 03f8 83348101 		ld	s1,24(sp)
+ 422              		.cfi_restore 9
+ 423 03fc 03390101 		ld	s2,16(sp)
+ 424              		.cfi_restore 18
+ 425 0400 83398100 		ld	s3,8(sp)
+ 426              		.cfi_restore 19
+ 427 0404 033A0100 		ld	s4,0(sp)
+ 428              		.cfi_restore 20
+ 429 0408 13010103 		addi	sp,sp,48
+ 430              		.cfi_def_cfa_offset 0
+ 431 040c 67800000 		jr	ra
+ 432              		.cfi_endproc
+ 433              	.LFE122:
+GAS LISTING /tmp/cc2xYG5H.s 			page 9
+
+
+ 435              		.globl	_ZN13SlabAllocator16buff_cache_namesE
+ 436              		.section	.rodata.str1.8
+ 437              		.align	3
+ 438              	.LC2:
+ 439 0020 736D625F 		.string	"smb_cache_5"
+ 439      63616368 
+ 439      655F3500 
+ 440 002c 00000000 		.align	3
+ 441              	.LC3:
+ 442 0030 736D625F 		.string	"smb_cache_6"
+ 442      63616368 
+ 442      655F3600 
+ 443 003c 00000000 		.align	3
+ 444              	.LC4:
+ 445 0040 736D625F 		.string	"smb_cache_7"
+ 445      63616368 
+ 445      655F3700 
+ 446 004c 00000000 		.align	3
+ 447              	.LC5:
+ 448 0050 736D625F 		.string	"smb_cache_8"
+ 448      63616368 
+ 448      655F3800 
+ 449 005c 00000000 		.align	3
+ 450              	.LC6:
+ 451 0060 736D625F 		.string	"smb_cache_9"
+ 451      63616368 
+ 451      655F3900 
+ 452 006c 00000000 		.align	3
+ 453              	.LC7:
+ 454 0070 736D625F 		.string	"smb_cache_10"
+ 454      63616368 
+ 454      655F3130 
+ 454      00
+ 455 007d 000000   		.align	3
+ 456              	.LC8:
+ 457 0080 736D625F 		.string	"smb_cache_11"
+ 457      63616368 
+ 457      655F3131 
+ 457      00
+ 458 008d 000000   		.align	3
+ 459              	.LC9:
+ 460 0090 736D625F 		.string	"smb_cache_12"
+ 460      63616368 
+ 460      655F3132 
+ 460      00
+ 461 009d 000000   		.align	3
+ 462              	.LC10:
+ 463 00a0 736D625F 		.string	"smb_cache_13"
+ 463      63616368 
+ 463      655F3133 
+ 463      00
+ 464 00ad 000000   		.align	3
+ 465              	.LC11:
+ 466 00b0 736D625F 		.string	"smb_cache_14"
+ 466      63616368 
+ 466      655F3134 
+ 466      00
+GAS LISTING /tmp/cc2xYG5H.s 			page 10
+
+
+ 467 00bd 000000   		.align	3
+ 468              	.LC12:
+ 469 00c0 736D625F 		.string	"smb_cache_15"
+ 469      63616368 
+ 469      655F3135 
+ 469      00
+ 470 00cd 000000   		.align	3
+ 471              	.LC13:
+ 472 00d0 736D625F 		.string	"smb_cache_16"
+ 472      63616368 
+ 472      655F3136 
+ 472      00
+ 473 00dd 000000   		.align	3
+ 474              	.LC14:
+ 475 00e0 736D625F 		.string	"smb_cache_17"
+ 475      63616368 
+ 475      655F3137 
+ 475      00
+ 476              		.globl	_ZN13SlabAllocator9allocatorE
+ 477              		.bss
+ 478              		.align	3
+ 479              		.set	.LANCHOR1,. + 0
+ 482              	_ZN13SlabAllocator9allocatorE:
+ 483 0000 00000000 		.zero	8
+ 483      00000000 
+ 484              		.section	.data.rel.local,"aw"
+ 485              		.align	3
+ 486              		.set	.LANCHOR0,. + 0
+ 489              	_ZN13SlabAllocator16buff_cache_namesE:
+ 490 0000 00000000 		.dword	.LC2
+ 490      00000000 
+ 491 0008 00000000 		.dword	.LC3
+ 491      00000000 
+ 492 0010 00000000 		.dword	.LC4
+ 492      00000000 
+ 493 0018 00000000 		.dword	.LC5
+ 493      00000000 
+ 494 0020 00000000 		.dword	.LC6
+ 494      00000000 
+ 495 0028 00000000 		.dword	.LC7
+ 495      00000000 
+ 496 0030 00000000 		.dword	.LC8
+ 496      00000000 
+ 497 0038 00000000 		.dword	.LC9
+ 497      00000000 
+ 498 0040 00000000 		.dword	.LC10
+ 498      00000000 
+ 499 0048 00000000 		.dword	.LC11
+ 499      00000000 
+ 500 0050 00000000 		.dword	.LC12
+ 500      00000000 
+ 501 0058 00000000 		.dword	.LC13
+ 501      00000000 
+ 502 0060 00000000 		.dword	.LC14
+ 502      00000000 
+ 503              		.hidden	DW.ref.__gxx_personality_v0
+ 504              		.weak	DW.ref.__gxx_personality_v0
+GAS LISTING /tmp/cc2xYG5H.s 			page 11
+
+
+ 505              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 506              		.align	3
+ 509              	DW.ref.__gxx_personality_v0:
+ 510 0000 00000000 		.dword	__gxx_personality_v0
+ 510      00000000 
+ 511              		.ident	"GCC: (GNU) 12.2.0"
+ 512              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cc2xYG5H.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 slab_allocator.cpp
+     /tmp/cc2xYG5H.s:19     .text:0000000000000000 _ZN13SlabAllocatorC2Ev
+     /tmp/cc2xYG5H.s:21     .text:0000000000000000 .L0 
+     /tmp/cc2xYG5H.s:509    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/cc2xYG5H.s:24     .text:0000000000000000 $x
+     /tmp/cc2xYG5H.s:25     .text:0000000000000004 .L0 
+     /tmp/cc2xYG5H.s:33     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:34     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:35     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:36     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:37     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:38     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:39     .text:0000000000000020 .L0 
+     /tmp/cc2xYG5H.s:41     .text:0000000000000024 .L0 
+     /tmp/cc2xYG5H.s:167    .text:00000000000001ec .L0 
+     /tmp/cc2xYG5H.s:169    .text:00000000000001f0 .L0 
+     /tmp/cc2xYG5H.s:170    .text:00000000000001f0 .L0 
+     /tmp/cc2xYG5H.s:172    .text:00000000000001f4 .L0 
+     /tmp/cc2xYG5H.s:174    .text:00000000000001f8 .L0 
+     /tmp/cc2xYG5H.s:176    .text:00000000000001fc .L0 
+     /tmp/cc2xYG5H.s:178    .text:0000000000000200 .L0 
+     /tmp/cc2xYG5H.s:180    .text:0000000000000204 .L0 
+     /tmp/cc2xYG5H.s:182    .text:0000000000000208 .L0 
+     /tmp/cc2xYG5H.s:184    .text:000000000000020c .L0 
+     /tmp/cc2xYG5H.s:19     .text:0000000000000000 _ZN13SlabAllocatorC1Ev
+     /tmp/cc2xYG5H.s:220    .text:000000000000020c _ZN13SlabAllocator11getInstanceEv
+     /tmp/cc2xYG5H.s:222    .text:000000000000020c .L0 
+     /tmp/cc2xYG5H.s:229    .text:0000000000000228 .L0 
+     /tmp/cc2xYG5H.s:233    .text:0000000000000234 .L0 
+     /tmp/cc2xYG5H.s:234    .text:0000000000000234 .L0 
+     /tmp/cc2xYG5H.s:235    .text:0000000000000234 .L0 
+     /tmp/cc2xYG5H.s:237    .text:0000000000000238 .L0 
+     /tmp/cc2xYG5H.s:247    .text:0000000000000268 .L0 
+     /tmp/cc2xYG5H.s:249    .text:000000000000026c .L0 
+     /tmp/cc2xYG5H.s:250    .text:000000000000026c .L0 
+     /tmp/cc2xYG5H.s:252    .text:0000000000000270 .L0 
+     /tmp/cc2xYG5H.s:254    .text:0000000000000274 .L0 
+     /tmp/cc2xYG5H.s:256    .text:0000000000000278 .L0 
+     /tmp/cc2xYG5H.s:262    .text:0000000000000278 _ZN13SlabAllocator11print_stateEc
+     /tmp/cc2xYG5H.s:264    .text:0000000000000278 .L0 
+     /tmp/cc2xYG5H.s:266    .text:000000000000027c .L0 
+     /tmp/cc2xYG5H.s:272    .text:0000000000000290 .L0 
+     /tmp/cc2xYG5H.s:273    .text:0000000000000290 .L0 
+     /tmp/cc2xYG5H.s:274    .text:0000000000000290 .L0 
+     /tmp/cc2xYG5H.s:275    .text:0000000000000290 .L0 
+     /tmp/cc2xYG5H.s:276    .text:0000000000000290 .L0 
+     /tmp/cc2xYG5H.s:278    .text:0000000000000294 .L0 
+     /tmp/cc2xYG5H.s:300    .text:00000000000002ec .L0 
+     /tmp/cc2xYG5H.s:302    .text:00000000000002f0 .L0 
+     /tmp/cc2xYG5H.s:303    .text:00000000000002f0 .L0 
+     /tmp/cc2xYG5H.s:305    .text:00000000000002f4 .L0 
+     /tmp/cc2xYG5H.s:307    .text:00000000000002f8 .L0 
+     /tmp/cc2xYG5H.s:309    .text:00000000000002fc .L0 
+     /tmp/cc2xYG5H.s:311    .text:0000000000000300 .L0 
+     /tmp/cc2xYG5H.s:313    .text:0000000000000304 .L0 
+     /tmp/cc2xYG5H.s:319    .text:0000000000000304 _ZN13SlabAllocator7kmallocEm
+GAS LISTING /tmp/cc2xYG5H.s 			page 13
+
+
+     /tmp/cc2xYG5H.s:321    .text:0000000000000304 .L0 
+     /tmp/cc2xYG5H.s:324    .text:000000000000030c .L0 
+     /tmp/cc2xYG5H.s:328    .text:0000000000000318 .L0 
+     /tmp/cc2xYG5H.s:329    .text:0000000000000318 .L0 
+     /tmp/cc2xYG5H.s:330    .text:0000000000000318 .L0 
+     /tmp/cc2xYG5H.s:332    .text:000000000000031c .L0 
+     /tmp/cc2xYG5H.s:352    .text:0000000000000368 .L0 
+     /tmp/cc2xYG5H.s:354    .text:000000000000036c .L0 
+     /tmp/cc2xYG5H.s:355    .text:000000000000036c .L0 
+     /tmp/cc2xYG5H.s:357    .text:0000000000000370 .L0 
+     /tmp/cc2xYG5H.s:359    .text:0000000000000374 .L0 
+     /tmp/cc2xYG5H.s:365    .text:0000000000000380 .L0 
+     /tmp/cc2xYG5H.s:366    .text:0000000000000380 .L0 
+     /tmp/cc2xYG5H.s:367    .text:0000000000000380 .L0 
+     /tmp/cc2xYG5H.s:368    .text:0000000000000380 .L0 
+     /tmp/cc2xYG5H.s:371    .text:0000000000000388 .L0 
+     /tmp/cc2xYG5H.s:377    .text:0000000000000388 _ZN13SlabAllocator5kfreeEPv
+     /tmp/cc2xYG5H.s:379    .text:0000000000000388 .L0 
+     /tmp/cc2xYG5H.s:381    .text:000000000000038c .L0 
+     /tmp/cc2xYG5H.s:388    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:389    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:390    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:391    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:392    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:393    .text:00000000000003a4 .L0 
+     /tmp/cc2xYG5H.s:395    .text:00000000000003a8 .L0 
+     /tmp/cc2xYG5H.s:417    .text:00000000000003f4 .L0 
+     /tmp/cc2xYG5H.s:419    .text:00000000000003f8 .L0 
+     /tmp/cc2xYG5H.s:420    .text:00000000000003f8 .L0 
+     /tmp/cc2xYG5H.s:422    .text:00000000000003fc .L0 
+     /tmp/cc2xYG5H.s:424    .text:0000000000000400 .L0 
+     /tmp/cc2xYG5H.s:426    .text:0000000000000404 .L0 
+     /tmp/cc2xYG5H.s:428    .text:0000000000000408 .L0 
+     /tmp/cc2xYG5H.s:430    .text:000000000000040c .L0 
+     /tmp/cc2xYG5H.s:432    .text:0000000000000410 .L0 
+     /tmp/cc2xYG5H.s:489    .data.rel.local:0000000000000000 _ZN13SlabAllocator16buff_cache_namesE
+     /tmp/cc2xYG5H.s:482    .bss:0000000000000000 _ZN13SlabAllocator9allocatorE
+     /tmp/cc2xYG5H.s:479    .bss:0000000000000000 .LANCHOR1
+     /tmp/cc2xYG5H.s:486    .data.rel.local:0000000000000000 .LANCHOR0
+     /tmp/cc2xYG5H.s:10     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cc2xYG5H.s:47     .text:0000000000000038 .L0 
+     /tmp/cc2xYG5H.s:13     .rodata.str1.8:0000000000000010 .LC1
+     /tmp/cc2xYG5H.s:56     .text:000000000000005c .L0 
+     /tmp/cc2xYG5H.s:114    .text:0000000000000130 .L0 
+     /tmp/cc2xYG5H.s:223    .text:000000000000020c .L0 
+     /tmp/cc2xYG5H.s:225    .text:0000000000000218 .L0 
+     /tmp/cc2xYG5H.s:244    .text:0000000000000254 .L0 
+     /tmp/cc2xYG5H.s:245    .text:000000000000025c .L0 
+     /tmp/cc2xYG5H.s:68     .text:0000000000000088 .L2
+     /tmp/cc2xYG5H.s:77     .text:00000000000000a4 .L19
+     /tmp/cc2xYG5H.s:65     .text:0000000000000080 .L20
+     /tmp/cc2xYG5H.s:109    .text:0000000000000120 .L4
+     /tmp/cc2xYG5H.s:165    .text:00000000000001e8 .L21
+     /tmp/cc2xYG5H.s:80     .text:00000000000000ac .L22
+     /tmp/cc2xYG5H.s:141    .text:0000000000000198 .L7
+     /tmp/cc2xYG5H.s:135    .text:0000000000000180 .L8
+     /tmp/cc2xYG5H.s:143    .text:000000000000019c .L9
+GAS LISTING /tmp/cc2xYG5H.s 			page 14
+
+
+     /tmp/cc2xYG5H.s:156    .text:00000000000001c8 .L12
+     /tmp/cc2xYG5H.s:146    .text:00000000000001a8 .L13
+     /tmp/cc2xYG5H.s:227    .text:0000000000000224 .L30
+     /tmp/cc2xYG5H.s:243    .text:0000000000000254 .L25
+     /tmp/cc2xYG5H.s:296    .text:00000000000002e0 .L32
+     /tmp/cc2xYG5H.s:287    .text:00000000000002bc .L33
+     /tmp/cc2xYG5H.s:361    .text:0000000000000378 .L38
+     /tmp/cc2xYG5H.s:364    .text:0000000000000380 .L39
+     /tmp/cc2xYG5H.s:343    .text:0000000000000348 .L37
+     /tmp/cc2xYG5H.s:350    .text:0000000000000364 .L35
+     /tmp/cc2xYG5H.s:412    .text:00000000000003e8 .L51
+     /tmp/cc2xYG5H.s:408    .text:00000000000003d8 .L52
+     /tmp/cc2xYG5H.s:399    .text:00000000000003b4 .L46
+     /tmp/cc2xYG5H.s:414    .text:00000000000003ec .L48
+     /tmp/cc2xYG5H.s:48     .text:0000000000000040 .LEHB0
+     /tmp/cc2xYG5H.s:20     .text:0000000000000000 .LFB117
+     /tmp/cc2xYG5H.s:50     .text:0000000000000048 .LEHE0
+     /tmp/cc2xYG5H.s:58     .text:0000000000000068 .LEHB1
+     /tmp/cc2xYG5H.s:60     .text:0000000000000070 .LEHE1
+     /tmp/cc2xYG5H.s:162    .text:00000000000001e0 .L14
+     /tmp/cc2xYG5H.s:73     .text:0000000000000098 .LEHB2
+     /tmp/cc2xYG5H.s:75     .text:00000000000000a0 .LEHE2
+     /tmp/cc2xYG5H.s:127    .text:0000000000000164 .L15
+     /tmp/cc2xYG5H.s:123    .text:0000000000000158 .LEHB3
+     /tmp/cc2xYG5H.s:125    .text:0000000000000160 .LEHE3
+     /tmp/cc2xYG5H.s:153    .text:00000000000001c0 .L16
+     /tmp/cc2xYG5H.s:150    .text:00000000000001b8 .LEHB4
+     /tmp/cc2xYG5H.s:152    .text:00000000000001c0 .LEHE4
+     /tmp/cc2xYG5H.s:438    .rodata.str1.8:0000000000000020 .LC2
+     /tmp/cc2xYG5H.s:441    .rodata.str1.8:0000000000000030 .LC3
+     /tmp/cc2xYG5H.s:444    .rodata.str1.8:0000000000000040 .LC4
+     /tmp/cc2xYG5H.s:447    .rodata.str1.8:0000000000000050 .LC5
+     /tmp/cc2xYG5H.s:450    .rodata.str1.8:0000000000000060 .LC6
+     /tmp/cc2xYG5H.s:453    .rodata.str1.8:0000000000000070 .LC7
+     /tmp/cc2xYG5H.s:456    .rodata.str1.8:0000000000000080 .LC8
+     /tmp/cc2xYG5H.s:459    .rodata.str1.8:0000000000000090 .LC9
+     /tmp/cc2xYG5H.s:462    .rodata.str1.8:00000000000000a0 .LC10
+     /tmp/cc2xYG5H.s:465    .rodata.str1.8:00000000000000b0 .LC11
+     /tmp/cc2xYG5H.s:468    .rodata.str1.8:00000000000000c0 .LC12
+     /tmp/cc2xYG5H.s:471    .rodata.str1.8:00000000000000d0 .LC13
+     /tmp/cc2xYG5H.s:474    .rodata.str1.8:00000000000000e0 .LC14
+     /tmp/cc2xYG5H.s:188    .gcc_except_table:0000000000000000 .LLSDA117
+
+UNDEFINED SYMBOLS
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN6list_tC1EPS_S0_
+_ZN11ObjectCacheD1Ev
+_Unwind_Resume
+__gxx_personality_v0
+_ZN7NoAlloc9mem_allocEm
+_ZN11ObjectCache9printInfoEc
+_Z4log2m
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCache8free_objEPv
+_ZN11ObjectCache6shrinkEv

@@ -1,0 +1,502 @@
+GAS LISTING /tmp/ccnggYS2.s 			page 1
+
+
+   1              		.file	"scheduler.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN9Scheduler3cmpEP3TCBS1_
+  11              	_ZN9Scheduler3cmpEP3TCBS1_:
+  12              	.LFB41:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 93070500 		mv	a5,a0
+  21 0010 83268500 		lw	a3,8(a0)
+  22 0014 03A78500 		lw	a4,8(a1)
+  23 0018 3B85E640 		subw	a0,a3,a4
+  24 001c 634A0500 		blt	a0,zero,.L2
+  25 0020 23B4A700 		sd	a0,8(a5)
+  26              	.L3:
+  27 0024 03348100 		ld	s0,8(sp)
+  28              		.cfi_remember_state
+  29              		.cfi_restore 8
+  30              		.cfi_def_cfa 2, 16
+  31 0028 13010101 		addi	sp,sp,16
+  32              		.cfi_def_cfa_offset 0
+  33 002c 67800000 		jr	ra
+  34              	.L2:
+  35              		.cfi_restore_state
+  36 0030 3B07D740 		subw	a4,a4,a3
+  37 0034 23B4E500 		sd	a4,8(a1)
+  38 0038 6FF0DFFE 		j	.L3
+  39              		.cfi_endproc
+  40              	.LFE41:
+  42              		.align	2
+  44              	_Z41__static_initialization_and_destruction_0ii:
+  45              	.LFB44:
+  46              		.cfi_startproc
+  47 003c 130101FF 		addi	sp,sp,-16
+  48              		.cfi_def_cfa_offset 16
+  49 0040 23348100 		sd	s0,8(sp)
+  50              		.cfi_offset 8, -8
+  51 0044 13040101 		addi	s0,sp,16
+  52              		.cfi_def_cfa 8, 0
+  53 0048 93071000 		li	a5,1
+  54 004c 6308F500 		beq	a0,a5,.L8
+  55              	.L5:
+  56 0050 03348100 		ld	s0,8(sp)
+  57              		.cfi_remember_state
+  58              		.cfi_restore 8
+  59              		.cfi_def_cfa 2, 16
+  60 0054 13010101 		addi	sp,sp,16
+GAS LISTING /tmp/ccnggYS2.s 			page 2
+
+
+  61              		.cfi_def_cfa_offset 0
+  62 0058 67800000 		jr	ra
+  63              	.L8:
+  64              		.cfi_restore_state
+  65 005c B7070100 		li	a5,65536
+  66 0060 9387F7FF 		addi	a5,a5,-1
+  67 0064 E396F5FE 		bne	a1,a5,.L5
+  68 0068 97070000 		lla	a5,.LANCHOR0
+  68      93870700 
+  69 0070 23B00700 		sd	zero,0(a5)
+  70 0074 23B40700 		sd	zero,8(a5)
+  71 0078 23A80700 		sw	zero,16(a5)
+  72 007c 23BC0700 		sd	zero,24(a5)
+  73 0080 23B00702 		sd	zero,32(a5)
+  74 0084 23A40702 		sw	zero,40(a5)
+  75 0088 6FF09FFC 		j	.L5
+  76              		.cfi_endproc
+  77              	.LFE44:
+  79              		.align	2
+  80              		.globl	_ZN9Scheduler3getEv
+  82              	_ZN9Scheduler3getEv:
+  83              	.LFB36:
+  84              		.cfi_startproc
+  85 008c 130101FF 		addi	sp,sp,-16
+  86              		.cfi_def_cfa_offset 16
+  87 0090 23341100 		sd	ra,8(sp)
+  88 0094 23308100 		sd	s0,0(sp)
+  89              		.cfi_offset 1, -8
+  90              		.cfi_offset 8, -16
+  91 0098 13040101 		addi	s0,sp,16
+  92              		.cfi_def_cfa 8, 0
+  93 009c 17050000 		lla	a0,.LANCHOR0
+  93      13050500 
+  94 00a4 97000000 		call	_ZN8TcbQueue6removeEv@plt
+  94      E7800000 
+  95 00ac 83308100 		ld	ra,8(sp)
+  96              		.cfi_restore 1
+  97 00b0 03340100 		ld	s0,0(sp)
+  98              		.cfi_restore 8
+  99              		.cfi_def_cfa 2, 16
+ 100 00b4 13010101 		addi	sp,sp,16
+ 101              		.cfi_def_cfa_offset 0
+ 102 00b8 67800000 		jr	ra
+ 103              		.cfi_endproc
+ 104              	.LFE36:
+ 106              		.align	2
+ 107              		.globl	_ZN9Scheduler3putEP3TCB
+ 109              	_ZN9Scheduler3putEP3TCB:
+ 110              	.LFB37:
+ 111              		.cfi_startproc
+ 112 00bc 130101FF 		addi	sp,sp,-16
+ 113              		.cfi_def_cfa_offset 16
+ 114 00c0 23341100 		sd	ra,8(sp)
+ 115 00c4 23308100 		sd	s0,0(sp)
+ 116              		.cfi_offset 1, -8
+ 117              		.cfi_offset 8, -16
+ 118 00c8 13040101 		addi	s0,sp,16
+GAS LISTING /tmp/ccnggYS2.s 			page 3
+
+
+ 119              		.cfi_def_cfa 8, 0
+ 120 00cc 93050500 		mv	a1,a0
+ 121 00d0 17050000 		lla	a0,.LANCHOR0
+ 121      13050500 
+ 122 00d8 97000000 		call	_ZN8TcbQueue6insertEP3TCB@plt
+ 122      E7800000 
+ 123 00e0 83308100 		ld	ra,8(sp)
+ 124              		.cfi_restore 1
+ 125 00e4 03340100 		ld	s0,0(sp)
+ 126              		.cfi_restore 8
+ 127              		.cfi_def_cfa 2, 16
+ 128 00e8 13010101 		addi	sp,sp,16
+ 129              		.cfi_def_cfa_offset 0
+ 130 00ec 67800000 		jr	ra
+ 131              		.cfi_endproc
+ 132              	.LFE37:
+ 134              		.align	2
+ 135              		.globl	_ZN9Scheduler9initalizeEv
+ 137              	_ZN9Scheduler9initalizeEv:
+ 138              	.LFB38:
+ 139              		.cfi_startproc
+ 140 00f0 130101FF 		addi	sp,sp,-16
+ 141              		.cfi_def_cfa_offset 16
+ 142 00f4 23348100 		sd	s0,8(sp)
+ 143              		.cfi_offset 8, -8
+ 144 00f8 13040101 		addi	s0,sp,16
+ 145              		.cfi_def_cfa 8, 0
+ 146 00fc 03348100 		ld	s0,8(sp)
+ 147              		.cfi_restore 8
+ 148              		.cfi_def_cfa 2, 16
+ 149 0100 13010101 		addi	sp,sp,16
+ 150              		.cfi_def_cfa_offset 0
+ 151 0104 67800000 		jr	ra
+ 152              		.cfi_endproc
+ 153              	.LFE38:
+ 155              		.align	2
+ 156              		.globl	_ZN9Scheduler8finalizeEv
+ 158              	_ZN9Scheduler8finalizeEv:
+ 159              	.LFB39:
+ 160              		.cfi_startproc
+ 161 0108 130101FF 		addi	sp,sp,-16
+ 162              		.cfi_def_cfa_offset 16
+ 163 010c 23348100 		sd	s0,8(sp)
+ 164              		.cfi_offset 8, -8
+ 165 0110 13040101 		addi	s0,sp,16
+ 166              		.cfi_def_cfa 8, 0
+ 167 0114 03348100 		ld	s0,8(sp)
+ 168              		.cfi_restore 8
+ 169              		.cfi_def_cfa 2, 16
+ 170 0118 13010101 		addi	sp,sp,16
+ 171              		.cfi_def_cfa_offset 0
+ 172 011c 67800000 		jr	ra
+ 173              		.cfi_endproc
+ 174              	.LFE39:
+ 176              		.align	2
+ 177              		.globl	_ZN9Scheduler11print_queueEv
+ 179              	_ZN9Scheduler11print_queueEv:
+GAS LISTING /tmp/ccnggYS2.s 			page 4
+
+
+ 180              	.LFB40:
+ 181              		.cfi_startproc
+ 182 0120 130101FF 		addi	sp,sp,-16
+ 183              		.cfi_def_cfa_offset 16
+ 184 0124 23341100 		sd	ra,8(sp)
+ 185 0128 23308100 		sd	s0,0(sp)
+ 186              		.cfi_offset 1, -8
+ 187              		.cfi_offset 8, -16
+ 188 012c 13040101 		addi	s0,sp,16
+ 189              		.cfi_def_cfa 8, 0
+ 190 0130 17050000 		lla	a0,.LANCHOR0
+ 190      13050500 
+ 191 0138 97000000 		call	_ZN8TcbQueue10printQueueEv@plt
+ 191      E7800000 
+ 192 0140 83308100 		ld	ra,8(sp)
+ 193              		.cfi_restore 1
+ 194 0144 03340100 		ld	s0,0(sp)
+ 195              		.cfi_restore 8
+ 196              		.cfi_def_cfa 2, 16
+ 197 0148 13010101 		addi	sp,sp,16
+ 198              		.cfi_def_cfa_offset 0
+ 199 014c 67800000 		jr	ra
+ 200              		.cfi_endproc
+ 201              	.LFE40:
+ 203              		.align	2
+ 204              		.globl	_ZN9Scheduler11put_sleeperEP3TCBm
+ 206              	_ZN9Scheduler11put_sleeperEP3TCBm:
+ 207              	.LFB42:
+ 208              		.cfi_startproc
+ 209 0150 130101FF 		addi	sp,sp,-16
+ 210              		.cfi_def_cfa_offset 16
+ 211 0154 23341100 		sd	ra,8(sp)
+ 212 0158 23308100 		sd	s0,0(sp)
+ 213              		.cfi_offset 1, -8
+ 214              		.cfi_offset 8, -16
+ 215 015c 13040101 		addi	s0,sp,16
+ 216              		.cfi_def_cfa 8, 0
+ 217 0160 2334B500 		sd	a1,8(a0)
+ 218 0164 17060000 		lla	a2,_ZN9Scheduler3cmpEP3TCBS1_
+ 218      13060600 
+ 219 016c 93050500 		mv	a1,a0
+ 220 0170 17050000 		lla	a0,.LANCHOR0+24
+ 220      13050500 
+ 221 0178 97000000 		call	_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E@plt
+ 221      E7800000 
+ 222 0180 83308100 		ld	ra,8(sp)
+ 223              		.cfi_restore 1
+ 224 0184 03340100 		ld	s0,0(sp)
+ 225              		.cfi_restore 8
+ 226              		.cfi_def_cfa 2, 16
+ 227 0188 13010101 		addi	sp,sp,16
+ 228              		.cfi_def_cfa_offset 0
+ 229 018c 67800000 		jr	ra
+ 230              		.cfi_endproc
+ 231              	.LFE42:
+ 233              		.align	2
+ 234              		.globl	_ZN9Scheduler12update_sleepEv
+GAS LISTING /tmp/ccnggYS2.s 			page 5
+
+
+ 236              	_ZN9Scheduler12update_sleepEv:
+ 237              	.LFB43:
+ 238              		.cfi_startproc
+ 239 0190 130101FE 		addi	sp,sp,-32
+ 240              		.cfi_def_cfa_offset 32
+ 241 0194 233C1100 		sd	ra,24(sp)
+ 242 0198 23388100 		sd	s0,16(sp)
+ 243 019c 23349100 		sd	s1,8(sp)
+ 244 01a0 23302101 		sd	s2,0(sp)
+ 245              		.cfi_offset 1, -8
+ 246              		.cfi_offset 8, -16
+ 247              		.cfi_offset 9, -24
+ 248              		.cfi_offset 18, -32
+ 249 01a4 13040102 		addi	s0,sp,32
+ 250              		.cfi_def_cfa 8, 0
+ 251 01a8 17050000 		lla	a0,.LANCHOR0+24
+ 251      13050500 
+ 252 01b0 97000000 		call	_ZN8TcbQueue3topEv@plt
+ 252      E7800000 
+ 253 01b8 630E0504 		beq	a0,zero,.L21
+ 254 01bc 93040500 		mv	s1,a0
+ 255 01c0 83378500 		ld	a5,8(a0)
+ 256 01c4 9387F7FF 		addi	a5,a5,-1
+ 257 01c8 2334F500 		sd	a5,8(a0)
+ 258 01cc 6F00C003 		j	.L23
+ 259              	.L24:
+ 260 01d0 17090000 		lla	s2,.LANCHOR0+24
+ 260      13090900 
+ 261 01d8 13050900 		mv	a0,s2
+ 262 01dc 97000000 		call	_ZN8TcbQueue6removeEv@plt
+ 262      E7800000 
+ 263 01e4 93071000 		li	a5,1
+ 264 01e8 23A8F402 		sw	a5,48(s1)
+ 265 01ec 13850400 		mv	a0,s1
+ 266 01f0 97000000 		call	_ZN9Scheduler3putEP3TCB
+ 266      E7800000 
+ 267 01f8 13050900 		mv	a0,s2
+ 268 01fc 97000000 		call	_ZN8TcbQueue3topEv@plt
+ 268      E7800000 
+ 269 0204 93040500 		mv	s1,a0
+ 270              	.L23:
+ 271 0208 63860400 		beq	s1,zero,.L21
+ 272 020c 83B78400 		ld	a5,8(s1)
+ 273 0210 E38007FC 		beq	a5,zero,.L24
+ 274              	.L21:
+ 275 0214 83308101 		ld	ra,24(sp)
+ 276              		.cfi_restore 1
+ 277 0218 03340101 		ld	s0,16(sp)
+ 278              		.cfi_restore 8
+ 279              		.cfi_def_cfa 2, 32
+ 280 021c 83348100 		ld	s1,8(sp)
+ 281              		.cfi_restore 9
+ 282 0220 03390100 		ld	s2,0(sp)
+ 283              		.cfi_restore 18
+ 284 0224 13010102 		addi	sp,sp,32
+ 285              		.cfi_def_cfa_offset 0
+ 286 0228 67800000 		jr	ra
+GAS LISTING /tmp/ccnggYS2.s 			page 6
+
+
+ 287              		.cfi_endproc
+ 288              	.LFE43:
+ 290              		.align	2
+ 292              	_GLOBAL__sub_I__ZN9Scheduler5queueE:
+ 293              	.LFB45:
+ 294              		.cfi_startproc
+ 295 022c 130101FF 		addi	sp,sp,-16
+ 296              		.cfi_def_cfa_offset 16
+ 297 0230 23341100 		sd	ra,8(sp)
+ 298 0234 23308100 		sd	s0,0(sp)
+ 299              		.cfi_offset 1, -8
+ 300              		.cfi_offset 8, -16
+ 301 0238 13040101 		addi	s0,sp,16
+ 302              		.cfi_def_cfa 8, 0
+ 303 023c B7050100 		li	a1,65536
+ 304 0240 9385F5FF 		addi	a1,a1,-1
+ 305 0244 13051000 		li	a0,1
+ 306 0248 97000000 		call	_Z41__static_initialization_and_destruction_0ii
+ 306      E7800000 
+ 307 0250 83308100 		ld	ra,8(sp)
+ 308              		.cfi_restore 1
+ 309 0254 03340100 		ld	s0,0(sp)
+ 310              		.cfi_restore 8
+ 311              		.cfi_def_cfa 2, 16
+ 312 0258 13010101 		addi	sp,sp,16
+ 313              		.cfi_def_cfa_offset 0
+ 314 025c 67800000 		jr	ra
+ 315              		.cfi_endproc
+ 316              	.LFE45:
+ 318              		.section	.init_array,"aw"
+ 319              		.align	3
+ 320 0000 00000000 		.dword	_GLOBAL__sub_I__ZN9Scheduler5queueE
+ 320      00000000 
+ 321              		.globl	_ZN9Scheduler8sleepingE
+ 322              		.globl	_ZN9Scheduler5queueE
+ 323              		.bss
+ 324              		.align	3
+ 325              		.set	.LANCHOR0,. + 0
+ 328              	_ZN9Scheduler5queueE:
+ 329 0000 00000000 		.zero	24
+ 329      00000000 
+ 329      00000000 
+ 329      00000000 
+ 329      00000000 
+ 332              	_ZN9Scheduler8sleepingE:
+ 333 0018 00000000 		.zero	24
+ 333      00000000 
+ 333      00000000 
+ 333      00000000 
+ 333      00000000 
+ 334              		.ident	"GCC: (GNU) 12.2.0"
+ 335              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccnggYS2.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 scheduler.cpp
+     /tmp/ccnggYS2.s:11     .text:0000000000000000 _ZN9Scheduler3cmpEP3TCBS1_
+     /tmp/ccnggYS2.s:13     .text:0000000000000000 .L0 
+     /tmp/ccnggYS2.s:14     .text:0000000000000000 $x
+     /tmp/ccnggYS2.s:15     .text:0000000000000004 .L0 
+     /tmp/ccnggYS2.s:17     .text:0000000000000008 .L0 
+     /tmp/ccnggYS2.s:19     .text:000000000000000c .L0 
+     /tmp/ccnggYS2.s:28     .text:0000000000000028 .L0 
+     /tmp/ccnggYS2.s:29     .text:0000000000000028 .L0 
+     /tmp/ccnggYS2.s:30     .text:0000000000000028 .L0 
+     /tmp/ccnggYS2.s:32     .text:000000000000002c .L0 
+     /tmp/ccnggYS2.s:35     .text:0000000000000030 .L0 
+     /tmp/ccnggYS2.s:39     .text:000000000000003c .L0 
+     /tmp/ccnggYS2.s:44     .text:000000000000003c _Z41__static_initialization_and_destruction_0ii
+     /tmp/ccnggYS2.s:46     .text:000000000000003c .L0 
+     /tmp/ccnggYS2.s:48     .text:0000000000000040 .L0 
+     /tmp/ccnggYS2.s:50     .text:0000000000000044 .L0 
+     /tmp/ccnggYS2.s:52     .text:0000000000000048 .L0 
+     /tmp/ccnggYS2.s:57     .text:0000000000000054 .L0 
+     /tmp/ccnggYS2.s:58     .text:0000000000000054 .L0 
+     /tmp/ccnggYS2.s:59     .text:0000000000000054 .L0 
+     /tmp/ccnggYS2.s:61     .text:0000000000000058 .L0 
+     /tmp/ccnggYS2.s:64     .text:000000000000005c .L0 
+     /tmp/ccnggYS2.s:76     .text:000000000000008c .L0 
+     /tmp/ccnggYS2.s:82     .text:000000000000008c _ZN9Scheduler3getEv
+     /tmp/ccnggYS2.s:84     .text:000000000000008c .L0 
+     /tmp/ccnggYS2.s:86     .text:0000000000000090 .L0 
+     /tmp/ccnggYS2.s:89     .text:0000000000000098 .L0 
+     /tmp/ccnggYS2.s:90     .text:0000000000000098 .L0 
+     /tmp/ccnggYS2.s:92     .text:000000000000009c .L0 
+     /tmp/ccnggYS2.s:96     .text:00000000000000b0 .L0 
+     /tmp/ccnggYS2.s:98     .text:00000000000000b4 .L0 
+     /tmp/ccnggYS2.s:99     .text:00000000000000b4 .L0 
+     /tmp/ccnggYS2.s:101    .text:00000000000000b8 .L0 
+     /tmp/ccnggYS2.s:103    .text:00000000000000bc .L0 
+     /tmp/ccnggYS2.s:109    .text:00000000000000bc _ZN9Scheduler3putEP3TCB
+     /tmp/ccnggYS2.s:111    .text:00000000000000bc .L0 
+     /tmp/ccnggYS2.s:113    .text:00000000000000c0 .L0 
+     /tmp/ccnggYS2.s:116    .text:00000000000000c8 .L0 
+     /tmp/ccnggYS2.s:117    .text:00000000000000c8 .L0 
+     /tmp/ccnggYS2.s:119    .text:00000000000000cc .L0 
+     /tmp/ccnggYS2.s:124    .text:00000000000000e4 .L0 
+     /tmp/ccnggYS2.s:126    .text:00000000000000e8 .L0 
+     /tmp/ccnggYS2.s:127    .text:00000000000000e8 .L0 
+     /tmp/ccnggYS2.s:129    .text:00000000000000ec .L0 
+     /tmp/ccnggYS2.s:131    .text:00000000000000f0 .L0 
+     /tmp/ccnggYS2.s:137    .text:00000000000000f0 _ZN9Scheduler9initalizeEv
+     /tmp/ccnggYS2.s:139    .text:00000000000000f0 .L0 
+     /tmp/ccnggYS2.s:141    .text:00000000000000f4 .L0 
+     /tmp/ccnggYS2.s:143    .text:00000000000000f8 .L0 
+     /tmp/ccnggYS2.s:145    .text:00000000000000fc .L0 
+     /tmp/ccnggYS2.s:147    .text:0000000000000100 .L0 
+     /tmp/ccnggYS2.s:148    .text:0000000000000100 .L0 
+     /tmp/ccnggYS2.s:150    .text:0000000000000104 .L0 
+     /tmp/ccnggYS2.s:152    .text:0000000000000108 .L0 
+     /tmp/ccnggYS2.s:158    .text:0000000000000108 _ZN9Scheduler8finalizeEv
+GAS LISTING /tmp/ccnggYS2.s 			page 8
+
+
+     /tmp/ccnggYS2.s:160    .text:0000000000000108 .L0 
+     /tmp/ccnggYS2.s:162    .text:000000000000010c .L0 
+     /tmp/ccnggYS2.s:164    .text:0000000000000110 .L0 
+     /tmp/ccnggYS2.s:166    .text:0000000000000114 .L0 
+     /tmp/ccnggYS2.s:168    .text:0000000000000118 .L0 
+     /tmp/ccnggYS2.s:169    .text:0000000000000118 .L0 
+     /tmp/ccnggYS2.s:171    .text:000000000000011c .L0 
+     /tmp/ccnggYS2.s:173    .text:0000000000000120 .L0 
+     /tmp/ccnggYS2.s:179    .text:0000000000000120 _ZN9Scheduler11print_queueEv
+     /tmp/ccnggYS2.s:181    .text:0000000000000120 .L0 
+     /tmp/ccnggYS2.s:183    .text:0000000000000124 .L0 
+     /tmp/ccnggYS2.s:186    .text:000000000000012c .L0 
+     /tmp/ccnggYS2.s:187    .text:000000000000012c .L0 
+     /tmp/ccnggYS2.s:189    .text:0000000000000130 .L0 
+     /tmp/ccnggYS2.s:193    .text:0000000000000144 .L0 
+     /tmp/ccnggYS2.s:195    .text:0000000000000148 .L0 
+     /tmp/ccnggYS2.s:196    .text:0000000000000148 .L0 
+     /tmp/ccnggYS2.s:198    .text:000000000000014c .L0 
+     /tmp/ccnggYS2.s:200    .text:0000000000000150 .L0 
+     /tmp/ccnggYS2.s:206    .text:0000000000000150 _ZN9Scheduler11put_sleeperEP3TCBm
+     /tmp/ccnggYS2.s:208    .text:0000000000000150 .L0 
+     /tmp/ccnggYS2.s:210    .text:0000000000000154 .L0 
+     /tmp/ccnggYS2.s:213    .text:000000000000015c .L0 
+     /tmp/ccnggYS2.s:214    .text:000000000000015c .L0 
+     /tmp/ccnggYS2.s:216    .text:0000000000000160 .L0 
+     /tmp/ccnggYS2.s:223    .text:0000000000000184 .L0 
+     /tmp/ccnggYS2.s:225    .text:0000000000000188 .L0 
+     /tmp/ccnggYS2.s:226    .text:0000000000000188 .L0 
+     /tmp/ccnggYS2.s:228    .text:000000000000018c .L0 
+     /tmp/ccnggYS2.s:230    .text:0000000000000190 .L0 
+     /tmp/ccnggYS2.s:236    .text:0000000000000190 _ZN9Scheduler12update_sleepEv
+     /tmp/ccnggYS2.s:238    .text:0000000000000190 .L0 
+     /tmp/ccnggYS2.s:240    .text:0000000000000194 .L0 
+     /tmp/ccnggYS2.s:245    .text:00000000000001a4 .L0 
+     /tmp/ccnggYS2.s:246    .text:00000000000001a4 .L0 
+     /tmp/ccnggYS2.s:247    .text:00000000000001a4 .L0 
+     /tmp/ccnggYS2.s:248    .text:00000000000001a4 .L0 
+     /tmp/ccnggYS2.s:250    .text:00000000000001a8 .L0 
+     /tmp/ccnggYS2.s:276    .text:0000000000000218 .L0 
+     /tmp/ccnggYS2.s:278    .text:000000000000021c .L0 
+     /tmp/ccnggYS2.s:279    .text:000000000000021c .L0 
+     /tmp/ccnggYS2.s:281    .text:0000000000000220 .L0 
+     /tmp/ccnggYS2.s:283    .text:0000000000000224 .L0 
+     /tmp/ccnggYS2.s:285    .text:0000000000000228 .L0 
+     /tmp/ccnggYS2.s:287    .text:000000000000022c .L0 
+     /tmp/ccnggYS2.s:292    .text:000000000000022c _GLOBAL__sub_I__ZN9Scheduler5queueE
+     /tmp/ccnggYS2.s:294    .text:000000000000022c .L0 
+     /tmp/ccnggYS2.s:296    .text:0000000000000230 .L0 
+     /tmp/ccnggYS2.s:299    .text:0000000000000238 .L0 
+     /tmp/ccnggYS2.s:300    .text:0000000000000238 .L0 
+     /tmp/ccnggYS2.s:302    .text:000000000000023c .L0 
+     /tmp/ccnggYS2.s:308    .text:0000000000000254 .L0 
+     /tmp/ccnggYS2.s:310    .text:0000000000000258 .L0 
+     /tmp/ccnggYS2.s:311    .text:0000000000000258 .L0 
+     /tmp/ccnggYS2.s:313    .text:000000000000025c .L0 
+     /tmp/ccnggYS2.s:315    .text:0000000000000260 .L0 
+     /tmp/ccnggYS2.s:332    .bss:0000000000000018 _ZN9Scheduler8sleepingE
+GAS LISTING /tmp/ccnggYS2.s 			page 9
+
+
+     /tmp/ccnggYS2.s:328    .bss:0000000000000000 _ZN9Scheduler5queueE
+     /tmp/ccnggYS2.s:325    .bss:0000000000000000 .LANCHOR0
+     /tmp/ccnggYS2.s:68     .text:0000000000000068 .L0 
+     /tmp/ccnggYS2.s:93     .text:000000000000009c .L0 
+     /tmp/ccnggYS2.s:121    .text:00000000000000d0 .L0 
+     /tmp/ccnggYS2.s:190    .text:0000000000000130 .L0 
+     /tmp/ccnggYS2.s:218    .text:0000000000000164 .L0 
+     /tmp/ccnggYS2.s:220    .text:0000000000000170 .L0 
+     /tmp/ccnggYS2.s:251    .text:00000000000001a8 .L0 
+     /tmp/ccnggYS2.s:260    .text:00000000000001d0 .L0 
+     /tmp/ccnggYS2.s:34     .text:0000000000000030 .L2
+     /tmp/ccnggYS2.s:26     .text:0000000000000024 .L3
+     /tmp/ccnggYS2.s:63     .text:000000000000005c .L8
+     /tmp/ccnggYS2.s:55     .text:0000000000000050 .L5
+     /tmp/ccnggYS2.s:274    .text:0000000000000214 .L21
+     /tmp/ccnggYS2.s:270    .text:0000000000000208 .L23
+     /tmp/ccnggYS2.s:259    .text:00000000000001d0 .L24
+
+UNDEFINED SYMBOLS
+_ZN8TcbQueue6removeEv
+_ZN8TcbQueue6insertEP3TCB
+_ZN8TcbQueue10printQueueEv
+_ZN8TcbQueue12insertSortedEP3TCBPFiS1_S1_E
+_ZN8TcbQueue3topEv

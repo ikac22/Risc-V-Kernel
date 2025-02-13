@@ -1,0 +1,518 @@
+GAS LISTING /tmp/ccabLGKZ.s 			page 1
+
+
+   1              		.file	"slab.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_Z17kmem_cache_createPKcmPFvPvES3_
+  11              	_Z17kmem_cache_createPKcmPFvPvES3_:
+  12              	.LFB113:
+  13              		.cfi_startproc
+  14              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  15              		.cfi_lsda 0x1b,.LLSDA113
+  16 0000 130101FC 		addi	sp,sp,-64
+  17              		.cfi_def_cfa_offset 64
+  18 0004 233C1102 		sd	ra,56(sp)
+  19 0008 23388102 		sd	s0,48(sp)
+  20 000c 23349102 		sd	s1,40(sp)
+  21 0010 23302103 		sd	s2,32(sp)
+  22 0014 233C3101 		sd	s3,24(sp)
+  23 0018 23384101 		sd	s4,16(sp)
+  24 001c 23345101 		sd	s5,8(sp)
+  25              		.cfi_offset 1, -8
+  26              		.cfi_offset 8, -16
+  27              		.cfi_offset 9, -24
+  28              		.cfi_offset 18, -32
+  29              		.cfi_offset 19, -40
+  30              		.cfi_offset 20, -48
+  31              		.cfi_offset 21, -56
+  32 0020 13040104 		addi	s0,sp,64
+  33              		.cfi_def_cfa 8, 0
+  34 0024 13090500 		mv	s2,a0
+  35 0028 93890500 		mv	s3,a1
+  36 002c 130A0600 		mv	s4,a2
+  37 0030 938A0600 		mv	s5,a3
+  38 0034 13058005 		li	a0,88
+  39              	.LEHB0:
+  40 0038 97000000 		call	_ZN11ObjectCachenwEm@plt
+  40      E7800000 
+  41              	.LEHE0:
+  42 0040 93040500 		mv	s1,a0
+  43 0044 63000504 		beq	a0,zero,.L1
+  44 0048 93070000 		li	a5,0
+  45 004c 13870A00 		mv	a4,s5
+  46 0050 93060A00 		mv	a3,s4
+  47 0054 13860900 		mv	a2,s3
+  48 0058 93050900 		mv	a1,s2
+  49              	.LEHB1:
+  50 005c 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+  50      E7800000 
+  51              	.LEHE1:
+  52 0064 6F000002 		j	.L1
+  53              	.L4:
+  54 0068 13090500 		mv	s2,a0
+  55 006c 13850400 		mv	a0,s1
+  56 0070 97000000 		call	_ZN11ObjectCachedlEPv@plt
+GAS LISTING /tmp/ccabLGKZ.s 			page 2
+
+
+  56      E7800000 
+  57 0078 13050900 		mv	a0,s2
+  58              	.LEHB2:
+  59 007c 97000000 		call	_Unwind_Resume@plt
+  59      E7800000 
+  60              	.LEHE2:
+  61              	.L1:
+  62 0084 13850400 		mv	a0,s1
+  63 0088 83308103 		ld	ra,56(sp)
+  64              		.cfi_restore 1
+  65 008c 03340103 		ld	s0,48(sp)
+  66              		.cfi_restore 8
+  67              		.cfi_def_cfa 2, 64
+  68 0090 83348102 		ld	s1,40(sp)
+  69              		.cfi_restore 9
+  70 0094 03390102 		ld	s2,32(sp)
+  71              		.cfi_restore 18
+  72 0098 83398101 		ld	s3,24(sp)
+  73              		.cfi_restore 19
+  74 009c 033A0101 		ld	s4,16(sp)
+  75              		.cfi_restore 20
+  76 00a0 833A8100 		ld	s5,8(sp)
+  77              		.cfi_restore 21
+  78 00a4 13010104 		addi	sp,sp,64
+  79              		.cfi_def_cfa_offset 0
+  80 00a8 67800000 		jr	ra
+  81              		.cfi_endproc
+  82              	.LFE113:
+  83              		.globl	__gxx_personality_v0
+  84              		.section	.gcc_except_table,"a",@progbits
+  85              	.LLSDA113:
+  86 0000 FF       		.byte	0xff
+  87 0001 FF       		.byte	0xff
+  88 0002 03       		.byte	0x3
+  89 0003 27       		.byte	0x27
+  90 0004 00000000 		.4byte	.LEHB0-.LFB113
+  91 0008 00000000 		.4byte	.LEHE0-.LEHB0
+  92 000c 00000000 		.4byte	0
+  93 0010 00       		.byte	0
+  94 0011 00000000 		.4byte	.LEHB1-.LFB113
+  95 0015 00000000 		.4byte	.LEHE1-.LEHB1
+  96 0019 00000000 		.4byte	.L4-.LFB113
+  97 001d 00       		.byte	0
+  98 001e 00000000 		.4byte	.LEHB2-.LFB113
+  99 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 100 0026 00000000 		.4byte	0
+ 101 002a 00       		.byte	0
+ 102              		.text
+ 104              		.align	2
+ 105              		.globl	_Z17kmem_cache_shrinkP11ObjectCache
+ 107              	_Z17kmem_cache_shrinkP11ObjectCache:
+ 108              	.LFB114:
+ 109              		.cfi_startproc
+ 110 00ac 130101FF 		addi	sp,sp,-16
+ 111              		.cfi_def_cfa_offset 16
+ 112 00b0 23341100 		sd	ra,8(sp)
+ 113 00b4 23308100 		sd	s0,0(sp)
+GAS LISTING /tmp/ccabLGKZ.s 			page 3
+
+
+ 114              		.cfi_offset 1, -8
+ 115              		.cfi_offset 8, -16
+ 116 00b8 13040101 		addi	s0,sp,16
+ 117              		.cfi_def_cfa 8, 0
+ 118 00bc 97000000 		call	_ZN11ObjectCache6shrinkEv@plt
+ 118      E7800000 
+ 119 00c4 83308100 		ld	ra,8(sp)
+ 120              		.cfi_restore 1
+ 121 00c8 03340100 		ld	s0,0(sp)
+ 122              		.cfi_restore 8
+ 123              		.cfi_def_cfa 2, 16
+ 124 00cc 13010101 		addi	sp,sp,16
+ 125              		.cfi_def_cfa_offset 0
+ 126 00d0 67800000 		jr	ra
+ 127              		.cfi_endproc
+ 128              	.LFE114:
+ 130              		.align	2
+ 131              		.globl	_Z16kmem_cache_allocP11ObjectCache
+ 133              	_Z16kmem_cache_allocP11ObjectCache:
+ 134              	.LFB115:
+ 135              		.cfi_startproc
+ 136 00d4 130101FF 		addi	sp,sp,-16
+ 137              		.cfi_def_cfa_offset 16
+ 138 00d8 23341100 		sd	ra,8(sp)
+ 139 00dc 23308100 		sd	s0,0(sp)
+ 140              		.cfi_offset 1, -8
+ 141              		.cfi_offset 8, -16
+ 142 00e0 13040101 		addi	s0,sp,16
+ 143              		.cfi_def_cfa 8, 0
+ 144 00e4 97000000 		call	_ZN11ObjectCache9alloc_objEv@plt
+ 144      E7800000 
+ 145 00ec 83308100 		ld	ra,8(sp)
+ 146              		.cfi_restore 1
+ 147 00f0 03340100 		ld	s0,0(sp)
+ 148              		.cfi_restore 8
+ 149              		.cfi_def_cfa 2, 16
+ 150 00f4 13010101 		addi	sp,sp,16
+ 151              		.cfi_def_cfa_offset 0
+ 152 00f8 67800000 		jr	ra
+ 153              		.cfi_endproc
+ 154              	.LFE115:
+ 156              		.align	2
+ 157              		.globl	_Z15kmem_cache_freeP11ObjectCachePv
+ 159              	_Z15kmem_cache_freeP11ObjectCachePv:
+ 160              	.LFB116:
+ 161              		.cfi_startproc
+ 162 00fc 130101FF 		addi	sp,sp,-16
+ 163              		.cfi_def_cfa_offset 16
+ 164 0100 23341100 		sd	ra,8(sp)
+ 165 0104 23308100 		sd	s0,0(sp)
+ 166              		.cfi_offset 1, -8
+ 167              		.cfi_offset 8, -16
+ 168 0108 13040101 		addi	s0,sp,16
+ 169              		.cfi_def_cfa 8, 0
+ 170 010c 97000000 		call	_ZN11ObjectCache8free_objEPv@plt
+ 170      E7800000 
+ 171 0114 83308100 		ld	ra,8(sp)
+GAS LISTING /tmp/ccabLGKZ.s 			page 4
+
+
+ 172              		.cfi_restore 1
+ 173 0118 03340100 		ld	s0,0(sp)
+ 174              		.cfi_restore 8
+ 175              		.cfi_def_cfa 2, 16
+ 176 011c 13010101 		addi	sp,sp,16
+ 177              		.cfi_def_cfa_offset 0
+ 178 0120 67800000 		jr	ra
+ 179              		.cfi_endproc
+ 180              	.LFE116:
+ 182              		.align	2
+ 183              		.globl	_Z7kmallocm
+ 185              	_Z7kmallocm:
+ 186              	.LFB117:
+ 187              		.cfi_startproc
+ 188 0124 130101FE 		addi	sp,sp,-32
+ 189              		.cfi_def_cfa_offset 32
+ 190 0128 233C1100 		sd	ra,24(sp)
+ 191 012c 23388100 		sd	s0,16(sp)
+ 192 0130 23349100 		sd	s1,8(sp)
+ 193              		.cfi_offset 1, -8
+ 194              		.cfi_offset 8, -16
+ 195              		.cfi_offset 9, -24
+ 196 0134 13040102 		addi	s0,sp,32
+ 197              		.cfi_def_cfa 8, 0
+ 198 0138 93040500 		mv	s1,a0
+ 199 013c 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 199      E7800000 
+ 200 0144 93850400 		mv	a1,s1
+ 201 0148 97000000 		call	_ZN13SlabAllocator7kmallocEm@plt
+ 201      E7800000 
+ 202 0150 83308101 		ld	ra,24(sp)
+ 203              		.cfi_restore 1
+ 204 0154 03340101 		ld	s0,16(sp)
+ 205              		.cfi_restore 8
+ 206              		.cfi_def_cfa 2, 32
+ 207 0158 83348100 		ld	s1,8(sp)
+ 208              		.cfi_restore 9
+ 209 015c 13010102 		addi	sp,sp,32
+ 210              		.cfi_def_cfa_offset 0
+ 211 0160 67800000 		jr	ra
+ 212              		.cfi_endproc
+ 213              	.LFE117:
+ 215              		.align	2
+ 216              		.globl	_Z5kfreePv
+ 218              	_Z5kfreePv:
+ 219              	.LFB118:
+ 220              		.cfi_startproc
+ 221 0164 130101FE 		addi	sp,sp,-32
+ 222              		.cfi_def_cfa_offset 32
+ 223 0168 233C1100 		sd	ra,24(sp)
+ 224 016c 23388100 		sd	s0,16(sp)
+ 225 0170 23349100 		sd	s1,8(sp)
+ 226              		.cfi_offset 1, -8
+ 227              		.cfi_offset 8, -16
+ 228              		.cfi_offset 9, -24
+ 229 0174 13040102 		addi	s0,sp,32
+ 230              		.cfi_def_cfa 8, 0
+GAS LISTING /tmp/ccabLGKZ.s 			page 5
+
+
+ 231 0178 93040500 		mv	s1,a0
+ 232 017c 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 232      E7800000 
+ 233 0184 93850400 		mv	a1,s1
+ 234 0188 97000000 		call	_ZN13SlabAllocator5kfreeEPv@plt
+ 234      E7800000 
+ 235 0190 83308101 		ld	ra,24(sp)
+ 236              		.cfi_restore 1
+ 237 0194 03340101 		ld	s0,16(sp)
+ 238              		.cfi_restore 8
+ 239              		.cfi_def_cfa 2, 32
+ 240 0198 83348100 		ld	s1,8(sp)
+ 241              		.cfi_restore 9
+ 242 019c 13010102 		addi	sp,sp,32
+ 243              		.cfi_def_cfa_offset 0
+ 244 01a0 67800000 		jr	ra
+ 245              		.cfi_endproc
+ 246              	.LFE118:
+ 248              		.align	2
+ 249              		.globl	_Z18kmem_cache_destroyP11ObjectCache
+ 251              	_Z18kmem_cache_destroyP11ObjectCache:
+ 252              	.LFB119:
+ 253              		.cfi_startproc
+ 254 01a4 63020504 		beq	a0,zero,.L19
+ 255 01a8 130101FE 		addi	sp,sp,-32
+ 256              		.cfi_def_cfa_offset 32
+ 257 01ac 233C1100 		sd	ra,24(sp)
+ 258 01b0 23388100 		sd	s0,16(sp)
+ 259 01b4 23349100 		sd	s1,8(sp)
+ 260              		.cfi_offset 1, -8
+ 261              		.cfi_offset 8, -16
+ 262              		.cfi_offset 9, -24
+ 263 01b8 13040102 		addi	s0,sp,32
+ 264              		.cfi_def_cfa 8, 0
+ 265 01bc 93040500 		mv	s1,a0
+ 266 01c0 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 266      E7800000 
+ 267 01c8 13850400 		mv	a0,s1
+ 268 01cc 97000000 		call	_ZN11ObjectCachedlEPv@plt
+ 268      E7800000 
+ 269 01d4 83308101 		ld	ra,24(sp)
+ 270              		.cfi_restore 1
+ 271 01d8 03340101 		ld	s0,16(sp)
+ 272              		.cfi_restore 8
+ 273              		.cfi_def_cfa 2, 32
+ 274 01dc 83348100 		ld	s1,8(sp)
+ 275              		.cfi_restore 9
+ 276 01e0 13010102 		addi	sp,sp,32
+ 277              		.cfi_def_cfa_offset 0
+ 278 01e4 67800000 		jr	ra
+ 279              	.L19:
+ 280 01e8 67800000 		ret
+ 281              		.cfi_endproc
+ 282              	.LFE119:
+ 284              		.align	2
+ 285              		.globl	_Z15kmem_cache_infoP11ObjectCache
+ 287              	_Z15kmem_cache_infoP11ObjectCache:
+GAS LISTING /tmp/ccabLGKZ.s 			page 6
+
+
+ 288              	.LFB120:
+ 289              		.cfi_startproc
+ 290 01ec 130101FF 		addi	sp,sp,-16
+ 291              		.cfi_def_cfa_offset 16
+ 292 01f0 23341100 		sd	ra,8(sp)
+ 293 01f4 23308100 		sd	s0,0(sp)
+ 294              		.cfi_offset 1, -8
+ 295              		.cfi_offset 8, -16
+ 296 01f8 13040101 		addi	s0,sp,16
+ 297              		.cfi_def_cfa 8, 0
+ 298 01fc 93050000 		li	a1,0
+ 299 0200 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 299      E7800000 
+ 300 0208 83308100 		ld	ra,8(sp)
+ 301              		.cfi_restore 1
+ 302 020c 03340100 		ld	s0,0(sp)
+ 303              		.cfi_restore 8
+ 304              		.cfi_def_cfa 2, 16
+ 305 0210 13010101 		addi	sp,sp,16
+ 306              		.cfi_def_cfa_offset 0
+ 307 0214 67800000 		jr	ra
+ 308              		.cfi_endproc
+ 309              	.LFE120:
+ 311              		.align	2
+ 312              		.globl	_Z16kmem_cache_errorP11ObjectCache
+ 314              	_Z16kmem_cache_errorP11ObjectCache:
+ 315              	.LFB121:
+ 316              		.cfi_startproc
+ 317 0218 130101FF 		addi	sp,sp,-16
+ 318              		.cfi_def_cfa_offset 16
+ 319 021c 23341100 		sd	ra,8(sp)
+ 320 0220 23308100 		sd	s0,0(sp)
+ 321              		.cfi_offset 1, -8
+ 322              		.cfi_offset 8, -16
+ 323 0224 13040101 		addi	s0,sp,16
+ 324              		.cfi_def_cfa 8, 0
+ 325 0228 97000000 		call	_ZN11ObjectCache10printErrorEv@plt
+ 325      E7800000 
+ 326 0230 83308100 		ld	ra,8(sp)
+ 327              		.cfi_restore 1
+ 328 0234 03340100 		ld	s0,0(sp)
+ 329              		.cfi_restore 8
+ 330              		.cfi_def_cfa 2, 16
+ 331 0238 13010101 		addi	sp,sp,16
+ 332              		.cfi_def_cfa_offset 0
+ 333 023c 67800000 		jr	ra
+ 334              		.cfi_endproc
+ 335              	.LFE121:
+ 337              		.hidden	DW.ref.__gxx_personality_v0
+ 338              		.weak	DW.ref.__gxx_personality_v0
+ 339              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 340              		.align	3
+ 343              	DW.ref.__gxx_personality_v0:
+ 344 0000 00000000 		.dword	__gxx_personality_v0
+ 344      00000000 
+ 345              		.ident	"GCC: (GNU) 12.2.0"
+ 346              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccabLGKZ.s 			page 7
+
+
+GAS LISTING /tmp/ccabLGKZ.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 slab.cpp
+     /tmp/ccabLGKZ.s:11     .text:0000000000000000 _Z17kmem_cache_createPKcmPFvPvES3_
+     /tmp/ccabLGKZ.s:13     .text:0000000000000000 .L0 
+     /tmp/ccabLGKZ.s:343    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccabLGKZ.s:16     .text:0000000000000000 $x
+     /tmp/ccabLGKZ.s:17     .text:0000000000000004 .L0 
+     /tmp/ccabLGKZ.s:25     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:26     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:27     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:28     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:29     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:30     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:31     .text:0000000000000020 .L0 
+     /tmp/ccabLGKZ.s:33     .text:0000000000000024 .L0 
+     /tmp/ccabLGKZ.s:64     .text:000000000000008c .L0 
+     /tmp/ccabLGKZ.s:66     .text:0000000000000090 .L0 
+     /tmp/ccabLGKZ.s:67     .text:0000000000000090 .L0 
+     /tmp/ccabLGKZ.s:69     .text:0000000000000094 .L0 
+     /tmp/ccabLGKZ.s:71     .text:0000000000000098 .L0 
+     /tmp/ccabLGKZ.s:73     .text:000000000000009c .L0 
+     /tmp/ccabLGKZ.s:75     .text:00000000000000a0 .L0 
+     /tmp/ccabLGKZ.s:77     .text:00000000000000a4 .L0 
+     /tmp/ccabLGKZ.s:79     .text:00000000000000a8 .L0 
+     /tmp/ccabLGKZ.s:81     .text:00000000000000ac .L0 
+     /tmp/ccabLGKZ.s:107    .text:00000000000000ac _Z17kmem_cache_shrinkP11ObjectCache
+     /tmp/ccabLGKZ.s:109    .text:00000000000000ac .L0 
+     /tmp/ccabLGKZ.s:111    .text:00000000000000b0 .L0 
+     /tmp/ccabLGKZ.s:114    .text:00000000000000b8 .L0 
+     /tmp/ccabLGKZ.s:115    .text:00000000000000b8 .L0 
+     /tmp/ccabLGKZ.s:117    .text:00000000000000bc .L0 
+     /tmp/ccabLGKZ.s:120    .text:00000000000000c8 .L0 
+     /tmp/ccabLGKZ.s:122    .text:00000000000000cc .L0 
+     /tmp/ccabLGKZ.s:123    .text:00000000000000cc .L0 
+     /tmp/ccabLGKZ.s:125    .text:00000000000000d0 .L0 
+     /tmp/ccabLGKZ.s:127    .text:00000000000000d4 .L0 
+     /tmp/ccabLGKZ.s:133    .text:00000000000000d4 _Z16kmem_cache_allocP11ObjectCache
+     /tmp/ccabLGKZ.s:135    .text:00000000000000d4 .L0 
+     /tmp/ccabLGKZ.s:137    .text:00000000000000d8 .L0 
+     /tmp/ccabLGKZ.s:140    .text:00000000000000e0 .L0 
+     /tmp/ccabLGKZ.s:141    .text:00000000000000e0 .L0 
+     /tmp/ccabLGKZ.s:143    .text:00000000000000e4 .L0 
+     /tmp/ccabLGKZ.s:146    .text:00000000000000f0 .L0 
+     /tmp/ccabLGKZ.s:148    .text:00000000000000f4 .L0 
+     /tmp/ccabLGKZ.s:149    .text:00000000000000f4 .L0 
+     /tmp/ccabLGKZ.s:151    .text:00000000000000f8 .L0 
+     /tmp/ccabLGKZ.s:153    .text:00000000000000fc .L0 
+     /tmp/ccabLGKZ.s:159    .text:00000000000000fc _Z15kmem_cache_freeP11ObjectCachePv
+     /tmp/ccabLGKZ.s:161    .text:00000000000000fc .L0 
+     /tmp/ccabLGKZ.s:163    .text:0000000000000100 .L0 
+     /tmp/ccabLGKZ.s:166    .text:0000000000000108 .L0 
+     /tmp/ccabLGKZ.s:167    .text:0000000000000108 .L0 
+     /tmp/ccabLGKZ.s:169    .text:000000000000010c .L0 
+     /tmp/ccabLGKZ.s:172    .text:0000000000000118 .L0 
+     /tmp/ccabLGKZ.s:174    .text:000000000000011c .L0 
+     /tmp/ccabLGKZ.s:175    .text:000000000000011c .L0 
+     /tmp/ccabLGKZ.s:177    .text:0000000000000120 .L0 
+GAS LISTING /tmp/ccabLGKZ.s 			page 9
+
+
+     /tmp/ccabLGKZ.s:179    .text:0000000000000124 .L0 
+     /tmp/ccabLGKZ.s:185    .text:0000000000000124 _Z7kmallocm
+     /tmp/ccabLGKZ.s:187    .text:0000000000000124 .L0 
+     /tmp/ccabLGKZ.s:189    .text:0000000000000128 .L0 
+     /tmp/ccabLGKZ.s:193    .text:0000000000000134 .L0 
+     /tmp/ccabLGKZ.s:194    .text:0000000000000134 .L0 
+     /tmp/ccabLGKZ.s:195    .text:0000000000000134 .L0 
+     /tmp/ccabLGKZ.s:197    .text:0000000000000138 .L0 
+     /tmp/ccabLGKZ.s:203    .text:0000000000000154 .L0 
+     /tmp/ccabLGKZ.s:205    .text:0000000000000158 .L0 
+     /tmp/ccabLGKZ.s:206    .text:0000000000000158 .L0 
+     /tmp/ccabLGKZ.s:208    .text:000000000000015c .L0 
+     /tmp/ccabLGKZ.s:210    .text:0000000000000160 .L0 
+     /tmp/ccabLGKZ.s:212    .text:0000000000000164 .L0 
+     /tmp/ccabLGKZ.s:218    .text:0000000000000164 _Z5kfreePv
+     /tmp/ccabLGKZ.s:220    .text:0000000000000164 .L0 
+     /tmp/ccabLGKZ.s:222    .text:0000000000000168 .L0 
+     /tmp/ccabLGKZ.s:226    .text:0000000000000174 .L0 
+     /tmp/ccabLGKZ.s:227    .text:0000000000000174 .L0 
+     /tmp/ccabLGKZ.s:228    .text:0000000000000174 .L0 
+     /tmp/ccabLGKZ.s:230    .text:0000000000000178 .L0 
+     /tmp/ccabLGKZ.s:236    .text:0000000000000194 .L0 
+     /tmp/ccabLGKZ.s:238    .text:0000000000000198 .L0 
+     /tmp/ccabLGKZ.s:239    .text:0000000000000198 .L0 
+     /tmp/ccabLGKZ.s:241    .text:000000000000019c .L0 
+     /tmp/ccabLGKZ.s:243    .text:00000000000001a0 .L0 
+     /tmp/ccabLGKZ.s:245    .text:00000000000001a4 .L0 
+     /tmp/ccabLGKZ.s:251    .text:00000000000001a4 _Z18kmem_cache_destroyP11ObjectCache
+     /tmp/ccabLGKZ.s:253    .text:00000000000001a4 .L0 
+     /tmp/ccabLGKZ.s:256    .text:00000000000001ac .L0 
+     /tmp/ccabLGKZ.s:260    .text:00000000000001b8 .L0 
+     /tmp/ccabLGKZ.s:261    .text:00000000000001b8 .L0 
+     /tmp/ccabLGKZ.s:262    .text:00000000000001b8 .L0 
+     /tmp/ccabLGKZ.s:264    .text:00000000000001bc .L0 
+     /tmp/ccabLGKZ.s:270    .text:00000000000001d8 .L0 
+     /tmp/ccabLGKZ.s:272    .text:00000000000001dc .L0 
+     /tmp/ccabLGKZ.s:273    .text:00000000000001dc .L0 
+     /tmp/ccabLGKZ.s:275    .text:00000000000001e0 .L0 
+     /tmp/ccabLGKZ.s:277    .text:00000000000001e4 .L0 
+     /tmp/ccabLGKZ.s:281    .text:00000000000001ec .L0 
+     /tmp/ccabLGKZ.s:287    .text:00000000000001ec _Z15kmem_cache_infoP11ObjectCache
+     /tmp/ccabLGKZ.s:289    .text:00000000000001ec .L0 
+     /tmp/ccabLGKZ.s:291    .text:00000000000001f0 .L0 
+     /tmp/ccabLGKZ.s:294    .text:00000000000001f8 .L0 
+     /tmp/ccabLGKZ.s:295    .text:00000000000001f8 .L0 
+     /tmp/ccabLGKZ.s:297    .text:00000000000001fc .L0 
+     /tmp/ccabLGKZ.s:301    .text:000000000000020c .L0 
+     /tmp/ccabLGKZ.s:303    .text:0000000000000210 .L0 
+     /tmp/ccabLGKZ.s:304    .text:0000000000000210 .L0 
+     /tmp/ccabLGKZ.s:306    .text:0000000000000214 .L0 
+     /tmp/ccabLGKZ.s:308    .text:0000000000000218 .L0 
+     /tmp/ccabLGKZ.s:314    .text:0000000000000218 _Z16kmem_cache_errorP11ObjectCache
+     /tmp/ccabLGKZ.s:316    .text:0000000000000218 .L0 
+     /tmp/ccabLGKZ.s:318    .text:000000000000021c .L0 
+     /tmp/ccabLGKZ.s:321    .text:0000000000000224 .L0 
+     /tmp/ccabLGKZ.s:322    .text:0000000000000224 .L0 
+     /tmp/ccabLGKZ.s:324    .text:0000000000000228 .L0 
+GAS LISTING /tmp/ccabLGKZ.s 			page 10
+
+
+     /tmp/ccabLGKZ.s:327    .text:0000000000000234 .L0 
+     /tmp/ccabLGKZ.s:329    .text:0000000000000238 .L0 
+     /tmp/ccabLGKZ.s:330    .text:0000000000000238 .L0 
+     /tmp/ccabLGKZ.s:332    .text:000000000000023c .L0 
+     /tmp/ccabLGKZ.s:334    .text:0000000000000240 .L0 
+     /tmp/ccabLGKZ.s:61     .text:0000000000000084 .L1
+     /tmp/ccabLGKZ.s:279    .text:00000000000001e8 .L19
+     /tmp/ccabLGKZ.s:39     .text:0000000000000038 .LEHB0
+     /tmp/ccabLGKZ.s:12     .text:0000000000000000 .LFB113
+     /tmp/ccabLGKZ.s:41     .text:0000000000000040 .LEHE0
+     /tmp/ccabLGKZ.s:49     .text:000000000000005c .LEHB1
+     /tmp/ccabLGKZ.s:51     .text:0000000000000064 .LEHE1
+     /tmp/ccabLGKZ.s:53     .text:0000000000000068 .L4
+     /tmp/ccabLGKZ.s:58     .text:000000000000007c .LEHB2
+     /tmp/ccabLGKZ.s:60     .text:0000000000000084 .LEHE2
+     /tmp/ccabLGKZ.s:85     .gcc_except_table:0000000000000000 .LLSDA113
+
+UNDEFINED SYMBOLS
+_ZN11ObjectCachenwEm
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN11ObjectCachedlEPv
+_Unwind_Resume
+__gxx_personality_v0
+_ZN11ObjectCache6shrinkEv
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCache8free_objEPv
+_ZN13SlabAllocator11getInstanceEv
+_ZN13SlabAllocator7kmallocEm
+_ZN13SlabAllocator5kfreeEPv
+_ZN11ObjectCacheD1Ev
+_ZN11ObjectCache9printInfoEc
+_ZN11ObjectCache10printErrorEv

@@ -1,0 +1,1638 @@
+GAS LISTING /tmp/ccm8l4Pg.s 			page 1
+
+
+   1              		.file	"slab_test.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_Z4ctorPv
+  11              	_Z4ctorPv:
+  12              	.LFB120:
+  13              		.cfi_startproc
+  14 0000 130101FC 		addi	sp,sp,-64
+  15              		.cfi_def_cfa_offset 64
+  16 0004 233C1102 		sd	ra,56(sp)
+  17 0008 23388102 		sd	s0,48(sp)
+  18              		.cfi_offset 1, -8
+  19              		.cfi_offset 8, -16
+  20 000c 13040104 		addi	s0,sp,64
+  21              		.cfi_def_cfa 8, 0
+  22 0010 93070500 		mv	a5,a0
+  23 0014 13071000 		li	a4,1
+  24 0018 2328E4FC 		sw	a4,-48(s0)
+  25 001c 233C04FC 		sd	zero,-40(s0)
+  26 0020 233004FE 		sd	zero,-32(s0)
+  27 0024 232404FE 		sw	zero,-24(s0)
+  28 0028 97060000 		la	a3,_ZN10KSemaphore16activeSemaphoresE
+  28      83B60600 
+  29 0030 03B70600 		ld	a4,0(a3)
+  30 0034 2334E4FC 		sd	a4,-56(s0)
+  31 0038 130584FC 		addi	a0,s0,-56
+  32 003c 23B0A600 		sd	a0,0(a3)
+  33 0040 23B0E700 		sd	a4,0(a5)
+  34 0044 033704FD 		ld	a4,-48(s0)
+  35 0048 23B4E700 		sd	a4,8(a5)
+  36 004c 23B80700 		sd	zero,16(a5)
+  37 0050 23BC0700 		sd	zero,24(a5)
+  38 0054 033784FE 		ld	a4,-24(s0)
+  39 0058 23B0E702 		sd	a4,32(a5)
+  40 005c 97000000 		call	_ZN10KSemaphoreD1Ev@plt
+  40      E7800000 
+  41 0064 83308103 		ld	ra,56(sp)
+  42              		.cfi_restore 1
+  43 0068 03340103 		ld	s0,48(sp)
+  44              		.cfi_restore 8
+  45              		.cfi_def_cfa 2, 64
+  46 006c 13010104 		addi	sp,sp,64
+  47              		.cfi_def_cfa_offset 0
+  48 0070 67800000 		jr	ra
+  49              		.cfi_endproc
+  50              	.LFE120:
+  52              		.section	.rodata.str1.8,"aMS",@progbits,1
+  53              		.align	3
+  54              	.LC0:
+  55 0000 0A0A3D3D 		.string	"\n\n=============Object Cache Allocating=============\n\n"
+  55      3D3D3D3D 
+  55      3D3D3D3D 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 2
+
+
+  55      3D3D3D4F 
+  55      626A6563 
+  56 0036 0000     		.align	3
+  57              	.LC1:
+  58 0038 416C6C6F 		.string	"Allocating "
+  58      63617469 
+  58      6E672000 
+  59 0044 00000000 		.align	3
+  60              	.LC2:
+  61 0048 20636163 		.string	" caches!!\n"
+  61      68657321 
+  61      210A00
+  62 0053 00000000 		.align	3
+  62      00
+  63              	.LC3:
+  64 0058 6F6300   		.string	"oc"
+  65 005b 00000000 		.align	3
+  65      00
+  66              	.LC4:
+  67 0060 6F635F61 		.string	"oc_arr["
+  67      72725B00 
+  68              		.align	3
+  69              	.LC5:
+  70 0068 5D3A2000 		.string	"]: "
+  71 006c 00000000 		.align	3
+  72              	.LC6:
+  73 0070 0A00     		.string	"\n"
+  74 0072 00000000 		.align	3
+  74      0000
+  75              	.LC7:
+  76 0078 4E6F7420 		.string	"Not enough memory left!\n"
+  76      656E6F75 
+  76      6768206D 
+  76      656D6F72 
+  76      79206C65 
+  77 0091 00000000 		.align	3
+  77      000000
+  78              	.LC8:
+  79 0098 0A0A3D3D 		.string	"\n\n===========Object Cache Allocating End===========\n\n"
+  79      3D3D3D3D 
+  79      3D3D3D3D 
+  79      3D4F626A 
+  79      65637420 
+  80              		.text
+  81              		.align	2
+  82              		.globl	_Z16cache_alloc_testPP11ObjectCacheimc
+  84              	_Z16cache_alloc_testPP11ObjectCacheimc:
+  85              	.LFB113:
+  86              		.cfi_startproc
+  87              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+  88              		.cfi_lsda 0x1b,.LLSDA113
+  89 0074 130101FB 		addi	sp,sp,-80
+  90              		.cfi_def_cfa_offset 80
+  91 0078 23341104 		sd	ra,72(sp)
+  92 007c 23308104 		sd	s0,64(sp)
+  93 0080 233C9102 		sd	s1,56(sp)
+  94 0084 23382103 		sd	s2,48(sp)
+GAS LISTING /tmp/ccm8l4Pg.s 			page 3
+
+
+  95 0088 23343103 		sd	s3,40(sp)
+  96 008c 23304103 		sd	s4,32(sp)
+  97 0090 233C5101 		sd	s5,24(sp)
+  98 0094 23386101 		sd	s6,16(sp)
+  99 0098 23347101 		sd	s7,8(sp)
+ 100              		.cfi_offset 1, -8
+ 101              		.cfi_offset 8, -16
+ 102              		.cfi_offset 9, -24
+ 103              		.cfi_offset 18, -32
+ 104              		.cfi_offset 19, -40
+ 105              		.cfi_offset 20, -48
+ 106              		.cfi_offset 21, -56
+ 107              		.cfi_offset 22, -64
+ 108              		.cfi_offset 23, -72
+ 109 009c 13040105 		addi	s0,sp,80
+ 110              		.cfi_def_cfa 8, 0
+ 111 00a0 130A0500 		mv	s4,a0
+ 112 00a4 938A0500 		mv	s5,a1
+ 113 00a8 930B0600 		mv	s7,a2
+ 114 00ac 138B0600 		mv	s6,a3
+ 115 00b0 17050000 		lla	a0,.LC0
+ 115      13050500 
+ 116              	.LEHB0:
+ 117 00b8 97000000 		call	_Z12kprintStringPKc@plt
+ 117      E7800000 
+ 118 00c0 17050000 		lla	a0,.LC1
+ 118      13050500 
+ 119 00c8 97000000 		call	_Z12kprintStringPKc@plt
+ 119      E7800000 
+ 120 00d0 13060000 		li	a2,0
+ 121 00d4 9305A000 		li	a1,10
+ 122 00d8 13850A00 		mv	a0,s5
+ 123 00dc 97000000 		call	_Z9kprintIntmib@plt
+ 123      E7800000 
+ 124 00e4 17050000 		lla	a0,.LC2
+ 124      13050500 
+ 125 00ec 97000000 		call	_Z12kprintStringPKc@plt
+ 125      E7800000 
+ 126 00f4 93090000 		li	s3,0
+ 127 00f8 6F000009 		j	.L4
+ 128              	.L5:
+ 129 00fc 13993900 		slli	s2,s3,3
+ 130 0100 33092A01 		add	s2,s4,s2
+ 131 0104 23309900 		sd	s1,0(s2)
+ 132 0108 17050000 		lla	a0,.LC4
+ 132      13050500 
+ 133 0110 97000000 		call	_Z12kprintStringPKc@plt
+ 133      E7800000 
+ 134 0118 13060000 		li	a2,0
+ 135 011c 9305A000 		li	a1,10
+ 136 0120 13850900 		mv	a0,s3
+ 137 0124 97000000 		call	_Z9kprintIntmib@plt
+ 137      E7800000 
+ 138 012c 17050000 		lla	a0,.LC5
+ 138      13050500 
+ 139 0134 97000000 		call	_Z12kprintStringPKc@plt
+ 139      E7800000 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 4
+
+
+ 140 013c 13060000 		li	a2,0
+ 141 0140 93050001 		li	a1,16
+ 142 0144 03350900 		ld	a0,0(s2)
+ 143 0148 97000000 		call	_Z9kprintIntmib@plt
+ 143      E7800000 
+ 144 0150 17050000 		lla	a0,.LC6
+ 144      13050500 
+ 145 0158 97000000 		call	_Z12kprintStringPKc@plt
+ 145      E7800000 
+ 146 0160 63020A06 		beq	s4,zero,.L12
+ 147 0164 93050B00 		mv	a1,s6
+ 148 0168 03350900 		ld	a0,0(s2)
+ 149 016c 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 149      E7800000 
+ 150 0174 17050000 		lla	a0,.LC6
+ 150      13050500 
+ 151 017c 97000000 		call	_Z12kprintStringPKc@plt
+ 151      E7800000 
+ 152 0184 9B891900 		addiw	s3,s3,1
+ 153              	.L4:
+ 154 0188 63D85905 		bge	s3,s5,.L13
+ 155 018c 13058005 		li	a0,88
+ 156 0190 97000000 		call	_ZN11ObjectCachenwEm@plt
+ 156      E7800000 
+ 157              	.LEHE0:
+ 158 0198 93040500 		mv	s1,a0
+ 159 019c E30005F6 		beq	a0,zero,.L5
+ 160 01a0 93070000 		li	a5,0
+ 161 01a4 13070000 		li	a4,0
+ 162 01a8 93060000 		li	a3,0
+ 163 01ac 13860B00 		mv	a2,s7
+ 164 01b0 97050000 		lla	a1,.LC3
+ 164      93850500 
+ 165              	.LEHB1:
+ 166 01b8 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+ 166      E7800000 
+ 167              	.LEHE1:
+ 168 01c0 6FF0DFF3 		j	.L5
+ 169              	.L12:
+ 170 01c4 17050000 		lla	a0,.LC7
+ 170      13050500 
+ 171              	.LEHB2:
+ 172 01cc 97000000 		call	_Z12kprintStringPKc@plt
+ 172      E7800000 
+ 173 01d4 6F008002 		j	.L3
+ 174              	.L13:
+ 175 01d8 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 175      E7800000 
+ 176 01e0 93050B00 		mv	a1,s6
+ 177 01e4 97000000 		call	_ZN13SlabAllocator11print_stateEc@plt
+ 177      E7800000 
+ 178 01ec 17050000 		lla	a0,.LC8
+ 178      13050500 
+ 179 01f4 97000000 		call	_Z12kprintStringPKc@plt
+ 179      E7800000 
+ 180              	.LEHE2:
+ 181              	.L3:
+GAS LISTING /tmp/ccm8l4Pg.s 			page 5
+
+
+ 182 01fc 83308104 		ld	ra,72(sp)
+ 183              		.cfi_remember_state
+ 184              		.cfi_restore 1
+ 185 0200 03340104 		ld	s0,64(sp)
+ 186              		.cfi_restore 8
+ 187              		.cfi_def_cfa 2, 80
+ 188 0204 83348103 		ld	s1,56(sp)
+ 189              		.cfi_restore 9
+ 190 0208 03390103 		ld	s2,48(sp)
+ 191              		.cfi_restore 18
+ 192 020c 83398102 		ld	s3,40(sp)
+ 193              		.cfi_restore 19
+ 194 0210 033A0102 		ld	s4,32(sp)
+ 195              		.cfi_restore 20
+ 196 0214 833A8101 		ld	s5,24(sp)
+ 197              		.cfi_restore 21
+ 198 0218 033B0101 		ld	s6,16(sp)
+ 199              		.cfi_restore 22
+ 200 021c 833B8100 		ld	s7,8(sp)
+ 201              		.cfi_restore 23
+ 202 0220 13010105 		addi	sp,sp,80
+ 203              		.cfi_def_cfa_offset 0
+ 204 0224 67800000 		jr	ra
+ 205              	.L10:
+ 206              		.cfi_restore_state
+ 207 0228 13090500 		mv	s2,a0
+ 208 022c 13850400 		mv	a0,s1
+ 209 0230 97000000 		call	_ZN11ObjectCachedlEPv@plt
+ 209      E7800000 
+ 210 0238 13050900 		mv	a0,s2
+ 211              	.LEHB3:
+ 212 023c 97000000 		call	_Unwind_Resume@plt
+ 212      E7800000 
+ 213              	.LEHE3:
+ 214              		.cfi_endproc
+ 215              	.LFE113:
+ 216              		.globl	__gxx_personality_v0
+ 217              		.section	.gcc_except_table,"a",@progbits
+ 218              	.LLSDA113:
+ 219 0000 FF       		.byte	0xff
+ 220 0001 FF       		.byte	0xff
+ 221 0002 03       		.byte	0x3
+ 222 0003 34       		.byte	0x34
+ 223 0004 00000000 		.4byte	.LEHB0-.LFB113
+ 224 0008 00000000 		.4byte	.LEHE0-.LEHB0
+ 225 000c 00000000 		.4byte	0
+ 226 0010 00       		.byte	0
+ 227 0011 00000000 		.4byte	.LEHB1-.LFB113
+ 228 0015 00000000 		.4byte	.LEHE1-.LEHB1
+ 229 0019 00000000 		.4byte	.L10-.LFB113
+ 230 001d 00       		.byte	0
+ 231 001e 00000000 		.4byte	.LEHB2-.LFB113
+ 232 0022 00000000 		.4byte	.LEHE2-.LEHB2
+ 233 0026 00000000 		.4byte	0
+ 234 002a 00       		.byte	0
+ 235 002b 00000000 		.4byte	.LEHB3-.LFB113
+ 236 002f 00000000 		.4byte	.LEHE3-.LEHB3
+GAS LISTING /tmp/ccm8l4Pg.s 			page 6
+
+
+ 237 0033 00000000 		.4byte	0
+ 238 0037 00       		.byte	0
+ 239              		.text
+ 241              		.section	.rodata.str1.8
+ 242 00ce 0000     		.align	3
+ 243              	.LC9:
+ 244 00d0 0A0A3D3D 		.string	"\n\n=============Object Cache Deallocating=============\n\n"
+ 244      3D3D3D3D 
+ 244      3D3D3D3D 
+ 244      3D3D3D4F 
+ 244      626A6563 
+ 245              		.align	3
+ 246              	.LC10:
+ 247 0108 47697665 		.string	"Given address not valid!\n"
+ 247      6E206164 
+ 247      64726573 
+ 247      73206E6F 
+ 247      74207661 
+ 248 0122 00000000 		.align	3
+ 248      0000
+ 249              	.LC11:
+ 250 0128 0A0A3D3D 		.string	"\n\n===========Object Cache Dellocating End===========\n\n"
+ 250      3D3D3D3D 
+ 250      3D3D3D3D 
+ 250      3D4F626A 
+ 250      65637420 
+ 251              		.text
+ 252              		.align	2
+ 253              		.globl	_Z18cache_dealloc_testPP11ObjectCacheic
+ 255              	_Z18cache_dealloc_testPP11ObjectCacheic:
+ 256              	.LFB114:
+ 257              		.cfi_startproc
+ 258 0244 130101FC 		addi	sp,sp,-64
+ 259              		.cfi_def_cfa_offset 64
+ 260 0248 233C1102 		sd	ra,56(sp)
+ 261 024c 23388102 		sd	s0,48(sp)
+ 262 0250 23349102 		sd	s1,40(sp)
+ 263 0254 23302103 		sd	s2,32(sp)
+ 264 0258 233C3101 		sd	s3,24(sp)
+ 265 025c 23384101 		sd	s4,16(sp)
+ 266 0260 23345101 		sd	s5,8(sp)
+ 267 0264 23306101 		sd	s6,0(sp)
+ 268              		.cfi_offset 1, -8
+ 269              		.cfi_offset 8, -16
+ 270              		.cfi_offset 9, -24
+ 271              		.cfi_offset 18, -32
+ 272              		.cfi_offset 19, -40
+ 273              		.cfi_offset 20, -48
+ 274              		.cfi_offset 21, -56
+ 275              		.cfi_offset 22, -64
+ 276 0268 13040104 		addi	s0,sp,64
+ 277              		.cfi_def_cfa 8, 0
+ 278 026c 930A0500 		mv	s5,a0
+ 279 0270 138A0500 		mv	s4,a1
+ 280 0274 130B0600 		mv	s6,a2
+ 281 0278 17050000 		lla	a0,.LC9
+ 281      13050500 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 7
+
+
+ 282 0280 97000000 		call	_Z12kprintStringPKc@plt
+ 282      E7800000 
+ 283 0288 13090000 		li	s2,0
+ 284 028c 6F004002 		j	.L15
+ 285              	.L21:
+ 286 0290 13850900 		mv	a0,s3
+ 287 0294 97000000 		call	_ZN11ObjectCacheD1Ev@plt
+ 287      E7800000 
+ 288 029c 13850900 		mv	a0,s3
+ 289 02a0 97000000 		call	_ZN11ObjectCachedlEPv@plt
+ 289      E7800000 
+ 290 02a8 23B00400 		sd	zero,0(s1)
+ 291 02ac 1B091900 		addiw	s2,s2,1
+ 292              	.L15:
+ 293 02b0 63504909 		bge	s2,s4,.L20
+ 294 02b4 17050000 		lla	a0,.LC4
+ 294      13050500 
+ 295 02bc 97000000 		call	_Z12kprintStringPKc@plt
+ 295      E7800000 
+ 296 02c4 13060000 		li	a2,0
+ 297 02c8 9305A000 		li	a1,10
+ 298 02cc 13050900 		mv	a0,s2
+ 299 02d0 97000000 		call	_Z9kprintIntmib@plt
+ 299      E7800000 
+ 300 02d8 17050000 		lla	a0,.LC5
+ 300      13050500 
+ 301 02e0 97000000 		call	_Z12kprintStringPKc@plt
+ 301      E7800000 
+ 302 02e8 93143900 		slli	s1,s2,3
+ 303 02ec B3849A00 		add	s1,s5,s1
+ 304 02f0 13060000 		li	a2,0
+ 305 02f4 93050001 		li	a1,16
+ 306 02f8 03B50400 		ld	a0,0(s1)
+ 307 02fc 97000000 		call	_Z9kprintIntmib@plt
+ 307      E7800000 
+ 308 0304 17050000 		lla	a0,.LC6
+ 308      13050500 
+ 309 030c 97000000 		call	_Z12kprintStringPKc@plt
+ 309      E7800000 
+ 310 0314 83B90400 		ld	s3,0(s1)
+ 311 0318 E39C09F6 		bne	s3,zero,.L21
+ 312 031c 17050000 		lla	a0,.LC10
+ 312      13050500 
+ 313 0324 97000000 		call	_Z12kprintStringPKc@plt
+ 313      E7800000 
+ 314 032c 6F008002 		j	.L14
+ 315              	.L20:
+ 316 0330 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 316      E7800000 
+ 317 0338 93050B00 		mv	a1,s6
+ 318 033c 97000000 		call	_ZN13SlabAllocator11print_stateEc@plt
+ 318      E7800000 
+ 319 0344 17050000 		lla	a0,.LC11
+ 319      13050500 
+ 320 034c 97000000 		call	_Z12kprintStringPKc@plt
+ 320      E7800000 
+ 321              	.L14:
+GAS LISTING /tmp/ccm8l4Pg.s 			page 8
+
+
+ 322 0354 83308103 		ld	ra,56(sp)
+ 323              		.cfi_restore 1
+ 324 0358 03340103 		ld	s0,48(sp)
+ 325              		.cfi_restore 8
+ 326              		.cfi_def_cfa 2, 64
+ 327 035c 83348102 		ld	s1,40(sp)
+ 328              		.cfi_restore 9
+ 329 0360 03390102 		ld	s2,32(sp)
+ 330              		.cfi_restore 18
+ 331 0364 83398101 		ld	s3,24(sp)
+ 332              		.cfi_restore 19
+ 333 0368 033A0101 		ld	s4,16(sp)
+ 334              		.cfi_restore 20
+ 335 036c 833A8100 		ld	s5,8(sp)
+ 336              		.cfi_restore 21
+ 337 0370 033B0100 		ld	s6,0(sp)
+ 338              		.cfi_restore 22
+ 339 0374 13010104 		addi	sp,sp,64
+ 340              		.cfi_def_cfa_offset 0
+ 341 0378 67800000 		jr	ra
+ 342              		.cfi_endproc
+ 343              	.LFE114:
+ 345              		.section	.rodata.str1.8
+ 346 015f 00       		.align	3
+ 347              	.LC12:
+ 348 0160 0A0A3D3D 		.string	"\n\n=============SMALL MEMORY BUFFER ALLOC=============\n\n"
+ 348      3D3D3D3D 
+ 348      3D3D3D3D 
+ 348      3D3D3D53 
+ 348      4D414C4C 
+ 349              		.align	3
+ 350              	.LC13:
+ 351 0198 62756666 		.string	"buff_arr["
+ 351      5F617272 
+ 351      5B00
+ 352 01a2 00000000 		.align	3
+ 352      0000
+ 353              	.LC14:
+ 354 01a8 0A0A3D3D 		.string	"\n\n===========SMALL MEMORY BUFFER ALLOC END===========\n\n"
+ 354      3D3D3D3D 
+ 354      3D3D3D3D 
+ 354      3D534D41 
+ 354      4C4C204D 
+ 355              		.text
+ 356              		.align	2
+ 357              		.globl	_Z12kmalloc_testPPvimc
+ 359              	_Z12kmalloc_testPPvimc:
+ 360              	.LFB115:
+ 361              		.cfi_startproc
+ 362 037c 130101FC 		addi	sp,sp,-64
+ 363              		.cfi_def_cfa_offset 64
+ 364 0380 233C1102 		sd	ra,56(sp)
+ 365 0384 23388102 		sd	s0,48(sp)
+ 366 0388 23349102 		sd	s1,40(sp)
+ 367 038c 23302103 		sd	s2,32(sp)
+ 368 0390 233C3101 		sd	s3,24(sp)
+ 369 0394 23384101 		sd	s4,16(sp)
+GAS LISTING /tmp/ccm8l4Pg.s 			page 9
+
+
+ 370 0398 23345101 		sd	s5,8(sp)
+ 371 039c 23306101 		sd	s6,0(sp)
+ 372              		.cfi_offset 1, -8
+ 373              		.cfi_offset 8, -16
+ 374              		.cfi_offset 9, -24
+ 375              		.cfi_offset 18, -32
+ 376              		.cfi_offset 19, -40
+ 377              		.cfi_offset 20, -48
+ 378              		.cfi_offset 21, -56
+ 379              		.cfi_offset 22, -64
+ 380 03a0 13040104 		addi	s0,sp,64
+ 381              		.cfi_def_cfa 8, 0
+ 382 03a4 930A0500 		mv	s5,a0
+ 383 03a8 93890500 		mv	s3,a1
+ 384 03ac 130A0600 		mv	s4,a2
+ 385 03b0 138B0600 		mv	s6,a3
+ 386 03b4 17050000 		lla	a0,.LC12
+ 386      13050500 
+ 387 03bc 97000000 		call	_Z12kprintStringPKc@plt
+ 387      E7800000 
+ 388 03c4 13090000 		li	s2,0
+ 389 03c8 6F008000 		j	.L23
+ 390              	.L24:
+ 391 03cc 1B091900 		addiw	s2,s2,1
+ 392              	.L23:
+ 393 03d0 635C3909 		bge	s2,s3,.L28
+ 394 03d4 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 394      E7800000 
+ 395 03dc 93143900 		slli	s1,s2,3
+ 396 03e0 B3849A00 		add	s1,s5,s1
+ 397 03e4 93050A00 		mv	a1,s4
+ 398 03e8 97000000 		call	_ZN13SlabAllocator7kmallocEm@plt
+ 398      E7800000 
+ 399 03f0 23B0A400 		sd	a0,0(s1)
+ 400 03f4 17050000 		lla	a0,.LC13
+ 400      13050500 
+ 401 03fc 97000000 		call	_Z12kprintStringPKc@plt
+ 401      E7800000 
+ 402 0404 13060000 		li	a2,0
+ 403 0408 9305A000 		li	a1,10
+ 404 040c 13050900 		mv	a0,s2
+ 405 0410 97000000 		call	_Z9kprintIntmib@plt
+ 405      E7800000 
+ 406 0418 17050000 		lla	a0,.LC5
+ 406      13050500 
+ 407 0420 97000000 		call	_Z12kprintStringPKc@plt
+ 407      E7800000 
+ 408 0428 13060000 		li	a2,0
+ 409 042c 93050001 		li	a1,16
+ 410 0430 03B50400 		ld	a0,0(s1)
+ 411 0434 97000000 		call	_Z9kprintIntmib@plt
+ 411      E7800000 
+ 412 043c 17050000 		lla	a0,.LC6
+ 412      13050500 
+ 413 0444 97000000 		call	_Z12kprintStringPKc@plt
+ 413      E7800000 
+ 414 044c 83B70400 		ld	a5,0(s1)
+GAS LISTING /tmp/ccm8l4Pg.s 			page 10
+
+
+ 415 0450 E39E07F6 		bne	a5,zero,.L24
+ 416 0454 17050000 		lla	a0,.LC7
+ 416      13050500 
+ 417 045c 97000000 		call	_Z12kprintStringPKc@plt
+ 417      E7800000 
+ 418 0464 6F008002 		j	.L22
+ 419              	.L28:
+ 420 0468 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 420      E7800000 
+ 421 0470 93050B00 		mv	a1,s6
+ 422 0474 97000000 		call	_ZN13SlabAllocator11print_stateEc@plt
+ 422      E7800000 
+ 423 047c 17050000 		lla	a0,.LC14
+ 423      13050500 
+ 424 0484 97000000 		call	_Z12kprintStringPKc@plt
+ 424      E7800000 
+ 425              	.L22:
+ 426 048c 83308103 		ld	ra,56(sp)
+ 427              		.cfi_restore 1
+ 428 0490 03340103 		ld	s0,48(sp)
+ 429              		.cfi_restore 8
+ 430              		.cfi_def_cfa 2, 64
+ 431 0494 83348102 		ld	s1,40(sp)
+ 432              		.cfi_restore 9
+ 433 0498 03390102 		ld	s2,32(sp)
+ 434              		.cfi_restore 18
+ 435 049c 83398101 		ld	s3,24(sp)
+ 436              		.cfi_restore 19
+ 437 04a0 033A0101 		ld	s4,16(sp)
+ 438              		.cfi_restore 20
+ 439 04a4 833A8100 		ld	s5,8(sp)
+ 440              		.cfi_restore 21
+ 441 04a8 033B0100 		ld	s6,0(sp)
+ 442              		.cfi_restore 22
+ 443 04ac 13010104 		addi	sp,sp,64
+ 444              		.cfi_def_cfa_offset 0
+ 445 04b0 67800000 		jr	ra
+ 446              		.cfi_endproc
+ 447              	.LFE115:
+ 449              		.section	.rodata.str1.8
+ 450              		.align	3
+ 451              	.LC15:
+ 452 01e0 0A0A3D3D 		.string	"\n\n=============SMALL MEMORY BUFFER DEALLOC=============\n\n"
+ 452      3D3D3D3D 
+ 452      3D3D3D3D 
+ 452      3D3D3D53 
+ 452      4D414C4C 
+ 453 021a 00000000 		.align	3
+ 453      0000
+ 454              	.LC16:
+ 455 0220 496E7661 		.string	"Invalid free address given!!"
+ 455      6C696420 
+ 455      66726565 
+ 455      20616464 
+ 455      72657373 
+ 456 023d 000000   		.align	3
+ 457              	.LC17:
+GAS LISTING /tmp/ccm8l4Pg.s 			page 11
+
+
+ 458 0240 0A0A3D3D 		.string	"\n\n===========SMALL MEMORY BUFFER DEALLOC END===========\n\n"
+ 458      3D3D3D3D 
+ 458      3D3D3D3D 
+ 458      3D534D41 
+ 458      4C4C204D 
+ 459              		.text
+ 460              		.align	2
+ 461              		.globl	_Z10kfree_testPPvic
+ 463              	_Z10kfree_testPPvic:
+ 464              	.LFB116:
+ 465              		.cfi_startproc
+ 466 04b4 130101FC 		addi	sp,sp,-64
+ 467              		.cfi_def_cfa_offset 64
+ 468 04b8 233C1102 		sd	ra,56(sp)
+ 469 04bc 23388102 		sd	s0,48(sp)
+ 470 04c0 23349102 		sd	s1,40(sp)
+ 471 04c4 23302103 		sd	s2,32(sp)
+ 472 04c8 233C3101 		sd	s3,24(sp)
+ 473 04cc 23384101 		sd	s4,16(sp)
+ 474 04d0 23345101 		sd	s5,8(sp)
+ 475              		.cfi_offset 1, -8
+ 476              		.cfi_offset 8, -16
+ 477              		.cfi_offset 9, -24
+ 478              		.cfi_offset 18, -32
+ 479              		.cfi_offset 19, -40
+ 480              		.cfi_offset 20, -48
+ 481              		.cfi_offset 21, -56
+ 482 04d4 13040104 		addi	s0,sp,64
+ 483              		.cfi_def_cfa 8, 0
+ 484 04d8 130A0500 		mv	s4,a0
+ 485 04dc 93890500 		mv	s3,a1
+ 486 04e0 930A0600 		mv	s5,a2
+ 487 04e4 17050000 		lla	a0,.LC15
+ 487      13050500 
+ 488 04ec 97000000 		call	_Z12kprintStringPKc@plt
+ 488      E7800000 
+ 489 04f4 13090000 		li	s2,0
+ 490 04f8 6F004007 		j	.L30
+ 491              	.L31:
+ 492 04fc 17050000 		lla	a0,.LC13
+ 492      13050500 
+ 493 0504 97000000 		call	_Z12kprintStringPKc@plt
+ 493      E7800000 
+ 494 050c 13060000 		li	a2,0
+ 495 0510 9305A000 		li	a1,10
+ 496 0514 13050900 		mv	a0,s2
+ 497 0518 97000000 		call	_Z9kprintIntmib@plt
+ 497      E7800000 
+ 498 0520 17050000 		lla	a0,.LC5
+ 498      13050500 
+ 499 0528 97000000 		call	_Z12kprintStringPKc@plt
+ 499      E7800000 
+ 500 0530 13060000 		li	a2,0
+ 501 0534 93050001 		li	a1,16
+ 502 0538 03B50400 		ld	a0,0(s1)
+ 503 053c 97000000 		call	_Z9kprintIntmib@plt
+ 503      E7800000 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 12
+
+
+ 504 0544 17050000 		lla	a0,.LC6
+ 504      13050500 
+ 505 054c 97000000 		call	_Z12kprintStringPKc@plt
+ 505      E7800000 
+ 506 0554 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 506      E7800000 
+ 507 055c 83B50400 		ld	a1,0(s1)
+ 508 0560 97000000 		call	_ZN13SlabAllocator5kfreeEPv@plt
+ 508      E7800000 
+ 509 0568 1B091900 		addiw	s2,s2,1
+ 510              	.L30:
+ 511 056c 63543903 		bge	s2,s3,.L35
+ 512 0570 93143900 		slli	s1,s2,3
+ 513 0574 B3049A00 		add	s1,s4,s1
+ 514 0578 83B70400 		ld	a5,0(s1)
+ 515 057c E39007F8 		bne	a5,zero,.L31
+ 516 0580 17050000 		lla	a0,.LC16
+ 516      13050500 
+ 517 0588 97000000 		call	_Z12kprintStringPKc@plt
+ 517      E7800000 
+ 518 0590 6F008002 		j	.L29
+ 519              	.L35:
+ 520 0594 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 520      E7800000 
+ 521 059c 93850A00 		mv	a1,s5
+ 522 05a0 97000000 		call	_ZN13SlabAllocator11print_stateEc@plt
+ 522      E7800000 
+ 523 05a8 17050000 		lla	a0,.LC17
+ 523      13050500 
+ 524 05b0 97000000 		call	_Z12kprintStringPKc@plt
+ 524      E7800000 
+ 525              	.L29:
+ 526 05b8 83308103 		ld	ra,56(sp)
+ 527              		.cfi_restore 1
+ 528 05bc 03340103 		ld	s0,48(sp)
+ 529              		.cfi_restore 8
+ 530              		.cfi_def_cfa 2, 64
+ 531 05c0 83348102 		ld	s1,40(sp)
+ 532              		.cfi_restore 9
+ 533 05c4 03390102 		ld	s2,32(sp)
+ 534              		.cfi_restore 18
+ 535 05c8 83398101 		ld	s3,24(sp)
+ 536              		.cfi_restore 19
+ 537 05cc 033A0101 		ld	s4,16(sp)
+ 538              		.cfi_restore 20
+ 539 05d0 833A8100 		ld	s5,8(sp)
+ 540              		.cfi_restore 21
+ 541 05d4 13010104 		addi	sp,sp,64
+ 542              		.cfi_def_cfa_offset 0
+ 543 05d8 67800000 		jr	ra
+ 544              		.cfi_endproc
+ 545              	.LFE116:
+ 547              		.section	.rodata.str1.8
+ 548 027a 00000000 		.align	3
+ 548      0000
+ 549              	.LC18:
+ 550 0280 0A0A3D3D 		.string	"\n\n=============Slab Allocator State Check=============\n\n"
+GAS LISTING /tmp/ccm8l4Pg.s 			page 13
+
+
+ 550      3D3D3D3D 
+ 550      3D3D3D3D 
+ 550      3D3D3D53 
+ 550      6C616220 
+ 551 02b9 00000000 		.align	3
+ 551      000000
+ 552              	.LC19:
+ 553 02c0 0A0A3D3D 		.string	"\n\n===========Slab Allocator State Check End===========\n\n"
+ 553      3D3D3D3D 
+ 553      3D3D3D3D 
+ 553      3D536C61 
+ 553      6220416C 
+ 554              		.text
+ 555              		.align	2
+ 556              		.globl	_Z25slab_allocator_state_ceckc
+ 558              	_Z25slab_allocator_state_ceckc:
+ 559              	.LFB117:
+ 560              		.cfi_startproc
+ 561 05dc 130101FE 		addi	sp,sp,-32
+ 562              		.cfi_def_cfa_offset 32
+ 563 05e0 233C1100 		sd	ra,24(sp)
+ 564 05e4 23388100 		sd	s0,16(sp)
+ 565 05e8 23349100 		sd	s1,8(sp)
+ 566              		.cfi_offset 1, -8
+ 567              		.cfi_offset 8, -16
+ 568              		.cfi_offset 9, -24
+ 569 05ec 13040102 		addi	s0,sp,32
+ 570              		.cfi_def_cfa 8, 0
+ 571 05f0 93040500 		mv	s1,a0
+ 572 05f4 17050000 		lla	a0,.LC18
+ 572      13050500 
+ 573 05fc 97000000 		call	_Z12kprintStringPKc@plt
+ 573      E7800000 
+ 574 0604 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 574      E7800000 
+ 575 060c 93850400 		mv	a1,s1
+ 576 0610 97000000 		call	_ZN13SlabAllocator11print_stateEc@plt
+ 576      E7800000 
+ 577 0618 17050000 		lla	a0,.LC19
+ 577      13050500 
+ 578 0620 97000000 		call	_Z12kprintStringPKc@plt
+ 578      E7800000 
+ 579 0628 83308101 		ld	ra,24(sp)
+ 580              		.cfi_restore 1
+ 581 062c 03340101 		ld	s0,16(sp)
+ 582              		.cfi_restore 8
+ 583              		.cfi_def_cfa 2, 32
+ 584 0630 83348100 		ld	s1,8(sp)
+ 585              		.cfi_restore 9
+ 586 0634 13010102 		addi	sp,sp,32
+ 587              		.cfi_def_cfa_offset 0
+ 588 0638 67800000 		jr	ra
+ 589              		.cfi_endproc
+ 590              	.LFE117:
+ 592              		.section	.rodata.str1.8
+ 593 02f9 00000000 		.align	3
+ 593      000000
+GAS LISTING /tmp/ccm8l4Pg.s 			page 14
+
+
+ 594              	.LC20:
+ 595 0300 0A0A3D3D 		.string	"\n\n=============Object Allocate Test=============\n\n"
+ 595      3D3D3D3D 
+ 595      3D3D3D3D 
+ 595      3D3D3D4F 
+ 595      626A6563 
+ 596 0333 00000000 		.align	3
+ 596      00
+ 597              	.LC21:
+ 598 0338 4F626A65 		.string	"Object not corresctly allocated!!\n"
+ 598      6374206E 
+ 598      6F742063 
+ 598      6F727265 
+ 598      7363746C 
+ 599 035b 00000000 		.align	3
+ 599      00
+ 600              	.LC22:
+ 601 0360 6F626A65 		.string	"object["
+ 601      63745B00 
+ 602              		.align	3
+ 603              	.LC23:
+ 604 0368 0A0A3D3D 		.string	"\n\n===========Object Allocate Test End===========\n\n"
+ 604      3D3D3D3D 
+ 604      3D3D3D3D 
+ 604      3D4F626A 
+ 604      65637420 
+ 605              		.text
+ 606              		.align	2
+ 607              		.globl	_Z20cache_obj_alloc_testPPviP11ObjectCachec
+ 609              	_Z20cache_obj_alloc_testPPviP11ObjectCachec:
+ 610              	.LFB118:
+ 611              		.cfi_startproc
+ 612 063c 130101FC 		addi	sp,sp,-64
+ 613              		.cfi_def_cfa_offset 64
+ 614 0640 233C1102 		sd	ra,56(sp)
+ 615 0644 23388102 		sd	s0,48(sp)
+ 616 0648 23349102 		sd	s1,40(sp)
+ 617 064c 23302103 		sd	s2,32(sp)
+ 618 0650 233C3101 		sd	s3,24(sp)
+ 619 0654 23384101 		sd	s4,16(sp)
+ 620 0658 23345101 		sd	s5,8(sp)
+ 621 065c 23306101 		sd	s6,0(sp)
+ 622              		.cfi_offset 1, -8
+ 623              		.cfi_offset 8, -16
+ 624              		.cfi_offset 9, -24
+ 625              		.cfi_offset 18, -32
+ 626              		.cfi_offset 19, -40
+ 627              		.cfi_offset 20, -48
+ 628              		.cfi_offset 21, -56
+ 629              		.cfi_offset 22, -64
+ 630 0660 13040104 		addi	s0,sp,64
+ 631              		.cfi_def_cfa 8, 0
+ 632 0664 930A0500 		mv	s5,a0
+ 633 0668 138A0500 		mv	s4,a1
+ 634 066c 93090600 		mv	s3,a2
+ 635 0670 138B0600 		mv	s6,a3
+ 636 0674 17050000 		lla	a0,.LC20
+GAS LISTING /tmp/ccm8l4Pg.s 			page 15
+
+
+ 636      13050500 
+ 637 067c 97000000 		call	_Z12kprintStringPKc@plt
+ 637      E7800000 
+ 638 0684 93040000 		li	s1,0
+ 639 0688 6F000006 		j	.L39
+ 640              	.L40:
+ 641 068c 17050000 		lla	a0,.LC22
+ 641      13050500 
+ 642 0694 97000000 		call	_Z12kprintStringPKc@plt
+ 642      E7800000 
+ 643 069c 13060000 		li	a2,0
+ 644 06a0 9305A000 		li	a1,10
+ 645 06a4 13850400 		mv	a0,s1
+ 646 06a8 97000000 		call	_Z9kprintIntmib@plt
+ 646      E7800000 
+ 647 06b0 17050000 		lla	a0,.LC5
+ 647      13050500 
+ 648 06b8 97000000 		call	_Z12kprintStringPKc@plt
+ 648      E7800000 
+ 649 06c0 13060000 		li	a2,0
+ 650 06c4 93050001 		li	a1,16
+ 651 06c8 03350900 		ld	a0,0(s2)
+ 652 06cc 97000000 		call	_Z9kprintIntmib@plt
+ 652      E7800000 
+ 653 06d4 17050000 		lla	a0,.LC6
+ 653      13050500 
+ 654 06dc 97000000 		call	_Z12kprintStringPKc@plt
+ 654      E7800000 
+ 655 06e4 9B841400 		addiw	s1,s1,1
+ 656              	.L39:
+ 657 06e8 63DA4403 		bge	s1,s4,.L44
+ 658 06ec 13993400 		slli	s2,s1,3
+ 659 06f0 33892A01 		add	s2,s5,s2
+ 660 06f4 13850900 		mv	a0,s3
+ 661 06f8 97000000 		call	_ZN11ObjectCache9alloc_objEv@plt
+ 661      E7800000 
+ 662 0700 2330A900 		sd	a0,0(s2)
+ 663 0704 E31405F8 		bne	a0,zero,.L40
+ 664 0708 17050000 		lla	a0,.LC21
+ 664      13050500 
+ 665 0710 97000000 		call	_Z12kprintStringPKc@plt
+ 665      E7800000 
+ 666 0718 6F000003 		j	.L38
+ 667              	.L44:
+ 668 071c 93050B00 		mv	a1,s6
+ 669 0720 13850900 		mv	a0,s3
+ 670 0724 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 670      E7800000 
+ 671 072c 13050B00 		mv	a0,s6
+ 672 0730 97000000 		call	_Z25slab_allocator_state_ceckc
+ 672      E7800000 
+ 673 0738 17050000 		lla	a0,.LC23
+ 673      13050500 
+ 674 0740 97000000 		call	_Z12kprintStringPKc@plt
+ 674      E7800000 
+ 675              	.L38:
+ 676 0748 83308103 		ld	ra,56(sp)
+GAS LISTING /tmp/ccm8l4Pg.s 			page 16
+
+
+ 677              		.cfi_restore 1
+ 678 074c 03340103 		ld	s0,48(sp)
+ 679              		.cfi_restore 8
+ 680              		.cfi_def_cfa 2, 64
+ 681 0750 83348102 		ld	s1,40(sp)
+ 682              		.cfi_restore 9
+ 683 0754 03390102 		ld	s2,32(sp)
+ 684              		.cfi_restore 18
+ 685 0758 83398101 		ld	s3,24(sp)
+ 686              		.cfi_restore 19
+ 687 075c 033A0101 		ld	s4,16(sp)
+ 688              		.cfi_restore 20
+ 689 0760 833A8100 		ld	s5,8(sp)
+ 690              		.cfi_restore 21
+ 691 0764 033B0100 		ld	s6,0(sp)
+ 692              		.cfi_restore 22
+ 693 0768 13010104 		addi	sp,sp,64
+ 694              		.cfi_def_cfa_offset 0
+ 695 076c 67800000 		jr	ra
+ 696              		.cfi_endproc
+ 697              	.LFE118:
+ 699              		.section	.rodata.str1.8
+ 700 039b 00000000 		.align	3
+ 700      00
+ 701              	.LC24:
+ 702 03a0 0A0A3D3D 		.string	"\n\n=============Object Deallocate Test=============\n\n"
+ 702      3D3D3D3D 
+ 702      3D3D3D3D 
+ 702      3D3D3D4F 
+ 702      626A6563 
+ 703 03d5 000000   		.align	3
+ 704              	.LC25:
+ 705 03d8 496E7661 		.string	"Invalid object address!\n"
+ 705      6C696420 
+ 705      6F626A65 
+ 705      63742061 
+ 705      64647265 
+ 706 03f1 00000000 		.align	3
+ 706      000000
+ 707              	.LC26:
+ 708 03f8 0A0A3D3D 		.string	"\n\n=============Object Dellocate Test End=============\n\n"
+ 708      3D3D3D3D 
+ 708      3D3D3D3D 
+ 708      3D3D3D4F 
+ 708      626A6563 
+ 709              		.text
+ 710              		.align	2
+ 711              		.globl	_Z23cache_obj_dealloca_testPPviP11ObjectCachec
+ 713              	_Z23cache_obj_dealloca_testPPviP11ObjectCachec:
+ 714              	.LFB119:
+ 715              		.cfi_startproc
+ 716 0770 130101FC 		addi	sp,sp,-64
+ 717              		.cfi_def_cfa_offset 64
+ 718 0774 233C1102 		sd	ra,56(sp)
+ 719 0778 23388102 		sd	s0,48(sp)
+ 720 077c 23349102 		sd	s1,40(sp)
+ 721 0780 23302103 		sd	s2,32(sp)
+GAS LISTING /tmp/ccm8l4Pg.s 			page 17
+
+
+ 722 0784 233C3101 		sd	s3,24(sp)
+ 723 0788 23384101 		sd	s4,16(sp)
+ 724 078c 23345101 		sd	s5,8(sp)
+ 725 0790 23306101 		sd	s6,0(sp)
+ 726              		.cfi_offset 1, -8
+ 727              		.cfi_offset 8, -16
+ 728              		.cfi_offset 9, -24
+ 729              		.cfi_offset 18, -32
+ 730              		.cfi_offset 19, -40
+ 731              		.cfi_offset 20, -48
+ 732              		.cfi_offset 21, -56
+ 733              		.cfi_offset 22, -64
+ 734 0794 13040104 		addi	s0,sp,64
+ 735              		.cfi_def_cfa 8, 0
+ 736 0798 930A0500 		mv	s5,a0
+ 737 079c 93890500 		mv	s3,a1
+ 738 07a0 130A0600 		mv	s4,a2
+ 739 07a4 138B0600 		mv	s6,a3
+ 740 07a8 17050000 		lla	a0,.LC24
+ 740      13050500 
+ 741 07b0 97000000 		call	_Z12kprintStringPKc@plt
+ 741      E7800000 
+ 742 07b8 93040000 		li	s1,0
+ 743 07bc 6F004001 		j	.L46
+ 744              	.L47:
+ 745 07c0 13050A00 		mv	a0,s4
+ 746 07c4 97000000 		call	_ZN11ObjectCache8free_objEPv@plt
+ 746      E7800000 
+ 747 07cc 9B841400 		addiw	s1,s1,1
+ 748              	.L46:
+ 749 07d0 63D03409 		bge	s1,s3,.L51
+ 750 07d4 17050000 		lla	a0,.LC22
+ 750      13050500 
+ 751 07dc 97000000 		call	_Z12kprintStringPKc@plt
+ 751      E7800000 
+ 752 07e4 13060000 		li	a2,0
+ 753 07e8 9305A000 		li	a1,10
+ 754 07ec 13850400 		mv	a0,s1
+ 755 07f0 97000000 		call	_Z9kprintIntmib@plt
+ 755      E7800000 
+ 756 07f8 17050000 		lla	a0,.LC5
+ 756      13050500 
+ 757 0800 97000000 		call	_Z12kprintStringPKc@plt
+ 757      E7800000 
+ 758 0808 13993400 		slli	s2,s1,3
+ 759 080c 33892A01 		add	s2,s5,s2
+ 760 0810 13060000 		li	a2,0
+ 761 0814 93050001 		li	a1,16
+ 762 0818 03350900 		ld	a0,0(s2)
+ 763 081c 97000000 		call	_Z9kprintIntmib@plt
+ 763      E7800000 
+ 764 0824 17050000 		lla	a0,.LC6
+ 764      13050500 
+ 765 082c 97000000 		call	_Z12kprintStringPKc@plt
+ 765      E7800000 
+ 766 0834 83350900 		ld	a1,0(s2)
+ 767 0838 E39405F8 		bne	a1,zero,.L47
+GAS LISTING /tmp/ccm8l4Pg.s 			page 18
+
+
+ 768 083c 17050000 		lla	a0,.LC25
+ 768      13050500 
+ 769 0844 97000000 		call	_Z12kprintStringPKc@plt
+ 769      E7800000 
+ 770 084c 6F000003 		j	.L45
+ 771              	.L51:
+ 772 0850 93050B00 		mv	a1,s6
+ 773 0854 13050A00 		mv	a0,s4
+ 774 0858 97000000 		call	_ZN11ObjectCache9printInfoEc@plt
+ 774      E7800000 
+ 775 0860 13050B00 		mv	a0,s6
+ 776 0864 97000000 		call	_Z25slab_allocator_state_ceckc
+ 776      E7800000 
+ 777 086c 17050000 		lla	a0,.LC26
+ 777      13050500 
+ 778 0874 97000000 		call	_Z12kprintStringPKc@plt
+ 778      E7800000 
+ 779              	.L45:
+ 780 087c 83308103 		ld	ra,56(sp)
+ 781              		.cfi_restore 1
+ 782 0880 03340103 		ld	s0,48(sp)
+ 783              		.cfi_restore 8
+ 784              		.cfi_def_cfa 2, 64
+ 785 0884 83348102 		ld	s1,40(sp)
+ 786              		.cfi_restore 9
+ 787 0888 03390102 		ld	s2,32(sp)
+ 788              		.cfi_restore 18
+ 789 088c 83398101 		ld	s3,24(sp)
+ 790              		.cfi_restore 19
+ 791 0890 033A0101 		ld	s4,16(sp)
+ 792              		.cfi_restore 20
+ 793 0894 833A8100 		ld	s5,8(sp)
+ 794              		.cfi_restore 21
+ 795 0898 033B0100 		ld	s6,0(sp)
+ 796              		.cfi_restore 22
+ 797 089c 13010104 		addi	sp,sp,64
+ 798              		.cfi_def_cfa_offset 0
+ 799 08a0 67800000 		jr	ra
+ 800              		.cfi_endproc
+ 801              	.LFE119:
+ 803              		.section	.rodata.str1.8
+ 804              		.align	3
+ 805              	.LC27:
+ 806 0430 0A0A2D2D 		.string	"\n\n--------SLAB TEST--------\n\n"
+ 806      2D2D2D2D 
+ 806      2D2D534C 
+ 806      41422054 
+ 806      4553542D 
+ 807 044e 0000     		.align	3
+ 808              	.LC28:
+ 809 0450 536C6162 		.string	"Slab Allocator init!\n"
+ 809      20416C6C 
+ 809      6F636174 
+ 809      6F722069 
+ 809      6E697421 
+ 810 0466 0000     		.align	3
+ 811              	.LC29:
+GAS LISTING /tmp/ccm8l4Pg.s 			page 19
+
+
+ 812 0468 6B73656D 		.string	"ksemaphore_cache"
+ 812      6170686F 
+ 812      72655F63 
+ 812      61636865 
+ 812      00
+ 813 0479 00000000 		.align	3
+ 813      000000
+ 814              	.LC30:
+ 815 0480 785B315D 		.string	"x[1]->get_val(): "
+ 815      2D3E6765 
+ 815      745F7661 
+ 815      6C28293A 
+ 815      2000
+ 816 0492 00000000 		.align	3
+ 816      0000
+ 817              	.LC31:
+ 818 0498 785B385D 		.string	"x[8]->get_val(): "
+ 818      2D3E6765 
+ 818      745F7661 
+ 818      6C28293A 
+ 818      2000
+ 819 04aa 00000000 		.align	3
+ 819      0000
+ 820              	.LC32:
+ 821 04b0 0A0A2D2D 		.string	"\n\n------SLAB TEST END------\n\n"
+ 821      2D2D2D2D 
+ 821      534C4142 
+ 821      20544553 
+ 821      5420454E 
+ 822              		.text
+ 823              		.align	2
+ 824              		.globl	_Z9slab_testv
+ 826              	_Z9slab_testv:
+ 827              	.LFB121:
+ 828              		.cfi_startproc
+ 829              		.cfi_personality 0x9b,DW.ref.__gxx_personality_v0
+ 830              		.cfi_lsda 0x1b,.LLSDA121
+ 831 08a4 130101F4 		addi	sp,sp,-192
+ 832              		.cfi_def_cfa_offset 192
+ 833 08a8 233C110A 		sd	ra,184(sp)
+ 834 08ac 2338810A 		sd	s0,176(sp)
+ 835 08b0 2334910A 		sd	s1,168(sp)
+ 836 08b4 2330210B 		sd	s2,160(sp)
+ 837              		.cfi_offset 1, -8
+ 838              		.cfi_offset 8, -16
+ 839              		.cfi_offset 9, -24
+ 840              		.cfi_offset 18, -32
+ 841 08b8 1304010C 		addi	s0,sp,192
+ 842              		.cfi_def_cfa 8, 0
+ 843 08bc 17050000 		lla	a0,.LC27
+ 843      13050500 
+ 844              	.LEHB4:
+ 845 08c4 97000000 		call	_Z12kprintStringPKc@plt
+ 845      E7800000 
+ 846 08cc 17050000 		lla	a0,.LC28
+ 846      13050500 
+ 847 08d4 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/ccm8l4Pg.s 			page 20
+
+
+ 847      E7800000 
+ 848 08dc 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 848      E7800000 
+ 849 08e4 13050005 		li	a0,80
+ 850 08e8 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 850      E7800000 
+ 851 08f0 13090500 		mv	s2,a0
+ 852 08f4 93063000 		li	a3,3
+ 853 08f8 13060002 		li	a2,32
+ 854 08fc 9305A000 		li	a1,10
+ 855 0900 97000000 		call	_Z16cache_alloc_testPP11ObjectCacheimc
+ 855      E7800000 
+ 856 0908 13058005 		li	a0,88
+ 857 090c 97000000 		call	_ZN11ObjectCachenwEm@plt
+ 857      E7800000 
+ 858              	.LEHE4:
+ 859 0914 93040500 		mv	s1,a0
+ 860 0918 63040502 		beq	a0,zero,.L53
+ 861 091c 93070000 		li	a5,0
+ 862 0920 13070000 		li	a4,0
+ 863 0924 97060000 		lla	a3,_Z4ctorPv
+ 863      93860600 
+ 864 092c 13068002 		li	a2,40
+ 865 0930 97050000 		lla	a1,.LC29
+ 865      93850500 
+ 866              	.LEHB5:
+ 867 0938 97000000 		call	_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE@plt
+ 867      E7800000 
+ 868              	.LEHE5:
+ 869              	.L53:
+ 870 0940 93063000 		li	a3,3
+ 871 0944 13860400 		mv	a2,s1
+ 872 0948 9305A000 		li	a1,10
+ 873 094c 130504F4 		addi	a0,s0,-192
+ 874              	.LEHB6:
+ 875 0950 97000000 		call	_Z20cache_obj_alloc_testPPviP11ObjectCachec
+ 875      E7800000 
+ 876 0958 17050000 		lla	a0,.LC30
+ 876      13050500 
+ 877 0960 97000000 		call	_Z12kprintStringPKc@plt
+ 877      E7800000 
+ 878 0968 13060000 		li	a2,0
+ 879 096c 93050001 		li	a1,16
+ 880 0970 833784F4 		ld	a5,-184(s0)
+ 881 0974 03E58700 		lwu	a0,8(a5)
+ 882 0978 97000000 		call	_Z9kprintIntmib@plt
+ 882      E7800000 
+ 883 0980 17050000 		lla	a0,.LC6
+ 883      13050500 
+ 884 0988 97000000 		call	_Z12kprintStringPKc@plt
+ 884      E7800000 
+ 885 0990 17050000 		lla	a0,.LC31
+ 885      13050500 
+ 886 0998 97000000 		call	_Z12kprintStringPKc@plt
+ 886      E7800000 
+ 887 09a0 13060000 		li	a2,0
+ 888 09a4 93050001 		li	a1,16
+GAS LISTING /tmp/ccm8l4Pg.s 			page 21
+
+
+ 889 09a8 833704F8 		ld	a5,-128(s0)
+ 890 09ac 03E58700 		lwu	a0,8(a5)
+ 891 09b0 97000000 		call	_Z9kprintIntmib@plt
+ 891      E7800000 
+ 892 09b8 17050000 		lla	a0,.LC6
+ 892      13050500 
+ 893 09c0 97000000 		call	_Z12kprintStringPKc@plt
+ 893      E7800000 
+ 894 09c8 13063000 		li	a2,3
+ 895 09cc 9305A000 		li	a1,10
+ 896 09d0 13050900 		mv	a0,s2
+ 897 09d4 97000000 		call	_Z18cache_dealloc_testPP11ObjectCacheic
+ 897      E7800000 
+ 898 09dc 17050000 		lla	a0,.LC32
+ 898      13050500 
+ 899 09e4 97000000 		call	_Z12kprintStringPKc@plt
+ 899      E7800000 
+ 900              	.LEHE6:
+ 901 09ec 8330810B 		ld	ra,184(sp)
+ 902              		.cfi_remember_state
+ 903              		.cfi_restore 1
+ 904 09f0 0334010B 		ld	s0,176(sp)
+ 905              		.cfi_restore 8
+ 906              		.cfi_def_cfa 2, 192
+ 907 09f4 8334810A 		ld	s1,168(sp)
+ 908              		.cfi_restore 9
+ 909 09f8 0339010A 		ld	s2,160(sp)
+ 910              		.cfi_restore 18
+ 911 09fc 1301010C 		addi	sp,sp,192
+ 912              		.cfi_def_cfa_offset 0
+ 913 0a00 67800000 		jr	ra
+ 914              	.L55:
+ 915              		.cfi_restore_state
+ 916 0a04 13090500 		mv	s2,a0
+ 917 0a08 13850400 		mv	a0,s1
+ 918 0a0c 97000000 		call	_ZN11ObjectCachedlEPv@plt
+ 918      E7800000 
+ 919 0a14 13050900 		mv	a0,s2
+ 920              	.LEHB7:
+ 921 0a18 97000000 		call	_Unwind_Resume@plt
+ 921      E7800000 
+ 922              	.LEHE7:
+ 923              		.cfi_endproc
+ 924              	.LFE121:
+ 925              		.section	.gcc_except_table
+ 926              	.LLSDA121:
+ 927 0038 FF       		.byte	0xff
+ 928 0039 FF       		.byte	0xff
+ 929 003a 03       		.byte	0x3
+ 930 003b 34       		.byte	0x34
+ 931 003c 00000000 		.4byte	.LEHB4-.LFB121
+ 932 0040 00000000 		.4byte	.LEHE4-.LEHB4
+ 933 0044 00000000 		.4byte	0
+ 934 0048 00       		.byte	0
+ 935 0049 00000000 		.4byte	.LEHB5-.LFB121
+ 936 004d 00000000 		.4byte	.LEHE5-.LEHB5
+ 937 0051 00000000 		.4byte	.L55-.LFB121
+GAS LISTING /tmp/ccm8l4Pg.s 			page 22
+
+
+ 938 0055 00       		.byte	0
+ 939 0056 00000000 		.4byte	.LEHB6-.LFB121
+ 940 005a 00000000 		.4byte	.LEHE6-.LEHB6
+ 941 005e 00000000 		.4byte	0
+ 942 0062 00       		.byte	0
+ 943 0063 00000000 		.4byte	.LEHB7-.LFB121
+ 944 0067 00000000 		.4byte	.LEHE7-.LEHB7
+ 945 006b 00000000 		.4byte	0
+ 946 006f 00       		.byte	0
+ 947              		.text
+ 949              		.hidden	DW.ref.__gxx_personality_v0
+ 950              		.weak	DW.ref.__gxx_personality_v0
+ 951              		.section	.data.rel.local.DW.ref.__gxx_personality_v0,"awG",@progbits,DW.ref.__gxx_personality_v0,c
+ 952              		.align	3
+ 955              	DW.ref.__gxx_personality_v0:
+ 956 0000 00000000 		.dword	__gxx_personality_v0
+ 956      00000000 
+ 957              		.ident	"GCC: (GNU) 12.2.0"
+ 958              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccm8l4Pg.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 slab_test.cpp
+     /tmp/ccm8l4Pg.s:11     .text:0000000000000000 _Z4ctorPv
+     /tmp/ccm8l4Pg.s:13     .text:0000000000000000 .L0 
+     /tmp/ccm8l4Pg.s:14     .text:0000000000000000 $x
+     /tmp/ccm8l4Pg.s:15     .text:0000000000000004 .L0 
+     /tmp/ccm8l4Pg.s:18     .text:000000000000000c .L0 
+     /tmp/ccm8l4Pg.s:19     .text:000000000000000c .L0 
+     /tmp/ccm8l4Pg.s:21     .text:0000000000000010 .L0 
+     /tmp/ccm8l4Pg.s:42     .text:0000000000000068 .L0 
+     /tmp/ccm8l4Pg.s:44     .text:000000000000006c .L0 
+     /tmp/ccm8l4Pg.s:45     .text:000000000000006c .L0 
+     /tmp/ccm8l4Pg.s:47     .text:0000000000000070 .L0 
+     /tmp/ccm8l4Pg.s:49     .text:0000000000000074 .L0 
+     /tmp/ccm8l4Pg.s:84     .text:0000000000000074 _Z16cache_alloc_testPP11ObjectCacheimc
+     /tmp/ccm8l4Pg.s:86     .text:0000000000000074 .L0 
+     /tmp/ccm8l4Pg.s:955    .data.rel.local.DW.ref.__gxx_personality_v0:0000000000000000 DW.ref.__gxx_personality_v0
+     /tmp/ccm8l4Pg.s:90     .text:0000000000000078 .L0 
+     /tmp/ccm8l4Pg.s:100    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:101    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:102    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:103    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:104    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:105    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:106    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:107    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:108    .text:000000000000009c .L0 
+     /tmp/ccm8l4Pg.s:110    .text:00000000000000a0 .L0 
+     /tmp/ccm8l4Pg.s:183    .text:0000000000000200 .L0 
+     /tmp/ccm8l4Pg.s:184    .text:0000000000000200 .L0 
+     /tmp/ccm8l4Pg.s:186    .text:0000000000000204 .L0 
+     /tmp/ccm8l4Pg.s:187    .text:0000000000000204 .L0 
+     /tmp/ccm8l4Pg.s:189    .text:0000000000000208 .L0 
+     /tmp/ccm8l4Pg.s:191    .text:000000000000020c .L0 
+     /tmp/ccm8l4Pg.s:193    .text:0000000000000210 .L0 
+     /tmp/ccm8l4Pg.s:195    .text:0000000000000214 .L0 
+     /tmp/ccm8l4Pg.s:197    .text:0000000000000218 .L0 
+     /tmp/ccm8l4Pg.s:199    .text:000000000000021c .L0 
+     /tmp/ccm8l4Pg.s:201    .text:0000000000000220 .L0 
+     /tmp/ccm8l4Pg.s:203    .text:0000000000000224 .L0 
+     /tmp/ccm8l4Pg.s:206    .text:0000000000000228 .L0 
+     /tmp/ccm8l4Pg.s:214    .text:0000000000000244 .L0 
+     /tmp/ccm8l4Pg.s:255    .text:0000000000000244 _Z18cache_dealloc_testPP11ObjectCacheic
+     /tmp/ccm8l4Pg.s:257    .text:0000000000000244 .L0 
+     /tmp/ccm8l4Pg.s:259    .text:0000000000000248 .L0 
+     /tmp/ccm8l4Pg.s:268    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:269    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:270    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:271    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:272    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:273    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:274    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:275    .text:0000000000000268 .L0 
+     /tmp/ccm8l4Pg.s:277    .text:000000000000026c .L0 
+     /tmp/ccm8l4Pg.s:323    .text:0000000000000358 .L0 
+     /tmp/ccm8l4Pg.s:325    .text:000000000000035c .L0 
+     /tmp/ccm8l4Pg.s:326    .text:000000000000035c .L0 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 24
+
+
+     /tmp/ccm8l4Pg.s:328    .text:0000000000000360 .L0 
+     /tmp/ccm8l4Pg.s:330    .text:0000000000000364 .L0 
+     /tmp/ccm8l4Pg.s:332    .text:0000000000000368 .L0 
+     /tmp/ccm8l4Pg.s:334    .text:000000000000036c .L0 
+     /tmp/ccm8l4Pg.s:336    .text:0000000000000370 .L0 
+     /tmp/ccm8l4Pg.s:338    .text:0000000000000374 .L0 
+     /tmp/ccm8l4Pg.s:340    .text:0000000000000378 .L0 
+     /tmp/ccm8l4Pg.s:342    .text:000000000000037c .L0 
+     /tmp/ccm8l4Pg.s:359    .text:000000000000037c _Z12kmalloc_testPPvimc
+     /tmp/ccm8l4Pg.s:361    .text:000000000000037c .L0 
+     /tmp/ccm8l4Pg.s:363    .text:0000000000000380 .L0 
+     /tmp/ccm8l4Pg.s:372    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:373    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:374    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:375    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:376    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:377    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:378    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:379    .text:00000000000003a0 .L0 
+     /tmp/ccm8l4Pg.s:381    .text:00000000000003a4 .L0 
+     /tmp/ccm8l4Pg.s:427    .text:0000000000000490 .L0 
+     /tmp/ccm8l4Pg.s:429    .text:0000000000000494 .L0 
+     /tmp/ccm8l4Pg.s:430    .text:0000000000000494 .L0 
+     /tmp/ccm8l4Pg.s:432    .text:0000000000000498 .L0 
+     /tmp/ccm8l4Pg.s:434    .text:000000000000049c .L0 
+     /tmp/ccm8l4Pg.s:436    .text:00000000000004a0 .L0 
+     /tmp/ccm8l4Pg.s:438    .text:00000000000004a4 .L0 
+     /tmp/ccm8l4Pg.s:440    .text:00000000000004a8 .L0 
+     /tmp/ccm8l4Pg.s:442    .text:00000000000004ac .L0 
+     /tmp/ccm8l4Pg.s:444    .text:00000000000004b0 .L0 
+     /tmp/ccm8l4Pg.s:446    .text:00000000000004b4 .L0 
+     /tmp/ccm8l4Pg.s:463    .text:00000000000004b4 _Z10kfree_testPPvic
+     /tmp/ccm8l4Pg.s:465    .text:00000000000004b4 .L0 
+     /tmp/ccm8l4Pg.s:467    .text:00000000000004b8 .L0 
+     /tmp/ccm8l4Pg.s:475    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:476    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:477    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:478    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:479    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:480    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:481    .text:00000000000004d4 .L0 
+     /tmp/ccm8l4Pg.s:483    .text:00000000000004d8 .L0 
+     /tmp/ccm8l4Pg.s:527    .text:00000000000005bc .L0 
+     /tmp/ccm8l4Pg.s:529    .text:00000000000005c0 .L0 
+     /tmp/ccm8l4Pg.s:530    .text:00000000000005c0 .L0 
+     /tmp/ccm8l4Pg.s:532    .text:00000000000005c4 .L0 
+     /tmp/ccm8l4Pg.s:534    .text:00000000000005c8 .L0 
+     /tmp/ccm8l4Pg.s:536    .text:00000000000005cc .L0 
+     /tmp/ccm8l4Pg.s:538    .text:00000000000005d0 .L0 
+     /tmp/ccm8l4Pg.s:540    .text:00000000000005d4 .L0 
+     /tmp/ccm8l4Pg.s:542    .text:00000000000005d8 .L0 
+     /tmp/ccm8l4Pg.s:544    .text:00000000000005dc .L0 
+     /tmp/ccm8l4Pg.s:558    .text:00000000000005dc _Z25slab_allocator_state_ceckc
+     /tmp/ccm8l4Pg.s:560    .text:00000000000005dc .L0 
+     /tmp/ccm8l4Pg.s:562    .text:00000000000005e0 .L0 
+     /tmp/ccm8l4Pg.s:566    .text:00000000000005ec .L0 
+     /tmp/ccm8l4Pg.s:567    .text:00000000000005ec .L0 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 25
+
+
+     /tmp/ccm8l4Pg.s:568    .text:00000000000005ec .L0 
+     /tmp/ccm8l4Pg.s:570    .text:00000000000005f0 .L0 
+     /tmp/ccm8l4Pg.s:580    .text:000000000000062c .L0 
+     /tmp/ccm8l4Pg.s:582    .text:0000000000000630 .L0 
+     /tmp/ccm8l4Pg.s:583    .text:0000000000000630 .L0 
+     /tmp/ccm8l4Pg.s:585    .text:0000000000000634 .L0 
+     /tmp/ccm8l4Pg.s:587    .text:0000000000000638 .L0 
+     /tmp/ccm8l4Pg.s:589    .text:000000000000063c .L0 
+     /tmp/ccm8l4Pg.s:609    .text:000000000000063c _Z20cache_obj_alloc_testPPviP11ObjectCachec
+     /tmp/ccm8l4Pg.s:611    .text:000000000000063c .L0 
+     /tmp/ccm8l4Pg.s:613    .text:0000000000000640 .L0 
+     /tmp/ccm8l4Pg.s:622    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:623    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:624    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:625    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:626    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:627    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:628    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:629    .text:0000000000000660 .L0 
+     /tmp/ccm8l4Pg.s:631    .text:0000000000000664 .L0 
+     /tmp/ccm8l4Pg.s:677    .text:000000000000074c .L0 
+     /tmp/ccm8l4Pg.s:679    .text:0000000000000750 .L0 
+     /tmp/ccm8l4Pg.s:680    .text:0000000000000750 .L0 
+     /tmp/ccm8l4Pg.s:682    .text:0000000000000754 .L0 
+     /tmp/ccm8l4Pg.s:684    .text:0000000000000758 .L0 
+     /tmp/ccm8l4Pg.s:686    .text:000000000000075c .L0 
+     /tmp/ccm8l4Pg.s:688    .text:0000000000000760 .L0 
+     /tmp/ccm8l4Pg.s:690    .text:0000000000000764 .L0 
+     /tmp/ccm8l4Pg.s:692    .text:0000000000000768 .L0 
+     /tmp/ccm8l4Pg.s:694    .text:000000000000076c .L0 
+     /tmp/ccm8l4Pg.s:696    .text:0000000000000770 .L0 
+     /tmp/ccm8l4Pg.s:713    .text:0000000000000770 _Z23cache_obj_dealloca_testPPviP11ObjectCachec
+     /tmp/ccm8l4Pg.s:715    .text:0000000000000770 .L0 
+     /tmp/ccm8l4Pg.s:717    .text:0000000000000774 .L0 
+     /tmp/ccm8l4Pg.s:726    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:727    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:728    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:729    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:730    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:731    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:732    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:733    .text:0000000000000794 .L0 
+     /tmp/ccm8l4Pg.s:735    .text:0000000000000798 .L0 
+     /tmp/ccm8l4Pg.s:781    .text:0000000000000880 .L0 
+     /tmp/ccm8l4Pg.s:783    .text:0000000000000884 .L0 
+     /tmp/ccm8l4Pg.s:784    .text:0000000000000884 .L0 
+     /tmp/ccm8l4Pg.s:786    .text:0000000000000888 .L0 
+     /tmp/ccm8l4Pg.s:788    .text:000000000000088c .L0 
+     /tmp/ccm8l4Pg.s:790    .text:0000000000000890 .L0 
+     /tmp/ccm8l4Pg.s:792    .text:0000000000000894 .L0 
+     /tmp/ccm8l4Pg.s:794    .text:0000000000000898 .L0 
+     /tmp/ccm8l4Pg.s:796    .text:000000000000089c .L0 
+     /tmp/ccm8l4Pg.s:798    .text:00000000000008a0 .L0 
+     /tmp/ccm8l4Pg.s:800    .text:00000000000008a4 .L0 
+     /tmp/ccm8l4Pg.s:826    .text:00000000000008a4 _Z9slab_testv
+     /tmp/ccm8l4Pg.s:828    .text:00000000000008a4 .L0 
+     /tmp/ccm8l4Pg.s:832    .text:00000000000008a8 .L0 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 26
+
+
+     /tmp/ccm8l4Pg.s:837    .text:00000000000008b8 .L0 
+     /tmp/ccm8l4Pg.s:838    .text:00000000000008b8 .L0 
+     /tmp/ccm8l4Pg.s:839    .text:00000000000008b8 .L0 
+     /tmp/ccm8l4Pg.s:840    .text:00000000000008b8 .L0 
+     /tmp/ccm8l4Pg.s:842    .text:00000000000008bc .L0 
+     /tmp/ccm8l4Pg.s:902    .text:00000000000009f0 .L0 
+     /tmp/ccm8l4Pg.s:903    .text:00000000000009f0 .L0 
+     /tmp/ccm8l4Pg.s:905    .text:00000000000009f4 .L0 
+     /tmp/ccm8l4Pg.s:906    .text:00000000000009f4 .L0 
+     /tmp/ccm8l4Pg.s:908    .text:00000000000009f8 .L0 
+     /tmp/ccm8l4Pg.s:910    .text:00000000000009fc .L0 
+     /tmp/ccm8l4Pg.s:912    .text:0000000000000a00 .L0 
+     /tmp/ccm8l4Pg.s:915    .text:0000000000000a04 .L0 
+     /tmp/ccm8l4Pg.s:923    .text:0000000000000a20 .L0 
+     /tmp/ccm8l4Pg.s:28     .text:0000000000000028 .L0 
+     /tmp/ccm8l4Pg.s:54     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccm8l4Pg.s:115    .text:00000000000000b0 .L0 
+     /tmp/ccm8l4Pg.s:57     .rodata.str1.8:0000000000000038 .LC1
+     /tmp/ccm8l4Pg.s:118    .text:00000000000000c0 .L0 
+     /tmp/ccm8l4Pg.s:60     .rodata.str1.8:0000000000000048 .LC2
+     /tmp/ccm8l4Pg.s:124    .text:00000000000000e4 .L0 
+     /tmp/ccm8l4Pg.s:66     .rodata.str1.8:0000000000000060 .LC4
+     /tmp/ccm8l4Pg.s:132    .text:0000000000000108 .L0 
+     /tmp/ccm8l4Pg.s:69     .rodata.str1.8:0000000000000068 .LC5
+     /tmp/ccm8l4Pg.s:138    .text:000000000000012c .L0 
+     /tmp/ccm8l4Pg.s:72     .rodata.str1.8:0000000000000070 .LC6
+     /tmp/ccm8l4Pg.s:144    .text:0000000000000150 .L0 
+     /tmp/ccm8l4Pg.s:150    .text:0000000000000174 .L0 
+     /tmp/ccm8l4Pg.s:63     .rodata.str1.8:0000000000000058 .LC3
+     /tmp/ccm8l4Pg.s:164    .text:00000000000001b0 .L0 
+     /tmp/ccm8l4Pg.s:75     .rodata.str1.8:0000000000000078 .LC7
+     /tmp/ccm8l4Pg.s:170    .text:00000000000001c4 .L0 
+     /tmp/ccm8l4Pg.s:78     .rodata.str1.8:0000000000000098 .LC8
+     /tmp/ccm8l4Pg.s:178    .text:00000000000001ec .L0 
+     /tmp/ccm8l4Pg.s:243    .rodata.str1.8:00000000000000d0 .LC9
+     /tmp/ccm8l4Pg.s:281    .text:0000000000000278 .L0 
+     /tmp/ccm8l4Pg.s:294    .text:00000000000002b4 .L0 
+     /tmp/ccm8l4Pg.s:300    .text:00000000000002d8 .L0 
+     /tmp/ccm8l4Pg.s:308    .text:0000000000000304 .L0 
+     /tmp/ccm8l4Pg.s:246    .rodata.str1.8:0000000000000108 .LC10
+     /tmp/ccm8l4Pg.s:312    .text:000000000000031c .L0 
+     /tmp/ccm8l4Pg.s:249    .rodata.str1.8:0000000000000128 .LC11
+     /tmp/ccm8l4Pg.s:319    .text:0000000000000344 .L0 
+     /tmp/ccm8l4Pg.s:347    .rodata.str1.8:0000000000000160 .LC12
+     /tmp/ccm8l4Pg.s:386    .text:00000000000003b4 .L0 
+     /tmp/ccm8l4Pg.s:350    .rodata.str1.8:0000000000000198 .LC13
+     /tmp/ccm8l4Pg.s:400    .text:00000000000003f4 .L0 
+     /tmp/ccm8l4Pg.s:406    .text:0000000000000418 .L0 
+     /tmp/ccm8l4Pg.s:412    .text:000000000000043c .L0 
+     /tmp/ccm8l4Pg.s:416    .text:0000000000000454 .L0 
+     /tmp/ccm8l4Pg.s:353    .rodata.str1.8:00000000000001a8 .LC14
+     /tmp/ccm8l4Pg.s:423    .text:000000000000047c .L0 
+     /tmp/ccm8l4Pg.s:451    .rodata.str1.8:00000000000001e0 .LC15
+     /tmp/ccm8l4Pg.s:487    .text:00000000000004e4 .L0 
+     /tmp/ccm8l4Pg.s:492    .text:00000000000004fc .L0 
+     /tmp/ccm8l4Pg.s:498    .text:0000000000000520 .L0 
+     /tmp/ccm8l4Pg.s:504    .text:0000000000000544 .L0 
+GAS LISTING /tmp/ccm8l4Pg.s 			page 27
+
+
+     /tmp/ccm8l4Pg.s:454    .rodata.str1.8:0000000000000220 .LC16
+     /tmp/ccm8l4Pg.s:516    .text:0000000000000580 .L0 
+     /tmp/ccm8l4Pg.s:457    .rodata.str1.8:0000000000000240 .LC17
+     /tmp/ccm8l4Pg.s:523    .text:00000000000005a8 .L0 
+     /tmp/ccm8l4Pg.s:549    .rodata.str1.8:0000000000000280 .LC18
+     /tmp/ccm8l4Pg.s:572    .text:00000000000005f4 .L0 
+     /tmp/ccm8l4Pg.s:552    .rodata.str1.8:00000000000002c0 .LC19
+     /tmp/ccm8l4Pg.s:577    .text:0000000000000618 .L0 
+     /tmp/ccm8l4Pg.s:594    .rodata.str1.8:0000000000000300 .LC20
+     /tmp/ccm8l4Pg.s:636    .text:0000000000000674 .L0 
+     /tmp/ccm8l4Pg.s:600    .rodata.str1.8:0000000000000360 .LC22
+     /tmp/ccm8l4Pg.s:641    .text:000000000000068c .L0 
+     /tmp/ccm8l4Pg.s:647    .text:00000000000006b0 .L0 
+     /tmp/ccm8l4Pg.s:653    .text:00000000000006d4 .L0 
+     /tmp/ccm8l4Pg.s:597    .rodata.str1.8:0000000000000338 .LC21
+     /tmp/ccm8l4Pg.s:664    .text:0000000000000708 .L0 
+     /tmp/ccm8l4Pg.s:603    .rodata.str1.8:0000000000000368 .LC23
+     /tmp/ccm8l4Pg.s:673    .text:0000000000000738 .L0 
+     /tmp/ccm8l4Pg.s:701    .rodata.str1.8:00000000000003a0 .LC24
+     /tmp/ccm8l4Pg.s:740    .text:00000000000007a8 .L0 
+     /tmp/ccm8l4Pg.s:750    .text:00000000000007d4 .L0 
+     /tmp/ccm8l4Pg.s:756    .text:00000000000007f8 .L0 
+     /tmp/ccm8l4Pg.s:764    .text:0000000000000824 .L0 
+     /tmp/ccm8l4Pg.s:704    .rodata.str1.8:00000000000003d8 .LC25
+     /tmp/ccm8l4Pg.s:768    .text:000000000000083c .L0 
+     /tmp/ccm8l4Pg.s:707    .rodata.str1.8:00000000000003f8 .LC26
+     /tmp/ccm8l4Pg.s:777    .text:000000000000086c .L0 
+     /tmp/ccm8l4Pg.s:805    .rodata.str1.8:0000000000000430 .LC27
+     /tmp/ccm8l4Pg.s:843    .text:00000000000008bc .L0 
+     /tmp/ccm8l4Pg.s:808    .rodata.str1.8:0000000000000450 .LC28
+     /tmp/ccm8l4Pg.s:846    .text:00000000000008cc .L0 
+     /tmp/ccm8l4Pg.s:863    .text:0000000000000924 .L0 
+     /tmp/ccm8l4Pg.s:811    .rodata.str1.8:0000000000000468 .LC29
+     /tmp/ccm8l4Pg.s:865    .text:0000000000000930 .L0 
+     /tmp/ccm8l4Pg.s:814    .rodata.str1.8:0000000000000480 .LC30
+     /tmp/ccm8l4Pg.s:876    .text:0000000000000958 .L0 
+     /tmp/ccm8l4Pg.s:883    .text:0000000000000980 .L0 
+     /tmp/ccm8l4Pg.s:817    .rodata.str1.8:0000000000000498 .LC31
+     /tmp/ccm8l4Pg.s:885    .text:0000000000000990 .L0 
+     /tmp/ccm8l4Pg.s:892    .text:00000000000009b8 .L0 
+     /tmp/ccm8l4Pg.s:820    .rodata.str1.8:00000000000004b0 .LC32
+     /tmp/ccm8l4Pg.s:898    .text:00000000000009dc .L0 
+     /tmp/ccm8l4Pg.s:153    .text:0000000000000188 .L4
+     /tmp/ccm8l4Pg.s:169    .text:00000000000001c4 .L12
+     /tmp/ccm8l4Pg.s:174    .text:00000000000001d8 .L13
+     /tmp/ccm8l4Pg.s:128    .text:00000000000000fc .L5
+     /tmp/ccm8l4Pg.s:181    .text:00000000000001fc .L3
+     /tmp/ccm8l4Pg.s:292    .text:00000000000002b0 .L15
+     /tmp/ccm8l4Pg.s:315    .text:0000000000000330 .L20
+     /tmp/ccm8l4Pg.s:285    .text:0000000000000290 .L21
+     /tmp/ccm8l4Pg.s:321    .text:0000000000000354 .L14
+     /tmp/ccm8l4Pg.s:392    .text:00000000000003d0 .L23
+     /tmp/ccm8l4Pg.s:419    .text:0000000000000468 .L28
+     /tmp/ccm8l4Pg.s:390    .text:00000000000003cc .L24
+     /tmp/ccm8l4Pg.s:425    .text:000000000000048c .L22
+     /tmp/ccm8l4Pg.s:510    .text:000000000000056c .L30
+     /tmp/ccm8l4Pg.s:519    .text:0000000000000594 .L35
+GAS LISTING /tmp/ccm8l4Pg.s 			page 28
+
+
+     /tmp/ccm8l4Pg.s:491    .text:00000000000004fc .L31
+     /tmp/ccm8l4Pg.s:525    .text:00000000000005b8 .L29
+     /tmp/ccm8l4Pg.s:656    .text:00000000000006e8 .L39
+     /tmp/ccm8l4Pg.s:667    .text:000000000000071c .L44
+     /tmp/ccm8l4Pg.s:640    .text:000000000000068c .L40
+     /tmp/ccm8l4Pg.s:675    .text:0000000000000748 .L38
+     /tmp/ccm8l4Pg.s:748    .text:00000000000007d0 .L46
+     /tmp/ccm8l4Pg.s:771    .text:0000000000000850 .L51
+     /tmp/ccm8l4Pg.s:744    .text:00000000000007c0 .L47
+     /tmp/ccm8l4Pg.s:779    .text:000000000000087c .L45
+     /tmp/ccm8l4Pg.s:869    .text:0000000000000940 .L53
+     /tmp/ccm8l4Pg.s:116    .text:00000000000000b8 .LEHB0
+     /tmp/ccm8l4Pg.s:85     .text:0000000000000074 .LFB113
+     /tmp/ccm8l4Pg.s:157    .text:0000000000000198 .LEHE0
+     /tmp/ccm8l4Pg.s:165    .text:00000000000001b8 .LEHB1
+     /tmp/ccm8l4Pg.s:167    .text:00000000000001c0 .LEHE1
+     /tmp/ccm8l4Pg.s:205    .text:0000000000000228 .L10
+     /tmp/ccm8l4Pg.s:171    .text:00000000000001cc .LEHB2
+     /tmp/ccm8l4Pg.s:180    .text:00000000000001fc .LEHE2
+     /tmp/ccm8l4Pg.s:211    .text:000000000000023c .LEHB3
+     /tmp/ccm8l4Pg.s:213    .text:0000000000000244 .LEHE3
+     /tmp/ccm8l4Pg.s:844    .text:00000000000008c4 .LEHB4
+     /tmp/ccm8l4Pg.s:827    .text:00000000000008a4 .LFB121
+     /tmp/ccm8l4Pg.s:858    .text:0000000000000914 .LEHE4
+     /tmp/ccm8l4Pg.s:866    .text:0000000000000938 .LEHB5
+     /tmp/ccm8l4Pg.s:868    .text:0000000000000940 .LEHE5
+     /tmp/ccm8l4Pg.s:914    .text:0000000000000a04 .L55
+     /tmp/ccm8l4Pg.s:874    .text:0000000000000950 .LEHB6
+     /tmp/ccm8l4Pg.s:900    .text:00000000000009ec .LEHE6
+     /tmp/ccm8l4Pg.s:920    .text:0000000000000a18 .LEHB7
+     /tmp/ccm8l4Pg.s:922    .text:0000000000000a20 .LEHE7
+     /tmp/ccm8l4Pg.s:218    .gcc_except_table:0000000000000000 .LLSDA113
+     /tmp/ccm8l4Pg.s:926    .gcc_except_table:0000000000000038 .LLSDA121
+
+UNDEFINED SYMBOLS
+_ZN10KSemaphore16activeSemaphoresE
+_ZN10KSemaphoreD1Ev
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN11ObjectCache9printInfoEc
+_ZN11ObjectCachenwEm
+_ZN11ObjectCacheC1EPKcmPFvPvES4_NS_12SlabMetaTypeE
+_ZN13SlabAllocator11getInstanceEv
+_ZN13SlabAllocator11print_stateEc
+_ZN11ObjectCachedlEPv
+_Unwind_Resume
+__gxx_personality_v0
+_ZN11ObjectCacheD1Ev
+_ZN13SlabAllocator7kmallocEm
+_ZN13SlabAllocator5kfreeEPv
+_ZN11ObjectCache9alloc_objEv
+_ZN11ObjectCache8free_objEPv
+_ZN7NoAlloc9mem_allocEm

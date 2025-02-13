@@ -1,0 +1,1945 @@
+GAS LISTING /tmp/ccheTEuq.s 			page 1
+
+
+   1              		.file	"buddy_allocator.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN5Buddy11getInstanceEv
+  11              	_ZN5Buddy11getInstanceEv:
+  12              	.LFB117:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 17050000 		ld	a0,.LANCHOR0
+  20      03350500 
+  21 0014 03348100 		ld	s0,8(sp)
+  22              		.cfi_restore 8
+  23              		.cfi_def_cfa 2, 16
+  24 0018 13010101 		addi	sp,sp,16
+  25              		.cfi_def_cfa_offset 0
+  26 001c 67800000 		jr	ra
+  27              		.cfi_endproc
+  28              	.LFE117:
+  30              		.align	2
+  31              		.globl	_ZN5Buddy13get_from_listEh
+  33              	_ZN5Buddy13get_from_listEh:
+  34              	.LFB121:
+  35              		.cfi_startproc
+  36 0020 130101FF 		addi	sp,sp,-16
+  37              		.cfi_def_cfa_offset 16
+  38 0024 23348100 		sd	s0,8(sp)
+  39              		.cfi_offset 8, -8
+  40 0028 13040101 		addi	s0,sp,16
+  41              		.cfi_def_cfa 8, 0
+  42 002c 03378500 		ld	a4,8(a0)
+  43 0030 6364B704 		bgtu	a1,a4,.L7
+  44 0034 93070500 		mv	a5,a0
+  45 0038 03370501 		ld	a4,16(a0)
+  46 003c 93953500 		slli	a1,a1,3
+  47 0040 3307B700 		add	a4,a4,a1
+  48 0044 03350700 		ld	a0,0(a4)
+  49 0048 63000502 		beq	a0,zero,.L5
+  50 004c 03370500 		ld	a4,0(a0)
+  51 0050 63040700 		beq	a4,zero,.L6
+  52 0054 23340700 		sd	zero,8(a4)
+  53              	.L6:
+  54 0058 83B70701 		ld	a5,16(a5)
+  55 005c B387B700 		add	a5,a5,a1
+  56 0060 03370500 		ld	a4,0(a0)
+  57 0064 23B0E700 		sd	a4,0(a5)
+  58              	.L5:
+  59 0068 23300500 		sd	zero,0(a0)
+GAS LISTING /tmp/ccheTEuq.s 			page 2
+
+
+  60              	.L3:
+  61 006c 03348100 		ld	s0,8(sp)
+  62              		.cfi_remember_state
+  63              		.cfi_restore 8
+  64              		.cfi_def_cfa 2, 16
+  65 0070 13010101 		addi	sp,sp,16
+  66              		.cfi_def_cfa_offset 0
+  67 0074 67800000 		jr	ra
+  68              	.L7:
+  69              		.cfi_restore_state
+  70 0078 13050000 		li	a0,0
+  71 007c 6FF01FFF 		j	.L3
+  72              		.cfi_endproc
+  73              	.LFE121:
+  75              		.align	2
+  76              		.globl	_ZN5Buddy5splitEP7mmeta_t
+  78              	_ZN5Buddy5splitEP7mmeta_t:
+  79              	.LFB123:
+  80              		.cfi_startproc
+  81 0080 130101FF 		addi	sp,sp,-16
+  82              		.cfi_def_cfa_offset 16
+  83 0084 23348100 		sd	s0,8(sp)
+  84              		.cfi_offset 8, -8
+  85 0088 13040101 		addi	s0,sp,16
+  86              		.cfi_def_cfa 8, 0
+  87 008c B7170000 		li	a5,4096
+  88 0090 9387F7FF 		addi	a5,a5,-1
+  89 0094 B3F7F500 		and	a5,a1,a5
+  90 0098 63960702 		bne	a5,zero,.L11
+  91 009c 83370500 		ld	a5,0(a0)
+  92 00a0 63E6F502 		bgtu	a5,a1,.L12
+  93 00a4 03C70501 		lbu	a4,16(a1)
+  94 00a8 1B07F7FF 		addiw	a4,a4,-1
+  95 00ac B7170000 		li	a5,4096
+  96 00b0 B397E700 		sll	a5,a5,a4
+  97 00b4 3385F500 		add	a0,a1,a5
+  98              	.L9:
+  99 00b8 03348100 		ld	s0,8(sp)
+ 100              		.cfi_remember_state
+ 101              		.cfi_restore 8
+ 102              		.cfi_def_cfa 2, 16
+ 103 00bc 13010101 		addi	sp,sp,16
+ 104              		.cfi_def_cfa_offset 0
+ 105 00c0 67800000 		jr	ra
+ 106              	.L11:
+ 107              		.cfi_restore_state
+ 108 00c4 13050000 		li	a0,0
+ 109 00c8 6FF01FFF 		j	.L9
+ 110              	.L12:
+ 111 00cc 13050000 		li	a0,0
+ 112 00d0 6FF09FFE 		j	.L9
+ 113              		.cfi_endproc
+ 114              	.LFE123:
+ 116              		.align	2
+ 117              		.globl	_ZN5Buddy11get_bit_valEm
+ 119              	_ZN5Buddy11get_bit_valEm:
+ 120              	.LFB125:
+GAS LISTING /tmp/ccheTEuq.s 			page 3
+
+
+ 121              		.cfi_startproc
+ 122 00d4 130101FF 		addi	sp,sp,-16
+ 123              		.cfi_def_cfa_offset 16
+ 124 00d8 23348100 		sd	s0,8(sp)
+ 125              		.cfi_offset 8, -8
+ 126 00dc 13040101 		addi	s0,sp,16
+ 127              		.cfi_def_cfa 8, 0
+ 128 00e0 13D73500 		srli	a4,a1,3
+ 129 00e4 83378501 		ld	a5,24(a0)
+ 130 00e8 B387E700 		add	a5,a5,a4
+ 131 00ec 03C50700 		lbu	a0,0(a5)
+ 132 00f0 93F57500 		andi	a1,a1,7
+ 133 00f4 3B55B540 		sraw	a0,a0,a1
+ 134 00f8 13751500 		andi	a0,a0,1
+ 135 00fc 03348100 		ld	s0,8(sp)
+ 136              		.cfi_restore 8
+ 137              		.cfi_def_cfa 2, 16
+ 138 0100 13010101 		addi	sp,sp,16
+ 139              		.cfi_def_cfa_offset 0
+ 140 0104 67800000 		jr	ra
+ 141              		.cfi_endproc
+ 142              	.LFE125:
+ 144              		.align	2
+ 145              		.globl	_ZN5Buddy11add_to_listEhP7mmeta_t
+ 147              	_ZN5Buddy11add_to_listEhP7mmeta_t:
+ 148              	.LFB120:
+ 149              		.cfi_startproc
+ 150 0108 83378500 		ld	a5,8(a0)
+ 151 010c 63EEB70A 		bgtu	a1,a5,.L19
+ 152 0110 130101FD 		addi	sp,sp,-48
+ 153              		.cfi_def_cfa_offset 48
+ 154 0114 23341102 		sd	ra,40(sp)
+ 155 0118 23308102 		sd	s0,32(sp)
+ 156 011c 233C9100 		sd	s1,24(sp)
+ 157 0120 23382101 		sd	s2,16(sp)
+ 158 0124 23343101 		sd	s3,8(sp)
+ 159              		.cfi_offset 1, -8
+ 160              		.cfi_offset 8, -16
+ 161              		.cfi_offset 9, -24
+ 162              		.cfi_offset 18, -32
+ 163              		.cfi_offset 19, -40
+ 164 0128 13040103 		addi	s0,sp,48
+ 165              		.cfi_def_cfa 8, 0
+ 166 012c 13090500 		mv	s2,a0
+ 167 0130 93890500 		mv	s3,a1
+ 168 0134 93040600 		mv	s1,a2
+ 169 0138 630C0608 		beq	a2,zero,.L20
+ 170 013c B7170000 		li	a5,4096
+ 171 0140 9387F7FF 		addi	a5,a5,-1
+ 172 0144 B377F600 		and	a5,a2,a5
+ 173 0148 63980708 		bne	a5,zero,.L21
+ 174 014c 83370500 		ld	a5,0(a0)
+ 175 0150 B307F640 		sub	a5,a2,a5
+ 176 0154 97050000 		lbu	a1,.LANCHOR0+8
+ 176      83C50500 
+ 177 015c B3D5B700 		srl	a1,a5,a1
+ 178 0160 97000000 		call	_ZN5Buddy11get_bit_valEm
+GAS LISTING /tmp/ccheTEuq.s 			page 4
+
+
+ 178      E7800000 
+ 179 0168 630C0506 		beq	a0,zero,.L22
+ 180 016c 83370901 		ld	a5,16(s2)
+ 181 0170 13973900 		slli	a4,s3,3
+ 182 0174 B387E700 		add	a5,a5,a4
+ 183 0178 83B70700 		ld	a5,0(a5)
+ 184 017c 23B0F400 		sd	a5,0(s1)
+ 185 0180 23B40400 		sd	zero,8(s1)
+ 186 0184 23883401 		sb	s3,16(s1)
+ 187 0188 83370901 		ld	a5,16(s2)
+ 188 018c B387E700 		add	a5,a5,a4
+ 189 0190 83B70700 		ld	a5,0(a5)
+ 190 0194 63840700 		beq	a5,zero,.L18
+ 191 0198 23B49700 		sd	s1,8(a5)
+ 192              	.L18:
+ 193 019c 83370901 		ld	a5,16(s2)
+ 194 01a0 B387E700 		add	a5,a5,a4
+ 195 01a4 23B09700 		sd	s1,0(a5)
+ 196 01a8 13050000 		li	a0,0
+ 197              	.L17:
+ 198 01ac 83308102 		ld	ra,40(sp)
+ 199              		.cfi_restore 1
+ 200 01b0 03340102 		ld	s0,32(sp)
+ 201              		.cfi_restore 8
+ 202              		.cfi_def_cfa 2, 48
+ 203 01b4 83348101 		ld	s1,24(sp)
+ 204              		.cfi_restore 9
+ 205 01b8 03390101 		ld	s2,16(sp)
+ 206              		.cfi_restore 18
+ 207 01bc 83398100 		ld	s3,8(sp)
+ 208              		.cfi_restore 19
+ 209 01c0 13010103 		addi	sp,sp,48
+ 210              		.cfi_def_cfa_offset 0
+ 211 01c4 67800000 		jr	ra
+ 212              	.L19:
+ 213 01c8 1305C0FF 		li	a0,-4
+ 214 01cc 67800000 		ret
+ 215              	.L20:
+ 216              		.cfi_def_cfa_register 8
+ 217              		.cfi_offset 1, -8
+ 218              		.cfi_offset 8, -16
+ 219              		.cfi_offset 9, -24
+ 220              		.cfi_offset 18, -32
+ 221              		.cfi_offset 19, -40
+ 222 01d0 1305F0FF 		li	a0,-1
+ 223 01d4 6FF09FFD 		j	.L17
+ 224              	.L21:
+ 225 01d8 1305F0FF 		li	a0,-1
+ 226 01dc 6FF01FFD 		j	.L17
+ 227              	.L22:
+ 228 01e0 1305E0FF 		li	a0,-2
+ 229 01e4 6FF09FFC 		j	.L17
+ 230              		.cfi_endproc
+ 231              	.LFE120:
+ 233              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 234              		.align	3
+ 235              	.LC0:
+GAS LISTING /tmp/ccheTEuq.s 			page 5
+
+
+ 236 0000 61646474 		.string	"addtolist panic: "
+ 236      6F6C6973 
+ 236      74207061 
+ 236      6E69633A 
+ 236      2000
+ 237 0012 00000000 		.align	3
+ 237      0000
+ 238              	.LC1:
+ 239 0018 0A00     		.string	"\n"
+ 240              		.text
+ 241              		.align	2
+ 242              		.globl	_ZN5BuddyC2EPvh
+ 244              	_ZN5BuddyC2EPvh:
+ 245              	.LFB114:
+ 246              		.cfi_startproc
+ 247 01e8 130101FD 		addi	sp,sp,-48
+ 248              		.cfi_def_cfa_offset 48
+ 249 01ec 23341102 		sd	ra,40(sp)
+ 250 01f0 23308102 		sd	s0,32(sp)
+ 251 01f4 233C9100 		sd	s1,24(sp)
+ 252 01f8 23382101 		sd	s2,16(sp)
+ 253 01fc 23343101 		sd	s3,8(sp)
+ 254              		.cfi_offset 1, -8
+ 255              		.cfi_offset 8, -16
+ 256              		.cfi_offset 9, -24
+ 257              		.cfi_offset 18, -32
+ 258              		.cfi_offset 19, -40
+ 259 0200 13040103 		addi	s0,sp,48
+ 260              		.cfi_def_cfa 8, 0
+ 261 0204 93040500 		mv	s1,a0
+ 262 0208 93090600 		mv	s3,a2
+ 263 020c 2330B500 		sd	a1,0(a0)
+ 264 0210 2334C500 		sd	a2,8(a0)
+ 265 0214 97070000 		la	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE
+ 265      83B70700 
+ 266 021c 03B50700 		ld	a0,0(a5)
+ 267 0220 B7170000 		li	a5,4096
+ 268 0224 B397C700 		sll	a5,a5,a2
+ 269 0228 B387B700 		add	a5,a5,a1
+ 270 022c 3385A740 		sub	a0,a5,a0
+ 271 0230 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 271      E7800000 
+ 272 0238 97070000 		lbu	a5,.LANCHOR0+8
+ 272      83C70700 
+ 273 0240 9B87D7FF 		addiw	a5,a5,-3
+ 274 0244 13091000 		li	s2,1
+ 275 0248 3B19F900 		sllw	s2,s2,a5
+ 276 024c 13050900 		mv	a0,s2
+ 277 0250 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 277      E7800000 
+ 278 0258 23BCA400 		sd	a0,24(s1)
+ 279 025c 93070000 		li	a5,0
+ 280 0260 6F004001 		j	.L28
+ 281              	.L29:
+ 282 0264 03B78401 		ld	a4,24(s1)
+ 283 0268 3307F700 		add	a4,a4,a5
+ 284 026c 23000700 		sb	zero,0(a4)
+GAS LISTING /tmp/ccheTEuq.s 			page 6
+
+
+ 285 0270 93871700 		addi	a5,a5,1
+ 286              	.L28:
+ 287 0274 E3E827FF 		bltu	a5,s2,.L29
+ 288 0278 13851900 		addi	a0,s3,1
+ 289 027c 13153500 		slli	a0,a0,3
+ 290 0280 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 290      E7800000 
+ 291 0288 23B8A400 		sd	a0,16(s1)
+ 292 028c 93070000 		li	a5,0
+ 293 0290 6F00C001 		j	.L30
+ 294              	.L31:
+ 295 0294 03B70401 		ld	a4,16(s1)
+ 296 0298 93963700 		slli	a3,a5,3
+ 297 029c 3307D700 		add	a4,a4,a3
+ 298 02a0 23300700 		sd	zero,0(a4)
+ 299 02a4 9B871700 		addiw	a5,a5,1
+ 300 02a8 93F7F70F 		andi	a5,a5,0xff
+ 301              	.L30:
+ 302 02ac 03B78400 		ld	a4,8(s1)
+ 303 02b0 13071700 		addi	a4,a4,1
+ 304 02b4 E3E0E7FE 		bltu	a5,a4,.L31
+ 305 02b8 03B78401 		ld	a4,24(s1)
+ 306 02bc 83470700 		lbu	a5,0(a4)
+ 307 02c0 93E71700 		ori	a5,a5,1
+ 308 02c4 2300F700 		sb	a5,0(a4)
+ 309 02c8 03B60400 		ld	a2,0(s1)
+ 310 02cc 83C58400 		lbu	a1,8(s1)
+ 311 02d0 13850400 		mv	a0,s1
+ 312 02d4 97000000 		call	_ZN5Buddy11add_to_listEhP7mmeta_t
+ 312      E7800000 
+ 313 02dc 93040500 		mv	s1,a0
+ 314 02e0 63400502 		blt	a0,zero,.L34
+ 315              	.L27:
+ 316 02e4 83308102 		ld	ra,40(sp)
+ 317              		.cfi_remember_state
+ 318              		.cfi_restore 1
+ 319 02e8 03340102 		ld	s0,32(sp)
+ 320              		.cfi_restore 8
+ 321              		.cfi_def_cfa 2, 48
+ 322 02ec 83348101 		ld	s1,24(sp)
+ 323              		.cfi_restore 9
+ 324 02f0 03390101 		ld	s2,16(sp)
+ 325              		.cfi_restore 18
+ 326 02f4 83398100 		ld	s3,8(sp)
+ 327              		.cfi_restore 19
+ 328 02f8 13010103 		addi	sp,sp,48
+ 329              		.cfi_def_cfa_offset 0
+ 330 02fc 67800000 		jr	ra
+ 331              	.L34:
+ 332              		.cfi_restore_state
+ 333 0300 17050000 		lla	a0,.LC0
+ 333      13050500 
+ 334 0308 97000000 		call	_Z12kprintStringPKc@plt
+ 334      E7800000 
+ 335 0310 13060000 		li	a2,0
+ 336 0314 93050001 		li	a1,16
+ 337 0318 13850400 		mv	a0,s1
+GAS LISTING /tmp/ccheTEuq.s 			page 7
+
+
+ 338 031c 97000000 		call	_Z9kprintIntmib@plt
+ 338      E7800000 
+ 339 0324 17050000 		lla	a0,.LC1
+ 339      13050500 
+ 340 032c 97000000 		call	_Z12kprintStringPKc@plt
+ 340      E7800000 
+ 341 0334 6FF01FFB 		j	.L27
+ 342              		.cfi_endproc
+ 343              	.LFE114:
+ 345              		.globl	_ZN5BuddyC1EPvh
+ 346              		.set	_ZN5BuddyC1EPvh,_ZN5BuddyC2EPvh
+ 347              		.align	2
+ 348              		.globl	_ZN5Buddy9initalizeEPvh
+ 350              	_ZN5Buddy9initalizeEPvh:
+ 351              	.LFB116:
+ 352              		.cfi_startproc
+ 353 0338 130101FD 		addi	sp,sp,-48
+ 354              		.cfi_def_cfa_offset 48
+ 355 033c 23341102 		sd	ra,40(sp)
+ 356 0340 23308102 		sd	s0,32(sp)
+ 357 0344 233C9100 		sd	s1,24(sp)
+ 358 0348 23382101 		sd	s2,16(sp)
+ 359 034c 23343101 		sd	s3,8(sp)
+ 360              		.cfi_offset 1, -8
+ 361              		.cfi_offset 8, -16
+ 362              		.cfi_offset 9, -24
+ 363              		.cfi_offset 18, -32
+ 364              		.cfi_offset 19, -40
+ 365 0350 13040103 		addi	s0,sp,48
+ 366              		.cfi_def_cfa 8, 0
+ 367 0354 93040500 		mv	s1,a0
+ 368 0358 93890500 		mv	s3,a1
+ 369 035c 37150000 		li	a0,4096
+ 370 0360 97000000 		call	_Z4log2m@plt
+ 370      E7800000 
+ 371 0368 97070000 		sb	a0,.LANCHOR0+8,a5
+ 371      2380A700 
+ 372 0370 97070000 		la	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE
+ 372      83B70700 
+ 373 0378 83B70700 		ld	a5,0(a5)
+ 374 037c 93870702 		addi	a5,a5,32
+ 375 0380 63F2F402 		bgeu	s1,a5,.L41
+ 376 0384 13051000 		li	a0,1
+ 377              	.L36:
+ 378 0388 83308102 		ld	ra,40(sp)
+ 379              		.cfi_remember_state
+ 380              		.cfi_restore 1
+ 381 038c 03340102 		ld	s0,32(sp)
+ 382              		.cfi_restore 8
+ 383              		.cfi_def_cfa 2, 48
+ 384 0390 83348101 		ld	s1,24(sp)
+ 385              		.cfi_restore 9
+ 386 0394 03390101 		ld	s2,16(sp)
+ 387              		.cfi_restore 18
+ 388 0398 83398100 		ld	s3,8(sp)
+ 389              		.cfi_restore 19
+ 390 039c 13010103 		addi	sp,sp,48
+GAS LISTING /tmp/ccheTEuq.s 			page 8
+
+
+ 391              		.cfi_def_cfa_offset 0
+ 392 03a0 67800000 		jr	ra
+ 393              	.L41:
+ 394              		.cfi_restore_state
+ 395 03a4 B7170000 		li	a5,4096
+ 396 03a8 9387F7FF 		addi	a5,a5,-1
+ 397 03ac B384F400 		add	s1,s1,a5
+ 398 03b0 9307F0FF 		li	a5,-1
+ 399 03b4 B397A700 		sll	a5,a5,a0
+ 400 03b8 B3F4F400 		and	s1,s1,a5
+ 401 03bc 13050002 		li	a0,32
+ 402 03c0 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+ 402      E7800000 
+ 403 03c8 13090500 		mv	s2,a0
+ 404 03cc 630A0500 		beq	a0,zero,.L37
+ 405 03d0 13860900 		mv	a2,s3
+ 406 03d4 93850400 		mv	a1,s1
+ 407 03d8 97000000 		call	_ZN5BuddyC1EPvh
+ 407      E7800000 
+ 408              	.L37:
+ 409 03e0 97070000 		sd	s2,.LANCHOR0,a5
+ 409      23B02701 
+ 410 03e8 63060900 		beq	s2,zero,.L39
+ 411 03ec 13050000 		li	a0,0
+ 412 03f0 6FF09FF9 		j	.L36
+ 413              	.L39:
+ 414 03f4 13051000 		li	a0,1
+ 415 03f8 6FF01FF9 		j	.L36
+ 416              		.cfi_endproc
+ 417              	.LFE116:
+ 419              		.align	2
+ 420              		.globl	_ZN5Buddy16remove_from_listEhP7mmeta_t
+ 422              	_ZN5Buddy16remove_from_listEhP7mmeta_t:
+ 423              	.LFB122:
+ 424              		.cfi_startproc
+ 425 03fc 83378500 		ld	a5,8(a0)
+ 426 0400 63EAB70C 		bgtu	a1,a5,.L46
+ 427 0404 130101FD 		addi	sp,sp,-48
+ 428              		.cfi_def_cfa_offset 48
+ 429 0408 23341102 		sd	ra,40(sp)
+ 430 040c 23308102 		sd	s0,32(sp)
+ 431 0410 233C9100 		sd	s1,24(sp)
+ 432 0414 23382101 		sd	s2,16(sp)
+ 433 0418 23343101 		sd	s3,8(sp)
+ 434              		.cfi_offset 1, -8
+ 435              		.cfi_offset 8, -16
+ 436              		.cfi_offset 9, -24
+ 437              		.cfi_offset 18, -32
+ 438              		.cfi_offset 19, -40
+ 439 041c 13040103 		addi	s0,sp,48
+ 440              		.cfi_def_cfa 8, 0
+ 441 0420 13090500 		mv	s2,a0
+ 442 0424 93890500 		mv	s3,a1
+ 443 0428 93040600 		mv	s1,a2
+ 444 042c 6308060A 		beq	a2,zero,.L47
+ 445 0430 B7170000 		li	a5,4096
+ 446 0434 9387F7FF 		addi	a5,a5,-1
+GAS LISTING /tmp/ccheTEuq.s 			page 9
+
+
+ 447 0438 B377F600 		and	a5,a2,a5
+ 448 043c 6394070A 		bne	a5,zero,.L48
+ 449 0440 83370500 		ld	a5,0(a0)
+ 450 0444 B307F640 		sub	a5,a2,a5
+ 451 0448 97050000 		lbu	a1,.LANCHOR0+8
+ 451      83C50500 
+ 452 0450 B3D5B700 		srl	a1,a5,a1
+ 453 0454 97000000 		call	_ZN5Buddy11get_bit_valEm
+ 453      E7800000 
+ 454 045c 63080508 		beq	a0,zero,.L49
+ 455 0460 83C70401 		lbu	a5,16(s1)
+ 456 0464 63983709 		bne	a5,s3,.L50
+ 457 0468 83370901 		ld	a5,16(s2)
+ 458 046c 13973900 		slli	a4,s3,3
+ 459 0470 B387E700 		add	a5,a5,a4
+ 460 0474 83B70700 		ld	a5,0(a5)
+ 461 0478 63829704 		beq	a5,s1,.L55
+ 462 047c 03B78400 		ld	a4,8(s1)
+ 463 0480 83B70400 		ld	a5,0(s1)
+ 464 0484 2330F700 		sd	a5,0(a4)
+ 465 0488 63860700 		beq	a5,zero,.L45
+ 466 048c 03B78400 		ld	a4,8(s1)
+ 467 0490 23B4E700 		sd	a4,8(a5)
+ 468              	.L45:
+ 469 0494 23B40400 		sd	zero,8(s1)
+ 470 0498 23B00400 		sd	zero,0(s1)
+ 471 049c 13050000 		li	a0,0
+ 472              	.L43:
+ 473 04a0 83308102 		ld	ra,40(sp)
+ 474              		.cfi_remember_state
+ 475              		.cfi_restore 1
+ 476 04a4 03340102 		ld	s0,32(sp)
+ 477              		.cfi_restore 8
+ 478              		.cfi_def_cfa 2, 48
+ 479 04a8 83348101 		ld	s1,24(sp)
+ 480              		.cfi_restore 9
+ 481 04ac 03390101 		ld	s2,16(sp)
+ 482              		.cfi_restore 18
+ 483 04b0 83398100 		ld	s3,8(sp)
+ 484              		.cfi_restore 19
+ 485 04b4 13010103 		addi	sp,sp,48
+ 486              		.cfi_def_cfa_offset 0
+ 487 04b8 67800000 		jr	ra
+ 488              	.L55:
+ 489              		.cfi_restore_state
+ 490 04bc 93850900 		mv	a1,s3
+ 491 04c0 13050900 		mv	a0,s2
+ 492 04c4 97000000 		call	_ZN5Buddy13get_from_listEh
+ 492      E7800000 
+ 493 04cc 13050000 		li	a0,0
+ 494 04d0 6FF01FFD 		j	.L43
+ 495              	.L46:
+ 496              		.cfi_def_cfa_register 2
+ 497              		.cfi_restore 1
+ 498              		.cfi_restore 8
+ 499              		.cfi_restore 9
+ 500              		.cfi_restore 18
+GAS LISTING /tmp/ccheTEuq.s 			page 10
+
+
+ 501              		.cfi_restore 19
+ 502 04d4 1305C0FF 		li	a0,-4
+ 503 04d8 67800000 		ret
+ 504              	.L47:
+ 505              		.cfi_def_cfa_register 8
+ 506              		.cfi_offset 1, -8
+ 507              		.cfi_offset 8, -16
+ 508              		.cfi_offset 9, -24
+ 509              		.cfi_offset 18, -32
+ 510              		.cfi_offset 19, -40
+ 511 04dc 1305F0FF 		li	a0,-1
+ 512 04e0 6FF01FFC 		j	.L43
+ 513              	.L48:
+ 514 04e4 1305F0FF 		li	a0,-1
+ 515 04e8 6FF09FFB 		j	.L43
+ 516              	.L49:
+ 517 04ec 1305E0FF 		li	a0,-2
+ 518 04f0 6FF01FFB 		j	.L43
+ 519              	.L50:
+ 520 04f4 1305D0FF 		li	a0,-3
+ 521 04f8 6FF09FFA 		j	.L43
+ 522              		.cfi_endproc
+ 523              	.LFE122:
+ 525              		.align	2
+ 526              		.globl	_ZN5Buddy7set_bitEm
+ 528              	_ZN5Buddy7set_bitEm:
+ 529              	.LFB126:
+ 530              		.cfi_startproc
+ 531 04fc 130101FF 		addi	sp,sp,-16
+ 532              		.cfi_def_cfa_offset 16
+ 533 0500 23348100 		sd	s0,8(sp)
+ 534              		.cfi_offset 8, -8
+ 535 0504 13040101 		addi	s0,sp,16
+ 536              		.cfi_def_cfa 8, 0
+ 537 0508 13D73500 		srli	a4,a1,3
+ 538 050c 83378501 		ld	a5,24(a0)
+ 539 0510 B387E700 		add	a5,a5,a4
+ 540 0514 03C70700 		lbu	a4,0(a5)
+ 541 0518 93F57500 		andi	a1,a1,7
+ 542 051c 93061000 		li	a3,1
+ 543 0520 BB96B600 		sllw	a3,a3,a1
+ 544 0524 3367D700 		or	a4,a4,a3
+ 545 0528 2380E700 		sb	a4,0(a5)
+ 546 052c 03348100 		ld	s0,8(sp)
+ 547              		.cfi_restore 8
+ 548              		.cfi_def_cfa 2, 16
+ 549 0530 13010101 		addi	sp,sp,16
+ 550              		.cfi_def_cfa_offset 0
+ 551 0534 67800000 		jr	ra
+ 552              		.cfi_endproc
+ 553              	.LFE126:
+ 555              		.align	2
+ 556              		.globl	_ZN5Buddy7clr_bitEm
+ 558              	_ZN5Buddy7clr_bitEm:
+ 559              	.LFB127:
+ 560              		.cfi_startproc
+ 561 0538 130101FF 		addi	sp,sp,-16
+GAS LISTING /tmp/ccheTEuq.s 			page 11
+
+
+ 562              		.cfi_def_cfa_offset 16
+ 563 053c 23348100 		sd	s0,8(sp)
+ 564              		.cfi_offset 8, -8
+ 565 0540 13040101 		addi	s0,sp,16
+ 566              		.cfi_def_cfa 8, 0
+ 567 0544 93D73500 		srli	a5,a1,3
+ 568 0548 03378501 		ld	a4,24(a0)
+ 569 054c 3307F700 		add	a4,a4,a5
+ 570 0550 83460700 		lbu	a3,0(a4)
+ 571 0554 93F57500 		andi	a1,a1,7
+ 572 0558 93071000 		li	a5,1
+ 573 055c BB97B700 		sllw	a5,a5,a1
+ 574 0560 93C7F7FF 		not	a5,a5
+ 575 0564 9B978701 		slliw	a5,a5,24
+ 576 0568 9BD78741 		sraiw	a5,a5,24
+ 577 056c B3F7F600 		and	a5,a3,a5
+ 578 0570 2300F700 		sb	a5,0(a4)
+ 579 0574 03348100 		ld	s0,8(sp)
+ 580              		.cfi_restore 8
+ 581              		.cfi_def_cfa 2, 16
+ 582 0578 13010101 		addi	sp,sp,16
+ 583              		.cfi_def_cfa_offset 0
+ 584 057c 67800000 		jr	ra
+ 585              		.cfi_endproc
+ 586              	.LFE127:
+ 588              		.align	2
+ 589              		.globl	_ZN5Buddy9mem_allocEh
+ 591              	_ZN5Buddy9mem_allocEh:
+ 592              	.LFB118:
+ 593              		.cfi_startproc
+ 594 0580 130101FC 		addi	sp,sp,-64
+ 595              		.cfi_def_cfa_offset 64
+ 596 0584 233C1102 		sd	ra,56(sp)
+ 597 0588 23388102 		sd	s0,48(sp)
+ 598 058c 23349102 		sd	s1,40(sp)
+ 599 0590 23302103 		sd	s2,32(sp)
+ 600 0594 233C3101 		sd	s3,24(sp)
+ 601 0598 23384101 		sd	s4,16(sp)
+ 602 059c 23345101 		sd	s5,8(sp)
+ 603              		.cfi_offset 1, -8
+ 604              		.cfi_offset 8, -16
+ 605              		.cfi_offset 9, -24
+ 606              		.cfi_offset 18, -32
+ 607              		.cfi_offset 19, -40
+ 608              		.cfi_offset 20, -48
+ 609              		.cfi_offset 21, -56
+ 610 05a0 13040104 		addi	s0,sp,64
+ 611              		.cfi_def_cfa 8, 0
+ 612 05a4 83368500 		ld	a3,8(a0)
+ 613 05a8 63EEB60E 		bgtu	a1,a3,.L67
+ 614 05ac 13090500 		mv	s2,a0
+ 615 05b0 138A0500 		mv	s4,a1
+ 616 05b4 93840500 		mv	s1,a1
+ 617              	.L62:
+ 618 05b8 13860400 		mv	a2,s1
+ 619 05bc 63E29602 		bltu	a3,s1,.L63
+ 620 05c0 83370901 		ld	a5,16(s2)
+GAS LISTING /tmp/ccheTEuq.s 			page 12
+
+
+ 621 05c4 13973400 		slli	a4,s1,3
+ 622 05c8 B387E700 		add	a5,a5,a4
+ 623 05cc 83B70700 		ld	a5,0(a5)
+ 624 05d0 63980700 		bne	a5,zero,.L63
+ 625 05d4 9B841400 		addiw	s1,s1,1
+ 626 05d8 93F4F40F 		andi	s1,s1,0xff
+ 627 05dc 6FF0DFFD 		j	.L62
+ 628              	.L63:
+ 629 05e0 63E6C60C 		bltu	a3,a2,.L68
+ 630 05e4 93850400 		mv	a1,s1
+ 631 05e8 13050900 		mv	a0,s2
+ 632 05ec 97000000 		call	_ZN5Buddy13get_from_listEh
+ 632      E7800000 
+ 633 05f4 930A0500 		mv	s5,a0
+ 634 05f8 6F000006 		j	.L65
+ 635              	.L66:
+ 636 05fc 93850A00 		mv	a1,s5
+ 637 0600 13050900 		mv	a0,s2
+ 638 0604 97000000 		call	_ZN5Buddy5splitEP7mmeta_t
+ 638      E7800000 
+ 639 060c 93090500 		mv	s3,a0
+ 640 0610 83370900 		ld	a5,0(s2)
+ 641 0614 B307F540 		sub	a5,a0,a5
+ 642 0618 97050000 		lbu	a1,.LANCHOR0+8
+ 642      83C50500 
+ 643 0620 B3D5B700 		srl	a1,a5,a1
+ 644 0624 13050900 		mv	a0,s2
+ 645 0628 97000000 		call	_ZN5Buddy7set_bitEm
+ 645      E7800000 
+ 646 0630 9B84F4FF 		addiw	s1,s1,-1
+ 647 0634 93F4F40F 		andi	s1,s1,0xff
+ 648 0638 13860900 		mv	a2,s3
+ 649 063c 93850400 		mv	a1,s1
+ 650 0640 13050900 		mv	a0,s2
+ 651 0644 97000000 		call	_ZN5Buddy11add_to_listEhP7mmeta_t
+ 651      E7800000 
+ 652 064c 83C70A01 		lbu	a5,16(s5)
+ 653 0650 9B87F7FF 		addiw	a5,a5,-1
+ 654 0654 2388FA00 		sb	a5,16(s5)
+ 655              	.L65:
+ 656 0658 E3629AFA 		bgtu	s1,s4,.L66
+ 657 065c 83370900 		ld	a5,0(s2)
+ 658 0660 B387FA40 		sub	a5,s5,a5
+ 659 0664 97050000 		lbu	a1,.LANCHOR0+8
+ 659      83C50500 
+ 660 066c B3D5B700 		srl	a1,a5,a1
+ 661 0670 13050900 		mv	a0,s2
+ 662 0674 97000000 		call	_ZN5Buddy7clr_bitEm
+ 662      E7800000 
+ 663              	.L60:
+ 664 067c 13850A00 		mv	a0,s5
+ 665 0680 83308103 		ld	ra,56(sp)
+ 666              		.cfi_remember_state
+ 667              		.cfi_restore 1
+ 668 0684 03340103 		ld	s0,48(sp)
+ 669              		.cfi_restore 8
+ 670              		.cfi_def_cfa 2, 64
+GAS LISTING /tmp/ccheTEuq.s 			page 13
+
+
+ 671 0688 83348102 		ld	s1,40(sp)
+ 672              		.cfi_restore 9
+ 673 068c 03390102 		ld	s2,32(sp)
+ 674              		.cfi_restore 18
+ 675 0690 83398101 		ld	s3,24(sp)
+ 676              		.cfi_restore 19
+ 677 0694 033A0101 		ld	s4,16(sp)
+ 678              		.cfi_restore 20
+ 679 0698 833A8100 		ld	s5,8(sp)
+ 680              		.cfi_restore 21
+ 681 069c 13010104 		addi	sp,sp,64
+ 682              		.cfi_def_cfa_offset 0
+ 683 06a0 67800000 		jr	ra
+ 684              	.L67:
+ 685              		.cfi_restore_state
+ 686 06a4 930A0000 		li	s5,0
+ 687 06a8 6FF05FFD 		j	.L60
+ 688              	.L68:
+ 689 06ac 930A0000 		li	s5,0
+ 690 06b0 6FF0DFFC 		j	.L60
+ 691              		.cfi_endproc
+ 692              	.LFE118:
+ 694              		.align	2
+ 695              		.globl	_Z3kmiv
+ 697              	_Z3kmiv:
+ 698              	.LFB128:
+ 699              		.cfi_startproc
+ 700 06b4 130101FE 		addi	sp,sp,-32
+ 701              		.cfi_def_cfa_offset 32
+ 702 06b8 233C1100 		sd	ra,24(sp)
+ 703 06bc 23388100 		sd	s0,16(sp)
+ 704 06c0 23349100 		sd	s1,8(sp)
+ 705 06c4 23302101 		sd	s2,0(sp)
+ 706              		.cfi_offset 1, -8
+ 707              		.cfi_offset 8, -16
+ 708              		.cfi_offset 9, -24
+ 709              		.cfi_offset 18, -32
+ 710 06c8 13040102 		addi	s0,sp,32
+ 711              		.cfi_def_cfa 8, 0
+ 712 06cc 97070000 		la	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE
+ 712      83B70700 
+ 713 06d4 03B90700 		ld	s2,0(a5)
+ 714 06d8 13090902 		addi	s2,s2,32
+ 715 06dc 97070000 		la	a5,HEAP_END_ADDR
+ 715      83B70700 
+ 716 06e4 03B50700 		ld	a0,0(a5)
+ 717 06e8 33052541 		sub	a0,a0,s2
+ 718 06ec 13553500 		srli	a0,a0,3
+ 719 06f0 63060506 		beq	a0,zero,.L72
+ 720 06f4 9304F5FF 		addi	s1,a0,-1
+ 721 06f8 37150000 		li	a0,4096
+ 722 06fc 97000000 		call	_Z4log2m@plt
+ 722      E7800000 
+ 723 0704 33D5A400 		srl	a0,s1,a0
+ 724 0708 13051500 		addi	a0,a0,1
+ 725 070c 97000000 		call	_Z11closest2powm@plt
+ 725      E7800000 
+GAS LISTING /tmp/ccheTEuq.s 			page 14
+
+
+ 726 0714 97000000 		call	_Z4log2m@plt
+ 726      E7800000 
+ 727 071c 93050500 		mv	a1,a0
+ 728 0720 13050900 		mv	a0,s2
+ 729 0724 97000000 		call	_ZN5Buddy9initalizeEPvh
+ 729      E7800000 
+ 730 072c 93040500 		mv	s1,a0
+ 731 0730 63000502 		beq	a0,zero,.L74
+ 732              	.L71:
+ 733 0734 13850400 		mv	a0,s1
+ 734 0738 83308101 		ld	ra,24(sp)
+ 735              		.cfi_remember_state
+ 736              		.cfi_restore 1
+ 737 073c 03340101 		ld	s0,16(sp)
+ 738              		.cfi_restore 8
+ 739              		.cfi_def_cfa 2, 32
+ 740 0740 83348100 		ld	s1,8(sp)
+ 741              		.cfi_restore 9
+ 742 0744 03390100 		ld	s2,0(sp)
+ 743              		.cfi_restore 18
+ 744 0748 13010102 		addi	sp,sp,32
+ 745              		.cfi_def_cfa_offset 0
+ 746 074c 67800000 		jr	ra
+ 747              	.L74:
+ 748              		.cfi_restore_state
+ 749 0750 97000000 		call	_ZN13SlabAllocator11getInstanceEv@plt
+ 749      E7800000 
+ 750 0758 6FF0DFFD 		j	.L71
+ 751              	.L72:
+ 752 075c 93042000 		li	s1,2
+ 753 0760 6FF05FFD 		j	.L71
+ 754              		.cfi_endproc
+ 755              	.LFE128:
+ 757              		.section	.rodata.str1.8
+ 758 001a 00000000 		.align	3
+ 758      0000
+ 759              	.LC2:
+ 760 0020 626C6F63 		.string	"blocks["
+ 760      6B735B00 
+ 761              		.align	3
+ 762              	.LC3:
+ 763 0028 5D3A2000 		.string	"]: "
+ 764 002c 00000000 		.align	3
+ 765              	.LC4:
+ 766 0030 46524545 		.string	"FREE"
+ 766      00
+ 767 0035 000000   		.align	3
+ 768              	.LC5:
+ 769 0038 414C4C4F 		.string	"ALLOC"
+ 769      4300
+ 770              		.text
+ 771              		.align	2
+ 772              		.globl	_ZN5Buddy8print_beEm
+ 774              	_ZN5Buddy8print_beEm:
+ 775              	.LFB129:
+ 776              		.cfi_startproc
+ 777 0764 130101FE 		addi	sp,sp,-32
+GAS LISTING /tmp/ccheTEuq.s 			page 15
+
+
+ 778              		.cfi_def_cfa_offset 32
+ 779 0768 233C1100 		sd	ra,24(sp)
+ 780 076c 23388100 		sd	s0,16(sp)
+ 781 0770 23349100 		sd	s1,8(sp)
+ 782 0774 23302101 		sd	s2,0(sp)
+ 783              		.cfi_offset 1, -8
+ 784              		.cfi_offset 8, -16
+ 785              		.cfi_offset 9, -24
+ 786              		.cfi_offset 18, -32
+ 787 0778 13040102 		addi	s0,sp,32
+ 788              		.cfi_def_cfa 8, 0
+ 789 077c 13090500 		mv	s2,a0
+ 790 0780 93840500 		mv	s1,a1
+ 791 0784 17050000 		lla	a0,.LC2
+ 791      13050500 
+ 792 078c 97000000 		call	_Z12kprintStringPKc@plt
+ 792      E7800000 
+ 793 0794 13060000 		li	a2,0
+ 794 0798 9305A000 		li	a1,10
+ 795 079c 13850400 		mv	a0,s1
+ 796 07a0 97000000 		call	_Z9kprintIntmib@plt
+ 796      E7800000 
+ 797 07a8 17050000 		lla	a0,.LC3
+ 797      13050500 
+ 798 07b0 97000000 		call	_Z12kprintStringPKc@plt
+ 798      E7800000 
+ 799 07b8 93850400 		mv	a1,s1
+ 800 07bc 13050900 		mv	a0,s2
+ 801 07c0 97000000 		call	_ZN5Buddy11get_bit_valEm
+ 801      E7800000 
+ 802 07c8 63060502 		beq	a0,zero,.L76
+ 803 07cc 17050000 		lla	a0,.LC4
+ 803      13050500 
+ 804 07d4 97000000 		call	_Z12kprintStringPKc@plt
+ 804      E7800000 
+ 805              	.L75:
+ 806 07dc 83308101 		ld	ra,24(sp)
+ 807              		.cfi_remember_state
+ 808              		.cfi_restore 1
+ 809 07e0 03340101 		ld	s0,16(sp)
+ 810              		.cfi_restore 8
+ 811              		.cfi_def_cfa 2, 32
+ 812 07e4 83348100 		ld	s1,8(sp)
+ 813              		.cfi_restore 9
+ 814 07e8 03390100 		ld	s2,0(sp)
+ 815              		.cfi_restore 18
+ 816 07ec 13010102 		addi	sp,sp,32
+ 817              		.cfi_def_cfa_offset 0
+ 818 07f0 67800000 		jr	ra
+ 819              	.L76:
+ 820              		.cfi_restore_state
+ 821 07f4 17050000 		lla	a0,.LC5
+ 821      13050500 
+ 822 07fc 97000000 		call	_Z12kprintStringPKc@plt
+ 822      E7800000 
+ 823 0804 6FF09FFD 		j	.L75
+ 824              		.cfi_endproc
+GAS LISTING /tmp/ccheTEuq.s 			page 16
+
+
+ 825              	.LFE129:
+ 827              		.section	.rodata.str1.8
+ 828 003e 0000     		.align	3
+ 829              	.LC6:
+ 830 0040 42554444 		.string	"BUDDY NOT INITALIZED!!!"
+ 830      59204E4F 
+ 830      5420494E 
+ 830      4954414C 
+ 830      495A4544 
+ 831              		.align	3
+ 832              	.LC7:
+ 833 0058 2D2D2D2D 		.string	"------BUDDY STATUS PRINT------\n"
+ 833      2D2D4255 
+ 833      44445920 
+ 833      53544154 
+ 833      55532050 
+ 834              		.align	3
+ 835              	.LC8:
+ 836 0078 62756464 		.string	"buddy: "
+ 836      793A2000 
+ 837              		.align	3
+ 838              	.LC9:
+ 839 0080 73746172 		.string	"start_address: "
+ 839      745F6164 
+ 839      64726573 
+ 839      733A2000 
+ 840              		.align	3
+ 841              	.LC10:
+ 842 0090 6D61785F 		.string	"max_level: "
+ 842      6C657665 
+ 842      6C3A2000 
+ 843 009c 00000000 		.align	3
+ 844              	.LC11:
+ 845 00a0 092D2D2D 		.string	"\t------MEMORY META------\n"
+ 845      2D2D2D4D 
+ 845      454D4F52 
+ 845      59204D45 
+ 845      54412D2D 
+ 846 00ba 00000000 		.align	3
+ 846      0000
+ 847              	.LC12:
+ 848 00c0 0900     		.string	"\t"
+ 849 00c2 00000000 		.align	3
+ 849      0000
+ 850              	.LC13:
+ 851 00c8 4C455645 		.string	"LEVEL["
+ 851      4C5B00
+ 852 00cf 00       		.align	3
+ 853              	.LC14:
+ 854 00d0 202D3E20 		.string	" -> "
+ 854      00
+ 855 00d5 000000   		.align	3
+ 856              	.LC15:
+ 857 00d8 092D2D2D 		.string	"\t----END MEMORY META----\n"
+ 857      2D454E44 
+ 857      204D454D 
+ 857      4F525920 
+GAS LISTING /tmp/ccheTEuq.s 			page 17
+
+
+ 857      4D455441 
+ 858 00f2 00000000 		.align	3
+ 858      0000
+ 859              	.LC16:
+ 860 00f8 2D2D2D2D 		.string	"-------END BUDDY STATUS-------\n"
+ 860      2D2D2D45 
+ 860      4E442042 
+ 860      55444459 
+ 860      20535441 
+ 861              		.text
+ 862              		.align	2
+ 863              		.globl	_ZN5Buddy12status_printEb
+ 865              	_ZN5Buddy12status_printEb:
+ 866              	.LFB130:
+ 867              		.cfi_startproc
+ 868 0808 130101FD 		addi	sp,sp,-48
+ 869              		.cfi_def_cfa_offset 48
+ 870 080c 23341102 		sd	ra,40(sp)
+ 871 0810 23308102 		sd	s0,32(sp)
+ 872 0814 233C9100 		sd	s1,24(sp)
+ 873 0818 23382101 		sd	s2,16(sp)
+ 874 081c 23343101 		sd	s3,8(sp)
+ 875 0820 23304101 		sd	s4,0(sp)
+ 876              		.cfi_offset 1, -8
+ 877              		.cfi_offset 8, -16
+ 878              		.cfi_offset 9, -24
+ 879              		.cfi_offset 18, -32
+ 880              		.cfi_offset 19, -40
+ 881              		.cfi_offset 20, -48
+ 882 0824 13040103 		addi	s0,sp,48
+ 883              		.cfi_def_cfa 8, 0
+ 884 0828 97070000 		ld	a5,.LANCHOR0
+ 884      83B70700 
+ 885 0830 638A070C 		beq	a5,zero,.L93
+ 886 0834 93090500 		mv	s3,a0
+ 887 0838 138A0500 		mv	s4,a1
+ 888 083c 17050000 		lla	a0,.LC7
+ 888      13050500 
+ 889 0844 97000000 		call	_Z12kprintStringPKc@plt
+ 889      E7800000 
+ 890 084c 17050000 		lla	a0,.LC8
+ 890      13050500 
+ 891 0854 97000000 		call	_Z12kprintStringPKc@plt
+ 891      E7800000 
+ 892 085c 13060000 		li	a2,0
+ 893 0860 93050001 		li	a1,16
+ 894 0864 17050000 		ld	a0,.LANCHOR0
+ 894      03350500 
+ 895 086c 97000000 		call	_Z9kprintIntmib@plt
+ 895      E7800000 
+ 896 0874 17050000 		lla	a0,.LC1
+ 896      13050500 
+ 897 087c 97000000 		call	_Z12kprintStringPKc@plt
+ 897      E7800000 
+ 898 0884 17050000 		lla	a0,.LC9
+ 898      13050500 
+ 899 088c 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/ccheTEuq.s 			page 18
+
+
+ 899      E7800000 
+ 900 0894 13060000 		li	a2,0
+ 901 0898 93050001 		li	a1,16
+ 902 089c 03B50900 		ld	a0,0(s3)
+ 903 08a0 97000000 		call	_Z9kprintIntmib@plt
+ 903      E7800000 
+ 904 08a8 17050000 		lla	a0,.LC1
+ 904      13050500 
+ 905 08b0 97000000 		call	_Z12kprintStringPKc@plt
+ 905      E7800000 
+ 906 08b8 17050000 		lla	a0,.LC10
+ 906      13050500 
+ 907 08c0 97000000 		call	_Z12kprintStringPKc@plt
+ 907      E7800000 
+ 908 08c8 13060000 		li	a2,0
+ 909 08cc 93050001 		li	a1,16
+ 910 08d0 03B58900 		ld	a0,8(s3)
+ 911 08d4 97000000 		call	_Z9kprintIntmib@plt
+ 911      E7800000 
+ 912 08dc 17050000 		lla	a0,.LC1
+ 912      13050500 
+ 913 08e4 97000000 		call	_Z12kprintStringPKc@plt
+ 913      E7800000 
+ 914 08ec 17050000 		lla	a0,.LC11
+ 914      13050500 
+ 915 08f4 97000000 		call	_Z12kprintStringPKc@plt
+ 915      E7800000 
+ 916 08fc 13090000 		li	s2,0
+ 917 0900 6F008006 		j	.L82
+ 918              	.L93:
+ 919 0904 17050000 		lla	a0,.LC6
+ 919      13050500 
+ 920 090c 97000000 		call	_Z12kprintStringPKc@plt
+ 920      E7800000 
+ 921 0914 6F008012 		j	.L79
+ 922              	.L84:
+ 923 0918 83B40400 		ld	s1,0(s1)
+ 924              	.L83:
+ 925 091c 638A0402 		beq	s1,zero,.L94
+ 926 0920 13060000 		li	a2,0
+ 927 0924 93050001 		li	a1,16
+ 928 0928 13850400 		mv	a0,s1
+ 929 092c 97000000 		call	_Z9kprintIntmib@plt
+ 929      E7800000 
+ 930 0934 83B70400 		ld	a5,0(s1)
+ 931 0938 E38007FE 		beq	a5,zero,.L84
+ 932 093c 17050000 		lla	a0,.LC14
+ 932      13050500 
+ 933 0944 97000000 		call	_Z12kprintStringPKc@plt
+ 933      E7800000 
+ 934 094c 6FF0DFFC 		j	.L84
+ 935              	.L94:
+ 936 0950 17050000 		lla	a0,.LC1
+ 936      13050500 
+ 937 0958 97000000 		call	_Z12kprintStringPKc@plt
+ 937      E7800000 
+ 938 0960 1B091900 		addiw	s2,s2,1
+GAS LISTING /tmp/ccheTEuq.s 			page 19
+
+
+ 939 0964 1379F90F 		andi	s2,s2,0xff
+ 940              	.L82:
+ 941 0968 83B78900 		ld	a5,8(s3)
+ 942 096c 63EE2709 		bgtu	s2,a5,.L95
+ 943 0970 17050000 		lla	a0,.LC12
+ 943      13050500 
+ 944 0978 97000000 		call	_Z12kprintStringPKc@plt
+ 944      E7800000 
+ 945 0980 17050000 		lla	a0,.LC13
+ 945      13050500 
+ 946 0988 97000000 		call	_Z12kprintStringPKc@plt
+ 946      E7800000 
+ 947 0990 13060000 		li	a2,0
+ 948 0994 9305A000 		li	a1,10
+ 949 0998 13050900 		mv	a0,s2
+ 950 099c 97000000 		call	_Z9kprintIntmib@plt
+ 950      E7800000 
+ 951 09a4 17050000 		lla	a0,.LC3
+ 951      13050500 
+ 952 09ac 97000000 		call	_Z12kprintStringPKc@plt
+ 952      E7800000 
+ 953 09b4 83B70901 		ld	a5,16(s3)
+ 954 09b8 93143900 		slli	s1,s2,3
+ 955 09bc B3879700 		add	a5,a5,s1
+ 956 09c0 03B50700 		ld	a0,0(a5)
+ 957 09c4 13060000 		li	a2,0
+ 958 09c8 93050001 		li	a1,16
+ 959 09cc 3335A000 		snez	a0,a0
+ 960 09d0 97000000 		call	_Z9kprintIntmib@plt
+ 960      E7800000 
+ 961 09d8 17050000 		lla	a0,.LC1
+ 961      13050500 
+ 962 09e0 97000000 		call	_Z12kprintStringPKc@plt
+ 962      E7800000 
+ 963 09e8 17050000 		lla	a0,.LC12
+ 963      13050500 
+ 964 09f0 97000000 		call	_Z12kprintStringPKc@plt
+ 964      E7800000 
+ 965 09f8 83B70901 		ld	a5,16(s3)
+ 966 09fc B3879700 		add	a5,a5,s1
+ 967 0a00 83B40700 		ld	s1,0(a5)
+ 968 0a04 6FF09FF1 		j	.L83
+ 969              	.L95:
+ 970 0a08 17050000 		lla	a0,.LC1
+ 970      13050500 
+ 971 0a10 97000000 		call	_Z12kprintStringPKc@plt
+ 971      E7800000 
+ 972 0a18 63100A0A 		bne	s4,zero,.L91
+ 973              	.L88:
+ 974 0a1c 17050000 		lla	a0,.LC15
+ 974      13050500 
+ 975 0a24 97000000 		call	_Z12kprintStringPKc@plt
+ 975      E7800000 
+ 976 0a2c 17050000 		lla	a0,.LC16
+ 976      13050500 
+ 977 0a34 97000000 		call	_Z12kprintStringPKc@plt
+ 977      E7800000 
+GAS LISTING /tmp/ccheTEuq.s 			page 20
+
+
+ 978              	.L79:
+ 979 0a3c 83308102 		ld	ra,40(sp)
+ 980              		.cfi_remember_state
+ 981              		.cfi_restore 1
+ 982 0a40 03340102 		ld	s0,32(sp)
+ 983              		.cfi_restore 8
+ 984              		.cfi_def_cfa 2, 48
+ 985 0a44 83348101 		ld	s1,24(sp)
+ 986              		.cfi_restore 9
+ 987 0a48 03390101 		ld	s2,16(sp)
+ 988              		.cfi_restore 18
+ 989 0a4c 83398100 		ld	s3,8(sp)
+ 990              		.cfi_restore 19
+ 991 0a50 033A0100 		ld	s4,0(sp)
+ 992              		.cfi_restore 20
+ 993 0a54 13010103 		addi	sp,sp,48
+ 994              		.cfi_def_cfa_offset 0
+ 995 0a58 67800000 		jr	ra
+ 996              	.L89:
+ 997              		.cfi_restore_state
+ 998 0a5c 93841400 		addi	s1,s1,1
+ 999              	.L87:
+ 1000 0a60 03B78900 		ld	a4,8(s3)
+ 1001 0a64 93071000 		li	a5,1
+ 1002 0a68 B397E700 		sll	a5,a5,a4
+ 1003 0a6c E3F8F4FA 		bleu	a5,s1,.L88
+ 1004 0a70 93850400 		mv	a1,s1
+ 1005 0a74 13850900 		mv	a0,s3
+ 1006 0a78 97000000 		call	_ZN5Buddy11get_bit_valEm
+ 1006      E7800000 
+ 1007 0a80 E30E05FC 		beq	a0,zero,.L89
+ 1008 0a84 17050000 		lla	a0,.LC12
+ 1008      13050500 
+ 1009 0a8c 97000000 		call	_Z12kprintStringPKc@plt
+ 1009      E7800000 
+ 1010 0a94 93850400 		mv	a1,s1
+ 1011 0a98 13850900 		mv	a0,s3
+ 1012 0a9c 97000000 		call	_ZN5Buddy8print_beEm
+ 1012      E7800000 
+ 1013 0aa4 17050000 		lla	a0,.LC1
+ 1013      13050500 
+ 1014 0aac 97000000 		call	_Z12kprintStringPKc@plt
+ 1014      E7800000 
+ 1015 0ab4 6FF09FFA 		j	.L89
+ 1016              	.L91:
+ 1017 0ab8 93040000 		li	s1,0
+ 1018 0abc 6FF05FFA 		j	.L87
+ 1019              		.cfi_endproc
+ 1020              	.LFE130:
+ 1022              		.section	.text._Z4swapImEvRT_S1_,"axG",@progbits,_Z4swapImEvRT_S1_,comdat
+ 1023              		.align	2
+ 1024              		.weak	_Z4swapImEvRT_S1_
+ 1026              	_Z4swapImEvRT_S1_:
+ 1027              	.LFB131:
+ 1028              		.cfi_startproc
+ 1029 0000 130101FF 		addi	sp,sp,-16
+ 1030              		.cfi_def_cfa_offset 16
+GAS LISTING /tmp/ccheTEuq.s 			page 21
+
+
+ 1031 0004 23348100 		sd	s0,8(sp)
+ 1032              		.cfi_offset 8, -8
+ 1033 0008 13040101 		addi	s0,sp,16
+ 1034              		.cfi_def_cfa 8, 0
+ 1035 000c 83370500 		ld	a5,0(a0)
+ 1036 0010 03B70500 		ld	a4,0(a1)
+ 1037 0014 2330E500 		sd	a4,0(a0)
+ 1038 0018 23B0F500 		sd	a5,0(a1)
+ 1039 001c 03348100 		ld	s0,8(sp)
+ 1040              		.cfi_restore 8
+ 1041              		.cfi_def_cfa 2, 16
+ 1042 0020 13010101 		addi	sp,sp,16
+ 1043              		.cfi_def_cfa_offset 0
+ 1044 0024 67800000 		jr	ra
+ 1045              		.cfi_endproc
+ 1046              	.LFE131:
+ 1048              		.section	.text._Z4swapIP7mmeta_tEvRT_S3_,"axG",@progbits,_Z4swapIP7mmeta_tEvRT_S3_,comdat
+ 1049              		.align	2
+ 1050              		.weak	_Z4swapIP7mmeta_tEvRT_S3_
+ 1052              	_Z4swapIP7mmeta_tEvRT_S3_:
+ 1053              	.LFB132:
+ 1054              		.cfi_startproc
+ 1055 0000 130101FF 		addi	sp,sp,-16
+ 1056              		.cfi_def_cfa_offset 16
+ 1057 0004 23348100 		sd	s0,8(sp)
+ 1058              		.cfi_offset 8, -8
+ 1059 0008 13040101 		addi	s0,sp,16
+ 1060              		.cfi_def_cfa 8, 0
+ 1061 000c 83370500 		ld	a5,0(a0)
+ 1062 0010 03B70500 		ld	a4,0(a1)
+ 1063 0014 2330E500 		sd	a4,0(a0)
+ 1064 0018 23B0F500 		sd	a5,0(a1)
+ 1065 001c 03348100 		ld	s0,8(sp)
+ 1066              		.cfi_restore 8
+ 1067              		.cfi_def_cfa 2, 16
+ 1068 0020 13010101 		addi	sp,sp,16
+ 1069              		.cfi_def_cfa_offset 0
+ 1070 0024 67800000 		jr	ra
+ 1071              		.cfi_endproc
+ 1072              	.LFE132:
+ 1074              		.text
+ 1075              		.align	2
+ 1076              		.globl	_ZN5Buddy8merge_ipEP7mmeta_t
+ 1078              	_ZN5Buddy8merge_ipEP7mmeta_t:
+ 1079              	.LFB124:
+ 1080              		.cfi_startproc
+ 1081 0ac0 130101FA 		addi	sp,sp,-96
+ 1082              		.cfi_def_cfa_offset 96
+ 1083 0ac4 233C1104 		sd	ra,88(sp)
+ 1084 0ac8 23388104 		sd	s0,80(sp)
+ 1085 0acc 23349104 		sd	s1,72(sp)
+ 1086 0ad0 23302105 		sd	s2,64(sp)
+ 1087 0ad4 233C3103 		sd	s3,56(sp)
+ 1088 0ad8 23384103 		sd	s4,48(sp)
+ 1089              		.cfi_offset 1, -8
+ 1090              		.cfi_offset 8, -16
+ 1091              		.cfi_offset 9, -24
+GAS LISTING /tmp/ccheTEuq.s 			page 22
+
+
+ 1092              		.cfi_offset 18, -32
+ 1093              		.cfi_offset 19, -40
+ 1094              		.cfi_offset 20, -48
+ 1095 0adc 13040106 		addi	s0,sp,96
+ 1096              		.cfi_def_cfa 8, 0
+ 1097 0ae0 13090500 		mv	s2,a0
+ 1098 0ae4 2334B4FA 		sd	a1,-88(s0)
+ 1099 0ae8 13870500 		mv	a4,a1
+ 1100 0aec 83370500 		ld	a5,0(a0)
+ 1101 0af0 B387F540 		sub	a5,a1,a5
+ 1102 0af4 170A0000 		lbu	s4,.LANCHOR0+8
+ 1102      034A0A00 
+ 1103 0afc B3D54701 		srl	a1,a5,s4
+ 1104 0b00 2334B4FC 		sd	a1,-56(s0)
+ 1105 0b04 83490701 		lbu	s3,16(a4)
+ 1106 0b08 93041000 		li	s1,1
+ 1107 0b0c B3943401 		sll	s1,s1,s3
+ 1108 0b10 B3C49500 		xor	s1,a1,s1
+ 1109 0b14 233094FC 		sd	s1,-64(s0)
+ 1110 0b18 97000000 		call	_ZN5Buddy11get_bit_valEm
+ 1110      E7800000 
+ 1111 0b20 6306050A 		beq	a0,zero,.L103
+ 1112 0b24 B3944401 		sll	s1,s1,s4
+ 1113 0b28 03360900 		ld	a2,0(s2)
+ 1114 0b2c 33069600 		add	a2,a2,s1
+ 1115 0b30 233CC4FA 		sd	a2,-72(s0)
+ 1116 0b34 83450601 		lbu	a1,16(a2)
+ 1117 0b38 639EB908 		bne	s3,a1,.L104
+ 1118 0b3c 13050900 		mv	a0,s2
+ 1119 0b40 97000000 		call	_ZN5Buddy16remove_from_listEhP7mmeta_t
+ 1119      E7800000 
+ 1120 0b48 634A0508 		blt	a0,zero,.L105
+ 1121 0b4c 033704FC 		ld	a4,-64(s0)
+ 1122 0b50 833784FC 		ld	a5,-56(s0)
+ 1123 0b54 636AF704 		bltu	a4,a5,.L107
+ 1124              	.L102:
+ 1125 0b58 833504FC 		ld	a1,-64(s0)
+ 1126 0b5c 13050900 		mv	a0,s2
+ 1127 0b60 97000000 		call	_ZN5Buddy7clr_bitEm
+ 1127      E7800000 
+ 1128 0b68 833584FC 		ld	a1,-56(s0)
+ 1129 0b6c 13050900 		mv	a0,s2
+ 1130 0b70 97000000 		call	_ZN5Buddy7set_bitEm
+ 1130      E7800000 
+ 1131 0b78 033584FA 		ld	a0,-88(s0)
+ 1132 0b7c 83470501 		lbu	a5,16(a0)
+ 1133 0b80 9B871700 		addiw	a5,a5,1
+ 1134 0b84 2308F500 		sb	a5,16(a0)
+ 1135              	.L100:
+ 1136 0b88 83308105 		ld	ra,88(sp)
+ 1137              		.cfi_remember_state
+ 1138              		.cfi_restore 1
+ 1139 0b8c 03340105 		ld	s0,80(sp)
+ 1140              		.cfi_restore 8
+ 1141              		.cfi_def_cfa 2, 96
+ 1142 0b90 83348104 		ld	s1,72(sp)
+ 1143              		.cfi_restore 9
+GAS LISTING /tmp/ccheTEuq.s 			page 23
+
+
+ 1144 0b94 03390104 		ld	s2,64(sp)
+ 1145              		.cfi_restore 18
+ 1146 0b98 83398103 		ld	s3,56(sp)
+ 1147              		.cfi_restore 19
+ 1148 0b9c 033A0103 		ld	s4,48(sp)
+ 1149              		.cfi_restore 20
+ 1150 0ba0 13010106 		addi	sp,sp,96
+ 1151              		.cfi_def_cfa_offset 0
+ 1152 0ba4 67800000 		jr	ra
+ 1153              	.L107:
+ 1154              		.cfi_restore_state
+ 1155 0ba8 930504FC 		addi	a1,s0,-64
+ 1156 0bac 130584FC 		addi	a0,s0,-56
+ 1157 0bb0 97000000 		call	_Z4swapImEvRT_S1_
+ 1157      E7800000 
+ 1158 0bb8 930584FB 		addi	a1,s0,-72
+ 1159 0bbc 130584FA 		addi	a0,s0,-88
+ 1160 0bc0 97000000 		call	_Z4swapIP7mmeta_tEvRT_S3_
+ 1160      E7800000 
+ 1161 0bc8 6FF01FF9 		j	.L102
+ 1162              	.L103:
+ 1163 0bcc 13050000 		li	a0,0
+ 1164 0bd0 6FF09FFB 		j	.L100
+ 1165              	.L104:
+ 1166 0bd4 13050000 		li	a0,0
+ 1167 0bd8 6FF01FFB 		j	.L100
+ 1168              	.L105:
+ 1169 0bdc 13050000 		li	a0,0
+ 1170 0be0 6FF09FFA 		j	.L100
+ 1171              		.cfi_endproc
+ 1172              	.LFE124:
+ 1174              		.align	2
+ 1175              		.globl	_ZN5Buddy8mem_freeEPvh
+ 1177              	_ZN5Buddy8mem_freeEPvh:
+ 1178              	.LFB119:
+ 1179              		.cfi_startproc
+ 1180 0be4 B7170000 		li	a5,4096
+ 1181 0be8 9387F7FF 		addi	a5,a5,-1
+ 1182 0bec B3F7F500 		and	a5,a1,a5
+ 1183 0bf0 6394070E 		bne	a5,zero,.L113
+ 1184 0bf4 130101FD 		addi	sp,sp,-48
+ 1185              		.cfi_def_cfa_offset 48
+ 1186 0bf8 23341102 		sd	ra,40(sp)
+ 1187 0bfc 23308102 		sd	s0,32(sp)
+ 1188 0c00 233C9100 		sd	s1,24(sp)
+ 1189 0c04 23382101 		sd	s2,16(sp)
+ 1190 0c08 23343101 		sd	s3,8(sp)
+ 1191 0c0c 23304101 		sd	s4,0(sp)
+ 1192              		.cfi_offset 1, -8
+ 1193              		.cfi_offset 8, -16
+ 1194              		.cfi_offset 9, -24
+ 1195              		.cfi_offset 18, -32
+ 1196              		.cfi_offset 19, -40
+ 1197              		.cfi_offset 20, -48
+ 1198 0c10 13040103 		addi	s0,sp,48
+ 1199              		.cfi_def_cfa 8, 0
+ 1200 0c14 13090500 		mv	s2,a0
+GAS LISTING /tmp/ccheTEuq.s 			page 24
+
+
+ 1201 0c18 93840500 		mv	s1,a1
+ 1202 0c1c 130A0600 		mv	s4,a2
+ 1203 0c20 83370500 		ld	a5,0(a0)
+ 1204 0c24 63EEF50A 		bgtu	a5,a1,.L114
+ 1205 0c28 03378500 		ld	a4,8(a0)
+ 1206 0c2c 636EC70A 		bgtu	a2,a4,.L115
+ 1207 0c30 B389F540 		sub	s3,a1,a5
+ 1208 0c34 97070000 		lbu	a5,.LANCHOR0+8
+ 1208      83C70700 
+ 1209 0c3c B3D9F900 		srl	s3,s3,a5
+ 1210 0c40 93071000 		li	a5,1
+ 1211 0c44 B397E700 		sll	a5,a5,a4
+ 1212 0c48 63F4F90A 		bleu	a5,s3,.L116
+ 1213 0c4c 93850900 		mv	a1,s3
+ 1214 0c50 97000000 		call	_ZN5Buddy11get_bit_valEm
+ 1214      E7800000 
+ 1215 0c58 6310050A 		bne	a0,zero,.L117
+ 1216 0c5c 23884401 		sb	s4,16(s1)
+ 1217 0c60 23B00400 		sd	zero,0(s1)
+ 1218 0c64 23B40400 		sd	zero,8(s1)
+ 1219 0c68 93850900 		mv	a1,s3
+ 1220 0c6c 13050900 		mv	a0,s2
+ 1221 0c70 97000000 		call	_ZN5Buddy7set_bitEm
+ 1221      E7800000 
+ 1222              	.L110:
+ 1223 0c78 03C70401 		lbu	a4,16(s1)
+ 1224 0c7c 83378900 		ld	a5,8(s2)
+ 1225 0c80 6370F702 		bgeu	a4,a5,.L111
+ 1226 0c84 93850400 		mv	a1,s1
+ 1227 0c88 13050900 		mv	a0,s2
+ 1228 0c8c 97000000 		call	_ZN5Buddy8merge_ipEP7mmeta_t
+ 1228      E7800000 
+ 1229 0c94 63060500 		beq	a0,zero,.L111
+ 1230 0c98 93040500 		mv	s1,a0
+ 1231 0c9c 6FF0DFFD 		j	.L110
+ 1232              	.L111:
+ 1233 0ca0 13860400 		mv	a2,s1
+ 1234 0ca4 83C50401 		lbu	a1,16(s1)
+ 1235 0ca8 13050900 		mv	a0,s2
+ 1236 0cac 97000000 		call	_ZN5Buddy11add_to_listEhP7mmeta_t
+ 1236      E7800000 
+ 1237 0cb4 13050000 		li	a0,0
+ 1238              	.L109:
+ 1239 0cb8 83308102 		ld	ra,40(sp)
+ 1240              		.cfi_restore 1
+ 1241 0cbc 03340102 		ld	s0,32(sp)
+ 1242              		.cfi_restore 8
+ 1243              		.cfi_def_cfa 2, 48
+ 1244 0cc0 83348101 		ld	s1,24(sp)
+ 1245              		.cfi_restore 9
+ 1246 0cc4 03390101 		ld	s2,16(sp)
+ 1247              		.cfi_restore 18
+ 1248 0cc8 83398100 		ld	s3,8(sp)
+ 1249              		.cfi_restore 19
+ 1250 0ccc 033A0100 		ld	s4,0(sp)
+ 1251              		.cfi_restore 20
+ 1252 0cd0 13010103 		addi	sp,sp,48
+GAS LISTING /tmp/ccheTEuq.s 			page 25
+
+
+ 1253              		.cfi_def_cfa_offset 0
+ 1254 0cd4 67800000 		jr	ra
+ 1255              	.L113:
+ 1256 0cd8 1305F0FF 		li	a0,-1
+ 1257 0cdc 67800000 		ret
+ 1258              	.L114:
+ 1259              		.cfi_def_cfa_register 8
+ 1260              		.cfi_offset 1, -8
+ 1261              		.cfi_offset 8, -16
+ 1262              		.cfi_offset 9, -24
+ 1263              		.cfi_offset 18, -32
+ 1264              		.cfi_offset 19, -40
+ 1265              		.cfi_offset 20, -48
+ 1266 0ce0 1305F0FF 		li	a0,-1
+ 1267 0ce4 6FF05FFD 		j	.L109
+ 1268              	.L115:
+ 1269 0ce8 1305C0FF 		li	a0,-4
+ 1270 0cec 6FF0DFFC 		j	.L109
+ 1271              	.L116:
+ 1272 0cf0 1305D0FF 		li	a0,-3
+ 1273 0cf4 6FF05FFC 		j	.L109
+ 1274              	.L117:
+ 1275 0cf8 1305E0FF 		li	a0,-2
+ 1276 0cfc 6FF0DFFB 		j	.L109
+ 1277              		.cfi_endproc
+ 1278              	.LFE119:
+ 1280              		.globl	_ZN5Buddy18BLOCK_SIZE_BIT_LENE
+ 1281              		.globl	_ZN5Buddy5buddyE
+ 1282              		.bss
+ 1283              		.align	3
+ 1284              		.set	.LANCHOR0,. + 0
+ 1287              	_ZN5Buddy5buddyE:
+ 1288 0000 00000000 		.zero	8
+ 1288      00000000 
+ 1291              	_ZN5Buddy18BLOCK_SIZE_BIT_LENE:
+ 1292 0008 00       		.zero	1
+ 1293              		.ident	"GCC: (GNU) 12.2.0"
+ 1294              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccheTEuq.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 buddy_allocator.cpp
+     /tmp/ccheTEuq.s:11     .text:0000000000000000 _ZN5Buddy11getInstanceEv
+     /tmp/ccheTEuq.s:13     .text:0000000000000000 .L0 
+     /tmp/ccheTEuq.s:14     .text:0000000000000000 $x
+     /tmp/ccheTEuq.s:15     .text:0000000000000004 .L0 
+     /tmp/ccheTEuq.s:17     .text:0000000000000008 .L0 
+     /tmp/ccheTEuq.s:19     .text:000000000000000c .L0 
+     /tmp/ccheTEuq.s:22     .text:0000000000000018 .L0 
+     /tmp/ccheTEuq.s:23     .text:0000000000000018 .L0 
+     /tmp/ccheTEuq.s:25     .text:000000000000001c .L0 
+     /tmp/ccheTEuq.s:27     .text:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:33     .text:0000000000000020 _ZN5Buddy13get_from_listEh
+     /tmp/ccheTEuq.s:35     .text:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:37     .text:0000000000000024 .L0 
+     /tmp/ccheTEuq.s:39     .text:0000000000000028 .L0 
+     /tmp/ccheTEuq.s:41     .text:000000000000002c .L0 
+     /tmp/ccheTEuq.s:62     .text:0000000000000070 .L0 
+     /tmp/ccheTEuq.s:63     .text:0000000000000070 .L0 
+     /tmp/ccheTEuq.s:64     .text:0000000000000070 .L0 
+     /tmp/ccheTEuq.s:66     .text:0000000000000074 .L0 
+     /tmp/ccheTEuq.s:69     .text:0000000000000078 .L0 
+     /tmp/ccheTEuq.s:72     .text:0000000000000080 .L0 
+     /tmp/ccheTEuq.s:78     .text:0000000000000080 _ZN5Buddy5splitEP7mmeta_t
+     /tmp/ccheTEuq.s:80     .text:0000000000000080 .L0 
+     /tmp/ccheTEuq.s:82     .text:0000000000000084 .L0 
+     /tmp/ccheTEuq.s:84     .text:0000000000000088 .L0 
+     /tmp/ccheTEuq.s:86     .text:000000000000008c .L0 
+     /tmp/ccheTEuq.s:100    .text:00000000000000bc .L0 
+     /tmp/ccheTEuq.s:101    .text:00000000000000bc .L0 
+     /tmp/ccheTEuq.s:102    .text:00000000000000bc .L0 
+     /tmp/ccheTEuq.s:104    .text:00000000000000c0 .L0 
+     /tmp/ccheTEuq.s:107    .text:00000000000000c4 .L0 
+     /tmp/ccheTEuq.s:113    .text:00000000000000d4 .L0 
+     /tmp/ccheTEuq.s:119    .text:00000000000000d4 _ZN5Buddy11get_bit_valEm
+     /tmp/ccheTEuq.s:121    .text:00000000000000d4 .L0 
+     /tmp/ccheTEuq.s:123    .text:00000000000000d8 .L0 
+     /tmp/ccheTEuq.s:125    .text:00000000000000dc .L0 
+     /tmp/ccheTEuq.s:127    .text:00000000000000e0 .L0 
+     /tmp/ccheTEuq.s:136    .text:0000000000000100 .L0 
+     /tmp/ccheTEuq.s:137    .text:0000000000000100 .L0 
+     /tmp/ccheTEuq.s:139    .text:0000000000000104 .L0 
+     /tmp/ccheTEuq.s:141    .text:0000000000000108 .L0 
+     /tmp/ccheTEuq.s:147    .text:0000000000000108 _ZN5Buddy11add_to_listEhP7mmeta_t
+     /tmp/ccheTEuq.s:149    .text:0000000000000108 .L0 
+     /tmp/ccheTEuq.s:153    .text:0000000000000114 .L0 
+     /tmp/ccheTEuq.s:159    .text:0000000000000128 .L0 
+     /tmp/ccheTEuq.s:160    .text:0000000000000128 .L0 
+     /tmp/ccheTEuq.s:161    .text:0000000000000128 .L0 
+     /tmp/ccheTEuq.s:162    .text:0000000000000128 .L0 
+     /tmp/ccheTEuq.s:163    .text:0000000000000128 .L0 
+     /tmp/ccheTEuq.s:165    .text:000000000000012c .L0 
+     /tmp/ccheTEuq.s:199    .text:00000000000001b0 .L0 
+     /tmp/ccheTEuq.s:201    .text:00000000000001b4 .L0 
+     /tmp/ccheTEuq.s:202    .text:00000000000001b4 .L0 
+     /tmp/ccheTEuq.s:204    .text:00000000000001b8 .L0 
+     /tmp/ccheTEuq.s:206    .text:00000000000001bc .L0 
+GAS LISTING /tmp/ccheTEuq.s 			page 27
+
+
+     /tmp/ccheTEuq.s:208    .text:00000000000001c0 .L0 
+     /tmp/ccheTEuq.s:210    .text:00000000000001c4 .L0 
+     /tmp/ccheTEuq.s:216    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:217    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:218    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:219    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:220    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:221    .text:00000000000001d0 .L0 
+     /tmp/ccheTEuq.s:230    .text:00000000000001e8 .L0 
+     /tmp/ccheTEuq.s:244    .text:00000000000001e8 _ZN5BuddyC2EPvh
+     /tmp/ccheTEuq.s:246    .text:00000000000001e8 .L0 
+     /tmp/ccheTEuq.s:248    .text:00000000000001ec .L0 
+     /tmp/ccheTEuq.s:254    .text:0000000000000200 .L0 
+     /tmp/ccheTEuq.s:255    .text:0000000000000200 .L0 
+     /tmp/ccheTEuq.s:256    .text:0000000000000200 .L0 
+     /tmp/ccheTEuq.s:257    .text:0000000000000200 .L0 
+     /tmp/ccheTEuq.s:258    .text:0000000000000200 .L0 
+     /tmp/ccheTEuq.s:260    .text:0000000000000204 .L0 
+     /tmp/ccheTEuq.s:317    .text:00000000000002e8 .L0 
+     /tmp/ccheTEuq.s:318    .text:00000000000002e8 .L0 
+     /tmp/ccheTEuq.s:320    .text:00000000000002ec .L0 
+     /tmp/ccheTEuq.s:321    .text:00000000000002ec .L0 
+     /tmp/ccheTEuq.s:323    .text:00000000000002f0 .L0 
+     /tmp/ccheTEuq.s:325    .text:00000000000002f4 .L0 
+     /tmp/ccheTEuq.s:327    .text:00000000000002f8 .L0 
+     /tmp/ccheTEuq.s:329    .text:00000000000002fc .L0 
+     /tmp/ccheTEuq.s:332    .text:0000000000000300 .L0 
+     /tmp/ccheTEuq.s:342    .text:0000000000000338 .L0 
+     /tmp/ccheTEuq.s:244    .text:00000000000001e8 _ZN5BuddyC1EPvh
+     /tmp/ccheTEuq.s:350    .text:0000000000000338 _ZN5Buddy9initalizeEPvh
+     /tmp/ccheTEuq.s:352    .text:0000000000000338 .L0 
+     /tmp/ccheTEuq.s:354    .text:000000000000033c .L0 
+     /tmp/ccheTEuq.s:360    .text:0000000000000350 .L0 
+     /tmp/ccheTEuq.s:361    .text:0000000000000350 .L0 
+     /tmp/ccheTEuq.s:362    .text:0000000000000350 .L0 
+     /tmp/ccheTEuq.s:363    .text:0000000000000350 .L0 
+     /tmp/ccheTEuq.s:364    .text:0000000000000350 .L0 
+     /tmp/ccheTEuq.s:366    .text:0000000000000354 .L0 
+     /tmp/ccheTEuq.s:379    .text:000000000000038c .L0 
+     /tmp/ccheTEuq.s:380    .text:000000000000038c .L0 
+     /tmp/ccheTEuq.s:382    .text:0000000000000390 .L0 
+     /tmp/ccheTEuq.s:383    .text:0000000000000390 .L0 
+     /tmp/ccheTEuq.s:385    .text:0000000000000394 .L0 
+     /tmp/ccheTEuq.s:387    .text:0000000000000398 .L0 
+     /tmp/ccheTEuq.s:389    .text:000000000000039c .L0 
+     /tmp/ccheTEuq.s:391    .text:00000000000003a0 .L0 
+     /tmp/ccheTEuq.s:394    .text:00000000000003a4 .L0 
+     /tmp/ccheTEuq.s:416    .text:00000000000003fc .L0 
+     /tmp/ccheTEuq.s:422    .text:00000000000003fc _ZN5Buddy16remove_from_listEhP7mmeta_t
+     /tmp/ccheTEuq.s:424    .text:00000000000003fc .L0 
+     /tmp/ccheTEuq.s:428    .text:0000000000000408 .L0 
+     /tmp/ccheTEuq.s:434    .text:000000000000041c .L0 
+     /tmp/ccheTEuq.s:435    .text:000000000000041c .L0 
+     /tmp/ccheTEuq.s:436    .text:000000000000041c .L0 
+     /tmp/ccheTEuq.s:437    .text:000000000000041c .L0 
+     /tmp/ccheTEuq.s:438    .text:000000000000041c .L0 
+     /tmp/ccheTEuq.s:440    .text:0000000000000420 .L0 
+GAS LISTING /tmp/ccheTEuq.s 			page 28
+
+
+     /tmp/ccheTEuq.s:474    .text:00000000000004a4 .L0 
+     /tmp/ccheTEuq.s:475    .text:00000000000004a4 .L0 
+     /tmp/ccheTEuq.s:477    .text:00000000000004a8 .L0 
+     /tmp/ccheTEuq.s:478    .text:00000000000004a8 .L0 
+     /tmp/ccheTEuq.s:480    .text:00000000000004ac .L0 
+     /tmp/ccheTEuq.s:482    .text:00000000000004b0 .L0 
+     /tmp/ccheTEuq.s:484    .text:00000000000004b4 .L0 
+     /tmp/ccheTEuq.s:486    .text:00000000000004b8 .L0 
+     /tmp/ccheTEuq.s:489    .text:00000000000004bc .L0 
+     /tmp/ccheTEuq.s:496    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:497    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:498    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:499    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:500    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:501    .text:00000000000004d4 .L0 
+     /tmp/ccheTEuq.s:505    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:506    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:507    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:508    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:509    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:510    .text:00000000000004dc .L0 
+     /tmp/ccheTEuq.s:522    .text:00000000000004fc .L0 
+     /tmp/ccheTEuq.s:528    .text:00000000000004fc _ZN5Buddy7set_bitEm
+     /tmp/ccheTEuq.s:530    .text:00000000000004fc .L0 
+     /tmp/ccheTEuq.s:532    .text:0000000000000500 .L0 
+     /tmp/ccheTEuq.s:534    .text:0000000000000504 .L0 
+     /tmp/ccheTEuq.s:536    .text:0000000000000508 .L0 
+     /tmp/ccheTEuq.s:547    .text:0000000000000530 .L0 
+     /tmp/ccheTEuq.s:548    .text:0000000000000530 .L0 
+     /tmp/ccheTEuq.s:550    .text:0000000000000534 .L0 
+     /tmp/ccheTEuq.s:552    .text:0000000000000538 .L0 
+     /tmp/ccheTEuq.s:558    .text:0000000000000538 _ZN5Buddy7clr_bitEm
+     /tmp/ccheTEuq.s:560    .text:0000000000000538 .L0 
+     /tmp/ccheTEuq.s:562    .text:000000000000053c .L0 
+     /tmp/ccheTEuq.s:564    .text:0000000000000540 .L0 
+     /tmp/ccheTEuq.s:566    .text:0000000000000544 .L0 
+     /tmp/ccheTEuq.s:580    .text:0000000000000578 .L0 
+     /tmp/ccheTEuq.s:581    .text:0000000000000578 .L0 
+     /tmp/ccheTEuq.s:583    .text:000000000000057c .L0 
+     /tmp/ccheTEuq.s:585    .text:0000000000000580 .L0 
+     /tmp/ccheTEuq.s:591    .text:0000000000000580 _ZN5Buddy9mem_allocEh
+     /tmp/ccheTEuq.s:593    .text:0000000000000580 .L0 
+     /tmp/ccheTEuq.s:595    .text:0000000000000584 .L0 
+     /tmp/ccheTEuq.s:603    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:604    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:605    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:606    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:607    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:608    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:609    .text:00000000000005a0 .L0 
+     /tmp/ccheTEuq.s:611    .text:00000000000005a4 .L0 
+     /tmp/ccheTEuq.s:666    .text:0000000000000684 .L0 
+     /tmp/ccheTEuq.s:667    .text:0000000000000684 .L0 
+     /tmp/ccheTEuq.s:669    .text:0000000000000688 .L0 
+     /tmp/ccheTEuq.s:670    .text:0000000000000688 .L0 
+     /tmp/ccheTEuq.s:672    .text:000000000000068c .L0 
+     /tmp/ccheTEuq.s:674    .text:0000000000000690 .L0 
+GAS LISTING /tmp/ccheTEuq.s 			page 29
+
+
+     /tmp/ccheTEuq.s:676    .text:0000000000000694 .L0 
+     /tmp/ccheTEuq.s:678    .text:0000000000000698 .L0 
+     /tmp/ccheTEuq.s:680    .text:000000000000069c .L0 
+     /tmp/ccheTEuq.s:682    .text:00000000000006a0 .L0 
+     /tmp/ccheTEuq.s:685    .text:00000000000006a4 .L0 
+     /tmp/ccheTEuq.s:691    .text:00000000000006b4 .L0 
+     /tmp/ccheTEuq.s:697    .text:00000000000006b4 _Z3kmiv
+     /tmp/ccheTEuq.s:699    .text:00000000000006b4 .L0 
+     /tmp/ccheTEuq.s:701    .text:00000000000006b8 .L0 
+     /tmp/ccheTEuq.s:706    .text:00000000000006c8 .L0 
+     /tmp/ccheTEuq.s:707    .text:00000000000006c8 .L0 
+     /tmp/ccheTEuq.s:708    .text:00000000000006c8 .L0 
+     /tmp/ccheTEuq.s:709    .text:00000000000006c8 .L0 
+     /tmp/ccheTEuq.s:711    .text:00000000000006cc .L0 
+     /tmp/ccheTEuq.s:735    .text:000000000000073c .L0 
+     /tmp/ccheTEuq.s:736    .text:000000000000073c .L0 
+     /tmp/ccheTEuq.s:738    .text:0000000000000740 .L0 
+     /tmp/ccheTEuq.s:739    .text:0000000000000740 .L0 
+     /tmp/ccheTEuq.s:741    .text:0000000000000744 .L0 
+     /tmp/ccheTEuq.s:743    .text:0000000000000748 .L0 
+     /tmp/ccheTEuq.s:745    .text:000000000000074c .L0 
+     /tmp/ccheTEuq.s:748    .text:0000000000000750 .L0 
+     /tmp/ccheTEuq.s:754    .text:0000000000000764 .L0 
+     /tmp/ccheTEuq.s:774    .text:0000000000000764 _ZN5Buddy8print_beEm
+     /tmp/ccheTEuq.s:776    .text:0000000000000764 .L0 
+     /tmp/ccheTEuq.s:778    .text:0000000000000768 .L0 
+     /tmp/ccheTEuq.s:783    .text:0000000000000778 .L0 
+     /tmp/ccheTEuq.s:784    .text:0000000000000778 .L0 
+     /tmp/ccheTEuq.s:785    .text:0000000000000778 .L0 
+     /tmp/ccheTEuq.s:786    .text:0000000000000778 .L0 
+     /tmp/ccheTEuq.s:788    .text:000000000000077c .L0 
+     /tmp/ccheTEuq.s:807    .text:00000000000007e0 .L0 
+     /tmp/ccheTEuq.s:808    .text:00000000000007e0 .L0 
+     /tmp/ccheTEuq.s:810    .text:00000000000007e4 .L0 
+     /tmp/ccheTEuq.s:811    .text:00000000000007e4 .L0 
+     /tmp/ccheTEuq.s:813    .text:00000000000007e8 .L0 
+     /tmp/ccheTEuq.s:815    .text:00000000000007ec .L0 
+     /tmp/ccheTEuq.s:817    .text:00000000000007f0 .L0 
+     /tmp/ccheTEuq.s:820    .text:00000000000007f4 .L0 
+     /tmp/ccheTEuq.s:824    .text:0000000000000808 .L0 
+     /tmp/ccheTEuq.s:865    .text:0000000000000808 _ZN5Buddy12status_printEb
+     /tmp/ccheTEuq.s:867    .text:0000000000000808 .L0 
+     /tmp/ccheTEuq.s:869    .text:000000000000080c .L0 
+     /tmp/ccheTEuq.s:876    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:877    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:878    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:879    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:880    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:881    .text:0000000000000824 .L0 
+     /tmp/ccheTEuq.s:883    .text:0000000000000828 .L0 
+     /tmp/ccheTEuq.s:980    .text:0000000000000a40 .L0 
+     /tmp/ccheTEuq.s:981    .text:0000000000000a40 .L0 
+     /tmp/ccheTEuq.s:983    .text:0000000000000a44 .L0 
+     /tmp/ccheTEuq.s:984    .text:0000000000000a44 .L0 
+     /tmp/ccheTEuq.s:986    .text:0000000000000a48 .L0 
+     /tmp/ccheTEuq.s:988    .text:0000000000000a4c .L0 
+     /tmp/ccheTEuq.s:990    .text:0000000000000a50 .L0 
+GAS LISTING /tmp/ccheTEuq.s 			page 30
+
+
+     /tmp/ccheTEuq.s:992    .text:0000000000000a54 .L0 
+     /tmp/ccheTEuq.s:994    .text:0000000000000a58 .L0 
+     /tmp/ccheTEuq.s:997    .text:0000000000000a5c .L0 
+     /tmp/ccheTEuq.s:1019   .text:0000000000000ac0 .L0 
+     /tmp/ccheTEuq.s:1026   .text._Z4swapImEvRT_S1_:0000000000000000 _Z4swapImEvRT_S1_
+     /tmp/ccheTEuq.s:1028   .text._Z4swapImEvRT_S1_:0000000000000000 .L0 
+     /tmp/ccheTEuq.s:1029   .text._Z4swapImEvRT_S1_:0000000000000000 $x
+     /tmp/ccheTEuq.s:1030   .text._Z4swapImEvRT_S1_:0000000000000004 .L0 
+     /tmp/ccheTEuq.s:1032   .text._Z4swapImEvRT_S1_:0000000000000008 .L0 
+     /tmp/ccheTEuq.s:1034   .text._Z4swapImEvRT_S1_:000000000000000c .L0 
+     /tmp/ccheTEuq.s:1040   .text._Z4swapImEvRT_S1_:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:1041   .text._Z4swapImEvRT_S1_:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:1043   .text._Z4swapImEvRT_S1_:0000000000000024 .L0 
+     /tmp/ccheTEuq.s:1045   .text._Z4swapImEvRT_S1_:0000000000000028 .L0 
+     /tmp/ccheTEuq.s:1052   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000000 _Z4swapIP7mmeta_tEvRT_S3_
+     /tmp/ccheTEuq.s:1054   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000000 .L0 
+     /tmp/ccheTEuq.s:1055   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000000 $x
+     /tmp/ccheTEuq.s:1056   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000004 .L0 
+     /tmp/ccheTEuq.s:1058   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000008 .L0 
+     /tmp/ccheTEuq.s:1060   .text._Z4swapIP7mmeta_tEvRT_S3_:000000000000000c .L0 
+     /tmp/ccheTEuq.s:1066   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:1067   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000020 .L0 
+     /tmp/ccheTEuq.s:1069   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000024 .L0 
+     /tmp/ccheTEuq.s:1071   .text._Z4swapIP7mmeta_tEvRT_S3_:0000000000000028 .L0 
+     /tmp/ccheTEuq.s:1078   .text:0000000000000ac0 _ZN5Buddy8merge_ipEP7mmeta_t
+     /tmp/ccheTEuq.s:1080   .text:0000000000000ac0 .L0 
+     /tmp/ccheTEuq.s:1082   .text:0000000000000ac4 .L0 
+     /tmp/ccheTEuq.s:1089   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1090   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1091   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1092   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1093   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1094   .text:0000000000000adc .L0 
+     /tmp/ccheTEuq.s:1096   .text:0000000000000ae0 .L0 
+     /tmp/ccheTEuq.s:1137   .text:0000000000000b8c .L0 
+     /tmp/ccheTEuq.s:1138   .text:0000000000000b8c .L0 
+     /tmp/ccheTEuq.s:1140   .text:0000000000000b90 .L0 
+     /tmp/ccheTEuq.s:1141   .text:0000000000000b90 .L0 
+     /tmp/ccheTEuq.s:1143   .text:0000000000000b94 .L0 
+     /tmp/ccheTEuq.s:1145   .text:0000000000000b98 .L0 
+     /tmp/ccheTEuq.s:1147   .text:0000000000000b9c .L0 
+     /tmp/ccheTEuq.s:1149   .text:0000000000000ba0 .L0 
+     /tmp/ccheTEuq.s:1151   .text:0000000000000ba4 .L0 
+     /tmp/ccheTEuq.s:1154   .text:0000000000000ba8 .L0 
+     /tmp/ccheTEuq.s:1171   .text:0000000000000be4 .L0 
+     /tmp/ccheTEuq.s:1177   .text:0000000000000be4 _ZN5Buddy8mem_freeEPvh
+     /tmp/ccheTEuq.s:1179   .text:0000000000000be4 .L0 
+     /tmp/ccheTEuq.s:1185   .text:0000000000000bf8 .L0 
+     /tmp/ccheTEuq.s:1192   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1193   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1194   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1195   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1196   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1197   .text:0000000000000c10 .L0 
+     /tmp/ccheTEuq.s:1199   .text:0000000000000c14 .L0 
+     /tmp/ccheTEuq.s:1240   .text:0000000000000cbc .L0 
+     /tmp/ccheTEuq.s:1242   .text:0000000000000cc0 .L0 
+GAS LISTING /tmp/ccheTEuq.s 			page 31
+
+
+     /tmp/ccheTEuq.s:1243   .text:0000000000000cc0 .L0 
+     /tmp/ccheTEuq.s:1245   .text:0000000000000cc4 .L0 
+     /tmp/ccheTEuq.s:1247   .text:0000000000000cc8 .L0 
+     /tmp/ccheTEuq.s:1249   .text:0000000000000ccc .L0 
+     /tmp/ccheTEuq.s:1251   .text:0000000000000cd0 .L0 
+     /tmp/ccheTEuq.s:1253   .text:0000000000000cd4 .L0 
+     /tmp/ccheTEuq.s:1259   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1260   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1261   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1262   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1263   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1264   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1265   .text:0000000000000ce0 .L0 
+     /tmp/ccheTEuq.s:1277   .text:0000000000000d00 .L0 
+     /tmp/ccheTEuq.s:1291   .bss:0000000000000008 _ZN5Buddy18BLOCK_SIZE_BIT_LENE
+     /tmp/ccheTEuq.s:1287   .bss:0000000000000000 _ZN5Buddy5buddyE
+     /tmp/ccheTEuq.s:1284   .bss:0000000000000000 .LANCHOR0
+     /tmp/ccheTEuq.s:20     .text:000000000000000c .L0 
+     /tmp/ccheTEuq.s:176    .text:0000000000000154 .L0 
+     /tmp/ccheTEuq.s:265    .text:0000000000000214 .L0 
+     /tmp/ccheTEuq.s:272    .text:0000000000000238 .L0 
+     /tmp/ccheTEuq.s:235    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccheTEuq.s:333    .text:0000000000000300 .L0 
+     /tmp/ccheTEuq.s:238    .rodata.str1.8:0000000000000018 .LC1
+     /tmp/ccheTEuq.s:339    .text:0000000000000324 .L0 
+     /tmp/ccheTEuq.s:371    .text:0000000000000368 .L0 
+     /tmp/ccheTEuq.s:372    .text:0000000000000370 .L0 
+     /tmp/ccheTEuq.s:409    .text:00000000000003e0 .L0 
+     /tmp/ccheTEuq.s:451    .text:0000000000000448 .L0 
+     /tmp/ccheTEuq.s:642    .text:0000000000000618 .L0 
+     /tmp/ccheTEuq.s:659    .text:0000000000000664 .L0 
+     /tmp/ccheTEuq.s:712    .text:00000000000006cc .L0 
+     /tmp/ccheTEuq.s:715    .text:00000000000006dc .L0 
+     /tmp/ccheTEuq.s:759    .rodata.str1.8:0000000000000020 .LC2
+     /tmp/ccheTEuq.s:791    .text:0000000000000784 .L0 
+     /tmp/ccheTEuq.s:762    .rodata.str1.8:0000000000000028 .LC3
+     /tmp/ccheTEuq.s:797    .text:00000000000007a8 .L0 
+     /tmp/ccheTEuq.s:765    .rodata.str1.8:0000000000000030 .LC4
+     /tmp/ccheTEuq.s:803    .text:00000000000007cc .L0 
+     /tmp/ccheTEuq.s:768    .rodata.str1.8:0000000000000038 .LC5
+     /tmp/ccheTEuq.s:821    .text:00000000000007f4 .L0 
+     /tmp/ccheTEuq.s:884    .text:0000000000000828 .L0 
+     /tmp/ccheTEuq.s:832    .rodata.str1.8:0000000000000058 .LC7
+     /tmp/ccheTEuq.s:888    .text:000000000000083c .L0 
+     /tmp/ccheTEuq.s:835    .rodata.str1.8:0000000000000078 .LC8
+     /tmp/ccheTEuq.s:890    .text:000000000000084c .L0 
+     /tmp/ccheTEuq.s:894    .text:0000000000000864 .L0 
+     /tmp/ccheTEuq.s:896    .text:0000000000000874 .L0 
+     /tmp/ccheTEuq.s:838    .rodata.str1.8:0000000000000080 .LC9
+     /tmp/ccheTEuq.s:898    .text:0000000000000884 .L0 
+     /tmp/ccheTEuq.s:904    .text:00000000000008a8 .L0 
+     /tmp/ccheTEuq.s:841    .rodata.str1.8:0000000000000090 .LC10
+     /tmp/ccheTEuq.s:906    .text:00000000000008b8 .L0 
+     /tmp/ccheTEuq.s:912    .text:00000000000008dc .L0 
+     /tmp/ccheTEuq.s:844    .rodata.str1.8:00000000000000a0 .LC11
+     /tmp/ccheTEuq.s:914    .text:00000000000008ec .L0 
+     /tmp/ccheTEuq.s:829    .rodata.str1.8:0000000000000040 .LC6
+GAS LISTING /tmp/ccheTEuq.s 			page 32
+
+
+     /tmp/ccheTEuq.s:919    .text:0000000000000904 .L0 
+     /tmp/ccheTEuq.s:853    .rodata.str1.8:00000000000000d0 .LC14
+     /tmp/ccheTEuq.s:932    .text:000000000000093c .L0 
+     /tmp/ccheTEuq.s:936    .text:0000000000000950 .L0 
+     /tmp/ccheTEuq.s:847    .rodata.str1.8:00000000000000c0 .LC12
+     /tmp/ccheTEuq.s:943    .text:0000000000000970 .L0 
+     /tmp/ccheTEuq.s:850    .rodata.str1.8:00000000000000c8 .LC13
+     /tmp/ccheTEuq.s:945    .text:0000000000000980 .L0 
+     /tmp/ccheTEuq.s:951    .text:00000000000009a4 .L0 
+     /tmp/ccheTEuq.s:961    .text:00000000000009d8 .L0 
+     /tmp/ccheTEuq.s:963    .text:00000000000009e8 .L0 
+     /tmp/ccheTEuq.s:970    .text:0000000000000a08 .L0 
+     /tmp/ccheTEuq.s:856    .rodata.str1.8:00000000000000d8 .LC15
+     /tmp/ccheTEuq.s:974    .text:0000000000000a1c .L0 
+     /tmp/ccheTEuq.s:859    .rodata.str1.8:00000000000000f8 .LC16
+     /tmp/ccheTEuq.s:976    .text:0000000000000a2c .L0 
+     /tmp/ccheTEuq.s:1008   .text:0000000000000a84 .L0 
+     /tmp/ccheTEuq.s:1013   .text:0000000000000aa4 .L0 
+     /tmp/ccheTEuq.s:1102   .text:0000000000000af4 .L0 
+     /tmp/ccheTEuq.s:1208   .text:0000000000000c34 .L0 
+     /tmp/ccheTEuq.s:68     .text:0000000000000078 .L7
+     /tmp/ccheTEuq.s:58     .text:0000000000000068 .L5
+     /tmp/ccheTEuq.s:53     .text:0000000000000058 .L6
+     /tmp/ccheTEuq.s:60     .text:000000000000006c .L3
+     /tmp/ccheTEuq.s:106    .text:00000000000000c4 .L11
+     /tmp/ccheTEuq.s:110    .text:00000000000000cc .L12
+     /tmp/ccheTEuq.s:98     .text:00000000000000b8 .L9
+     /tmp/ccheTEuq.s:212    .text:00000000000001c8 .L19
+     /tmp/ccheTEuq.s:215    .text:00000000000001d0 .L20
+     /tmp/ccheTEuq.s:224    .text:00000000000001d8 .L21
+     /tmp/ccheTEuq.s:227    .text:00000000000001e0 .L22
+     /tmp/ccheTEuq.s:192    .text:000000000000019c .L18
+     /tmp/ccheTEuq.s:197    .text:00000000000001ac .L17
+     /tmp/ccheTEuq.s:286    .text:0000000000000274 .L28
+     /tmp/ccheTEuq.s:281    .text:0000000000000264 .L29
+     /tmp/ccheTEuq.s:301    .text:00000000000002ac .L30
+     /tmp/ccheTEuq.s:294    .text:0000000000000294 .L31
+     /tmp/ccheTEuq.s:331    .text:0000000000000300 .L34
+     /tmp/ccheTEuq.s:315    .text:00000000000002e4 .L27
+     /tmp/ccheTEuq.s:393    .text:00000000000003a4 .L41
+     /tmp/ccheTEuq.s:408    .text:00000000000003e0 .L37
+     /tmp/ccheTEuq.s:413    .text:00000000000003f4 .L39
+     /tmp/ccheTEuq.s:377    .text:0000000000000388 .L36
+     /tmp/ccheTEuq.s:495    .text:00000000000004d4 .L46
+     /tmp/ccheTEuq.s:504    .text:00000000000004dc .L47
+     /tmp/ccheTEuq.s:513    .text:00000000000004e4 .L48
+     /tmp/ccheTEuq.s:516    .text:00000000000004ec .L49
+     /tmp/ccheTEuq.s:519    .text:00000000000004f4 .L50
+     /tmp/ccheTEuq.s:488    .text:00000000000004bc .L55
+     /tmp/ccheTEuq.s:468    .text:0000000000000494 .L45
+     /tmp/ccheTEuq.s:472    .text:00000000000004a0 .L43
+     /tmp/ccheTEuq.s:684    .text:00000000000006a4 .L67
+     /tmp/ccheTEuq.s:628    .text:00000000000005e0 .L63
+     /tmp/ccheTEuq.s:617    .text:00000000000005b8 .L62
+     /tmp/ccheTEuq.s:688    .text:00000000000006ac .L68
+     /tmp/ccheTEuq.s:655    .text:0000000000000658 .L65
+     /tmp/ccheTEuq.s:635    .text:00000000000005fc .L66
+GAS LISTING /tmp/ccheTEuq.s 			page 33
+
+
+     /tmp/ccheTEuq.s:663    .text:000000000000067c .L60
+     /tmp/ccheTEuq.s:751    .text:000000000000075c .L72
+     /tmp/ccheTEuq.s:747    .text:0000000000000750 .L74
+     /tmp/ccheTEuq.s:732    .text:0000000000000734 .L71
+     /tmp/ccheTEuq.s:819    .text:00000000000007f4 .L76
+     /tmp/ccheTEuq.s:805    .text:00000000000007dc .L75
+     /tmp/ccheTEuq.s:918    .text:0000000000000904 .L93
+     /tmp/ccheTEuq.s:940    .text:0000000000000968 .L82
+     /tmp/ccheTEuq.s:978    .text:0000000000000a3c .L79
+     /tmp/ccheTEuq.s:935    .text:0000000000000950 .L94
+     /tmp/ccheTEuq.s:922    .text:0000000000000918 .L84
+     /tmp/ccheTEuq.s:969    .text:0000000000000a08 .L95
+     /tmp/ccheTEuq.s:924    .text:000000000000091c .L83
+     /tmp/ccheTEuq.s:1016   .text:0000000000000ab8 .L91
+     /tmp/ccheTEuq.s:973    .text:0000000000000a1c .L88
+     /tmp/ccheTEuq.s:996    .text:0000000000000a5c .L89
+     /tmp/ccheTEuq.s:999    .text:0000000000000a60 .L87
+     /tmp/ccheTEuq.s:1162   .text:0000000000000bcc .L103
+     /tmp/ccheTEuq.s:1165   .text:0000000000000bd4 .L104
+     /tmp/ccheTEuq.s:1168   .text:0000000000000bdc .L105
+     /tmp/ccheTEuq.s:1153   .text:0000000000000ba8 .L107
+     /tmp/ccheTEuq.s:1124   .text:0000000000000b58 .L102
+     /tmp/ccheTEuq.s:1135   .text:0000000000000b88 .L100
+     /tmp/ccheTEuq.s:1255   .text:0000000000000cd8 .L113
+     /tmp/ccheTEuq.s:1258   .text:0000000000000ce0 .L114
+     /tmp/ccheTEuq.s:1268   .text:0000000000000ce8 .L115
+     /tmp/ccheTEuq.s:1271   .text:0000000000000cf0 .L116
+     /tmp/ccheTEuq.s:1274   .text:0000000000000cf8 .L117
+     /tmp/ccheTEuq.s:1232   .text:0000000000000ca0 .L111
+     /tmp/ccheTEuq.s:1222   .text:0000000000000c78 .L110
+     /tmp/ccheTEuq.s:1238   .text:0000000000000cb8 .L109
+
+UNDEFINED SYMBOLS
+_ZN7NoAlloc16NOALLOC_END_ADDRE
+_ZN7NoAlloc9mem_allocEm
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_Z4log2m
+HEAP_END_ADDR
+_Z11closest2powm
+_ZN13SlabAllocator11getInstanceEv

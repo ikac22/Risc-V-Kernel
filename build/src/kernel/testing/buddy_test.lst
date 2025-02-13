@@ -1,0 +1,464 @@
+GAS LISTING /tmp/ccaWJsbZ.s 			page 1
+
+
+   1              		.file	"buddy_test.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.section	.rodata.str1.8,"aMS",@progbits,1
+   9              		.align	3
+  10              	.LC0:
+  11 0000 42756464 		.string	"Buddy allocate: 2^"
+  11      7920616C 
+  11      6C6F6361 
+  11      74653A20 
+  11      325E00
+  12 0013 00000000 		.align	3
+  12      00
+  13              	.LC1:
+  14 0018 20626C6F 		.string	" blocks\n"
+  14      636B730A 
+  14      00
+  15 0021 00000000 		.align	3
+  15      000000
+  16              	.LC2:
+  17 0028 52657475 		.string	"Returned address: "
+  17      726E6564 
+  17      20616464 
+  17      72657373 
+  17      3A2000
+  18 003b 00000000 		.align	3
+  18      00
+  19              	.LC3:
+  20 0040 0A00     		.string	"\n"
+  21 0042 00000000 		.align	3
+  21      0000
+  22              	.LC4:
+  23 0048 42554444 		.string	"BUDDY ALLOCATE ERROR\n"
+  23      5920414C 
+  23      4C4F4341 
+  23      54452045 
+  23      52524F52 
+  24              		.text
+  25              		.align	2
+  26              		.globl	_Z19buddy_allocate_testhb
+  28              	_Z19buddy_allocate_testhb:
+  29              	.LFB113:
+  30              		.cfi_startproc
+  31 0000 130101FE 		addi	sp,sp,-32
+  32              		.cfi_def_cfa_offset 32
+  33 0004 233C1100 		sd	ra,24(sp)
+  34 0008 23388100 		sd	s0,16(sp)
+  35 000c 23349100 		sd	s1,8(sp)
+  36 0010 23302101 		sd	s2,0(sp)
+  37              		.cfi_offset 1, -8
+  38              		.cfi_offset 8, -16
+  39              		.cfi_offset 9, -24
+  40              		.cfi_offset 18, -32
+GAS LISTING /tmp/ccaWJsbZ.s 			page 2
+
+
+  41 0014 13040102 		addi	s0,sp,32
+  42              		.cfi_def_cfa 8, 0
+  43 0018 93040500 		mv	s1,a0
+  44 001c 13890500 		mv	s2,a1
+  45 0020 17050000 		lla	a0,.LC0
+  45      13050500 
+  46 0028 97000000 		call	_Z12kprintStringPKc@plt
+  46      E7800000 
+  47 0030 13060000 		li	a2,0
+  48 0034 9305A000 		li	a1,10
+  49 0038 13850400 		mv	a0,s1
+  50 003c 97000000 		call	_Z9kprintIntmib@plt
+  50      E7800000 
+  51 0044 17050000 		lla	a0,.LC1
+  51      13050500 
+  52 004c 97000000 		call	_Z12kprintStringPKc@plt
+  52      E7800000 
+  53 0054 97000000 		call	_ZN5Buddy11getInstanceEv@plt
+  53      E7800000 
+  54 005c 93850400 		mv	a1,s1
+  55 0060 97000000 		call	_ZN5Buddy9mem_allocEh@plt
+  55      E7800000 
+  56 0068 93040500 		mv	s1,a0
+  57 006c 17050000 		lla	a0,.LC2
+  57      13050500 
+  58 0074 97000000 		call	_Z12kprintStringPKc@plt
+  58      E7800000 
+  59 007c 13060000 		li	a2,0
+  60 0080 93050001 		li	a1,16
+  61 0084 13850400 		mv	a0,s1
+  62 0088 97000000 		call	_Z9kprintIntmib@plt
+  62      E7800000 
+  63 0090 17050000 		lla	a0,.LC3
+  63      13050500 
+  64 0098 97000000 		call	_Z12kprintStringPKc@plt
+  64      E7800000 
+  65 00a0 17050000 		lla	a0,.LC3
+  65      13050500 
+  66 00a8 97000000 		call	_Z12kprintStringPKc@plt
+  66      E7800000 
+  67 00b0 63820404 		beq	s1,zero,.L5
+  68              	.L2:
+  69 00b4 17050000 		lla	a0,.LC3
+  69      13050500 
+  70 00bc 97000000 		call	_Z12kprintStringPKc@plt
+  70      E7800000 
+  71 00c4 63120904 		bne	s2,zero,.L6
+  72              	.L3:
+  73 00c8 17050000 		lla	a0,.LC3
+  73      13050500 
+  74 00d0 97000000 		call	_Z12kprintStringPKc@plt
+  74      E7800000 
+  75 00d8 13850400 		mv	a0,s1
+  76 00dc 83308101 		ld	ra,24(sp)
+  77              		.cfi_remember_state
+  78              		.cfi_restore 1
+  79 00e0 03340101 		ld	s0,16(sp)
+GAS LISTING /tmp/ccaWJsbZ.s 			page 3
+
+
+  80              		.cfi_restore 8
+  81              		.cfi_def_cfa 2, 32
+  82 00e4 83348100 		ld	s1,8(sp)
+  83              		.cfi_restore 9
+  84 00e8 03390100 		ld	s2,0(sp)
+  85              		.cfi_restore 18
+  86 00ec 13010102 		addi	sp,sp,32
+  87              		.cfi_def_cfa_offset 0
+  88 00f0 67800000 		jr	ra
+  89              	.L5:
+  90              		.cfi_restore_state
+  91 00f4 17050000 		lla	a0,.LC4
+  91      13050500 
+  92 00fc 97000000 		call	_Z12kprintStringPKc@plt
+  92      E7800000 
+  93 0104 6FF01FFB 		j	.L2
+  94              	.L6:
+  95 0108 97000000 		call	_ZN5Buddy11getInstanceEv@plt
+  95      E7800000 
+  96 0110 93051000 		li	a1,1
+  97 0114 97000000 		call	_ZN5Buddy12status_printEb@plt
+  97      E7800000 
+  98 011c 6FF0DFFA 		j	.L3
+  99              		.cfi_endproc
+ 100              	.LFE113:
+ 102              		.section	.rodata.str1.8
+ 103 005e 0000     		.align	3
+ 104              	.LC5:
+ 105 0060 42756464 		.string	"Buddy deallocate 2^"
+ 105      79206465 
+ 105      616C6C6F 
+ 105      63617465 
+ 105      20325E00 
+ 106 0074 00000000 		.align	3
+ 107              	.LC6:
+ 108 0078 20626C6F 		.string	" blocks on address: "
+ 108      636B7320 
+ 108      6F6E2061 
+ 108      64647265 
+ 108      73733A20 
+ 109 008d 000000   		.align	3
+ 110              	.LC7:
+ 111 0090 42554444 		.string	"BUDDY DEALLOCATE ERROR:"
+ 111      59204445 
+ 111      414C4C4F 
+ 111      43415445 
+ 111      20455252 
+ 112              		.text
+ 113              		.align	2
+ 114              		.globl	_Z21buddy_deallocate_testPvhb
+ 116              	_Z21buddy_deallocate_testPvhb:
+ 117              	.LFB114:
+ 118              		.cfi_startproc
+ 119 0120 130101FD 		addi	sp,sp,-48
+ 120              		.cfi_def_cfa_offset 48
+ 121 0124 23341102 		sd	ra,40(sp)
+ 122 0128 23308102 		sd	s0,32(sp)
+GAS LISTING /tmp/ccaWJsbZ.s 			page 4
+
+
+ 123 012c 233C9100 		sd	s1,24(sp)
+ 124 0130 23382101 		sd	s2,16(sp)
+ 125 0134 23343101 		sd	s3,8(sp)
+ 126              		.cfi_offset 1, -8
+ 127              		.cfi_offset 8, -16
+ 128              		.cfi_offset 9, -24
+ 129              		.cfi_offset 18, -32
+ 130              		.cfi_offset 19, -40
+ 131 0138 13040103 		addi	s0,sp,48
+ 132              		.cfi_def_cfa 8, 0
+ 133 013c 93040500 		mv	s1,a0
+ 134 0140 13890500 		mv	s2,a1
+ 135 0144 93090600 		mv	s3,a2
+ 136 0148 17050000 		lla	a0,.LC5
+ 136      13050500 
+ 137 0150 97000000 		call	_Z12kprintStringPKc@plt
+ 137      E7800000 
+ 138 0158 13060000 		li	a2,0
+ 139 015c 9305A000 		li	a1,10
+ 140 0160 13050900 		mv	a0,s2
+ 141 0164 97000000 		call	_Z9kprintIntmib@plt
+ 141      E7800000 
+ 142 016c 17050000 		lla	a0,.LC6
+ 142      13050500 
+ 143 0174 97000000 		call	_Z12kprintStringPKc@plt
+ 143      E7800000 
+ 144 017c 13060000 		li	a2,0
+ 145 0180 93050001 		li	a1,16
+ 146 0184 13850400 		mv	a0,s1
+ 147 0188 97000000 		call	_Z9kprintIntmib@plt
+ 147      E7800000 
+ 148 0190 17050000 		lla	a0,.LC3
+ 148      13050500 
+ 149 0198 97000000 		call	_Z12kprintStringPKc@plt
+ 149      E7800000 
+ 150 01a0 97000000 		call	_ZN5Buddy11getInstanceEv@plt
+ 150      E7800000 
+ 151 01a8 13060900 		mv	a2,s2
+ 152 01ac 93850400 		mv	a1,s1
+ 153 01b0 97000000 		call	_ZN5Buddy8mem_freeEPvh@plt
+ 153      E7800000 
+ 154 01b8 93040500 		mv	s1,a0
+ 155 01bc 63440504 		blt	a0,zero,.L11
+ 156              	.L8:
+ 157 01c0 17050000 		lla	a0,.LC3
+ 157      13050500 
+ 158 01c8 97000000 		call	_Z12kprintStringPKc@plt
+ 158      E7800000 
+ 159 01d0 63960906 		bne	s3,zero,.L12
+ 160              	.L9:
+ 161 01d4 17050000 		lla	a0,.LC3
+ 161      13050500 
+ 162 01dc 97000000 		call	_Z12kprintStringPKc@plt
+ 162      E7800000 
+ 163 01e4 13850400 		mv	a0,s1
+ 164 01e8 83308102 		ld	ra,40(sp)
+ 165              		.cfi_remember_state
+GAS LISTING /tmp/ccaWJsbZ.s 			page 5
+
+
+ 166              		.cfi_restore 1
+ 167 01ec 03340102 		ld	s0,32(sp)
+ 168              		.cfi_restore 8
+ 169              		.cfi_def_cfa 2, 48
+ 170 01f0 83348101 		ld	s1,24(sp)
+ 171              		.cfi_restore 9
+ 172 01f4 03390101 		ld	s2,16(sp)
+ 173              		.cfi_restore 18
+ 174 01f8 83398100 		ld	s3,8(sp)
+ 175              		.cfi_restore 19
+ 176 01fc 13010103 		addi	sp,sp,48
+ 177              		.cfi_def_cfa_offset 0
+ 178 0200 67800000 		jr	ra
+ 179              	.L11:
+ 180              		.cfi_restore_state
+ 181 0204 17050000 		lla	a0,.LC7
+ 181      13050500 
+ 182 020c 97000000 		call	_Z12kprintStringPKc@plt
+ 182      E7800000 
+ 183 0214 13061000 		li	a2,1
+ 184 0218 9305A000 		li	a1,10
+ 185 021c 13850400 		mv	a0,s1
+ 186 0220 97000000 		call	_Z9kprintIntmib@plt
+ 186      E7800000 
+ 187 0228 17050000 		lla	a0,.LC3
+ 187      13050500 
+ 188 0230 97000000 		call	_Z12kprintStringPKc@plt
+ 188      E7800000 
+ 189 0238 6FF09FF8 		j	.L8
+ 190              	.L12:
+ 191 023c 97000000 		call	_ZN5Buddy11getInstanceEv@plt
+ 191      E7800000 
+ 192 0244 93051000 		li	a1,1
+ 193 0248 97000000 		call	_ZN5Buddy12status_printEb@plt
+ 193      E7800000 
+ 194 0250 6FF05FF8 		j	.L9
+ 195              		.cfi_endproc
+ 196              	.LFE114:
+ 198              		.section	.rodata.str1.8
+ 199              		.align	3
+ 200              	.LC8:
+ 201 00a8 2D2D2D2D 		.string	"--------BUDDY TEST--------\n"
+ 201      2D2D2D2D 
+ 201      42554444 
+ 201      59205445 
+ 201      53542D2D 
+ 202 00c4 00000000 		.align	3
+ 203              	.LC9:
+ 204 00c8 2D2D2D2D 		.string	"------BUDDY TEST END------\n"
+ 204      2D2D4255 
+ 204      44445920 
+ 204      54455354 
+ 204      20454E44 
+ 205              		.text
+ 206              		.align	2
+ 207              		.globl	_Z10buddy_testv
+ 209              	_Z10buddy_testv:
+GAS LISTING /tmp/ccaWJsbZ.s 			page 6
+
+
+ 210              	.LFB115:
+ 211              		.cfi_startproc
+ 212 0254 130101FE 		addi	sp,sp,-32
+ 213              		.cfi_def_cfa_offset 32
+ 214 0258 233C1100 		sd	ra,24(sp)
+ 215 025c 23388100 		sd	s0,16(sp)
+ 216 0260 23349100 		sd	s1,8(sp)
+ 217              		.cfi_offset 1, -8
+ 218              		.cfi_offset 8, -16
+ 219              		.cfi_offset 9, -24
+ 220 0264 13040102 		addi	s0,sp,32
+ 221              		.cfi_def_cfa 8, 0
+ 222 0268 17050000 		lla	a0,.LC8
+ 222      13050500 
+ 223 0270 97000000 		call	_Z12kprintStringPKc@plt
+ 223      E7800000 
+ 224 0278 93050000 		li	a1,0
+ 225 027c 13054000 		li	a0,4
+ 226 0280 97000000 		call	_Z19buddy_allocate_testhb
+ 226      E7800000 
+ 227 0288 93040500 		mv	s1,a0
+ 228 028c 13060000 		li	a2,0
+ 229 0290 93054000 		li	a1,4
+ 230 0294 97000000 		call	_Z21buddy_deallocate_testPvhb
+ 230      E7800000 
+ 231 029c 93050000 		li	a1,0
+ 232 02a0 1305D000 		li	a0,13
+ 233 02a4 97000000 		call	_Z19buddy_allocate_testhb
+ 233      E7800000 
+ 234 02ac 13060000 		li	a2,0
+ 235 02b0 9305D000 		li	a1,13
+ 236 02b4 13850400 		mv	a0,s1
+ 237 02b8 97000000 		call	_Z21buddy_deallocate_testPvhb
+ 237      E7800000 
+ 238 02c0 13060000 		li	a2,0
+ 239 02c4 93052000 		li	a1,2
+ 240 02c8 13050000 		li	a0,0
+ 241 02cc 97000000 		call	_Z21buddy_deallocate_testPvhb
+ 241      E7800000 
+ 242 02d4 17050000 		lla	a0,.LC9
+ 242      13050500 
+ 243 02dc 97000000 		call	_Z12kprintStringPKc@plt
+ 243      E7800000 
+ 244 02e4 83308101 		ld	ra,24(sp)
+ 245              		.cfi_restore 1
+ 246 02e8 03340101 		ld	s0,16(sp)
+ 247              		.cfi_restore 8
+ 248              		.cfi_def_cfa 2, 32
+ 249 02ec 83348100 		ld	s1,8(sp)
+ 250              		.cfi_restore 9
+ 251 02f0 13010102 		addi	sp,sp,32
+ 252              		.cfi_def_cfa_offset 0
+ 253 02f4 67800000 		jr	ra
+ 254              		.cfi_endproc
+ 255              	.LFE115:
+ 257              		.ident	"GCC: (GNU) 12.2.0"
+ 258              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccaWJsbZ.s 			page 7
+
+
+GAS LISTING /tmp/ccaWJsbZ.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 buddy_test.cpp
+     /tmp/ccaWJsbZ.s:28     .text:0000000000000000 _Z19buddy_allocate_testhb
+     /tmp/ccaWJsbZ.s:30     .text:0000000000000000 .L0 
+     /tmp/ccaWJsbZ.s:31     .text:0000000000000000 $x
+     /tmp/ccaWJsbZ.s:32     .text:0000000000000004 .L0 
+     /tmp/ccaWJsbZ.s:37     .text:0000000000000014 .L0 
+     /tmp/ccaWJsbZ.s:38     .text:0000000000000014 .L0 
+     /tmp/ccaWJsbZ.s:39     .text:0000000000000014 .L0 
+     /tmp/ccaWJsbZ.s:40     .text:0000000000000014 .L0 
+     /tmp/ccaWJsbZ.s:42     .text:0000000000000018 .L0 
+     /tmp/ccaWJsbZ.s:77     .text:00000000000000e0 .L0 
+     /tmp/ccaWJsbZ.s:78     .text:00000000000000e0 .L0 
+     /tmp/ccaWJsbZ.s:80     .text:00000000000000e4 .L0 
+     /tmp/ccaWJsbZ.s:81     .text:00000000000000e4 .L0 
+     /tmp/ccaWJsbZ.s:83     .text:00000000000000e8 .L0 
+     /tmp/ccaWJsbZ.s:85     .text:00000000000000ec .L0 
+     /tmp/ccaWJsbZ.s:87     .text:00000000000000f0 .L0 
+     /tmp/ccaWJsbZ.s:90     .text:00000000000000f4 .L0 
+     /tmp/ccaWJsbZ.s:99     .text:0000000000000120 .L0 
+     /tmp/ccaWJsbZ.s:116    .text:0000000000000120 _Z21buddy_deallocate_testPvhb
+     /tmp/ccaWJsbZ.s:118    .text:0000000000000120 .L0 
+     /tmp/ccaWJsbZ.s:120    .text:0000000000000124 .L0 
+     /tmp/ccaWJsbZ.s:126    .text:0000000000000138 .L0 
+     /tmp/ccaWJsbZ.s:127    .text:0000000000000138 .L0 
+     /tmp/ccaWJsbZ.s:128    .text:0000000000000138 .L0 
+     /tmp/ccaWJsbZ.s:129    .text:0000000000000138 .L0 
+     /tmp/ccaWJsbZ.s:130    .text:0000000000000138 .L0 
+     /tmp/ccaWJsbZ.s:132    .text:000000000000013c .L0 
+     /tmp/ccaWJsbZ.s:165    .text:00000000000001ec .L0 
+     /tmp/ccaWJsbZ.s:166    .text:00000000000001ec .L0 
+     /tmp/ccaWJsbZ.s:168    .text:00000000000001f0 .L0 
+     /tmp/ccaWJsbZ.s:169    .text:00000000000001f0 .L0 
+     /tmp/ccaWJsbZ.s:171    .text:00000000000001f4 .L0 
+     /tmp/ccaWJsbZ.s:173    .text:00000000000001f8 .L0 
+     /tmp/ccaWJsbZ.s:175    .text:00000000000001fc .L0 
+     /tmp/ccaWJsbZ.s:177    .text:0000000000000200 .L0 
+     /tmp/ccaWJsbZ.s:180    .text:0000000000000204 .L0 
+     /tmp/ccaWJsbZ.s:195    .text:0000000000000254 .L0 
+     /tmp/ccaWJsbZ.s:209    .text:0000000000000254 _Z10buddy_testv
+     /tmp/ccaWJsbZ.s:211    .text:0000000000000254 .L0 
+     /tmp/ccaWJsbZ.s:213    .text:0000000000000258 .L0 
+     /tmp/ccaWJsbZ.s:217    .text:0000000000000264 .L0 
+     /tmp/ccaWJsbZ.s:218    .text:0000000000000264 .L0 
+     /tmp/ccaWJsbZ.s:219    .text:0000000000000264 .L0 
+     /tmp/ccaWJsbZ.s:221    .text:0000000000000268 .L0 
+     /tmp/ccaWJsbZ.s:245    .text:00000000000002e8 .L0 
+     /tmp/ccaWJsbZ.s:247    .text:00000000000002ec .L0 
+     /tmp/ccaWJsbZ.s:248    .text:00000000000002ec .L0 
+     /tmp/ccaWJsbZ.s:250    .text:00000000000002f0 .L0 
+     /tmp/ccaWJsbZ.s:252    .text:00000000000002f4 .L0 
+     /tmp/ccaWJsbZ.s:254    .text:00000000000002f8 .L0 
+     /tmp/ccaWJsbZ.s:10     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccaWJsbZ.s:45     .text:0000000000000020 .L0 
+     /tmp/ccaWJsbZ.s:13     .rodata.str1.8:0000000000000018 .LC1
+     /tmp/ccaWJsbZ.s:51     .text:0000000000000044 .L0 
+     /tmp/ccaWJsbZ.s:16     .rodata.str1.8:0000000000000028 .LC2
+GAS LISTING /tmp/ccaWJsbZ.s 			page 9
+
+
+     /tmp/ccaWJsbZ.s:57     .text:000000000000006c .L0 
+     /tmp/ccaWJsbZ.s:19     .rodata.str1.8:0000000000000040 .LC3
+     /tmp/ccaWJsbZ.s:63     .text:0000000000000090 .L0 
+     /tmp/ccaWJsbZ.s:65     .text:00000000000000a0 .L0 
+     /tmp/ccaWJsbZ.s:69     .text:00000000000000b4 .L0 
+     /tmp/ccaWJsbZ.s:73     .text:00000000000000c8 .L0 
+     /tmp/ccaWJsbZ.s:22     .rodata.str1.8:0000000000000048 .LC4
+     /tmp/ccaWJsbZ.s:91     .text:00000000000000f4 .L0 
+     /tmp/ccaWJsbZ.s:104    .rodata.str1.8:0000000000000060 .LC5
+     /tmp/ccaWJsbZ.s:136    .text:0000000000000148 .L0 
+     /tmp/ccaWJsbZ.s:107    .rodata.str1.8:0000000000000078 .LC6
+     /tmp/ccaWJsbZ.s:142    .text:000000000000016c .L0 
+     /tmp/ccaWJsbZ.s:148    .text:0000000000000190 .L0 
+     /tmp/ccaWJsbZ.s:157    .text:00000000000001c0 .L0 
+     /tmp/ccaWJsbZ.s:161    .text:00000000000001d4 .L0 
+     /tmp/ccaWJsbZ.s:110    .rodata.str1.8:0000000000000090 .LC7
+     /tmp/ccaWJsbZ.s:181    .text:0000000000000204 .L0 
+     /tmp/ccaWJsbZ.s:187    .text:0000000000000228 .L0 
+     /tmp/ccaWJsbZ.s:200    .rodata.str1.8:00000000000000a8 .LC8
+     /tmp/ccaWJsbZ.s:222    .text:0000000000000268 .L0 
+     /tmp/ccaWJsbZ.s:203    .rodata.str1.8:00000000000000c8 .LC9
+     /tmp/ccaWJsbZ.s:242    .text:00000000000002d4 .L0 
+     /tmp/ccaWJsbZ.s:89     .text:00000000000000f4 .L5
+     /tmp/ccaWJsbZ.s:94     .text:0000000000000108 .L6
+     /tmp/ccaWJsbZ.s:68     .text:00000000000000b4 .L2
+     /tmp/ccaWJsbZ.s:72     .text:00000000000000c8 .L3
+     /tmp/ccaWJsbZ.s:179    .text:0000000000000204 .L11
+     /tmp/ccaWJsbZ.s:190    .text:000000000000023c .L12
+     /tmp/ccaWJsbZ.s:156    .text:00000000000001c0 .L8
+     /tmp/ccaWJsbZ.s:160    .text:00000000000001d4 .L9
+
+UNDEFINED SYMBOLS
+_Z12kprintStringPKc
+_Z9kprintIntmib
+_ZN5Buddy11getInstanceEv
+_ZN5Buddy9mem_allocEh
+_ZN5Buddy12status_printEb
+_ZN5Buddy8mem_freeEPvh

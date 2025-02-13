@@ -1,0 +1,621 @@
+GAS LISTING /tmp/ccA6BHkO.s 			page 1
+
+
+   1              		.file	"os2Main.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_Z6memsetPKvii
+  11              	_Z6memsetPKvii:
+  12              	.LFB113:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 93070000 		li	a5,0
+  21 0010 6F000001 		j	.L2
+  22              	.L3:
+  23 0014 3307F500 		add	a4,a0,a5
+  24 0018 2300C700 		sb	a2,0(a4)
+  25 001c 9B871700 		addiw	a5,a5,1
+  26              	.L2:
+  27 0020 E3CAB7FE 		blt	a5,a1,.L3
+  28 0024 03348100 		ld	s0,8(sp)
+  29              		.cfi_restore 8
+  30              		.cfi_def_cfa 2, 16
+  31 0028 13010101 		addi	sp,sp,16
+  32              		.cfi_def_cfa_offset 0
+  33 002c 67800000 		jr	ra
+  34              		.cfi_endproc
+  35              	.LFE113:
+  37              		.section	.rodata.str1.8,"aMS",@progbits,1
+  38              		.align	3
+  39              	.LC0:
+  40 0000 20536861 		.string	" Shared object constructed\n"
+  40      72656420 
+  40      6F626A65 
+  40      63742063 
+  40      6F6E7374 
+  41              		.text
+  42              		.align	2
+  43              		.globl	_Z9constructPv
+  45              	_Z9constructPv:
+  46              	.LFB114:
+  47              		.cfi_startproc
+  48 0030 130101FE 		addi	sp,sp,-32
+  49              		.cfi_def_cfa_offset 32
+  50 0034 233C1100 		sd	ra,24(sp)
+  51 0038 23388100 		sd	s0,16(sp)
+  52 003c 23349100 		sd	s1,8(sp)
+  53              		.cfi_offset 1, -8
+  54              		.cfi_offset 8, -16
+  55              		.cfi_offset 9, -24
+  56 0040 13040102 		addi	s0,sp,32
+GAS LISTING /tmp/ccA6BHkO.s 			page 2
+
+
+  57              		.cfi_def_cfa 8, 0
+  58 0044 93040500 		mv	s1,a0
+  59 0048 97070000 		lla	a5,.LANCHOR0
+  59      93870700 
+  60 0050 03A50700 		lw	a0,0(a5)
+  61 0054 1B071500 		addiw	a4,a0,1
+  62 0058 23A0E700 		sw	a4,0(a5)
+  63 005c 13060000 		li	a2,0
+  64 0060 9305A000 		li	a1,10
+  65 0064 97000000 		call	_Z9kprintIntmib@plt
+  65      E7800000 
+  66 006c 17050000 		lla	a0,.LC0
+  66      13050500 
+  67 0074 97000000 		call	_Z12kprintStringPKc@plt
+  67      E7800000 
+  68 007c 1306500A 		li	a2,165
+  69 0080 93057000 		li	a1,7
+  70 0084 13850400 		mv	a0,s1
+  71 0088 97000000 		call	_Z6memsetPKvii
+  71      E7800000 
+  72 0090 83308101 		ld	ra,24(sp)
+  73              		.cfi_restore 1
+  74 0094 03340101 		ld	s0,16(sp)
+  75              		.cfi_restore 8
+  76              		.cfi_def_cfa 2, 32
+  77 0098 83348100 		ld	s1,8(sp)
+  78              		.cfi_restore 9
+  79 009c 13010102 		addi	sp,sp,32
+  80              		.cfi_def_cfa_offset 0
+  81 00a0 67800000 		jr	ra
+  82              		.cfi_endproc
+  83              	.LFE114:
+  85              		.align	2
+  86              		.globl	_Z5checkPvm
+  88              	_Z5checkPvm:
+  89              	.LFB115:
+  90              		.cfi_startproc
+  91 00a4 130101FF 		addi	sp,sp,-16
+  92              		.cfi_def_cfa_offset 16
+  93 00a8 23348100 		sd	s0,8(sp)
+  94              		.cfi_offset 8, -8
+  95 00ac 13040101 		addi	s0,sp,16
+  96              		.cfi_def_cfa 8, 0
+  97 00b0 13060500 		mv	a2,a0
+  98 00b4 93070000 		li	a5,0
+  99 00b8 13051000 		li	a0,1
+ 100 00bc 6F008000 		j	.L8
+ 101              	.L9:
+ 102 00c0 93871700 		addi	a5,a5,1
+ 103              	.L8:
+ 104 00c4 63FEB700 		bgeu	a5,a1,.L13
+ 105 00c8 3307F600 		add	a4,a2,a5
+ 106 00cc 83460700 		lbu	a3,0(a4)
+ 107 00d0 1307500A 		li	a4,165
+ 108 00d4 E386E6FE 		beq	a3,a4,.L9
+ 109 00d8 13050000 		li	a0,0
+ 110 00dc 6FF05FFE 		j	.L9
+GAS LISTING /tmp/ccA6BHkO.s 			page 3
+
+
+ 111              	.L13:
+ 112 00e0 03348100 		ld	s0,8(sp)
+ 113              		.cfi_restore 8
+ 114              		.cfi_def_cfa 2, 16
+ 115 00e4 13010101 		addi	sp,sp,16
+ 116              		.cfi_def_cfa_offset 0
+ 117 00e8 67800000 		jr	ra
+ 118              		.cfi_endproc
+ 119              	.LFE115:
+ 121              		.section	.rodata.str1.8
+ 122 001c 00000000 		.align	3
+ 123              	.LC1:
+ 124 0020 56616C75 		.string	"Value not correct!\n"
+ 124      65206E6F 
+ 124      7420636F 
+ 124      72726563 
+ 124      74210A00 
+ 125              		.text
+ 126              		.align	2
+ 127              		.globl	_Z4workPv
+ 129              	_Z4workPv:
+ 130              	.LFB116:
+ 131              		.cfi_startproc
+ 132 00ec 130101F9 		addi	sp,sp,-112
+ 133              		.cfi_def_cfa_offset 112
+ 134 00f0 23341106 		sd	ra,104(sp)
+ 135 00f4 23308106 		sd	s0,96(sp)
+ 136 00f8 233C9104 		sd	s1,88(sp)
+ 137 00fc 23382105 		sd	s2,80(sp)
+ 138 0100 23343105 		sd	s3,72(sp)
+ 139 0104 23304105 		sd	s4,64(sp)
+ 140 0108 233C5103 		sd	s5,56(sp)
+ 141 010c 23386103 		sd	s6,48(sp)
+ 142 0110 23347103 		sd	s7,40(sp)
+ 143 0114 23308103 		sd	s8,32(sp)
+ 144              		.cfi_offset 1, -8
+ 145              		.cfi_offset 8, -16
+ 146              		.cfi_offset 9, -24
+ 147              		.cfi_offset 18, -32
+ 148              		.cfi_offset 19, -40
+ 149              		.cfi_offset 20, -48
+ 150              		.cfi_offset 21, -56
+ 151              		.cfi_offset 22, -64
+ 152              		.cfi_offset 23, -72
+ 153              		.cfi_offset 24, -80
+ 154 0118 13040107 		addi	s0,sp,112
+ 155              		.cfi_def_cfa 8, 0
+ 156 011c 83370500 		ld	a5,0(a0)
+ 157 0120 233CF4F8 		sd	a5,-104(s0)
+ 158 0124 83378500 		ld	a5,8(a0)
+ 159 0128 2330F4FA 		sd	a5,-96(s0)
+ 160 012c 83370501 		ld	a5,16(a0)
+ 161 0130 2334F4FA 		sd	a5,-88(s0)
+ 162 0134 832784F9 		lw	a5,-104(s0)
+ 163 0138 1B8B1700 		addiw	s6,a5,1
+ 164 013c 93973700 		slli	a5,a5,3
+ 165 0140 17070000 		lla	a4,.LANCHOR1
+GAS LISTING /tmp/ccA6BHkO.s 			page 4
+
+
+ 165      13070700 
+ 166 0148 B307F700 		add	a5,a4,a5
+ 167 014c 93060000 		li	a3,0
+ 168 0150 13060000 		li	a2,0
+ 169 0154 93050B00 		mv	a1,s6
+ 170 0158 03B50700 		ld	a0,0(a5)
+ 171 015c 97000000 		call	_Z17kmem_cache_createPKcmPFvPvES3_@plt
+ 171      E7800000 
+ 172 0164 130A0500 		mv	s4,a0
+ 173 0168 832B84FA 		lw	s7,-88(s0)
+ 174 016c 13954B00 		slli	a0,s7,4
+ 175 0170 97000000 		call	_Z7kmallocm@plt
+ 175      E7800000 
+ 176 0178 930A0500 		mv	s5,a0
+ 177 017c 93040000 		li	s1,0
+ 178 0180 93090000 		li	s3,0
+ 179 0184 6F008003 		j	.L15
+ 180              	.L16:
+ 181 0188 13994900 		slli	s2,s3,4
+ 182 018c 33892A01 		add	s2,s5,s2
+ 183 0190 13050A00 		mv	a0,s4
+ 184 0194 97000000 		call	_Z16kmem_cache_allocP11ObjectCache@plt
+ 184      E7800000 
+ 185 019c 2334A900 		sd	a0,8(s2)
+ 186 01a0 23304901 		sd	s4,0(s2)
+ 187 01a4 1306500A 		li	a2,165
+ 188 01a8 93050B00 		mv	a1,s6
+ 189 01ac 97000000 		call	_Z6memsetPKvii
+ 189      E7800000 
+ 190              	.L17:
+ 191 01b4 9B891900 		addiw	s3,s3,1
+ 192 01b8 9B841400 		addiw	s1,s1,1
+ 193              	.L15:
+ 194 01bc 63DA7405 		ble	s7,s1,.L25
+ 195 01c0 93074006 		li	a5,100
+ 196 01c4 BBE7F402 		remw	a5,s1,a5
+ 197 01c8 E39007FC 		bne	a5,zero,.L16
+ 198 01cc 033C04FA 		ld	s8,-96(s0)
+ 199 01d0 13994900 		slli	s2,s3,4
+ 200 01d4 33892A01 		add	s2,s5,s2
+ 201 01d8 13050C00 		mv	a0,s8
+ 202 01dc 97000000 		call	_Z16kmem_cache_allocP11ObjectCache@plt
+ 202      E7800000 
+ 203 01e4 2334A900 		sd	a0,8(s2)
+ 204 01e8 23308901 		sd	s8,0(s2)
+ 205 01ec 93057000 		li	a1,7
+ 206 01f0 97000000 		call	_Z5checkPvm
+ 206      E7800000 
+ 207 01f8 E31E05FA 		bne	a0,zero,.L17
+ 208 01fc 17050000 		lla	a0,.LC1
+ 208      13050500 
+ 209 0204 97000000 		call	_Z12kprintStringPKc@plt
+ 209      E7800000 
+ 210 020c 6FF09FFA 		j	.L17
+ 211              	.L25:
+ 212 0210 13050A00 		mv	a0,s4
+ 213 0214 97000000 		call	_Z15kmem_cache_infoP11ObjectCache@plt
+GAS LISTING /tmp/ccA6BHkO.s 			page 5
+
+
+ 213      E7800000 
+ 214 021c 033504FA 		ld	a0,-96(s0)
+ 215 0220 97000000 		call	_Z15kmem_cache_infoP11ObjectCache@plt
+ 215      E7800000 
+ 216 0228 13090000 		li	s2,0
+ 217 022c 6F000002 		j	.L19
+ 218              	.L23:
+ 219 0230 93050B00 		mv	a1,s6
+ 220 0234 6F004003 		j	.L20
+ 221              	.L21:
+ 222 0238 83B58400 		ld	a1,8(s1)
+ 223 023c 03B50400 		ld	a0,0(s1)
+ 224 0240 97000000 		call	_Z15kmem_cache_freeP11ObjectCachePv@plt
+ 224      E7800000 
+ 225 0248 1B091900 		addiw	s2,s2,1
+ 226              	.L19:
+ 227 024c 635E3903 		ble	s3,s2,.L26
+ 228 0250 93144900 		slli	s1,s2,4
+ 229 0254 B3849A00 		add	s1,s5,s1
+ 230 0258 03B58400 		ld	a0,8(s1)
+ 231 025c 83B70400 		ld	a5,0(s1)
+ 232 0260 E38847FD 		beq	a5,s4,.L23
+ 233 0264 93057000 		li	a1,7
+ 234              	.L20:
+ 235 0268 97000000 		call	_Z5checkPvm
+ 235      E7800000 
+ 236 0270 E31405FC 		bne	a0,zero,.L21
+ 237 0274 17050000 		lla	a0,.LC1
+ 237      13050500 
+ 238 027c 97000000 		call	_Z12kprintStringPKc@plt
+ 238      E7800000 
+ 239 0284 6FF05FFB 		j	.L21
+ 240              	.L26:
+ 241 0288 13850A00 		mv	a0,s5
+ 242 028c 97000000 		call	_Z5kfreePv@plt
+ 242      E7800000 
+ 243 0294 13050A00 		mv	a0,s4
+ 244 0298 97000000 		call	_Z18kmem_cache_destroyP11ObjectCache@plt
+ 244      E7800000 
+ 245 02a0 83308106 		ld	ra,104(sp)
+ 246              		.cfi_restore 1
+ 247 02a4 03340106 		ld	s0,96(sp)
+ 248              		.cfi_restore 8
+ 249              		.cfi_def_cfa 2, 112
+ 250 02a8 83348105 		ld	s1,88(sp)
+ 251              		.cfi_restore 9
+ 252 02ac 03390105 		ld	s2,80(sp)
+ 253              		.cfi_restore 18
+ 254 02b0 83398104 		ld	s3,72(sp)
+ 255              		.cfi_restore 19
+ 256 02b4 033A0104 		ld	s4,64(sp)
+ 257              		.cfi_restore 20
+ 258 02b8 833A8103 		ld	s5,56(sp)
+ 259              		.cfi_restore 21
+ 260 02bc 033B0103 		ld	s6,48(sp)
+ 261              		.cfi_restore 22
+ 262 02c0 833B8102 		ld	s7,40(sp)
+GAS LISTING /tmp/ccA6BHkO.s 			page 6
+
+
+ 263              		.cfi_restore 23
+ 264 02c4 033C0102 		ld	s8,32(sp)
+ 265              		.cfi_restore 24
+ 266 02c8 13010107 		addi	sp,sp,112
+ 267              		.cfi_def_cfa_offset 0
+ 268 02cc 67800000 		jr	ra
+ 269              		.cfi_endproc
+ 270              	.LFE116:
+ 272              		.align	2
+ 273              		.globl	_Z4runsPFvPvEP6data_si
+ 275              	_Z4runsPFvPvEP6data_si:
+ 276              	.LFB117:
+ 277              		.cfi_startproc
+ 278 02d0 130101FB 		addi	sp,sp,-80
+ 279              		.cfi_def_cfa_offset 80
+ 280 02d4 23341104 		sd	ra,72(sp)
+ 281 02d8 23308104 		sd	s0,64(sp)
+ 282 02dc 233C9102 		sd	s1,56(sp)
+ 283 02e0 23382103 		sd	s2,48(sp)
+ 284 02e4 23343103 		sd	s3,40(sp)
+ 285 02e8 23304103 		sd	s4,32(sp)
+ 286              		.cfi_offset 1, -8
+ 287              		.cfi_offset 8, -16
+ 288              		.cfi_offset 9, -24
+ 289              		.cfi_offset 18, -32
+ 290              		.cfi_offset 19, -40
+ 291              		.cfi_offset 20, -48
+ 292 02ec 13040105 		addi	s0,sp,80
+ 293              		.cfi_def_cfa 8, 0
+ 294 02f0 130A0500 		mv	s4,a0
+ 295 02f4 13890500 		mv	s2,a1
+ 296 02f8 93090600 		mv	s3,a2
+ 297 02fc 93040000 		li	s1,0
+ 298 0300 6F00C002 		j	.L28
+ 299              	.L29:
+ 300 0304 83370900 		ld	a5,0(s2)
+ 301 0308 233CF4FA 		sd	a5,-72(s0)
+ 302 030c 83378900 		ld	a5,8(s2)
+ 303 0310 2330F4FC 		sd	a5,-64(s0)
+ 304 0314 83370901 		ld	a5,16(s2)
+ 305 0318 2334F4FC 		sd	a5,-56(s0)
+ 306 031c 232C94FA 		sw	s1,-72(s0)
+ 307 0320 130584FB 		addi	a0,s0,-72
+ 308 0324 E7000A00 		jalr	s4
+ 309 0328 9B841400 		addiw	s1,s1,1
+ 310              	.L28:
+ 311 032c E3CC34FD 		blt	s1,s3,.L29
+ 312 0330 83308104 		ld	ra,72(sp)
+ 313              		.cfi_restore 1
+ 314 0334 03340104 		ld	s0,64(sp)
+ 315              		.cfi_restore 8
+ 316              		.cfi_def_cfa 2, 80
+ 317 0338 83348103 		ld	s1,56(sp)
+ 318              		.cfi_restore 9
+ 319 033c 03390103 		ld	s2,48(sp)
+ 320              		.cfi_restore 18
+ 321 0340 83398102 		ld	s3,40(sp)
+GAS LISTING /tmp/ccA6BHkO.s 			page 7
+
+
+ 322              		.cfi_restore 19
+ 323 0344 033A0102 		ld	s4,32(sp)
+ 324              		.cfi_restore 20
+ 325 0348 13010105 		addi	sp,sp,80
+ 326              		.cfi_def_cfa_offset 0
+ 327 034c 67800000 		jr	ra
+ 328              		.cfi_endproc
+ 329              	.LFE117:
+ 331              		.section	.rodata.str1.8
+ 332 0034 00000000 		.align	3
+ 333              	.LC2:
+ 334 0038 73686172 		.string	"shared object"
+ 334      6564206F 
+ 334      626A6563 
+ 334      7400
+ 335              		.text
+ 336              		.align	2
+ 337              		.globl	kTestMain
+ 339              	kTestMain:
+ 340              	.LFB118:
+ 341              		.cfi_startproc
+ 342 0350 130101FC 		addi	sp,sp,-64
+ 343              		.cfi_def_cfa_offset 64
+ 344 0354 233C1102 		sd	ra,56(sp)
+ 345 0358 23388102 		sd	s0,48(sp)
+ 346 035c 23349102 		sd	s1,40(sp)
+ 347              		.cfi_offset 1, -8
+ 348              		.cfi_offset 8, -16
+ 349              		.cfi_offset 9, -24
+ 350 0360 13040104 		addi	s0,sp,64
+ 351              		.cfi_def_cfa 8, 0
+ 352 0364 93060000 		li	a3,0
+ 353 0368 17060000 		lla	a2,_Z9constructPv
+ 353      13060600 
+ 354 0370 93057000 		li	a1,7
+ 355 0374 17050000 		lla	a0,.LC2
+ 355      13050500 
+ 356 037c 97000000 		call	_Z17kmem_cache_createPKcmPFvPvES3_@plt
+ 356      E7800000 
+ 357 0384 93040500 		mv	s1,a0
+ 358 0388 2338A4FC 		sd	a0,-48(s0)
+ 359 038c 9307803E 		li	a5,1000
+ 360 0390 232CF4FC 		sw	a5,-40(s0)
+ 361 0394 13065000 		li	a2,5
+ 362 0398 930584FC 		addi	a1,s0,-56
+ 363 039c 17050000 		lla	a0,_Z4workPv
+ 363      13050500 
+ 364 03a4 97000000 		call	_Z4runsPFvPvEP6data_si
+ 364      E7800000 
+ 365 03ac 13850400 		mv	a0,s1
+ 366 03b0 97000000 		call	_Z18kmem_cache_destroyP11ObjectCache@plt
+ 366      E7800000 
+ 367 03b8 83308103 		ld	ra,56(sp)
+ 368              		.cfi_restore 1
+ 369 03bc 03340103 		ld	s0,48(sp)
+ 370              		.cfi_restore 8
+ 371              		.cfi_def_cfa 2, 64
+GAS LISTING /tmp/ccA6BHkO.s 			page 8
+
+
+ 372 03c0 83348102 		ld	s1,40(sp)
+ 373              		.cfi_restore 9
+ 374 03c4 13010104 		addi	sp,sp,64
+ 375              		.cfi_def_cfa_offset 0
+ 376 03c8 67800000 		jr	ra
+ 377              		.cfi_endproc
+ 378              	.LFE118:
+ 380              		.section	.rodata.str1.8
+ 381 0046 0000     		.align	3
+ 382              	.LC3:
+ 383 0048 74635F30 		.string	"tc_0"
+ 383      00
+ 384 004d 000000   		.align	3
+ 385              	.LC4:
+ 386 0050 74635F31 		.string	"tc_1"
+ 386      00
+ 387 0055 000000   		.align	3
+ 388              	.LC5:
+ 389 0058 74635F32 		.string	"tc_2"
+ 389      00
+ 390 005d 000000   		.align	3
+ 391              	.LC6:
+ 392 0060 74635F33 		.string	"tc_3"
+ 392      00
+ 393 0065 000000   		.align	3
+ 394              	.LC7:
+ 395 0068 74635F34 		.string	"tc_4"
+ 395      00
+ 396              		.data
+ 397              		.align	2
+ 398              		.set	.LANCHOR0,. + 0
+ 401              	_ZZ9constructPvE1i:
+ 402 0000 01000000 		.word	1
+ 403              		.section	.data.rel.ro.local,"aw"
+ 404              		.align	3
+ 405              		.set	.LANCHOR1,. + 0
+ 408              	_ZL11CACHE_NAMES:
+ 409 0000 00000000 		.dword	.LC3
+ 409      00000000 
+ 410 0008 00000000 		.dword	.LC4
+ 410      00000000 
+ 411 0010 00000000 		.dword	.LC5
+ 411      00000000 
+ 412 0018 00000000 		.dword	.LC6
+ 412      00000000 
+ 413 0020 00000000 		.dword	.LC7
+ 413      00000000 
+ 414              		.ident	"GCC: (GNU) 12.2.0"
+ 415              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccA6BHkO.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 os2Main.cpp
+     /tmp/ccA6BHkO.s:11     .text:0000000000000000 _Z6memsetPKvii
+     /tmp/ccA6BHkO.s:13     .text:0000000000000000 .L0 
+     /tmp/ccA6BHkO.s:14     .text:0000000000000000 $x
+     /tmp/ccA6BHkO.s:15     .text:0000000000000004 .L0 
+     /tmp/ccA6BHkO.s:17     .text:0000000000000008 .L0 
+     /tmp/ccA6BHkO.s:19     .text:000000000000000c .L0 
+     /tmp/ccA6BHkO.s:29     .text:0000000000000028 .L0 
+     /tmp/ccA6BHkO.s:30     .text:0000000000000028 .L0 
+     /tmp/ccA6BHkO.s:32     .text:000000000000002c .L0 
+     /tmp/ccA6BHkO.s:34     .text:0000000000000030 .L0 
+     /tmp/ccA6BHkO.s:45     .text:0000000000000030 _Z9constructPv
+     /tmp/ccA6BHkO.s:47     .text:0000000000000030 .L0 
+     /tmp/ccA6BHkO.s:49     .text:0000000000000034 .L0 
+     /tmp/ccA6BHkO.s:53     .text:0000000000000040 .L0 
+     /tmp/ccA6BHkO.s:54     .text:0000000000000040 .L0 
+     /tmp/ccA6BHkO.s:55     .text:0000000000000040 .L0 
+     /tmp/ccA6BHkO.s:57     .text:0000000000000044 .L0 
+     /tmp/ccA6BHkO.s:73     .text:0000000000000094 .L0 
+     /tmp/ccA6BHkO.s:75     .text:0000000000000098 .L0 
+     /tmp/ccA6BHkO.s:76     .text:0000000000000098 .L0 
+     /tmp/ccA6BHkO.s:78     .text:000000000000009c .L0 
+     /tmp/ccA6BHkO.s:80     .text:00000000000000a0 .L0 
+     /tmp/ccA6BHkO.s:82     .text:00000000000000a4 .L0 
+     /tmp/ccA6BHkO.s:88     .text:00000000000000a4 _Z5checkPvm
+     /tmp/ccA6BHkO.s:90     .text:00000000000000a4 .L0 
+     /tmp/ccA6BHkO.s:92     .text:00000000000000a8 .L0 
+     /tmp/ccA6BHkO.s:94     .text:00000000000000ac .L0 
+     /tmp/ccA6BHkO.s:96     .text:00000000000000b0 .L0 
+     /tmp/ccA6BHkO.s:113    .text:00000000000000e4 .L0 
+     /tmp/ccA6BHkO.s:114    .text:00000000000000e4 .L0 
+     /tmp/ccA6BHkO.s:116    .text:00000000000000e8 .L0 
+     /tmp/ccA6BHkO.s:118    .text:00000000000000ec .L0 
+     /tmp/ccA6BHkO.s:129    .text:00000000000000ec _Z4workPv
+     /tmp/ccA6BHkO.s:131    .text:00000000000000ec .L0 
+     /tmp/ccA6BHkO.s:133    .text:00000000000000f0 .L0 
+     /tmp/ccA6BHkO.s:144    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:145    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:146    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:147    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:148    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:149    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:150    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:151    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:152    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:153    .text:0000000000000118 .L0 
+     /tmp/ccA6BHkO.s:155    .text:000000000000011c .L0 
+     /tmp/ccA6BHkO.s:246    .text:00000000000002a4 .L0 
+     /tmp/ccA6BHkO.s:248    .text:00000000000002a8 .L0 
+     /tmp/ccA6BHkO.s:249    .text:00000000000002a8 .L0 
+     /tmp/ccA6BHkO.s:251    .text:00000000000002ac .L0 
+     /tmp/ccA6BHkO.s:253    .text:00000000000002b0 .L0 
+     /tmp/ccA6BHkO.s:255    .text:00000000000002b4 .L0 
+     /tmp/ccA6BHkO.s:257    .text:00000000000002b8 .L0 
+     /tmp/ccA6BHkO.s:259    .text:00000000000002bc .L0 
+     /tmp/ccA6BHkO.s:261    .text:00000000000002c0 .L0 
+GAS LISTING /tmp/ccA6BHkO.s 			page 10
+
+
+     /tmp/ccA6BHkO.s:263    .text:00000000000002c4 .L0 
+     /tmp/ccA6BHkO.s:265    .text:00000000000002c8 .L0 
+     /tmp/ccA6BHkO.s:267    .text:00000000000002cc .L0 
+     /tmp/ccA6BHkO.s:269    .text:00000000000002d0 .L0 
+     /tmp/ccA6BHkO.s:275    .text:00000000000002d0 _Z4runsPFvPvEP6data_si
+     /tmp/ccA6BHkO.s:277    .text:00000000000002d0 .L0 
+     /tmp/ccA6BHkO.s:279    .text:00000000000002d4 .L0 
+     /tmp/ccA6BHkO.s:286    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:287    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:288    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:289    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:290    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:291    .text:00000000000002ec .L0 
+     /tmp/ccA6BHkO.s:293    .text:00000000000002f0 .L0 
+     /tmp/ccA6BHkO.s:313    .text:0000000000000334 .L0 
+     /tmp/ccA6BHkO.s:315    .text:0000000000000338 .L0 
+     /tmp/ccA6BHkO.s:316    .text:0000000000000338 .L0 
+     /tmp/ccA6BHkO.s:318    .text:000000000000033c .L0 
+     /tmp/ccA6BHkO.s:320    .text:0000000000000340 .L0 
+     /tmp/ccA6BHkO.s:322    .text:0000000000000344 .L0 
+     /tmp/ccA6BHkO.s:324    .text:0000000000000348 .L0 
+     /tmp/ccA6BHkO.s:326    .text:000000000000034c .L0 
+     /tmp/ccA6BHkO.s:328    .text:0000000000000350 .L0 
+     /tmp/ccA6BHkO.s:339    .text:0000000000000350 kTestMain
+     /tmp/ccA6BHkO.s:341    .text:0000000000000350 .L0 
+     /tmp/ccA6BHkO.s:343    .text:0000000000000354 .L0 
+     /tmp/ccA6BHkO.s:347    .text:0000000000000360 .L0 
+     /tmp/ccA6BHkO.s:348    .text:0000000000000360 .L0 
+     /tmp/ccA6BHkO.s:349    .text:0000000000000360 .L0 
+     /tmp/ccA6BHkO.s:351    .text:0000000000000364 .L0 
+     /tmp/ccA6BHkO.s:368    .text:00000000000003bc .L0 
+     /tmp/ccA6BHkO.s:370    .text:00000000000003c0 .L0 
+     /tmp/ccA6BHkO.s:371    .text:00000000000003c0 .L0 
+     /tmp/ccA6BHkO.s:373    .text:00000000000003c4 .L0 
+     /tmp/ccA6BHkO.s:375    .text:00000000000003c8 .L0 
+     /tmp/ccA6BHkO.s:377    .text:00000000000003cc .L0 
+     /tmp/ccA6BHkO.s:398    .data:0000000000000000 .LANCHOR0
+     /tmp/ccA6BHkO.s:401    .data:0000000000000000 _ZZ9constructPvE1i
+     /tmp/ccA6BHkO.s:405    .data.rel.ro.local:0000000000000000 .LANCHOR1
+     /tmp/ccA6BHkO.s:408    .data.rel.ro.local:0000000000000000 _ZL11CACHE_NAMES
+     /tmp/ccA6BHkO.s:59     .text:0000000000000048 .L0 
+     /tmp/ccA6BHkO.s:39     .rodata.str1.8:0000000000000000 .LC0
+     /tmp/ccA6BHkO.s:66     .text:000000000000006c .L0 
+     /tmp/ccA6BHkO.s:165    .text:0000000000000140 .L0 
+     /tmp/ccA6BHkO.s:123    .rodata.str1.8:0000000000000020 .LC1
+     /tmp/ccA6BHkO.s:208    .text:00000000000001fc .L0 
+     /tmp/ccA6BHkO.s:237    .text:0000000000000274 .L0 
+     /tmp/ccA6BHkO.s:353    .text:0000000000000368 .L0 
+     /tmp/ccA6BHkO.s:333    .rodata.str1.8:0000000000000038 .LC2
+     /tmp/ccA6BHkO.s:355    .text:0000000000000374 .L0 
+     /tmp/ccA6BHkO.s:363    .text:000000000000039c .L0 
+     /tmp/ccA6BHkO.s:26     .text:0000000000000020 .L2
+     /tmp/ccA6BHkO.s:22     .text:0000000000000014 .L3
+     /tmp/ccA6BHkO.s:103    .text:00000000000000c4 .L8
+     /tmp/ccA6BHkO.s:111    .text:00000000000000e0 .L13
+     /tmp/ccA6BHkO.s:101    .text:00000000000000c0 .L9
+     /tmp/ccA6BHkO.s:193    .text:00000000000001bc .L15
+GAS LISTING /tmp/ccA6BHkO.s 			page 11
+
+
+     /tmp/ccA6BHkO.s:211    .text:0000000000000210 .L25
+     /tmp/ccA6BHkO.s:180    .text:0000000000000188 .L16
+     /tmp/ccA6BHkO.s:190    .text:00000000000001b4 .L17
+     /tmp/ccA6BHkO.s:226    .text:000000000000024c .L19
+     /tmp/ccA6BHkO.s:234    .text:0000000000000268 .L20
+     /tmp/ccA6BHkO.s:240    .text:0000000000000288 .L26
+     /tmp/ccA6BHkO.s:218    .text:0000000000000230 .L23
+     /tmp/ccA6BHkO.s:221    .text:0000000000000238 .L21
+     /tmp/ccA6BHkO.s:310    .text:000000000000032c .L28
+     /tmp/ccA6BHkO.s:299    .text:0000000000000304 .L29
+     /tmp/ccA6BHkO.s:382    .rodata.str1.8:0000000000000048 .LC3
+     /tmp/ccA6BHkO.s:385    .rodata.str1.8:0000000000000050 .LC4
+     /tmp/ccA6BHkO.s:388    .rodata.str1.8:0000000000000058 .LC5
+     /tmp/ccA6BHkO.s:391    .rodata.str1.8:0000000000000060 .LC6
+     /tmp/ccA6BHkO.s:394    .rodata.str1.8:0000000000000068 .LC7
+
+UNDEFINED SYMBOLS
+_Z9kprintIntmib
+_Z12kprintStringPKc
+_Z17kmem_cache_createPKcmPFvPvES3_
+_Z7kmallocm
+_Z16kmem_cache_allocP11ObjectCache
+_Z15kmem_cache_infoP11ObjectCache
+_Z15kmem_cache_freeP11ObjectCachePv
+_Z5kfreePv
+_Z18kmem_cache_destroyP11ObjectCache

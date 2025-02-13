@@ -1,0 +1,1051 @@
+GAS LISTING /tmp/cceK3eZ1.s 			page 1
+
+
+   1              		.file	"pager.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN5PagerC2Ev
+  11              	_ZN5PagerC2Ev:
+  12              	.LFB114:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 23300500 		sd	zero,0(a0)
+  21 0010 03348100 		ld	s0,8(sp)
+  22              		.cfi_restore 8
+  23              		.cfi_def_cfa 2, 16
+  24 0014 13010101 		addi	sp,sp,16
+  25              		.cfi_def_cfa_offset 0
+  26 0018 67800000 		jr	ra
+  27              		.cfi_endproc
+  28              	.LFE114:
+  30              		.globl	_ZN5PagerC1Ev
+  31              		.set	_ZN5PagerC1Ev,_ZN5PagerC2Ev
+  32              		.align	2
+  33              		.globl	_ZN5Pager11getInstanceEv
+  35              	_ZN5Pager11getInstanceEv:
+  36              	.LFB116:
+  37              		.cfi_startproc
+  38 001c 97070000 		ld	a5,.LANCHOR0
+  38      83B70700 
+  39 0024 63880700 		beq	a5,zero,.L10
+  40 0028 17050000 		ld	a0,.LANCHOR0
+  40      03350500 
+  41 0030 67800000 		ret
+  42              	.L10:
+  43 0034 130101FE 		addi	sp,sp,-32
+  44              		.cfi_def_cfa_offset 32
+  45 0038 233C1100 		sd	ra,24(sp)
+  46 003c 23388100 		sd	s0,16(sp)
+  47 0040 23349100 		sd	s1,8(sp)
+  48              		.cfi_offset 1, -8
+  49              		.cfi_offset 8, -16
+  50              		.cfi_offset 9, -24
+  51 0044 13040102 		addi	s0,sp,32
+  52              		.cfi_def_cfa 8, 0
+  53 0048 13058000 		li	a0,8
+  54 004c 97000000 		call	_ZN7NoAlloc9mem_allocEm@plt
+  54      E7800000 
+  55 0054 93040500 		mv	s1,a0
+  56 0058 63060500 		beq	a0,zero,.L5
+  57 005c 97000000 		call	_ZN5PagerC1Ev
+GAS LISTING /tmp/cceK3eZ1.s 			page 2
+
+
+  57      E7800000 
+  58              	.L5:
+  59 0064 97070000 		sd	s1,.LANCHOR0,a5
+  59      23B09700 
+  60 006c 17050000 		ld	a0,.LANCHOR0
+  60      03350500 
+  61 0074 83308101 		ld	ra,24(sp)
+  62              		.cfi_restore 1
+  63 0078 03340101 		ld	s0,16(sp)
+  64              		.cfi_restore 8
+  65              		.cfi_def_cfa 2, 32
+  66 007c 83348100 		ld	s1,8(sp)
+  67              		.cfi_restore 9
+  68 0080 13010102 		addi	sp,sp,32
+  69              		.cfi_def_cfa_offset 0
+  70 0084 67800000 		jr	ra
+  71              		.cfi_endproc
+  72              	.LFE116:
+  74              		.align	2
+  75              		.globl	_ZN5Pager3mapEPvS0_12PMTEntryBits
+  77              	_ZN5Pager3mapEPvS0_12PMTEntryBits:
+  78              	.LFB117:
+  79              		.cfi_startproc
+  80 0088 130101FC 		addi	sp,sp,-64
+  81              		.cfi_def_cfa_offset 64
+  82 008c 233C1102 		sd	ra,56(sp)
+  83 0090 23388102 		sd	s0,48(sp)
+  84 0094 23349102 		sd	s1,40(sp)
+  85 0098 23302103 		sd	s2,32(sp)
+  86 009c 233C3101 		sd	s3,24(sp)
+  87 00a0 23384101 		sd	s4,16(sp)
+  88 00a4 23345101 		sd	s5,8(sp)
+  89              		.cfi_offset 1, -8
+  90              		.cfi_offset 8, -16
+  91              		.cfi_offset 9, -24
+  92              		.cfi_offset 18, -32
+  93              		.cfi_offset 19, -40
+  94              		.cfi_offset 20, -48
+  95              		.cfi_offset 21, -56
+  96 00a8 13040104 		addi	s0,sp,64
+  97              		.cfi_def_cfa 8, 0
+  98 00ac 93040500 		mv	s1,a0
+  99 00b0 93890500 		mv	s3,a1
+ 100 00b4 130A0600 		mv	s4,a2
+ 101 00b8 938A0600 		mv	s5,a3
+ 102 00bc 83370500 		ld	a5,0(a0)
+ 103 00c0 63820702 		beq	a5,zero,.L17
+ 104              	.L12:
+ 105 00c4 13860900 		mv	a2,s3
+ 106 00c8 93052000 		li	a1,2
+ 107 00cc 03B50400 		ld	a0,0(s1)
+ 108 00d0 97000000 		call	_ZN3PMT9get_entryEhPv@plt
+ 108      E7800000 
+ 109 00d8 93040500 		mv	s1,a0
+ 110 00dc 13092000 		li	s2,2
+ 111 00e0 6F00C003 		j	.L13
+ 112              	.L17:
+GAS LISTING /tmp/cceK3eZ1.s 			page 3
+
+
+ 113 00e4 97000000 		call	_ZN3PMT12allocate_pmtEv@plt
+ 113      E7800000 
+ 114 00ec 23B0A400 		sd	a0,0(s1)
+ 115 00f0 6FF05FFD 		j	.L12
+ 116              	.L14:
+ 117 00f4 13850400 		mv	a0,s1
+ 118 00f8 97000000 		call	_ZN8PMTEntry6get_paEv@plt
+ 118      E7800000 
+ 119 0100 9B05F9FF 		addiw	a1,s2,-1
+ 120 0104 13860900 		mv	a2,s3
+ 121 0108 93F5F50F 		andi	a1,a1,0xff
+ 122 010c 97000000 		call	_ZN3PMT9get_entryEhPv@plt
+ 122      E7800000 
+ 123 0114 93040500 		mv	s1,a0
+ 124 0118 1B09F9FF 		addiw	s2,s2,-1
+ 125              	.L13:
+ 126 011c 63522005 		ble	s2,zero,.L18
+ 127 0120 93051000 		li	a1,1
+ 128 0124 13850400 		mv	a0,s1
+ 129 0128 97000000 		call	_ZN8PMTEntry9chk_flagsE12PMTEntryBits@plt
+ 129      E7800000 
+ 130 0130 E31205FC 		bne	a0,zero,.L14
+ 131 0134 93051000 		li	a1,1
+ 132 0138 13850400 		mv	a0,s1
+ 133 013c 97000000 		call	_ZN8PMTEntry9set_flagsE12PMTEntryBits@plt
+ 133      E7800000 
+ 134 0144 97000000 		call	_ZN3PMT12allocate_pmtEv@plt
+ 134      E7800000 
+ 135 014c 93050500 		mv	a1,a0
+ 136 0150 13850400 		mv	a0,s1
+ 137 0154 97000000 		call	_ZN8PMTEntry6set_paEPv@plt
+ 137      E7800000 
+ 138 015c 6FF09FF9 		j	.L14
+ 139              	.L18:
+ 140 0160 93E51A00 		ori	a1,s5,1
+ 141 0164 13850400 		mv	a0,s1
+ 142 0168 97000000 		call	_ZN8PMTEntry9set_flagsE12PMTEntryBits@plt
+ 142      E7800000 
+ 143 0170 93050A00 		mv	a1,s4
+ 144 0174 13850400 		mv	a0,s1
+ 145 0178 97000000 		call	_ZN8PMTEntry6set_paEPv@plt
+ 145      E7800000 
+ 146 0180 13050000 		li	a0,0
+ 147 0184 83308103 		ld	ra,56(sp)
+ 148              		.cfi_restore 1
+ 149 0188 03340103 		ld	s0,48(sp)
+ 150              		.cfi_restore 8
+ 151              		.cfi_def_cfa 2, 64
+ 152 018c 83348102 		ld	s1,40(sp)
+ 153              		.cfi_restore 9
+ 154 0190 03390102 		ld	s2,32(sp)
+ 155              		.cfi_restore 18
+ 156 0194 83398101 		ld	s3,24(sp)
+ 157              		.cfi_restore 19
+ 158 0198 033A0101 		ld	s4,16(sp)
+ 159              		.cfi_restore 20
+ 160 019c 833A8100 		ld	s5,8(sp)
+GAS LISTING /tmp/cceK3eZ1.s 			page 4
+
+
+ 161              		.cfi_restore 21
+ 162 01a0 13010104 		addi	sp,sp,64
+ 163              		.cfi_def_cfa_offset 0
+ 164 01a4 67800000 		jr	ra
+ 165              		.cfi_endproc
+ 166              	.LFE117:
+ 168              		.align	2
+ 169              		.globl	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 171              	_ZN5Pager6id_mapEPvS0_12PMTEntryBits:
+ 172              	.LFB118:
+ 173              		.cfi_startproc
+ 174 01a8 130101FD 		addi	sp,sp,-48
+ 175              		.cfi_def_cfa_offset 48
+ 176 01ac 23341102 		sd	ra,40(sp)
+ 177 01b0 23308102 		sd	s0,32(sp)
+ 178 01b4 233C9100 		sd	s1,24(sp)
+ 179 01b8 23382101 		sd	s2,16(sp)
+ 180 01bc 23343101 		sd	s3,8(sp)
+ 181 01c0 23304101 		sd	s4,0(sp)
+ 182              		.cfi_offset 1, -8
+ 183              		.cfi_offset 8, -16
+ 184              		.cfi_offset 9, -24
+ 185              		.cfi_offset 18, -32
+ 186              		.cfi_offset 19, -40
+ 187              		.cfi_offset 20, -48
+ 188 01c4 13040103 		addi	s0,sp,48
+ 189              		.cfi_def_cfa 8, 0
+ 190 01c8 130A0500 		mv	s4,a0
+ 191 01cc 93890600 		mv	s3,a3
+ 192 01d0 13090600 		mv	s2,a2
+ 193 01d4 B7F7FFFF 		li	a5,-4096
+ 194 01d8 B3F4F500 		and	s1,a1,a5
+ 195 01dc 6F004002 		j	.L20
+ 196              	.L21:
+ 197 01e0 93860900 		mv	a3,s3
+ 198 01e4 13860400 		mv	a2,s1
+ 199 01e8 93850400 		mv	a1,s1
+ 200 01ec 13050A00 		mv	a0,s4
+ 201 01f0 97000000 		call	_ZN5Pager3mapEPvS0_12PMTEntryBits
+ 201      E7800000 
+ 202 01f8 B7170000 		li	a5,4096
+ 203 01fc B384F400 		add	s1,s1,a5
+ 204              	.L20:
+ 205 0200 E3E024FF 		bltu	s1,s2,.L21
+ 206 0204 13050000 		li	a0,0
+ 207 0208 83308102 		ld	ra,40(sp)
+ 208              		.cfi_restore 1
+ 209 020c 03340102 		ld	s0,32(sp)
+ 210              		.cfi_restore 8
+ 211              		.cfi_def_cfa 2, 48
+ 212 0210 83348101 		ld	s1,24(sp)
+ 213              		.cfi_restore 9
+ 214 0214 03390101 		ld	s2,16(sp)
+ 215              		.cfi_restore 18
+ 216 0218 83398100 		ld	s3,8(sp)
+ 217              		.cfi_restore 19
+ 218 021c 033A0100 		ld	s4,0(sp)
+GAS LISTING /tmp/cceK3eZ1.s 			page 5
+
+
+ 219              		.cfi_restore 20
+ 220 0220 13010103 		addi	sp,sp,48
+ 221              		.cfi_def_cfa_offset 0
+ 222 0224 67800000 		jr	ra
+ 223              		.cfi_endproc
+ 224              	.LFE118:
+ 226              		.align	2
+ 227              		.globl	_ZN5Pager10map_kernelEv
+ 229              	_ZN5Pager10map_kernelEv:
+ 230              	.LFB119:
+ 231              		.cfi_startproc
+ 232 0228 130101FE 		addi	sp,sp,-32
+ 233              		.cfi_def_cfa_offset 32
+ 234 022c 233C1100 		sd	ra,24(sp)
+ 235 0230 23388100 		sd	s0,16(sp)
+ 236 0234 23349100 		sd	s1,8(sp)
+ 237              		.cfi_offset 1, -8
+ 238              		.cfi_offset 8, -16
+ 239              		.cfi_offset 9, -24
+ 240 0238 13040102 		addi	s0,sp,32
+ 241              		.cfi_def_cfa 8, 0
+ 242 023c 93040500 		mv	s1,a0
+ 243 0240 9306E000 		li	a3,14
+ 244 0244 97070000 		la	a5,_ZN7NoAlloc16NOALLOC_END_ADDRE
+ 244      83B70700 
+ 245 024c 03B60700 		ld	a2,0(a5)
+ 246 0250 97070000 		la	a5,KERNEL_TEXT_START
+ 246      83B70700 
+ 247 0258 83B50700 		ld	a1,0(a5)
+ 248 025c 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 248      E7800000 
+ 249 0264 93066000 		li	a3,6
+ 250 0268 37060010 		li	a2,268435456
+ 251 026c 13060610 		addi	a2,a2,256
+ 252 0270 B7050010 		li	a1,268435456
+ 253 0274 13850400 		mv	a0,s1
+ 254 0278 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 254      E7800000 
+ 255 0280 93066000 		li	a3,6
+ 256 0284 3726000C 		li	a2,201334784
+ 257 0288 13061600 		addi	a2,a2,1
+ 258 028c B705000C 		li	a1,201326592
+ 259 0290 13850400 		mv	a0,s1
+ 260 0294 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 260      E7800000 
+ 261 029c 93066000 		li	a3,6
+ 262 02a0 3786200C 		li	a2,203456512
+ 263 02a4 13061600 		addi	a2,a2,1
+ 264 02a8 B705200C 		li	a1,203423744
+ 265 02ac 13850400 		mv	a0,s1
+ 266 02b0 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 266      E7800000 
+ 267 02b8 13050000 		li	a0,0
+ 268 02bc 83308101 		ld	ra,24(sp)
+ 269              		.cfi_restore 1
+ 270 02c0 03340101 		ld	s0,16(sp)
+ 271              		.cfi_restore 8
+GAS LISTING /tmp/cceK3eZ1.s 			page 6
+
+
+ 272              		.cfi_def_cfa 2, 32
+ 273 02c4 83348100 		ld	s1,8(sp)
+ 274              		.cfi_restore 9
+ 275 02c8 13010102 		addi	sp,sp,32
+ 276              		.cfi_def_cfa_offset 0
+ 277 02cc 67800000 		jr	ra
+ 278              		.cfi_endproc
+ 279              	.LFE119:
+ 281              		.align	2
+ 282              		.globl	_ZN5Pager8map_userEv
+ 284              	_ZN5Pager8map_userEv:
+ 285              	.LFB120:
+ 286              		.cfi_startproc
+ 287 02d0 130101FE 		addi	sp,sp,-32
+ 288              		.cfi_def_cfa_offset 32
+ 289 02d4 233C1100 		sd	ra,24(sp)
+ 290 02d8 23388100 		sd	s0,16(sp)
+ 291 02dc 23349100 		sd	s1,8(sp)
+ 292              		.cfi_offset 1, -8
+ 293              		.cfi_offset 8, -16
+ 294              		.cfi_offset 9, -24
+ 295 02e0 13040102 		addi	s0,sp,32
+ 296              		.cfi_def_cfa 8, 0
+ 297 02e4 93040500 		mv	s1,a0
+ 298 02e8 9306A001 		li	a3,26
+ 299 02ec 97070000 		la	a5,USER_TEXT_END
+ 299      83B70700 
+ 300 02f4 03B60700 		ld	a2,0(a5)
+ 301 02f8 97070000 		la	a5,USER_TEXT_START
+ 301      83B70700 
+ 302 0300 83B50700 		ld	a1,0(a5)
+ 303 0304 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 303      E7800000 
+ 304 030c 93066001 		li	a3,22
+ 305 0310 97070000 		la	a5,USER_BSS_END
+ 305      83B70700 
+ 306 0318 03B60700 		ld	a2,0(a5)
+ 307 031c 97070000 		la	a5,USER_BSS_START
+ 307      83B70700 
+ 308 0324 83B50700 		ld	a1,0(a5)
+ 309 0328 13850400 		mv	a0,s1
+ 310 032c 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 310      E7800000 
+ 311 0334 93066001 		li	a3,22
+ 312 0338 97070000 		la	a5,USER_DATA_END
+ 312      83B70700 
+ 313 0340 03B60700 		ld	a2,0(a5)
+ 314 0344 97070000 		la	a5,USER_DATA_START
+ 314      83B70700 
+ 315 034c 83B50700 		ld	a1,0(a5)
+ 316 0350 13850400 		mv	a0,s1
+ 317 0354 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 317      E7800000 
+ 318 035c 93062001 		li	a3,18
+ 319 0360 97070000 		la	a5,USER_RODATA_END
+ 319      83B70700 
+ 320 0368 03B60700 		ld	a2,0(a5)
+GAS LISTING /tmp/cceK3eZ1.s 			page 7
+
+
+ 321 036c 97070000 		la	a5,USER_RODATA_START
+ 321      83B70700 
+ 322 0374 83B50700 		ld	a1,0(a5)
+ 323 0378 13850400 		mv	a0,s1
+ 324 037c 97000000 		call	_ZN5Pager6id_mapEPvS0_12PMTEntryBits
+ 324      E7800000 
+ 325 0384 13050000 		li	a0,0
+ 326 0388 83308101 		ld	ra,24(sp)
+ 327              		.cfi_restore 1
+ 328 038c 03340101 		ld	s0,16(sp)
+ 329              		.cfi_restore 8
+ 330              		.cfi_def_cfa 2, 32
+ 331 0390 83348100 		ld	s1,8(sp)
+ 332              		.cfi_restore 9
+ 333 0394 13010102 		addi	sp,sp,32
+ 334              		.cfi_def_cfa_offset 0
+ 335 0398 67800000 		jr	ra
+ 336              		.cfi_endproc
+ 337              	.LFE120:
+ 339              		.align	2
+ 340              		.globl	_ZN5Pager12start_pagingEv
+ 342              	_ZN5Pager12start_pagingEv:
+ 343              	.LFB121:
+ 344              		.cfi_startproc
+ 345 039c 130101FF 		addi	sp,sp,-16
+ 346              		.cfi_def_cfa_offset 16
+ 347 03a0 23348100 		sd	s0,8(sp)
+ 348              		.cfi_offset 8, -8
+ 349 03a4 13040101 		addi	s0,sp,16
+ 350              		.cfi_def_cfa 8, 0
+ 351 03a8 83370500 		ld	a5,0(a0)
+ 352 03ac 638A0702 		beq	a5,zero,.L29
+ 353 03b0 93D7C700 		srli	a5,a5,12
+ 354 03b4 1307F0FF 		li	a4,-1
+ 355 03b8 1317F703 		slli	a4,a4,63
+ 356 03bc B3E7E700 		or	a5,a5,a4
+ 357 03c0 17070000 		la	a4,_ZN7NoAlloc7workingE
+ 357      03370700 
+ 358 03c8 23000700 		sb	zero,0(a4)
+ 359              	#APP
+ 360              	# 127 "src/kernel/virtualization/pager.cpp" 1
+   1              	#include"../../../h/kernel_lib.h"
+   2              	
+   3              	Pager* Pager::p = nullptr;
+   4              	
+   5              	Pager::Pager():pmt(nullptr){}
+   6              	
+   7              	Pager& Pager::getInstance(){
+   8              	    if(!p) p = new Pager();
+   9              	    
+  10              	    return *p;
+  11              	}
+  12              	
+  13              	int Pager::map(void *va, void *pa, PMTEntryBits flag){
+  14              	   
+  15              	    if(!pmt)
+  16              	        pmt = PMT::allocate_pmt();
+GAS LISTING /tmp/cceK3eZ1.s 			page 8
+
+
+  17              	    
+  18              	    PMT* curr = pmt;
+  19              	    PMTEntry* pmte = curr->get_entry(2, va);
+  20              	    
+  21              	    for(int i = 2; i > 0; i--){
+  22              	       
+  23              	        if(!(pmte->chk_flags(PMTEntryBits::valid))){
+  24              	            pmte->set_flags(PMTEntryBits::valid);
+  25              	            pmte->set_pa(PMT::allocate_pmt());
+  26              	        }
+  27              	       
+  28              	        curr = (PMT*)pmte->get_pa();
+  29              	        
+  30              	        pmte = curr->get_entry(i-1, va);
+  31              	    }
+  32              	    
+  33              	    pmte->set_flags((PMTEntryBits)(PMTEntryBits::valid | flag));
+  34              	    pmte->set_pa(pa);
+  35              	    
+  36              	
+  37              	    return 0;
+  38              	}
+  39              	
+  40              	int Pager::id_map(void* start, void* end, PMTEntryBits flag){
+  41              	    uint64 ustart = (uint64) start, uend = (uint64) end;
+  42              	    ustart = ustart & ~(0xfff);
+  43              	    uint64 tmp = ustart;
+  44              	
+  45              	    while(tmp < uend){
+  46              	        map((void*)tmp, (void*)tmp, flag);
+  47              	        tmp += PMT::PAGE_SIZE;    
+  48              	    }
+  49              	
+  50              	    return 0;
+  51              	}
+  52              	
+  53              	int Pager::map_kernel(){
+  54              	    uint64 laa = (uint64)NoAlloc::getEndAddress();
+  55              	    //int64 laa = (uint64)HEAP_END_ADDR;
+  56              	    uint64 fa = KERNEL_TEXT_START;
+  57              	    
+  58              	    //map_ram
+  59              	    id_map((void*)fa, (void*)laa, (PMTEntryBits)
+  60              	            (PMTEntryBits::write | PMTEntryBits::read | PMTEntryBits::execute ));
+  61              	
+  62              	    // UART
+  63              		id_map((void*)0x10000000,
+  64              		        (void*)0x10000100,
+  65              		        (PMTEntryBits)
+  66              	            (PMTEntryBits::write | PMTEntryBits::read )
+  67              		);
+  68              	
+  69              		// CLINT
+  70              		// id_map(
+  71              		//             (void*)0x02000000,
+  72              		//             (void*)0x0200ffff,
+  73              		//             (PMTEntryBits)
+GAS LISTING /tmp/cceK3eZ1.s 			page 9
+
+
+  74              	    //             (PMTEntryBits::write | PMTEntryBits::read)
+  75              		// );
+  76              		// PLIC
+  77              		id_map(
+  78              		            (void*)0x0c000000,
+  79              		            (void*)0x0c002001,
+  80              		            (PMTEntryBits)
+  81              	                (PMTEntryBits::write | PMTEntryBits::read )
+  82              		);
+  83              		id_map(
+  84              		            (void*)0x0c200000,
+  85              		            (void*)0x0c208001,
+  86              		            (PMTEntryBits)
+  87              	                (PMTEntryBits::write | PMTEntryBits::read )
+  88              		);
+  89              	
+  90              	
+  91              	    return 0;        
+  92              	}
+  93              	
+  94              	int Pager::map_user(){
+  95              	    id_map(
+  96              	                (void*)USER_TEXT_START,
+  97              	                (void*)USER_TEXT_END,
+  98              	                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::execute | PMTEntryBits::user)
+  99              	    );
+ 100              	
+ 101              	    id_map(
+ 102              	                (void*)USER_BSS_START,
+ 103              	                (void*)USER_BSS_END,
+ 104              	                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+ 105              	    );
+ 106              	
+ 107              	    id_map(
+ 108              	                (void*)USER_DATA_START,
+ 109              	                (void*)USER_DATA_END,
+ 110              	                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::write | PMTEntryBits::user)
+ 111              	    );
+ 112              	
+ 113              	    id_map(
+ 114              	                (void*)USER_RODATA_START,
+ 115              	                (void*)USER_RODATA_END,
+ 116              	                (PMTEntryBits) (PMTEntryBits::read | PMTEntryBits::user)
+ 117              	    );
+ 118              	    return 0;
+ 119              	}
+ 120              	
+ 121              	int Pager::start_paging(){
+ 122              	    if(!pmt)
+ 123              	        return 1;
+ 124              	    //Riscv::ms_sstatus(Riscv::BitMaskSstatus::SSTATUS_SUM);
+ 125              	    uint64 satp = (8ULL << 60) | ( (uint64)pmt >> 12);
+ 126              	    NoAlloc::turn_off();
+ 127 03cc 73900718 	    asm volatile("csrw satp, %0" : : "r" (satp));
+ 128              	    return 0;
+ 361              		csrw satp, a5
+ 362              	# 0 "" 2
+GAS LISTING /tmp/cceK3eZ1.s 			page 10
+
+
+ 363              	#NO_APP
+ 364 03d0 13050000 		li	a0,0
+ 365              	.L28:
+ 366 03d4 03348100 		ld	s0,8(sp)
+ 367              		.cfi_remember_state
+ 368              		.cfi_restore 8
+ 369              		.cfi_def_cfa 2, 16
+ 370 03d8 13010101 		addi	sp,sp,16
+ 371              		.cfi_def_cfa_offset 0
+ 372 03dc 67800000 		jr	ra
+ 373              	.L29:
+ 374              		.cfi_restore_state
+ 375 03e0 13051000 		li	a0,1
+ 376 03e4 6FF01FFF 		j	.L28
+ 377              		.cfi_endproc
+ 378              	.LFE121:
+ 380              		.section	.rodata.str1.8,"aMS",@progbits,1
+ 381              		.align	3
+ 382              	.LC0:
+ 383 0000 2D2D2D2D 		.string	"--------LEVEL 0--------\n"
+ 383      2D2D2D2D 
+ 383      4C455645 
+ 383      4C20302D 
+ 383      2D2D2D2D 
+ 384 0019 00000000 		.align	3
+ 384      000000
+ 385              	.LC1:
+ 386 0020 2D2D2D2D 		.string	"--------LEVEL 1--------\n"
+ 386      2D2D2D2D 
+ 386      4C455645 
+ 386      4C20312D 
+ 386      2D2D2D2D 
+ 387 0039 00000000 		.align	3
+ 387      000000
+ 388              	.LC2:
+ 389 0040 706D7431 		.string	"pmt1: "
+ 389      3A2000
+ 390 0047 00       		.align	3
+ 391              	.LC3:
+ 392 0048 0A00     		.string	"\n"
+ 393 004a 00000000 		.align	3
+ 393      0000
+ 394              	.LC4:
+ 395 0050 2D2D2D2D 		.string	"--------LEVEL 2--------\n"
+ 395      2D2D2D2D 
+ 395      4C455645 
+ 395      4C20322D 
+ 395      2D2D2D2D 
+ 396 0069 00000000 		.align	3
+ 396      000000
+ 397              	.LC5:
+ 398 0070 706D7432 		.string	"pmt2: "
+ 398      3A2000
+ 399 0077 00       		.align	3
+ 400              	.LC6:
+ 401 0078 70616765 		.string	"page_table_num: "
+ 401      5F746162 
+GAS LISTING /tmp/cceK3eZ1.s 			page 11
+
+
+ 401      6C655F6E 
+ 401      756D3A20 
+ 401      00
+ 402 0089 00000000 		.align	3
+ 402      000000
+ 403              	.LC7:
+ 404 0090 70616765 		.string	"page_table_size: "
+ 404      5F746162 
+ 404      6C655F73 
+ 404      697A653A 
+ 404      2000
+ 405 00a2 00000000 		.align	3
+ 405      0000
+ 406              	.LC8:
+ 407 00a8 70616765 		.string	"page_table_buddy_level: "
+ 407      5F746162 
+ 407      6C655F62 
+ 407      75646479 
+ 407      5F6C6576 
+ 408              		.text
+ 409              		.align	2
+ 410              		.globl	_ZN5Pager5printEv
+ 412              	_ZN5Pager5printEv:
+ 413              	.LFB122:
+ 414              		.cfi_startproc
+ 415 03e8 130101FC 		addi	sp,sp,-64
+ 416              		.cfi_def_cfa_offset 64
+ 417 03ec 233C1102 		sd	ra,56(sp)
+ 418 03f0 23388102 		sd	s0,48(sp)
+ 419 03f4 23349102 		sd	s1,40(sp)
+ 420 03f8 23302103 		sd	s2,32(sp)
+ 421 03fc 233C3101 		sd	s3,24(sp)
+ 422 0400 23384101 		sd	s4,16(sp)
+ 423 0404 23345101 		sd	s5,8(sp)
+ 424 0408 23306101 		sd	s6,0(sp)
+ 425              		.cfi_offset 1, -8
+ 426              		.cfi_offset 8, -16
+ 427              		.cfi_offset 9, -24
+ 428              		.cfi_offset 18, -32
+ 429              		.cfi_offset 19, -40
+ 430              		.cfi_offset 20, -48
+ 431              		.cfi_offset 21, -56
+ 432              		.cfi_offset 22, -64
+ 433 040c 13040104 		addi	s0,sp,64
+ 434              		.cfi_def_cfa 8, 0
+ 435 0410 83370500 		ld	a5,0(a0)
+ 436 0414 63820716 		beq	a5,zero,.L39
+ 437 0418 130B0500 		mv	s6,a0
+ 438 041c 17050000 		lla	a0,.LC0
+ 438      13050500 
+ 439 0424 97000000 		call	_Z12kprintStringPKc@plt
+ 439      E7800000 
+ 440 042c 03350B00 		ld	a0,0(s6)
+ 441 0430 97000000 		call	_ZN3PMT5printEv@plt
+ 441      E7800000 
+ 442 0438 930A0000 		li	s5,0
+ 443 043c 130A1000 		li	s4,1
+GAS LISTING /tmp/cceK3eZ1.s 			page 12
+
+
+ 444 0440 6F00000A 		j	.L33
+ 445              	.L36:
+ 446 0444 93841400 		addi	s1,s1,1
+ 447              	.L35:
+ 448 0448 9307F01F 		li	a5,511
+ 449 044c 63E89708 		bgtu	s1,a5,.L34
+ 450 0450 93850400 		mv	a1,s1
+ 451 0454 13850900 		mv	a0,s3
+ 452 0458 97000000 		call	_ZN3PMT9get_entryEm@plt
+ 452      E7800000 
+ 453 0460 13090500 		mv	s2,a0
+ 454 0464 93051000 		li	a1,1
+ 455 0468 97000000 		call	_ZN8PMTEntry9chk_flagsE12PMTEntryBits@plt
+ 455      E7800000 
+ 456 0470 E30A05FC 		beq	a0,zero,.L36
+ 457 0474 1B0A1A00 		addiw	s4,s4,1
+ 458 0478 13050900 		mv	a0,s2
+ 459 047c 97000000 		call	_ZN8PMTEntry6get_paEv@plt
+ 459      E7800000 
+ 460 0484 13090500 		mv	s2,a0
+ 461 0488 17050000 		lla	a0,.LC4
+ 461      13050500 
+ 462 0490 97000000 		call	_Z12kprintStringPKc@plt
+ 462      E7800000 
+ 463 0498 17050000 		lla	a0,.LC5
+ 463      13050500 
+ 464 04a0 97000000 		call	_Z12kprintStringPKc@plt
+ 464      E7800000 
+ 465 04a8 13060000 		li	a2,0
+ 466 04ac 93050001 		li	a1,16
+ 467 04b0 13050900 		mv	a0,s2
+ 468 04b4 97000000 		call	_Z9kprintIntmib@plt
+ 468      E7800000 
+ 469 04bc 17050000 		lla	a0,.LC3
+ 469      13050500 
+ 470 04c4 97000000 		call	_Z12kprintStringPKc@plt
+ 470      E7800000 
+ 471 04cc 13050900 		mv	a0,s2
+ 472 04d0 97000000 		call	_ZN3PMT5printEv@plt
+ 472      E7800000 
+ 473 04d8 6FF0DFF6 		j	.L36
+ 474              	.L34:
+ 475 04dc 938A1A00 		addi	s5,s5,1
+ 476              	.L33:
+ 477 04e0 9307F01F 		li	a5,511
+ 478 04e4 63EC5709 		bgtu	s5,a5,.L32
+ 479 04e8 93850A00 		mv	a1,s5
+ 480 04ec 03350B00 		ld	a0,0(s6)
+ 481 04f0 97000000 		call	_ZN3PMT9get_entryEm@plt
+ 481      E7800000 
+ 482 04f8 93040500 		mv	s1,a0
+ 483 04fc 93051000 		li	a1,1
+ 484 0500 97000000 		call	_ZN8PMTEntry9chk_flagsE12PMTEntryBits@plt
+ 484      E7800000 
+ 485 0508 E30A05FC 		beq	a0,zero,.L34
+ 486 050c 1B0A1A00 		addiw	s4,s4,1
+ 487 0510 13850400 		mv	a0,s1
+GAS LISTING /tmp/cceK3eZ1.s 			page 13
+
+
+ 488 0514 97000000 		call	_ZN8PMTEntry6get_paEv@plt
+ 488      E7800000 
+ 489 051c 93090500 		mv	s3,a0
+ 490 0520 17050000 		lla	a0,.LC1
+ 490      13050500 
+ 491 0528 97000000 		call	_Z12kprintStringPKc@plt
+ 491      E7800000 
+ 492 0530 17050000 		lla	a0,.LC2
+ 492      13050500 
+ 493 0538 97000000 		call	_Z12kprintStringPKc@plt
+ 493      E7800000 
+ 494 0540 13060000 		li	a2,0
+ 495 0544 93050001 		li	a1,16
+ 496 0548 13850900 		mv	a0,s3
+ 497 054c 97000000 		call	_Z9kprintIntmib@plt
+ 497      E7800000 
+ 498 0554 17050000 		lla	a0,.LC3
+ 498      13050500 
+ 499 055c 97000000 		call	_Z12kprintStringPKc@plt
+ 499      E7800000 
+ 500 0564 13850900 		mv	a0,s3
+ 501 0568 97000000 		call	_ZN3PMT5printEv@plt
+ 501      E7800000 
+ 502 0570 93040000 		li	s1,0
+ 503 0574 6FF05FED 		j	.L35
+ 504              	.L39:
+ 505 0578 130A0000 		li	s4,0
+ 506              	.L32:
+ 507 057c 17050000 		lla	a0,.LC6
+ 507      13050500 
+ 508 0584 97000000 		call	_Z12kprintStringPKc@plt
+ 508      E7800000 
+ 509 058c 13060000 		li	a2,0
+ 510 0590 9305A000 		li	a1,10
+ 511 0594 13050A00 		mv	a0,s4
+ 512 0598 97000000 		call	_Z9kprintIntmib@plt
+ 512      E7800000 
+ 513 05a0 17050000 		lla	a0,.LC3
+ 513      13050500 
+ 514 05a8 97000000 		call	_Z12kprintStringPKc@plt
+ 514      E7800000 
+ 515 05b0 17050000 		lla	a0,.LC7
+ 515      13050500 
+ 516 05b8 97000000 		call	_Z12kprintStringPKc@plt
+ 516      E7800000 
+ 517 05c0 13060000 		li	a2,0
+ 518 05c4 9305A000 		li	a1,10
+ 519 05c8 37150000 		li	a0,4096
+ 520 05cc 97000000 		call	_Z9kprintIntmib@plt
+ 520      E7800000 
+ 521 05d4 17050000 		lla	a0,.LC3
+ 521      13050500 
+ 522 05dc 97000000 		call	_Z12kprintStringPKc@plt
+ 522      E7800000 
+ 523 05e4 17050000 		lla	a0,.LC8
+ 523      13050500 
+ 524 05ec 97000000 		call	_Z12kprintStringPKc@plt
+GAS LISTING /tmp/cceK3eZ1.s 			page 14
+
+
+ 524      E7800000 
+ 525 05f4 37150000 		li	a0,4096
+ 526 05f8 97000000 		call	_Z4log2m@plt
+ 526      E7800000 
+ 527 0600 B7170000 		li	a5,4096
+ 528 0604 9387F7FF 		addi	a5,a5,-1
+ 529 0608 33D5A700 		srl	a0,a5,a0
+ 530 060c 13051500 		addi	a0,a0,1
+ 531 0610 97000000 		call	_Z4log2m@plt
+ 531      E7800000 
+ 532 0618 13060000 		li	a2,0
+ 533 061c 9305A000 		li	a1,10
+ 534 0620 97000000 		call	_Z9kprintIntmib@plt
+ 534      E7800000 
+ 535 0628 17050000 		lla	a0,.LC3
+ 535      13050500 
+ 536 0630 97000000 		call	_Z12kprintStringPKc@plt
+ 536      E7800000 
+ 537 0638 83308103 		ld	ra,56(sp)
+ 538              		.cfi_restore 1
+ 539 063c 03340103 		ld	s0,48(sp)
+ 540              		.cfi_restore 8
+ 541              		.cfi_def_cfa 2, 64
+ 542 0640 83348102 		ld	s1,40(sp)
+ 543              		.cfi_restore 9
+ 544 0644 03390102 		ld	s2,32(sp)
+ 545              		.cfi_restore 18
+ 546 0648 83398101 		ld	s3,24(sp)
+ 547              		.cfi_restore 19
+ 548 064c 033A0101 		ld	s4,16(sp)
+ 549              		.cfi_restore 20
+ 550 0650 833A8100 		ld	s5,8(sp)
+ 551              		.cfi_restore 21
+ 552 0654 033B0100 		ld	s6,0(sp)
+ 553              		.cfi_restore 22
+ 554 0658 13010104 		addi	sp,sp,64
+ 555              		.cfi_def_cfa_offset 0
+ 556 065c 67800000 		jr	ra
+ 557              		.cfi_endproc
+ 558              	.LFE122:
+ 560              		.globl	_ZN5Pager1pE
+ 561              		.bss
+ 562              		.align	3
+ 563              		.set	.LANCHOR0,. + 0
+ 566              	_ZN5Pager1pE:
+ 567 0000 00000000 		.zero	8
+ 567      00000000 
+ 568              		.ident	"GCC: (GNU) 12.2.0"
+ 569              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/cceK3eZ1.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 pager.cpp
+     /tmp/cceK3eZ1.s:11     .text:0000000000000000 _ZN5PagerC2Ev
+     /tmp/cceK3eZ1.s:13     .text:0000000000000000 .L0 
+     /tmp/cceK3eZ1.s:14     .text:0000000000000000 $x
+     /tmp/cceK3eZ1.s:15     .text:0000000000000004 .L0 
+     /tmp/cceK3eZ1.s:17     .text:0000000000000008 .L0 
+     /tmp/cceK3eZ1.s:19     .text:000000000000000c .L0 
+     /tmp/cceK3eZ1.s:22     .text:0000000000000014 .L0 
+     /tmp/cceK3eZ1.s:23     .text:0000000000000014 .L0 
+     /tmp/cceK3eZ1.s:25     .text:0000000000000018 .L0 
+     /tmp/cceK3eZ1.s:27     .text:000000000000001c .L0 
+     /tmp/cceK3eZ1.s:11     .text:0000000000000000 _ZN5PagerC1Ev
+     /tmp/cceK3eZ1.s:35     .text:000000000000001c _ZN5Pager11getInstanceEv
+     /tmp/cceK3eZ1.s:37     .text:000000000000001c .L0 
+     /tmp/cceK3eZ1.s:44     .text:0000000000000038 .L0 
+     /tmp/cceK3eZ1.s:48     .text:0000000000000044 .L0 
+     /tmp/cceK3eZ1.s:49     .text:0000000000000044 .L0 
+     /tmp/cceK3eZ1.s:50     .text:0000000000000044 .L0 
+     /tmp/cceK3eZ1.s:52     .text:0000000000000048 .L0 
+     /tmp/cceK3eZ1.s:62     .text:0000000000000078 .L0 
+     /tmp/cceK3eZ1.s:64     .text:000000000000007c .L0 
+     /tmp/cceK3eZ1.s:65     .text:000000000000007c .L0 
+     /tmp/cceK3eZ1.s:67     .text:0000000000000080 .L0 
+     /tmp/cceK3eZ1.s:69     .text:0000000000000084 .L0 
+     /tmp/cceK3eZ1.s:71     .text:0000000000000088 .L0 
+     /tmp/cceK3eZ1.s:77     .text:0000000000000088 _ZN5Pager3mapEPvS0_12PMTEntryBits
+     /tmp/cceK3eZ1.s:79     .text:0000000000000088 .L0 
+     /tmp/cceK3eZ1.s:81     .text:000000000000008c .L0 
+     /tmp/cceK3eZ1.s:89     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:90     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:91     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:92     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:93     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:94     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:95     .text:00000000000000a8 .L0 
+     /tmp/cceK3eZ1.s:97     .text:00000000000000ac .L0 
+     /tmp/cceK3eZ1.s:148    .text:0000000000000188 .L0 
+     /tmp/cceK3eZ1.s:150    .text:000000000000018c .L0 
+     /tmp/cceK3eZ1.s:151    .text:000000000000018c .L0 
+     /tmp/cceK3eZ1.s:153    .text:0000000000000190 .L0 
+     /tmp/cceK3eZ1.s:155    .text:0000000000000194 .L0 
+     /tmp/cceK3eZ1.s:157    .text:0000000000000198 .L0 
+     /tmp/cceK3eZ1.s:159    .text:000000000000019c .L0 
+     /tmp/cceK3eZ1.s:161    .text:00000000000001a0 .L0 
+     /tmp/cceK3eZ1.s:163    .text:00000000000001a4 .L0 
+     /tmp/cceK3eZ1.s:165    .text:00000000000001a8 .L0 
+     /tmp/cceK3eZ1.s:171    .text:00000000000001a8 _ZN5Pager6id_mapEPvS0_12PMTEntryBits
+     /tmp/cceK3eZ1.s:173    .text:00000000000001a8 .L0 
+     /tmp/cceK3eZ1.s:175    .text:00000000000001ac .L0 
+     /tmp/cceK3eZ1.s:182    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:183    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:184    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:185    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:186    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:187    .text:00000000000001c4 .L0 
+     /tmp/cceK3eZ1.s:189    .text:00000000000001c8 .L0 
+GAS LISTING /tmp/cceK3eZ1.s 			page 16
+
+
+     /tmp/cceK3eZ1.s:208    .text:000000000000020c .L0 
+     /tmp/cceK3eZ1.s:210    .text:0000000000000210 .L0 
+     /tmp/cceK3eZ1.s:211    .text:0000000000000210 .L0 
+     /tmp/cceK3eZ1.s:213    .text:0000000000000214 .L0 
+     /tmp/cceK3eZ1.s:215    .text:0000000000000218 .L0 
+     /tmp/cceK3eZ1.s:217    .text:000000000000021c .L0 
+     /tmp/cceK3eZ1.s:219    .text:0000000000000220 .L0 
+     /tmp/cceK3eZ1.s:221    .text:0000000000000224 .L0 
+     /tmp/cceK3eZ1.s:223    .text:0000000000000228 .L0 
+     /tmp/cceK3eZ1.s:229    .text:0000000000000228 _ZN5Pager10map_kernelEv
+     /tmp/cceK3eZ1.s:231    .text:0000000000000228 .L0 
+     /tmp/cceK3eZ1.s:233    .text:000000000000022c .L0 
+     /tmp/cceK3eZ1.s:237    .text:0000000000000238 .L0 
+     /tmp/cceK3eZ1.s:238    .text:0000000000000238 .L0 
+     /tmp/cceK3eZ1.s:239    .text:0000000000000238 .L0 
+     /tmp/cceK3eZ1.s:241    .text:000000000000023c .L0 
+     /tmp/cceK3eZ1.s:269    .text:00000000000002c0 .L0 
+     /tmp/cceK3eZ1.s:271    .text:00000000000002c4 .L0 
+     /tmp/cceK3eZ1.s:272    .text:00000000000002c4 .L0 
+     /tmp/cceK3eZ1.s:274    .text:00000000000002c8 .L0 
+     /tmp/cceK3eZ1.s:276    .text:00000000000002cc .L0 
+     /tmp/cceK3eZ1.s:278    .text:00000000000002d0 .L0 
+     /tmp/cceK3eZ1.s:284    .text:00000000000002d0 _ZN5Pager8map_userEv
+     /tmp/cceK3eZ1.s:286    .text:00000000000002d0 .L0 
+     /tmp/cceK3eZ1.s:288    .text:00000000000002d4 .L0 
+     /tmp/cceK3eZ1.s:292    .text:00000000000002e0 .L0 
+     /tmp/cceK3eZ1.s:293    .text:00000000000002e0 .L0 
+     /tmp/cceK3eZ1.s:294    .text:00000000000002e0 .L0 
+     /tmp/cceK3eZ1.s:296    .text:00000000000002e4 .L0 
+     /tmp/cceK3eZ1.s:327    .text:000000000000038c .L0 
+     /tmp/cceK3eZ1.s:329    .text:0000000000000390 .L0 
+     /tmp/cceK3eZ1.s:330    .text:0000000000000390 .L0 
+     /tmp/cceK3eZ1.s:332    .text:0000000000000394 .L0 
+     /tmp/cceK3eZ1.s:334    .text:0000000000000398 .L0 
+     /tmp/cceK3eZ1.s:336    .text:000000000000039c .L0 
+     /tmp/cceK3eZ1.s:342    .text:000000000000039c _ZN5Pager12start_pagingEv
+     /tmp/cceK3eZ1.s:344    .text:000000000000039c .L0 
+     /tmp/cceK3eZ1.s:346    .text:00000000000003a0 .L0 
+     /tmp/cceK3eZ1.s:348    .text:00000000000003a4 .L0 
+     /tmp/cceK3eZ1.s:350    .text:00000000000003a8 .L0 
+     /tmp/cceK3eZ1.s:367    .text:00000000000003d8 .L0 
+     /tmp/cceK3eZ1.s:368    .text:00000000000003d8 .L0 
+     /tmp/cceK3eZ1.s:369    .text:00000000000003d8 .L0 
+     /tmp/cceK3eZ1.s:371    .text:00000000000003dc .L0 
+     /tmp/cceK3eZ1.s:374    .text:00000000000003e0 .L0 
+     /tmp/cceK3eZ1.s:377    .text:00000000000003e8 .L0 
+     /tmp/cceK3eZ1.s:412    .text:00000000000003e8 _ZN5Pager5printEv
+     /tmp/cceK3eZ1.s:414    .text:00000000000003e8 .L0 
+     /tmp/cceK3eZ1.s:416    .text:00000000000003ec .L0 
+     /tmp/cceK3eZ1.s:425    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:426    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:427    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:428    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:429    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:430    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:431    .text:000000000000040c .L0 
+     /tmp/cceK3eZ1.s:432    .text:000000000000040c .L0 
+GAS LISTING /tmp/cceK3eZ1.s 			page 17
+
+
+     /tmp/cceK3eZ1.s:434    .text:0000000000000410 .L0 
+     /tmp/cceK3eZ1.s:538    .text:000000000000063c .L0 
+     /tmp/cceK3eZ1.s:540    .text:0000000000000640 .L0 
+     /tmp/cceK3eZ1.s:541    .text:0000000000000640 .L0 
+     /tmp/cceK3eZ1.s:543    .text:0000000000000644 .L0 
+     /tmp/cceK3eZ1.s:545    .text:0000000000000648 .L0 
+     /tmp/cceK3eZ1.s:547    .text:000000000000064c .L0 
+     /tmp/cceK3eZ1.s:549    .text:0000000000000650 .L0 
+     /tmp/cceK3eZ1.s:551    .text:0000000000000654 .L0 
+     /tmp/cceK3eZ1.s:553    .text:0000000000000658 .L0 
+     /tmp/cceK3eZ1.s:555    .text:000000000000065c .L0 
+     /tmp/cceK3eZ1.s:557    .text:0000000000000660 .L0 
+     /tmp/cceK3eZ1.s:566    .bss:0000000000000000 _ZN5Pager1pE
+     /tmp/cceK3eZ1.s:563    .bss:0000000000000000 .LANCHOR0
+     /tmp/cceK3eZ1.s:38     .text:000000000000001c .L0 
+     /tmp/cceK3eZ1.s:40     .text:0000000000000028 .L0 
+     /tmp/cceK3eZ1.s:59     .text:0000000000000064 .L0 
+     /tmp/cceK3eZ1.s:60     .text:000000000000006c .L0 
+     /tmp/cceK3eZ1.s:244    .text:0000000000000244 .L0 
+     /tmp/cceK3eZ1.s:246    .text:0000000000000250 .L0 
+     /tmp/cceK3eZ1.s:299    .text:00000000000002ec .L0 
+     /tmp/cceK3eZ1.s:301    .text:00000000000002f8 .L0 
+     /tmp/cceK3eZ1.s:305    .text:0000000000000310 .L0 
+     /tmp/cceK3eZ1.s:307    .text:000000000000031c .L0 
+     /tmp/cceK3eZ1.s:312    .text:0000000000000338 .L0 
+     /tmp/cceK3eZ1.s:314    .text:0000000000000344 .L0 
+     /tmp/cceK3eZ1.s:319    .text:0000000000000360 .L0 
+     /tmp/cceK3eZ1.s:321    .text:000000000000036c .L0 
+     /tmp/cceK3eZ1.s:357    .text:00000000000003c0 .L0 
+     /tmp/cceK3eZ1.s:382    .rodata.str1.8:0000000000000000 .LC0
+     /tmp/cceK3eZ1.s:438    .text:000000000000041c .L0 
+     /tmp/cceK3eZ1.s:394    .rodata.str1.8:0000000000000050 .LC4
+     /tmp/cceK3eZ1.s:461    .text:0000000000000488 .L0 
+     /tmp/cceK3eZ1.s:397    .rodata.str1.8:0000000000000070 .LC5
+     /tmp/cceK3eZ1.s:463    .text:0000000000000498 .L0 
+     /tmp/cceK3eZ1.s:391    .rodata.str1.8:0000000000000048 .LC3
+     /tmp/cceK3eZ1.s:469    .text:00000000000004bc .L0 
+     /tmp/cceK3eZ1.s:385    .rodata.str1.8:0000000000000020 .LC1
+     /tmp/cceK3eZ1.s:490    .text:0000000000000520 .L0 
+     /tmp/cceK3eZ1.s:388    .rodata.str1.8:0000000000000040 .LC2
+     /tmp/cceK3eZ1.s:492    .text:0000000000000530 .L0 
+     /tmp/cceK3eZ1.s:498    .text:0000000000000554 .L0 
+     /tmp/cceK3eZ1.s:400    .rodata.str1.8:0000000000000078 .LC6
+     /tmp/cceK3eZ1.s:507    .text:000000000000057c .L0 
+     /tmp/cceK3eZ1.s:513    .text:00000000000005a0 .L0 
+     /tmp/cceK3eZ1.s:403    .rodata.str1.8:0000000000000090 .LC7
+     /tmp/cceK3eZ1.s:515    .text:00000000000005b0 .L0 
+     /tmp/cceK3eZ1.s:521    .text:00000000000005d4 .L0 
+     /tmp/cceK3eZ1.s:406    .rodata.str1.8:00000000000000a8 .LC8
+     /tmp/cceK3eZ1.s:523    .text:00000000000005e4 .L0 
+     /tmp/cceK3eZ1.s:535    .text:0000000000000628 .L0 
+     /tmp/cceK3eZ1.s:42     .text:0000000000000034 .L10
+     /tmp/cceK3eZ1.s:58     .text:0000000000000064 .L5
+     /tmp/cceK3eZ1.s:112    .text:00000000000000e4 .L17
+     /tmp/cceK3eZ1.s:125    .text:000000000000011c .L13
+     /tmp/cceK3eZ1.s:104    .text:00000000000000c4 .L12
+     /tmp/cceK3eZ1.s:139    .text:0000000000000160 .L18
+GAS LISTING /tmp/cceK3eZ1.s 			page 18
+
+
+     /tmp/cceK3eZ1.s:116    .text:00000000000000f4 .L14
+     /tmp/cceK3eZ1.s:204    .text:0000000000000200 .L20
+     /tmp/cceK3eZ1.s:196    .text:00000000000001e0 .L21
+     /tmp/cceK3eZ1.s:373    .text:00000000000003e0 .L29
+     /tmp/cceK3eZ1.s:365    .text:00000000000003d4 .L28
+     /tmp/cceK3eZ1.s:504    .text:0000000000000578 .L39
+     /tmp/cceK3eZ1.s:476    .text:00000000000004e0 .L33
+     /tmp/cceK3eZ1.s:474    .text:00000000000004dc .L34
+     /tmp/cceK3eZ1.s:445    .text:0000000000000444 .L36
+     /tmp/cceK3eZ1.s:506    .text:000000000000057c .L32
+     /tmp/cceK3eZ1.s:447    .text:0000000000000448 .L35
+
+UNDEFINED SYMBOLS
+_ZN7NoAlloc9mem_allocEm
+_ZN3PMT9get_entryEhPv
+_ZN3PMT12allocate_pmtEv
+_ZN8PMTEntry6get_paEv
+_ZN8PMTEntry9chk_flagsE12PMTEntryBits
+_ZN8PMTEntry9set_flagsE12PMTEntryBits
+_ZN8PMTEntry6set_paEPv
+_ZN7NoAlloc16NOALLOC_END_ADDRE
+KERNEL_TEXT_START
+USER_TEXT_END
+USER_TEXT_START
+USER_BSS_END
+USER_BSS_START
+USER_DATA_END
+USER_DATA_START
+USER_RODATA_END
+USER_RODATA_START
+_ZN7NoAlloc7workingE
+_Z12kprintStringPKc
+_ZN3PMT5printEv
+_ZN3PMT9get_entryEm
+_Z9kprintIntmib
+_Z4log2m

@@ -1,0 +1,151 @@
+GAS LISTING /tmp/ccpckGLB.s 			page 1
+
+
+   1              		.file	"noalloc_allocator.cpp"
+   2              		.option pic
+   3              		.option norelax
+   4              		.attribute arch, "rv64i2p1_m2p0_a2p1_zicsr2p0"
+   5              		.attribute unaligned_access, 0
+   6              		.attribute stack_align, 16
+   7              		.text
+   8              		.align	2
+   9              		.globl	_ZN7NoAlloc9mem_allocEm
+  11              	_ZN7NoAlloc9mem_allocEm:
+  12              	.LFB113:
+  13              		.cfi_startproc
+  14 0000 130101FF 		addi	sp,sp,-16
+  15              		.cfi_def_cfa_offset 16
+  16 0004 23348100 		sd	s0,8(sp)
+  17              		.cfi_offset 8, -8
+  18 0008 13040101 		addi	s0,sp,16
+  19              		.cfi_def_cfa 8, 0
+  20 000c 17070000 		lbu	a4,.LANCHOR0
+  20      03470700 
+  21 0014 630E0702 		beq	a4,zero,.L3
+  22 0018 93070500 		mv	a5,a0
+  23 001c 17050000 		ld	a0,.LANCHOR0+8
+  23      03350500 
+  24 0024 63000502 		beq	a0,zero,.L1
+  25 0028 B307F500 		add	a5,a0,a5
+  26 002c 17070000 		la	a4,HEAP_END_ADDR
+  26      03370700 
+  27 0034 03370700 		ld	a4,0(a4)
+  28 0038 63F0E702 		bgeu	a5,a4,.L4
+  29 003c 17070000 		sd	a5,.LANCHOR0+8,a4
+  29      2330F700 
+  30              	.L1:
+  31 0044 03348100 		ld	s0,8(sp)
+  32              		.cfi_remember_state
+  33              		.cfi_restore 8
+  34              		.cfi_def_cfa 2, 16
+  35 0048 13010101 		addi	sp,sp,16
+  36              		.cfi_def_cfa_offset 0
+  37 004c 67800000 		jr	ra
+  38              	.L3:
+  39              		.cfi_restore_state
+  40 0050 13050000 		li	a0,0
+  41 0054 6FF01FFF 		j	.L1
+  42              	.L4:
+  43 0058 13050000 		li	a0,0
+  44 005c 6FF09FFE 		j	.L1
+  45              		.cfi_endproc
+  46              	.LFE113:
+  48              		.align	2
+  49              		.globl	_ZN7NoAlloc4initEv
+  51              	_ZN7NoAlloc4initEv:
+  52              	.LFB114:
+  53              		.cfi_startproc
+  54 0060 130101FF 		addi	sp,sp,-16
+  55              		.cfi_def_cfa_offset 16
+  56 0064 23348100 		sd	s0,8(sp)
+GAS LISTING /tmp/ccpckGLB.s 			page 2
+
+
+  57              		.cfi_offset 8, -8
+  58 0068 13040101 		addi	s0,sp,16
+  59              		.cfi_def_cfa 8, 0
+  60 006c 97070000 		ld	a5,.LANCHOR0+8
+  60      83B70700 
+  61 0074 63880700 		beq	a5,zero,.L9
+  62              	.L6:
+  63 0078 03348100 		ld	s0,8(sp)
+  64              		.cfi_remember_state
+  65              		.cfi_restore 8
+  66              		.cfi_def_cfa 2, 16
+  67 007c 13010101 		addi	sp,sp,16
+  68              		.cfi_def_cfa_offset 0
+  69 0080 67800000 		jr	ra
+  70              	.L9:
+  71              		.cfi_restore_state
+  72 0084 97070000 		lla	a5,.LANCHOR0
+  72      93870700 
+  73 008c 17070000 		la	a4,HEAP_START_ADDR
+  73      03370700 
+  74 0094 03370700 		ld	a4,0(a4)
+  75 0098 23B4E700 		sd	a4,8(a5)
+  76 009c 13071000 		li	a4,1
+  77 00a0 2380E700 		sb	a4,0(a5)
+  78 00a4 6FF05FFD 		j	.L6
+  79              		.cfi_endproc
+  80              	.LFE114:
+  82              		.globl	_ZN7NoAlloc7workingE
+  83              		.globl	_ZN7NoAlloc16NOALLOC_END_ADDRE
+  84              		.bss
+  85              		.align	3
+  86              		.set	.LANCHOR0,. + 0
+  89              	_ZN7NoAlloc7workingE:
+  90 0000 00       		.zero	1
+  91 0001 00000000 		.zero	7
+  91      000000
+  94              	_ZN7NoAlloc16NOALLOC_END_ADDRE:
+  95 0008 00000000 		.zero	8
+  95      00000000 
+  96              		.ident	"GCC: (GNU) 12.2.0"
+  97              		.section	.note.GNU-stack,"",@progbits
+GAS LISTING /tmp/ccpckGLB.s 			page 3
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 noalloc_allocator.cpp
+     /tmp/ccpckGLB.s:11     .text:0000000000000000 _ZN7NoAlloc9mem_allocEm
+     /tmp/ccpckGLB.s:13     .text:0000000000000000 .L0 
+     /tmp/ccpckGLB.s:14     .text:0000000000000000 $x
+     /tmp/ccpckGLB.s:15     .text:0000000000000004 .L0 
+     /tmp/ccpckGLB.s:17     .text:0000000000000008 .L0 
+     /tmp/ccpckGLB.s:19     .text:000000000000000c .L0 
+     /tmp/ccpckGLB.s:32     .text:0000000000000048 .L0 
+     /tmp/ccpckGLB.s:33     .text:0000000000000048 .L0 
+     /tmp/ccpckGLB.s:34     .text:0000000000000048 .L0 
+     /tmp/ccpckGLB.s:36     .text:000000000000004c .L0 
+     /tmp/ccpckGLB.s:39     .text:0000000000000050 .L0 
+     /tmp/ccpckGLB.s:45     .text:0000000000000060 .L0 
+     /tmp/ccpckGLB.s:51     .text:0000000000000060 _ZN7NoAlloc4initEv
+     /tmp/ccpckGLB.s:53     .text:0000000000000060 .L0 
+     /tmp/ccpckGLB.s:55     .text:0000000000000064 .L0 
+     /tmp/ccpckGLB.s:57     .text:0000000000000068 .L0 
+     /tmp/ccpckGLB.s:59     .text:000000000000006c .L0 
+     /tmp/ccpckGLB.s:64     .text:000000000000007c .L0 
+     /tmp/ccpckGLB.s:65     .text:000000000000007c .L0 
+     /tmp/ccpckGLB.s:66     .text:000000000000007c .L0 
+     /tmp/ccpckGLB.s:68     .text:0000000000000080 .L0 
+     /tmp/ccpckGLB.s:71     .text:0000000000000084 .L0 
+     /tmp/ccpckGLB.s:79     .text:00000000000000a8 .L0 
+     /tmp/ccpckGLB.s:89     .bss:0000000000000000 _ZN7NoAlloc7workingE
+     /tmp/ccpckGLB.s:94     .bss:0000000000000008 _ZN7NoAlloc16NOALLOC_END_ADDRE
+     /tmp/ccpckGLB.s:86     .bss:0000000000000000 .LANCHOR0
+     /tmp/ccpckGLB.s:20     .text:000000000000000c .L0 
+     /tmp/ccpckGLB.s:23     .text:000000000000001c .L0 
+     /tmp/ccpckGLB.s:26     .text:000000000000002c .L0 
+     /tmp/ccpckGLB.s:29     .text:000000000000003c .L0 
+     /tmp/ccpckGLB.s:60     .text:000000000000006c .L0 
+     /tmp/ccpckGLB.s:72     .text:0000000000000084 .L0 
+     /tmp/ccpckGLB.s:73     .text:000000000000008c .L0 
+     /tmp/ccpckGLB.s:38     .text:0000000000000050 .L3
+     /tmp/ccpckGLB.s:30     .text:0000000000000044 .L1
+     /tmp/ccpckGLB.s:42     .text:0000000000000058 .L4
+     /tmp/ccpckGLB.s:70     .text:0000000000000084 .L9
+     /tmp/ccpckGLB.s:62     .text:0000000000000078 .L6
+
+UNDEFINED SYMBOLS
+HEAP_END_ADDR
+HEAP_START_ADDR
